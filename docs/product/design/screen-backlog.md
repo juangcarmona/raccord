@@ -7,15 +7,56 @@ field mode, management mode, and a read-only large-screen board).
 Built screens live in `raccord-screens.pen`; per-screen PDaC citations live in
 [screen-traces.md](screen-traces.md).
 
-## Already built (3)
+## Already built (3 + 37 + 2)
 
 | Screen | Mode | Journey |
 |---|---|---|
 | Invoice list | management | JRN-BILL-FINISHED-PROJECT |
 | Field check-in | field | JRN-RECORD-WORKING-DAY |
 | Operations board | board | JRN-WHS-DISPATCH-EQUIPMENT / JRN-WHS-RECEIVE-RETURNS |
+| Invoice draft editor | management | JRN-BILL-FINISHED-PROJECT |
+| Invoicing queue | management | JRN-FIN-STAGED-BILLING |
+| Payments & dunning | management | JRN-FIN-STAGED-BILLING |
+| Quote review & generation | management | JRN-FIN-QUOTE-TO-SIGNATURE |
+| Online quote page | management | JRN-FIN-QUOTE-TO-SIGNATURE |
+| Financial settings hub | management | JRN-FIN-PREPARE-FINANCE |
+| Issuer profile settings | management | JRN-SET-UP-INVOICING |
+| Project creation | management | JRN-PRJ-RUN-RENTAL-PROJECT |
+| Project detail & schedule | management | JRN-PRJ-RUN-RENTAL-PROJECT |
+| Project task board | management | JRN-PRJ-DELIVER-PRODUCTION-WORK |
+| Service planned-vs-actual | management | JRN-PRJ-DELIVER-PRODUCTION-WORK |
+| Task workflow settings | management | JRN-PRJ-DELIVER-PRODUCTION-WORK |
+| Project equipment plan & shortages | management | JRN-WHS-SECURE-EQUIPMENT |
+| Packing list detail | management | JRN-WHS-DISPATCH-EQUIPMENT |
+| Return handling | management | JRN-WHS-RECEIVE-RETURNS |
+| Stock count session | management | JRN-EQP-KEEP-STOCK-ACCURATE |
+| Stock movements & disposition | management | JRN-EQP-KEEP-STOCK-ACCURATE |
+| Equipment import | management | JRN-EQP-SET-UP-CATALOG |
+| Item detail | management | JRN-EQP-SET-UP-CATALOG |
+| Kit builder | management | JRN-EQP-SET-UP-CATALOG |
+| Contact import | management | JRN-PRJ-SET-UP-CONTACT-DATABASE |
+| Contact detail & commercial defaults | management | JRN-PRJ-SET-UP-CONTACT-DATABASE |
+| Crew availability | management | JRN-CRW-STAFF-A-PROJECT |
+| Function staffing | management | JRN-CRW-STAFF-A-PROJECT |
+| Job board postings | management | JRN-CRW-FILL-VIA-JOB-BOARD |
+| Shift planner | management | JRN-CRW-PLAN-INTERNAL-WORK |
+| Time approvals & reconciliation | management | JRN-CRW-HOURS-TO-PAYROLL |
+| Payroll export | management | JRN-CRW-HOURS-TO-PAYROLL |
+| Crew import | management | JRN-CRW-ONBOARD-CREW |
+| Crew member profile | management | JRN-CRW-ONBOARD-CREW |
+| Personal schedule & calendar feeds | management | JRN-CRW-STAFF-A-PROJECT / JRN-INT-SYNC-PERSONAL-CALENDAR |
+| Workday record corrections & approval | management | JRN-RECORD-WORKING-DAY (management spill) |
+| Document send & communications log | management | JRN-DOC-SEND-DOCUMENT-AND-CONFIRM-RECEIPT |
+| Letterhead & template branding | management | JRN-DOC-SET-UP-BRANDED-DOCUMENTS |
+| Equipment labels | management | JRN-DOC-LABEL-EQUIPMENT |
+| Workspace settings & roles | management | JRN-WSP-SET-UP-WORKSPACE |
+| API access & tokens | management | JRN-INT-BUILD-API-INTEGRATION |
 
-## To generate — management (37)
+All 37 management screens plus the two field candidates have been generated
+and committed on `trial/pen-dev-design-canvas`; exports live alongside this
+file, citations in [screen-traces.md](screen-traces.md).
+
+## Generated — management (37, all landed)
 
 Low-visual-interest setup screens are marked *(setup)*.
 
@@ -59,7 +100,7 @@ Low-visual-interest setup screens are marked *(setup)*.
 | 36 | Workspace settings & roles | company details, number series, roles *(setup)* | JRN-WSP-SET-UP-WORKSPACE |
 | 37 | API access & tokens | enable access, copy/regenerate token *(setup)* | JRN-INT-BUILD-API-INTEGRATION |
 
-## To generate — field candidates (2, decision-gated)
+## Field candidates (2) — built
 
 Field mode is defined as check-in/out plus read-only assignments; these two
 are interactive on the crew side and were triaged as candidates that need an

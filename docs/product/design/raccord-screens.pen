@@ -27608,6 +27608,1314 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "wAXTA",
+      "x": 6310,
+      "y": 20104,
+      "name": "Item Detail",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "tfRsq",
+          "name": "ID Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "PU5mG",
+              "name": "ID Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xQI0Z",
+                  "name": "ID Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "mQRHb",
+                  "name": "ID Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nzWyB",
+              "name": "ID Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ByAbQ",
+                  "name": "ID Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XdKd7",
+                      "name": "ID Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "D0KEwd",
+                      "name": "ID Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cKvtC",
+                  "name": "ID Nav Equipment",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "kKlFk",
+                      "name": "ID Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Chd1Z",
+                      "name": "ID Nav Label Equipment",
+                      "fill": "$white",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TMCw3",
+                  "name": "ID Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Mqwr9",
+                      "name": "ID Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x9iMX5",
+                      "name": "ID Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Y8E9nS",
+                  "name": "ID Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "HleXO",
+                      "name": "ID Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "e406Lw",
+                      "name": "ID Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "RzTYj",
+              "name": "ID Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Equipment · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VbGYM",
+          "name": "ID Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "sdeHT",
+              "name": "ID Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xgmLR",
+                  "name": "ID Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jdxOP",
+                      "name": "ID Title",
+                      "fill": "$ink",
+                      "content": "Alexa 35 body",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fmoQP",
+                      "name": "ID Meta",
+                      "gap": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zGTkj",
+                          "name": "ID Meta Code",
+                          "fill": "$slate",
+                          "content": "CAM-0041",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "p2JJJI",
+                          "name": "ID Meta Folder",
+                          "fill": "$slate",
+                          "content": "Warehouse / Cameras / Cinema",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kPizE",
+                          "name": "ID Meta Group",
+                          "fill": "$slate",
+                          "content": "Group: Camera bodies",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "A5DZd",
+                  "name": "ID Type Visible",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "p5bhg6",
+                      "name": "ID Visible Label",
+                      "fill": "$slate",
+                      "content": "Planner visibility",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vk6SS",
+                      "name": "ID Visible Chip",
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4,
+                      "padding": [
+                        3,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dxnti",
+                          "name": "ID Visible Value",
+                          "fill": "#1D7A4F",
+                          "content": "Visible · bookable",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GwujL",
+              "name": "ID Tabs",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "c94Ts",
+                  "name": "ID Tab General",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "I43Fuf",
+                      "name": "ID Tab Label General",
+                      "fill": "$ink",
+                      "content": "General",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bELUE",
+                      "name": "ID Tab Under General",
+                      "width": 40,
+                      "height": 2,
+                      "fill": "$cyan"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "J17xaZ",
+                  "name": "ID Tab Prices",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Z3fq6",
+                      "name": "ID Tab Label Prices",
+                      "fill": "$slate",
+                      "content": "Prices",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "h3y5Qd",
+                      "name": "ID Tab Under Prices",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LnvhK",
+                  "name": "ID Tab Physical & logistics",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eXiQY",
+                      "name": "ID Tab Label Physical & logistics",
+                      "fill": "$slate",
+                      "content": "Physical & logistics",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MQGDL",
+                      "name": "ID Tab Under Physical & logistics",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "l6a0K",
+                  "name": "ID Tab Accessories",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "W4AxR",
+                      "name": "ID Tab Label Accessories",
+                      "fill": "$slate",
+                      "content": "Accessories",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "alpT8",
+                      "name": "ID Tab Under Accessories",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "qHw98",
+                  "name": "ID Tab Alternatives",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wXTOo",
+                      "name": "ID Tab Label Alternatives",
+                      "fill": "$slate",
+                      "content": "Alternatives",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SYaba",
+                      "name": "ID Tab Under Alternatives",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m1Da9",
+                  "name": "ID Tab Usage",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OrANq",
+                      "name": "ID Tab Label Usage",
+                      "fill": "$slate",
+                      "content": "Usage",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BEqsh",
+                      "name": "ID Tab Under Usage",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Hb8zR",
+                  "name": "ID Tab Files",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "W6iKdT",
+                      "name": "ID Tab Label Files",
+                      "fill": "$slate",
+                      "content": "Files",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WBUkU",
+                      "name": "ID Tab Under Files",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "w95Rm7",
+              "name": "ID Tab Content Wrap",
+              "width": "fill_container",
+              "height": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DgUZc",
+                  "name": "ID Columns",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "gap": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FXeC2",
+                      "name": "ID Left",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 18,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jiewb",
+                          "name": "ID General Card",
+                          "width": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            18,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ANCpn",
+                              "name": "ID Gen Title",
+                              "fill": "$ink",
+                              "content": "General",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "p9Io3",
+                              "name": "ID GRow Name",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "flOxU",
+                                  "name": "ID GL Name",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Name",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "euZ2t",
+                                  "name": "ID GV Name",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Alexa 35 body",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "tWjen",
+                              "name": "ID GRow Code",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "t7eaY",
+                                  "name": "ID GL Code",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Code",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "YD0PU",
+                                  "name": "ID GV Code",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "CAM-0041 (would be auto-generated if left empty)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "O5vznU",
+                              "name": "ID GRow Folder",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "no3li",
+                                  "name": "ID GL Folder",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Folder",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "x53SwY",
+                                  "name": "ID GV Folder",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Warehouse / Cameras / Cinema",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aGOZ4",
+                              "name": "ID GRow Default group",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "oqHGj",
+                                  "name": "ID GL Default group",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Default group",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xwR8i",
+                                  "name": "ID GV Default group",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Camera bodies",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "FSz1r",
+                          "name": "ID Location Card",
+                          "width": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            18,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Hp5HX",
+                              "name": "ID Loc Title",
+                              "fill": "$ink",
+                              "content": "Location in warehouse",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "JekM2",
+                              "name": "ID Loc Row",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Ldugq",
+                                  "name": "ID Loc L",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Rack",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "i6DqY",
+                                  "name": "ID Loc V",
+                                  "fill": "$ink",
+                                  "content": "Shelf C, rack 3, bin 12 (may stay empty)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pSMLT",
+                          "name": "ID Remarks Card",
+                          "width": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            18,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "X6jT6T",
+                              "name": "ID Rem Title",
+                              "fill": "$ink",
+                              "content": "Remarks · external / internal",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "r2T9o",
+                              "name": "ID RRow External",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "A7G3Tf",
+                                  "name": "ID RL External",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "External",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "E61c5p",
+                                  "name": "ID RV External",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Ships with 2x CFexpress cards, handle removed for transport",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "x0xJR",
+                              "name": "ID RRow Internal",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "D2Tjcp",
+                                  "name": "ID RL Internal",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 120,
+                                  "content": "Internal",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "j4Qfx",
+                                  "name": "ID RV Internal",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Sensor cleaned Oct · next service due Jan",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Puk11",
+                      "name": "ID Right",
+                      "width": 380,
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 18,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "R45Tp",
+                          "name": "ID Financial Card",
+                          "width": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            18,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "trPYc",
+                              "name": "ID Fin Title",
+                              "fill": "$ink",
+                              "content": "Financial",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "uxNcF",
+                              "name": "ID FRow Rental p",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "hf2yq",
+                                  "name": "ID FL Rental p",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Rental price / day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "TntB3",
+                                  "name": "ID FV Rental p",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "€310.00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "p220cy",
+                              "name": "ID FRow Discount",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "k9GOR",
+                                  "name": "ID FL Discount",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Discount group",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "W86Voj",
+                                  "name": "ID FV Discount",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Cinema cameras",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "M1lIIO",
+                              "name": "ID FRow Factor g",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uRqFz",
+                                  "name": "ID FL Factor g",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Factor group",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Z800p0",
+                                  "name": "ID FV Factor g",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "— skip after first day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "mQyvp",
+                              "name": "ID FRow Margin p",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "f34xxI",
+                                  "name": "ID FL Margin p",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Margin price",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "SlnJN",
+                                  "name": "ID FV Margin p",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "€340.00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "iKyME",
+                              "name": "ID FRow VAT clas",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "rJagI",
+                                  "name": "ID FL VAT clas",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "VAT class",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "J4qOzn",
+                                  "name": "ID FV VAT clas",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Standard 21%",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "lPE5P",
+                              "name": "ID FRow Ledger a",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "p7lp0x",
+                                  "name": "ID FL Ledger a",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Ledger account",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "onAFT",
+                                  "name": "ID FV Ledger a",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "4010 Camera revenue",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "t3GMxe",
+                          "name": "ID Acc Card",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            18,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oJg1o",
+                              "name": "ID AccTitle",
+                              "fill": "$ink",
+                              "content": "Accessories & alternatives",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "sc5v0",
+                              "name": "ID AccRow1",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "xIuW0",
+                                  "name": "ID AccL1",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Accessories",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "wuPZR",
+                                  "name": "ID AccV1",
+                                  "width": "fill_container",
+                                  "gap": 6,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "UCLFW",
+                                      "name": "ID AccChip1",
+                                      "fill": "$cloud",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        3,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "L7S22Z",
+                                          "name": "ID AccChipT1",
+                                          "fill": "$ink",
+                                          "content": "Base plate · automatic, skip if present",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "OPxic",
+                                      "name": "ID AccChip2",
+                                      "fill": "$cloud",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        3,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "FJoyq",
+                                          "name": "ID AccChipT2",
+                                          "fill": "$ink",
+                                          "content": "Side handle · ask each plan",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "c86PWm",
+                              "name": "ID AltRow",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "dX5Ok",
+                                  "name": "ID AltL",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Alternatives",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "kzmqc",
+                                  "name": "ID AltV",
+                                  "width": "fill_container",
+                                  "gap": 6,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "rFHwo",
+                                      "name": "ID AltChip1",
+                                      "fill": "#EDF6FC",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        3,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "ZcGlJ",
+                                          "name": "ID AltChipT1",
+                                          "fill": "#000000",
+                                          "content": "Alexa Mini LF",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bNDyT",
+              "name": "ID Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "CrkHW",
+                  "name": "ID Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "LG1lg",
+                  "name": "ID Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Saved data applies to new planned lines; existing lines keep their snapshot. Hidden planner items remain bookable. Kits do not inherit the item's accessories.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

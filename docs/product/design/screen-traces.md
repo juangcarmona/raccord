@@ -82,6 +82,22 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Item detail (management, desktop)
+
+File: `item-detail.png` / `item-detail.html`
+
+| Design decision | Decided by |
+|---|---|
+| Tabs: general, prices, physical & logistics, accessories, alternatives, usage, files | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) main flow steps 2–6 |
+| Code, folder, default equipment group, planner visibility on the item | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 2; code generated when left empty (flow 2a) |
+| Location in warehouse, may stay empty | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 3, flow 3a |
+| Financial block: rental price, discount group, factor group, margin price, VAT class, ledger account | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 4 |
+| External and internal remarks with their audiences | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 6, [BR-EQP-REMARK-AUDIENCE](../model/business-rules/br-eqp-remark-audience.md) |
+| Accessories with automatic / skip-if-present / ask flags; not inherited by kits | [UC-EQP-CONFIGURE-ACCESSORIES](../model/use-cases/uc-eqp-configure-accessories.md) steps 2–3, [BR-EQP-ACCESSORY-OPTIONS](../model/business-rules/br-eqp-accessory-options.md), [BR-EQP-ACCESSORIES-NOT-INHERITED](../model/business-rules/br-eqp-accessories-not-inherited.md) |
+| Alternatives offered when the item is short | [UC-EQP-SET-ALTERNATIVES](../model/use-cases/uc-eqp-set-alternatives.md) steps 2–3, [BR-WHS-ALTERNATIVE-SAVED](../model/business-rules/br-whs-alternative-saved.md) |
+| Saved data applies to new planned lines; existing lines keep their snapshot | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) postconditions |
+| Hidden planner items remain bookable | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 2, [BR-EQP-HIDDEN-ITEM-STILL-BOOKABLE](../model/business-rules/br-eqp-hidden-item-still-bookable.md) |
+
 ## Screen — Equipment import (management, desktop)
 
 File: `equipment-import.png` / `equipment-import.html`

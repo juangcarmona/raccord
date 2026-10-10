@@ -36,6 +36,15 @@ expectation that broke. GitHub issue
   allowlist over the runtime dependency graph (NuGet nuspec expressions + npm lockfile)
   via `tools/dependency-licenses` — load-bearing for the AGPL and brand-independence
   position (ADR-0002): a copy-left surprise must fail before it ships in a deliverable.
+- **Mutation testing**: nightly Stryker run over the Domain tests (dotnet-stryker in the
+  root tool manifest, `tests/Raccord.Domain.Tests/stryker-config.json` with break/high/low
+  thresholds, HTML report as a workflow artifact) — nightly, not per-PR, until the suite
+  is dense enough for a stable score.
+- **Post-merge runtime probing**: a `post-merge` workflow boots the Compose stack after
+  every merge to main and runs the OWASP ZAP baseline scan against it, blocking on FAIL;
+  the human-side operational hygiene (backup drills, rotations, access review) moves to
+  `docs/operations/ops-checklist.md`, seeded by the backup-restore-drill issue
+  (juangcarmona/raccord#5).
 - **Arbitrary-bypass note**: direct pushes to main skip the commitlint mirror (it runs on
   `pull_request` only); branch protection is the policy answer.
 
@@ -56,6 +65,9 @@ expectation that broke. GitHub issue
   TruffleHog, Semgrep (in-repo rules + registry sets), Trivy fs and image scans.
 - `license-policy`: the runtime dependency graph allows only allowlisted licenses, and
   the container image ships with a published SPDX SBOM.
+- `mutation-testing`: nightly Stryker mutation runs over the Domain layer with
+  threshold-enforced scores and published reports.
+- `runtime-probing`: post-merge ZAP baseline scans of the booted Compose stack.
 
 ### Modified Capabilities
 _(none — no spec'd capability's requirements change; this change is the seed for the

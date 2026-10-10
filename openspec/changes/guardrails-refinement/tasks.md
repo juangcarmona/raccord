@@ -80,3 +80,22 @@
       allowlist (SPDX OR/AND/WITH expressions allowed when every alternative is). Verify:
       removing MIT from the allowlist fails the check listing the MIT-licensed packages;
       the real graph passes clean.
+
+## 9. Mutation testing (nightly)
+
+- [x] 9.1 dotnet-stryker 5.0.0 in the root dotnet-tools.json;
+      tests/Raccord.Domain.Tests/stryker-config.json with thresholds high 80 / low 70 /
+      break 60. Verify: first local run completes and reports a baseline score (recorded
+      in the tasks/proposal notes).
+- [x] 9.2 .github/workflows/mutation.yml: nightly 03:17 UTC run + workflow_dispatch,
+      StrykerConfig report artifact upload. Verify: workflow file is valid YAML with the
+      local tool restore path matching the other jobs.
+
+## 10. Post-merge runtime probing
+
+- [x] 10.1 .github/workflows/post-merge.yml: on push to main, build the image, boot the
+      Compose stack with --wait, zaproxy/action-baseline against localhost:8080,
+      teardown with volumes. Verify: compose boots locally with the same POSTGRES_PASSWORD
+      env; ZAP action inputs match the action's README.
+- [x] 10.2 docs/operations/ops-checklist.md (backup drill, rotation, access review,
+      runbook currency, ZAP triage) and the backup-restore-drill backlog issue (#5).

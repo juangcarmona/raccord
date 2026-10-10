@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker-net/master/stryker-config/Stryker.Config.Schema.json",
+  "stryker-config": {
+    "solution": "../../Raccord.slnx",
+    "project": "Raccord.Domain.csproj",
+    "test-projects": ["Raccord.Domain.Tests.csproj"],
+    "mutate": ["!**/*Tests.cs"],
+    "test-runner": "mtp",
+    "coverage-analysis": "off",
+    "thresholds": {
+      "high": 80,
+      "low": 70,
+      "break": 60
+    },
+    "reporters": ["html", "progress"]
+  }
+}

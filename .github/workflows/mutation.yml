@@ -1,0 +1,40 @@
+name: Mutation testing
+
+# Stryker runs nightly, not per-PR: with today's suite density the score is as much a
+# test-gap inventory as a grade, and a flaky per-PR gate would train people to ignore
+# it (a gate earns its place by catching something). When the suite is dense enough for
+# a stable score, move this to pull_request with a break threshold per project.
+on:
+  schedule:
+    # 03:17 UTC — off the hour so shared runners are quieter, and after the nightly
+    # Trivy DB update window rather than colliding with it.
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  domain:
+    name: Stryker (Raccord.Domain)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Restore (solution and local tools)
+        run: |
+          dotnet restore Raccord.slnx
+          dotnet tool restore
+      - name: Run Stryker over the Domain tests
+        run: dotnet stryker --config-file tests/Raccord.Domain.Tests/stryker-config.json
+        working-directory: tests/Raccord.Domain.Tests
+      - name: Upload mutation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutation-report-domain
+          path: tests/Raccord.Domain.Tests/StrykerOutput/**
+          if-no-files-found: ignore
+          retention-days: 14

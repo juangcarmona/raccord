@@ -21,4 +21,25 @@
         <PackageReference Include="Meziantou.Analyzer" PrivateAssets="all" />
         <PackageReference Include="Roslynator.Analyzers" PrivateAssets="all" />
     </ItemGroup>
+
+    <!-- One-time, idempotent commit-hook activation: point git at .husky/ (repo root) on the first
+         build, so a fresh clone gets hooks with no manual step. Hooked to BeforeBuild rather than
+         Restore — solution-level `dotnet restore`/`dotnet build` use a static-graph restore that
+         skips BeforeTargets="Restore" custom targets, but BeforeBuild always runs. Skipped in
+         CI / HUSKY=0; `git config` is a no-op if the value is already set, so re-running is
+         harmless. The manifest lives at the repo root (dotnet-tools.json), unlike ds-connect's
+         src/-rooted layout, because Raccord's NuGet root is the repository root. -->
+    <Target
+        Name="HuskyInstall"
+        BeforeTargets="BeforeBuild"
+        Condition="'$(HUSKY)' != '0' AND '$(CI)' != 'true' AND '$(GITHUB_ACTIONS)' != 'true'"
+    >
+        <Exec
+            Command="git config core.hooksPath .husky"
+            WorkingDirectory="$(MSBuildThisFileDirectory)"
+            ContinueOnError="true"
+            StandardOutputImportance="low"
+            StandardErrorImportance="low"
+        />
+    </Target>
 </Project>

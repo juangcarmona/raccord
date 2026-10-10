@@ -16,14 +16,14 @@ public sealed class PdfInvoiceRendererTests
         var pdf = renderer.Render(SampleInvoices.Issue());
         var text = Latin1.GetString(pdf);
 
-        Assert.StartsWith("%PDF-1.7", text, StringComparison.Ordinal);
-        Assert.EndsWith("%%EOF\n", text, StringComparison.Ordinal);
+        text.ShouldStartWith("%PDF-1.7", Case.Sensitive);
+        text.ShouldEndWith("%%EOF\n", Case.Sensitive);
 
         var startXref = int.Parse(
             Regex.Match(text, @"startxref\n(\d+)\n%%EOF\n$").Groups[1].Value,
             CultureInfo.InvariantCulture
         );
-        Assert.StartsWith("xref", text[startXref..], StringComparison.Ordinal);
+        text[startXref..].ShouldStartWith("xref", Case.Sensitive);
 
         var offsets = Regex
             .Matches(
@@ -33,14 +33,11 @@ public sealed class PdfInvoiceRendererTests
             )
             .Select(match => int.Parse(match.Groups["offset"].Value, CultureInfo.InvariantCulture))
             .ToList();
-        Assert.NotEmpty(offsets);
+        offsets.ShouldNotBeEmpty();
         for (var objectNumber = 1; objectNumber <= offsets.Count; objectNumber++)
         {
-            Assert.StartsWith(
-                $"{objectNumber} 0 obj",
-                text[offsets[objectNumber - 1]..],
-                StringComparison.Ordinal
-            );
+            text[offsets[objectNumber - 1]..]
+                .ShouldStartWith($"{objectNumber} 0 obj", Case.Sensitive);
         }
     }
 
@@ -49,15 +46,12 @@ public sealed class PdfInvoiceRendererTests
     {
         var text = Latin1.GetString(renderer.Render(SampleInvoices.Issue()));
 
-        Assert.Contains("(F2026-00001)", text, StringComparison.Ordinal);
-        Assert.Contains("(Productora Ejemplo S.A.)", text, StringComparison.Ordinal);
-        Assert.Contains("(NIF: A00000000)", text, StringComparison.Ordinal);
-        Assert.Contains(
-            "(1.548,80 €)",
-            text.Replace("\u0080", "€", StringComparison.Ordinal),
-            StringComparison.Ordinal
-        );
-        Assert.Contains("(11/05/2026)", text, StringComparison.Ordinal);
+        text.ShouldContain("(F2026-00001)", Case.Sensitive);
+        text.ShouldContain("(Productora Ejemplo S.A.)", Case.Sensitive);
+        text.ShouldContain("(NIF: A00000000)", Case.Sensitive);
+        text.Replace("\u0080", "€", StringComparison.Ordinal)
+            .ShouldContain("(1.548,80 €)", Case.Sensitive);
+        text.ShouldContain("(11/05/2026)", Case.Sensitive);
     }
 
     [Fact]
@@ -78,14 +72,10 @@ public sealed class PdfInvoiceRendererTests
             0xE1,
             (byte)'m',
         };
-        Assert.True(
-            pdf.AsSpan().IndexOf(expected) >= 0,
-            "Expected 'Kit de cám' encoded in WinAnsi."
-        );
-        Assert.True(
-            pdf.AsSpan().IndexOf(new byte[] { (byte)' ', 0x96, (byte)' ' }) >= 0,
-            "Expected an en dash encoded as 0x96."
-        );
+        pdf.AsSpan().IndexOf(expected).ShouldBeGreaterThanOrEqualTo(0);
+        pdf.AsSpan()
+            .IndexOf(new byte[] { (byte)' ', 0x96, (byte)' ' })
+            .ShouldBeGreaterThanOrEqualTo(0);
     }
 
     [Fact]
@@ -93,7 +83,7 @@ public sealed class PdfInvoiceRendererTests
     {
         var invoice = SampleInvoices.Issue();
 
-        Assert.Equal(renderer.Render(invoice), renderer.Render(invoice));
+        renderer.Render(invoice).ShouldBe(renderer.Render(invoice));
     }
 
     [Fact]
@@ -102,7 +92,7 @@ public sealed class PdfInvoiceRendererTests
         var text = Latin1.GetString(renderer.Render(SampleInvoices.Issue(lineCount: 90)));
 
         var pages = Regex.Count(text, @"/Type /Page\b(?!s)");
-        Assert.True(pages >= 3, $"Expected at least 3 pages, found {pages}.");
-        Assert.Contains("(Line 90)", text, StringComparison.Ordinal);
+        pages.ShouldBeGreaterThanOrEqualTo(3);
+        text.ShouldContain("(Line 90)", Case.Sensitive);
     }
 }

@@ -13,10 +13,10 @@ public sealed class InvoiceNumberSequenceTests
         var first = sequence.Allocate(new DateOnly(2026, 3, 2));
         var second = sequence.Allocate(new DateOnly(2026, 3, 2));
 
-        Assert.Equal("F2026-00001", first.Value);
-        Assert.Equal(1, first.Sequence);
-        Assert.Equal("F2026-00002", second.Value);
-        Assert.Equal(2, sequence.LastNumber);
+        first.Value.ShouldBe("F2026-00001");
+        first.Sequence.ShouldBe(1);
+        second.Value.ShouldBe("F2026-00002");
+        sequence.LastNumber.ShouldBe(2);
     }
 
     [Fact]
@@ -25,12 +25,12 @@ public sealed class InvoiceNumberSequenceTests
         var sequence = InvoiceNumberSequence.Start("F", 2026);
         sequence.Allocate(new DateOnly(2026, 3, 10));
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             sequence.Allocate(new DateOnly(2026, 3, 9))
         );
 
-        Assert.Equal("numbering.issue-date-before-previous", error.Code);
-        Assert.Equal(1, sequence.LastNumber);
+        error.Code.ShouldBe("numbering.issue-date-before-previous");
+        sequence.LastNumber.ShouldBe(1);
     }
 
     [Fact]
@@ -38,11 +38,11 @@ public sealed class InvoiceNumberSequenceTests
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             sequence.Allocate(new DateOnly(2027, 1, 1))
         );
 
-        Assert.Equal("numbering.year-mismatch", error.Code);
+        error.Code.ShouldBe("numbering.year-mismatch");
     }
 
     [Theory]
@@ -52,11 +52,11 @@ public sealed class InvoiceNumberSequenceTests
     [InlineData("ABCDEFGHIJK")]
     public void Series_codes_are_short_uppercase_alphanumerics(string code)
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             InvoiceNumberSequence.Start(code, 2026)
         );
 
-        Assert.Equal("numbering.series-code-invalid", error.Code);
+        error.Code.ShouldBe("numbering.series-code-invalid");
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public sealed class InvoiceNumberSequenceTests
         var sequence = InvoiceNumberSequence.Start("F", 2026);
         sequence.Allocate(new DateOnly(2026, 6, 30));
 
-        Assert.False(sequence.Accepts(new DateOnly(2026, 6, 29)));
-        Assert.True(sequence.Accepts(new DateOnly(2026, 6, 30)));
+        sequence.Accepts(new DateOnly(2026, 6, 29)).ShouldBeFalse();
+        sequence.Accepts(new DateOnly(2026, 6, 30)).ShouldBeTrue();
     }
 }

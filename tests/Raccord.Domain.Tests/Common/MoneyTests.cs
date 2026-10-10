@@ -19,9 +19,8 @@ public sealed class MoneyTests
             Currency.Eur
         );
 
-        Assert.Equal(
-            decimal.Parse(expected, System.Globalization.CultureInfo.InvariantCulture),
-            money.Amount
+        money.Amount.ShouldBe(
+            decimal.Parse(expected, System.Globalization.CultureInfo.InvariantCulture)
         );
     }
 }

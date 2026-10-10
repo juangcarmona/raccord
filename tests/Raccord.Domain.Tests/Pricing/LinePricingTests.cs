@@ -15,7 +15,7 @@ public sealed class LinePricingTests
             VatRate.Of(21m)
         );
 
-        Assert.Equal(Money.Of(90.00m, Currency.Eur), pricing.NetAmount);
+        pricing.NetAmount.ShouldBe(Money.Of(90.00m, Currency.Eur));
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public sealed class LinePricingTests
             VatRate.Of(21m)
         );
 
-        Assert.Equal(675.00m, pricing.NetAmount.Amount);
+        pricing.NetAmount.Amount.ShouldBe(675.00m);
     }
 
     [Theory]
@@ -44,7 +44,7 @@ public sealed class LinePricingTests
         string expectedCode
     )
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             LinePricing.Create(
                 (decimal)quantity,
                 (decimal)unitPrice,
@@ -53,7 +53,7 @@ public sealed class LinePricingTests
             )
         );
 
-        Assert.Equal(expectedCode, error.Code);
+        error.Code.ShouldBe(expectedCode);
     }
 
     [Fact]
@@ -66,18 +66,18 @@ public sealed class LinePricingTests
             VatRate.Of(21m)
         );
 
-        Assert.Equal(0.1234m, pricing.UnitPrice);
-        Assert.Equal(123.40m, pricing.NetAmount.Amount);
+        pricing.UnitPrice.ShouldBe(0.1234m);
+        pricing.NetAmount.Amount.ShouldBe(123.40m);
     }
 
     [Fact]
     public void Unit_prices_with_more_than_four_decimals_are_rejected()
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             LinePricing.Create(1m, 0.12345m, 0m, VatRate.Of(21m))
         );
 
-        Assert.Equal("pricing.unit-price-precision", error.Code);
+        error.Code.ShouldBe("pricing.unit-price-precision");
     }
 
     [Theory]
@@ -85,8 +85,8 @@ public sealed class LinePricingTests
     [InlineData(100.01)]
     public void Vat_rates_must_be_between_zero_and_one_hundred(double rate)
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() => VatRate.Of((decimal)rate));
+        var error = Should.Throw<BusinessRuleViolationException>(() => VatRate.Of((decimal)rate));
 
-        Assert.Equal("pricing.vat-rate-out-of-range", error.Code);
+        error.Code.ShouldBe("pricing.vat-rate-out-of-range");
     }
 }

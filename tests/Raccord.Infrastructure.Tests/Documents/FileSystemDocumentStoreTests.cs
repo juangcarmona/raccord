@@ -23,13 +23,12 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
             TestContext.Current.CancellationToken
         );
 
-        Assert.Equal(
-            content,
+        (
             await store.ReadAsync(
                 "invoices/abc/F2026-00001.pdf",
                 TestContext.Current.CancellationToken
             )
-        );
+        ).ShouldBe(content);
     }
 
     [Fact]
@@ -37,9 +36,9 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
     {
         var store = new FileSystemDocumentStore(root);
 
-        Assert.Null(
+        (
             await store.ReadAsync("invoices/none.pdf", TestContext.Current.CancellationToken)
-        );
+        ).ShouldBeNull();
     }
 
     [Theory]
@@ -51,7 +50,7 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
     {
         var store = new FileSystemDocumentStore(root);
 
-        await Assert.ThrowsAsync<ArgumentException>(() =>
+        await Should.ThrowAsync<ArgumentException>(() =>
             store.ReadAsync(key, TestContext.Current.CancellationToken)
         );
     }

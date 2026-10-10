@@ -11,7 +11,7 @@ public sealed class ProjectTests
     [Fact]
     public void A_project_cannot_end_before_it_starts()
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             Project.Create(
                 "Spring campaign shoot",
                 CustomerId,
@@ -20,7 +20,7 @@ public sealed class ProjectTests
             )
         );
 
-        Assert.Equal("projects.period-invalid", error.Code);
+        error.Code.ShouldBe("projects.period-invalid");
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public sealed class ProjectTests
             Pricing(2m, 450m)
         );
 
-        Assert.Equal(BillingState.Unbilled, line.State);
-        Assert.Contains(line, project.BillableLines);
+        line.State.ShouldBe(BillingState.Unbilled);
+        project.BillableLines.ShouldContain(line);
     }
 
     [Fact]
@@ -56,10 +56,10 @@ public sealed class ProjectTests
 
         var reserved = project.ReserveForDraft([camera.Id], draftId);
 
-        Assert.Equal([camera], reserved);
-        Assert.Equal(BillingState.InDraft, camera.State);
-        Assert.Equal(draftId, camera.DraftId);
-        Assert.Equal(BillingState.Unbilled, gaffer.State);
+        reserved.ShouldBe([camera]);
+        camera.State.ShouldBe(BillingState.InDraft);
+        camera.DraftId.ShouldBe(draftId);
+        gaffer.State.ShouldBe(BillingState.Unbilled);
     }
 
     [Fact]
@@ -73,11 +73,11 @@ public sealed class ProjectTests
         );
         project.ReserveForDraft([line.Id], Guid.CreateVersion7());
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             project.ReserveForDraft([line.Id], Guid.CreateVersion7())
         );
 
-        Assert.Equal("billing.line-not-unbilled", error.Code);
+        error.Code.ShouldBe("billing.line-not-unbilled");
     }
 
     [Fact]
@@ -85,11 +85,11 @@ public sealed class ProjectTests
     {
         var project = NewProject();
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             project.ReserveForDraft([Guid.CreateVersion7()], Guid.CreateVersion7())
         );
 
-        Assert.Equal("projects.billable-line-not-found", error.Code);
+        error.Code.ShouldBe("projects.billable-line-not-found");
     }
 
     [Fact]
@@ -106,8 +106,8 @@ public sealed class ProjectTests
 
         project.ReleaseFromDraft(draftId, [line.Id]);
 
-        Assert.Equal(BillingState.Unbilled, line.State);
-        Assert.Null(line.DraftId);
+        line.State.ShouldBe(BillingState.Unbilled);
+        line.DraftId.ShouldBeNull();
     }
 
     [Fact]
@@ -126,12 +126,13 @@ public sealed class ProjectTests
         project.MarkInvoiced(draftId, invoiceId);
         project.ReleaseFromDraft(draftId, [line.Id]);
 
-        Assert.Equal(BillingState.Invoiced, line.State);
-        Assert.Equal(invoiceId, line.InvoiceId);
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
-            project.ReserveForDraft([line.Id], Guid.CreateVersion7())
-        );
-        Assert.Equal("billing.line-not-unbilled", error.Code);
+        line.State.ShouldBe(BillingState.Invoiced);
+        line.InvoiceId.ShouldBe(invoiceId);
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.ReserveForDraft([line.Id], Guid.CreateVersion7())
+            )
+            .Code.ShouldBe("billing.line-not-unbilled");
     }
 
     [Fact]
@@ -139,11 +140,11 @@ public sealed class ProjectTests
     {
         var project = NewProject();
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             project.AddBillableLine(BillableLineKind.Other, "  ", Pricing(1m, 10m))
         );
 
-        Assert.Equal("projects.billable-line-description-required", error.Code);
+        error.Code.ShouldBe("projects.billable-line-description-required");
     }
 
     private static Project NewProject() =>

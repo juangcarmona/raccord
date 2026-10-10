@@ -16,9 +16,9 @@ public sealed class IssuedInvoiceRepresentationTests
         var first = IssuedInvoiceRepresentation.From(invoice);
         var second = IssuedInvoiceRepresentation.From(invoice);
 
-        Assert.Equal(first.Json, second.Json);
-        Assert.Equal(first.ContentHash, second.ContentHash);
-        Assert.Matches("^[0-9a-f]{64}$", first.ContentHash);
+        second.Json.ShouldBe(first.Json);
+        second.ContentHash.ShouldBe(first.ContentHash);
+        first.ContentHash.ShouldMatch("^[0-9a-f]{64}$");
     }
 
     [Fact]
@@ -26,9 +26,9 @@ public sealed class IssuedInvoiceRepresentationTests
     {
         var json = IssuedInvoiceRepresentation.From(invoice).Json;
 
-        Assert.Contains("\"taxableBase\":\"1280.00\"", json, StringComparison.Ordinal);
-        Assert.Contains("\"total\":\"1548.80\"", json, StringComparison.Ordinal);
-        Assert.Contains("\"schema\":\"raccord.issued-invoice/1\"", json, StringComparison.Ordinal);
+        json.ShouldContain("\"taxableBase\":\"1280.00\"", Case.Sensitive);
+        json.ShouldContain("\"total\":\"1548.80\"", Case.Sensitive);
+        json.ShouldContain("\"schema\":\"raccord.issued-invoice/1\"", Case.Sensitive);
     }
 
     [Fact]
@@ -38,12 +38,12 @@ public sealed class IssuedInvoiceRepresentationTests
 
         var restored = IssuedInvoiceRepresentation.Restore(stored.Json, stored.ContentHash);
 
-        Assert.Equal(invoice.Id, restored.Id);
-        Assert.Equal(invoice.Number, restored.Number);
-        Assert.Equal(invoice.Issuer, restored.Issuer);
-        Assert.Equal(invoice.Recipient, restored.Recipient);
-        Assert.Equal(invoice.Totals.Total, restored.Totals.Total);
-        Assert.Equal(stored.Json, IssuedInvoiceRepresentation.From(restored).Json);
+        restored.Id.ShouldBe(invoice.Id);
+        restored.Number.ShouldBe(invoice.Number);
+        restored.Issuer.ShouldBe(invoice.Issuer);
+        restored.Recipient.ShouldBe(invoice.Recipient);
+        restored.Totals.Total.ShouldBe(invoice.Totals.Total);
+        IssuedInvoiceRepresentation.From(restored).Json.ShouldBe(stored.Json);
     }
 
     [Fact]
@@ -56,11 +56,11 @@ public sealed class IssuedInvoiceRepresentationTests
             StringComparison.Ordinal
         );
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             IssuedInvoiceRepresentation.Restore(tampered, stored.ContentHash)
         );
 
-        Assert.Equal("issued-invoice.integrity-violation", error.Code);
+        error.Code.ShouldBe("issued-invoice.integrity-violation");
     }
 
     private static IssuedInvoice IssueSampleInvoice()

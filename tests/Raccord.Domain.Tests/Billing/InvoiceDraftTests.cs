@@ -38,14 +38,14 @@ public sealed class InvoiceDraftTests
 
         var draft = InvoiceDraft.CreateFromProject(project, [camera.Id], "F", Now);
 
-        var line = Assert.Single(draft.Lines);
-        Assert.Equal(camera.Id, line.SourceBillableLineId);
-        Assert.Equal("Cinema camera kit", line.Description);
-        Assert.Equal(900.00m, draft.Totals.TaxableBase.Amount);
-        Assert.Equal(1089.00m, draft.Totals.Total.Amount);
-        Assert.Equal(BillingState.InDraft, camera.State);
-        Assert.Equal(BillingState.Unbilled, gaffer.State);
-        Assert.Equal(project.CustomerId, draft.CustomerId);
+        var line = draft.Lines.ShouldHaveSingleItem();
+        line.SourceBillableLineId.ShouldBe(camera.Id);
+        line.Description.ShouldBe("Cinema camera kit");
+        draft.Totals.TaxableBase.Amount.ShouldBe(900.00m);
+        draft.Totals.Total.Amount.ShouldBe(1089.00m);
+        camera.State.ShouldBe(BillingState.InDraft);
+        gaffer.State.ShouldBe(BillingState.Unbilled);
+        draft.CustomerId.ShouldBe(project.CustomerId);
     }
 
     [Fact]
@@ -62,22 +62,21 @@ public sealed class InvoiceDraftTests
             Now
         );
 
-        Assert.Equal([1, 2, 3], [camera.Position, gaffer.Position, van.Position]);
-        Assert.Equal(
-            ["Cinema camera kit", "Gaffer, 10h day", "Van with driver"],
-            draft.Lines.Select(line => line.Description)
-        );
-        Assert.Equal([1, 2, 3], draft.Lines.Select(line => line.Position));
+        new[] { camera.Position, gaffer.Position, van.Position }.ShouldBe([1, 2, 3]);
+        draft
+            .Lines.Select(line => line.Description)
+            .ShouldBe(["Cinema camera kit", "Gaffer, 10h day", "Van with driver"]);
+        draft.Lines.Select(line => line.Position).ShouldBe([1, 2, 3]);
     }
 
     [Fact]
     public void A_draft_needs_at_least_one_line()
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             InvoiceDraft.CreateFromProject(project, [], "F", Now)
         );
 
-        Assert.Equal("draft.no-lines", error.Code);
+        error.Code.ShouldBe("draft.no-lines");
     }
 
     [Fact]
@@ -85,7 +84,7 @@ public sealed class InvoiceDraftTests
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
-        Assert.Empty(draft.Validate(Issuer, Recipient, IssueDate, Sequence()));
+        draft.Validate(Issuer, Recipient, IssueDate, Sequence()).ShouldBeEmpty();
     }
 
     [Fact]
@@ -96,10 +95,9 @@ public sealed class InvoiceDraftTests
 
         var issues = draft.Validate(Issuer, incomplete, IssueDate, Sequence());
 
-        Assert.Equal(
-            ["recipient.tax-id-missing", "recipient.address-missing"],
-            issues.Select(issue => issue.Code)
-        );
+        issues
+            .Select(issue => issue.Code)
+            .ShouldBe(["recipient.tax-id-missing", "recipient.address-missing"]);
     }
 
     [Fact]
@@ -107,18 +105,14 @@ public sealed class InvoiceDraftTests
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
-        Assert.Equal(
-            "issuer.profile-missing",
-            Assert.Single(draft.Validate(null, Recipient, IssueDate, Sequence())).Code
-        );
-        Assert.Equal(
-            "issuer.tax-id-missing",
-            Assert
-                .Single(
-                    draft.Validate(Issuer with { TaxId = " " }, Recipient, IssueDate, Sequence())
-                )
-                .Code
-        );
+        draft
+            .Validate(null, Recipient, IssueDate, Sequence())
+            .ShouldHaveSingleItem()
+            .Code.ShouldBe("issuer.profile-missing");
+        draft
+            .Validate(Issuer with { TaxId = " " }, Recipient, IssueDate, Sequence())
+            .ShouldHaveSingleItem()
+            .Code.ShouldBe("issuer.tax-id-missing");
     }
 
     [Fact]
@@ -128,14 +122,13 @@ public sealed class InvoiceDraftTests
         var emptied = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         emptied.RemoveLine(emptied.Lines[0].Id);
 
-        Assert.Equal(
-            "draft.total-not-positive",
-            Assert.Single(free.Validate(Issuer, Recipient, IssueDate, Sequence())).Code
-        );
-        Assert.Equal(
-            "draft.no-lines",
-            Assert.Single(emptied.Validate(Issuer, Recipient, IssueDate, Sequence())).Code
-        );
+        free.Validate(Issuer, Recipient, IssueDate, Sequence())
+            .ShouldHaveSingleItem()
+            .Code.ShouldBe("draft.total-not-positive");
+        emptied
+            .Validate(Issuer, Recipient, IssueDate, Sequence())
+            .ShouldHaveSingleItem()
+            .Code.ShouldBe("draft.no-lines");
     }
 
     [Fact]
@@ -145,9 +138,9 @@ public sealed class InvoiceDraftTests
         var sequence = Sequence();
         sequence.Allocate(IssueDate.AddDays(1));
 
-        var issue = Assert.Single(draft.Validate(Issuer, Recipient, IssueDate, sequence));
+        var issue = draft.Validate(Issuer, Recipient, IssueDate, sequence).ShouldHaveSingleItem();
 
-        Assert.Equal("numbering.issue-date-not-accepted", issue.Code);
+        issue.Code.ShouldBe("numbering.issue-date-not-accepted");
     }
 
     [Fact]
@@ -158,8 +151,8 @@ public sealed class InvoiceDraftTests
 
         var released = draft.RemoveLine(draft.Lines[0].Id);
 
-        Assert.Equal(camera.Id, released);
-        Assert.Empty(draft.Lines);
+        released.ShouldBe(camera.Id);
+        draft.Lines.ShouldBeEmpty();
     }
 
     [Fact]
@@ -172,22 +165,21 @@ public sealed class InvoiceDraftTests
 
         var invoice = draft.Finalize(Issuer, Recipient, sequence, IssueDate, Now);
 
-        Assert.Equal("F2026-00001", invoice.Number.Value);
-        Assert.Equal(IssueDate, invoice.IssueDate);
-        Assert.Equal(project.EndDate, invoice.OperationDate);
-        Assert.Equal(Now, invoice.IssuedAt);
-        Assert.Equal(Issuer, invoice.Issuer);
-        Assert.Equal(Recipient, invoice.Recipient);
-        Assert.Equal(
-            ["Cinema camera kit", "Gaffer, 10h day"],
-            invoice.Lines.Select(line => line.Description)
-        );
-        Assert.Equal(1280.00m, invoice.Totals.TaxableBase.Amount);
-        Assert.Equal(268.80m, invoice.Totals.VatAmount.Amount);
-        Assert.Equal(1548.80m, invoice.Totals.Total.Amount);
-        Assert.Equal(DraftStatus.Issued, draft.Status);
-        Assert.Equal(invoice.Id, draft.IssuedInvoiceId);
-        Assert.Equal(1, sequence.LastNumber);
+        invoice.Number.Value.ShouldBe("F2026-00001");
+        invoice.IssueDate.ShouldBe(IssueDate);
+        invoice.OperationDate.ShouldBe(project.EndDate);
+        invoice.IssuedAt.ShouldBe(Now);
+        invoice.Issuer.ShouldBe(Issuer);
+        invoice.Recipient.ShouldBe(Recipient);
+        invoice
+            .Lines.Select(line => line.Description)
+            .ShouldBe(["Cinema camera kit", "Gaffer, 10h day"]);
+        invoice.Totals.TaxableBase.Amount.ShouldBe(1280.00m);
+        invoice.Totals.VatAmount.Amount.ShouldBe(268.80m);
+        invoice.Totals.Total.Amount.ShouldBe(1548.80m);
+        draft.Status.ShouldBe(DraftStatus.Issued);
+        draft.IssuedInvoiceId.ShouldBe(invoice.Id);
+        sequence.LastNumber.ShouldBe(1);
     }
 
     [Fact]
@@ -197,7 +189,7 @@ public sealed class InvoiceDraftTests
 
         var invoice = draft.Finalize(Issuer, Recipient, Sequence(), project.EndDate, Now);
 
-        Assert.Null(invoice.OperationDate);
+        invoice.OperationDate.ShouldBeNull();
     }
 
     [Fact]
@@ -206,13 +198,13 @@ public sealed class InvoiceDraftTests
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         var sequence = Sequence();
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             draft.Finalize(Issuer, Recipient with { TaxId = null }, sequence, IssueDate, Now)
         );
 
-        Assert.Equal("draft.invalid", error.Code);
-        Assert.Equal(0, sequence.LastNumber);
-        Assert.Equal(DraftStatus.Open, draft.Status);
+        error.Code.ShouldBe("draft.invalid");
+        sequence.LastNumber.ShouldBe(0);
+        draft.Status.ShouldBe(DraftStatus.Open);
     }
 
     [Fact]
@@ -221,15 +213,15 @@ public sealed class InvoiceDraftTests
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         draft.Finalize(Issuer, Recipient, Sequence(), IssueDate, Now);
 
-        var finalizeAgain = Assert.Throws<BusinessRuleViolationException>(() =>
+        var finalizeAgain = Should.Throw<BusinessRuleViolationException>(() =>
             draft.Finalize(Issuer, Recipient, Sequence(), IssueDate, Now)
         );
-        var removeLine = Assert.Throws<BusinessRuleViolationException>(() =>
+        var removeLine = Should.Throw<BusinessRuleViolationException>(() =>
             draft.RemoveLine(draft.Lines[0].Id)
         );
 
-        Assert.Equal("draft.not-open", finalizeAgain.Code);
-        Assert.Equal("draft.not-open", removeLine.Code);
+        finalizeAgain.Code.ShouldBe("draft.not-open");
+        removeLine.Code.ShouldBe("draft.not-open");
     }
 
     [Fact]
@@ -237,7 +229,7 @@ public sealed class InvoiceDraftTests
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             draft.Finalize(
                 Issuer,
                 Recipient,
@@ -247,7 +239,7 @@ public sealed class InvoiceDraftTests
             )
         );
 
-        Assert.Equal("numbering.series-mismatch", error.Code);
+        error.Code.ShouldBe("numbering.series-mismatch");
     }
 
     private BillableLine AddLine(string description, decimal quantity, decimal unitPrice) =>

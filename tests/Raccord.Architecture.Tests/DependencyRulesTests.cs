@@ -43,7 +43,7 @@ public sealed class DependencyRulesTests
                 !FrameworkPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
             );
 
-        Assert.Empty(offending);
+        offending.ShouldBeEmpty();
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class DependencyRulesTests
                 !FrameworkPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
             );
 
-        Assert.Empty(offending);
+        offending.ShouldBeEmpty();
     }
 
     [Fact]
@@ -65,16 +65,14 @@ public sealed class DependencyRulesTests
                 ForbiddenInCore.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
             );
 
-        Assert.Empty(offending);
+        offending.ShouldBeEmpty();
     }
 
     [Fact]
     public void Infrastructure_does_not_depend_on_the_web_host()
     {
-        Assert.DoesNotContain(
-            ReferencedNames(Infrastructure),
-            name => name.StartsWith("Raccord.Web", StringComparison.Ordinal)
-        );
+        ReferencedNames(Infrastructure)
+            .ShouldNotContain(name => name.StartsWith("Raccord.Web", StringComparison.Ordinal));
     }
 
     [Theory]
@@ -100,10 +98,7 @@ public sealed class DependencyRulesTests
     {
         var references = ProjectReferences(project);
 
-        Assert.Equal(
-            allowed.Order(StringComparer.Ordinal),
-            references.Order(StringComparer.Ordinal)
-        );
+        references.Order(StringComparer.Ordinal).ShouldBe(allowed.Order(StringComparer.Ordinal));
     }
 
     [Theory]
@@ -112,7 +107,7 @@ public sealed class DependencyRulesTests
     [InlineData("Raccord.Application")]
     public void Core_projects_add_no_package_references(string project)
     {
-        Assert.Empty(ProjectFile(project).Descendants("PackageReference"));
+        ProjectFile(project).Descendants("PackageReference").ShouldBeEmpty();
     }
 
     private static string[] ReferencedNames(Assembly assembly) =>
@@ -137,7 +132,7 @@ public sealed class DependencyRulesTests
             directory = directory.Parent;
         }
 
-        Assert.NotNull(directory);
+        directory.ShouldNotBeNull();
         return XDocument.Load(
             Path.Combine(directory.FullName, "src", project, project + ".csproj")
         );

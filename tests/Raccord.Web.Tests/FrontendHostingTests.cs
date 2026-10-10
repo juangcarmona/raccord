@@ -44,8 +44,8 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
         var clientRoute = await client.GetAsync("/projects/123");
         var missingAsset = await client.GetAsync("/assets/missing.js");
 
-        Assert.Equal("text/javascript", script.Content.Headers.ContentType?.MediaType);
-        Assert.Equal("text/html", clientRoute.Content.Headers.ContentType?.MediaType);
-        Assert.Equal(HttpStatusCode.NotFound, missingAsset.StatusCode);
+        script.Content.Headers.ContentType?.MediaType.ShouldBe("text/javascript");
+        clientRoute.Content.Headers.ContentType?.MediaType.ShouldBe("text/html");
+        missingAsset.StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 }

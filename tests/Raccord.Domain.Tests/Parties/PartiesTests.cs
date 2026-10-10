@@ -22,7 +22,7 @@ public sealed class PartiesTests
     {
         var customer = Customer.Register("Productora Ejemplo S.A.", raw, Address, null);
 
-        Assert.Equal(expected, customer.TaxId);
+        customer.TaxId.ShouldBe(expected);
     }
 
     [Fact]
@@ -35,35 +35,32 @@ public sealed class PartiesTests
             "billing@example.test"
         );
 
-        Assert.Null(customer.TaxId);
-        Assert.Equal(
-            new LegalParty("Productora Ejemplo S.A.", null, null),
-            customer.ToLegalParty()
-        );
+        customer.TaxId.ShouldBeNull();
+        customer.ToLegalParty().ShouldBe(new LegalParty("Productora Ejemplo S.A.", null, null));
     }
 
     [Fact]
     public void Customers_need_a_legal_name()
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
             Customer.Register(" ", "A00000000", Address, null)
         );
 
-        Assert.Equal("customers.legal-name-required", error.Code);
+        error.Code.ShouldBe("customers.legal-name-required");
     }
 
     [Fact]
     public void The_issuer_profile_requires_name_tax_id_and_complete_address()
     {
-        var missingTaxId = Assert.Throws<BusinessRuleViolationException>(() =>
+        var missingTaxId = Should.Throw<BusinessRuleViolationException>(() =>
             IssuerProfile.Define("Fotograma Rental S.L.", "", Address)
         );
-        var badAddress = Assert.Throws<BusinessRuleViolationException>(() =>
+        var badAddress = Should.Throw<BusinessRuleViolationException>(() =>
             IssuerProfile.Define("Fotograma Rental S.L.", "B00000000", Address with { City = "" })
         );
 
-        Assert.Equal("issuer.tax-id-missing", missingTaxId.Code);
-        Assert.Equal("issuer.address-missing", badAddress.Code);
+        missingTaxId.Code.ShouldBe("issuer.tax-id-missing");
+        badAddress.Code.ShouldBe("issuer.address-missing");
     }
 
     [Fact]
@@ -81,17 +78,18 @@ public sealed class PartiesTests
             }
         );
 
-        Assert.Equal(id, profile.Id);
-        Assert.Equal(
-            new LegalParty(
-                "Fotograma Rental, S.L.",
-                "B00000000",
-                Address with
-                {
-                    Street = "Calle Nueva 3",
-                }
-            ),
-            profile.ToLegalParty()
-        );
+        profile.Id.ShouldBe(id);
+        profile
+            .ToLegalParty()
+            .ShouldBe(
+                new LegalParty(
+                    "Fotograma Rental, S.L.",
+                    "B00000000",
+                    Address with
+                    {
+                        Street = "Calle Nueva 3",
+                    }
+                )
+            );
     }
 }

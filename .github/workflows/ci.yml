@@ -213,6 +213,24 @@ jobs:
           scan-ref: .
           severity: HIGH,CRITICAL
           exit-code: "1"
+
+  # Image-dependent gates: the Trivy image scan and the Syft SBOM + license policy. The
+  # license check is load-bearing for Raccord's AGPL + brand-independence position
+  # (ADR-0002): a non-distributable or copy-left surprise must fail the build before it
+  # ships in a deliverable. NuGet licenses live in nuspec metadata (not in the compiled
+  # DLLs the image scan sees), so the policy check runs over the restored package graph
+  # and the npm lockfile, while Syft's SPDX inventory of the built image is published as
+  # the SBOM artifact.
+  sbom:
+    name: SBOM and license policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Build container image
+        run: docker build -f deploy/docker/Dockerfile -t raccord:ci .
       - name: Trivy (container image)
         uses: aquasecurity/trivy-action@0.33.1
         with:
@@ -220,6 +238,16 @@ jobs:
           image-ref: raccord:ci
           severity: HIGH,CRITICAL
           exit-code: "1"
+      - name: Syft SBOM (SPDX, published as an artifact)
+        uses: anchore/sbom-action@v0
+        with:
+          image: raccord:ci
+          format: spdx-json
+          artifact-name: sbom.spdx.json
+      - name: Restore (populates the NuGet cache the license check reads nuspecs from)
+        run: dotnet restore Raccord.slnx
+      - name: License policy (allowed licenses only)
+        run: dotnet run --project tools/dependency-licenses/dependency-licenses.csproj -- --check
 
   deployment:
     name: Container image, Compose and Bicep

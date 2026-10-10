@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <!--
+      License policy checker: walks Raccord.Web's restored NuGet graph (project.assets.json
+      plus the local nuspec cache) and the frontend's package-lock.json, and fails when a
+      dependency carries a license outside the allowlist. See docs/adr/0002 and the sbom
+      CI job.
+    -->
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Raccord.Tools.DependencyLicenses</RootNamespace>
+        <AssemblyName>dependency-licenses</AssemblyName>
+        <!-- A console tool, not part of the analyzed solution surface. -->
+        <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    </PropertyGroup>
+    <ItemGroup>
+        <!-- The tool is a single Program.cs; the default glob already picks it up. -->
+    </ItemGroup>
+</Project>

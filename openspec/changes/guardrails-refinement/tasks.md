@@ -69,3 +69,14 @@
       Application, no direct file IO in Domain/Application, no hardcoded credential-looking
       literals. Verify: planting each violation makes `semgrep --error` exit 1 (checked
       locally for all three; plants removed afterwards).
+
+## 8. SBOM and license policy
+
+- [x] 8.1 `sbom` job in .github/workflows/ci.yml: build the image, Trivy image scan
+      (HIGH/CRITICAL blocking), anchore/sbom-action publishing sbom.spdx.json. Verify:
+      Trivy image scan clean locally; Syft produces a valid SPDX document (149 packages).
+- [x] 8.2 tools/dependency-licenses: reads every restored src/ project.assets.json plus
+      cached nuspecs and package-lock.json, fails on any license token outside the
+      allowlist (SPDX OR/AND/WITH expressions allowed when every alternative is). Verify:
+      removing MIT from the allowlist fails the check listing the MIT-licensed packages;
+      the real graph passes clean.

@@ -29,9 +29,13 @@ expectation that broke. GitHub issue
   TruffleHog over git history since the PR base (secrets), Semgrep with the in-repo
   `.semgrep/` rules plus the OWASP Top 10 and secrets registry sets (insecure code
   patterns — the static twin of the ForbiddenInCore architecture rule), and Trivy over
-  both the repository tree and the built container image (known vulnerabilities, blocking
-  on high/critical). The deep per-ecosystem audits (dotnet package --vulnerable, npm
-  audit) stay where they are.
+  the repository tree (known vulnerabilities, blocking on high/critical). The deep
+  per-ecosystem audits (dotnet package --vulnerable, npm audit) stay where they are.
+- **SBOM and license policy**: an `sbom` CI job builds the container image, Trivy-scans
+  it, publishes the Syft SPDX inventory as `sbom.spdx.json`, and enforces the license
+  allowlist over the runtime dependency graph (NuGet nuspec expressions + npm lockfile)
+  via `tools/dependency-licenses` — load-bearing for the AGPL and brand-independence
+  position (ADR-0002): a copy-left surprise must fail before it ships in a deliverable.
 - **Arbitrary-bypass note**: direct pushes to main skip the commitlint mirror (it runs on
   `pull_request` only); branch protection is the policy answer.
 
@@ -50,6 +54,8 @@ expectation that broke. GitHub issue
   per-PR selection and failure evidence as artifacts.
 - `security-scanning`: blocking secrets/pattern/vulnerability gates on every PR —
   TruffleHog, Semgrep (in-repo rules + registry sets), Trivy fs and image scans.
+- `license-policy`: the runtime dependency graph allows only allowlisted licenses, and
+  the container image ships with a published SPDX SBOM.
 
 ### Modified Capabilities
 _(none — no spec'd capability's requirements change; this change is the seed for the
@@ -63,6 +69,8 @@ spec layer itself)_
   4.3.0, Aspire.Hosting.Testing 13.6.0 and Microsoft.Playwright 1.63.0 in
   Directory.Packages.props; prettier 3.6.2, lint-staged 16.2.3, @commitlint 19.8.1 in the
   frontend devDependencies.
-- **CI**: new lint, e2e and security jobs in .github/workflows/ci.yml; backend job's Format
-  step is CSharpier and its test run excludes the E2E project (the e2e job runs it with
-  Docker). The security job checks out with fetch-depth 500 for TruffleHog.
+- **CI**: new lint, e2e, security and sbom jobs in .github/workflows/ci.yml; backend job's
+  Format step is CSharpier and its test run excludes the E2E project (the e2e job runs it
+  with Docker). The security job checks out with fetch-depth 500 for TruffleHog. The
+  sbom job adds a standalone console tool at tools/dependency-licenses (not part of
+  Raccord.slnx — it is CI plumbing, not product code).

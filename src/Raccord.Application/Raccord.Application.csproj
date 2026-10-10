@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\Raccord.Domain\Raccord.Domain.csproj" />
-    <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\Raccord.Domain\Raccord.Domain.csproj" />
+        <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
+    </ItemGroup>
 </Project>

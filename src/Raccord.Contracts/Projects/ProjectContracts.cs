@@ -5,7 +5,12 @@ namespace Raccord.Contracts.Projects;
 /// <param name="CustomerId">Customer billed for the project.</param>
 /// <param name="StartDate">First day of the job.</param>
 /// <param name="EndDate">Last day of the job.</param>
-public sealed record CreateProjectRequest(string Name, Guid CustomerId, DateOnly StartDate, DateOnly EndDate);
+public sealed record CreateProjectRequest(
+    string Name,
+    Guid CustomerId,
+    DateOnly StartDate,
+    DateOnly EndDate
+);
 
 /// <summary>Adds billable work to a project.</summary>
 /// <param name="Kind">One of <c>equipment</c>, <c>labour</c>, <c>transport</c>, <c>consumable</c>, <c>service</c>, <c>other</c>.</param>
@@ -14,7 +19,14 @@ public sealed record CreateProjectRequest(string Name, Guid CustomerId, DateOnly
 /// <param name="UnitPrice">Net unit price with up to four decimals.</param>
 /// <param name="DiscountPercent">Line discount, 0–100.</param>
 /// <param name="VatRate">VAT percentage, 0–100.</param>
-public sealed record AddBillableLineRequest(string Kind, string Description, decimal Quantity, decimal UnitPrice, decimal DiscountPercent, decimal VatRate);
+public sealed record AddBillableLineRequest(
+    string Kind,
+    string Description,
+    decimal Quantity,
+    decimal UnitPrice,
+    decimal DiscountPercent,
+    decimal VatRate
+);
 
 /// <summary>A project in a list.</summary>
 /// <param name="Id">Project identifier.</param>
@@ -35,7 +47,8 @@ public sealed record ProjectSummaryResponse(
     DateOnly EndDate,
     int UnbilledLineCount,
     decimal UnbilledNetAmount,
-    string Currency);
+    string Currency
+);
 
 /// <summary>A project with its billable lines.</summary>
 /// <param name="Id">Project identifier.</param>
@@ -54,7 +67,8 @@ public sealed record ProjectResponse(
     DateOnly StartDate,
     DateOnly EndDate,
     string Currency,
-    IReadOnlyList<BillableLineResponse> BillableLines);
+    IReadOnlyList<BillableLineResponse> BillableLines
+);
 
 /// <summary>A billable line.</summary>
 /// <param name="Id">Line identifier.</param>
@@ -79,4 +93,5 @@ public sealed record BillableLineResponse(
     decimal NetAmount,
     string BillingState,
     Guid? DraftId,
-    Guid? InvoiceId);
+    Guid? InvoiceId
+);

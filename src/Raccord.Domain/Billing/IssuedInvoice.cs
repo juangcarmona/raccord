@@ -20,7 +20,8 @@ public sealed class IssuedInvoice
         LegalParty issuer,
         LegalParty recipient,
         IReadOnlyList<IssuedInvoiceLine> lines,
-        Currency currency)
+        Currency currency
+    )
     {
         Id = id;
         Source = source;

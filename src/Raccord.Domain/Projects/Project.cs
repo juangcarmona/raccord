@@ -38,31 +38,45 @@ public sealed class Project
     public DateOnly EndDate { get; private set; }
 
     /// <summary>Billable work recorded for the project.</summary>
-    public IReadOnlyList<BillableLine> BillableLines => [.. billableLines.OrderBy(line => line.Position)];
+    public IReadOnlyList<BillableLine> BillableLines =>
+        [.. billableLines.OrderBy(line => line.Position)];
 
     /// <summary>Creates a project for a customer and period.</summary>
     public static Project Create(string name, Guid customerId, DateOnly startDate, DateOnly endDate)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new BusinessRuleViolationException("projects.name-required", "Project name is required.");
+            throw new BusinessRuleViolationException(
+                "projects.name-required",
+                "Project name is required."
+            );
         }
 
         if (endDate < startDate)
         {
-            throw new BusinessRuleViolationException("projects.period-invalid", "A project cannot end before it starts.");
+            throw new BusinessRuleViolationException(
+                "projects.period-invalid",
+                "A project cannot end before it starts."
+            );
         }
 
         return new Project(name.Trim(), customerId, startDate, endDate);
     }
 
     /// <summary>Records billable work.</summary>
-    public BillableLine AddBillableLine(BillableLineKind kind, string description, LinePricing pricing)
+    public BillableLine AddBillableLine(
+        BillableLineKind kind,
+        string description,
+        LinePricing pricing
+    )
     {
         ArgumentNullException.ThrowIfNull(pricing);
         if (string.IsNullOrWhiteSpace(description))
         {
-            throw new BusinessRuleViolationException("projects.billable-line-description-required", "A billable line needs a description.");
+            throw new BusinessRuleViolationException(
+                "projects.billable-line-description-required",
+                "A billable line needs a description."
+            );
         }
 
         var position = billableLines.Count == 0 ? 1 : billableLines.Max(line => line.Position) + 1;
@@ -72,7 +86,10 @@ public sealed class Project
     }
 
     /// <summary>Reserves unbilled lines for one draft so they cannot be billed twice.</summary>
-    public IReadOnlyList<BillableLine> ReserveForDraft(IReadOnlyCollection<Guid> lineIds, Guid draftId)
+    public IReadOnlyList<BillableLine> ReserveForDraft(
+        IReadOnlyCollection<Guid> lineIds,
+        Guid draftId
+    )
     {
         ArgumentNullException.ThrowIfNull(lineIds);
         var lines = lineIds.Distinct().Select(FindLine).OrderBy(line => line.Position).ToList();
@@ -105,5 +122,8 @@ public sealed class Project
 
     private BillableLine FindLine(Guid lineId) =>
         billableLines.Find(line => line.Id == lineId)
-        ?? throw new BusinessRuleViolationException("projects.billable-line-not-found", $"Billable line '{lineId}' does not belong to this project.");
+        ?? throw new BusinessRuleViolationException(
+            "projects.billable-line-not-found",
+            $"Billable line '{lineId}' does not belong to this project."
+        );
 }

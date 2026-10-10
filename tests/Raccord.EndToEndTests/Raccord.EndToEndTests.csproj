@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.Testing" />
+        <PackageReference Include="Microsoft.Playwright" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Referencing the Aspire host makes the Aspire tooling emit Projects.Raccord_Aspire, the
+             metadata DistributedApplicationTestingBuilder boots. -->
+        <ProjectReference Include="..\..\src\Raccord.Aspire\Raccord.Aspire.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+</Project>

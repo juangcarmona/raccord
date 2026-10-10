@@ -54,5 +54,6 @@ public sealed class InvoiceDraftLine
     public string CurrencyCode { get; private set; }
 
     /// <summary>The line's pricing.</summary>
-    public LinePricing Pricing => LinePricing.Create(Quantity, UnitPrice, DiscountPercent, VatRate.Of(VatPercentage));
+    public LinePricing Pricing =>
+        LinePricing.Create(Quantity, UnitPrice, DiscountPercent, VatRate.Of(VatPercentage));
 }

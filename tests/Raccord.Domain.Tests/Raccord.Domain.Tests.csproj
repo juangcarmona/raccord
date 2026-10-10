@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Raccord.Domain\Raccord.Domain.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Raccord.Domain\Raccord.Domain.csproj" />
+    </ItemGroup>
 </Project>

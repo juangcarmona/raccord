@@ -8,4 +8,12 @@ namespace Raccord.Application.Invoicing;
 /// <param name="Total">Amount payable.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="ProjectId">Billed project.</param>
-public sealed record IssuedInvoiceListItem(Guid Id, string Number, DateOnly IssueDate, string RecipientName, decimal Total, string Currency, Guid ProjectId);
+public sealed record IssuedInvoiceListItem(
+    Guid Id,
+    string Number,
+    DateOnly IssueDate,
+    string RecipientName,
+    decimal Total,
+    string Currency,
+    Guid ProjectId
+);

@@ -15,7 +15,12 @@ internal sealed class PdfPage
     /// <summary>Draws left-aligned text.</summary>
     public void Text(double x, double y, string text, double size, bool bold = false)
     {
-        Write(string.Create(CultureInfo.InvariantCulture, $"BT /{(bold ? "F2" : "F1")} {Number(size)} Tf {Number(x)} {Number(y)} Td ("));
+        Write(
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"BT /{(bold ? "F2" : "F1")} {Number(size)} Tf {Number(x)} {Number(y)} Td ("
+            )
+        );
         WriteEscaped(text);
         Write(") Tj ET\n");
     }
@@ -26,16 +31,27 @@ internal sealed class PdfPage
 
     /// <summary>Draws a horizontal rule.</summary>
     public void Rule(double x1, double x2, double y, double thickness = 0.5) =>
-        Write(string.Create(CultureInfo.InvariantCulture, $"{Number(thickness)} w {Number(x1)} {Number(y)} m {Number(x2)} {Number(y)} l S\n"));
+        Write(
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"{Number(thickness)} w {Number(x1)} {Number(y)} m {Number(x2)} {Number(y)} l S\n"
+            )
+        );
 
     /// <summary>Fills a light grey band.</summary>
     public void Band(double x, double y, double width, double height) =>
-        Write(string.Create(CultureInfo.InvariantCulture, $"0.94 g {Number(x)} {Number(y)} {Number(width)} {Number(height)} re f 0 g\n"));
+        Write(
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"0.94 g {Number(x)} {Number(y)} {Number(width)} {Number(height)} re f 0 g\n"
+            )
+        );
 
     /// <summary>The content stream bytes.</summary>
     public byte[] ToArray() => content.WrittenSpan.ToArray();
 
-    private static string Number(double value) => value.ToString("0.##", CultureInfo.InvariantCulture);
+    private static string Number(double value) =>
+        value.ToString("0.##", CultureInfo.InvariantCulture);
 
     private void Write(string ascii) => content.Write(Encoding.ASCII.GetBytes(ascii));
 

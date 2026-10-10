@@ -15,7 +15,7 @@ Configuration: `deploy/.env` (from `.env.example`). Operations: [self-hosting](.
 
 ## .NET Aspire (development)
 
-`dotnet run --project src/Raccord.AppHost`: PostgreSQL (volume), Azurite (volume), `migrations` resource, `web` (API) and `frontend` (Vite with proxy). Dashboard with logs, traces and metrics. See [local development](../../operations/local-development.md).
+`dotnet run --project src/Raccord.Aspire`: PostgreSQL (volume), Azurite (volume), `migrations` resource, `web` (API) and `frontend` (Vite with proxy). Dashboard with logs, traces and metrics. See [local development](../../operations/local-development.md).
 
 ## Azure (Bicep)
 

@@ -14,7 +14,11 @@ internal sealed class ProjectRepository(RaccordDbContext db) : IProjectRepositor
         db.Projects.FirstOrDefaultAsync(project => project.Id == id, cancellationToken);
 
     public async Task<IReadOnlyList<Project>> ListAsync(CancellationToken cancellationToken) =>
-        await db.Projects.OrderByDescending(project => project.StartDate).ThenBy(project => project.Name).ToListAsync(cancellationToken).ConfigureAwait(false);
+        await db
+            .Projects.OrderByDescending(project => project.StartDate)
+            .ThenBy(project => project.Name)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
 
     public void Add(Project project) => db.Projects.Add(project);
 }

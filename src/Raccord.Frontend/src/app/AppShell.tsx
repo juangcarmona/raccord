@@ -1,66 +1,71 @@
-import { useEffect, useRef } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router';
-import { useI18n } from '../shared/i18n/I18nProvider';
-import { locales, type Locale } from '../shared/i18n/messages';
+import { useEffect, useRef } from "react";
+import { NavLink, Outlet, useLocation } from "react-router";
+import { useI18n } from "../shared/i18n/I18nProvider";
+import { locales, type Locale } from "../shared/i18n/messages";
 
 const navigation = [
-  { to: '/projects', key: 'nav.projects' },
-  { to: '/drafts', key: 'nav.drafts' },
-  { to: '/invoices', key: 'nav.invoices' },
-  { to: '/customers', key: 'nav.customers' },
-  { to: '/settings/issuer', key: 'nav.settings' },
+    { to: "/projects", key: "nav.projects" },
+    { to: "/drafts", key: "nav.drafts" },
+    { to: "/invoices", key: "nav.invoices" },
+    { to: "/customers", key: "nav.customers" },
+    { to: "/settings/issuer", key: "nav.settings" },
 ] as const;
 
 export function AppShell() {
-  const { t, locale, setLocale } = useI18n();
-  const location = useLocation();
-  const main = useRef<HTMLElement>(null);
-  const firstRender = useRef(true);
+    const { t, locale, setLocale } = useI18n();
+    const location = useLocation();
+    const main = useRef<HTMLElement>(null);
+    const firstRender = useRef(true);
 
-  // Move focus to the new page heading after client-side navigation, as a full page load would.
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    const timer = setTimeout(() => {
-      main.current?.querySelector<HTMLElement>('[data-page-heading]')?.focus();
-    }, 0);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [location.pathname]);
+    // Move focus to the new page heading after client-side navigation, as a full page load would.
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        const timer = setTimeout(() => {
+            main.current?.querySelector<HTMLElement>("[data-page-heading]")?.focus();
+        }, 0);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [location.pathname]);
 
-  return (
-    <div className="shell">
-      <a className="skip-link" href="#main">
-        {t('app.skipToContent')}
-      </a>
-      <header className="shell__header">
-        <span className="brand">{t('app.name')}</span>
-        <nav aria-label={t('nav.main')}>
-          <ul>
-            {navigation.map((item) => (
-              <li key={item.to}>
-                <NavLink to={item.to}>{t(item.key)}</NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <label className="locale">
-          <span className="visually-hidden">{t('app.language')}</span>
-          <select value={locale} onChange={(event) => { setLocale(event.target.value as Locale); }}>
-            {locales.map((option) => (
-              <option key={option} value={option}>
-                {option.toUpperCase()}
-              </option>
-            ))}
-          </select>
-        </label>
-      </header>
-      <main id="main" ref={main} className="shell__main">
-        <Outlet />
-      </main>
-    </div>
-  );
+    return (
+        <div className="shell">
+            <a className="skip-link" href="#main">
+                {t("app.skipToContent")}
+            </a>
+            <header className="shell__header">
+                <span className="brand">{t("app.name")}</span>
+                <nav aria-label={t("nav.main")}>
+                    <ul>
+                        {navigation.map((item) => (
+                            <li key={item.to}>
+                                <NavLink to={item.to}>{t(item.key)}</NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+                <label className="locale">
+                    <span className="visually-hidden">{t("app.language")}</span>
+                    <select
+                        value={locale}
+                        onChange={(event) => {
+                            setLocale(event.target.value as Locale);
+                        }}
+                    >
+                        {locales.map((option) => (
+                            <option key={option} value={option}>
+                                {option.toUpperCase()}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </header>
+            <main id="main" ref={main} className="shell__main">
+                <Outlet />
+            </main>
+        </div>
+    );
 }

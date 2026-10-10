@@ -10,10 +10,22 @@ internal static class ConcurrencyTokenExtensions
 
     public static void HasConcurrencyToken<TEntity>(this EntityTypeBuilder<TEntity> builder)
         where TEntity : class =>
-        builder.Property<uint>(Version).HasColumnName("xmin").HasColumnType("xid").ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
+        builder
+            .Property<uint>(Version)
+            .HasColumnName("xmin")
+            .HasColumnType("xid")
+            .ValueGeneratedOnAddOrUpdate()
+            .IsConcurrencyToken();
 
-    public static void HasConcurrencyToken<TOwner, TOwned>(this OwnedNavigationBuilder<TOwner, TOwned> builder)
+    public static void HasConcurrencyToken<TOwner, TOwned>(
+        this OwnedNavigationBuilder<TOwner, TOwned> builder
+    )
         where TOwner : class
         where TOwned : class =>
-        builder.Property<uint>(Version).HasColumnName("xmin").HasColumnType("xid").ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
+        builder
+            .Property<uint>(Version)
+            .HasColumnName("xmin")
+            .HasColumnType("xid")
+            .ValueGeneratedOnAddOrUpdate()
+            .IsConcurrencyToken();
 }

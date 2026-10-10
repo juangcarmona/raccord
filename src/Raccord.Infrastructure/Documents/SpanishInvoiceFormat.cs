@@ -9,7 +9,9 @@ namespace Raccord.Infrastructure.Documents;
 internal static class SpanishInvoiceFormat
 {
     public static string Money(decimal amount, string currencyCode) =>
-        Grouped(amount, "F2") + " " + (string.Equals(currencyCode, "EUR", StringComparison.Ordinal) ? "€" : currencyCode);
+        Grouped(amount, "F2")
+        + " "
+        + (string.Equals(currencyCode, "EUR", StringComparison.Ordinal) ? "€" : currencyCode);
 
     public static string Quantity(decimal value) => Grouped(value, "0.####");
 
@@ -17,7 +19,8 @@ internal static class SpanishInvoiceFormat
 
     public static string Percent(decimal value) => Grouped(value, "0.##") + " %";
 
-    public static string Date(DateOnly date) => date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+    public static string Date(DateOnly date) =>
+        date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
 
     private static string Grouped(decimal value, string format)
     {

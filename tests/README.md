@@ -6,6 +6,7 @@
 | `Raccord.Architecture.Tests` | Dependency rules | No |
 | `Raccord.Infrastructure.Tests` | PDF renderer, file document store | No |
 | `Raccord.Web.Tests` | HTTP API against real PostgreSQL (Testcontainers, one database per test) | Yes |
+| `Raccord.EndToEndTests` | Playwright journeys driving the real SPA over the booted Aspire AppHost (fresh session-lifetime Postgres per run) | Yes |
 
 Frontend tests live next to the code in `src/Raccord.Frontend` (`npm test`).
 

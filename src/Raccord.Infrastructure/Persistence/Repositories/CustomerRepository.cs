@@ -14,7 +14,10 @@ internal sealed class CustomerRepository(RaccordDbContext db) : ICustomerReposit
         db.Customers.FirstOrDefaultAsync(customer => customer.Id == id, cancellationToken);
 
     public async Task<IReadOnlyList<Customer>> ListAsync(CancellationToken cancellationToken) =>
-        await db.Customers.OrderBy(customer => customer.LegalName).ToListAsync(cancellationToken).ConfigureAwait(false);
+        await db
+            .Customers.OrderBy(customer => customer.LegalName)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
 
     public void Add(Customer customer) => db.Customers.Add(customer);
 }

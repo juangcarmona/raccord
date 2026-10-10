@@ -6,7 +6,11 @@ namespace Raccord.Contracts.Invoicing;
 /// <param name="ProjectId">The project to bill.</param>
 /// <param name="BillableLineIds">Unbilled lines to include.</param>
 /// <param name="SeriesCode">Series that will number the invoice; the default series when omitted.</param>
-public sealed record CreateInvoiceDraftRequest(Guid ProjectId, IReadOnlyList<Guid> BillableLineIds, string? SeriesCode);
+public sealed record CreateInvoiceDraftRequest(
+    Guid ProjectId,
+    IReadOnlyList<Guid> BillableLineIds,
+    string? SeriesCode
+);
 
 /// <summary>Finalizes a draft.</summary>
 /// <param name="IssueDate">Legal issue date; today in the organization's time zone when omitted.</param>
@@ -29,7 +33,8 @@ public sealed record InvoiceLineResponse(
     decimal UnitPrice,
     decimal DiscountPercent,
     decimal VatRate,
-    decimal NetAmount);
+    decimal NetAmount
+);
 
 /// <summary>Taxable base and VAT for one rate.</summary>
 /// <param name="Rate">VAT percentage.</param>
@@ -43,7 +48,13 @@ public sealed record VatGroupResponse(decimal Rate, decimal TaxableBase, decimal
 /// <param name="VatAmount">Sum of VAT.</param>
 /// <param name="Total">Amount payable.</param>
 /// <param name="VatBreakdown">One entry per VAT rate.</param>
-public sealed record InvoiceTotalsResponse(string Currency, decimal TaxableBase, decimal VatAmount, decimal Total, IReadOnlyList<VatGroupResponse> VatBreakdown);
+public sealed record InvoiceTotalsResponse(
+    string Currency,
+    decimal TaxableBase,
+    decimal VatAmount,
+    decimal Total,
+    IReadOnlyList<VatGroupResponse> VatBreakdown
+);
 
 /// <summary>An invoice draft.</summary>
 /// <param name="Id">Draft identifier.</param>
@@ -72,7 +83,8 @@ public sealed record InvoiceDraftResponse(
     IReadOnlyList<InvoiceLineResponse> Lines,
     InvoiceTotalsResponse Totals,
     IReadOnlyList<ValidationIssueResponse> ValidationIssues,
-    Guid? IssuedInvoiceId);
+    Guid? IssuedInvoiceId
+);
 
 /// <summary>A draft in a list.</summary>
 /// <param name="Id">Draft identifier.</param>
@@ -83,7 +95,16 @@ public sealed record InvoiceDraftResponse(
 /// <param name="Total">Current total.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="CreatedAt">Creation moment (UTC).</param>
-public sealed record InvoiceDraftSummaryResponse(Guid Id, Guid ProjectId, string ProjectName, string CustomerName, int LineCount, decimal Total, string Currency, DateTimeOffset CreatedAt);
+public sealed record InvoiceDraftSummaryResponse(
+    Guid Id,
+    Guid ProjectId,
+    string ProjectName,
+    string CustomerName,
+    int LineCount,
+    decimal Total,
+    string Currency,
+    DateTimeOffset CreatedAt
+);
 
 /// <summary>An issued, immutable invoice.</summary>
 /// <param name="Id">Invoice identifier.</param>
@@ -114,7 +135,8 @@ public sealed record IssuedInvoiceResponse(
     string ContentHash,
     Guid ProjectId,
     Guid CustomerId,
-    Guid DraftId);
+    Guid DraftId
+);
 
 /// <summary>An issued invoice in a list.</summary>
 /// <param name="Id">Invoice identifier.</param>
@@ -124,7 +146,15 @@ public sealed record IssuedInvoiceResponse(
 /// <param name="Total">Amount payable.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="ProjectId">Billed project.</param>
-public sealed record IssuedInvoiceSummaryResponse(Guid Id, string Number, DateOnly IssueDate, string RecipientName, decimal Total, string Currency, Guid ProjectId);
+public sealed record IssuedInvoiceSummaryResponse(
+    Guid Id,
+    string Number,
+    DateOnly IssueDate,
+    string RecipientName,
+    decimal Total,
+    string Currency,
+    Guid ProjectId
+);
 
 /// <summary>An invoice numbering series.</summary>
 /// <param name="Code">Series code.</param>

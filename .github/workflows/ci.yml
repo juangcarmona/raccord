@@ -14,21 +14,23 @@ concurrency:
 
 jobs:
   backend:
-    name: .NET restore, format, analyzers, tests, vulnerabilities
+    name: .NET restore, analyzers, format, tests, vulnerabilities
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
         with:
           global-json-file: global.json
-      - name: Restore
-        run: dotnet restore Raccord.slnx
-      - name: Format
-        run: dotnet format Raccord.slnx --verify-no-changes --no-restore
+      - name: Restore (solution and local tools)
+        run: |
+          dotnet restore Raccord.slnx
+          dotnet tool restore
+      - name: Format (CSharpier)
+        run: dotnet csharpier check .
       - name: Build (analyzers, warnings as errors)
         run: dotnet build Raccord.slnx -c Release --no-restore
       - name: Test (integration tests use Testcontainers PostgreSQL)
-        run: dotnet test Raccord.slnx -c Release --no-build
+        run: dotnet test Raccord.slnx -c Release --no-build --filter "FullyQualifiedName!~Raccord.EndToEndTests"
       - name: Vulnerable packages
         run: |
           dotnet list Raccord.slnx package --vulnerable --include-transitive 2>&1 | tee vulnerable.txt
@@ -37,6 +39,103 @@ jobs:
         run: |
           dotnet tool restore
           dotnet ef migrations has-pending-model-changes --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --no-build --configuration Release
+
+  # Mirrors the commit-time gates (.husky/pre-commit + .husky/commit-msg) in --check mode, so a
+  # local bypass (HUSKY=0 or --no-verify) is still caught before merge. CSharpier and Prettier run
+  # in check mode; commitlint lints every commit in the PR range. ESLint is deliberately not
+  # duplicated here: the frontend job already fails on it.
+  lint:
+    name: Lint mirror (format, commit messages)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Restore local tools
+        run: dotnet tool restore
+      - name: CSharpier check
+        run: dotnet csharpier check .
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/Raccord.Frontend/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: src/Raccord.Frontend
+      - name: Prettier check
+        run: npx prettier --check "**/*.{ts,tsx,json,md,yml,yaml,css}"
+        working-directory: src/Raccord.Frontend
+      - name: Commitlint over PR commits
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --config ../../.config/commitlint.config.cjs --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+        working-directory: src/Raccord.Frontend
+
+  openspec:
+    name: OpenSpec changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      # Pinned like @prodshape/cli in the product job: unpinned, a CLI drift silently changes
+      # what "a valid change" means between a contributor's machine and CI.
+      - name: Validate OpenSpec changes (PDaC stays the product-model source of truth)
+        run: npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive
+
+  # The whole Aspire AppHost boots once (Postgres, Azurite, migrations, the API and the Vite
+  # frontend; the frontend resource's `npm ci` dominates a cold boot) and Playwright drives the
+  # real SPA through the customer → project → invoice journeys. Selection is pinned by the
+  # committed manifest, so a narrowed filter is a red build, not a quieter suite.
+  e2e:
+    name: E2E journeys (Playwright over the Aspire AppHost)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      # Node for the frontend resource's `npm ci` inside the booted AppHost (matching the
+      # frontend job's version, which the SPA's engines field demands).
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/Raccord.Frontend/package-lock.json
+      - name: Restore (solution and local tools)
+        run: |
+          dotnet restore Raccord.slnx
+          dotnet tool restore
+      - name: Build (Release, so discovery matches the manifest's configuration)
+        run: dotnet build Raccord.slnx -c Release --no-restore
+      # Installing chromium with --with-deps here means the fixture's own `install chromium`
+      # (a no-op when the browser is cached) launches with its OS libraries already present.
+      # The npm `playwright` package matches the Microsoft.Playwright 1.63.0 NuGet version.
+      - name: Install Playwright chromium with OS dependencies
+        run: npx -y playwright@1.63.0 install --with-deps chromium
+      - name: Per-PR selection matches the manifest
+        run: bash .github/scripts/check-e2e-selection.sh
+        working-directory: .
+      # The test assembly runs through its own xunit.v3 executable host rather than
+      # `dotnet test`: the VSTest host captures stdout/stderr, which hid every fixture
+      # stage marker during the 90-minute CI hang; the MTP host streams them live. The
+      # filter syntax is xunit.v3's query language, matching the same Quarantine trait.
+      # A bounded run; a hang fails the job instead of stalling it for hours.
+      - name: Run journeys
+        run: |
+          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+      - name: Upload journey artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: '**/playwright-artifacts/'
+          if-no-files-found: ignore
+          retention-days: 7
 
   product:
     name: Product definition (PDaC)
@@ -71,6 +170,7 @@ jobs:
         with:
           global-json-file: global.json
       - run: npm ci
+      - run: npm run format:check
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
@@ -81,6 +181,79 @@ jobs:
         run: |
           npm run api:generate
           git diff --exit-code -- openapi src/shared/api/schema.d.ts
+
+  # Result-checking security gates, all blocking: secrets in history (TruffleHog over the
+  # PR range), insecure code patterns (Semgrep over the in-repo rules plus OWASP/secrets
+  # registry sets), and known vulnerabilities in the repo tree and the built container
+  # image (Trivy). The deep per-ecosystem audits (dotnet list package --vulnerable, npm
+  # audit) stay in their own jobs — they know NuGet/npm dependency graphs better than
+  # Trivy does.
+  security:
+    name: Security gates (secrets, patterns, vulnerabilities)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # TruffleHog walks history back from the PR head; a shallow clone has nothing
+          # for it to scan since the base sha.
+          fetch-depth: 500
+      - name: TruffleHog (secrets in git history since the base)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          # Scan the full history of the checked-out ref, but only report findings newer
+          # than the PR base so pre-existing noise doesn't block unrelated PRs.
+          path: ./
+          base: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
+          head: HEAD
+      - name: Semgrep (insecure code patterns)
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            .semgrep/csharp-core-rules.yml
+            p/owasp-top-ten
+            p/secrets
+      - name: Trivy (repository filesystem)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
+  # Image-dependent gates: the Trivy image scan and the Syft SBOM + license policy. The
+  # license check is load-bearing for Raccord's AGPL + brand-independence position
+  # (ADR-0002): a non-distributable or copy-left surprise must fail the build before it
+  # ships in a deliverable. NuGet licenses live in nuspec metadata (not in the compiled
+  # DLLs the image scan sees), so the policy check runs over the restored package graph
+  # and the npm lockfile, while Syft's SPDX inventory of the built image is published as
+  # the SBOM artifact.
+  sbom:
+    name: SBOM and license policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Build container image
+        run: docker build -f deploy/docker/Dockerfile -t raccord:ci .
+      - name: Trivy (container image)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: raccord:ci
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+      - name: Syft SBOM (SPDX, published as an artifact)
+        uses: anchore/sbom-action@v0
+        with:
+          image: raccord:ci
+          format: spdx-json
+          artifact-name: sbom.spdx.json
+      - name: Restore (populates the NuGet cache the license check reads nuspecs from)
+        run: dotnet restore Raccord.slnx
+      - name: License policy (allowed licenses only)
+        run: dotnet run --project tools/dependency-licenses/dependency-licenses.csproj -- --check
 
   deployment:
     name: Container image, Compose and Bicep

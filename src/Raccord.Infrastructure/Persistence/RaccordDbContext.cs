@@ -9,7 +9,8 @@ using Raccord.Domain.Projects;
 namespace Raccord.Infrastructure.Persistence;
 
 /// <summary>The PostgreSQL system of record.</summary>
-public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options) : DbContext(options)
+public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
+    : DbContext(options)
 {
     internal DbSet<Customer> Customers => Set<Customer>();
 
@@ -61,7 +62,9 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
             foreach (var foreignKey in entity.GetForeignKeys())
             {
-                foreignKey.SetConstraintName(ToSnakeCase(foreignKey.GetConstraintName() ?? string.Empty));
+                foreignKey.SetConstraintName(
+                    ToSnakeCase(foreignKey.GetConstraintName() ?? string.Empty)
+                );
             }
 
             foreach (var index in entity.GetIndexes())
@@ -80,7 +83,13 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
             if (char.IsUpper(current))
             {
                 var previous = i > 0 ? name[i - 1] : '_';
-                var startsWord = previous != '_' && (char.IsLower(previous) || char.IsDigit(previous) || (i + 1 < name.Length && char.IsLower(name[i + 1])));
+                var startsWord =
+                    previous != '_'
+                    && (
+                        char.IsLower(previous)
+                        || char.IsDigit(previous)
+                        || (i + 1 < name.Length && char.IsLower(name[i + 1]))
+                    );
                 if (startsWord)
                 {
                     builder.Append('_');

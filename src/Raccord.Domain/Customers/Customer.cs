@@ -36,14 +36,27 @@ public sealed class Customer
     public string? Email { get; private set; }
 
     /// <summary>Registers a customer. Tax ID and address may be completed before invoicing.</summary>
-    public static Customer Register(string legalName, string? taxId, PostalAddress? address, string? email)
+    public static Customer Register(
+        string legalName,
+        string? taxId,
+        PostalAddress? address,
+        string? email
+    )
     {
         if (string.IsNullOrWhiteSpace(legalName))
         {
-            throw new BusinessRuleViolationException("customers.legal-name-required", "Customer legal name is required.");
+            throw new BusinessRuleViolationException(
+                "customers.legal-name-required",
+                "Customer legal name is required."
+            );
         }
 
-        return new Customer(legalName.Trim(), Parties.TaxId.Normalize(taxId), address, string.IsNullOrWhiteSpace(email) ? null : email.Trim());
+        return new Customer(
+            legalName.Trim(),
+            Parties.TaxId.Normalize(taxId),
+            address,
+            string.IsNullOrWhiteSpace(email) ? null : email.Trim()
+        );
     }
 
     /// <summary>The customer's legal identity for an invoice.</summary>

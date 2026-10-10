@@ -1,0 +1,56 @@
+# In-repo Semgrep rules for Raccord — the static twin of the runtime ForbiddenInCore
+# architecture test. Where the arch test catches a bad reference once the code compiles,
+# these rules fire in CI on every push/PR, no build required. The CI job layers the
+# p/owasp-top-ten and p/secrets registry sets on top of this file.
+
+rules:
+  # The domain and application layers must stay free of infrastructure concerns — the
+  # modular monolith's inner-ring rule (see AGENTS.md and the ForbiddenInCore test).
+  - id: raccord-no-httpclient-in-core
+    message: HttpClient belongs to infrastructure; Domain and Application must not make HTTP calls.
+    severity: ERROR
+    languages: [csharp]
+    paths:
+      include:
+        - /src/Raccord.Domain/**
+        - /src/Raccord.Application/**
+    pattern: new HttpClient(...)
+
+  - id: raccord-no-file-io-in-core
+    message: Direct file system access belongs to infrastructure, not Domain or Application.
+    severity: ERROR
+    languages: [csharp]
+    paths:
+      include:
+        - /src/Raccord.Domain/**
+        - /src/Raccord.Application/**
+    pattern-either:
+      - pattern: File.ReadAllText(...)
+      - pattern: File.ReadAllTextAsync(...)
+      - pattern: File.WriteAllText(...)
+      - pattern: File.WriteAllTextAsync(...)
+      - pattern: Directory.Delete(...)
+
+  # Secrets must never be hardcoded. A deliberately small net (a credential-looking
+  # variable assigned a string literal catches the accidental case; TruffleHog guards
+  # real keys in history and the p/secrets set covers more shapes).
+  - id: raccord-no-hardcoded-secrets
+    message: >-
+      Hardcoded credentials are forbidden; read secrets from configuration or a secret
+      store instead (see docs/operations/local-development.md).
+    severity: ERROR
+    languages: [csharp]
+    paths:
+      exclude:
+        - "**/bin/**"
+        - "**/obj/**"
+        - /tests/**
+    patterns:
+      - pattern-either:
+          - pattern: string $CRED = "...";
+          - pattern: var $CRED = "...";
+      - metavariable-regex:
+          metavariable: $CRED
+          regex: (?i).*(password|passwd|secret|apikey|api_key|accesstoken).*
+      # Leave obviously-fake fixture values out of the net.
+      - pattern-not: string $CRED = "";

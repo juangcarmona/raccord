@@ -9,82 +9,116 @@ public sealed class ProjectTests
     private static readonly Guid CustomerId = Guid.CreateVersion7();
 
     [Fact]
-    public void A_project_cannot_end_before_it_starts()
+    public void A_project_Should_not_end_before_it_starts()
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(
-            () => Project.Create("Spring campaign shoot", CustomerId, new DateOnly(2026, 5, 10), new DateOnly(2026, 5, 9)));
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            Project.Create(
+                "Spring campaign shoot",
+                CustomerId,
+                new DateOnly(2026, 5, 10),
+                new DateOnly(2026, 5, 9)
+            )
+        );
 
-        Assert.Equal("projects.period-invalid", error.Code);
+        error.Code.ShouldBe("projects.period-invalid");
     }
 
     [Fact]
-    public void New_billable_lines_are_unbilled()
+    public void New_billable_lines_Should_be_unbilled()
     {
         var project = NewProject();
 
-        var line = project.AddBillableLine(BillableLineKind.Equipment, "Cinema camera kit", Pricing(2m, 450m));
+        var line = project.AddBillableLine(
+            BillableLineKind.Equipment,
+            "Cinema camera kit",
+            Pricing(2m, 450m)
+        );
 
-        Assert.Equal(BillingState.Unbilled, line.State);
-        Assert.Contains(line, project.BillableLines);
+        line.State.ShouldBe(BillingState.Unbilled);
+        project.BillableLines.ShouldContain(line);
     }
 
     [Fact]
-    public void Reserving_lines_for_a_draft_moves_them_out_of_the_unbilled_pool()
+    public void Reserving_lines_for_a_draft_Should_move_them_out_of_the_unbilled_pool()
     {
         var project = NewProject();
-        var camera = project.AddBillableLine(BillableLineKind.Equipment, "Cinema camera kit", Pricing(2m, 450m));
-        var gaffer = project.AddBillableLine(BillableLineKind.Labour, "Gaffer, 10h day", Pricing(1m, 380m));
+        var camera = project.AddBillableLine(
+            BillableLineKind.Equipment,
+            "Cinema camera kit",
+            Pricing(2m, 450m)
+        );
+        var gaffer = project.AddBillableLine(
+            BillableLineKind.Labour,
+            "Gaffer, 10h day",
+            Pricing(1m, 380m)
+        );
         var draftId = Guid.CreateVersion7();
 
         var reserved = project.ReserveForDraft([camera.Id], draftId);
 
-        Assert.Equal([camera], reserved);
-        Assert.Equal(BillingState.InDraft, camera.State);
-        Assert.Equal(draftId, camera.DraftId);
-        Assert.Equal(BillingState.Unbilled, gaffer.State);
+        reserved.ShouldBe([camera]);
+        camera.State.ShouldBe(BillingState.InDraft);
+        camera.DraftId.ShouldBe(draftId);
+        gaffer.State.ShouldBe(BillingState.Unbilled);
     }
 
     [Fact]
-    public void A_line_already_in_a_draft_cannot_be_reserved_again()
+    public void A_line_already_in_a_draft_Should_not_be_reserved_again()
     {
         var project = NewProject();
-        var line = project.AddBillableLine(BillableLineKind.Transport, "Van with driver", Pricing(1m, 220m));
+        var line = project.AddBillableLine(
+            BillableLineKind.Transport,
+            "Van with driver",
+            Pricing(1m, 220m)
+        );
         project.ReserveForDraft([line.Id], Guid.CreateVersion7());
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() => project.ReserveForDraft([line.Id], Guid.CreateVersion7()));
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.ReserveForDraft([line.Id], Guid.CreateVersion7())
+        );
 
-        Assert.Equal("billing.line-not-unbilled", error.Code);
+        error.Code.ShouldBe("billing.line-not-unbilled");
     }
 
     [Fact]
-    public void Reserving_an_unknown_line_is_rejected()
+    public void Reserving_an_unknown_line_Should_be_rejected()
     {
         var project = NewProject();
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() => project.ReserveForDraft([Guid.CreateVersion7()], Guid.CreateVersion7()));
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.ReserveForDraft([Guid.CreateVersion7()], Guid.CreateVersion7())
+        );
 
-        Assert.Equal("projects.billable-line-not-found", error.Code);
+        error.Code.ShouldBe("projects.billable-line-not-found");
     }
 
     [Fact]
-    public void Released_lines_can_be_billed_again()
+    public void Released_lines_Should_be_billable_again()
     {
         var project = NewProject();
-        var line = project.AddBillableLine(BillableLineKind.Consumable, "Gel and diffusion pack", Pricing(3m, 18.5m));
+        var line = project.AddBillableLine(
+            BillableLineKind.Consumable,
+            "Gel and diffusion pack",
+            Pricing(3m, 18.5m)
+        );
         var draftId = Guid.CreateVersion7();
         project.ReserveForDraft([line.Id], draftId);
 
         project.ReleaseFromDraft(draftId, [line.Id]);
 
-        Assert.Equal(BillingState.Unbilled, line.State);
-        Assert.Null(line.DraftId);
+        line.State.ShouldBe(BillingState.Unbilled);
+        line.DraftId.ShouldBeNull();
     }
 
     [Fact]
-    public void Invoiced_lines_are_never_billable_again()
+    public void Invoiced_lines_Should_never_be_billable_again()
     {
         var project = NewProject();
-        var line = project.AddBillableLine(BillableLineKind.Service, "Colour grading", Pricing(8m, 95m));
+        var line = project.AddBillableLine(
+            BillableLineKind.Service,
+            "Colour grading",
+            Pricing(8m, 95m)
+        );
         var draftId = Guid.CreateVersion7();
         var invoiceId = Guid.CreateVersion7();
         project.ReserveForDraft([line.Id], draftId);
@@ -92,25 +126,34 @@ public sealed class ProjectTests
         project.MarkInvoiced(draftId, invoiceId);
         project.ReleaseFromDraft(draftId, [line.Id]);
 
-        Assert.Equal(BillingState.Invoiced, line.State);
-        Assert.Equal(invoiceId, line.InvoiceId);
-        var error = Assert.Throws<BusinessRuleViolationException>(() => project.ReserveForDraft([line.Id], Guid.CreateVersion7()));
-        Assert.Equal("billing.line-not-unbilled", error.Code);
+        line.State.ShouldBe(BillingState.Invoiced);
+        line.InvoiceId.ShouldBe(invoiceId);
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.ReserveForDraft([line.Id], Guid.CreateVersion7())
+            )
+            .Code.ShouldBe("billing.line-not-unbilled");
     }
 
     [Fact]
-    public void Billable_lines_need_a_description()
+    public void Billable_lines_Should_require_a_description()
     {
         var project = NewProject();
 
-        var error = Assert.Throws<BusinessRuleViolationException>(
-            () => project.AddBillableLine(BillableLineKind.Other, "  ", Pricing(1m, 10m)));
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.AddBillableLine(BillableLineKind.Other, "  ", Pricing(1m, 10m))
+        );
 
-        Assert.Equal("projects.billable-line-description-required", error.Code);
+        error.Code.ShouldBe("projects.billable-line-description-required");
     }
 
     private static Project NewProject() =>
-        Project.Create("Spring campaign shoot", CustomerId, new DateOnly(2026, 5, 4), new DateOnly(2026, 5, 8));
+        Project.Create(
+            "Spring campaign shoot",
+            CustomerId,
+            new DateOnly(2026, 5, 4),
+            new DateOnly(2026, 5, 8)
+        );
 
     private static LinePricing Pricing(decimal quantity, decimal unitPrice) =>
         LinePricing.Create(quantity, unitPrice, 0m, VatRate.Of(21m));

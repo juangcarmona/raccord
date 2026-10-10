@@ -20,7 +20,15 @@ public sealed class AddressFields
 
     /// <summary>The stored address, or null when no address was given.</summary>
     public PostalAddress? ToAddress() =>
-        Street is null ? null : new PostalAddress(Street, PostalCode ?? string.Empty, City ?? string.Empty, Province ?? string.Empty, CountryCode ?? string.Empty);
+        Street is null
+            ? null
+            : new PostalAddress(
+                Street,
+                PostalCode ?? string.Empty,
+                City ?? string.Empty,
+                Province ?? string.Empty,
+                CountryCode ?? string.Empty
+            );
 
     /// <summary>Replaces the stored address.</summary>
     public void Set(PostalAddress? address)

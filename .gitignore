@@ -24,6 +24,7 @@ storage/
 node_modules/
 coverage/
 TestResults/
+playwright-artifacts/
 *.pdf
 *.zip
 dist/
@@ -38,3 +39,6 @@ deploy/backups*/
 # Product Definition as Code: regenerable outputs, never canonical.
 .product/generated/
 .product/cache/
+
+# Stryker mutation reports (regenerated per run, published as CI artifacts).
+StrykerOutput/

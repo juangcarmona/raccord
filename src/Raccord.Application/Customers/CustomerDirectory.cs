@@ -8,18 +8,32 @@ namespace Raccord.Application.Customers;
 public sealed class CustomerDirectory(ICustomerRepository customers, IUnitOfWork unitOfWork)
 {
     /// <summary>Registers a customer.</summary>
-    public async Task<CustomerResponse> RegisterAsync(RegisterCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<CustomerResponse> RegisterAsync(
+        RegisterCustomerRequest request,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
-        var customer = Customer.Register(request.LegalName ?? string.Empty, request.TaxId, request.Address.ToDomain(), request.Email);
+        var customer = Customer.Register(
+            request.LegalName ?? string.Empty,
+            request.TaxId,
+            request.Address.ToDomain(),
+            request.Email
+        );
         customers.Add(customer);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(customer);
     }
 
     /// <summary>Lists customers.</summary>
-    public async Task<IReadOnlyList<CustomerResponse>> ListAsync(CancellationToken cancellationToken) =>
-        [.. (await customers.ListAsync(cancellationToken).ConfigureAwait(false)).Select(ToResponse)];
+    public async Task<IReadOnlyList<CustomerResponse>> ListAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (await customers.ListAsync(cancellationToken).ConfigureAwait(false)).Select(
+                ToResponse
+            ),
+        ];
 
     /// <summary>Reads a customer.</summary>
     public async Task<CustomerResponse?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -32,6 +46,13 @@ public sealed class CustomerDirectory(ICustomerRepository customers, IUnitOfWork
     {
         var party = customer.ToLegalParty();
         var invoiceable = party.TaxId is not null && party.Address is { IsComplete: true };
-        return new CustomerResponse(customer.Id, customer.LegalName, customer.TaxId, party.Address.ToDto(), customer.Email, invoiceable);
+        return new CustomerResponse(
+            customer.Id,
+            customer.LegalName,
+            customer.TaxId,
+            party.Address.ToDto(),
+            customer.Email,
+            invoiceable
+        );
     }
 }

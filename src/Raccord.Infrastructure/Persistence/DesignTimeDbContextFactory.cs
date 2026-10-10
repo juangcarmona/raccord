@@ -7,5 +7,9 @@ namespace Raccord.Infrastructure.Persistence;
 internal sealed class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<RaccordDbContext>
 {
     public RaccordDbContext CreateDbContext(string[] args) =>
-        new(new DbContextOptionsBuilder<RaccordDbContext>().UseNpgsql("Host=localhost;Database=raccord").Options);
+        new(
+            new DbContextOptionsBuilder<RaccordDbContext>()
+                .UseNpgsql("Host=localhost;Database=raccord")
+                .Options
+        );
 }

@@ -44,13 +44,26 @@ public static class Extensions
             logging.IncludeScopes = true;
         });
 
-        builder.Services.AddOpenTelemetry()
-            .WithMetrics(metrics => metrics.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation().AddRuntimeInstrumentation())
-            .WithTracing(tracing => tracing
-                .AddSource(builder.Environment.ApplicationName)
-                .AddAspNetCoreInstrumentation(options =>
-                    options.Filter = context => !context.Request.Path.StartsWithSegments("/health", StringComparison.Ordinal))
-                .AddHttpClientInstrumentation());
+        builder
+            .Services.AddOpenTelemetry()
+            .WithMetrics(metrics =>
+                metrics
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddRuntimeInstrumentation()
+            )
+            .WithTracing(tracing =>
+                tracing
+                    .AddSource(builder.Environment.ApplicationName)
+                    .AddAspNetCoreInstrumentation(options =>
+                        options.Filter = context =>
+                            !context.Request.Path.StartsWithSegments(
+                                "/health",
+                                StringComparison.Ordinal
+                            )
+                    )
+                    .AddHttpClientInstrumentation()
+            );
 
         if (!string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]))
         {
@@ -64,7 +77,9 @@ public static class Extensions
     public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder)
         where TBuilder : IHostApplicationBuilder
     {
-        builder.Services.AddHealthChecks().AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
+        builder
+            .Services.AddHealthChecks()
+            .AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
         return builder;
     }
 
@@ -76,7 +91,10 @@ public static class Extensions
     {
         ArgumentNullException.ThrowIfNull(app);
         app.MapHealthChecks(ReadinessPath);
-        app.MapHealthChecks(LivenessPath, new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") });
+        app.MapHealthChecks(
+            LivenessPath,
+            new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") }
+        );
         return app;
     }
 }

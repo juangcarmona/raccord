@@ -9,8 +9,14 @@ internal sealed class InvoiceDraftRepository(RaccordDbContext db) : IInvoiceDraf
     public Task<InvoiceDraft?> FindAsync(Guid id, CancellationToken cancellationToken) =>
         db.InvoiceDrafts.FirstOrDefaultAsync(draft => draft.Id == id, cancellationToken);
 
-    public async Task<IReadOnlyList<InvoiceDraft>> ListOpenAsync(CancellationToken cancellationToken) =>
-        await db.InvoiceDrafts.Where(draft => draft.Status == DraftStatus.Open).OrderByDescending(draft => draft.CreatedAt).ToListAsync(cancellationToken).ConfigureAwait(false);
+    public async Task<IReadOnlyList<InvoiceDraft>> ListOpenAsync(
+        CancellationToken cancellationToken
+    ) =>
+        await db
+            .InvoiceDrafts.Where(draft => draft.Status == DraftStatus.Open)
+            .OrderByDescending(draft => draft.CreatedAt)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
 
     public void Add(InvoiceDraft draft) => db.InvoiceDrafts.Add(draft);
 

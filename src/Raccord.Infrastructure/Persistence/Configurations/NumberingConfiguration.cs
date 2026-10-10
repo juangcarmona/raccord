@@ -4,7 +4,9 @@ using Raccord.Domain.Billing;
 
 namespace Raccord.Infrastructure.Persistence.Configurations;
 
-internal sealed class NumberingConfiguration : IEntityTypeConfiguration<InvoiceSeries>, IEntityTypeConfiguration<InvoiceNumberSequence>
+internal sealed class NumberingConfiguration
+    : IEntityTypeConfiguration<InvoiceSeries>,
+        IEntityTypeConfiguration<InvoiceNumberSequence>
 {
     public void Configure(EntityTypeBuilder<InvoiceSeries> builder)
     {
@@ -19,7 +21,11 @@ internal sealed class NumberingConfiguration : IEntityTypeConfiguration<InvoiceS
         builder.ToTable("invoice_number_sequences");
         builder.HasKey(sequence => new { sequence.SeriesCode, sequence.Year });
         builder.Property(sequence => sequence.SeriesCode).HasMaxLength(10);
-        builder.HasOne<InvoiceSeries>().WithMany().HasForeignKey(sequence => sequence.SeriesCode).OnDelete(DeleteBehavior.Restrict);
+        builder
+            .HasOne<InvoiceSeries>()
+            .WithMany()
+            .HasForeignKey(sequence => sequence.SeriesCode)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasConcurrencyToken();
     }
 }

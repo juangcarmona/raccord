@@ -82,6 +82,22 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Project equipment plan & shortages (management, desktop)
+
+File: `equipment-plan.png` / `equipment-plan.html`
+
+| Design decision | Decided by |
+|---|---|
+| Planned lines grouped into named groups with own planning/usage periods, duration option and quotation remark | [UC-WHS-ORGANIZE-GROUPS](../model/use-cases/uc-whs-organize-groups.md) step 1 |
+| Editing group times applies to all its lines | [UC-WHS-ORGANIZE-GROUPS](../model/use-cases/uc-whs-organize-groups.md) step 3, [BR-WHS-LINE-TIMES-LINKED](../model/business-rules/br-whs-line-times-linked.md) |
+| Search by name, catalog tags/folders, plus ranked suggestions | [UC-WHS-PLAN-EQUIPMENT](../model/use-cases/uc-whs-plan-equipment.md) step 1 |
+| Availability computed per line over its planning period; shortage lines marked | [UC-WHS-PLAN-EQUIPMENT](../model/use-cases/uc-whs-plan-equipment.md) step 4, [BR-WHS-AVAILABILITY-BY-PLANNING-PERIOD](../model/business-rules/br-whs-availability-by-planning-period.md), [BR-WHS-SHORTAGE-DETECTION](../model/business-rules/br-whs-shortage-detection.md) |
+| Shortage shown in error tint with negative count badge | [TERM-SHORTAGE](../model/domain/terms/term-shortage.md), [docs/design/color-tokens.md](../../design/color-tokens.md) |
+| Quick availability check from anywhere (header action) | [UC-WHS-CHECK-AVAILABILITY](../model/use-cases/uc-whs-check-availability.md) |
+| Alternative-article suggestion for shortages (warning tint) | [TERM-EQUIPMENT-ALTERNATIVE](../model/domain/terms/term-equipment-alternative.md), [UC-WHS-REALLOCATE-RESERVATIONS](../model/use-cases/uc-whs-reallocate-reservations.md) |
+| Reserve action (timeline, lower other projects' reservations) | [UC-WHS-REALLOCATE-RESERVATIONS](../model/use-cases/uc-whs-reallocate-reservations.md) steps 1–3, [BR-WHS-RESERVATION-PRIORITY](../model/business-rules/br-whs-reservation-priority.md) |
+| Over-availability lines planned anyway (footnote); combinations plan their content | [UC-WHS-PLAN-EQUIPMENT](../model/use-cases/uc-whs-plan-equipment.md) failure conditions and alternative flows |
+
 ## Screen — Task workflow settings (management, desktop)
 
 File: `task-workflow-settings.png` / `task-workflow-settings.html`

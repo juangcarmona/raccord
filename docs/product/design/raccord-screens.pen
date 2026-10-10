@@ -21114,6 +21114,1080 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "A2wj6J",
+      "x": 6310,
+      "y": 13000,
+      "name": "Equipment Plan",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YJt49",
+          "name": "EP Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "usGBp",
+              "name": "EP Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vxwQA",
+                  "name": "EP Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "ogEfb",
+                  "name": "EP Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "z6GZPF",
+              "name": "EP Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OD7ti",
+                  "name": "EP Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "l1yS4",
+                      "name": "EP Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Dayoq",
+                      "name": "EP Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JNJkQ",
+                  "name": "EP Nav Equipment",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "p7g6i",
+                      "name": "EP Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tyWs2",
+                      "name": "EP Nav Label Equipment",
+                      "fill": "#8A93A8",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PSYNp",
+                  "name": "EP Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "DRA09",
+                      "name": "EP Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "by5OU",
+                      "name": "EP Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "z8gcQL",
+              "name": "EP Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Operations · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "V132II",
+          "name": "EP Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "tRFEV",
+              "name": "EP Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NS0QV",
+                  "name": "EP Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yxWvj",
+                      "name": "EP Title",
+                      "fill": "$ink",
+                      "content": "Corona Festival — equipment plan",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JPNIQ",
+                      "name": "EP Subtitle",
+                      "fill": "$slate",
+                      "content": "Groups hold their own planning and usage periods; availability is computed per line over its planning period.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iVNHw",
+                  "name": "EP Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Kk9dR",
+                      "name": "EP Quick Check",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "kNyCD",
+                          "name": "EP Quick Check Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "search",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hkH11",
+                          "name": "EP Quick Check Label",
+                          "fill": "$ink",
+                          "content": "Quick availability check",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "brD8b",
+                      "name": "EP Reserve Btn",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "y9Dr8",
+                          "name": "EP Reserve Label",
+                          "fill": "$white",
+                          "content": "Reserve",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "k8Jzw9",
+              "name": "EP Search Bar",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 8,
+              "stroke": "$hairline",
+              "gap": 8,
+              "padding": [
+                9,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "gOaCI",
+                  "name": "EP Search Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "search",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "Wbygd",
+                  "name": "EP Search Text",
+                  "fill": "$slate",
+                  "content": "Search articles by name, catalog tag or folder — suggestions ranked by articles planned together, project type, customer and venue",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fk8v5",
+              "name": "EP Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hUvgZ",
+                  "name": "EP Group Cameras",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "sZg2q",
+                      "name": "EP Group Cameras Head",
+                      "width": "fill_container",
+                      "padding": [
+                        12,
+                        16
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Fk3eq",
+                          "name": "EP Group Cameras Head Text",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "se5TN",
+                              "name": "EP Group Cameras Name",
+                              "fill": "$ink",
+                              "content": "Cameras — shooting package",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "z05qn",
+                              "name": "EP Group Cameras Times",
+                              "fill": "$slate",
+                              "content": "Planning 12–15 Feb · usage 12 Feb 08:00 — 15 Feb 18:00 · remark: shown on quotation",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mXKbG",
+                      "name": "EP Group Cameras Shortage",
+                      "fill": "#FDE3E0",
+                      "cornerRadius": 6,
+                      "gap": 6,
+                      "padding": [
+                        4,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "L0yjQ",
+                          "name": "EP Shortage Icon",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "priority_high",
+                          "library": "Material Symbols Rounded",
+                          "fill": "#B3261E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XqC2M",
+                          "name": "EP Shortage Label",
+                          "fill": "#B3261E",
+                          "content": "1 shortage",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DUuom",
+                      "name": "EP Group Cameras Table",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d2arEl",
+                          "name": "EP T1 Head",
+                          "width": "fill_container",
+                          "fill": "$cloud",
+                          "gap": 14,
+                          "padding": [
+                            7,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "M2DcUy",
+                              "name": "EP T1 Col Article",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "ARTICLE",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Irkf2",
+                              "name": "EP T1 Col Planned",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "PLANNED",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "EKS3u",
+                              "name": "EP T1 Col Available",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "AVAILABLE",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "liwUr",
+                              "name": "EP T1 Col Shortage",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "SHORTAGE",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qDm6H",
+                              "name": "EP T1 Col Group",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 110,
+                              "content": "GROUP",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "eNjGL",
+                          "name": "EP T1 Row Alexa 35 body",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YCNXo",
+                              "name": "EP T1 A Alexa 35 body",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Alexa 35 body",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "r76OSx",
+                              "name": "EP T1 P Alexa 35 body",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "2",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "U3lzPj",
+                              "name": "EP T1 Av Alexa 35 body",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "2",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "X4Dxn",
+                              "name": "EP T1 G Alexa 35 body",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 110,
+                              "content": "Cameras",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "K1hSh",
+                          "name": "EP T1 Row Zeiss Supreme set",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "LIaaF",
+                              "name": "EP T1 A Zeiss Supreme set",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Zeiss Supreme set",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "GdXN5",
+                              "name": "EP T1 P Zeiss Supreme set",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "tWMh1",
+                              "name": "EP T1 Av Zeiss Supreme set",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "vBHE8",
+                              "name": "EP T1 G Zeiss Supreme set",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 110,
+                              "content": "Cameras",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U6LMx",
+                          "name": "EP T1 Row Easyrig Vario 5",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dHYHm",
+                              "name": "EP T1 A Easyrig Vario 5",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Easyrig Vario 5",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "MhBgs",
+                              "name": "EP T1 P Easyrig Vario 5",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "3",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "d5v5H8",
+                              "name": "EP T1 Av Easyrig Vario 5",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "k7THsj",
+                              "name": "EP T1 S Easyrig Vario 5",
+                              "width": 90,
+                              "alignItems": "end",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "BKT0r",
+                                  "name": "EP T1 S Badge Easyrig Vario 5",
+                                  "fill": "#FDE3E0",
+                                  "cornerRadius": 4,
+                                  "padding": [
+                                    2,
+                                    8
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "lEzAz",
+                                      "name": "EP T1 S Label Easyrig Vario 5",
+                                      "fill": "#B3261E",
+                                      "content": "-2",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11,
+                                      "fontWeight": "semibold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "LtsS3",
+                              "name": "EP T1 G Easyrig Vario 5",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 110,
+                              "content": "Cameras",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IcLiV",
+                          "name": "EP Alt Row",
+                          "width": "fill_container",
+                          "fill": "#FFF3D6",
+                          "gap": 10,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "eoYfr",
+                              "name": "EP Alt Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "swap_horiz",
+                              "library": "Material Symbols Rounded",
+                              "fill": "#8A5A00"
+                            },
+                            {
+                              "type": "text",
+                              "id": "b5bAr",
+                              "name": "EP Alt Text",
+                              "fill": "#8A5A00",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Easyrig Vario 5 short of 2: alternative article suggested (Easyrig Flow 5 · 3 available) · reserve to another project's timeline if needed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DFRAs",
+                  "name": "EP Group Video",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "o7r8PM",
+                      "name": "EP Group Video Head",
+                      "width": "fill_container",
+                      "padding": [
+                        12,
+                        16
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "L2XEt4",
+                          "name": "EP Group Video Head Text",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "o8RQR",
+                              "name": "EP Group Video Name",
+                              "fill": "$ink",
+                              "content": "Video — LED wall and media",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Y5KhMv",
+                              "name": "EP Group Video Times",
+                              "fill": "$slate",
+                              "content": "Planning 12–15 Feb · usage 13 Feb 07:00 — 14 Feb 23:30 · duration: 3 days",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "VKDs8",
+                          "name": "EP Group Video Badge",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 6,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "K32St4",
+                              "name": "EP Group Video Badge Label",
+                              "fill": "#1D7A4F",
+                              "content": "Available",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Pa4BQ",
+                      "name": "EP Group Video Table",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "IA8pH",
+                          "name": "EP T2 Row LED panel P2.6",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "DBIWU",
+                              "name": "EP T2 A LED panel P2.6",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "LED panel P2.6",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "dseJ7",
+                              "name": "EP T2 P LED panel P2.6",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "24",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "h0HLay",
+                              "name": "EP T2 Av LED panel P2.6",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "24",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OD8hE",
+                          "name": "EP T2 Row Riser 2m",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "irPsG",
+                              "name": "EP T2 A Riser 2m",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Riser 2m",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "dtCO8",
+                              "name": "EP T2 P Riser 2m",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "eh2b2",
+                              "name": "EP T2 Av Riser 2m",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "slc7a",
+                          "name": "EP T2 Row Media server Xi20",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 14,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dNS6w",
+                              "name": "EP T2 A Media server Xi20",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Media server Xi20",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "OhWJ5",
+                              "name": "EP T2 P Media server Xi20",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "yEOe0",
+                              "name": "EP T2 Av Media server Xi20",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KXqbg",
+              "name": "EP Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "oJgtT",
+                  "name": "EP Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "UF7Xr",
+                  "name": "EP Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lines exceeding availability are planned anyway and shown in shortage. Planning a combination plans its content as defined; imported files create planned lines too.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

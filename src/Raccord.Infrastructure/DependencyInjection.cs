@@ -29,7 +29,9 @@ public static class DependencyInjection
     public const string DocumentsConnectionName = "documents";
 
     /// <summary>Adds persistence, document storage, rendering, compliance and time adapters.</summary>
-    public static IHostApplicationBuilder AddRaccordInfrastructure(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddRaccordInfrastructure(
+        this IHostApplicationBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -50,17 +52,27 @@ public static class DependencyInjection
 
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);
-        services.AddSingleton<IClock>(provider => new SystemClock(provider.GetRequiredService<TimeProvider>(), TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)));
+        services.AddSingleton<IClock>(provider => new SystemClock(
+            provider.GetRequiredService<TimeProvider>(),
+            TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)
+        ));
 
-        var storage = builder.Configuration.GetSection(StorageOptions.Section).Get<StorageOptions>() ?? new StorageOptions();
+        var storage =
+            builder.Configuration.GetSection(StorageOptions.Section).Get<StorageOptions>()
+            ?? new StorageOptions();
         if (string.Equals(storage.Provider, "AzureBlob", StringComparison.OrdinalIgnoreCase))
         {
             builder.AddAzureBlobServiceClient(DocumentsConnectionName);
-            services.AddSingleton<IDocumentStore>(provider => new AzureBlobDocumentStore(provider.GetRequiredService<BlobServiceClient>(), storage.ContainerName));
+            services.AddSingleton<IDocumentStore>(provider => new AzureBlobDocumentStore(
+                provider.GetRequiredService<BlobServiceClient>(),
+                storage.ContainerName
+            ));
         }
         else
         {
-            services.AddSingleton<IDocumentStore>(new FileSystemDocumentStore(storage.FileSystemRoot));
+            services.AddSingleton<IDocumentStore>(
+                new FileSystemDocumentStore(storage.FileSystemRoot)
+            );
         }
 
         return builder;

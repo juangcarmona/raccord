@@ -50,21 +50,59 @@ public sealed class IssuedInvoiceRepresentationTests
     public void A_tampered_representation_is_rejected()
     {
         var stored = IssuedInvoiceRepresentation.From(invoice);
-        var tampered = stored.Json.Replace("\"quantity\":\"2\"", "\"quantity\":\"1\"", StringComparison.Ordinal);
+        var tampered = stored.Json.Replace(
+            "\"quantity\":\"2\"",
+            "\"quantity\":\"1\"",
+            StringComparison.Ordinal
+        );
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() => IssuedInvoiceRepresentation.Restore(tampered, stored.ContentHash));
+        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+            IssuedInvoiceRepresentation.Restore(tampered, stored.ContentHash)
+        );
 
         Assert.Equal("issued-invoice.integrity-violation", error.Code);
     }
 
     private static IssuedInvoice IssueSampleInvoice()
     {
-        var project = Project.Create("Spring campaign shoot", Guid.CreateVersion7(), new DateOnly(2026, 5, 4), new DateOnly(2026, 5, 8));
-        var camera = project.AddBillableLine(BillableLineKind.Equipment, "Cinema camera kit – días 1–2", LinePricing.Create(2m, 450m, 0m, VatRate.Of(21m)));
-        var gaffer = project.AddBillableLine(BillableLineKind.Labour, "Gaffer, 10h day", LinePricing.Create(1m, 380m, 0m, VatRate.Of(21m)));
-        var draft = InvoiceDraft.CreateFromProject(project, [camera.Id, gaffer.Id], "F", DateTimeOffset.UnixEpoch);
-        var issuer = new LegalParty("Fotograma Rental S.L.", "B00000000", new PostalAddress("Calle Mayor 1", "28013", "Madrid", "Madrid", "ES"));
-        var recipient = new LegalParty("Productora Ejemplo S.A.", "A00000000", new PostalAddress("Avenida del Puerto 20", "46023", "Valencia", "Valencia", "ES"));
-        return draft.Finalize(issuer, recipient, InvoiceNumberSequence.Start("F", 2026), new DateOnly(2026, 5, 11), new DateTimeOffset(2026, 5, 11, 9, 30, 0, TimeSpan.Zero));
+        var project = Project.Create(
+            "Spring campaign shoot",
+            Guid.CreateVersion7(),
+            new DateOnly(2026, 5, 4),
+            new DateOnly(2026, 5, 8)
+        );
+        var camera = project.AddBillableLine(
+            BillableLineKind.Equipment,
+            "Cinema camera kit – días 1–2",
+            LinePricing.Create(2m, 450m, 0m, VatRate.Of(21m))
+        );
+        var gaffer = project.AddBillableLine(
+            BillableLineKind.Labour,
+            "Gaffer, 10h day",
+            LinePricing.Create(1m, 380m, 0m, VatRate.Of(21m))
+        );
+        var draft = InvoiceDraft.CreateFromProject(
+            project,
+            [camera.Id, gaffer.Id],
+            "F",
+            DateTimeOffset.UnixEpoch
+        );
+        var issuer = new LegalParty(
+            "Fotograma Rental S.L.",
+            "B00000000",
+            new PostalAddress("Calle Mayor 1", "28013", "Madrid", "Madrid", "ES")
+        );
+        var recipient = new LegalParty(
+            "Productora Ejemplo S.A.",
+            "A00000000",
+            new PostalAddress("Avenida del Puerto 20", "46023", "Valencia", "Valencia", "ES")
+        );
+        return draft.Finalize(
+            issuer,
+            recipient,
+            InvoiceNumberSequence.Start("F", 2026),
+            new DateOnly(2026, 5, 11),
+            new DateTimeOffset(2026, 5, 11, 9, 30, 0, TimeSpan.Zero)
+        );
     }
 }

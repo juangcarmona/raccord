@@ -39,14 +39,23 @@ public sealed record InvoiceTotals
             .OrderByDescending(group => group.Key.Percentage)
             .Select(group =>
             {
-                var taxableBase = group.Aggregate(Money.Zero(currency), (sum, line) => sum + line.NetAmount);
+                var taxableBase = group.Aggregate(
+                    Money.Zero(currency),
+                    (sum, line) => sum + line.NetAmount
+                );
                 var vat = Money.Of(taxableBase.Amount * group.Key.Percentage / 100m, currency);
                 return new VatGroup(group.Key, taxableBase, vat);
             })
             .ToList();
 
-        var totalBase = groups.Aggregate(Money.Zero(currency), (sum, group) => sum + group.TaxableBase);
-        var totalVat = groups.Aggregate(Money.Zero(currency), (sum, group) => sum + group.VatAmount);
+        var totalBase = groups.Aggregate(
+            Money.Zero(currency),
+            (sum, group) => sum + group.TaxableBase
+        );
+        var totalVat = groups.Aggregate(
+            Money.Zero(currency),
+            (sum, group) => sum + group.VatAmount
+        );
         return new InvoiceTotals(groups, totalBase, totalVat);
     }
 }

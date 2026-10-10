@@ -11,7 +11,9 @@ public static class TaxId
             return null;
         }
 
-        var normalized = new string([.. raw.Where(char.IsAsciiLetterOrDigit).Select(char.ToUpperInvariant)]);
+        var normalized = new string([
+            .. raw.Where(char.IsAsciiLetterOrDigit).Select(char.ToUpperInvariant),
+        ]);
         return normalized.Length == 0 ? null : normalized;
     }
 }

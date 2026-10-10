@@ -17,36 +17,87 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     private RaccordApi(string connectionString)
     {
         ConnectionString = connectionString;
-        DocumentRoot = Path.Combine(Path.GetTempPath(), "raccord-web-tests", Guid.NewGuid().ToString("N"));
+        DocumentRoot = Path.Combine(
+            Path.GetTempPath(),
+            "raccord-web-tests",
+            Guid.NewGuid().ToString("N")
+        );
     }
 
     public string ConnectionString { get; }
 
     public string DocumentRoot { get; }
 
-    public static readonly AddressDto Madrid = new("Calle Mayor 1", "28013", "Madrid", "Madrid", "ES");
+    public static readonly AddressDto Madrid = new(
+        "Calle Mayor 1",
+        "28013",
+        "Madrid",
+        "Madrid",
+        "ES"
+    );
 
-    public static readonly AddressDto Valencia = new("Avenida del Puerto 20", "46023", "Valencia", "Valencia", "ES");
+    public static readonly AddressDto Valencia = new(
+        "Avenida del Puerto 20",
+        "46023",
+        "Valencia",
+        "Valencia",
+        "ES"
+    );
 
     public static async Task<RaccordApi> StartAsync(PostgresContainer postgres)
     {
         var api = new RaccordApi(await postgres.CreateDatabaseAsync());
         await using var scope = api.Services.CreateAsyncScope();
-        await scope.ServiceProvider.GetRequiredService<DatabaseMaintenance>().MigrateAsync(CancellationToken.None);
+        await scope
+            .ServiceProvider.GetRequiredService<DatabaseMaintenance>()
+            .MigrateAsync(CancellationToken.None);
         return api;
     }
 
     /// <summary>Defines the issuer, a customer and a project with the given lines; returns the project.</summary>
-    public static async Task<ProjectResponse> ArrangeProjectAsync(HttpClient client, string? customerTaxId = "A00000000", params AddBillableLineRequest[] lines)
+    public static async Task<ProjectResponse> ArrangeProjectAsync(
+        HttpClient client,
+        string? customerTaxId = "A00000000",
+        params AddBillableLineRequest[] lines
+    )
     {
-        (await client.PutAsJsonAsync("/api/organization/issuer", new UpdateIssuerProfileRequest("Fotograma Rental S.L.", "B00000000", Madrid))).EnsureSuccessStatusCode();
-        var customer = await (await client.PostAsJsonAsync("/api/customers", new RegisterCustomerRequest("Productora Ejemplo S.A.", customerTaxId, Valencia, null)))
-            .EnsureSuccessStatusCode().Content.ReadFromJsonAsync<CustomerResponse>();
-        var project = await (await client.PostAsJsonAsync("/api/projects", new CreateProjectRequest("Spring campaign shoot", customer!.Id, new DateOnly(2026, 5, 4), new DateOnly(2026, 5, 8))))
-            .EnsureSuccessStatusCode().Content.ReadFromJsonAsync<ProjectResponse>();
+        (
+            await client.PutAsJsonAsync(
+                "/api/organization/issuer",
+                new UpdateIssuerProfileRequest("Fotograma Rental S.L.", "B00000000", Madrid)
+            )
+        ).EnsureSuccessStatusCode();
+        var customer = await (
+            await client.PostAsJsonAsync(
+                "/api/customers",
+                new RegisterCustomerRequest(
+                    "Productora Ejemplo S.A.",
+                    customerTaxId,
+                    Valencia,
+                    null
+                )
+            )
+        )
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<CustomerResponse>();
+        var project = await (
+            await client.PostAsJsonAsync(
+                "/api/projects",
+                new CreateProjectRequest(
+                    "Spring campaign shoot",
+                    customer!.Id,
+                    new DateOnly(2026, 5, 4),
+                    new DateOnly(2026, 5, 8)
+                )
+            )
+        )
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<ProjectResponse>();
         foreach (var line in lines)
         {
-            (await client.PostAsJsonAsync($"/api/projects/{project!.Id}/billable-lines", line)).EnsureSuccessStatusCode();
+            (
+                await client.PostAsJsonAsync($"/api/projects/{project!.Id}/billable-lines", line)
+            ).EnsureSuccessStatusCode();
         }
 
         return (await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project!.Id}"))!;

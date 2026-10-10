@@ -8,7 +8,9 @@ namespace Raccord.Web.Tests.Infrastructure;
 /// <summary>One PostgreSQL server for the test run; every test gets its own database.</summary>
 public sealed class PostgresContainer : IAsyncLifetime
 {
-    private readonly PostgreSqlContainer container = new PostgreSqlBuilder("postgres:17-alpine").Build();
+    private readonly PostgreSqlContainer container = new PostgreSqlBuilder(
+        "postgres:17-alpine"
+    ).Build();
 
     public async ValueTask InitializeAsync() => await container.StartAsync();
 
@@ -25,6 +27,9 @@ public sealed class PostgresContainer : IAsyncLifetime
             await command.ExecuteNonQueryAsync();
         }
 
-        return new NpgsqlConnectionStringBuilder(container.GetConnectionString()) { Database = name }.ConnectionString;
+        return new NpgsqlConnectionStringBuilder(container.GetConnectionString())
+        {
+            Database = name,
+        }.ConnectionString;
     }
 }

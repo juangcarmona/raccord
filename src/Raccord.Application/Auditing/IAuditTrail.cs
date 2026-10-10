@@ -9,5 +9,8 @@ public interface IAuditTrail
     void Append(AuditEvent auditEvent);
 
     /// <summary>Lists events for an entity in chronological order.</summary>
-    Task<IReadOnlyList<AuditEvent>> ListForEntityAsync(Guid entityId, CancellationToken cancellationToken);
+    Task<IReadOnlyList<AuditEvent>> ListForEntityAsync(
+        Guid entityId,
+        CancellationToken cancellationToken
+    );
 }

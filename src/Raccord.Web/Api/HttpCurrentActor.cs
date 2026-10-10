@@ -8,5 +8,8 @@ namespace Raccord.Web.Api;
 /// </summary>
 internal sealed class HttpCurrentActor(IHttpContextAccessor accessor) : ICurrentActor
 {
-    public string Name => accessor.HttpContext?.User.Identity is { IsAuthenticated: true, Name: { } name } ? name : "unauthenticated";
+    public string Name =>
+        accessor.HttpContext?.User.Identity is { IsAuthenticated: true, Name: { } name }
+            ? name
+            : "unauthenticated";
 }

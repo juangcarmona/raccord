@@ -8,7 +8,13 @@ public sealed record LinePricing
     /// <summary>Maximum decimals accepted for unit prices, which may be finer than invoice amounts.</summary>
     public const int UnitPriceDecimals = 4;
 
-    private LinePricing(decimal quantity, decimal unitPrice, decimal discountPercent, VatRate vatRate, Currency currency)
+    private LinePricing(
+        decimal quantity,
+        decimal unitPrice,
+        decimal discountPercent,
+        VatRate vatRate,
+        Currency currency
+    )
     {
         Quantity = quantity;
         UnitPrice = unitPrice;
@@ -37,26 +43,43 @@ public sealed record LinePricing
     public Money NetAmount { get; }
 
     /// <summary>Creates line pricing in euros.</summary>
-    public static LinePricing Create(decimal quantity, decimal unitPrice, decimal discountPercent, VatRate vatRate)
+    public static LinePricing Create(
+        decimal quantity,
+        decimal unitPrice,
+        decimal discountPercent,
+        VatRate vatRate
+    )
     {
         if (quantity <= 0m)
         {
-            throw new BusinessRuleViolationException("pricing.quantity-not-positive", "Quantity must be greater than zero.");
+            throw new BusinessRuleViolationException(
+                "pricing.quantity-not-positive",
+                "Quantity must be greater than zero."
+            );
         }
 
         if (unitPrice < 0m)
         {
-            throw new BusinessRuleViolationException("pricing.unit-price-negative", "Unit price cannot be negative.");
+            throw new BusinessRuleViolationException(
+                "pricing.unit-price-negative",
+                "Unit price cannot be negative."
+            );
         }
 
         if (decimal.Round(unitPrice, UnitPriceDecimals) != unitPrice)
         {
-            throw new BusinessRuleViolationException("pricing.unit-price-precision", "Unit price cannot have more than four decimals.");
+            throw new BusinessRuleViolationException(
+                "pricing.unit-price-precision",
+                "Unit price cannot have more than four decimals."
+            );
         }
 
         if (discountPercent is < 0m or > 100m)
         {
-            throw new BusinessRuleViolationException("pricing.discount-out-of-range", "Discount must be between 0 and 100 percent.");
+            throw new BusinessRuleViolationException(
+                "pricing.discount-out-of-range",
+                "Discount must be between 0 and 100 percent."
+            );
         }
 
         return new LinePricing(quantity, unitPrice, discountPercent, vatRate, Currency.Eur);

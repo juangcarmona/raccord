@@ -18,7 +18,10 @@ public readonly record struct VatRate
     {
         if (percentage is < 0m or > 100m)
         {
-            throw new BusinessRuleViolationException("pricing.vat-rate-out-of-range", "VAT rate must be between 0 and 100.");
+            throw new BusinessRuleViolationException(
+                "pricing.vat-rate-out-of-range",
+                "VAT rate must be between 0 and 100."
+            );
         }
 
         return new VatRate(percentage);

@@ -22,6 +22,11 @@ public sealed class InvoiceSeries
     public static InvoiceSeries Define(string code, string description, bool isDefault)
     {
         InvoiceNumberSequence.EnsureValidSeriesCode(code);
-        return new InvoiceSeries { Code = code, Description = description.Trim(), IsDefault = isDefault };
+        return new InvoiceSeries
+        {
+            Code = code,
+            Description = description.Trim(),
+            IsDefault = isDefault,
+        };
     }
 }

@@ -15,4 +15,5 @@ public sealed record AuditEventResponse(
     string Action,
     string EntityType,
     Guid EntityId,
-    IReadOnlyDictionary<string, string> Details);
+    IReadOnlyDictionary<string, string> Details
+);

@@ -25,7 +25,9 @@ public sealed class InvoiceNumberSequenceTests
         var sequence = InvoiceNumberSequence.Start("F", 2026);
         sequence.Allocate(new DateOnly(2026, 3, 10));
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() => sequence.Allocate(new DateOnly(2026, 3, 9)));
+        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+            sequence.Allocate(new DateOnly(2026, 3, 9))
+        );
 
         Assert.Equal("numbering.issue-date-before-previous", error.Code);
         Assert.Equal(1, sequence.LastNumber);
@@ -36,7 +38,9 @@ public sealed class InvoiceNumberSequenceTests
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
 
-        var error = Assert.Throws<BusinessRuleViolationException>(() => sequence.Allocate(new DateOnly(2027, 1, 1)));
+        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+            sequence.Allocate(new DateOnly(2027, 1, 1))
+        );
 
         Assert.Equal("numbering.year-mismatch", error.Code);
     }
@@ -48,7 +52,9 @@ public sealed class InvoiceNumberSequenceTests
     [InlineData("ABCDEFGHIJK")]
     public void Series_codes_are_short_uppercase_alphanumerics(string code)
     {
-        var error = Assert.Throws<BusinessRuleViolationException>(() => InvoiceNumberSequence.Start(code, 2026));
+        var error = Assert.Throws<BusinessRuleViolationException>(() =>
+            InvoiceNumberSequence.Start(code, 2026)
+        );
 
         Assert.Equal("numbering.series-code-invalid", error.Code);
     }

@@ -1,17 +1,17 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/Raccord.Aspire/Raccord.Aspire.csproj" />
-    <Project Path="src/Raccord.Application/Raccord.Application.csproj" />
-    <Project Path="src/Raccord.Contracts/Raccord.Contracts.csproj" />
-    <Project Path="src/Raccord.Domain/Raccord.Domain.csproj" />
-    <Project Path="src/Raccord.Infrastructure/Raccord.Infrastructure.csproj" />
-    <Project Path="src/Raccord.ServiceDefaults/Raccord.ServiceDefaults.csproj" />
-    <Project Path="src/Raccord.Web/Raccord.Web.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/Raccord.Architecture.Tests/Raccord.Architecture.Tests.csproj" />
-    <Project Path="tests/Raccord.Domain.Tests/Raccord.Domain.Tests.csproj" />
-    <Project Path="tests/Raccord.Infrastructure.Tests/Raccord.Infrastructure.Tests.csproj" />
-    <Project Path="tests/Raccord.Web.Tests/Raccord.Web.Tests.csproj" />
-  </Folder>
+    <Folder Name="/src/">
+        <Project Path="src/Raccord.Aspire/Raccord.Aspire.csproj" />
+        <Project Path="src/Raccord.Application/Raccord.Application.csproj" />
+        <Project Path="src/Raccord.Contracts/Raccord.Contracts.csproj" />
+        <Project Path="src/Raccord.Domain/Raccord.Domain.csproj" />
+        <Project Path="src/Raccord.Infrastructure/Raccord.Infrastructure.csproj" />
+        <Project Path="src/Raccord.ServiceDefaults/Raccord.ServiceDefaults.csproj" />
+        <Project Path="src/Raccord.Web/Raccord.Web.csproj" />
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/Raccord.Architecture.Tests/Raccord.Architecture.Tests.csproj" />
+        <Project Path="tests/Raccord.Domain.Tests/Raccord.Domain.Tests.csproj" />
+        <Project Path="tests/Raccord.Infrastructure.Tests/Raccord.Infrastructure.Tests.csproj" />
+        <Project Path="tests/Raccord.Web.Tests/Raccord.Web.Tests.csproj" />
+    </Folder>
 </Solution>

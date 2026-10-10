@@ -15,8 +15,16 @@ public interface IInvoiceSeriesRepository
     void Add(InvoiceSeries series);
 
     /// <summary>Finds the sequence of a series and year without starting it.</summary>
-    Task<InvoiceNumberSequence?> FindSequenceAsync(string seriesCode, int year, CancellationToken cancellationToken);
+    Task<InvoiceNumberSequence?> FindSequenceAsync(
+        string seriesCode,
+        int year,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>Loads the sequence of a series and year for allocation, starting it when it does not exist yet.</summary>
-    Task<InvoiceNumberSequence> GetOrStartSequenceAsync(string seriesCode, int year, CancellationToken cancellationToken);
+    Task<InvoiceNumberSequence> GetOrStartSequenceAsync(
+        string seriesCode,
+        int year,
+        CancellationToken cancellationToken
+    );
 }

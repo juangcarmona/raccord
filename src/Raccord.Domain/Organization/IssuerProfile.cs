@@ -37,15 +37,25 @@ public sealed class IssuerProfile
     {
         if (string.IsNullOrWhiteSpace(legalName))
         {
-            throw new BusinessRuleViolationException("issuer.legal-name-missing", "The issuer legal name is required.");
+            throw new BusinessRuleViolationException(
+                "issuer.legal-name-missing",
+                "The issuer legal name is required."
+            );
         }
 
-        var normalizedTaxId = Parties.TaxId.Normalize(taxId)
-            ?? throw new BusinessRuleViolationException("issuer.tax-id-missing", "The issuer tax ID is required.");
+        var normalizedTaxId =
+            Parties.TaxId.Normalize(taxId)
+            ?? throw new BusinessRuleViolationException(
+                "issuer.tax-id-missing",
+                "The issuer tax ID is required."
+            );
 
         if (address is not { IsComplete: true })
         {
-            throw new BusinessRuleViolationException("issuer.address-missing", "The issuer address is incomplete.");
+            throw new BusinessRuleViolationException(
+                "issuer.address-missing",
+                "The issuer address is incomplete."
+            );
         }
 
         LegalName = legalName.Trim();

@@ -14,7 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddRaccordInfrastructure();
 
-builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.NumberHandling = JsonNumberHandling.Strict);
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.NumberHandling = JsonNumberHandling.Strict
+);
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddOpenApi();
@@ -34,7 +36,10 @@ if (args.Contains("migrate", StringComparer.Ordinal))
     await using var scope = app.Services.CreateAsyncScope();
     var maintenance = scope.ServiceProvider.GetRequiredService<DatabaseMaintenance>();
     await maintenance.MigrateAsync(CancellationToken.None);
-    if (args.Contains("--seed-demo", StringComparer.Ordinal) || app.Configuration.GetValue<bool>("Raccord:SeedDemoData"))
+    if (
+        args.Contains("--seed-demo", StringComparer.Ordinal)
+        || app.Configuration.GetValue<bool>("Raccord:SeedDemoData")
+    )
     {
         await maintenance.SeedDemoDataAsync(CancellationToken.None);
     }
@@ -50,6 +55,7 @@ app.UseStaticFiles();
 app.MapOpenApi();
 app.MapDefaultEndpoints();
 app.MapRaccordApi();
+
 // Client-side routes fall back to the SPA; paths that look like files (assets) and server prefixes never do.
 app.MapFallbackToFile("{*path:regex(^(?!api/|health/|openapi/).*$):nonfile}", "index.html");
 

@@ -12,12 +12,29 @@ namespace Raccord.Application;
 internal static class ContractMapping
 {
     public static AddressDto? ToDto(this PostalAddress? address) =>
-        address is null ? null : new AddressDto(address.Street, address.PostalCode, address.City, address.Province, address.CountryCode);
+        address is null
+            ? null
+            : new AddressDto(
+                address.Street,
+                address.PostalCode,
+                address.City,
+                address.Province,
+                address.CountryCode
+            );
 
     public static PostalAddress? ToDomain(this AddressDto? address) =>
-        address is null ? null : new PostalAddress(address.Street ?? string.Empty, address.PostalCode ?? string.Empty, address.City ?? string.Empty, address.Province ?? string.Empty, address.CountryCode ?? string.Empty);
+        address is null
+            ? null
+            : new PostalAddress(
+                address.Street ?? string.Empty,
+                address.PostalCode ?? string.Empty,
+                address.City ?? string.Empty,
+                address.Province ?? string.Empty,
+                address.CountryCode ?? string.Empty
+            );
 
-    public static PartyResponse ToResponse(this LegalParty party) => new(party.LegalName, party.TaxId, party.Address.ToDto());
+    public static PartyResponse ToResponse(this LegalParty party) =>
+        new(party.LegalName, party.TaxId, party.Address.ToDto());
 
     public static InvoiceTotalsResponse ToResponse(this InvoiceTotals totals) =>
         new(
@@ -25,18 +42,44 @@ internal static class ContractMapping
             totals.TaxableBase.Amount,
             totals.VatAmount.Amount,
             totals.Total.Amount,
-            [.. totals.VatBreakdown.Select(group => new VatGroupResponse(group.Rate.Percentage, group.TaxableBase.Amount, group.VatAmount.Amount))]);
+            [
+                .. totals.VatBreakdown.Select(group => new VatGroupResponse(
+                    group.Rate.Percentage,
+                    group.TaxableBase.Amount,
+                    group.VatAmount.Amount
+                )),
+            ]
+        );
 
     public static InvoiceLineResponse ToResponse(this InvoiceDraftLine line)
     {
         var pricing = line.Pricing;
-        return new(line.Id, line.Position, line.Description, pricing.Quantity, pricing.UnitPrice, pricing.DiscountPercent, pricing.VatRate.Percentage, pricing.NetAmount.Amount);
+        return new(
+            line.Id,
+            line.Position,
+            line.Description,
+            pricing.Quantity,
+            pricing.UnitPrice,
+            pricing.DiscountPercent,
+            pricing.VatRate.Percentage,
+            pricing.NetAmount.Amount
+        );
     }
 
     public static InvoiceLineResponse ToResponse(this IssuedInvoiceLine line) =>
-        new(null, line.Position, line.Description, line.Pricing.Quantity, line.Pricing.UnitPrice, line.Pricing.DiscountPercent, line.Pricing.VatRate.Percentage, line.Pricing.NetAmount.Amount);
+        new(
+            null,
+            line.Position,
+            line.Description,
+            line.Pricing.Quantity,
+            line.Pricing.UnitPrice,
+            line.Pricing.DiscountPercent,
+            line.Pricing.VatRate.Percentage,
+            line.Pricing.NetAmount.Amount
+        );
 
-    public static ValidationIssueResponse ToResponse(this ValidationIssue issue) => new(issue.Code, issue.Message);
+    public static ValidationIssueResponse ToResponse(this ValidationIssue issue) =>
+        new(issue.Code, issue.Message);
 
     public static BillableLineResponse ToResponse(this BillableLine line) =>
         new(
@@ -55,9 +98,13 @@ internal static class ContractMapping
                 _ => "invoiced",
             },
             line.DraftId,
-            line.InvoiceId);
+            line.InvoiceId
+        );
 
-    public static IssuedInvoiceResponse ToResponse(this IssuedInvoice invoice, string contentHash) =>
+    public static IssuedInvoiceResponse ToResponse(
+        this IssuedInvoice invoice,
+        string contentHash
+    ) =>
         new(
             invoice.Id,
             invoice.Number.Value,
@@ -72,5 +119,6 @@ internal static class ContractMapping
             contentHash,
             invoice.Source.ProjectId,
             invoice.Source.CustomerId,
-            invoice.Source.DraftId);
+            invoice.Source.DraftId
+        );
 }

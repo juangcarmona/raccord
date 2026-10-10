@@ -19,16 +19,28 @@ public sealed class PdfInvoiceRendererTests
         Assert.StartsWith("%PDF-1.7", text, StringComparison.Ordinal);
         Assert.EndsWith("%%EOF\n", text, StringComparison.Ordinal);
 
-        var startXref = int.Parse(Regex.Match(text, @"startxref\n(\d+)\n%%EOF\n$").Groups[1].Value, CultureInfo.InvariantCulture);
+        var startXref = int.Parse(
+            Regex.Match(text, @"startxref\n(\d+)\n%%EOF\n$").Groups[1].Value,
+            CultureInfo.InvariantCulture
+        );
         Assert.StartsWith("xref", text[startXref..], StringComparison.Ordinal);
 
-        var offsets = Regex.Matches(text[startXref..], @"^(?<offset>\d{10}) 00000 n ?$", RegexOptions.Multiline | RegexOptions.ExplicitCapture)
+        var offsets = Regex
+            .Matches(
+                text[startXref..],
+                @"^(?<offset>\d{10}) 00000 n ?$",
+                RegexOptions.Multiline | RegexOptions.ExplicitCapture
+            )
             .Select(match => int.Parse(match.Groups["offset"].Value, CultureInfo.InvariantCulture))
             .ToList();
         Assert.NotEmpty(offsets);
         for (var objectNumber = 1; objectNumber <= offsets.Count; objectNumber++)
         {
-            Assert.StartsWith($"{objectNumber} 0 obj", text[offsets[objectNumber - 1]..], StringComparison.Ordinal);
+            Assert.StartsWith(
+                $"{objectNumber} 0 obj",
+                text[offsets[objectNumber - 1]..],
+                StringComparison.Ordinal
+            );
         }
     }
 
@@ -40,7 +52,11 @@ public sealed class PdfInvoiceRendererTests
         Assert.Contains("(F2026-00001)", text, StringComparison.Ordinal);
         Assert.Contains("(Productora Ejemplo S.A.)", text, StringComparison.Ordinal);
         Assert.Contains("(NIF: A00000000)", text, StringComparison.Ordinal);
-        Assert.Contains("(1.548,80 €)", text.Replace("\u0080", "€", StringComparison.Ordinal), StringComparison.Ordinal);
+        Assert.Contains(
+            "(1.548,80 €)",
+            text.Replace("\u0080", "€", StringComparison.Ordinal),
+            StringComparison.Ordinal
+        );
         Assert.Contains("(11/05/2026)", text, StringComparison.Ordinal);
     }
 
@@ -49,9 +65,27 @@ public sealed class PdfInvoiceRendererTests
     {
         var pdf = renderer.Render(SampleInvoices.Issue());
 
-        var expected = new byte[] { (byte)'K', (byte)'i', (byte)'t', (byte)' ', (byte)'d', (byte)'e', (byte)' ', (byte)'c', 0xE1, (byte)'m' };
-        Assert.True(pdf.AsSpan().IndexOf(expected) >= 0, "Expected 'Kit de cám' encoded in WinAnsi.");
-        Assert.True(pdf.AsSpan().IndexOf(new byte[] { (byte)' ', 0x96, (byte)' ' }) >= 0, "Expected an en dash encoded as 0x96.");
+        var expected = new byte[]
+        {
+            (byte)'K',
+            (byte)'i',
+            (byte)'t',
+            (byte)' ',
+            (byte)'d',
+            (byte)'e',
+            (byte)' ',
+            (byte)'c',
+            0xE1,
+            (byte)'m',
+        };
+        Assert.True(
+            pdf.AsSpan().IndexOf(expected) >= 0,
+            "Expected 'Kit de cám' encoded in WinAnsi."
+        );
+        Assert.True(
+            pdf.AsSpan().IndexOf(new byte[] { (byte)' ', 0x96, (byte)' ' }) >= 0,
+            "Expected an en dash encoded as 0x96."
+        );
     }
 
     [Fact]

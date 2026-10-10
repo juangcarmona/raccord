@@ -19,7 +19,10 @@ public readonly record struct Money
     public static Money Of(decimal amount, Currency currency)
     {
         ArgumentNullException.ThrowIfNull(currency);
-        return new Money(Math.Round(amount, currency.MinorUnits, MidpointRounding.AwayFromZero), currency);
+        return new Money(
+            Math.Round(amount, currency.MinorUnits, MidpointRounding.AwayFromZero),
+            currency
+        );
     }
 
     /// <summary>A zero amount in the given currency.</summary>
@@ -39,7 +42,10 @@ public readonly record struct Money
     {
         if (left.Currency != right.Currency)
         {
-            throw new BusinessRuleViolationException("money.currency-mismatch", "Amounts in different currencies cannot be combined.");
+            throw new BusinessRuleViolationException(
+                "money.currency-mismatch",
+                "Amounts in different currencies cannot be combined."
+            );
         }
     }
 }

@@ -24,7 +24,10 @@ public sealed record Currency
         ArgumentNullException.ThrowIfNull(code);
         return string.Equals(code, Eur.Code, StringComparison.Ordinal)
             ? Eur
-            : throw new BusinessRuleViolationException("currency.unsupported", $"Currency '{code}' is not supported.");
+            : throw new BusinessRuleViolationException(
+                "currency.unsupported",
+                $"Currency '{code}' is not supported."
+            );
     }
 
     /// <inheritdoc />

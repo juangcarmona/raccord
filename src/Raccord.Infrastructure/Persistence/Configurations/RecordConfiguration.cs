@@ -7,10 +7,10 @@ using Raccord.Domain.Auditing;
 namespace Raccord.Infrastructure.Persistence.Configurations;
 
 /// <summary>Append-only tables: issued invoices, audit events and compliance records.</summary>
-internal sealed class RecordConfiguration :
-    IEntityTypeConfiguration<IssuedInvoiceRow>,
-    IEntityTypeConfiguration<AuditEvent>,
-    IEntityTypeConfiguration<ComplianceRecordRow>
+internal sealed class RecordConfiguration
+    : IEntityTypeConfiguration<IssuedInvoiceRow>,
+        IEntityTypeConfiguration<AuditEvent>,
+        IEntityTypeConfiguration<ComplianceRecordRow>
 {
     public void Configure(EntityTypeBuilder<IssuedInvoiceRow> builder)
     {
@@ -25,7 +25,14 @@ internal sealed class RecordConfiguration :
         builder.Property(row => row.Representation).HasColumnType("text");
         builder.Property(row => row.ContentHash).HasMaxLength(64).IsFixedLength();
         builder.HasIndex(row => row.Number).IsUnique();
-        builder.HasIndex(row => new { row.SeriesCode, row.Year, row.Sequence }).IsUnique();
+        builder
+            .HasIndex(row => new
+            {
+                row.SeriesCode,
+                row.Year,
+                row.Sequence,
+            })
+            .IsUnique();
         builder.HasIndex(row => row.DraftId).IsUnique();
         builder.HasIndex(row => row.IssueDate);
     }
@@ -38,15 +45,30 @@ internal sealed class RecordConfiguration :
         builder.Property(item => item.Actor).HasMaxLength(200);
         builder.Property(item => item.Action).HasMaxLength(100);
         builder.Property(item => item.EntityType).HasMaxLength(50);
-        builder.Property(item => item.Details)
+        builder
+            .Property(item => item.Details)
             .HasColumnType("jsonb")
             .HasConversion(
                 details => JsonSerializer.Serialize(details, JsonSerializerOptions.Default),
-                json => JsonSerializer.Deserialize<Dictionary<string, string>>(json, JsonSerializerOptions.Default) ?? new Dictionary<string, string>(StringComparer.Ordinal),
+                json =>
+                    JsonSerializer.Deserialize<Dictionary<string, string>>(
+                        json,
+                        JsonSerializerOptions.Default
+                    ) ?? new Dictionary<string, string>(StringComparer.Ordinal),
                 new ValueComparer<IReadOnlyDictionary<string, string>>(
-                    (left, right) => left != null && right != null && left.Count == right.Count && !left.Except(right).Any(),
-                    details => details.Aggregate(0, (hash, pair) => HashCode.Combine(hash, pair.Key, pair.Value)),
-                    details => new Dictionary<string, string>(details, StringComparer.Ordinal)));
+                    (left, right) =>
+                        left != null
+                        && right != null
+                        && left.Count == right.Count
+                        && !left.Except(right).Any(),
+                    details =>
+                        details.Aggregate(
+                            0,
+                            (hash, pair) => HashCode.Combine(hash, pair.Key, pair.Value)
+                        ),
+                    details => new Dictionary<string, string>(details, StringComparer.Ordinal)
+                )
+            );
         builder.HasIndex(item => new { item.EntityId, item.OccurredAt });
     }
 
@@ -61,6 +83,10 @@ internal sealed class RecordConfiguration :
         builder.Property(row => row.LastError).HasMaxLength(2000);
         builder.HasIndex(row => row.InvoiceId).IsUnique();
         builder.HasIndex(row => row.Status);
-        builder.HasOne<IssuedInvoiceRow>().WithMany().HasForeignKey(row => row.InvoiceId).OnDelete(DeleteBehavior.Restrict);
+        builder
+            .HasOne<IssuedInvoiceRow>()
+            .WithMany()
+            .HasForeignKey(row => row.InvoiceId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

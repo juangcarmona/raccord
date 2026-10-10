@@ -23,7 +23,11 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
 
     private static readonly (string Label, double Right)[] Columns =
     [
-        ("Cantidad", 345), ("Precio", 410), ("Dto.", 450), ("IVA", 490), ("Importe", Right),
+        ("Cantidad", 345),
+        ("Precio", 410),
+        ("Dto.", 450),
+        ("IVA", 490),
+        ("Importe", Right),
     ];
 
     public string ContentType => "application/pdf";
@@ -51,9 +55,26 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
             var pricing = line.Pricing;
             page.TextRight(Columns[0].Right, y, Format.Quantity(pricing.Quantity), BodySize);
             page.TextRight(Columns[1].Right, y, Format.UnitPrice(pricing.UnitPrice), BodySize);
-            page.TextRight(Columns[2].Right, y, pricing.DiscountPercent == 0 ? string.Empty : Format.Percent(pricing.DiscountPercent), BodySize);
-            page.TextRight(Columns[3].Right, y, Format.Percent(pricing.VatRate.Percentage), BodySize);
-            page.TextRight(Columns[4].Right, y, Format.Money(pricing.NetAmount.Amount, invoice.Currency.Code), BodySize);
+            page.TextRight(
+                Columns[2].Right,
+                y,
+                pricing.DiscountPercent == 0
+                    ? string.Empty
+                    : Format.Percent(pricing.DiscountPercent),
+                BodySize
+            );
+            page.TextRight(
+                Columns[3].Right,
+                y,
+                Format.Percent(pricing.VatRate.Percentage),
+                BodySize
+            );
+            page.TextRight(
+                Columns[4].Right,
+                y,
+                Format.Money(pricing.NetAmount.Amount, invoice.Currency.Code),
+                BodySize
+            );
             foreach (var text in descriptionLines)
             {
                 page.Text(Left, y, text, BodySize);
@@ -105,7 +126,13 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         y -= RowHeight;
     }
 
-    private static double DrawParty(PdfPage page, double x, double y, LegalParty party, double nameSize)
+    private static double DrawParty(
+        PdfPage page,
+        double x,
+        double y,
+        LegalParty party,
+        double nameSize
+    )
     {
         page.Text(x, y, party.LegalName, nameSize, bold: true);
         y -= nameSize + 3;
@@ -115,8 +142,16 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         {
             page.Text(x, y, address.Street, BodySize);
             y -= RowHeight;
-            var locality = string.Join(' ', new[] { address.PostalCode, address.City }.Where(part => part.Length > 0));
-            var region = string.Join(", ", new[] { locality, address.Province, address.CountryCode }.Where(part => part.Length > 0));
+            var locality = string.Join(
+                ' ',
+                new[] { address.PostalCode, address.City }.Where(part => part.Length > 0)
+            );
+            var region = string.Join(
+                ", ",
+                new[] { locality, address.Province, address.CountryCode }.Where(part =>
+                    part.Length > 0
+                )
+            );
             page.Text(x, y, region, BodySize);
             y -= RowHeight;
         }
@@ -127,7 +162,13 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
     private static double ContinuationHeader(PdfPage page, IssuedInvoice invoice)
     {
         page.Text(Left, Top, invoice.Issuer.LegalName, 10, bold: true);
-        page.TextRight(Right, Top, "Factura " + invoice.Number.Value + " (continuación)", 10, bold: true);
+        page.TextRight(
+            Right,
+            Top,
+            "Factura " + invoice.Number.Value + " (continuación)",
+            10,
+            bold: true
+        );
         return Top - 30;
     }
 
@@ -161,18 +202,42 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
 
         page.Rule(330, Right, y + RowHeight - 2);
         page.TextRight(LabelRight, y - 4, "Total factura", 11, bold: true);
-        page.TextRight(Right, y - 4, Format.Money(invoice.Totals.Total.Amount, currency), 11, bold: true);
+        page.TextRight(
+            Right,
+            y - 4,
+            Format.Money(invoice.Totals.Total.Amount, currency),
+            11,
+            bold: true
+        );
     }
 
     private static void DrawFooters(List<PdfPage> pages, IssuedInvoice invoice)
     {
-        var issued = invoice.IssuedAt.UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+        var issued = invoice.IssuedAt.UtcDateTime.ToString(
+            "yyyy-MM-dd HH:mm:ss 'UTC'",
+            CultureInfo.InvariantCulture
+        );
         for (var index = 0; index < pages.Count; index++)
         {
             var page = pages[index];
             page.Rule(Left, Right, 52, 0.3);
-            page.Text(Left, 40, "Emitida el " + issued + " · Representación emitida verificable por su huella SHA-256", 7);
-            page.TextRight(Right, 40, string.Create(CultureInfo.InvariantCulture, $"{invoice.Number.Value} · Página {index + 1} de {pages.Count}"), 7);
+            page.Text(
+                Left,
+                40,
+                "Emitida el "
+                    + issued
+                    + " · Representación emitida verificable por su huella SHA-256",
+                7
+            );
+            page.TextRight(
+                Right,
+                40,
+                string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"{invoice.Number.Value} · Página {index + 1} de {pages.Count}"
+                ),
+                7
+            );
         }
     }
 

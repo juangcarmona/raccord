@@ -12,7 +12,12 @@ public sealed class BillableLine
         CurrencyCode = Currency.Eur.Code;
     }
 
-    internal BillableLine(int position, BillableLineKind kind, string description, LinePricing pricing)
+    internal BillableLine(
+        int position,
+        BillableLineKind kind,
+        string description,
+        LinePricing pricing
+    )
     {
         Id = Guid.CreateVersion7();
         Position = position;
@@ -63,13 +68,17 @@ public sealed class BillableLine
     public Guid? InvoiceId { get; private set; }
 
     /// <summary>The pricing of the line as a value object.</summary>
-    public LinePricing Pricing => LinePricing.Create(Quantity, UnitPrice, DiscountPercent, VatRate.Of(VatPercentage));
+    public LinePricing Pricing =>
+        LinePricing.Create(Quantity, UnitPrice, DiscountPercent, VatRate.Of(VatPercentage));
 
     internal void Reserve(Guid draftId)
     {
         if (State != BillingState.Unbilled)
         {
-            throw new BusinessRuleViolationException("billing.line-not-unbilled", $"Billable line '{Description}' is already in a draft or invoiced.");
+            throw new BusinessRuleViolationException(
+                "billing.line-not-unbilled",
+                $"Billable line '{Description}' is already in a draft or invoiced."
+            );
         }
 
         State = BillingState.InDraft;

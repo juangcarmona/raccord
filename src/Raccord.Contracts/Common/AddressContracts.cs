@@ -6,7 +6,13 @@ namespace Raccord.Contracts.Common;
 /// <param name="City">City or municipality.</param>
 /// <param name="Province">Province, region or state.</param>
 /// <param name="CountryCode">ISO 3166-1 alpha-2 country code.</param>
-public sealed record AddressDto(string Street, string PostalCode, string City, string Province, string CountryCode);
+public sealed record AddressDto(
+    string Street,
+    string PostalCode,
+    string City,
+    string Province,
+    string CountryCode
+);
 
 /// <summary>A legal party as printed on an invoice.</summary>
 /// <param name="LegalName">Registered legal name.</param>

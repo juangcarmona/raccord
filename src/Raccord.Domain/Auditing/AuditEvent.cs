@@ -33,7 +33,14 @@ public sealed class AuditEvent
     public IReadOnlyDictionary<string, string> Details { get; private set; }
 
     /// <summary>Records an action.</summary>
-    public static AuditEvent Record(DateTimeOffset occurredAt, string actor, string action, string entityType, Guid entityId, IReadOnlyDictionary<string, string> details) =>
+    public static AuditEvent Record(
+        DateTimeOffset occurredAt,
+        string actor,
+        string action,
+        string entityType,
+        Guid entityId,
+        IReadOnlyDictionary<string, string> details
+    ) =>
         new()
         {
             Id = Guid.CreateVersion7(occurredAt),

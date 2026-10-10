@@ -46,7 +46,8 @@ public sealed class InvoiceTotalsTests
                 Assert.Equal(Reduced, reduced.Rate);
                 Assert.Equal(200.00m, reduced.TaxableBase.Amount);
                 Assert.Equal(20.00m, reduced.VatAmount.Amount);
-            });
+            }
+        );
         Assert.Equal(1671.80m, totals.TaxableBase.Amount);
         Assert.Equal(329.08m, totals.VatAmount.Amount);
         Assert.Equal(2000.88m, totals.Total.Amount);
@@ -55,7 +56,10 @@ public sealed class InvoiceTotalsTests
     [Fact]
     public void Zero_rated_lines_still_appear_in_the_breakdown()
     {
-        var totals = InvoiceTotals.Calculate([LinePricing.Create(1m, 50m, 0m, VatRate.Of(0m))], Currency.Eur);
+        var totals = InvoiceTotals.Calculate(
+            [LinePricing.Create(1m, 50m, 0m, VatRate.Of(0m))],
+            Currency.Eur
+        );
 
         var group = Assert.Single(totals.VatBreakdown);
         Assert.Equal(0m, group.VatAmount.Amount);

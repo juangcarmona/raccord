@@ -5,7 +5,5 @@ public sealed class ConcurrencyConflictException : Exception
 {
     /// <summary>Creates the exception.</summary>
     public ConcurrencyConflictException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) { }
 }

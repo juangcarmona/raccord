@@ -18,11 +18,28 @@ internal static class PdfDocumentWriter
 
         WriteAscii(output, "%PDF-1.7\n%âãÏÓ\n");
 
-        var kids = string.Join(' ', Enumerable.Range(0, pages.Count).Select(index => Invariant($"{FirstPageObject + (index * 2)} 0 R")));
+        var kids = string.Join(
+            ' ',
+            Enumerable
+                .Range(0, pages.Count)
+                .Select(index => Invariant($"{FirstPageObject + (index * 2)} 0 R"))
+        );
         WriteObject(output, offsets, "<< /Type /Catalog /Pages 2 0 R >>");
-        WriteObject(output, offsets, Invariant($"<< /Type /Pages /Kids [{kids}] /Count {pages.Count} >>"));
-        WriteObject(output, offsets, "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
-        WriteObject(output, offsets, "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+        WriteObject(
+            output,
+            offsets,
+            Invariant($"<< /Type /Pages /Kids [{kids}] /Count {pages.Count} >>")
+        );
+        WriteObject(
+            output,
+            offsets,
+            "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"
+        );
+        WriteObject(
+            output,
+            offsets,
+            "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"
+        );
         WriteInfo(output, offsets, title);
 
         for (var index = 0; index < pages.Count; index++)
@@ -31,7 +48,10 @@ internal static class PdfDocumentWriter
             WriteObject(
                 output,
                 offsets,
-                Invariant($"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {PdfPage.Width:0.##} {PdfPage.Height:0.##}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents {contentObject} 0 R >>"));
+                Invariant(
+                    $"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {PdfPage.Width:0.##} {PdfPage.Height:0.##}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents {contentObject} 0 R >>"
+                )
+            );
             WriteStream(output, offsets, pages[index].ToArray());
         }
 
@@ -43,7 +63,11 @@ internal static class PdfDocumentWriter
             table.Append(Invariant($"{offset:D10} 00000 n \n"));
         }
 
-        table.Append(Invariant($"trailer\n<< /Size {offsets.Count + 1} /Root 1 0 R /Info 5 0 R >>\nstartxref\n{xref}\n%%EOF\n"));
+        table.Append(
+            Invariant(
+                $"trailer\n<< /Size {offsets.Count + 1} /Root 1 0 R /Info 5 0 R >>\nstartxref\n{xref}\n%%EOF\n"
+            )
+        );
         WriteAscii(output, table.ToString());
         return output.ToArray();
     }
@@ -74,12 +98,17 @@ internal static class PdfDocumentWriter
     private static void WriteStream(MemoryStream output, List<long> offsets, byte[] content)
     {
         offsets.Add(output.Position);
-        WriteAscii(output, Invariant($"{offsets.Count} 0 obj\n<< /Length {content.Length} >>\nstream\n"));
+        WriteAscii(
+            output,
+            Invariant($"{offsets.Count} 0 obj\n<< /Length {content.Length} >>\nstream\n")
+        );
         output.Write(content);
         WriteAscii(output, "\nendstream\nendobj\n");
     }
 
-    private static void WriteAscii(MemoryStream output, string text) => output.Write(Encoding.Latin1.GetBytes(text));
+    private static void WriteAscii(MemoryStream output, string text) =>
+        output.Write(Encoding.Latin1.GetBytes(text));
 
-    private static string Invariant(FormattableString value) => value.ToString(CultureInfo.InvariantCulture);
+    private static string Invariant(FormattableString value) =>
+        value.ToString(CultureInfo.InvariantCulture);
 }

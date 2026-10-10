@@ -44,11 +44,16 @@ public sealed class InvoiceNumberSequence
     /// <summary>Validates a series code: 1–10 characters, uppercase letters and digits.</summary>
     public static void EnsureValidSeriesCode(string seriesCode)
     {
-        if (string.IsNullOrEmpty(seriesCode)
+        if (
+            string.IsNullOrEmpty(seriesCode)
             || seriesCode.Length > MaxSeriesCodeLength
-            || !seriesCode.All(c => char.IsAsciiDigit(c) || char.IsAsciiLetterUpper(c)))
+            || !seriesCode.All(c => char.IsAsciiDigit(c) || char.IsAsciiLetterUpper(c))
+        )
         {
-            throw new BusinessRuleViolationException("numbering.series-code-invalid", "Series codes have 1 to 10 uppercase letters or digits.");
+            throw new BusinessRuleViolationException(
+                "numbering.series-code-invalid",
+                "Series codes have 1 to 10 uppercase letters or digits."
+            );
         }
     }
 
@@ -61,19 +66,26 @@ public sealed class InvoiceNumberSequence
     {
         if (issueDate.Year != Year)
         {
-            throw new BusinessRuleViolationException("numbering.year-mismatch", $"Sequence {SeriesCode}/{Year} cannot number an invoice dated {issueDate:yyyy-MM-dd}.");
+            throw new BusinessRuleViolationException(
+                "numbering.year-mismatch",
+                $"Sequence {SeriesCode}/{Year} cannot number an invoice dated {issueDate:yyyy-MM-dd}."
+            );
         }
 
         if (LastIssueDate is { } last && issueDate < last)
         {
             throw new BusinessRuleViolationException(
                 "numbering.issue-date-before-previous",
-                $"Issue date {issueDate:yyyy-MM-dd} is earlier than the last invoice of series {SeriesCode} ({last:yyyy-MM-dd}).");
+                $"Issue date {issueDate:yyyy-MM-dd} is earlier than the last invoice of series {SeriesCode} ({last:yyyy-MM-dd})."
+            );
         }
 
         LastNumber++;
         LastIssueDate = issueDate;
-        var value = string.Create(CultureInfo.InvariantCulture, $"{SeriesCode}{Year}-{LastNumber:D5}");
+        var value = string.Create(
+            CultureInfo.InvariantCulture,
+            $"{SeriesCode}{Year}-{LastNumber:D5}"
+        );
         return new InvoiceNumber(SeriesCode, Year, LastNumber, value);
     }
 }

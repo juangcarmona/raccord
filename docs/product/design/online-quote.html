@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter%3Awght%40100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, ::before, ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body style="background-color: #FFFFFF">
+    <div
+      data-pencil-name="Online Quote Page"
+      class="box-border w-[1440px] h-[1024px] flex flex-col gap-0 justify-start items-start bg-[#FFFFFF] overflow-hidden"
+    >
+      <div
+        data-pencil-name="Hero Wrap"
+        class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[48px_120px_40px_120px] justify-start items-start bg-[#0B1020]"
+      >
+        <div
+          data-pencil-name="OQ Brand Row"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+        >
+          <div
+            data-pencil-name="OQ Mark"
+            class="box-border w-[26px] shrink-0 h-[26px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[6px]"
+          ></div>
+          <div
+            data-pencil-name="OQ Brand"
+            class="text-[15px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Estudio Norte S.L.
+          </div>
+          <div
+            data-pencil-name="OQ Brand Spacer"
+            class="box-border [flex:1_1_0] h-[1px] flex flex-row gap-0 justify-start items-start"
+          ></div>
+          <div
+            data-pencil-name="OQ Validity"
+            class="text-[11.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            Offer valid until 24 Feb 2026
+          </div>
+        </div>
+        <div
+          data-pencil-name="OQ Title Row"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[6px] p-[10px_0px_0px_0px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="OQ Kicker"
+            class="text-[12px]/[normal] box-border text-[#2DE2E6] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            QUOTE P 2026-0127 · CURRENT VERSION
+          </div>
+          <div
+            data-pencil-name="OQ Title"
+            class="text-[34px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Corona Festival — Main stage
+          </div>
+          <div
+            data-pencil-name="OQ Subtitle"
+            class="text-[14px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            Audiovisual production and equipment rental · 12–14 February 2026 · Plaza Mayor,
+            Valencia
+          </div>
+        </div>
+      </div>
+      <div
+        data-pencil-name="OQ Body"
+        class="box-border w-full [flex:1_1_0] flex flex-row gap-[32px] p-[32px_120px] justify-start items-start"
+      >
+        <div
+          data-pencil-name="OQ Main Col"
+          class="box-border [flex:1_1_0] h-full flex flex-col gap-[24px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="OQ Welcome"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="OQ Welcome Text"
+              class="text-[13.5px]/[normal] box-border w-full text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Dear Ms. Ibáñez, thank you for considering us for the Corona Festival main-stage
+              production. Below is the offer for equipment and crew as discussed. We are happy to
+              adjust it to your needs.
+            </div>
+          </div>
+          <div
+            data-pencil-name="OQ Lines"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-0 justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+          >
+            <div
+              data-pencil-name="OQ Lines Head"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[10px_16px] justify-start items-center bg-[#F5F7FA]"
+            >
+              <div
+                data-pencil-name="OQ Col Item"
+                class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                ITEM
+              </div>
+              <div
+                data-pencil-name="OQ Col Qty"
+                class="text-[11px]/[normal] box-border w-[44px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                QTY
+              </div>
+              <div
+                data-pencil-name="OQ Col Unit"
+                class="text-[11px]/[normal] box-border w-[80px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                UNIT
+              </div>
+              <div
+                data-pencil-name="OQ Col Total"
+                class="text-[11px]/[normal] box-border w-[90px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                TOTAL
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Row Camera"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[10px_16px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Item Camera"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Camera package A — Alexa 35 + set of lenses
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1 Camera"
+                class="text-[12px]/[normal] box-border w-[44px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1
+              </div>
+              <div
+                data-pencil-name="OQ Cell 2,400.00 Camera"
+                class="text-[12px]/[normal] box-border w-[80px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                2,400.00
+              </div>
+              <div
+                data-pencil-name="OQ Cell 2,880.00 Camera"
+                class="text-[12px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                2,880.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Row Gaffer"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[10px_16px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Item Gaffer"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Gaffer + 2 electricians — prep day
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1 Gaffer"
+                class="text-[12px]/[normal] box-border w-[44px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1
+              </div>
+              <div
+                data-pencil-name="OQ Cell 780.00 Gaffer"
+                class="text-[12px]/[normal] box-border w-[80px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                780.00
+              </div>
+              <div
+                data-pencil-name="OQ Cell 948.00 Gaffer"
+                class="text-[12px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                948.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Row LED"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[10px_16px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Item LED"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                LED wall 6×3m — 2 days
+              </div>
+              <div
+                data-pencil-name="OQ Cell 2 LED"
+                class="text-[12px]/[normal] box-border w-[44px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                2
+              </div>
+              <div
+                data-pencil-name="OQ Cell 450.00 LED"
+                class="text-[12px]/[normal] box-border w-[80px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                450.00
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1,800.00 LED"
+                class="text-[12px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1,800.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Row Rigging"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[10px_16px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Item Rigging"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Rigging and truss — arena
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1 Rigging"
+                class="text-[12px]/[normal] box-border w-[44px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1,020.00 Rigging"
+                class="text-[12px]/[normal] box-border w-[80px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1,020.00
+              </div>
+              <div
+                data-pencil-name="OQ Cell 1,240.00 Rigging"
+                class="text-[12px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+              >
+                1,240.00
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="OQ Footnotes"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-[4px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="OQ Footnote 1"
+              class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Prices in EUR, VAT 21% excluded. Quote content reflects the plan synchronised on 10
+              Feb 2026; changes after this date are offered as a new version.
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="OQ Side"
+          class="box-border w-[340px] shrink-0 h-full flex flex-col gap-[16px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="OQ Totals"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[24px] justify-start items-start bg-[#FFFFFF] rounded-[12px]"
+          >
+            <div
+              data-pencil-name="OQ Tot Row Equipment rental"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Tot Label Equipment rental"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Equipment rental
+              </div>
+              <div
+                data-pencil-name="OQ Tot Val Equipment rental"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                8,310.28
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Tot Row Crew functions"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Tot Label Crew functions"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Crew functions
+              </div>
+              <div
+                data-pencil-name="OQ Tot Val Crew functions"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                3,910.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Tot Row Post-production"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Tot Label Post-production"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Post-production
+              </div>
+              <div
+                data-pencil-name="OQ Tot Val Post-production"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                900.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Tot Row Consumables"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Tot Label Consumables"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Consumables
+              </div>
+              <div
+                data-pencil-name="OQ Tot Val Consumables"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                168.00
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Tot Divider"
+              class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#E4E8EF]"
+            ></div>
+            <div
+              data-pencil-name="OQ Sub Row Subtotal"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Sub Label Subtotal"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Subtotal
+              </div>
+              <div
+                data-pencil-name="OQ Sub Val Subtotal"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                13,288.28
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Sub Row VAT 21%"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Sub Label VAT 21%"
+                class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                VAT 21%
+              </div>
+              <div
+                data-pencil-name="OQ Sub Val VAT 21%"
+                class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                2,790.54
+              </div>
+            </div>
+            <div
+              data-pencil-name="OQ Grand Row"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="OQ Grand Label 2"
+                class="text-[13px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Total due
+              </div>
+              <div
+                data-pencil-name="OQ Grand Val 2"
+                class="text-[13px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                16,078.82 EUR
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="OQ Accept Card"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-[14px] p-[24px] justify-start items-start bg-[#FFFFFF] rounded-[12px]"
+          >
+            <div
+              data-pencil-name="OQ Accept Title"
+              class="text-[13px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Your decision
+            </div>
+            <div
+              data-pencil-name="OQ Accept Text"
+              class="text-[11.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              This offer is valid until 24 Feb 2026. Accepting it confirms the scope and prices
+              above for the Corona Festival main stage. You can also request a change and we will
+              send an updated version.
+            </div>
+            <div
+              data-pencil-name="OQ Accept Buttons"
+              class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
+            >
+              <div
+                data-pencil-name="OQ Accept Btn"
+                class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[10px_16px] justify-center items-center bg-[#0B1020] rounded-[8px]"
+              >
+                <div
+                  data-pencil-name="OQ Accept Btn Label"
+                  class="text-[13px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Accept quote and sign
+                </div>
+              </div>
+              <div
+                data-pencil-name="OQ Request Btn"
+                class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[10px_16px] justify-center items-center bg-[#FFFFFF] rounded-[8px]"
+              >
+                <div
+                  data-pencil-name="OQ Request Btn Label"
+                  class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Request a change
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="OQ Link Note"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+          >
+            <svg
+              data-pencil-name="OQ Lock Icon"
+              data-icon-name="lock"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[13px] shrink-0 h-[13px]"
+            >
+              <path
+                d="M3.85889 12.25q-0.39307 0-0.66993-0.27344-0.27344-0.27685-0.27343-0.66992l0-5.11328q0-0.39307 0.27343-0.6665 0.27686-0.27686 0.66993-0.27686l0.80664 0 0-1.16553q0-0.97754 0.68017-1.65429 0.68018-0.68018 1.6543-0.68018 0.97412 0 1.6543 0.68018 0.68018 0.67676 0.68017 1.65429l0 1.16553 0.80664 0q0.39307 0 0.66651 0.27686 0.27686 0.27344 0.27685 0.6665l0 5.11328q0 0.39307-0.27685 0.66992-0.27344 0.27344-0.66651 0.27344l-6.28222 0z m0-0.58447l6.28222 0q0.15723 0 0.25635-0.09912 0.10254-0.10254 0.10254-0.25977l0-5.11328q0-0.15723-0.10254-0.25635-0.09912-0.10254-0.25635-0.10254l-6.28222 0q-0.15723 0-0.25977 0.10254-0.09912 0.09912-0.09912 0.25635l0 5.11328q0 0.15723 0.09912 0.25977 0.10254 0.09912 0.25977 0.09912z m3.14111-2.04053q0.36914 0 0.62207-0.25293 0.25293-0.25293 0.25293-0.62207 0-0.36914-0.25293-0.62207-0.25293-0.25293-0.62207-0.25293-0.36914 0-0.62207 0.25293-0.25293 0.25293-0.25293 0.62207 0 0.36914 0.25293 0.62207 0.25293 0.25293 0.62207 0.25293z m-1.75-4.375l3.5 0 0-1.16553q0-0.73145-0.5127-1.24072-0.50928-0.50928-1.2373-0.50928-0.72803 0-1.24072 0.50928-0.50928 0.50928-0.50928 1.24072l0 1.16553z m-1.75 6.41553q0 0 0-0.09912 0-0.10254 0-0.25977l0-5.11328q0-0.15723 0-0.25635 0-0.10254 0-0.10254 0 0 0 0.10254 0 0.09912 0 0.25635l0 5.11328q0 0.15723 0 0.25977 0 0.09912 0 0.09912z"
+                fill="#667085"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="OQ Link Note Text"
+              class="text-[10.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Private link — protected by the password sent to you. Addressed to the quote contact
+              only.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

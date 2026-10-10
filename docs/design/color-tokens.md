@@ -10,6 +10,19 @@ These are the exploratory v1 tokens. They should become CSS variables and, later
 | `--raccord-cloud` | `#F5F7FA` | Light application backgrounds |
 | `--raccord-slate` | `#667085` | Secondary text and metadata |
 | `--raccord-white` | `#FFFFFF` | Cards and high-contrast text |
+| `--raccord-selected` | `#0B7FBF` | Selected rows, checkboxes and selection bars (decided 2026-10-10: blue, not cyan) |
+
+Selection tints (from the invoice-list screen): row fill `#EDF6FC`, badge fill `#D6EBF7`.
+
+## Status tints
+
+Statuses pair a text color with a pale background; both are shown so status remains readable in grayscale:
+
+| Status kind | Text | Background |
+|---|---|---|
+| Paid / success | `#1D7A4F` | `#E3F5EE` |
+| Warning / pending | `#8A5A00` | `#FFF3D6` |
+| Error / delayed | `#B3261E` | `#FDE3E0` |
 
 ## Semantic guidance
 

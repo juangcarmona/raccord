@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter%3Awght%40100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, ::before, ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body style="background-color: #F5F7FA">
+    <div
+      data-pencil-name="API Access"
+      class="box-border w-[1440px] h-[1024px] flex flex-row gap-0 justify-start items-start bg-[#F5F7FA]"
+    >
+      <div
+        data-pencil-name="AI Sidebar"
+        class="box-border w-[236px] shrink-0 h-full flex flex-col gap-[16px] p-[20px_16px] justify-start items-start bg-[#0B1020]"
+      >
+        <div
+          data-pencil-name="AI Brand"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+        >
+          <div
+            data-pencil-name="AI Brand Mark"
+            class="box-border w-[26px] shrink-0 h-[26px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[6px]"
+          ></div>
+          <div
+            data-pencil-name="AI Brand Name"
+            class="text-[16px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Raccord
+          </div>
+        </div>
+        <div
+          data-pencil-name="AI Nav"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[2px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="AI Nav Projects"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="AI Nav Icon Projects"
+              data-icon-name="folder"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M2.69336 11.08447q-0.40332 0-0.67334-0.27002-0.27002-0.27002-0.27002-0.67334l0-6.28222q0-0.40332 0.27002-0.67334 0.27002-0.27002 0.67334-0.27002l2.51221 0q0.18799 0 0.36572 0.07861 0.17773 0.0752 0.3042 0.20166l0.88867 0.88867 4.54248 0q0.40332 0 0.67334 0.27002 0.27002 0.27002 0.27002 0.66992l0 5.1167q0 0.40332-0.27002 0.67334-0.27002 0.27002-0.67334 0.27002l-8.61328 0z m0-0.58447l8.61328 0q0.15723 0 0.25635-0.09912 0.10254-0.10254 0.10254-0.25977l0-5.1167q0-0.15723-0.10254-0.25634-0.09912-0.10254-0.25635-0.10254l-4.77832 0-1.06299-1.06299q-0.05811-0.05811-0.11963-0.07861-0.06152-0.02393-0.12988-0.02393l-2.52246 0q-0.15723 0-0.25977 0.10254-0.09912 0.09912-0.09912 0.25635l0 6.28222q0 0.15723 0.09912 0.25977 0.10254 0.09912 0.25977 0.09912z m-0.35889 0q0 0 0-0.09912 0-0.10254 0-0.25977l0-6.28222q0-0.15723 0-0.25635 0-0.10254 0-0.10254 0 0 0 0.02393 0 0.02051 0 0.07861l0 1.06299q0 0 0 0.10254 0 0.09912 0 0.25634l0 5.1167q0 0.15723 0 0.25977 0 0.09912 0 0.09912z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Nav Label Projects"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Projects
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI Nav Crew"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="AI Nav Icon Crew"
+              data-icon-name="groups"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M1.0083 10.25391q-0.18115 0-0.3042-0.12305-0.11963-0.12305-0.11963-0.3042l0-0.07861q0-0.53662 0.57422-0.88867 0.57422-0.35547 1.47656-0.35547 0.1333 0 0.28711 0.01367 0.15381 0.01025 0.32471 0.04101-0.13672 0.23926-0.20166 0.49219-0.06152 0.24951-0.06152 0.50244l0 0.70069-1.97559 0z m3.55127 0q-0.2085 0-0.3418-0.13331-0.1333-0.13672-0.1333-0.33837l0-0.18457q0-0.35205 0.20166-0.64258 0.20508-0.29395 0.60498-0.50928 0.3999-0.21191 0.92969-0.31787 0.5332-0.10596 1.17578-0.10596 0.65283 0 1.18262 0.10596 0.5332 0.10596 0.9331 0.31787 0.3999 0.21533 0.60157 0.50928 0.20166 0.29053 0.20166 0.64258l0 0.18457q0 0.20166-0.13672 0.33837-0.1333 0.1333-0.33496 0.13331l-4.88428 0z m6.45654 0l0-0.70069q0-0.28027-0.06152-0.52295-0.06152-0.24609-0.18457-0.47168 0.18457-0.03076 0.32813-0.04101 0.14697-0.01367 0.27685-0.01367 0.90576 0 1.47315 0.35205 0.56738 0.35205 0.56738 0.89209l0 0.07861q0 0.18115-0.12305 0.3042-0.11963 0.12305-0.30078 0.12305l-1.97559 0z m-6.33349-0.58448l4.63818 0 0-0.12304q-0.03418-0.41357-0.68359-0.67676-0.646-0.2666-1.63721-0.2666-0.99121 0-1.64063 0.2666-0.646 0.26318-0.67675 0.67676l0 0.12304z m-2.05078-1.71582q-0.3418 0-0.58448-0.24267-0.24268-0.24609-0.24267-0.58789 0-0.33838 0.24267-0.57764 0.24609-0.23926 0.58789-0.23926 0.33838 0 0.58448 0.23926 0.24609 0.23926 0.24609 0.58105 0 0.33154-0.23926 0.58106-0.23926 0.24609-0.59472 0.24609z m8.74316 0q-0.33496 0-0.58447-0.24609-0.24609-0.24951-0.2461-0.58106 0-0.3418 0.2461-0.58105 0.24951-0.23926 0.58789-0.23926 0.34521 0 0.58447 0.23926 0.24267 0.23926 0.24268 0.57764 0 0.3418-0.23926 0.58789-0.23926 0.24268-0.59131 0.24267z m-4.37158-0.36914q-0.52979 0-0.90576-0.37256-0.37598-0.37598-0.37598-0.90576 0-0.54688 0.37256-0.9126 0.37256-0.36914 0.90576-0.36914 0.54346 0 0.90918 0.36914 0.36914 0.36572 0.36914 0.90577 0 0.5332-0.36572 0.90918-0.36572 0.37598-0.90918 0.37597z m0.00342-0.58447q0.28711 0 0.48535-0.20508 0.20166-0.2085 0.20166-0.4956 0-0.28711-0.20166-0.48877-0.19824-0.20166-0.49219-0.20166-0.28027 0-0.48877 0.20166-0.20508 0.19824-0.20508 0.4956 0 0.28027 0.20508 0.48877 0.2085 0.20508 0.49561 0.20508z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Nav Label Crew"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Crew
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI Nav Workspace"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center bg-[#1A2440] rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="AI Nav Icon Workspace"
+              data-icon-name="settings"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M6.3916 12.25q-0.20166 0-0.35205-0.1333-0.15039-0.1333-0.18457-0.33496l-0.15381-1.22022q-0.28027-0.08203-0.60498-0.26318-0.32471-0.18115-0.55029-0.38623l-1.11768 0.47852q-0.18457 0.08203-0.37597 0.0205-0.19141-0.06494-0.29395-0.24267l-0.62891-1.08692q-0.10596-0.17773-0.06494-0.36914 0.04443-0.19482 0.20508-0.32129l0.97412-0.72802q-0.02393-0.15723-0.04101-0.32471-0.01709-0.16748-0.01709-0.32813 0-0.14697 0.01709-0.30761 0.01709-0.16406 0.04101-0.36573l-0.97412-0.72802q-0.16064-0.12646-0.19824-0.32471-0.03418-0.20166 0.06836-0.37939l0.61865-1.04932q0.10254-0.16748 0.29395-0.23584 0.19141-0.07178 0.37597 0.01025l1.10401 0.47168q0.26318-0.21875 0.56738-0.39306 0.3042-0.17432 0.59131-0.27002l0.16406-1.22022q0.03418-0.20166 0.18457-0.33496 0.15039-0.1333 0.35205-0.1333l1.2168 0q0.20166 0 0.35205 0.1333 0.15039 0.1333 0.18457 0.33496l0.15381 1.23047q0.33496 0.11621 0.59131 0.27002 0.25977 0.15381 0.5332 0.38281l1.16211-0.47168q0.18457-0.08203 0.37256-0.01025 0.19141 0.06836 0.29736 0.23584l0.61523 1.06299q0.10596 0.17773 0.06153 0.37256-0.04102 0.19141-0.20166 0.31787l-1.02197 0.7622q0.04785 0.18115 0.05468 0.33155 0.00684 0.15039 0.00684 0.29736 0 0.13672-0.01367 0.28711-0.01025 0.15039-0.05127 0.36572l0.98779 0.73828q0.16065 0.12646 0.2085 0.32129 0.04785 0.19141-0.05469 0.36914l-0.62207 1.07325q-0.10254 0.17774-0.30078 0.24267-0.19482 0.06494-0.3794-0.01709l-1.12109-0.48193q-0.27344 0.229-0.55029 0.39306-0.27686 0.16406-0.57422 0.25977l-0.15381 1.23047q-0.03418 0.20166-0.18457 0.33496-0.15039 0.1333-0.35205 0.1333l-1.2168 0z m0.02393-0.58447l1.1416 0 0.21533-1.5791q0.44092-0.11621 0.79297-0.31788 0.35547-0.20508 0.72119-0.56054l1.45264 0.62207 0.58105-0.99121-1.27832-0.96045q0.0752-0.24951 0.09912-0.45801 0.02393-0.2085 0.02393-0.42041 0-0.22217-0.02393-0.42041-0.02393-0.19824-0.09912-0.43408l1.29883-0.98438-0.57764-0.99121-1.49023 0.62549q-0.26318-0.29053-0.69727-0.54346-0.43066-0.25635-0.81347-0.33838l-0.17774-1.5791-1.16552 0-0.18116 1.56543q-0.44092 0.0957-0.81006 0.3042-0.36914 0.2085-0.73486 0.57422l-1.45605-0.6084-0.57764 0.99121 1.26465 0.94678q-0.0752 0.19482-0.10596 0.42725-0.02734 0.229-0.02734 0.47509 0 0.22217 0.02734 0.44092 0.03076 0.21875 0.09229 0.42725l-1.25098 0.96045 0.57764 0.99121 1.4458-0.61182q0.3418 0.34521 0.71093 0.55371 0.36914 0.2085 0.83399 0.32813l0.18799 1.56543z m0.56738-3.20606q0.61182 0 1.03564-0.42383 0.42383-0.42383 0.42383-1.03564 0-0.61182-0.42383-1.03564-0.42383-0.42383-1.03564-0.42383-0.61182 0-1.03564 0.42383-0.42041 0.42383-0.42041 1.03564 0 0.61182 0.42041 1.03564 0.42383 0.42383 1.03564 0.42383z"
+                fill="#2DE2E6"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Nav Label Workspace"
+              class="text-[12.5px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Workspace
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI Nav Finance"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="AI Nav Icon Finance"
+              data-icon-name="payments"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M7.875 7.24609q-0.49219 0-0.83057-0.33496-0.33496-0.33838-0.33496-0.83056 0-0.49561 0.33496-0.83057 0.33838-0.33496 0.83057-0.33496 0.49219 0 0.82715 0.33496 0.33838 0.33496 0.33838 0.83057 0 0.49219-0.33838 0.83056-0.33496 0.33496-0.82715 0.33496z m-3.61279 1.8628q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.17334q0-0.38623 0.27685-0.66309 0.27686-0.27686 0.66651-0.27685l7.22558 0q0.38965 0 0.66651 0.27685 0.27686 0.27686 0.27685 0.66309l0 4.17334q0 0.38965-0.27685 0.6665-0.27686 0.27686-0.66651 0.27686l-7.22558 0z m0.58447-0.58448l6.05664 0q0-0.38965 0.27686-0.66308 0.27686-0.27686 0.6665-0.27686l0-3.00781q-0.39307 0-0.66992-0.27686-0.27344-0.27686-0.27344-0.6665l-6.05664 0q0 0.39307-0.27686 0.66992-0.27686 0.27344-0.6665 0.27344l0 3.00781q0.39307 0 0.6665 0.27686 0.27686 0.27686 0.27686 0.66308z m5.56445 2.33448l-7.89892 0q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.84668q0-0.12305 0.08545-0.20508 0.08545-0.08545 0.20849-0.08545 0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.20508l0 4.84668q0 0.13672 0.11279 0.24951 0.11279 0.10938 0.2461 0.10937l7.89892 0q0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.2085 0 0.12305-0.08545 0.20849-0.08203 0.08203-0.20508 0.08204z m-6.14892-2.33448l-0.35889 0q0 0 0-0.10595 0-0.10596 0-0.25293l0-4.17334q0-0.14355 0-0.24951 0-0.10938 0-0.10938l0.35889 0q-0.14355 0-0.25293 0.10938-0.10596 0.10596-0.10596 0.24951l0 4.17334q0 0.14697 0.10596 0.25293 0.10938 0.10596 0.25293 0.10595z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Nav Label Finance"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Finance
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="AI Nav Note"
+          class="text-[10px]/[normal] box-border w-full text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left"
+        >
+          Workspace · Lumen Events
+        </div>
+      </div>
+      <div
+        data-pencil-name="AI Main"
+        class="box-border [flex:1_1_0] h-full flex flex-col gap-[16px] p-[28px_40px] justify-start items-start"
+      >
+        <div
+          data-pencil-name="AI Header"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[4px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="AI Title"
+            class="text-[20px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            API access &amp; tokens
+          </div>
+          <div
+            data-pencil-name="AI Subtitle"
+            class="text-[12.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            Integrations configuration: the public interface authenticates with a token that
+            inherits its owner's role.
+          </div>
+        </div>
+        <div
+          data-pencil-name="AI Token Card"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[16px_20px] justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+        >
+          <div
+            data-pencil-name="AI Token Head"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+          >
+            <svg
+              data-pencil-name="AI Token Icon"
+              data-icon-name="key"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M4.08447 7.71777q-0.29736 0-0.50927-0.20849-0.2085-0.21191-0.2085-0.50928 0-0.29736 0.2085-0.50586 0.21191-0.21191 0.50927-0.21191 0.29395 0 0.50586 0.21191 0.21191 0.2085 0.21192 0.50586 0 0.29736-0.21192 0.50928-0.21191 0.2085-0.50586 0.20849z m0 2.19776q-1.2168 0-2.06787-0.84766-0.85107-0.85107-0.85107-2.06445 0-1.21338 0.85107-2.06446 0.85107-0.85449 2.06787-0.85449 0.89893 0 1.62012 0.48877 0.72119 0.48535 1.05273 1.26123l5.17823 0q0.08887 0 0.1709 0.03418 0.08545 0.03076 0.16064 0.10596l0.69726 0.69726q0.0752 0.0752 0.10596 0.15723 0.03076 0.07861 0.03076 0.1709 0 0.0957-0.03076 0.17432-0.03076 0.07861-0.10596 0.1538l-1.2373 1.22706q-0.05811 0.06152-0.14014 0.09912-0.07861 0.0376-0.16064 0.04101-0.07861 0.00342-0.15723-0.02051-0.07861-0.02393-0.15722-0.07519l-0.68018-0.5127-0.79639 0.58448q-0.06152 0.04443-0.12646 0.06494-0.06494 0.01709-0.14014 0.01709-0.07861 0-0.14697-0.02393-0.06494-0.02393-0.12647-0.0581l-0.75537-0.50586-1.58252 0q-0.33154 0.76563-1.05273 1.25781-0.72119 0.49219-1.62012 0.49219z m0-0.58106q0.86133 0 1.46973-0.51953 0.6084-0.51953 0.7793-1.23047l2.19091 0 0.83741 0.56397q-0.01367 0-0.00684 0.00342 0.00684 0 0.00684-0.00342l1.08349-0.7793 0.94336 0.71436q0-0.01367 0-0.00684 0 0.00684 0 0.00684l1.0835-1.0835q-0.00342 0-0.00342 0 0.00342 0 0.00342 0l-0.58447-0.58447q0-0.00342 0 0l-5.5542 0q-0.1709-0.71094-0.7793-1.23047-0.6084-0.51953-1.46973-0.51953-0.96387 0-1.65088 0.68701-0.68359 0.68359-0.68359 1.64746 0 0.96387 0.68359 1.65088 0.68701 0.68359 1.65088 0.68359z"
+                fill="#0B1020"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Token Title"
+              class="text-[13.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Public interface — connected
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI TRow Status"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="AI TK Status"
+              class="text-[11px]/[normal] box-border w-[110px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Status
+            </div>
+            <div
+              data-pencil-name="AI TV Status"
+              class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Connected · integration active
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI TRow Token"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="AI TK Token"
+              class="text-[11px]/[normal] box-border w-[110px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Token owner
+            </div>
+            <div
+              data-pencil-name="AI TV Token"
+              class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Administrator (Juan G. Carmona)
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI TRow Validity"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="AI TK Validity"
+              class="text-[11px]/[normal] box-border w-[110px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Validity
+            </div>
+            <div
+              data-pencil-name="AI TV Validity"
+              class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              10 years · issued 10 Oct 2026
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI TRow Permissions"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="AI TK Permissions"
+              class="text-[11px]/[normal] box-border w-[110px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Permissions
+            </div>
+            <div
+              data-pencil-name="AI TV Permissions"
+              class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Calls beyond the owner's role permissions are refused
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI Token Reveal"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] justify-start items-center"
+          >
+            <div
+              data-pencil-name="AI Reveal Btn"
+              class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[7px_12px] justify-start items-start bg-[#2DE2E6] rounded-[6px]"
+            >
+              <div
+                data-pencil-name="AI Reveal Btn Text"
+                class="text-[11.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                Show token
+              </div>
+            </div>
+            <div
+              data-pencil-name="AI Regen Btn"
+              class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[7px_12px] justify-start items-start bg-[#FFFFFF] rounded-[6px]"
+            >
+              <div
+                data-pencil-name="AI Regen Btn Text"
+                class="text-[11.5px]/[normal] box-border text-[#000000] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                Regenerate token
+              </div>
+            </div>
+            <div
+              data-pencil-name="AI Regen Note"
+              class="text-[10.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              regenerating revokes the old token immediately — update every application
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="AI Version Card"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[16px_20px] justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+        >
+          <div
+            data-pencil-name="AI Version Head"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+          >
+            <svg
+              data-pencil-name="AI Version Icon"
+              data-icon-name="update"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M7.01025 11.66553q-0.9707 0-1.81836-0.36231-0.84766-0.36572-1.48339-1.00146-0.63232-0.63574-0.99805-1.4834-0.36572-0.84766-0.36572-1.81836 0-0.9707 0.36572-1.81836 0.36572-0.84766 0.99805-1.4834 0.63574-0.63574 1.48339-0.99804 0.84766-0.36572 1.81836-0.36573 1.00488 0 1.91407 0.41699 0.90918 0.41357 1.58593 1.15528l0-1.10059q0-0.12646 0.08204-0.20849 0.08545-0.08545 0.21191-0.08545 0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.20849l0 1.65772q0 0.20166-0.13672 0.33838-0.1333 0.1333-0.33496 0.1333l-1.66114 0q-0.12305 0-0.20849-0.08203-0.08203-0.08545-0.08203-0.2085 0-0.12646 0.08203-0.2085 0.08545-0.08545 0.20849-0.08545l1.15528 0q-0.6084-0.66992-1.40479-1.05273-0.79639-0.38281-1.70215-0.38281-1.70557 0-2.89502 1.18945-1.18604 1.18945-1.18603 2.89502 0 1.70557 1.18603 2.89502 1.18945 1.18945 2.89502 1.18945 1.44238 0 2.55323-0.90234 1.11084-0.90576 1.42529-2.29688 0.04101-0.1333 0.1333-0.20507 0.0957-0.07178 0.21875-0.05469 0.1333 0.01709 0.19483 0.12646 0.06152 0.10938 0.02734 0.23926-0.33496 1.61328-1.60303 2.64551-1.26807 1.02881-2.94971 1.02881z m0.29395-4.78516l1.75 1.75q0.08203 0.08203 0.08545 0.20166 0.00684 0.11621-0.08545 0.2085-0.0957 0.0957-0.2085 0.0957-0.11279 0-0.20508-0.0957l-1.78076-1.77735q-0.0752-0.07861-0.10937-0.16064-0.03076-0.08545-0.03076-0.17432l0-2.55322q0-0.12305 0.08203-0.20508 0.08545-0.08545 0.20849-0.08545 0.12646 0 0.2085 0.08545 0.08545 0.08203 0.08545 0.20508l0 2.50537z"
+                fill="#0B1020"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="AI Version Title"
+              class="text-[13.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Interface versions &amp; deprecations
+            </div>
+          </div>
+          <div
+            data-pencil-name="AI Version Table"
+            class="box-border w-full h-fit shrink-0 flex flex-col gap-0 justify-start items-start"
+          >
+            <div
+              data-pencil-name="AI Version Head Row"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[7px_0px] justify-start items-start"
+            >
+              <div
+                data-pencil-name="AI VCol Version"
+                class="text-[10px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                VERSION
+              </div>
+              <div
+                data-pencil-name="AI VCol Change"
+                class="text-[10px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                CHANGE
+              </div>
+              <div
+                data-pencil-name="AI VCol Transition"
+                class="text-[10px]/[normal] box-border w-[240px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                TRANSITION
+              </div>
+              <div
+                data-pencil-name="AI VCol Final"
+                class="text-[10px]/[normal] box-border w-[130px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                FINAL
+              </div>
+            </div>
+            <div
+              data-pencil-name="AI Ver Row v3)"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[8px_0px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="AI VV v3 (current)"
+                class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                v3 (current)
+              </div>
+              <div
+                data-pencil-name="AI VC v3 (current)"
+                class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                —
+              </div>
+              <div
+                data-pencil-name="AI VT v3 (current)"
+                class="text-[10.5px]/[normal] box-border w-[240px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                —
+              </div>
+              <div
+                data-pencil-name="AI VF v3 (current)"
+                class="text-[10.5px]/[normal] box-border w-[130px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                —
+              </div>
+            </div>
+            <div
+              data-pencil-name="AI Ver Row v23"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[8px_0px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="AI VV v2 → v3"
+                class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                v2 → v3
+              </div>
+              <div
+                data-pencil-name="AI VC v2 → v3"
+                class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Field item.code moved to item.reference.number
+              </div>
+              <div
+                data-pencil-name="AI VT v2 → v3"
+                class="text-[10.5px]/[normal] box-border w-[240px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Both places returned until 30 Apr 2027
+              </div>
+              <div
+                data-pencil-name="AI VF v2 → v3"
+                class="text-[10.5px]/[normal] box-border w-[130px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                30 Apr 2027
+              </div>
+            </div>
+            <div
+              data-pencil-name="AI Ver Row v12"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] p-[8px_0px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="AI VV v1 → v2"
+                class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                v1 → v2
+              </div>
+              <div
+                data-pencil-name="AI VC v1 → v2"
+                class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                Breaking: contacts endpoint reworked
+              </div>
+              <div
+                data-pencil-name="AI VT v1 → v2"
+                class="text-[10.5px]/[normal] box-border w-[240px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                None — flagged as breaking
+              </div>
+              <div
+                data-pencil-name="AI VF v1 → v2"
+                class="text-[10.5px]/[normal] box-border w-[130px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                removed
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="AI Footnote"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+        >
+          <svg
+            data-pencil-name="AI Footnote Icon"
+            data-icon-name="info"
+            data-icon-set="Material Symbols Rounded"
+            viewBox="0 0 14.000015258789062 14"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            class="box-border w-[13px] shrink-0 h-[13px]"
+          >
+            <path
+              d="M7 9.625q0.12305 0 0.20508-0.08203 0.08545-0.08545 0.08545-0.2085l0-2.625q0-0.12646-0.08545-0.20849-0.08203-0.08545-0.20508-0.08545-0.12305 0-0.2085 0.08545-0.08203 0.08203-0.08203 0.20849l0 2.625q0 0.12305 0.08203 0.2085 0.08545 0.08203 0.2085 0.08203z m0-4.04004q0.15381 0 0.25635-0.10254 0.10254-0.10254 0.10254-0.25635 0-0.15039-0.10254-0.25293-0.10254-0.10596-0.25635-0.10595-0.15381 0-0.25635 0.10595-0.10254 0.10254-0.10254 0.25293 0 0.15381 0.10254 0.25635 0.10254 0.10254 0.25635 0.10254z m0.00342 6.66504q-1.09033 0-2.05078-0.41357-0.95703-0.41357-1.66797-1.1211-0.70752-0.70752-1.1211-1.66455-0.41357-0.96045-0.41357-2.04736 0-1.09033 0.41357-2.04737 0.41357-0.96045 1.1211-1.66796 0.70752-0.71094 1.66455-1.12452 0.96045-0.41357 2.04736-0.41357 1.09033 0 2.04737 0.41357 0.96045 0.41357 1.66796 1.1211 0.71094 0.70752 1.12452 1.66797 0.41357 0.95703 0.41357 2.04394 0 1.09033-0.41357 2.05078-0.41357 0.95703-1.1211 1.66797-0.70752 0.70752-1.66797 1.1211-0.95703 0.41357-2.04394 0.41357z m-0.00342-0.58447q1.95508 0 3.30859-1.35352 1.35693-1.35693 1.35694-3.31201 0-1.95508-1.35694-3.30859-1.35352-1.35693-3.30859-1.35694-1.95508 0-3.31201 1.35694-1.35352 1.35352-1.35352 3.30859 0 1.95508 1.35352 3.31201 1.35693 1.35352 3.31201 1.35352z"
+              fill="#667085"
+            ></path>
+          </svg>
+          <div
+            data-pencil-name="AI Footnote Text"
+            class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+          >
+            The public interface exposes what the integration requests within the token owner's
+            permissions. During a transition period the field is returned in both places with the
+            same values; integrations not updated in time lose the old field after it.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

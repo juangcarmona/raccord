@@ -124,7 +124,8 @@ jobs:
       # `dotnet test`: the VSTest host captures stdout/stderr, which hid every fixture
       # stage marker during the 90-minute CI hang; the MTP host streams them live. The
       # filter syntax is xunit.v3's query language, matching the same Quarantine trait.
-      - name: Run journeys (bounded: a hang fails the job instead of stalling it for hours)
+      # A bounded run; a hang fails the job instead of stalling it for hours.
+      - name: Run journeys
         run: |
           timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
       - name: Upload journey artifacts on failure

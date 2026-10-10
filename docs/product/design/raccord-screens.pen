@@ -28916,6 +28916,1135 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "YIyxl",
+      "x": 6310,
+      "y": 21288,
+      "name": "Kit Builder",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "rqigL",
+          "name": "KB Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "y1PRjl",
+              "name": "KB Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OI3aU",
+                  "name": "KB Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "O1Udo",
+                  "name": "KB Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Horhl",
+              "name": "KB Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "B0i5Z",
+                  "name": "KB Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "qHW2v",
+                      "name": "KB Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tbw4A",
+                      "name": "KB Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t2FHkl",
+                  "name": "KB Nav Equipment",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "dxIa3",
+                      "name": "KB Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xH6EW",
+                      "name": "KB Nav Label Equipment",
+                      "fill": "$white",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QDHsI",
+                  "name": "KB Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "neNGq",
+                      "name": "KB Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q3tt0i",
+                      "name": "KB Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "glzp2",
+                  "name": "KB Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "gc4BG",
+                      "name": "KB Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "otpTr",
+                      "name": "KB Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "rVuz1",
+              "name": "KB Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Equipment · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "BOYW1",
+          "name": "KB Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "s1X5I0",
+              "name": "KB Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "k8gKc",
+                  "name": "KB Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qSJWf",
+                      "name": "KB Title",
+                      "fill": "$ink",
+                      "content": "Interview kit 4K",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LY37J",
+                      "name": "KB Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "B6XES",
+                          "name": "KB Kind Chip",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 4,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "z4xX2X",
+                              "name": "KB Kind Text",
+                              "fill": "#000000",
+                              "content": "Virtual kit",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "tzXDr",
+                          "name": "KB Meta Folder",
+                          "fill": "$slate",
+                          "content": "Warehouse / Kits",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "d4QUe",
+                  "name": "KB Kind Swap",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "U4EeRE",
+                      "name": "KB Kind Row",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "dwicm",
+                          "name": "KB Kind Opt Physical",
+                          "cornerRadius": 6,
+                          "stroke": "$hairline",
+                          "padding": [
+                            6,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "L6Ymf",
+                              "name": "KB Kind Label Physical",
+                              "fill": "$slate",
+                              "content": "Physical",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Ko59M",
+                          "name": "KB Kind Opt Virtual",
+                          "fill": "#000000",
+                          "cornerRadius": 6,
+                          "padding": [
+                            6,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gL1qA",
+                              "name": "KB Kind Label Virtual",
+                              "fill": "$white",
+                              "content": "Virtual",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "wxy74",
+                      "name": "KB Kind Hint",
+                      "fill": "$slate",
+                      "content": "Stock derived from content · no scan code",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N6L0VG",
+              "name": "KB Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "uznG4",
+                  "name": "KB Left",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ZO8PY",
+                      "name": "KB Content Card",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "qTddo",
+                          "name": "KB Content Header",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "rmh02",
+                              "name": "KB Content Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "view_kanban",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "NrDuG",
+                              "name": "KB Content Title",
+                              "fill": "$ink",
+                              "content": "Default content",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "rBxhh",
+                              "name": "KB Content Add",
+                              "fill": "#000000",
+                              "content": "+ Add from catalog",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SnJn1",
+                          "name": "KB Content Table",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "QCZBC",
+                              "name": "KB C Head",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "se8cn",
+                                  "name": "KB CCol Item",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "ITEM",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "t7TPH",
+                                  "name": "KB CCol Qty per kit",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "QTY PER KIT",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "K0lXCn",
+                                  "name": "KB CCol Binding",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "BINDING",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cioZF",
+                                  "name": "KB CCol Availability outside kit",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "AVAILABILITY OUTSIDE KIT",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "zHrkI",
+                              "name": "KB CRow Sony FX6 b",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "C31Nka",
+                                  "name": "KB CI Sony FX6 b",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Sony FX6 body",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "SjWTv",
+                                  "name": "KB CQ Sony FX6 b",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "1",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "mORp7",
+                                  "name": "KB CB Sony FX6 b",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "— (virtual)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "V1i0ms",
+                                  "name": "KB CA Sony FX6 b",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Always",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "eClSa",
+                              "name": "KB CRow FE 24-70 f",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "yjLSG",
+                                  "name": "KB CI FE 24-70 f",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "FE 24-70 f2.8",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "l2LEX",
+                                  "name": "KB CQ FE 24-70 f",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "1",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "eXIJN",
+                                  "name": "KB CB FE 24-70 f",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "— (virtual)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "lYZhE",
+                                  "name": "KB CA FE 24-70 f",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Always",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bocvH",
+                              "name": "KB CRow Sennheiser",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pJGhb",
+                                  "name": "KB CI Sennheiser",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Sennheiser MKH-416",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ubVFw",
+                                  "name": "KB CQ Sennheiser",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "1",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "tMiAF",
+                                  "name": "KB CB Sennheiser",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "— (virtual)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "P0T5U1",
+                                  "name": "KB CA Sennheiser",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Always",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aCBv7",
+                              "name": "KB CRow XLR cable ",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "vJ5oj",
+                                  "name": "KB CI XLR cable ",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "XLR cable set",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "GFqOO",
+                                  "name": "KB CQ XLR cable ",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "2",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "thUsg",
+                                  "name": "KB CB XLR cable ",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "— (virtual)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "uXj0c",
+                                  "name": "KB CA XLR cable ",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Always",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "LV8Zq",
+                              "name": "KB CRow Light stan",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Dt1Bu",
+                                  "name": "KB CI Light stan",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Light stand 2m",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "FwTnw",
+                                  "name": "KB CQ Light stan",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "2",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "vU8Ey",
+                                  "name": "KB CB Light stan",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "Bound to kit stock",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HlfMc",
+                                  "name": "KB CA Light stan",
+                                  "fill": "#8A5A00",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Never",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tEQ6a",
+                      "name": "KB Import Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "iFAxS",
+                          "name": "KB Import Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "description",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vWrY9",
+                          "name": "KB Import Text",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "J4TcUN",
+                              "name": "KB Import Title",
+                              "fill": "$ink",
+                              "content": "Import default content",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Knh25",
+                              "name": "KB Import Sub",
+                              "fill": "$slate",
+                              "content": "Sample file lists kits, items and current content — update or overwrite many kits at once.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WAZSG",
+                  "name": "KB Right",
+                  "width": 360,
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "bUNB4",
+                      "name": "KB Price Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "m2Eyl",
+                          "name": "KB Price Title",
+                          "fill": "$ink",
+                          "content": "Price & physical",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j9rCyX",
+                          "name": "KB Price Mode",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "JbBnQ",
+                              "name": "KB Price Opt Fixed ",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                6,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "P7IETo",
+                                  "name": "KB Price Label Fixed ",
+                                  "fill": "$slate",
+                                  "content": "Fixed kit price",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Rn3ep",
+                              "name": "KB Price Opt From c",
+                              "fill": "#000000",
+                              "cornerRadius": 6,
+                              "padding": [
+                                6,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "a8gDC",
+                                  "name": "KB Price Label From c",
+                                  "fill": "$white",
+                                  "content": "From content",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kviKF",
+                          "name": "KB PRow Kit pric",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sSxUa",
+                              "name": "KB PL Kit pric",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Kit price (computed)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zhaPO",
+                              "name": "KB PV Kit pric",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "€196.00 / day",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HxTHn",
+                          "name": "KB PRow Empty we",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VGcuG",
+                              "name": "KB PL Empty we",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Empty weight",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "w1T4Vq",
+                              "name": "KB PV Empty we",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "6.4 kg",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "PL0Yo",
+                          "name": "KB PRow Dimensio",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "IMdEn",
+                              "name": "KB PL Dimensio",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Dimensions",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "euC4r",
+                              "name": "KB PV Dimensio",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "60 × 40 × 30 cm",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OLWpS",
+              "name": "KB Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "GQvdg",
+                  "name": "KB Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "X69I7h",
+                  "name": "KB Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Planning a virtual kit adds its content to the project; each item stays rentable on its own. Physical kits book stock as one unit — content bound to the kit's stock is deducted from the item's free stock.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Kit builder (management, desktop)
+
+File: `kit-builder.png` / `kit-builder.html`
+
+| Design decision | Decided by |
+|---|---|
+| Physical vs virtual kit toggle with different stock semantics in the hint | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md), [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md), [BR-EQP-VIRTUAL-KIT-STOCK-DERIVED](../model/business-rules/br-eqp-virtual-kit-stock-derived.md) |
+| No scan code offered for virtual kits | [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md) failure conditions |
+| Default content: catalog items with quantity per kit | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md) step 2, [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md) step 2, [BR-EQP-DEFAULT-CONTENT-CATALOG-ONLY](../model/business-rules/br-eqp-default-content-catalog-only.md) |
+| Content binding column: bound to kit stock vs rentable outside | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md) step 4, flows 4a/2b, [BR-EQP-PHYSICAL-KIT-CONSUMES-CONTENT-STOCK](../model/business-rules/br-eqp-physical-kit-consumes-content-stock.md) |
+| Fixed kit price or computed from content, recalculated in place | [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md) step 3, flow 3a, [BR-EQP-KIT-PRICING](../model/business-rules/br-eqp-kit-pricing.md) |
+| Empty weight and dimensions on the kit | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md) step 3, [BR-EQP-KIT-WEIGHT](../model/business-rules/br-eqp-kit-weight.md) |
+| Content import for many kits at once (update / overwrite, sample file) | [UC-EQP-IMPORT-KIT-CONTENT](../model/use-cases/uc-eqp-import-kit-content.md) steps 1–2, [BR-EQP-CONTENT-IMPORT-MODES](../model/business-rules/br-eqp-content-import-modes.md) |
+
 ## Screen — Item detail (management, desktop)
 
 File: `item-detail.png` / `item-detail.html`

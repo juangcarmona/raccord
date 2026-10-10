@@ -90,6 +90,22 @@ File: `personal-schedule.png` / `personal-schedule.html`
 | Scope column notes each stream follows the user's permissions | [BR-WSP-INTEGRATION-DATA-SCOPE](../model/business-rules/br-wsp-integration-data-scope.md), [BR-INT-SYNC-RESPECTS-ROLE](../model/business-rules/br-int-sync-respects-role.md) |
 | Footnote: feeds are read-only, refresh is the application's own schedule, items created there never reach Raccord | [UC-INT-SUBSCRIBE-TO-CALENDAR-FEED](../model/use-cases/uc-int-subscribe-to-calendar-feed.md) failure conditions and postconditions, [BR-INT-FEED-ONE-WAY](../model/business-rules/br-int-feed-one-way.md) |
 
+## Screen — Workday record corrections & approval (management, desktop)
+
+File: `workday-corrections.png` / `workday-corrections.html`
+
+| Design decision | Decided by |
+|---|---|
+| Corrections queue with employee, day, clocked value, corrected value, requester, reason and status | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) main flow steps 1–3 |
+| Pending / Approved / Rejected statuses (rejected = nothing changes, employee informed) | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) alternative flow |
+| Forgotten clock-out scenario as a row (no clock-out → corrected to 18:30) | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) trigger, [SB-WORKDAY-FORGOTTEN-CLOCK-OUT](../model/behaviours/sb-workday-forgotten-clock-out.md) |
+| Append-only history card showing the corrected times plus the original immutable clock-in 08:02 | [BR-WORKDAY-APPEND-ONLY](../model/business-rules/br-workday-append-only.md), [SB-WORKDAY-CORRECTION-KEEPS-ORIGINAL](../model/behaviours/sb-workday-correction-keeps-original.md) |
+| Correction entries reference requester and approver | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) postcondition |
+| Signed export action for employees & period (times, breaks, totals, corrections) | [UC-EXPORT-WORKDAY-RECORDS](../model/use-cases/uc-export-workday-records.md) steps 2–3 |
+| Export text notes inspectorate access is time-limited, read-only, logged | [UC-EXPORT-WORKDAY-RECORDS](../model/use-cases/uc-export-workday-records.md) alternative flow |
+| Footnote: correction without reason refused; no self-approval | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) failure conditions |
+| Footnote: records kept at least four years, exportable after departure | [BR-WORKDAY-RETENTION](../model/business-rules/br-workday-retention.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

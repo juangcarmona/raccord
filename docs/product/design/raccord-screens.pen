@@ -26306,6 +26306,1308 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "paNVl",
+      "x": 6310,
+      "y": 18920,
+      "name": "Equipment Import",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "euHib",
+          "name": "EI Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Dfpfq",
+              "name": "EI Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KqLQt",
+                  "name": "EI Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "NuaiQ",
+                  "name": "EI Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jTYFn",
+              "name": "EI Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hB7aw",
+                  "name": "EI Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "thBFb",
+                      "name": "EI Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uZHyN",
+                      "name": "EI Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hT9iH",
+                  "name": "EI Nav Equipment",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "H1gR1U",
+                      "name": "EI Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EiJ1C",
+                      "name": "EI Nav Label Equipment",
+                      "fill": "$white",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AWRFq",
+                  "name": "EI Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "pGGEa",
+                      "name": "EI Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mSSQJ",
+                      "name": "EI Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t367vk",
+                  "name": "EI Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "bpBMA",
+                      "name": "EI Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eDZU8",
+                      "name": "EI Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "G9sSn1",
+              "name": "EI Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Equipment · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "R9KlRY",
+          "name": "EI Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "NjEzB",
+              "name": "EI Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "TJXec",
+                  "name": "EI Title",
+                  "fill": "$ink",
+                  "content": "Import equipment",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "mwH2m",
+                  "name": "EI Subtitle",
+                  "fill": "$slate",
+                  "content": "Load the catalog from a spreadsheet — map columns, preview, and everything gets the import tag so a bad import can be undone.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RDxQ9",
+              "name": "EI Steps",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EeGWE",
+                  "name": "EI Step 1",
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DCqrD",
+                      "name": "EI Step Dot 1",
+                      "width": 20,
+                      "height": 20,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 10,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dVAwL",
+                          "name": "EI Step DotNum 1",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width-height",
+                          "width": 20,
+                          "height": 20,
+                          "content": "1",
+                          "textAlign": "center",
+                          "textAlignVertical": "middle",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "JzCOh",
+                      "name": "EI Step Label 1",
+                      "fill": "$ink",
+                      "content": "Mode",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ynVEo",
+                  "name": "EI Step 2",
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "N4THO",
+                      "name": "EI Step Dot 2",
+                      "width": 20,
+                      "height": 20,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 10,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "vJniv",
+                          "name": "EI Step DotNum 2",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width-height",
+                          "width": 20,
+                          "height": 20,
+                          "content": "2",
+                          "textAlign": "center",
+                          "textAlignVertical": "middle",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "wOrwr",
+                      "name": "EI Step Label 2",
+                      "fill": "$ink",
+                      "content": "File",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zMvLV",
+                  "name": "EI Step 3",
+                  "fill": "#D6EBF7",
+                  "cornerRadius": 6,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DjpAQ",
+                      "name": "EI Step Dot 3",
+                      "width": 20,
+                      "height": 20,
+                      "fill": "#000000",
+                      "cornerRadius": 10,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l8QO9s",
+                          "name": "EI Step DotNum 3",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width-height",
+                          "width": 20,
+                          "height": 20,
+                          "content": "3",
+                          "textAlign": "center",
+                          "textAlignVertical": "middle",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "kxzQK",
+                      "name": "EI Step Label 3",
+                      "fill": "$ink",
+                      "content": "Mapping",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dxzxf",
+                  "name": "EI Step 4",
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mwski",
+                      "name": "EI Step Dot 4",
+                      "width": 20,
+                      "height": 20,
+                      "fill": "#E4E8EF",
+                      "cornerRadius": 10,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "p9tc6p",
+                          "name": "EI Step DotNum 4",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width-height",
+                          "width": 20,
+                          "height": 20,
+                          "content": "4",
+                          "textAlign": "center",
+                          "textAlignVertical": "middle",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "LnSng",
+                      "name": "EI Step Label 4",
+                      "fill": "$slate",
+                      "content": "Folder",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "i8t7D2",
+                  "name": "EI Step 5",
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Zo1NM",
+                      "name": "EI Step Dot 5",
+                      "width": 20,
+                      "height": 20,
+                      "fill": "#E4E8EF",
+                      "cornerRadius": 10,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Pbg45",
+                          "name": "EI Step DotNum 5",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width-height",
+                          "width": 20,
+                          "height": 20,
+                          "content": "5",
+                          "textAlign": "center",
+                          "textAlignVertical": "middle",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "GEH3h",
+                      "name": "EI Step Label 5",
+                      "fill": "$slate",
+                      "content": "Preview",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n9PHdc",
+              "name": "EI Middle Row",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "q8m5r",
+                  "name": "EI Mapping Card",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "rjPsI",
+                      "name": "EI Mapping Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "S4LG2",
+                          "name": "EI Mapping Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "swap_horiz",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KSZMy",
+                          "name": "EI Mapping Title",
+                          "fill": "$ink",
+                          "content": "Column mapping — catalog-2026.xlsx",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "s8Gih",
+                      "name": "EI Mapping Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "NUbQX",
+                          "name": "EI MRow A — Item",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "S4G0aW",
+                              "name": "EI MF A — Item",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "A — Item name",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "altlk",
+                              "name": "EI MArrow A — Item",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "E1cJAW",
+                              "name": "EI MT A — Item",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "R8wGo",
+                                  "name": "EI MTL A — Item",
+                                  "fill": "$ink",
+                                  "content": "Name",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mbUWJ",
+                          "name": "EI MRow B — Fold",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "z3MB9D",
+                              "name": "EI MF B — Fold",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "B — Folder path",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "TYvvx",
+                              "name": "EI MArrow B — Fold",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "cNPN8",
+                              "name": "EI MT B — Fold",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "YG195",
+                                  "name": "EI MTL B — Fold",
+                                  "fill": "$ink",
+                                  "content": "Folder path",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rMKKI",
+                          "name": "EI MRow C — Qty",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "j4NEXC",
+                              "name": "EI MF C — Qty",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "C — Qty",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "LHQAN",
+                              "name": "EI MArrow C — Qty",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "E74gV",
+                              "name": "EI MT C — Qty",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DGhXA",
+                                  "name": "EI MTL C — Qty",
+                                  "fill": "$ink",
+                                  "content": "Quantity",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "J831wt",
+                          "name": "EI MRow D — Scan",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "x21ix7",
+                              "name": "EI MF D — Scan",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "D — Scan code",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "x80c4Z",
+                              "name": "EI MArrow D — Scan",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "dX0Le",
+                              "name": "EI MT D — Scan",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "igMu7",
+                                  "name": "EI MTL D — Scan",
+                                  "fill": "$ink",
+                                  "content": "Scan code",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "v4nrV",
+                          "name": "EI MRow E — Cate",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iyGlW",
+                              "name": "EI MF E — Cate",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "E — Category",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "KJsjf",
+                              "name": "EI MArrow E — Cate",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "woGZs",
+                              "name": "EI MT E — Cate",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "a2HZf",
+                                  "name": "EI MTL E — Cate",
+                                  "fill": "$ink",
+                                  "content": "Category",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HGzSP",
+                          "name": "EI MRow F — Day ",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "OmWYW",
+                              "name": "EI MF F — Day ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "F — Day rate",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "sLRyp",
+                              "name": "EI MArrow F — Day ",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "SOg7B",
+                              "name": "EI MT F — Day ",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "wdEH1",
+                                  "name": "EI MTL F — Day ",
+                                  "fill": "$ink",
+                                  "content": "Price day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "z9i8Xy",
+                          "name": "EI MRow G — Note",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Lc76o",
+                              "name": "EI MF G — Note",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "G — Notes",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "XkIQY",
+                              "name": "EI MArrow G — Note",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "JklH5",
+                              "name": "EI MT G — Note",
+                              "fill": "#FFF3D6",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "J3AiLJ",
+                                  "name": "EI MTL G — Note",
+                                  "fill": "#8A5A00",
+                                  "content": "Custom: condition",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vwhZq",
+                  "name": "EI Options Card",
+                  "width": 360,
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "x6wRbq",
+                      "name": "EI Options Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "C1jF7J",
+                          "name": "EI Options Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "settings",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OGrxS",
+                          "name": "EI Options Title",
+                          "fill": "$ink",
+                          "content": "Import options",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "z2dYg",
+                      "name": "EI Mode Row",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xBslE",
+                          "name": "EI Mode Update",
+                          "fill": "#000000",
+                          "cornerRadius": 6,
+                          "padding": [
+                            6,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "S7St0",
+                              "name": "EI Mode Label Update",
+                              "fill": "$white",
+                              "content": "Update",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "hq6wN",
+                          "name": "EI Mode Skip",
+                          "cornerRadius": 6,
+                          "stroke": "$hairline",
+                          "padding": [
+                            6,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Howh0",
+                              "name": "EI Mode Label Skip",
+                              "fill": "$slate",
+                              "content": "Skip",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "zkaoA",
+                      "name": "EI Match Label",
+                      "fill": "$slate",
+                      "content": "MATCH COLUMNS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oUyU6",
+                      "name": "EI Match Scan code",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "L2INn9",
+                          "name": "EI CB Scan code",
+                          "width": 14,
+                          "height": 14,
+                          "fill": "#000000",
+                          "cornerRadius": 3,
+                          "stroke": "#000000"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Hj0po",
+                          "name": "EI Match Label Scan code",
+                          "fill": "$ink",
+                          "content": "Scan code",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p0qNf2",
+                      "name": "EI Match Name",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "RRSdT",
+                          "name": "EI CB Name",
+                          "width": 14,
+                          "height": 14,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZOUCa",
+                          "name": "EI Match Label Name",
+                          "fill": "$ink",
+                          "content": "Name",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "F5jW4",
+                      "name": "EI Scan Label",
+                      "fill": "$slate",
+                      "content": "SCAN CODES FROM FILE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WmWlk",
+                      "name": "EI ScanOpt Replace existing",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "c0AGq",
+                          "name": "EI RB Replace existing",
+                          "width": 14,
+                          "height": 14,
+                          "cornerRadius": 7,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Img6V",
+                          "name": "EI Scan Label Replace existing",
+                          "fill": "$ink",
+                          "content": "Replace existing",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SUTsh",
+                      "name": "EI ScanOpt Add to existing",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "D3lBR",
+                          "name": "EI RB Add to existing",
+                          "width": 14,
+                          "height": 14,
+                          "fill": "#000000",
+                          "cornerRadius": 7
+                        },
+                        {
+                          "type": "text",
+                          "id": "sk6qp",
+                          "name": "EI Scan Label Add to existing",
+                          "fill": "$ink",
+                          "content": "Add to existing",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Gakxv",
+                      "name": "EI Folder Row",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "d7ilbA",
+                          "name": "EI Folder Label",
+                          "fill": "$slate",
+                          "content": "ROOT FOLDER",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yqr3h",
+                          "name": "EI Folder Select",
+                          "width": "fill_container",
+                          "cornerRadius": 6,
+                          "stroke": "$hairline",
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "R1bgTQ",
+                              "name": "EI Folder Value",
+                              "fill": "$ink",
+                              "content": "Warehouse / Main",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "HKWBq",
+                              "name": "EI Folder Caret",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bm7rV",
+              "name": "EI Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "C9UXZ",
+                  "name": "EI Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "dkuIY",
+                  "name": "EI Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Rows are tagged with the import tag; kit content and accessories are not imported and are added afterwards. A wrong import is undone by archiving everything with its tag.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

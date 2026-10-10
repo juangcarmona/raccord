@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Equipment import (management, desktop)
+
+File: `equipment-import.png` / `equipment-import.html`
+
+| Design decision | Decided by |
+|---|---|
+| Wizard steps: mode → file → mapping → folder → preview | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) main flow steps 1–7 |
+| Import mode choice (update / skip) with match columns | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) steps 2, 6, [BR-EQP-IMPORT-MATCH-UNIQUE](../model/business-rules/br-eqp-import-match-unique.md) |
+| Update mode chooses whether scan codes replace or add | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) alternative flow 2a |
+| Proposed mapping of file columns to equipment fields and custom fields, correctable | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) step 4, [TERM-IMPORT-MATCH-COLUMN](../model/domain/terms/term-import-match-column.md) |
+| Root folder choice; items placed by folder paths | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) step 5, [BR-PRJ-IMPORT-FOLDER-PLACEMENT](../model/business-rules/br-prj-import-folder-placement.md) |
+| Everything tagged with an import tag; wrong import undone by archiving by tag | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) step 8, alternative flow 8b, [BR-PRJ-IMPORT-TAG](../model/business-rules/br-prj-import-tag.md) |
+| Kit content and accessories not imported — added afterwards | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) postconditions, [BR-EQP-IMPORT-NO-STRUCTURE](../model/business-rules/br-eqp-import-no-structure.md) |
+
 ## Screen — Stock movements & disposition (management, desktop)
 
 File: `stock-movements.png` / `stock-movements.html`

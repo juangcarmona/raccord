@@ -67,6 +67,21 @@ File: `invoice-draft-editor.png` / `invoice-draft-editor.html`
 | VAT shown per rate (21%/10%/4% rows) | [BR-VAT-PER-RATE](../model/business-rules/br-vat-per-rate.md) |
 | Selection and validation states use the selected-blue token, not cyan | [docs/design/color-tokens.md](../../design/color-tokens.md) `--raccord-selected` (decided 2026-10-10) |
 
+## Screen — Online quote page (customer-facing, public web)
+
+File: `online-quote.png` / `online-quote.html`
+
+| Design decision | Decided by |
+|---|---|
+| Customer-facing page always showing the latest synchronised version | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) goal |
+| Kicker shows quote number + current-version marker; unsynchronised new versions stay hidden | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md), [TERM-ONLINE-QUOTE](../model/domain/terms/term-online-quote.md) |
+| Welcome message to the quote contact (default from configuration) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) step 2 |
+| Quoted line items with quantities, unit and total prices | [UC-FIN-GENERATE-QUOTE](../model/use-cases/uc-fin-generate-quote.md) step 2 (document structure) |
+| Totals per revenue category, VAT, total due | [UC-FIN-REVIEW-PROJECT-FINANCIALS](../model/use-cases/uc-fin-review-project-financials.md) step 2 |
+| Validity date shown ("Offer valid until 24 Feb 2026") | [BR-FIN-QUOTE-VALIDITY-DEFAULT](../model/business-rules/br-fin-quote-validity-default.md) |
+| Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
+| Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
+
 ## Screens 5–7 — Invoicing queue · Payments & dunning · Quote review (management, desktop)
 
 Files: `invoicing-queue.png/html` · `payments-dunning.png/html` · `quote-review.png/html`

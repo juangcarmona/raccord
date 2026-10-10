@@ -12117,6 +12117,924 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "G7PYoe",
+      "x": 6310,
+      "y": 3528,
+      "name": "Online Quote Page",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$white",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "fg2hQ",
+          "name": "Hero Wrap",
+          "width": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            48,
+            120,
+            40,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "U1wXsR",
+              "name": "OQ Brand Row",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IfV7q",
+                  "name": "OQ Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "LrQL0",
+                  "name": "OQ Brand",
+                  "fill": "$white",
+                  "content": "Estudio Norte S.L.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "frame",
+                  "id": "r5DpPe",
+                  "name": "OQ Brand Spacer",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "text",
+                  "id": "eAUNz",
+                  "name": "OQ Validity",
+                  "fill": "#8A93A8",
+                  "content": "Offer valid until 24 Feb 2026",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fNLQz",
+              "name": "OQ Title Row",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                10,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GVd3i",
+                  "name": "OQ Kicker",
+                  "fill": "$cyan",
+                  "content": "QUOTE P 2026-0127 · CURRENT VERSION",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "medium"
+                },
+                {
+                  "type": "text",
+                  "id": "TJC39",
+                  "name": "OQ Title",
+                  "fill": "$white",
+                  "content": "Corona Festival — Main stage",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "L2LGx",
+                  "name": "OQ Subtitle",
+                  "fill": "#8A93A8",
+                  "content": "Audiovisual production and equipment rental · 12–14 February 2026 · Plaza Mayor, Valencia",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "R8HZYI",
+          "name": "OQ Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "gap": 32,
+          "padding": [
+            32,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "HC380",
+              "name": "OQ Main Col",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "g9NH6g",
+                  "name": "OQ Welcome",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bncsX",
+                      "name": "OQ Welcome Text",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dear Ms. Ibáñez, thank you for considering us for the Corona Festival main-stage production. Below is the offer for equipment and crew as discussed. We are happy to adjust it to your needs.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "S0hyHt",
+                  "name": "OQ Lines",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cU0vL",
+                      "name": "OQ Lines Head",
+                      "width": "fill_container",
+                      "fill": "$cloud",
+                      "gap": 12,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CQIu9",
+                          "name": "OQ Col Item",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "ITEM",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gYGze",
+                          "name": "OQ Col Qty",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 44,
+                          "content": "QTY",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qdCxb",
+                          "name": "OQ Col Unit",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 80,
+                          "content": "UNIT",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NAMpC",
+                          "name": "OQ Col Total",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "TOTAL",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U2ERbx",
+                      "name": "OQ Row Camera",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "WabIW",
+                          "name": "OQ Item Camera",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Camera package A — Alexa 35 + set of lenses",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "h6FAo",
+                          "name": "OQ Cell 1 Camera",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 44,
+                          "content": "1",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "naD7G",
+                          "name": "OQ Cell 2,400.00 Camera",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 80,
+                          "content": "2,400.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "bHBWq",
+                          "name": "OQ Cell 2,880.00 Camera",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "2,880.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ERQwj",
+                      "name": "OQ Row Gaffer",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ocmvt",
+                          "name": "OQ Item Gaffer",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Gaffer + 2 electricians — prep day",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hdAj5",
+                          "name": "OQ Cell 1 Gaffer",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 44,
+                          "content": "1",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NhDck",
+                          "name": "OQ Cell 780.00 Gaffer",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 80,
+                          "content": "780.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "g2dfbl",
+                          "name": "OQ Cell 948.00 Gaffer",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "948.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VsVr0",
+                      "name": "OQ Row LED",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oTx9B",
+                          "name": "OQ Item LED",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "LED wall 6×3m — 2 days",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CIM4l",
+                          "name": "OQ Cell 2 LED",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 44,
+                          "content": "2",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "R6Hd3",
+                          "name": "OQ Cell 450.00 LED",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 80,
+                          "content": "450.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "AunOy",
+                          "name": "OQ Cell 1,800.00 LED",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "1,800.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n7gMf",
+                      "name": "OQ Row Rigging",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VftjI",
+                          "name": "OQ Item Rigging",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Rigging and truss — arena",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UhcfF",
+                          "name": "OQ Cell 1 Rigging",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 44,
+                          "content": "1",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vYqnQ",
+                          "name": "OQ Cell 1,020.00 Rigging",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 80,
+                          "content": "1,020.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qkrIG",
+                          "name": "OQ Cell 1,240.00 Rigging",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "1,240.00",
+                          "textAlign": "right",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "r5AP2",
+                  "name": "OQ Footnotes",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fhwUJ",
+                      "name": "OQ Footnote 1",
+                      "fill": "$slate",
+                      "content": "Prices in EUR, VAT 21% excluded. Quote content reflects the plan synchronised on 10 Feb 2026; changes after this date are offered as a new version.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "M993p",
+              "name": "OQ Side",
+              "width": 340,
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "P6V76n",
+                  "name": "OQ Totals",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 12,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j5z8Eq",
+                      "name": "OQ Tot Row Equipment rental",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kL7tn",
+                          "name": "OQ Tot Label Equipment rental",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Equipment rental",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "JqAQ8",
+                          "name": "OQ Tot Val Equipment rental",
+                          "fill": "$ink",
+                          "content": "8,310.28",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yfiMZ",
+                      "name": "OQ Tot Row Crew functions",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zXFKF",
+                          "name": "OQ Tot Label Crew functions",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Crew functions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cUOdG",
+                          "name": "OQ Tot Val Crew functions",
+                          "fill": "$ink",
+                          "content": "3,910.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "exmdK",
+                      "name": "OQ Tot Row Post-production",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "o0eY3m",
+                          "name": "OQ Tot Label Post-production",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Post-production",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "a5wjf",
+                          "name": "OQ Tot Val Post-production",
+                          "fill": "$ink",
+                          "content": "900.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "h6d7XB",
+                      "name": "OQ Tot Row Consumables",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "BIAhx",
+                          "name": "OQ Tot Label Consumables",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Consumables",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hBb2T",
+                          "name": "OQ Tot Val Consumables",
+                          "fill": "$ink",
+                          "content": "168.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dkEWu",
+                      "name": "OQ Tot Divider",
+                      "width": "fill_container",
+                      "height": 1,
+                      "fill": "$hairline"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Yhw1V",
+                      "name": "OQ Sub Row Subtotal",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kEw2N",
+                          "name": "OQ Sub Label Subtotal",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Subtotal",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Z3l6Kv",
+                          "name": "OQ Sub Val Subtotal",
+                          "fill": "$ink",
+                          "content": "13,288.28",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "P9njl",
+                      "name": "OQ Sub Row VAT 21%",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "z6xJx0",
+                          "name": "OQ Sub Label VAT 21%",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "VAT 21%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "STiW2",
+                          "name": "OQ Sub Val VAT 21%",
+                          "fill": "$ink",
+                          "content": "2,790.54",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L5bBi",
+                      "name": "OQ Grand Row",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IiyXp",
+                          "name": "OQ Grand Label 2",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Total due",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CmQMu",
+                          "name": "OQ Grand Val 2",
+                          "fill": "$ink",
+                          "content": "16,078.82 EUR",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YyE2F",
+                  "name": "OQ Accept Card",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 12,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MyHYW",
+                      "name": "OQ Accept Title",
+                      "fill": "$ink",
+                      "content": "Your decision",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fxwm3",
+                      "name": "OQ Accept Text",
+                      "fill": "$slate",
+                      "content": "This offer is valid until 24 Feb 2026. Accepting it confirms the scope and prices above for the Corona Festival main stage. You can also request a change and we will send an updated version.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V6rDVB",
+                      "name": "OQ Accept Buttons",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "UL0J0",
+                          "name": "OQ Accept Btn",
+                          "width": "fill_container",
+                          "fill": "$ink",
+                          "cornerRadius": 8,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vXo6N",
+                              "name": "OQ Accept Btn Label",
+                              "fill": "$white",
+                              "content": "Accept quote and sign",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SmaY2",
+                          "name": "OQ Request Btn",
+                          "width": "fill_container",
+                          "fill": "$white",
+                          "cornerRadius": 8,
+                          "stroke": "$ink",
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "h56AoU",
+                              "name": "OQ Request Btn Label",
+                              "fill": "$ink",
+                              "content": "Request a change",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cLaTy",
+                  "name": "OQ Link Note",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "xQu3y",
+                      "name": "OQ Lock Icon",
+                      "width": 13,
+                      "height": 13,
+                      "icon": "lock",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$slate"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YKwds",
+                      "name": "OQ Link Note Text",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Private link — protected by the password sent to you. Addressed to the quote contact only.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

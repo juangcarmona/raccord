@@ -121,6 +121,20 @@ File: `communications-log.png` / `communications-log.html`
 | Footnote: roles without access see only their own sent messages | [BR-DOC-COMMUNICATION-ACCESS](../model/business-rules/br-doc-communication-access.md) |
 | Footnote: record changes after generation need regeneration | [BR-PRJ-DOCUMENT-REGENERATION](../model/business-rules/br-prj-document-regeneration.md) |
 
+## Screen — Letterhead & template branding (management, desktop, setup)
+
+File: `letterhead-branding.png` / `letterhead-branding.html`
+
+| Design decision | Decided by |
+|---|---|
+| Letterheads table with name, page size, margins, enabled document types | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) steps 1–6, [BR-DOC-LETTERHEAD-TYPE-AVAILABILITY](../model/business-rules/br-doc-letterhead-type-availability.md) |
+| Label-format letterhead at 62×100 mm with small margins | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) trigger "label format", step 3 custom size |
+| Multi-page PDF maps first and following pages | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) alternative flow, [BR-DOC-LETTERHEAD-PAGE-MAPPING](../model/business-rules/br-doc-letterhead-page-mapping.md) |
+| Branding card: logo preview and colour swatches | [UC-DOC-STYLE-TEMPLATE](../model/use-cases/uc-doc-style-template.md) steps 2–4, [TERM-DOCUMENT-STYLE](../model/domain/terms/term-document-style.md) |
+| Hint: unsupported logo images refused, previous remains | [UC-DOC-STYLE-TEMPLATE](../model/use-cases/uc-doc-style-template.md) failure conditions |
+| Template settings card per document type: language/country, e-mail subject with placeholders, file name, header/footer, signing, default letterhead | [UC-DOC-CONFIGURE-TEMPLATE-SETTINGS](../model/use-cases/uc-doc-configure-template-settings.md) steps 2–5 |
+| Footnote: template's own letterhead is proposed first, then the project-type default, replaceable per document | [BR-DOC-LETTERHEAD-PRECEDENCE](../model/business-rules/br-doc-letterhead-precedence.md), [JRN-DOC-SET-UP-BRANDED-DOCUMENTS](../model/journeys/jrn-doc-set-up-branded-documents.md) narrative |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -43936,6 +43936,1151 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "G9IW3",
+      "x": 6310,
+      "y": 37864,
+      "name": "Letterhead Branding",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "l1lKTk",
+          "name": "LB Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "xWCxW",
+              "name": "LB Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "o3zndv",
+                  "name": "LB Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "E9qsr",
+                  "name": "LB Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "A9lP3",
+              "name": "LB Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lM6fs",
+                  "name": "LB Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "jv5En",
+                      "name": "LB Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DEofG",
+                      "name": "LB Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "exSwC",
+                  "name": "LB Nav Crew",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "lNgCD",
+                      "name": "LB Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j3AXl",
+                      "name": "LB Nav Label Crew",
+                      "fill": "#8A93A8",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ljyat",
+                  "name": "LB Nav Workspace",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "YMXvz",
+                      "name": "LB Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BXUNu",
+                      "name": "LB Nav Label Workspace",
+                      "fill": "$white",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gq3TX",
+                  "name": "LB Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "sIUq5",
+                      "name": "LB Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RPKlD",
+                      "name": "LB Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "sf3NI",
+              "name": "LB Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gUrtV",
+          "name": "LB Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "E6x860",
+              "name": "LB Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pr3rP",
+                  "name": "LB Title",
+                  "fill": "$ink",
+                  "content": "Letterhead & template branding",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "CmLP8",
+                  "name": "LB Subtitle",
+                  "fill": "$slate",
+                  "content": "Stationery, logo, colours and per-type template settings; defaults propose themselves automatically at generation.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SQaCJ",
+              "name": "LB Columns",
+              "width": "fill_container",
+              "height": 440,
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IkY74",
+                  "name": "LB Letterheads Col",
+                  "width": 520,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cUqqx",
+                      "name": "LB Letterheads Card",
+                      "width": "fill_container",
+                      "height": 410,
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "gUXon",
+                          "name": "LB LH Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "S7CLy",
+                              "name": "LB LH Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "description",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Ip7R3",
+                              "name": "LB LH Title",
+                              "fill": "$ink",
+                              "content": "Letterheads",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xLAPq",
+                          "name": "LB LH Table",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Oc89y",
+                              "name": "LB LH Head Row",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ECtrc",
+                                  "name": "LB LCol Name",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "NAME",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "MLT9C",
+                                  "name": "LB LCol Page",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "PAGE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "OgFed",
+                                  "name": "LB LCol Margins",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "MARGINS",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "y3Jhl4",
+                                  "name": "LB LCol Types",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "TYPES",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "fZI1p",
+                              "name": "LB LH Row Festival",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "GwiD5",
+                                  "name": "LB LHN Festival",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Festival — stationery A4",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "A0vlel",
+                                  "name": "LB LHP Festival",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "A4",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "oDbUC",
+                                  "name": "LB LHM Festival",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "15 mm",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "oir6N",
+                                  "name": "LB LHT Festival",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Quote, Invoice, Packing slip",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "IeeM2",
+                              "name": "LB LH Row Neutral",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "G1parh",
+                                  "name": "LB LHN Neutral",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Neutral — stationery A4",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "IiKcB",
+                                  "name": "LB LHP Neutral",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "A4",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cUce0",
+                                  "name": "LB LHM Neutral",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "15 mm",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "YYDPs",
+                                  "name": "LB LHT Neutral",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Quote, Invoice",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Z3y4f8",
+                              "name": "LB LH Row Label",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "e0EIo",
+                                  "name": "LB LHN Label",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Label — 62×100",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "CE95O",
+                                  "name": "LB LHP Label",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "62×100 mm",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "sTLaw",
+                                  "name": "LB LHM Label",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "2 mm",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "M6lXGW",
+                                  "name": "LB LHT Label",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Equipment label",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "h9a6X",
+                              "name": "LB LH Row Contract",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "RmM2t",
+                                  "name": "LB LHN Contract",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Contract — Letter",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cg114",
+                                  "name": "LB LHP Contract",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "Letter",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "j0KtXl",
+                                  "name": "LB LHM Contract",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "18 mm",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "pkitY",
+                                  "name": "LB LHT Contract",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Crew agreement",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jwidX",
+                          "name": "LB LH Note",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "IJRUu",
+                              "name": "LB LH Note Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "info",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "text",
+                              "id": "NKLFf",
+                              "name": "LB LH Note Text",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "A multi-page PDF maps page 1 to the first page and the following pages to the rest.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YX17a",
+                  "name": "LB Style Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LWGjE",
+                      "name": "LB Style Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Q90KYt",
+                          "name": "LB Style Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "IXi1K",
+                              "name": "LB Style Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "palette",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "iDGfG",
+                              "name": "LB Style Title",
+                              "fill": "$ink",
+                              "content": "Branding",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uaZxu",
+                          "name": "LB Logo Frame",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "tW57z",
+                              "name": "LB Logo Preview",
+                              "width": 110,
+                              "height": 60,
+                              "fill": "$cloud",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "U5PLS",
+                                  "name": "LB Logo Mark",
+                                  "width": 30,
+                                  "height": 30,
+                                  "fill": "$cyan",
+                                  "cornerRadius": 6
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "E80iYh",
+                                  "name": "LB Logo Placeholder",
+                                  "fill": "$slate",
+                                  "content": "logo.png",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 9.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "mlpTn",
+                              "name": "LB Logo Hint",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Unsupported images are refused; the previous logo remains.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aWbSk",
+                          "name": "LB Colors Row",
+                          "width": "fill_container",
+                          "gap": 14,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "lBhPe",
+                              "name": "LB Colors Label",
+                              "fill": "$slate",
+                              "content": "Colours",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Z2TMU",
+                              "name": "LB Swatches",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "qInWz",
+                                  "name": "LB Swatch #0B1020",
+                                  "width": 22,
+                                  "height": 22,
+                                  "fill": "#0B1020",
+                                  "cornerRadius": 4,
+                                  "stroke": "$hairline"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ATMDA",
+                                  "name": "LB Swatch #2DE2E6",
+                                  "width": 22,
+                                  "height": 22,
+                                  "fill": "#2DE2E6",
+                                  "cornerRadius": 4,
+                                  "stroke": "$hairline"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "mFcnN",
+                                  "name": "LB Swatch #FF6B5E",
+                                  "width": 22,
+                                  "height": 22,
+                                  "fill": "#FF6B5E",
+                                  "cornerRadius": 4,
+                                  "stroke": "$hairline"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uPUfR",
+                      "name": "LB Template Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XT1Ec",
+                          "name": "LB Template Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "R2Izi",
+                              "name": "LB Template Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "edit_note",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "IQGvt",
+                              "name": "LB Template Title",
+                              "fill": "$ink",
+                              "content": "Template settings — Quote",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nLHND",
+                          "name": "LB Template Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "civv7",
+                              "name": "LB TRow Language / country",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "anzkX",
+                                  "name": "LB TK Language / country",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Language / country",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "f5baE",
+                                  "name": "LB TV Language / country",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "English · Spain",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qZG9e",
+                              "name": "LB TRow E-mail subject",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "NeEra",
+                                  "name": "LB TK E-mail subject",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "E-mail subject",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ZDivj",
+                                  "name": "LB TV E-mail subject",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Quote %number% · %project%",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZpyUX",
+                              "name": "LB TRow File name",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "L9JWR",
+                                  "name": "LB TK File name",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "File name",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "uhe7f",
+                                  "name": "LB TV File name",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "%type%-%number%",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "WkO0Q",
+                              "name": "LB TRow Header / footer",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "oQBo8",
+                                  "name": "LB TK Header / footer",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Header / footer",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ONxB8",
+                                  "name": "LB TV Header / footer",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "company header text · page footer text",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "k1bzt0",
+                              "name": "LB TRow Digital signing",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ooc7M",
+                                  "name": "LB TK Digital signing",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Digital signing",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "l7IBNi",
+                                  "name": "LB TV Digital signing",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Not requested",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aqhFJ",
+                              "name": "LB TRow Default letterhead",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "UCt9U",
+                                  "name": "LB TK Default letterhead",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 150,
+                                  "content": "Default letterhead",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "FeMGu",
+                                  "name": "LB TV Default letterhead",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Festival — stationery A4",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u3Nyb",
+              "name": "LB Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "GZavt",
+                  "name": "LB Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "F5hOu5",
+                  "name": "LB Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "At generation the template's own letterhead is proposed first; without one, the default letterhead of the project's type applies, and the user may replace either for that document. Documents in another language only need their language and country set on the template.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

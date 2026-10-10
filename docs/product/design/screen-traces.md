@@ -45,6 +45,21 @@ File: `payroll-export.png` / `payroll-export.html`
 | Footnote: worked hours add to the total, corrections add or subtract, compensation does not | [BR-CRW-HOUR-TYPE-TOTALS](../model/business-rules/br-crw-hour-type-totals.md) |
 | Footnote: time not covered by activities exports as hours without activities | [BR-CRW-ACTIVITY-DURATION-CONSISTENCY](../model/business-rules/br-crw-activity-duration-consistency.md) |
 
+## Screen — Crew import (management, desktop)
+
+File: `crew-import.png` / `crew-import.html`
+
+| Design decision | Decided by |
+|---|---|
+| Import wizard steps: mode → upload → column mapping → folder & match → preview & import | [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) steps 1–7 |
+| All crew imported with login off, invitations "Not sent" until the planner enables login | [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) alternative flow, [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md) |
+| "Enable login and send invitations" bulk action after import | [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md) alternative flow "Bulk enabling login for imported crew" |
+| Per-row import result (created / failed with reason) | [BR-CRW-IMPORT-ROW-RESULT](../model/business-rules/br-crw-import-row-result.md), [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) failure conditions |
+| Folder column showing root-folder placement hierarchy (Crew › Camera) | [BR-CRW-IMPORT-FOLDER-PLACEMENT](../model/business-rules/br-crw-import-folder-placement.md) |
+| Import tag shown onscreen for undo ("crew-import-2026-11-10") | [BR-CRW-IMPORT-TAG](../model/business-rules/br-crw-import-tag.md), [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) alternative flow |
+| Footnote: invitations expire after 30 days; resending opens a fresh window | [BR-CRW-ACCOUNT-INVITATION-EXPIRY](../model/business-rules/br-crw-account-invitation-expiry.md), [TERM-ACCOUNT-INVITATION-STATUS](../model/domain/terms/term-account-invitation-status.md) |
+| Footer: imported crew get the default user role | [JRN-CRW-ONBOARD-CREW](../model/journeys/jrn-crw-onboard-crew.md) narrative |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

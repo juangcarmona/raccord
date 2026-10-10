@@ -38598,6 +38598,1060 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "QhqnI",
+      "x": 6310,
+      "y": 31944,
+      "name": "Crew Import",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ys7CZ",
+          "name": "CIr Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "kTbie",
+              "name": "CIr Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eWLRH",
+                  "name": "CIr Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "X9Zg7",
+                  "name": "CIr Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eg1YV",
+              "name": "CIr Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "M1sK4",
+                  "name": "CIr Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "cjJ2d",
+                      "name": "CIr Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OWFO3",
+                      "name": "CIr Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MEDpi",
+                  "name": "CIr Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "lgguO",
+                      "name": "CIr Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GuiWj",
+                      "name": "CIr Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "R37Kiz",
+                  "name": "CIr Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "oCoxi",
+                      "name": "CIr Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Uvr75",
+                      "name": "CIr Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Xdvny",
+                  "name": "CIr Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "VZv1Z",
+                      "name": "CIr Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OpOwj",
+                      "name": "CIr Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "OqI9o",
+              "name": "CIr Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Nxkln",
+          "name": "CIr Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "P3NT0j",
+              "name": "CIr Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "C1WaeS",
+                  "name": "CIr Title",
+                  "fill": "$ink",
+                  "content": "Crew import",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "f6RFfq",
+                  "name": "CIr Subtitle",
+                  "fill": "$slate",
+                  "content": "Import crew with login off while you set up, then enable login and send invitations when ready.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "K6lWC1",
+              "name": "CIr Steps",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ReRSN",
+                  "name": "CIr Step 1",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "lEpI3",
+                      "name": "CIr Dot 1",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 11
+                    },
+                    {
+                      "type": "text",
+                      "id": "oVBuE",
+                      "name": "CIr StepL 1",
+                      "fill": "$slate",
+                      "content": "1. Choose mode",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ce8Nu",
+                  "name": "CIr Step 2",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NbH6c",
+                      "name": "CIr Dot 2",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 11
+                    },
+                    {
+                      "type": "text",
+                      "id": "m3Bijw",
+                      "name": "CIr StepL 2",
+                      "fill": "$slate",
+                      "content": "2. Upload file",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NZFPr",
+                  "name": "CIr Step 3",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SI0K6",
+                      "name": "CIr Dot 3",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 11
+                    },
+                    {
+                      "type": "text",
+                      "id": "gES4l",
+                      "name": "CIr StepL 3",
+                      "fill": "$slate",
+                      "content": "3. Map columns",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "thESV",
+                  "name": "CIr Step 4",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "QBB0f",
+                      "name": "CIr Dot 4",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "#1D7A4F",
+                      "cornerRadius": 11
+                    },
+                    {
+                      "type": "text",
+                      "id": "b86g6",
+                      "name": "CIr StepL 4",
+                      "fill": "$slate",
+                      "content": "4. Folder & match",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nejI5",
+                  "name": "CIr Step 5",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "p9I7AF",
+                      "name": "CIr Dot 5",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "$cyan",
+                      "cornerRadius": 11
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ybpi6",
+                      "name": "CIr StepL 5",
+                      "fill": "$ink",
+                      "content": "5. Preview & import",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WD1us",
+              "name": "CIr Table",
+              "width": "fill_container",
+              "height": 430,
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ImLGH",
+                  "name": "CIr Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jtbZi",
+                      "name": "CIr Col Name / email",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "NAME / EMAIL",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EbNmy",
+                      "name": "CIr Col Rate group",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "RATE GROUP",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tqtcw",
+                      "name": "CIr Col Login",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "LOGIN",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "N2slcz",
+                      "name": "CIr Col Invitation",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "INVITATION",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dfOTd",
+                      "name": "CIr Col Folder",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "FOLDER",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "k9KQe",
+                      "name": "CIr Col Import result",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "IMPORT RESULT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WT1jq",
+                  "name": "CIr Row Ibai",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iDYhE",
+                      "name": "CIr C Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Ibai Ruiz · ibai@lumen.events",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c7aqc",
+                      "name": "CIr RG Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Camera B",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yl5yt",
+                      "name": "CIr L Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Off",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ayvJ4",
+                      "name": "CIr I Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Not sent",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wMEEr",
+                      "name": "CIr F Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Crew › Camera",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WqjIM",
+                      "name": "CIr R Ibai",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "✓ created",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mr4Mc",
+                  "name": "CIr Row Nerea",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UDHUM",
+                      "name": "CIr C Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Nerea Vidal · nerea@lumen.events",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sKLPj",
+                      "name": "CIr RG Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Camera A",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VCXFe",
+                      "name": "CIr L Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Off",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rJnkX",
+                      "name": "CIr I Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Not sent",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "L5SlJZ",
+                      "name": "CIr F Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Crew › Camera",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jNQJr",
+                      "name": "CIr R Nerea",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "✓ created",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zUtlE",
+                  "name": "CIr Row Marta",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lo4bc",
+                      "name": "CIr C Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Marta Ruiz · marta.r@lumen.events",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "v04Zu",
+                      "name": "CIr RG Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "h84VEr",
+                      "name": "CIr L Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Off",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wHfQ0",
+                      "name": "CIr I Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Not sent",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KDzTx",
+                      "name": "CIr F Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Crew › Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "R3OVAu",
+                      "name": "CIr R Marta",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "✓ created",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "veQ1O",
+                  "name": "CIr Row Óscar",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Uxpua",
+                      "name": "CIr C Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Óscar Miranda · invalid email row",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z2TfQO",
+                      "name": "CIr RG Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Lighting",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uj0ay",
+                      "name": "CIr L Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Off",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j1SPYj",
+                      "name": "CIr I Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lGrge",
+                      "name": "CIr F Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "weXFo",
+                      "name": "CIr R Óscar",
+                      "fill": "#B3261E",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "✗ failed",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "orNhk",
+                  "name": "CIr Row Dídac",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "G2VH7",
+                      "name": "CIr C Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dídac Torres · didaac@lumen.events",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sJVD3",
+                      "name": "CIr RG Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Playback",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VWbLo",
+                      "name": "CIr L Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Off",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O3yrL",
+                      "name": "CIr I Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Not sent",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "y8CzeS",
+                      "name": "CIr F Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Crew › Playback",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NtZNh",
+                      "name": "CIr R Dídac",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "✓ created",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "B2v0bU",
+              "name": "CIr Actions",
+              "width": "fill_container",
+              "gap": 10,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XWI0s",
+                  "name": "CIr Actions Left",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "BOIhK",
+                      "name": "CIr Enable Button",
+                      "fill": "$cyan",
+                      "cornerRadius": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "k04v5",
+                          "name": "CIr Enable Button Text",
+                          "fill": "$ink",
+                          "content": "Enable login and send invitations",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VcSRD",
+                  "name": "CIr Footnote",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "B3rZV",
+                      "name": "CIr Footnote Icon",
+                      "width": 13,
+                      "height": 13,
+                      "icon": "info",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$slate"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fs8x8",
+                      "name": "CIr Footnote Text",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Import tag: crew-import-2026-11-10",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "b0oN3",
+              "name": "CIr Footnote 2",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "U970M",
+                  "name": "CIr Footnote 2 Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "qj956",
+                  "name": "CIr Footnote 2 Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Imported crew get the default user role and the import tag. When an import goes partly wrong, delete the records with this tag and import again in smaller files. Invitations expire after 30 days without acceptance; resending opens a fresh window. Imported people with login off cannot log in yet and receive no invitation email.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

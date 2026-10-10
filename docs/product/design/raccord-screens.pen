@@ -4504,6 +4504,2250 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "d8wzeq",
+      "x": 1510,
+      "y": 2344,
+      "name": "Invoice Draft Editor",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "O9EZv",
+          "name": "Nav",
+          "width": 236,
+          "height": 1024,
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            20,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "s6wDxj",
+              "name": "Brand Wrap",
+              "width": "fill_container",
+              "padding": [
+                0,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "kwpD1",
+                  "name": "Brand",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 17,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "du3kA",
+              "name": "Brand Underline",
+              "width": 28,
+              "height": 3,
+              "fill": "$cyan",
+              "cornerRadius": 2
+            },
+            {
+              "type": "frame",
+              "id": "yzbM7",
+              "name": "Nav Overview",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "esxX4",
+                  "name": "Nav Icon Overview",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "layout-dashboard",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "W8k2lD",
+                  "name": "Nav Label Overview",
+                  "fill": "#8A93A8",
+                  "content": "Overview",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LY46Q",
+              "name": "Nav Projects",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "mnjxx",
+                  "name": "Nav Icon Projects",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "folder",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "e41u9",
+                  "name": "Nav Label Projects",
+                  "fill": "#8A93A8",
+                  "content": "Projects",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "T3EsB5",
+              "name": "Nav Equipment",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "jzWtm",
+                  "name": "Nav Icon Equipment",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "package",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "e6tKLi",
+                  "name": "Nav Label Equipment",
+                  "fill": "#8A93A8",
+                  "content": "Equipment",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SWgKe",
+              "name": "Nav Crew",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "QSxn5",
+                  "name": "Nav Icon Crew",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "users",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "yv0FN",
+                  "name": "Nav Label Crew",
+                  "fill": "#8A93A8",
+                  "content": "Crew",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UrCok",
+              "name": "Nav Invoices",
+              "width": "fill_container",
+              "fill": "#1A2440",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "X7eOHF",
+                  "name": "Nav Icon Invoices",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "file-text",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "XAZnu",
+                  "name": "Nav Label Invoices",
+                  "fill": "$white",
+                  "content": "Invoices",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SxyBF",
+              "name": "Nav Customers",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "WCRIK",
+                  "name": "Nav Icon Customers",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "book-user",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "oy093",
+                  "name": "Nav Label Customers",
+                  "fill": "#8A93A8",
+                  "content": "Customers",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nu48D",
+              "name": "Nav Documents",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "VRcTn",
+                  "name": "Nav Icon Documents",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "file",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "z5Q4Kc",
+                  "name": "Nav Label Documents",
+                  "fill": "#8A93A8",
+                  "content": "Documents",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ENTqU",
+              "name": "Nav Reports",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "IQrIN",
+                  "name": "Nav Icon Reports",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "chart-column",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "BhUGj",
+                  "name": "Nav Label Reports",
+                  "fill": "#8A93A8",
+                  "content": "Reports",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Prz7f",
+              "name": "Nav Settings",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                9,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ZZ03W",
+                  "name": "Nav Icon Settings",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "settings",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "WqW4Z",
+                  "name": "Nav Label Settings",
+                  "fill": "#8A93A8",
+                  "content": "Settings",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bTiXs",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$white",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "s7fnfj",
+              "name": "Header",
+              "width": "fill_container",
+              "gap": 16,
+              "padding": [
+                22,
+                28
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "L9smvg",
+                  "name": "Title Block",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "I409c",
+                      "name": "Breadcrumbs",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jMsQr",
+                          "name": "Crumb Projects",
+                          "fill": "$slate",
+                          "content": "Projects",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UJrNq",
+                          "name": "Crumb Sep 1",
+                          "fill": "$slate",
+                          "content": "/",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "uJ0nk",
+                          "name": "Crumb Music Video",
+                          "fill": "$slate",
+                          "content": "Corona Festival — Main stage",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KwUZU",
+                          "name": "Crumb Sep 2",
+                          "fill": "$slate",
+                          "content": "/",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "bgri9",
+                          "name": "Crumb Draft",
+                          "fill": "$slate",
+                          "content": "Draft",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "zRbKh",
+                      "name": "Page Title",
+                      "fill": "$ink",
+                      "content": "Invoice draft F 2026-0043",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mTRew",
+                      "name": "Page Subtitle",
+                      "fill": "$slate",
+                      "content": "Draft preview · series F ordinary · created 10 Feb 2026 by J. Carmona",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "o2zPF",
+                  "name": "Header Spacer",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "$white"
+                },
+                {
+                  "type": "frame",
+                  "id": "WXdnS",
+                  "name": "Header Actions",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ACYb6",
+                      "name": "Discard Button",
+                      "fill": "$white",
+                      "cornerRadius": 6,
+                      "gap": 8,
+                      "padding": [
+                        9,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "lYYxM",
+                          "name": "Discard Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "trash-2",
+                          "library": "lucide",
+                          "fill": "$coral"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MFEWG",
+                          "name": "Discard Label",
+                          "fill": "$coral",
+                          "content": "Discard draft",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "s3WUNq",
+                      "name": "Issue Button",
+                      "fill": "$ink",
+                      "cornerRadius": 6,
+                      "gap": 8,
+                      "padding": [
+                        9,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "MAOdV",
+                          "name": "Issue Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$cyan"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XD4Iy",
+                          "name": "Issue Label",
+                          "fill": "$cyan",
+                          "content": "Issue invoice",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vWCez",
+              "name": "Work Area",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 24,
+              "padding": 28,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "o1qfR",
+                  "name": "Unbilled Panel",
+                  "width": 430,
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "O57lAY",
+                      "name": "Unbilled Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YzXTT",
+                          "name": "Unbilled Title",
+                          "fill": "$ink",
+                          "content": "Unbilled lines",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "r9pTD",
+                          "name": "Unbilled Count",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 10,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sn9Yf",
+                              "name": "Unbilled Count Text",
+                              "fill": "#0B7FBF",
+                              "content": "7",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "otLnJ",
+                          "name": "Unbilled Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "bHeyd",
+                          "name": "Unbilled Hint",
+                          "fill": "$slate",
+                          "content": "select to add",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "iyupi",
+                      "name": "Unbilled Row Camera package A",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "p9wGoX",
+                          "name": "Unbilled Check Camera package A",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lBp04",
+                          "name": "Unbilled Texts Camera package A",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vaVFO",
+                              "name": "Unbilled Desc Camera package A",
+                              "fill": "$ink",
+                              "content": "Camera package A — Alexa 35 + set of lenses",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "yuE1x",
+                              "name": "Unbilled Meta Camera package A",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "hVZur",
+                          "name": "Unbilled Spacer Camera package A",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wTbJ9",
+                          "name": "Unbilled Amount Camera package A",
+                          "fill": "$ink",
+                          "content": "2,880.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VBKo7",
+                      "name": "Unbilled Row Gaffer + 2 electricians",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y4sbQ",
+                          "name": "Unbilled Check Gaffer + 2 electricians",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gaj2J",
+                          "name": "Unbilled Texts Gaffer + 2 electricians",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vQcB5",
+                              "name": "Unbilled Desc Gaffer + 2 electricians",
+                              "fill": "$ink",
+                              "content": "Gaffer + 2 electricians — prep day",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Tax9U",
+                              "name": "Unbilled Meta Gaffer + 2 electricians",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tjdHS",
+                          "name": "Unbilled Spacer Gaffer + 2 electricians",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "EZ5cy",
+                          "name": "Unbilled Amount Gaffer + 2 electricians",
+                          "fill": "$ink",
+                          "content": "948.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "D6Xot",
+                      "name": "Unbilled Row LED wall 6×3m",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "cZzPc",
+                          "name": "Unbilled Check LED wall 6×3m",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "GJ582",
+                          "name": "Unbilled Texts LED wall 6×3m",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "mGy3O",
+                              "name": "Unbilled Desc LED wall 6×3m",
+                              "fill": "$ink",
+                              "content": "LED wall 6×3m — 2 days",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "LYV1P",
+                              "name": "Unbilled Meta LED wall 6×3m",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xR8Cm",
+                          "name": "Unbilled Spacer LED wall 6×3m",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pkiSJ",
+                          "name": "Unbilled Amount LED wall 6×3m",
+                          "fill": "$ink",
+                          "content": "2,160.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mPaJR",
+                      "name": "Unbilled Row Rigging and truss",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Xd7jE",
+                          "name": "Unbilled Check Rigging and truss",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rjaD0",
+                          "name": "Unbilled Texts Rigging and truss",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "IyDnB",
+                              "name": "Unbilled Desc Rigging and truss",
+                              "fill": "$ink",
+                              "content": "Rigging and truss — arena",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "OQ1Mj",
+                              "name": "Unbilled Meta Rigging and truss",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RNxQ0",
+                          "name": "Unbilled Spacer Rigging and truss",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qzLwm",
+                          "name": "Unbilled Amount Rigging and truss",
+                          "fill": "$ink",
+                          "content": "1,240.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xGjfu",
+                      "name": "Unbilled Row Walkie-talkies ×12",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Ycq8m",
+                          "name": "Unbilled Check Walkie-talkies ×12",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aLhQC",
+                          "name": "Unbilled Texts Walkie-talkies ×12",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "h1Fwfl",
+                              "name": "Unbilled Desc Walkie-talkies ×12",
+                              "fill": "$ink",
+                              "content": "Walkie-talkies ×12",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "hlrVQ",
+                              "name": "Unbilled Meta Walkie-talkies ×12",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rWRWl",
+                          "name": "Unbilled Spacer Walkie-talkies ×12",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gJ8nO",
+                          "name": "Unbilled Amount Walkie-talkies ×12",
+                          "fill": "$ink",
+                          "content": "168.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kI1YG",
+                      "name": "Unbilled Row Post-production suite",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "iGZji",
+                          "name": "Unbilled Check Post-production suite",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rKCjo",
+                          "name": "Unbilled Texts Post-production suite",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "xjTfr",
+                              "name": "Unbilled Desc Post-production suite",
+                              "fill": "$ink",
+                              "content": "Post-production suite — edit bay",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "pEDJC",
+                              "name": "Unbilled Meta Post-production suite",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xtvhQ",
+                          "name": "Unbilled Spacer Post-production suite",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "eUjrK",
+                          "name": "Unbilled Amount Post-production suite",
+                          "fill": "$ink",
+                          "content": "540.00",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DiID4",
+                      "name": "Unbilled Row Consumables",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y1kI0",
+                          "name": "Unbilled Check Consumables",
+                          "width": 16,
+                          "height": 16,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "z1Rni",
+                          "name": "Unbilled Texts Consumables",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "V9uKxM",
+                              "name": "Unbilled Desc Consumables",
+                              "fill": "$ink",
+                              "content": "Consumables — gaffer tape, batteries",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "vKnOS",
+                              "name": "Unbilled Meta Consumables",
+                              "fill": "$slate",
+                              "content": "12 Feb · 21% VAT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xz9CD",
+                          "name": "Unbilled Spacer Consumables",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ksFxL",
+                          "name": "Unbilled Amount Consumables",
+                          "fill": "$ink",
+                          "content": "96.50",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XjXi3",
+                  "name": "Draft Panel",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ywGqs",
+                      "name": "Draft Header",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "OVlkB",
+                          "name": "Draft Title",
+                          "fill": "$ink",
+                          "content": "Draft F 2026-0043 · Corona Festival — Main stage",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "TJBvY",
+                          "name": "Draft Status Badge",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 10,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "O2UDg",
+                              "name": "Draft Status Text",
+                              "fill": "#8A5A00",
+                              "content": "Draft preview · open",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dNniw",
+                          "name": "Draft Head Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "MvzC6",
+                          "name": "Draft Hint",
+                          "fill": "$slate",
+                          "content": "remove a line to return it to unbilled",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mRJTf",
+                      "name": "Draft Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "byoie",
+                          "name": "Draft Head Row",
+                          "width": "fill_container",
+                          "fill": "$cloud",
+                          "gap": 12,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "k9SkF",
+                              "name": "Draft Col Description",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "DESCRIPTION",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "F8RQy",
+                              "name": "Draft Col Qty",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 44,
+                              "content": "QTY",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "bfIFq",
+                              "name": "Draft Col Unit price",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 72,
+                              "content": "UNIT PRICE",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zO3Ci",
+                              "name": "Draft Col VAT",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 40,
+                              "content": "VAT",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "hOU32",
+                              "name": "Draft Col Total",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 78,
+                              "content": "TOTAL",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bJmit",
+                          "name": "Draft Row Camera package A",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "lMkao",
+                              "name": "Draft Desc Cell Camera package A",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "tgUfo",
+                                  "name": "Remove Camera package A",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "#FDE3E0",
+                                  "cornerRadius": 4,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "sSocS",
+                                      "name": "Remove Icon Camera package A",
+                                      "width": 10,
+                                      "height": 10,
+                                      "icon": "x",
+                                      "library": "lucide",
+                                      "fill": "#B3261E"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "dP9wN",
+                                  "name": "Draft Desc Camera package A",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Camera package A — Alexa 35 + set of lenses",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "gECc3",
+                              "name": "Draft Cell 1 Camera package A",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 44,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ecDh0",
+                              "name": "Draft Cell 2,400.00 Camera package A",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 72,
+                              "content": "2,400.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "fLeQ2",
+                              "name": "Draft Cell 21% Camera package A",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 40,
+                              "content": "21%",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "l7sNyV",
+                              "name": "Draft Cell 2,880.00 Camera package A",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 78,
+                              "content": "2,880.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OdffJ",
+                          "name": "Draft Row Gaffer + 2 electricians",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "PDcey",
+                              "name": "Draft Desc Cell Gaffer + 2 electricians",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "vEcUl",
+                                  "name": "Remove Gaffer + 2 electricians",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "#FDE3E0",
+                                  "cornerRadius": 4,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "tjJSN",
+                                      "name": "Remove Icon Gaffer + 2 electricians",
+                                      "width": 10,
+                                      "height": 10,
+                                      "icon": "x",
+                                      "library": "lucide",
+                                      "fill": "#B3261E"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "KSpXu",
+                                  "name": "Draft Desc Gaffer + 2 electricians",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Gaffer + 2 electricians — prep day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "dQvHu",
+                              "name": "Draft Cell 1 Gaffer + 2 electricians",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 44,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "daPzy",
+                              "name": "Draft Cell 780.00 Gaffer + 2 electricians",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 72,
+                              "content": "780.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Q09AG",
+                              "name": "Draft Cell 21% Gaffer + 2 electricians",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 40,
+                              "content": "21%",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "lften",
+                              "name": "Draft Cell 948.00 Gaffer + 2 electricians",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 78,
+                              "content": "948.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "M8xvv",
+                          "name": "Draft Row LED wall 6×3m",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "O5bxl",
+                              "name": "Draft Desc Cell LED wall 6×3m",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "P7dt5",
+                                  "name": "Remove LED wall 6×3m",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "#FDE3E0",
+                                  "cornerRadius": 4,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "Bt8VT",
+                                      "name": "Remove Icon LED wall 6×3m",
+                                      "width": 10,
+                                      "height": 10,
+                                      "icon": "x",
+                                      "library": "lucide",
+                                      "fill": "#B3261E"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "T3ABEj",
+                                  "name": "Draft Desc LED wall 6×3m",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "LED wall 6×3m — 2 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "QkjAp",
+                              "name": "Draft Cell 2 LED wall 6×3m",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 44,
+                              "content": "4",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "H9PVj5",
+                              "name": "Draft Cell 900.00 LED wall 6×3m",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 72,
+                              "content": "450.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "jFXa3",
+                              "name": "Draft Cell 21% LED wall 6×3m",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 40,
+                              "content": "21%",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "U67bU5",
+                              "name": "Draft Cell 2,160.00 LED wall 6×3m",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 78,
+                              "content": "1,800.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "L6gyvB",
+                          "name": "Draft Row Rigging and truss",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            10,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "REpIb",
+                              "name": "Draft Desc Cell Rigging and truss",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "FnKd0",
+                                  "name": "Remove Rigging and truss",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "#FDE3E0",
+                                  "cornerRadius": 4,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "y5y7R",
+                                      "name": "Remove Icon Rigging and truss",
+                                      "width": 10,
+                                      "height": 10,
+                                      "icon": "x",
+                                      "library": "lucide",
+                                      "fill": "#B3261E"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "uUly8",
+                                  "name": "Draft Desc Rigging and truss",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Rigging and truss — arena",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "HQuQU",
+                              "name": "Draft Cell 1 Rigging and truss",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 44,
+                              "content": "1",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "XUUOe",
+                              "name": "Draft Cell 1,020.00 Rigging and truss",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 72,
+                              "content": "1,020.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "L0ch3",
+                              "name": "Draft Cell 21% Rigging and truss",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 40,
+                              "content": "21%",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "W0aeN",
+                              "name": "Draft Cell 1,240.00 Rigging and truss",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": 78,
+                              "content": "1,240.00",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Spfm4",
+                      "name": "Draft Summary",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "h0rIz",
+                          "name": "VAT Box",
+                          "width": 300,
+                          "fill": "$white",
+                          "cornerRadius": 10,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": [
+                            14,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RGEzE",
+                              "name": "VAT Title",
+                              "fill": "$slate",
+                              "content": "VAT BREAKDOWN · BR-VAT-PER-RATE",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "V4q4j",
+                              "name": "VAT Row 21% base",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "echgP",
+                                  "name": "VAT Rate 21% base",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "21% base",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "niGNP",
+                                  "name": "VAT Base 21% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "6,388.00",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "OF9Tq",
+                                  "name": "VAT Amount 21% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "1,341.48",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "zqIYi",
+                              "name": "VAT Row 10% base",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "igHRG",
+                                  "name": "VAT Rate 10% base",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "10% base",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "x6DNpU",
+                                  "name": "VAT Base 10% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "0.00",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "sFanf",
+                                  "name": "VAT Amount 10% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "0.00",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "M7Hf5l",
+                              "name": "VAT Row 4% base",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "EUETe",
+                                  "name": "VAT Rate 4% base",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "4% base",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "mIXea",
+                                  "name": "VAT Base 4% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 90,
+                                  "content": "0.00",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "RP1wr",
+                                  "name": "VAT Amount 4% base",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "0.00",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "O1U30",
+                          "name": "Totals Box",
+                          "width": 260,
+                          "fill": "$ink",
+                          "cornerRadius": 10,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": [
+                            14,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "smLQC",
+                              "name": "Total Row Subtotal",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Grl1a",
+                                  "name": "Total Label Subtotal",
+                                  "fill": "#8A93A8",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Subtotal",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "w3JC31",
+                                  "name": "Total Value Subtotal",
+                                  "fill": "$white",
+                                  "content": "6,868.00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "bold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "EVNZb",
+                              "name": "Total Row VAT 21%",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "jqqGG",
+                                  "name": "Total Label VAT 21%",
+                                  "fill": "#8A93A8",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "VAT 21%",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Qw6ey",
+                                  "name": "Total Value VAT 21%",
+                                  "fill": "$white",
+                                  "content": "1,442.28",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "bold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "hMhkt",
+                              "name": "Total Row Total due",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "c3uCov",
+                                  "name": "Total Label Total due",
+                                  "fill": "$cyan",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Total due",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "bold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "zGcT9",
+                                  "name": "Total Value Total due",
+                                  "fill": "$cyan",
+                                  "content": "8,310.28",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 16,
+                                  "fontWeight": "bold"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "shUll",
+                          "name": "Validation Box",
+                          "width": "fill_container",
+                          "fill": "#FFF9E6",
+                          "cornerRadius": 10,
+                          "stroke": "#F0D896",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            14,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "OKYXW",
+                              "name": "Validation Head",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "xT9C6",
+                                  "name": "Validation Icon",
+                                  "width": 15,
+                                  "height": 15,
+                                  "icon": "triangle-alert",
+                                  "library": "lucide",
+                                  "fill": "#8A5A00"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "N7EtkW",
+                                  "name": "Validation Title",
+                                  "fill": "#8A5A00",
+                                  "content": "Validation issues — resolve before issuing",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "h3T2FY",
+                                  "name": "Validation Spacer",
+                                  "width": "fill_container",
+                                  "height": 1
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "j3cM37",
+                                  "name": "Validation Count",
+                                  "fill": "#FFF3D6",
+                                  "cornerRadius": 10,
+                                  "padding": [
+                                    2,
+                                    8
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "ZaNfd",
+                                      "name": "Validation Count Text",
+                                      "fill": "#8A5A00",
+                                      "content": "2",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qqSsp",
+                              "name": "Issue Customer",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "QaVen",
+                                  "name": "Issue Dot Customer",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#8A5A00",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "OHrsx",
+                                  "name": "Issue Texts Customer",
+                                  "layout": "vertical",
+                                  "gap": 2,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "wj0Pa",
+                                      "name": "Issue Title Customer",
+                                      "fill": "$ink",
+                                      "content": "Customer tax details incomplete",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12.5,
+                                      "fontWeight": "medium"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "k6R0o",
+                                      "name": "Issue Detail Customer",
+                                      "fill": "$slate",
+                                      "content": "Estudio Norte S.L. is missing its identification number — complete it before issuing.",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "QdmWQ",
+                              "name": "Issue Issue",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "F6afF1",
+                                  "name": "Issue Dot Issue",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#8A5A00",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "RC5r5",
+                                  "name": "Issue Texts Issue",
+                                  "layout": "vertical",
+                                  "gap": 2,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "dQsDt",
+                                      "name": "Issue Title Issue",
+                                      "fill": "$ink",
+                                      "content": "Issue date ahead of use",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12.5,
+                                      "fontWeight": "medium"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "jaXr1",
+                                      "name": "Issue Detail Issue",
+                                      "fill": "$slate",
+                                      "content": "The chosen issue date falls before the project's last usage period ends (10–14 Feb).",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

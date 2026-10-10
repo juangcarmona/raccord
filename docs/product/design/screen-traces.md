@@ -51,3 +51,18 @@ File: `ops-board.png` / `ops-board.html`
 | Board date defaults to today (due-date semantics: start of planning period for outgoing, end for returns) | [TERM-WAREHOUSE-DUE-DATE](../model/domain/terms/term-warehouse-due-date.md) |
 | Progress dots red / yellow / green per card and project | [TERM-WAREHOUSE-PROGRESS](../model/domain/terms/term-warehouse-progress.md) |
 | Read-only: no actions, no edit affordances anywhere | Mobile-delivery decision (read-only board mode) |
+
+## Screen 4 — Invoice draft editor (management, desktop)
+
+File: `invoice-draft-editor.png` / `invoice-draft-editor.html`
+
+| Design decision | Decided by |
+|---|---|
+| Two-panel layout: unbilled lines selectable on the left, draft contents on the right | [UC-CREATE-INVOICE-DRAFT](../model/use-cases/uc-create-invoice-draft.md) main flow (select unbilled lines → gathered into one draft) |
+| Draft lines in project order, in the default series, with calculated VAT breakdown and totals | [UC-CREATE-INVOICE-DRAFT](../model/use-cases/uc-create-invoice-draft.md), [TERM-INVOICE-SERIES](../model/domain/terms/term-invoice-series.md) |
+| Status shown as "Draft preview · open"; issuing refused until readiness is met | [TERM-INVOICE-STATUS](../model/domain/terms/term-invoice-status.md), [UC-ISSUE-INVOICE](../model/use-cases/uc-issue-invoice.md) failure conditions (all unmet conditions reported, nothing issued, no number consumed) |
+| Per-line remove button returning the line to unbilled and recalculating the draft | [UC-REVISE-INVOICE-DRAFT](../model/use-cases/uc-revise-invoice-draft.md) main flow |
+| Discard draft action (all lines become unbilled) | [UC-REVISE-INVOICE-DRAFT](../model/use-cases/uc-revise-invoice-draft.md) alternative flow |
+| Validation issues block shown before issue (e.g. missing customer tax details) | [TERM-VALIDATION-ISSUE](../model/domain/terms/term-validation-issue.md), [UC-ISSUE-INVOICE](../model/use-cases/uc-issue-invoice.md) step 2 |
+| VAT shown per rate (21%/10%/4% rows) | [BR-VAT-PER-RATE](../model/business-rules/br-vat-per-rate.md) |
+| Selection and validation states use the selected-blue token, not cyan | [docs/design/color-tokens.md](../../design/color-tokens.md) `--raccord-selected` (decided 2026-10-10) |

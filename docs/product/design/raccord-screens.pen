@@ -48775,6 +48775,723 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "F8C5P",
+      "x": 920,
+      "y": 3032,
+      "name": "Hours Registration",
+      "width": 390,
+      "height": 844,
+      "fill": "$ink",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ERlqC",
+          "name": "HR Status Bar",
+          "width": "fill_container",
+          "padding": [
+            14,
+            24,
+            6,
+            24
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "text",
+              "id": "Ujjbz",
+              "name": "HR Status Time",
+              "fill": "$white",
+              "content": "22:18",
+              "fontFamily": "$font-body",
+              "fontSize": 12,
+              "fontWeight": "medium"
+            },
+            {
+              "type": "frame",
+              "id": "GTOUG",
+              "name": "HR Status Icons",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "M5d2W5",
+                  "name": "HR SIcon signal_cellular_alt",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "signal_cellular_alt",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "URylu",
+                  "name": "HR SIcon wifi",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "wifi",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "m5FFJc",
+                  "name": "HR SIcon battery_full",
+                  "width": 18,
+                  "height": 14,
+                  "icon": "battery_full",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "c1fDOz",
+          "name": "HR Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            10,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "NsVeF",
+              "name": "HR Hero",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oPzUM",
+                  "name": "HR Hero Date",
+                  "fill": "#8A93A8",
+                  "content": "TUESDAY 10 NOVEMBER, 22:18",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bPkRn",
+                  "name": "HR Hero Title",
+                  "fill": "$white",
+                  "content": "Hours",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "KfvKJ",
+                  "name": "HR Hero Sub",
+                  "fill": "#8A93A8",
+                  "content": "Register against your planned activities · editable 7 days back",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xz69k",
+              "name": "HR Section Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YztpE",
+                  "name": "HR Sec Label",
+                  "fill": "#8A93A8",
+                  "content": "STILL TO REGISTER · LAST 24 HOURS",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "semibold"
+                },
+                {
+                  "type": "frame",
+                  "id": "S9kCo",
+                  "name": "HR Act Card 1",
+                  "width": "fill_container",
+                  "fill": "#0F1628",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "oRarJ",
+                      "name": "HR C1 Head",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "pkVDL",
+                          "name": "HR C1 Check",
+                          "width": 18,
+                          "height": 18,
+                          "fill": "#000000",
+                          "cornerRadius": 4,
+                          "stroke": "#000000"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lwCtU",
+                          "name": "HR C1 HeadT",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "b0chik",
+                              "name": "HR C1 Title",
+                              "fill": "$white",
+                              "content": "Corona Festival · A-cam",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qwRuv",
+                              "name": "HR C1 Sub",
+                              "fill": "#8A93A8",
+                              "content": "Show · 10:00–23:00 · Fira Montjuïc hall 2",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "RD6Ux",
+                      "name": "HR C1 Fields",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ftyQv",
+                          "name": "HR C1 Row From",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "mDFY6",
+                              "name": "HR C1 FromL",
+                              "fill": "#8A93A8",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "From",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "JEZCn",
+                              "name": "HR C1 FromV",
+                              "fill": "#141B33",
+                              "cornerRadius": 6,
+                              "padding": [
+                                4,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "iprOQ",
+                                  "name": "HR C1 FromT",
+                                  "fill": "$white",
+                                  "content": "10:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NIsiy",
+                          "name": "HR C1 Row Until",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "q2Bjt",
+                              "name": "HR C1 UntilL",
+                              "fill": "#8A93A8",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "Until",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZgYpF",
+                              "name": "HR C1 UntilV",
+                              "fill": "#141B33",
+                              "cornerRadius": 6,
+                              "padding": [
+                                4,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "D9nHFB",
+                                  "name": "HR C1 UntilT",
+                                  "fill": "$white",
+                                  "content": "22:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YVqJp",
+                          "name": "HR C1 Row Break",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "e5XsTd",
+                              "name": "HR C1 BreakL",
+                              "fill": "#8A93A8",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "Break",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Qp2vx",
+                              "name": "HR C1 BreakV",
+                              "fill": "#141B33",
+                              "cornerRadius": 6,
+                              "padding": [
+                                4,
+                                10
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "VffFt",
+                                  "name": "HR C1 BreakT",
+                                  "fill": "$white",
+                                  "content": "45 min · from the shift",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "eiRt7",
+                      "name": "HR C1 Note",
+                      "fill": "#667085",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Prefilled from the planned activity; adjust times and break before saving.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 9.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oXMjz",
+                      "name": "HR C1 Save",
+                      "width": "fill_container",
+                      "fill": "$cyan",
+                      "cornerRadius": 8,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "D4BQS",
+                          "name": "HR C1 Save T",
+                          "fill": "$ink",
+                          "content": "Save registrations",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QohCO",
+                  "name": "HR Act Card 2",
+                  "width": "fill_container",
+                  "fill": "#00000000",
+                  "cornerRadius": 10,
+                  "stroke": "#1A2440",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "J1Z2yW",
+                      "name": "HR C2 Head",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "iRvg5",
+                          "name": "HR C2 Check",
+                          "width": 18,
+                          "height": 18,
+                          "fill": "#00000000",
+                          "cornerRadius": 4,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kZ7UU",
+                          "name": "HR C2 HeadT",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dsn1M",
+                              "name": "HR C2 Title",
+                              "fill": "$white",
+                              "content": "Load-out",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Lo5DN",
+                              "name": "HR C2 Sub",
+                              "fill": "#8A93A8",
+                              "content": "23:00–02:00 (yesterday's night show)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lrWSu",
+              "name": "HR Registered Card",
+              "width": "fill_container",
+              "fill": "#0F1628",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                12,
+                14
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "hCN2F",
+                  "name": "HR Reg Label",
+                  "fill": "#8A93A8",
+                  "content": "REGISTERED · WEEK 46 · 47.5 H",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "semibold"
+                },
+                {
+                  "type": "frame",
+                  "id": "P0ghM7",
+                  "name": "HR Reg Row Mon",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "c8kiiG",
+                      "name": "HR Reg Icon Mon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "check_circle",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#1D7A4F"
+                    },
+                    {
+                      "type": "text",
+                      "id": "L5cFru",
+                      "name": "HR Reg D Mon",
+                      "fill": "$white",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Mon 9 Nov · Warehouse prep",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "y2pVd9",
+                      "name": "HR Reg H Mon",
+                      "fill": "$cyan",
+                      "content": "8.5 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Zivnj",
+                  "name": "HR Reg Row Sun",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "l4iLZ",
+                      "name": "HR Reg Icon Sun",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "check_circle",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#1D7A4F"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZCtPh",
+                      "name": "HR Reg D Sun",
+                      "fill": "$white",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sun 8 Nov · Studio shoot",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ud9CA",
+                      "name": "HR Reg H Sun",
+                      "fill": "$cyan",
+                      "content": "12 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qpRDO",
+          "name": "HR Field Nav",
+          "width": "fill_container",
+          "fill": "#0F1628",
+          "padding": [
+            10,
+            20
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "wtz1Z",
+              "name": "HR Nav Today",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "sGIs1",
+                  "name": "HR NavIcon Today",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "schedule",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "x5smV",
+                  "name": "HR NavLabel Today",
+                  "fill": "#8A93A8",
+                  "content": "Today",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u7QCk6",
+              "name": "HR Nav My jobs",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "bB26T",
+                  "name": "HR NavIcon My jobs",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "work",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "U2MxNM",
+                  "name": "HR NavLabel My jobs",
+                  "fill": "#8A93A8",
+                  "content": "My jobs",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YD1aS",
+              "name": "HR Nav Hours",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "L9GzXZ",
+                  "name": "HR NavIcon Hours",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "hourglass_bottom",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "hTuEP",
+                  "name": "HR NavLabel Hours",
+                  "fill": "$cyan",
+                  "content": "Hours",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Yvs7M",
+              "name": "HR Nav Me",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "uKU7m",
+                  "name": "HR NavIcon Me",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "person",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "KiOB9",
+                  "name": "HR NavLabel Me",
+                  "fill": "#8A93A8",
+                  "content": "Me",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

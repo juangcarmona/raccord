@@ -193,6 +193,20 @@ File: `my-assignments.png` / `my-assignments.html`
 | Dismiss action removes a posting from the crew member's view | [UC-CRW-SIGN-UP-FOR-POSTED-JOB](../model/use-cases/uc-crw-sign-up-for-posted-job.md) alternative flow |
 | Note on posting: sign-up does not check availability or conflicts; the planner resolves double bookings | [BR-CRW-JOB-BOARD-IGNORES-CONFLICTS](../model/business-rules/br-crw-job-board-ignores-conflicts.md) |
 
+## Screen — Hours registration (field mode, phone)
+
+File: `hours-registration.png` / `hours-registration.html`
+
+| Design decision | Decided by |
+|---|---|
+| Phone layout in the field PWA dark theme; "Hours" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
+| "Still to register" list of activities scheduled in the past 24 hours | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) step 1, [BR-CRW-PLANNED-ACTIVITIES-WINDOW](../model/business-rules/br-crw-planned-activities-window.md) |
+| From / until / break prefilled from the planned activity, editable before saving | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) steps 2–4 |
+| Break prefilled from the linked shift ("45 min · from the shift") | [BR-CRW-DEFAULT-BREAK](../model/business-rules/br-crw-default-break.md) |
+| Registrations saved together for the selected activity | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) alternative flow |
+| Subtitle states the editable-days-back window (7 days) | [BR-CRW-DAYS-BACK-LIMIT](../model/business-rules/br-crw-days-back-limit.md), exception in [BR-CRW-PLANNED-ACTIVITIES-WINDOW](../model/business-rules/br-crw-planned-activities-window.md) |
+| Registered list shows the week's totals with check marks | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) postconditions, [BR-CRW-TIME-REGISTRATION-RIGHTS](../model/business-rules/br-crw-time-registration-rights.md) (own registrations only) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -23136,6 +23136,921 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "S122T",
+      "x": 6310,
+      "y": 15368,
+      "name": "Return Handling",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "pU7wa",
+          "name": "RH Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "m1IcP",
+              "name": "RH Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tde0r",
+                  "name": "RH Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "ufojK",
+                  "name": "RH Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cOgIn",
+              "name": "RH Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cWAbQ",
+                  "name": "RH Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "nr71B",
+                      "name": "RH Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "l2J7C5",
+                      "name": "RH Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dESs5",
+                  "name": "RH Nav Equipment",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Wp1Lb",
+                      "name": "RH Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T5EYE",
+                      "name": "RH Nav Label Equipment",
+                      "fill": "#8A93A8",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KPxUX",
+                  "name": "RH Nav Warehouse",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "B6sel",
+                      "name": "RH Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UajwL",
+                      "name": "RH Nav Label Warehouse",
+                      "fill": "$white",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZcICG",
+                  "name": "RH Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "E0RBRz",
+                      "name": "RH Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "p6NqT",
+                      "name": "RH Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "lvuVx",
+              "name": "RH Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Warehouse · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "x6ZBo",
+          "name": "RH Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "JIFWK",
+              "name": "RH Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uUaFo",
+                  "name": "RH Title",
+                  "fill": "$ink",
+                  "content": "Scan return",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "z9S4fa",
+                  "name": "RH Subtitle",
+                  "fill": "$slate",
+                  "content": "Mixed truck — pick the project per scanned article; each row notes its quantity and remark.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XMPEc",
+              "name": "RH Scan Bar",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 10,
+              "gap": 14,
+              "padding": [
+                16,
+                20
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "KoDie",
+                  "name": "RH Scan Icon",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "qr_code_scanner",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "frame",
+                  "id": "JYyl4",
+                  "name": "RH Scan Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mu3CQ",
+                      "name": "RH Scan Title",
+                      "fill": "$white",
+                      "content": "Truck unloaded — 14 units · from 3 projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "K2QIrf",
+                      "name": "RH Scan Sub",
+                      "fill": "#8A93A8",
+                      "content": "Camera ready; scan codes or type them below — the list routes each article to its project.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v2mvuj",
+              "name": "RH Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "D5BCEF",
+                  "name": "RH Table Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CoVkN",
+                      "name": "RH Col Article",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "ARTICLE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "doUEt",
+                      "name": "RH Col Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "PROJECT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PHpQd",
+                      "name": "RH Col Returned",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "RETURNED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "W5B8k8",
+                      "name": "RH Col Outcome",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "OUTCOME",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t5olWU",
+                      "name": "RH Col Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "NOTE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "v42L2",
+                  "name": "RH Row Alexa 35 body ",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "W6r8M",
+                      "name": "RH A Alexa 35 bod",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Alexa 35 body #0041",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V6da8",
+                      "name": "RH Prj Alexa 35 bod",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m6bvb",
+                      "name": "RH Qty Alexa 35 bod",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PCbKA",
+                      "name": "RH Out Alexa 35 bod",
+                      "width": 130,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "gSK6h",
+                          "name": "RH Out Chip Alexa 35 bod",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GiErk",
+                              "name": "RH Out Label Alexa 35 bod",
+                              "fill": "#1D7A4F",
+                              "content": "Returned",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "XPnnq",
+                      "name": "RH Note Alexa 35 bod",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Case clasp repaired",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mkEiK",
+                  "name": "RH Row Easyrig Vario ",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CkMN9",
+                      "name": "RH A Easyrig Vari",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Easyrig Vario 5 #EV5-7",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Glxyo",
+                      "name": "RH Prj Easyrig Vari",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nBSIY",
+                      "name": "RH Qty Easyrig Vari",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zeJUZ",
+                      "name": "RH Out Easyrig Vari",
+                      "width": 130,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "PTshc",
+                          "name": "RH Out Chip Easyrig Vari",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Dmkwm",
+                              "name": "RH Out Label Easyrig Vari",
+                              "fill": "#1D7A4F",
+                              "content": "Returned",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "v2Kn24",
+                      "name": "RH Note Easyrig Vari",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zZfT5",
+                  "name": "RH Row Sennheiser MKH",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gS7WU",
+                      "name": "RH A Sennheiser M",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sennheiser MKH-416 #S9",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "l9hWiU",
+                      "name": "RH Prj Sennheiser M",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "Gala Dinner",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bq6aI",
+                      "name": "RH Qty Sennheiser M",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BZ01j",
+                      "name": "RH Out Sennheiser M",
+                      "width": 130,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y5AsC1",
+                          "name": "RH Out Chip Sennheiser M",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "y4v4T",
+                              "name": "RH Out Label Sennheiser M",
+                              "fill": "#1D7A4F",
+                              "content": "Returned",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "n0633",
+                      "name": "RH Note Sennheiser M",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lWhgC",
+                  "name": "RH Row SDI cable 30m ",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "p2bDlm",
+                      "name": "RH A SDI cable 30",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SDI cable 30m #C142",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sCeRL",
+                      "name": "RH Prj SDI cable 30",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qXQtX",
+                      "name": "RH Qty SDI cable 30",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XTrVs",
+                      "name": "RH Out SDI cable 30",
+                      "width": 130,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "dqf30",
+                          "name": "RH Out Chip SDI cable 30",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "wMVkq",
+                              "name": "RH Out Label SDI cable 30",
+                              "fill": "#8A5A00",
+                              "content": "Damaged · charge",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Mcj2z",
+                      "name": "RH Note SDI cable 30",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Connector crushed — charged to project",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m3zaT",
+                  "name": "RH Row LED panel P2.6",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZzHiM",
+                      "name": "RH A LED panel P2",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "LED panel P2.6 #P114",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CBxmV",
+                      "name": "RH Prj LED panel P2",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 150,
+                      "content": "Gala Dinner",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RY5CI",
+                      "name": "RH Qty LED panel P2",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "0",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wX154",
+                      "name": "RH Out LED panel P2",
+                      "width": 130,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "sadcz",
+                          "name": "RH Out Chip LED panel P2",
+                          "fill": "#FDE3E0",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "i5pAB",
+                              "name": "RH Out Label LED panel P2",
+                              "fill": "#B3261E",
+                              "content": "Lost",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "OJVb1",
+                      "name": "RH Note LED panel P2",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Not found after teardown",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hET63",
+              "name": "RH Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "LHyC6",
+                  "name": "RH Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "jOTrP",
+                  "name": "RH Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lost equipment reduces stock; damage charges go to the project. Early returns release their reservation for other projects.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

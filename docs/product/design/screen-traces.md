@@ -82,6 +82,19 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Return handling (management/warehouse, desktop)
+
+File: `return-handling.png` / `return-handling.html`
+
+| Design decision | Decided by |
+|---|---|
+| Scan-return session: for each scanned article pick project and returned quantity; mixed truck from several projects booked back without sorting | [UC-WHS-SCAN-RETURN](../model/use-cases/uc-whs-scan-return.md) steps 1–5 |
+| Optional note per return row (case clasp repaired) | [UC-WHS-SCAN-RETURN](../model/use-cases/uc-whs-scan-return.md) main flow |
+| Lost line with quantity lost, charge decision and remark; recording reduces stock | [UC-WHS-MARK-LOST](../model/use-cases/uc-whs-mark-lost.md) steps 1–3 |
+| Damage charged to the project rides the same charge decision | [UC-WHS-MARK-LOST](../model/use-cases/uc-whs-mark-lost.md) step 3 (charge may be added) |
+| Lost equipment may invalidate reservations elsewhere — flagged in footnote | [UC-WHS-MARK-LOST](../model/use-cases/uc-whs-mark-lost.md) effects |
+| Early return releases the reservation for other projects | [UC-WHS-SCAN-RETURN](../model/use-cases/uc-whs-scan-return.md) effects |
+
 ## Screen — Packing list detail (management/warehouse, desktop)
 
 File: `packing-list.png` / `packing-list.html`

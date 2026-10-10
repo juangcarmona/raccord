@@ -1,0 +1,51 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_size = 2
+
+[*.yaml]
+indent_size = 2
+
+[*.cs]
+# Domain-specific: invariant culture is explicit where it matters (numbering, hashing, documents).
+dotnet_diagnostic.CA1303.severity = none
+# Domain exceptions require a stable rule code; the parameterless constructors would allow code-less errors.
+dotnet_diagnostic.RCS1194.severity = none
+dotnet_diagnostic.CA1032.severity = none
+
+[tests/**.cs]
+# Test names use underscores to read as behavior sentences.
+dotnet_diagnostic.CA1707.severity = none
+# xUnit test classes are instantiated by the framework.
+dotnet_diagnostic.CA1515.severity = none
+dotnet_diagnostic.CA2007.severity = none
+dotnet_diagnostic.MA0004.severity = none
+# Regexes in tests only parse output produced by the code under test.
+dotnet_diagnostic.MA0009.severity = none
+# Integration tests are bounded by the runner timeout; threading tokens through every HTTP call adds noise.
+dotnet_diagnostic.xUnit1051.severity = none
+
+[src/Raccord.Contracts/**.cs]
+# Wire contracts are grouped per feature (request + response records) so the public API reads as one file per area.
+dotnet_diagnostic.MA0048.severity = none
+
+[src/Raccord.Infrastructure/Persistence/Migrations/**.cs]
+# EF Core migrations are generated; reviewed by hand but not held to analyzer style rules.
+generated_code = true
+
+[src/Raccord.Web/**.cs]
+# ASP.NET Core has no SynchronizationContext; ConfigureAwait(false) adds noise without effect in the host.
+dotnet_diagnostic.MA0004.severity = none
+dotnet_diagnostic.CA2007.severity = none

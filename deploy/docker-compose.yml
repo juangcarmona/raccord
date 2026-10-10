@@ -1,0 +1,59 @@
+# Self-hosted Raccord: PostgreSQL, a one-shot migration job and the web application (API + UI).
+# Usage (from the deploy/ folder):  cp .env.example .env  &&  edit .env  &&  docker compose up -d --build
+name: raccord
+
+x-app: &app
+  image: ${RACCORD_IMAGE:-raccord:local}
+  build:
+    context: ..
+    dockerfile: deploy/docker/Dockerfile
+  environment: &app-environment
+    ConnectionStrings__raccord: Host=postgres;Port=5432;Database=${POSTGRES_DB:-raccord};Username=${POSTGRES_USER:-raccord};Password=${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in deploy/.env}
+    Raccord__TimeZone: ${RACCORD_TIME_ZONE:-Europe/Madrid}
+    Raccord__SeedDemoData: ${RACCORD_SEED_DEMO_DATA:-false}
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-raccord}
+      POSTGRES_USER: ${POSTGRES_USER:-raccord}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in deploy/.env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  migrate:
+    <<: *app
+    command: ["migrate"]
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    <<: *app
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "${RACCORD_HTTP_PORT:-8080}:8080"
+    volumes:
+      - documents:/var/lib/raccord/documents
+    healthcheck:
+      # The runtime image has no curl; bash's /dev/tcp is enough for a readiness probe.
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /health/ready HTTP/1.0\r\n\r\n' >&3 && grep -q '200 OK' <&3"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+
+volumes:
+  postgres-data:
+  documents:

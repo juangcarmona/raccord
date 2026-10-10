@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Raccord.Infrastructure\Raccord.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

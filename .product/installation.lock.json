@@ -1,0 +1,43 @@
+{
+  "schema": "product-definition-as-code/installation-lock/v1alpha1",
+  "version": "0.20.0",
+  "providers": {
+    "claude": {
+      "files": {
+        ".claude/commands/product/audit.md": "sha256:cd4913b0e8000fab75af8f2c75e9bc07fcf4c33c3e504a74bf6a53d73f71e5e7",
+        ".claude/commands/product/bind.md": "sha256:711e27ab987c53e5068644a3a73d9c3160506339eb22d57eaba4e7d046cb1890",
+        ".claude/commands/product/change.md": "sha256:77246da8d2a757cc015a8c708baf2a3552c029c3031d41f7db3c49105840604a",
+        ".claude/commands/product/define.md": "sha256:46f8831408dce17b0eb66c854ed551224e38d51d09acfcf227b8564c77e1863d",
+        ".claude/commands/product/explore.md": "sha256:b279e3b50f09dd97625797bb27fd7acbbafc812e9b8dcc553bdbc9d2de01e4bb",
+        ".claude/commands/product/impact.md": "sha256:30b690f70e80ee7d20608f93ee0ceb76836e2bd9035251b06b8074e49201f9ec",
+        ".claude/commands/product/recover.md": "sha256:d9dded29949eb4778515b1cf90cfd9764c6cb6ba088f2286ddaa1ac516c0c14d",
+        ".claude/commands/product/refine.md": "sha256:3da9c312274dc49a2a7d7a286f961fd12ea34652c67e32f7283d75c1051681a4",
+        ".claude/hooks/product-definition.json": "sha256:16de573c2b2f359cdb9dd8a6e7107480d3633d7470149f0456f7d7a599132dfd",
+        ".claude/skills/analyze-product-change/references/change-template-guide.md": "sha256:610c739dc61fd8addc2cc4ba05d56d6e2e5b913ac52adf8c7a12d13057917231",
+        ".claude/skills/analyze-product-change/references/operations-checklist.md": "sha256:b36c25fecd2ec74ce1b926a08081e893f203788614abef11394d4879318e2834",
+        ".claude/skills/analyze-product-change/SKILL.md": "sha256:135a82bc64f967114e8062968d1cdbb07d943b9be3cc5b9d10f6f26e3f90c443",
+        ".claude/skills/audit-product-model/references/diagnostic-codes.md": "sha256:d1ade2175e644c522eb2ce1fd91889833fb7998dc4acc3be8dd3a2567eb86bab",
+        ".claude/skills/audit-product-model/references/finding-classification.md": "sha256:5fa008b69c11bfb88555ef7c9aa028835ddcfba99451cf56f66d982cfecd38a5",
+        ".claude/skills/audit-product-model/SKILL.md": "sha256:9f635820d7d58172db6b219432566ab01e390a71a5b3300bcc516e33c53641f7",
+        ".claude/skills/bind-consumers/references/openspec.md": "sha256:68472070292260a1fe859c59ca669d7b822bacb7b38ef7c6db302e810bfb2bf0",
+        ".claude/skills/bind-consumers/references/speckit.md": "sha256:817fef756c5d908c5c54fcd17fddd5376a93d1564a84eb48c7d10c85624e3b19",
+        ".claude/skills/bind-consumers/SKILL.md": "sha256:6a92cd8c651531fed06ed8d3e8e99d55eadf3a5c0f45cc8278416e0276a48ef2",
+        ".claude/skills/define-product/references/authoring-order.md": "sha256:e0f4399482996cec52bea98b9b9a20b9a0f21c31216e43329769b95d6dfab6a6",
+        ".claude/skills/define-product/SKILL.md": "sha256:f1e83c4d46af53ed4f02ef2fac26da918788f55a832bbcc4fba8030131d08a25",
+        ".claude/skills/explore-product/references/exploration-heuristics.md": "sha256:4905e386f531f87c6d8cab7c563baca860b2f7405b850504a7c01aaa58dcc658",
+        ".claude/skills/explore-product/SKILL.md": "sha256:e5f5831da73044b24ea9426654ba4480023482aa44da26e18f91bf425f49cd36",
+        ".claude/skills/recover-product/references/artifact-extraction.md": "sha256:f8da12ffabb567d17f01b3b67995545f2e5f9a5e28648e5ee016430414ccb07f",
+        ".claude/skills/recover-product/references/completion-criteria.md": "sha256:b9fbabfc1d69daeaf4ea81be007084b40e70289b348ed52cbdcc9426ee12160c",
+        ".claude/skills/recover-product/references/evidence-classification.md": "sha256:2ff7f08350ecec1c363543fdf7e8cf929e25165a4fd13e21623154ef9ea75091",
+        ".claude/skills/recover-product/references/evidence-sources.md": "sha256:4c3e0c5dfc447867cebffc8fe1142b6e4615946db8a7c34bbc2b5ce483eb1bd6",
+        ".claude/skills/recover-product/references/provenance-format.md": "sha256:5767bd525ee2a7abe3e1f51342248060da4f290f2aed25b811259cf7f425daa0",
+        ".claude/skills/recover-product/references/reconciliation.md": "sha256:07a31fc20af0fc1a7b3033dd8617a5ad1c640277b383572ad3a508f077e1f19a",
+        ".claude/skills/recover-product/references/recovery-workflow.md": "sha256:c520f0d31182785dea38f654a9b58fa057c6208ce48cdd7b292e8e55daaf5934",
+        ".claude/skills/recover-product/SKILL.md": "sha256:6cc893e06a2c052efeacd9db9823c96ac183e8984f70905b75b9ba2fc9faeb12",
+        ".claude/skills/refine-product/references/host-adapter.md": "sha256:d3e0d5fde08bb81be072be4087cc8199f84fce44395a53ae06d97563e32b6a26",
+        ".claude/skills/refine-product/references/question-writing.md": "sha256:1c94da64fa11a34d7c3689f7dfb06f43e059b4955dd96b633d544ffef7af1ea2",
+        ".claude/skills/refine-product/SKILL.md": "sha256:cbd2e8538fa37690d25311ffea299a47340f11b9a0e1b4aa57402e9318f5ff49"
+      }
+    }
+  }
+}

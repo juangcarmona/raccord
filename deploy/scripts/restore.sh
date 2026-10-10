@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Restores a backup made by backup.sh into a Docker Compose installation whose database is empty or disposable.
+# Usage: deploy/scripts/restore.sh <backup-directory> <stamp>   (run from the deploy/ folder)
+# The web service is stopped during the restore and started again afterwards.
+set -euo pipefail
+
+project="${COMPOSE_PROJECT_NAME:-raccord}"
+source_dir="$(cd "$1" && pwd)"
+stamp="$2"
+
+( cd "$source_dir" && sha256sum --check "raccord-$stamp.sha256" )
+
+docker compose -p "$project" up -d postgres
+docker compose -p "$project" stop web || true
+until docker compose -p "$project" exec -T postgres sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"' >/dev/null; do sleep 1; done
+
+echo "Restoring database..."
+# Recreate the schema from scratch so the append-only triggers are restored with the data.
+docker compose -p "$project" exec -T postgres sh -c \
+  'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"'
+docker compose -p "$project" exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --no-owner --exit-on-error' \
+  < "$source_dir/raccord-db-$stamp.dump"
+
+echo "Restoring documents..."
+docker volume create "${project}_documents" >/dev/null
+docker run --rm -v "${project}_documents:/data" -v "$source_dir:/backup:ro" alpine:3 \
+  sh -c "find /data -mindepth 1 -delete && tar xzf /backup/raccord-documents-$stamp.tgz -C /data && chown -R 1654:1654 /data"
+
+docker compose -p "$project" up -d web
+echo "Restore complete. Verify with: curl -fsS http://localhost:\${RACCORD_HTTP_PORT:-8080}/health/ready"

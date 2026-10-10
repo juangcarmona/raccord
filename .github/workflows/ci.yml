@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: .NET restore, format, analyzers, tests, vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Restore
+        run: dotnet restore Raccord.slnx
+      - name: Format
+        run: dotnet format Raccord.slnx --verify-no-changes --no-restore
+      - name: Build (analyzers, warnings as errors)
+        run: dotnet build Raccord.slnx -c Release --no-restore
+      - name: Test (integration tests use Testcontainers PostgreSQL)
+        run: dotnet test Raccord.slnx -c Release --no-build
+      - name: Vulnerable packages
+        run: |
+          dotnet list Raccord.slnx package --vulnerable --include-transitive 2>&1 | tee vulnerable.txt
+          if grep -q -i "has the following vulnerable packages" vulnerable.txt; then exit 1; fi
+      - name: Pending model changes have a migration
+        run: |
+          dotnet tool restore
+          dotnet ef migrations has-pending-model-changes --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --no-build --configuration Release
+
+  product:
+    name: Product definition (PDaC)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Validate baseline and live Product Changes
+        run: |
+          npx -y @prodshape/cli@0.20.0 validate
+          for change in docs/product/changes/active/*/; do
+            id=$(grep -m1 '^id:' "$change/change.md" | awk '{print $2}')
+            npx -y @prodshape/cli@0.20.0 change validate "$id"
+          done
+
+  frontend:
+    name: Frontend lint, types, tests, build, audit, contract drift
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/Raccord.Frontend
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/Raccord.Frontend/package-lock.json
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: API contract is up to date
+        run: |
+          npm run api:generate
+          git diff --exit-code -- openapi src/shared/api/schema.d.ts
+
+  deployment:
+    name: Container image, Compose and Bicep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build container image
+        run: docker build -f deploy/docker/Dockerfile -t raccord:ci .
+      - name: Validate Compose file
+        working-directory: deploy
+        run: POSTGRES_PASSWORD=ci-only docker compose config --quiet
+      - name: Build and lint Bicep
+        run: |
+          az bicep install
+          az bicep build --file deploy/azure/bicep/main.bicep --stdout > /dev/null
+          az bicep lint --file deploy/azure/bicep/main.bicep

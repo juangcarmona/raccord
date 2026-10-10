@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Raccord mark</title>
+  <desc id="desc">Two linked frame-like paths representing continuity in audiovisual production.</desc>
+  <path fill="#0B1020" d="M108 116h235c29 0 52 23 52 52v38h-50v-25c0-9-7-16-16-16H132v118h109l38-38 36 36-53 53H108c-28 0-50-22-50-50V166c0-28 22-50 50-50Z"/>
+  <path fill="#2DE2E6" d="M404 396H169c-29 0-52-23-52-52v-38h50v25c0 9 7 16 16 16h197V229H271l-38 38-36-36 53-53h205c28 0 50 22 50 50v102c0 36-29 66-66 66Z"/>
+  <path fill="#FF6B5E" d="m327 116 43 43-43 43-43-43 43-43Zm-111 194 43 43-43 43-43-43 43-43Z"/>
+</svg>

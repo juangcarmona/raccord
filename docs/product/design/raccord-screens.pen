@@ -20291,6 +20291,829 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "q7TKx",
+      "x": 6310,
+      "y": 11816,
+      "name": "Task Workflow Settings",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "W2s9b",
+          "name": "TW Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "ZZmQK",
+              "name": "TW Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xNXok",
+                  "name": "TW Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "Qign0",
+                  "name": "TW Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VE2kk",
+              "name": "TW Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "y5Wsy5",
+                  "name": "TW Nav Task boards",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "qV9Y2",
+                      "name": "TW Nav Icon Task boards",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "view_kanban",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hTuzC",
+                      "name": "TW Nav Label Task boards",
+                      "fill": "#8A93A8",
+                      "content": "Task boards",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "o4PVc",
+                  "name": "TW Nav Teams",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "l6Hmv5",
+                      "name": "TW Nav Icon Teams",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "B7hTW",
+                      "name": "TW Nav Label Teams",
+                      "fill": "#8A93A8",
+                      "content": "Teams",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "qbZuE",
+                  "name": "TW Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "M8Xd0",
+                      "name": "TW Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XOnFY",
+                      "name": "TW Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nG1GR",
+                  "name": "TW Nav Workspace",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XnMCW",
+                      "name": "TW Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LEo9d",
+                      "name": "TW Nav Label Workspace",
+                      "fill": "$white",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "x4AnPb",
+              "name": "TW Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace admin · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tqE79",
+          "name": "TW Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "y8Cfd",
+              "name": "TW Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "amvD4",
+                  "name": "TW Title",
+                  "fill": "$ink",
+                  "content": "Task workflow",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "B6S0o",
+                  "name": "TW Subtitle",
+                  "fill": "$slate",
+                  "content": "Company-wide task statuses and teams. Boards show columns in the configured order.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a2toy3",
+              "name": "TW Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "s0PH3",
+                  "name": "TW Status Card",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "X2AYz",
+                      "name": "TW Status Caption",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "w7YBQ",
+                          "name": "TW Status Title",
+                          "fill": "$ink",
+                          "content": "Statuses",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "M7Sgc",
+                          "name": "TW Status Add",
+                          "cornerRadius": 6,
+                          "stroke": "#000000",
+                          "strokeWidth": 1.5,
+                          "padding": [
+                            5,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AlG6H",
+                              "name": "TW Status Add Label",
+                              "fill": "#000000",
+                              "content": "+ Status",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fo3Xq",
+                      "name": "TW Status Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Drag to reorder. To do and Completed are fixed endpoints — they can be renamed or recoloured but not deleted.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "olqRQ",
+                      "name": "TW Status Flow",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "V6Psjt",
+                          "name": "TW Chip To do",
+                          "cornerRadius": 8,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Mpr3x",
+                              "name": "TW Chip Dot To do",
+                              "width": 10,
+                              "height": 10,
+                              "fill": "#8A93A8",
+                              "cornerRadius": 99
+                            },
+                            {
+                              "type": "text",
+                              "id": "IRoZ3",
+                              "name": "TW Chip Label To do",
+                              "fill": "$ink",
+                              "content": "To do",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "msSba",
+                          "name": "TW Arrow 0",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "arrow_forward",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HBYcy",
+                          "name": "TW Chip Prep",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "q856rM",
+                              "name": "TW Chip Dot Prep",
+                              "width": 10,
+                              "height": 10,
+                              "fill": "#2DE2E6",
+                              "cornerRadius": 99
+                            },
+                            {
+                              "type": "text",
+                              "id": "lAIbY",
+                              "name": "TW Chip Label Prep",
+                              "fill": "$ink",
+                              "content": "Prep",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "g0MLPy",
+                          "name": "TW Arrow 1",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "arrow_forward",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "WeDM4",
+                          "name": "TW Chip In progress",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "BvM15",
+                              "name": "TW Chip Dot In progress",
+                              "width": 10,
+                              "height": 10,
+                              "fill": "#0B7FBF",
+                              "cornerRadius": 99
+                            },
+                            {
+                              "type": "text",
+                              "id": "GyBX3",
+                              "name": "TW Chip Label In progress",
+                              "fill": "$ink",
+                              "content": "In progress",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "II1rQ",
+                          "name": "TW Arrow 2",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "arrow_forward",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "i2VStF",
+                          "name": "TW Chip Review",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "cBIQM",
+                              "name": "TW Chip Dot Review",
+                              "width": 10,
+                              "height": 10,
+                              "fill": "#8A5A00",
+                              "cornerRadius": 99
+                            },
+                            {
+                              "type": "text",
+                              "id": "RIk6u",
+                              "name": "TW Chip Label Review",
+                              "fill": "$ink",
+                              "content": "Review",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "o8PVFN",
+                          "name": "TW Arrow 3",
+                          "width": 12,
+                          "height": 12,
+                          "icon": "arrow_forward",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aBPVx",
+                          "name": "TW Chip Completed",
+                          "cornerRadius": 8,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "KhxL2",
+                              "name": "TW Chip Dot Completed",
+                              "width": 10,
+                              "height": 10,
+                              "fill": "#1D7A4F",
+                              "cornerRadius": 99
+                            },
+                            {
+                              "type": "text",
+                              "id": "F43SOQ",
+                              "name": "TW Chip Label Completed",
+                              "fill": "$ink",
+                              "content": "Completed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jJJyA",
+                      "name": "TW Delete Card",
+                      "width": "fill_container",
+                      "fill": "$cloud",
+                      "cornerRadius": 8,
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": [
+                        12,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fewnZ",
+                          "name": "TW Delete Title",
+                          "fill": "$ink",
+                          "content": "Delete a status",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xE0Vb",
+                          "name": "TW Delete Text",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Deleting asks where its tasks move; tasks on a deleted status migrate to the chosen one.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "d4hPKW",
+                  "name": "TW Teams Card",
+                  "width": 420,
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Rjf6o",
+                      "name": "TW Teams Title",
+                      "fill": "$ink",
+                      "content": "Teams and team boards",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "feUQF",
+                      "name": "TW Teams Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Teams group colleagues across projects; a team board shows several teams' shared work. Members added or removed are notified.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LYLvS",
+                      "name": "TW Team Rows",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "T1LvpA",
+                          "name": "TW Team Video",
+                          "width": "fill_container",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "gap": 10,
+                          "padding": [
+                            10,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "s1obv2",
+                              "name": "TW Team Icon Video",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "groups",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "text",
+                              "id": "uy2Cj",
+                              "name": "TW Team Name Video",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Video",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "GUPqd",
+                              "name": "TW Team Count Video",
+                              "fill": "$slate",
+                              "content": "6 members",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RsMCR",
+                          "name": "TW Team Lighting",
+                          "width": "fill_container",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "gap": 10,
+                          "padding": [
+                            10,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "uSQo8",
+                              "name": "TW Team Icon Lighting",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "groups",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "text",
+                              "id": "gdkpK",
+                              "name": "TW Team Name Lighting",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Lighting",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ADpiO",
+                              "name": "TW Team Count Lighting",
+                              "fill": "$slate",
+                              "content": "4 members",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NIVW1",
+                          "name": "TW Team Rigging",
+                          "width": "fill_container",
+                          "cornerRadius": 8,
+                          "stroke": "$hairline",
+                          "gap": 10,
+                          "padding": [
+                            10,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "nNTCv",
+                              "name": "TW Team Icon Rigging",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "groups",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "text",
+                              "id": "T6Ehk",
+                              "name": "TW Team Name Rigging",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Rigging",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "lI43A",
+                              "name": "TW Team Count Rigging",
+                              "fill": "$slate",
+                              "content": "5 members",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z46Sf3",
+                      "name": "TW New Team",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "y0tQV",
+                          "name": "TW New Team Label",
+                          "fill": "$slate",
+                          "content": "+ New team",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

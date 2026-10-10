@@ -82,6 +82,18 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Task workflow settings (management, desktop)
+
+File: `task-workflow-settings.png` / `task-workflow-settings.html`
+
+| Design decision | Decided by |
+|---|---|
+| Company-wide task statuses with name + colour, reorderable | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) step 1, [BR-PRJ-TASK-STATUS-ORDER](../model/business-rules/br-prj-task-status-order.md) |
+| To do and Completed fixed endpoints (renameable, recolourable, not deletable) | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) failure conditions, [BR-PRJ-TASK-STATUS-ENDPOINTS](../model/business-rules/br-prj-task-status-endpoints.md) |
+| Deleting a status asks where its tasks move (migration) | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) step 2, [BR-PRJ-TASK-STATUS-MIGRATION](../model/business-rules/br-prj-task-status-migration.md) |
+| Boards show columns in configured order (subtitle note) | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) postconditions |
+| Teams with members; team boards span several teams; add/remove notifications | [UC-PRJ-MANAGE-TEAMS](../model/use-cases/uc-prj-manage-teams.md) steps 1–3, [BR-PRJ-TEAM-MEMBERSHIP-NOTICE](../model/business-rules/br-prj-team-membership-notice.md) |
+
 ## Screen — Service planned-vs-actual (management, desktop)
 
 File: `service-planned-actual.png` / `service-planned-actual.html`

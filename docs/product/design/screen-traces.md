@@ -149,6 +149,21 @@ File: `equipment-labels.png` / `equipment-labels.html`
 | Case label with content option | [UC-WHS-PRINT-CODE-LABELS](../model/use-cases/uc-whs-print-code-labels.md) alternative flow, [TERM-COMBINATION-LABEL](../model/domain/terms/term-combination-label.md) |
 | Footnote: label too small for the code refused; oversized content spills to the next label | [UC-WHS-PRINT-CODE-LABELS](../model/use-cases/uc-whs-print-code-labels.md) failure conditions, [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) failure conditions |
 
+## Screen — Workspace settings & roles (management, desktop, setup)
+
+File: `workspace-settings.png` / `workspace-settings.html`
+
+| Design decision | Decided by |
+|---|---|
+| Company details card: name, address, contact, logo, workspace image for sign-in/signing/payment pages | [UC-WSP-EDIT-COMPANY-DETAILS](../model/use-cases/uc-wsp-edit-company-details.md) steps 2–3, [TERM-WORKSPACE-IMAGE](../model/domain/terms/term-workspace-image.md) |
+| Time zone and language in workspace settings | [UC-WSP-SET-TIME-ZONE](../model/use-cases/uc-wsp-set-time-zone.md), [UC-WSP-SET-LANGUAGE](../model/use-cases/uc-wsp-set-language.md) |
+| Number series table with format and current number per series | [UC-WSP-CONFIGURE-NUMBER-SERIES](../model/use-cases/uc-wsp-configure-number-series.md) step 2, [TERM-NUMBER-SERIES](../model/domain/terms/term-number-series.md) |
+| Invoice series follows the F prefix convention (F2026-%###) | [TERM-INVOICE-SERIES](../model/domain/terms/term-invoice-series.md) |
+| Roles table listing the four predefined roles, some adapted, with user counts and granted modules | [UC-WSP-MANAGE-ROLE](../model/use-cases/uc-wsp-manage-role.md) main flow and alternative flow, [TERM-USER-ROLE](../model/domain/terms/term-user-role.md) |
+| Permissions set per module: access, level, scope | [UC-WSP-MANAGE-ROLE](../model/use-cases/uc-wsp-manage-role.md) step 2, [TERM-ROLE-PERMISSION](../model/domain/terms/term-role-permission.md) |
+| Footnote: role changes apply to all its users immediately | [UC-WSP-MANAGE-ROLE](../model/use-cases/uc-wsp-manage-role.md) step 3 and postconditions |
+| Overall journey context: setup from company details through roles to go-live | [JRN-WSP-SET-UP-WORKSPACE](../model/journeys/jrn-wsp-set-up-workspace.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

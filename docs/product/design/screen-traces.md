@@ -106,6 +106,21 @@ File: `workday-corrections.png` / `workday-corrections.html`
 | Footnote: correction without reason refused; no self-approval | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) failure conditions |
 | Footnote: records kept at least four years, exportable after departure | [BR-WORKDAY-RETENTION](../model/business-rules/br-workday-retention.md) |
 
+## Screen — Document send & communications log (management, desktop)
+
+File: `communications-log.png` / `communications-log.html`
+
+| Design decision | Decided by |
+|---|---|
+| E-mail compose card: recipients, subject from template, sender = company mail account, signature appended, document attached | [UC-DOC-EMAIL-DOCUMENT](../model/use-cases/uc-doc-email-document.md) steps 2–5, [BR-DOC-SIGNATURE-APPENDED](../model/business-rules/br-doc-signature-appended.md) |
+| Send button notes the message is logged as pending until the mail account reports | [UC-DOC-EMAIL-DOCUMENT](../model/use-cases/uc-doc-email-document.md) step 5, [BR-DOC-DELIVERY-STATUS-TRANSITIONS](../model/business-rules/br-doc-delivery-status-transitions.md) |
+| Communications list per recipient/contact with subject, message start, date and delivery status | [UC-DOC-REVIEW-RECIPIENT-COMMUNICATIONS](../model/use-cases/uc-doc-review-recipient-communications.md) step 2, [TERM-COMMUNICATION-RECORD](../model/domain/terms/term-communication-record.md) |
+| Delivery statuses Sent / Pending / Failed (failed carries the reason) | [UC-DOC-RECORD-DELIVERY-OUTCOME](../model/use-cases/uc-doc-record-delivery-outcome.md) main and alternative flows |
+| Failed row surfaced in an error banner with investigate-and-resend action | [JRN-DOC-SEND-DOCUMENT-AND-CONFIRM-RECEIPT](../model/journeys/jrn-doc-send-document-and-confirm-receipt.md) variant "Delivery failed", [UC-DOC-INVESTIGATE-DELIVERY-FAILURE](../model/use-cases/uc-doc-investigate-delivery-failure.md) |
+| Footnote: delivery status applies to e-mails only | [BR-DOC-STATUS-EMAIL-ONLY](../model/business-rules/br-doc-status-email-only.md) |
+| Footnote: roles without access see only their own sent messages | [BR-DOC-COMMUNICATION-ACCESS](../model/business-rules/br-doc-communication-access.md) |
+| Footnote: record changes after generation need regeneration | [BR-PRJ-DOCUMENT-REGENERATION](../model/business-rules/br-prj-document-regeneration.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

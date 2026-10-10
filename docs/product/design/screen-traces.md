@@ -76,6 +76,20 @@ File: `crew-profile.png` / `crew-profile.html`
 | ID document with front + back files forming one document | [TERM-CREW-DOCUMENT](../model/domain/terms/term-crew-document.md) definition |
 | Footnote: derived active contract can be overridden by an administrator | [BR-CRW-ACTIVE-CONTRACT-DERIVATION](../model/business-rules/br-crw-active-contract-derivation.md) override clause |
 
+## Screen — Personal schedule & calendar feeds (management, desktop; crew-own view)
+
+File: `personal-schedule.png` / `personal-schedule.html`
+
+| Design decision | Decided by |
+|---|---|
+| Week view of final assignments with times, locations and remarks | [UC-CRW-CONSULT-OWN-SCHEDULE](../model/use-cases/uc-crw-consult-own-schedule.md) steps 1–2 |
+| Appointments shown alongside functions; reservations shown with a separate visual treatment | [UC-CRW-CONSULT-OWN-SCHEDULE](../model/use-cases/uc-crw-consult-own-schedule.md) step 2, [TERM-PERSONAL-SCHEDULE](../model/domain/terms/term-personal-schedule.md) |
+| Draft work not visible; subtitle states it | [BR-CRW-DRAFT-INVISIBLE](../model/business-rules/br-crw-draft-invisible.md) |
+| Empty days rendered as empty, not errors | [UC-CRW-CONSULT-OWN-SCHEDULE](../model/use-cases/uc-crw-consult-own-schedule.md) failure conditions |
+| Calendar feeds table: named streams with copyable private addresses | [UC-INT-SUBSCRIBE-TO-CALENDAR-FEED](../model/use-cases/uc-int-subscribe-to-calendar-feed.md) step 1, [TERM-CALENDAR-STREAM](../model/domain/terms/term-calendar-stream.md), [JRN-INT-SYNC-PERSONAL-CALENDAR](../model/journeys/jrn-int-sync-personal-calendar.md) |
+| Scope column notes each stream follows the user's permissions | [BR-WSP-INTEGRATION-DATA-SCOPE](../model/business-rules/br-wsp-integration-data-scope.md), [BR-INT-SYNC-RESPECTS-ROLE](../model/business-rules/br-int-sync-respects-role.md) |
+| Footnote: feeds are read-only, refresh is the application's own schedule, items created there never reach Raccord | [UC-INT-SUBSCRIBE-TO-CALENDAR-FEED](../model/use-cases/uc-int-subscribe-to-calendar-feed.md) failure conditions and postconditions, [BR-INT-FEED-ONE-WAY](../model/business-rules/br-int-feed-one-way.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -40892,6 +40892,1116 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "h573I",
+      "x": 6310,
+      "y": 34312,
+      "name": "Personal Schedule",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "SPqxU",
+          "name": "PS Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "SHmt0",
+              "name": "PS Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PVe8Y",
+                  "name": "PS Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "wpdNW",
+                  "name": "PS Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zWB0N",
+              "name": "PS Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TMONn",
+                  "name": "PS Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "mjgQC",
+                      "name": "PS Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x1rB2W",
+                      "name": "PS Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mcSTS",
+                  "name": "PS Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Zc9ol",
+                      "name": "PS Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DHeWj",
+                      "name": "PS Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ikl8U",
+                  "name": "PS Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "J6K21",
+                      "name": "PS Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "F8Es50",
+                      "name": "PS Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Jnd03",
+                  "name": "PS Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XO98Z",
+                      "name": "PS Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vyHmI",
+                      "name": "PS Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "WbPAZ",
+              "name": "PS Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Nerea Vidal · field crew",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "F8mcl",
+          "name": "PS Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "t4dNMB",
+              "name": "PS Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "L5hqLz",
+                  "name": "PS Title",
+                  "fill": "$ink",
+                  "content": "My schedule — week 47 · 16–22 Nov 2026",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "b3kAu",
+                  "name": "PS Subtitle",
+                  "fill": "$slate",
+                  "content": "Final assignments with times, locations and remarks; draft work is not shown until the planner finishes it.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "EpMeA",
+              "name": "PS Calendar Card",
+              "width": "fill_container",
+              "height": 480,
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "G4Mri",
+                  "name": "PS Cal Header",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hXgh0",
+                      "name": "PS Cal Title",
+                      "fill": "$ink",
+                      "content": "Week 47",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RXKSw",
+                      "name": "PS Cal Sub",
+                      "fill": "$slate",
+                      "content": "MON 16 · TUE 17 · WED 18 · THU 19 · FRI 20 · SAT 21 · SUN 22",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zsiFb",
+                  "name": "PS Grid",
+                  "width": "fill_container",
+                  "height": 400,
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "YY7xP",
+                      "name": "PS Day Mon",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "f3esIC",
+                          "name": "PS DayL Mon",
+                          "fill": "$ink",
+                          "content": "Mon 16",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fc8Ui",
+                          "name": "PS Ev Mon08:00",
+                          "width": "fill_container",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 6,
+                          "stroke": "#D6EBF7",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gLwp4",
+                              "name": "PS EvT Mon08:00",
+                              "fill": "#000000",
+                              "content": "08:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "AIwgb",
+                              "name": "PS EvD Mon08:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Corona Festival · A-cam · Fira Montjuïc hall 2",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "mXOLR",
+                              "name": "PS EvS Mon08:00",
+                              "fill": "$slate",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "X2PFdx",
+                      "name": "PS Day Tue",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qB0md",
+                          "name": "PS DayL Tue",
+                          "fill": "$ink",
+                          "content": "Tue 17",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DATyK",
+                          "name": "PS Ev Tue09:00",
+                          "width": "fill_container",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 6,
+                          "stroke": "#D6EBF7",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dGPlN",
+                              "name": "PS EvT Tue09:00",
+                              "fill": "#000000",
+                              "content": "09:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ZKsvy",
+                              "name": "PS EvD Tue09:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Corona Festival · A-cam · Fira Montjuïc hall 2",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qHrPE",
+                              "name": "PS EvS Tue09:00",
+                              "fill": "$slate",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "c8UJS",
+                          "name": "PS Ev Tue18:00",
+                          "width": "fill_container",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 6,
+                          "stroke": "#D6EBF7",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HKD7J",
+                              "name": "PS EvT Tue18:00",
+                              "fill": "#000000",
+                              "content": "18:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "NH7LS",
+                              "name": "PS EvD Tue18:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Rig review · appointment",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "olBVs",
+                              "name": "PS EvS Tue18:00",
+                              "fill": "$slate",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uLfJd",
+                      "name": "PS Day Wed",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ZzZOK",
+                          "name": "PS DayL Wed",
+                          "fill": "$ink",
+                          "content": "Wed 18",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "L3HayA",
+                          "name": "PS Empty Wed",
+                          "fill": "#8A93A8",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nBKOT",
+                      "name": "PS Day Thu",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VghhS",
+                          "name": "PS DayL Thu",
+                          "fill": "$ink",
+                          "content": "Thu 19",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yF2Nc",
+                          "name": "PS Ev Thu08:00",
+                          "width": "fill_container",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 6,
+                          "stroke": "#D6EBF7",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rDTBe",
+                              "name": "PS EvT Thu08:00",
+                              "fill": "#000000",
+                              "content": "08:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Um4tB",
+                              "name": "PS EvD Thu08:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Corona Festival · A-cam · hall 2",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "lkQIt",
+                              "name": "PS EvS Thu08:00",
+                              "fill": "$slate",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Gb60W",
+                          "name": "PS Ev Thu14:00",
+                          "width": "fill_container",
+                          "fill": "$cloud",
+                          "cornerRadius": 6,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "SnCrZ",
+                              "name": "PS EvT Thu14:00",
+                              "fill": "$slate",
+                              "content": "14:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "xbKxN",
+                              "name": "PS EvD Thu14:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Kit prep reservation · warehouse",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "LbI7f",
+                              "name": "PS EvS Thu14:00",
+                              "fill": "$slate",
+                              "content": "Reservation",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JiQPN",
+                      "name": "PS Day Fri",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CHfDd",
+                          "name": "PS DayL Fri",
+                          "fill": "$ink",
+                          "content": "Fri 20",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "d6LSCk",
+                          "name": "PS Empty Fri",
+                          "fill": "#8A93A8",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "J1ka7",
+                      "name": "PS Day Sat",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kI4Tg",
+                          "name": "PS DayL Sat",
+                          "fill": "$ink",
+                          "content": "Sat 21",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j6KYl",
+                          "name": "PS Ev Sat10:00",
+                          "width": "fill_container",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 6,
+                          "stroke": "#D6EBF7",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "pruVP",
+                              "name": "PS EvT Sat10:00",
+                              "fill": "#000000",
+                              "content": "10:00",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "J4pwH2",
+                              "name": "PS EvD Sat10:00",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Studio shoot · Sant Adrià · B-cam",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "YkId3",
+                              "name": "PS EvS Sat10:00",
+                              "fill": "$slate",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n3O9fo",
+                      "name": "PS Day Sun",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Jz6fb",
+                          "name": "PS DayL Sun",
+                          "fill": "$ink",
+                          "content": "Sun 22",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "l4rqm",
+                          "name": "PS Empty Sun",
+                          "fill": "#8A93A8",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v6Pjgg",
+              "name": "PS Feeds Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YRx3x",
+                  "name": "PS Feeds Head",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "V38T7",
+                      "name": "PS Feeds Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "calendar_add_on",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "s4yrNB",
+                      "name": "PS Feeds Title",
+                      "fill": "$ink",
+                      "content": "Calendar feeds · copy the private address of the streams you want",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G17kO",
+                  "name": "PS Feeds Table",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z1sRn",
+                      "name": "PS Feeds Head Row",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        7,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "h7b0z3",
+                          "name": "PS FCol Stream",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "STREAM",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "w7HRjf",
+                          "name": "PS FCol Private address",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "PRIVATE ADDRESS",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qrMGh",
+                          "name": "PS FCol Scope",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "SCOPE",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eqIR3",
+                      "name": "PS Feed Row own",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ztpRH",
+                          "name": "PS Feed N own",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 180,
+                          "content": "My own functions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "K9xOCZ",
+                          "name": "PS Feed U own",
+                          "fill": "#000000",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "https://raccord.example/feed/9f2a…c1/my-functions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "YBJ1m",
+                          "name": "PS Feed S own",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "Only my final assignments",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZiYBE",
+                      "name": "PS Feed Row appointments",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qgpd7",
+                          "name": "PS Feed N appointments",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 180,
+                          "content": "My appointments",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "JjUQK",
+                          "name": "PS Feed U appointments",
+                          "fill": "#000000",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "https://raccord.example/feed/9f2a…c1/my-appointments",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "LDBe1",
+                          "name": "PS Feed S appointments",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "Only my appointments",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OzI0t",
+                      "name": "PS Feed Row projects",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Q5ZNNg",
+                          "name": "PS Feed N projects",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 180,
+                          "content": "All projects",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "itlzg",
+                          "name": "PS Feed U projects",
+                          "fill": "#000000",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "https://raccord.example/feed/9f2a…c1/all-projects",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "EZoRj",
+                          "name": "PS Feed S projects",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "Streams follow my permissions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Zvd5q",
+              "name": "PS Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "AfyWE",
+                  "name": "PS Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "e0i4ON",
+                  "name": "PS Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Feeds are read-only and refresh on the calendar application's own schedule — some applications refresh only daily. Items created in the calendar application never reach Raccord. Each stream publishes only what your permissions allow.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

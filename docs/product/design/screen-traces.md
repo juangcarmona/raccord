@@ -178,6 +178,21 @@ File: `api-access.png` / `api-access.html`
 | Footnote: interface exposes only what the integration requests within the owner's permissions | [BR-WSP-INTEGRATION-DATA-SCOPE](../model/business-rules/br-wsp-integration-data-scope.md) |
 | Journey context: enable → token → read/write → adapt across versions; leak → regenerate | [JRN-INT-BUILD-API-INTEGRATION](../model/journeys/jrn-int-build-api-integration.md) |
 
+## Screen — My assignments & responses (field mode, phone)
+
+File: `my-assignments.png` / `my-assignments.html`
+
+| Design decision | Decided by |
+|---|---|
+| Phone layout in the field PWA dark theme; "My jobs" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
+| Open invitations answered with Yes/No directly in the mobile web app | [UC-CRW-RESPOND-TO-INVITATION](../model/use-cases/uc-crw-respond-to-invitation.md) steps 1–2 |
+| Invitation card explains what a yes does per type ("plans you visibly", "marks me available") | [TERM-INVITATION-TYPE](../model/domain/terms/term-invitation-type.md) |
+| Availability invitation shows no job details (only the period) | [TERM-INVITATION-TYPE](../model/domain/terms/term-invitation-type.md) definition |
+| Job board postings browsable with due-date sort and sign-up action | [UC-CRW-SIGN-UP-FOR-POSTED-JOB](../model/use-cases/uc-crw-sign-up-for-posted-job.md) steps 1–2 |
+| Posting cards show time, location, rate | [TERM-JOB-POSTING](../model/domain/terms/term-job-posting.md) |
+| Dismiss action removes a posting from the crew member's view | [UC-CRW-SIGN-UP-FOR-POSTED-JOB](../model/use-cases/uc-crw-sign-up-for-posted-job.md) alternative flow |
+| Note on posting: sign-up does not check availability or conflicts; the planner resolves double bookings | [BR-CRW-JOB-BOARD-IGNORES-CONFLICTS](../model/business-rules/br-crw-job-board-ignores-conflicts.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

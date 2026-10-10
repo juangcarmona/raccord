@@ -48098,6 +48098,683 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "i0iXIB",
+      "x": 920,
+      "y": 2068,
+      "name": "My Assignments",
+      "width": 390,
+      "height": 844,
+      "fill": "$ink",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YLp1i",
+          "name": "MA Status Bar",
+          "width": "fill_container",
+          "padding": [
+            14,
+            24,
+            6,
+            24
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "text",
+              "id": "GLYGT",
+              "name": "MA Status Time",
+              "fill": "$white",
+              "content": "10:42",
+              "fontFamily": "$font-body",
+              "fontSize": 12,
+              "fontWeight": "medium"
+            },
+            {
+              "type": "frame",
+              "id": "U8R2av",
+              "name": "MA Status Icons",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ibQNq",
+                  "name": "MA SIcon signal",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "signal_cellular_alt",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "iCObl",
+                  "name": "MA SIcon wifi",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "wifi",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "NlJqx",
+                  "name": "MA SIcon battery",
+                  "width": 18,
+                  "height": 14,
+                  "icon": "battery_full",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$white"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "S01jh",
+          "name": "MA Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            10,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "v81R0E",
+              "name": "MA Hero",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "h3NR6j",
+                  "name": "MA Hero Date",
+                  "fill": "#8A93A8",
+                  "content": "TUESDAY 10 NOVEMBER, 15:42",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "eq2C2",
+                  "name": "MA Hero Greeting",
+                  "fill": "$white",
+                  "content": "My jobs",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MlkSX",
+              "name": "MA Invitations",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "B5lvXu",
+                  "name": "MA Sec1 Label",
+                  "fill": "#8A93A8",
+                  "content": "INVITATIONS · 2 OPEN",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "semibold"
+                },
+                {
+                  "type": "frame",
+                  "id": "looBx",
+                  "name": "MA Inv Card 1",
+                  "width": "fill_container",
+                  "fill": "#0F1628",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "CyNEj",
+                      "name": "MA C1 Head",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l7srvC",
+                          "name": "MA C1 Title",
+                          "fill": "$white",
+                          "content": "Corona Festival · A-cam operator",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "bold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "fDT5x",
+                          "name": "MA C1 Sub",
+                          "fill": "#8A93A8",
+                          "content": "Final planning · 16–18 Nov · Fira Montjuïc, hall 2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pgknJ",
+                      "name": "MA C1 Chip",
+                      "fill": "#D6EBF7",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kCG4f",
+                          "name": "MA C1 Chip Text",
+                          "fill": "#000000",
+                          "content": "Yes plans you visibly on the function",
+                          "fontFamily": "$font-body",
+                          "fontSize": 9.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "UzGEQ",
+                      "name": "MA C1 Buttons",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "KXTwe",
+                          "name": "MA C1 Yes",
+                          "width": "fill_container",
+                          "fill": "$cyan",
+                          "cornerRadius": 8,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yXR8f",
+                              "name": "MA C1 Yes T",
+                              "fill": "$ink",
+                              "content": "Yes",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "e2F2nt",
+                          "name": "MA C1 No",
+                          "width": "fill_container",
+                          "fill": "#141B33",
+                          "cornerRadius": 8,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "s6NMqd",
+                              "name": "MA C1 No T",
+                              "fill": "#8A93A8",
+                              "content": "No",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "b4ppd3",
+                  "name": "MA Inv Card 2",
+                  "width": "fill_container",
+                  "fill": "#0F1628",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "J0uu8j",
+                      "name": "MA C2 Head",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "imiN2",
+                          "name": "MA C2 Title",
+                          "fill": "$white",
+                          "content": "Week 48 · availability request",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "bold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CzYAw",
+                          "name": "MA C2 Sub",
+                          "fill": "#8A93A8",
+                          "content": "Availability · 23–29 Nov · no job details shown",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "V978D",
+                      "name": "MA C2 Chip Text",
+                      "fill": "#667085",
+                      "content": "Yes marks me available · no marks me unavailable",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rVf0n",
+                      "name": "MA C2 Buttons",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "GsJCA",
+                          "name": "MA C2 Yes",
+                          "width": "fill_container",
+                          "fill": "$cyan",
+                          "cornerRadius": 8,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dd1ZB",
+                              "name": "MA C2 Yes T",
+                              "fill": "$ink",
+                              "content": "Yes",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U8Ycb",
+                          "name": "MA C2 No",
+                          "width": "fill_container",
+                          "fill": "#141B33",
+                          "cornerRadius": 8,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VRgtS",
+                              "name": "MA C2 No T",
+                              "fill": "#8A93A8",
+                              "content": "No",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pAS3O",
+              "name": "MA Postings",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CGHfJ",
+                  "name": "MA Sec2 Label",
+                  "fill": "#8A93A8",
+                  "content": "JOB BOARD · SORTED BY DUE DATE",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "semibold"
+                },
+                {
+                  "type": "frame",
+                  "id": "lseCb",
+                  "name": "MA Post Card 1",
+                  "width": "fill_container",
+                  "fill": "#00000000",
+                  "cornerRadius": 10,
+                  "stroke": "#1A2440",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "b5ajsl",
+                      "name": "MA C3 Head",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Oyfea",
+                          "name": "MA C3 Title",
+                          "fill": "$white",
+                          "content": "Studio shoot · B-cam operator",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "bold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SvDLi",
+                          "name": "MA C3 Due",
+                          "fill": "#8A93A8",
+                          "content": "due 13 Nov",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "U6g8ln",
+                      "name": "MA C3 Sub",
+                      "fill": "#8A93A8",
+                      "content": "21 Nov · 10:00–22:00 · Sant Adrià studio · €25/h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vmlyt",
+                      "name": "MA C3 Buttons",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Asiqz",
+                          "name": "MA C3 SignUp",
+                          "width": "fill_container",
+                          "fill": "$cyan",
+                          "cornerRadius": 8,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iIvk8",
+                              "name": "MA C3 SignUp T",
+                              "fill": "$ink",
+                              "content": "Sign up",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ejrCw",
+                          "name": "MA C3 Dismiss",
+                          "fill": "#00000000",
+                          "cornerRadius": 8,
+                          "padding": [
+                            7,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gBNVY",
+                              "name": "MA C3 Dismiss T",
+                              "fill": "#667085",
+                              "content": "Dismiss",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "p3NZaE",
+                      "name": "MA C3 Note",
+                      "fill": "#667085",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Signing up does not check your availability or other planning — the planner resolves double bookings.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 9.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "oLoi4",
+          "name": "MA Field Nav",
+          "width": "fill_container",
+          "fill": "#0F1628",
+          "padding": [
+            10,
+            20
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "wZEUI",
+              "name": "MA Nav Today",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "TFdTl",
+                  "name": "MA NavIcon Today",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "schedule",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "pZd3R",
+                  "name": "MA NavLabel Today",
+                  "fill": "#8A93A8",
+                  "content": "Today",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KEaw2",
+              "name": "MA Nav My jobs",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "YfZCw",
+                  "name": "MA NavIcon My jobs",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "work",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "U1wzPa",
+                  "name": "MA NavLabel My jobs",
+                  "fill": "$cyan",
+                  "content": "My jobs",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Cao6A",
+              "name": "MA Nav Hours",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ifYEP",
+                  "name": "MA NavIcon Hours",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "hourglass_bottom",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "ipfic",
+                  "name": "MA NavLabel Hours",
+                  "fill": "#8A93A8",
+                  "content": "Hours",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j4lVB",
+              "name": "MA Nav Me",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "oiZXM",
+                  "name": "MA NavIcon Me",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "person",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "hrYP6",
+                  "name": "MA NavLabel Me",
+                  "fill": "#8A93A8",
+                  "content": "Me",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

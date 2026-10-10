@@ -45081,6 +45081,1050 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "kNPXO",
+      "x": 6310,
+      "y": 39048,
+      "name": "Equipment Labels",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "wGevG",
+          "name": "EL Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "sZt2T",
+              "name": "EL Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YWUeh",
+                  "name": "EL Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "EQjYy",
+                  "name": "EL Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qusjQ",
+              "name": "EL Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Q9AsEf",
+                  "name": "EL Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "SavTx",
+                      "name": "EL Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jaUJt",
+                      "name": "EL Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oP4Kh",
+                  "name": "EL Nav Crew",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "m4FqDt",
+                      "name": "EL Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "y1ouj",
+                      "name": "EL Nav Label Crew",
+                      "fill": "#8A93A8",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RXmKF",
+                  "name": "EL Nav Workspace",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "vJ0Rs",
+                      "name": "EL Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KxIgW",
+                      "name": "EL Nav Label Workspace",
+                      "fill": "$white",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ai6ht",
+                  "name": "EL Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "olDjp",
+                      "name": "EL Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VtShz",
+                      "name": "EL Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "y1X8fB",
+              "name": "EL Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YNkj6",
+          "name": "EL Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "TkTdv",
+              "name": "EL Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "WSvbc",
+                  "name": "EL Title",
+                  "fill": "$ink",
+                  "content": "Equipment labels",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "FaVlN",
+                  "name": "EL Subtitle",
+                  "fill": "$slate",
+                  "content": "Design the label once, then warehouse staff print code labels for selected articles; every label carries the article's scan code.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "dtvnR",
+              "name": "EL Columns",
+              "width": "fill_container",
+              "height": 520,
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "j8a2w",
+                  "name": "EL Left Col",
+                  "width": 560,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "of0IA",
+                      "name": "EL Design Card",
+                      "width": "fill_container",
+                      "height": 330,
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "R0xHs",
+                          "name": "EL Design Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Ynwvj",
+                              "name": "EL Design Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "design_services",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "D8fTdl",
+                              "name": "EL Design Title",
+                              "fill": "$ink",
+                              "content": "Label design — built-in equipment label",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MIAI6",
+                          "name": "EL DRow Letterhead",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rD3d8",
+                              "name": "EL DK Letterhead",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Letterhead",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "XRal6",
+                              "name": "EL DV Letterhead",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Label — 62×100 mm (defines label size)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SOiOl",
+                          "name": "EL DRow Codes",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YY2n2",
+                              "name": "EL DK Codes",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Codes",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "p2RI9J",
+                              "name": "EL DV Codes",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Scan code · article code",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xD1aN",
+                          "name": "EL DRow Article details",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ApnKf",
+                              "name": "EL DK Article details",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Article details",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "EV2zJ",
+                              "name": "EL DV Article details",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Name · type · serial",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U1A49",
+                          "name": "EL DRow Case label",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "fjMPe",
+                              "name": "EL DK Case label",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Case label",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qzgTL",
+                              "name": "EL DV Case label",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Optional content for case labels",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QeLdM",
+                          "name": "EL Test Row",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "X2nIxG",
+                              "name": "EL Test Btn",
+                              "fill": "$white",
+                              "cornerRadius": 6,
+                              "stroke": "#000000",
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ObLuX",
+                                  "name": "EL Test Btn Text",
+                                  "fill": "#000000",
+                                  "content": "Generate test label",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "ye6C4",
+                              "name": "EL Test Note",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "print to check size and position",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AwH2O",
+                      "name": "EL Label Preview Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "uhMxQ",
+                          "name": "EL Preview Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "ajjez",
+                              "name": "EL Preview Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "visibility",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "b5mcv",
+                              "name": "EL Preview Title",
+                              "fill": "$ink",
+                              "content": "Generated label — CAM-A-0142",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tAHmj",
+                          "name": "EL Label Preview",
+                          "width": 230,
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "stroke": "$hairline",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            10,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ezsp6",
+                              "name": "EL Lbl Name",
+                              "fill": "$ink",
+                              "content": "Sony FX6 body",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "wRcrQ",
+                              "name": "EL Lbl Meta",
+                              "fill": "$slate",
+                              "content": "Camera A · SN 348271",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "hreRf",
+                              "name": "EL Lbl Code",
+                              "width": 52,
+                              "height": 52,
+                              "fill": "$ink",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "r8VVCy",
+                              "name": "EL Lbl Code",
+                              "fill": "$slate",
+                              "content": "CAM-A-0142",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "H8eFX",
+                  "name": "EL Right Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "xk7w7",
+                      "name": "EL Articles Card",
+                      "width": "fill_container",
+                      "height": 520,
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "H0yuj",
+                          "name": "EL Art Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "padding": [
+                            14,
+                            20,
+                            0,
+                            20
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "T0i8n",
+                              "name": "EL Art Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "print",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "xwZiY",
+                              "name": "EL Art Title",
+                              "fill": "$ink",
+                              "content": "Print labels — selected articles",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dh7Hz",
+                          "name": "EL Art Actions",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "padding": [
+                            10,
+                            20
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "KL7AF",
+                              "name": "EL Gen Btn",
+                              "fill": "$cyan",
+                              "cornerRadius": 6,
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "yidVQ",
+                                  "name": "EL Gen Btn Text",
+                                  "fill": "$ink",
+                                  "content": "Generate · PDF to printer software",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "XvdzV",
+                          "name": "EL Art Table",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "mJXzf",
+                              "name": "EL Art Head Row",
+                              "width": "fill_container",
+                              "fill": "$cloud",
+                              "gap": 10,
+                              "padding": [
+                                7,
+                                20
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "asvDw",
+                                  "name": "EL ACol Article",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "ARTICLE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "DvIgM",
+                                  "name": "EL ACol Code",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "CODE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "M6biF",
+                                  "name": "EL ACol Label saved",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "LABEL SAVED",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "drfb6",
+                              "name": "EL Art Row CAM-A-0142",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                9,
+                                20
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "t4Jzu",
+                                  "name": "EL Asel CAM-A-0142",
+                                  "width": 13,
+                                  "height": 13,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3,
+                                  "stroke": "#000000"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Kreds",
+                                  "name": "EL AN CAM-A-0142",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Sony FX6 body",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "CIu2d",
+                                  "name": "EL AC CAM-A-0142",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "CAM-A-0142",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "TT1jO",
+                                  "name": "EL AS CAM-A-0142",
+                                  "fill": "#1D7A4F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "Saved",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "W8LZ7",
+                              "name": "EL Art Row LEN-A-0031",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                9,
+                                20
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "eL8JL",
+                                  "name": "EL Asel LEN-A-0031",
+                                  "width": 13,
+                                  "height": 13,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3,
+                                  "stroke": "#000000"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "aRWec",
+                                  "name": "EL AN LEN-A-0031",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Sony FE 24-70 GM",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "tdltX",
+                                  "name": "EL AC LEN-A-0031",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "LEN-A-0031",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Jm1Jg",
+                                  "name": "EL AS LEN-A-0031",
+                                  "fill": "#1D7A4F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "Saved",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "tCYZS",
+                              "name": "EL Art Row LGT-C-0088",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                9,
+                                20
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "StwMK",
+                                  "name": "EL Asel LGT-C-0088",
+                                  "width": 13,
+                                  "height": 13,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3,
+                                  "stroke": "#000000"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "fax3g",
+                                  "name": "EL AN LGT-C-0088",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Aputure 600d Pro",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ZlgRN",
+                                  "name": "EL AC LGT-C-0088",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "LGT-C-0088",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "O1etz",
+                                  "name": "EL AS LGT-C-0088",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "—",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Qf3Ki",
+                              "name": "EL Art Row CAS-D-0044",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                9,
+                                20
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "h3k6Uh",
+                                  "name": "EL Asel CAS-D-0044",
+                                  "width": 13,
+                                  "height": 13,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3,
+                                  "stroke": "#000000"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "eoxDh",
+                                  "name": "EL AN CAS-D-0044",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Tenba Air Case",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "AJIpr",
+                                  "name": "EL AC CAS-D-0044",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 130,
+                                  "content": "CAS-D-0044",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "BPOE4",
+                                  "name": "EL AS CAS-D-0044",
+                                  "fill": "#1D7A4F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "Saved",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "e1Tepr",
+              "name": "EL Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "uaAmb",
+                  "name": "EL Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "lhk1u",
+                  "name": "EL Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "The letterhead defines the label's size; generating without a template or letterhead, or a label too small for the code, is refused with a reason. Content too large for the label spills onto the next label. Generated labels can be saved to the article.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

@@ -135,6 +135,20 @@ File: `letterhead-branding.png` / `letterhead-branding.html`
 | Template settings card per document type: language/country, e-mail subject with placeholders, file name, header/footer, signing, default letterhead | [UC-DOC-CONFIGURE-TEMPLATE-SETTINGS](../model/use-cases/uc-doc-configure-template-settings.md) steps 2–5 |
 | Footnote: template's own letterhead is proposed first, then the project-type default, replaceable per document | [BR-DOC-LETTERHEAD-PRECEDENCE](../model/business-rules/br-doc-letterhead-precedence.md), [JRN-DOC-SET-UP-BRANDED-DOCUMENTS](../model/journeys/jrn-doc-set-up-branded-documents.md) narrative |
 
+## Screen — Equipment labels (management, desktop)
+
+File: `equipment-labels.png` / `equipment-labels.html`
+
+| Design decision | Decided by |
+|---|---|
+| Label-design card: letterhead (defines label size), codes, article details, case label option | [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) steps 1–3 |
+| Test-label generation to check size and position | [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) step 4 |
+| Label preview showing name, type, serial and scan code block | [TERM-EQUIPMENT-LABEL](../model/domain/terms/term-equipment-label.md), [TERM-SCAN-CODE](../model/domain/terms/term-scan-code.md) |
+| Print card: select articles, generate labels as PDF to printer's own software, save to article | [UC-WHS-PRINT-CODE-LABELS](../model/use-cases/uc-whs-print-code-labels.md) steps 1–2, [JRN-DOC-LABEL-EQUIPMENT](../model/journeys/jrn-doc-label-equipment.md) variant |
+| Column "Label saved" showing which article carries its generated label | [BR-DOC-LABEL-SAVE-TO-ITEM](../model/business-rules/br-doc-label-save-to-item.md) |
+| Case label with content option | [UC-WHS-PRINT-CODE-LABELS](../model/use-cases/uc-whs-print-code-labels.md) alternative flow, [TERM-COMBINATION-LABEL](../model/domain/terms/term-combination-label.md) |
+| Footnote: label too small for the code refused; oversized content spills to the next label | [UC-WHS-PRINT-CODE-LABELS](../model/use-cases/uc-whs-print-code-labels.md) failure conditions, [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) failure conditions |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -38,6 +38,22 @@
 
 ## 5. Spec layer
 
-- [ ] 5.1 Author openspec/config.yaml (this change) and validate it in CI. Verify:
+- [x] 5.1 Author openspec/config.yaml (this change) and validate it in CI. Verify:
       `npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive` passes locally and
       in the openspec CI job.
+
+## 6. E2E journeys
+
+- [x] 6.1 tests/Raccord.EndToEndTests: csproj (Aspire.Hosting.Testing 13.6.0, Playwright
+      1.63.0, xunit.v3), xunit.runner.json, Infrastructure/ (DistributedAppFixture,
+      E2ECollection, E2ETraits, BrowserJourneyBase, PlaywrightArtifacts). Verify: the solution
+      builds with warnings-as-errors.
+- [x] 6.2 Four smoke journeys (boot, customer, billable line, invoice finalize) over the real
+      SPA. Verify: `dotnet test tests/Raccord.EndToEndTests --filter "Quarantine!=true"` green
+      with Docker running.
+- [x] 6.3 per-pr-selection.txt + .github/scripts/check-e2e-selection.sh; e2e job in ci.yml
+      (chromium --with-deps, manifest check, journey run, artifacts on failure); backend job
+      excludes E2E. Verify: guard script prints "matches the manifest"; discovery equals the
+      manifest.
+- [x] 6.4 New test project wired into Raccord.slnx, Architecture.Tests' naming-rule references
+      and tests/README.md.

@@ -18,6 +18,11 @@ expectation that broke. GitHub issue
 - **Test conventions**: assertions migrated to Shouldly; all tests renamed to
   Thing_Should_Outcome and the convention enforced over every test assembly by
   `TestNaming_Should_Constraint` in tests/Raccord.Architecture.Tests.
+- **E2E journeys**: a new `Raccord.EndToEndTests` project boots the unmodified Aspire AppHost
+  (fresh session-lifetime Postgres per run) and drives the real SPA with Playwright through four
+  smoke journeys (boot, customer, billable line, invoice finalize). The per-PR selection is
+  pinned by a committed manifest, so a narrowed filter is a red build rather than a quieter
+  suite; failed journeys leave a trace and screenshot as CI artifacts.
 - **CI mirror**: a lint job re-runs the commit-time gates in `--check` mode (CSharpier,
   Prettier, commitlint over the PR commit range) so a hook bypass is still caught before merge.
 - **Arbitrary-bypass note**: direct pushes to main skip the commitlint mirror (it runs on
@@ -34,6 +39,8 @@ expectation that broke. GitHub issue
 - `ci-mirrors`: a CI job re-running every commit-time gate in check mode.
 - `test-conventions`: Shouldly assertions and Thing_Should_Outcome test naming, both
   machine-enforced.
+- `e2e-testing`: browser journeys over the booted Aspire AppHost, with a manifest-pinned
+  per-PR selection and failure evidence as artifacts.
 
 ### Modified Capabilities
 _(none — no spec'd capability's requirements change; this change is the seed for the
@@ -44,6 +51,8 @@ spec layer itself)_
 - **Repo-wide, developer-experience only**: no runtime or API changes. One-time CSharpier
   reformat (review with `git diff -w`, it is empty) and one-time test renames.
 - **Tooling pins**: husky 0.9.1 and csharpier 1.3.0 in the root dotnet-tools.json; Shouldly
-  4.3.0 in Directory.Packages.props; prettier 3.6.2, lint-staged 16.2.3, @commitlint 19.8.1 in
-  the frontend devDependencies.
-- **CI**: new lint job in .github/workflows/ci.yml; backend job's Format step is CSharpier.
+  4.3.0, Aspire.Hosting.Testing 13.6.0 and Microsoft.Playwright 1.63.0 in
+  Directory.Packages.props; prettier 3.6.2, lint-staged 16.2.3, @commitlint 19.8.1 in the
+  frontend devDependencies.
+- **CI**: new lint and e2e jobs in .github/workflows/ci.yml; backend job's Format step is
+  CSharpier and its test run excludes the E2E project (the e2e job runs it with Docker).

@@ -36,6 +36,8 @@ dotnet_diagnostic.MA0004.severity = none
 dotnet_diagnostic.MA0009.severity = none
 # Integration tests are bounded by the runner timeout; threading tokens through every HTTP call adds noise.
 dotnet_diagnostic.xUnit1051.severity = none
+# xUnit's own collection-definition convention requires a "*Collection" class name.
+dotnet_diagnostic.CA1711.severity = none
 
 [src/Raccord.Contracts/**.cs]
 # Wire contracts are grouped per feature (request + response records) so the public API reads as one file per area.

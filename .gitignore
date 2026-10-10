@@ -24,6 +24,7 @@ storage/
 node_modules/
 coverage/
 TestResults/
+playwright-artifacts/
 *.pdf
 *.zip
 dist/

@@ -11,6 +11,7 @@
     <Folder Name="/tests/">
         <Project Path="tests/Raccord.Architecture.Tests/Raccord.Architecture.Tests.csproj" />
         <Project Path="tests/Raccord.Domain.Tests/Raccord.Domain.Tests.csproj" />
+        <Project Path="tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj" />
         <Project Path="tests/Raccord.Infrastructure.Tests/Raccord.Infrastructure.Tests.csproj" />
         <Project Path="tests/Raccord.Web.Tests/Raccord.Web.Tests.csproj" />
     </Folder>

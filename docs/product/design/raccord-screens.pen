@@ -19099,6 +19099,1198 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "LhWhS",
+      "x": 6310,
+      "y": 10632,
+      "name": "Service Planned vs Actual",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "n3iOp",
+          "name": "SV Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "tqgxA",
+              "name": "SV Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "fMKfb",
+                  "name": "SV Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "CyrOE",
+                  "name": "SV Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gOrqz",
+              "name": "SV Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sBMYy",
+                  "name": "SV Nav Task boards",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Y4X5gz",
+                      "name": "SV Nav Icon Task boards",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "view_kanban",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "o2vGUF",
+                      "name": "SV Nav Label Task boards",
+                      "fill": "#8A93A8",
+                      "content": "Task boards",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JHDDM",
+                  "name": "SV Nav Schedule",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "xtzBX",
+                      "name": "SV Nav Icon Schedule",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "calendar_month",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jyqDN",
+                      "name": "SV Nav Label Schedule",
+                      "fill": "#8A93A8",
+                      "content": "Schedule",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZqJhG",
+                  "name": "SV Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "OQfQJ",
+                      "name": "SV Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TjWAm",
+                      "name": "SV Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZRWyP",
+                  "name": "SV Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "YlpGI",
+                      "name": "SV Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AiA71",
+                      "name": "SV Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "nQ7xa",
+              "name": "SV Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Operations · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fjbBE",
+          "name": "SV Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "p6IYNS",
+              "name": "SV Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YWoj1",
+                  "name": "SV Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hXs66",
+                      "name": "SV Title",
+                      "fill": "$ink",
+                      "content": "Services — planned vs actual",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "w16ZYm",
+                      "name": "SV Subtitle",
+                      "fill": "$slate",
+                      "content": "Corona Festival · Post-production service group · hours tracked on tasks flow to their linked service",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "h5jBjN",
+                  "name": "SV Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "M3IOf7",
+                      "name": "SV Export Btn",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IT5M4",
+                          "name": "SV Export Label",
+                          "fill": "$white",
+                          "content": "Export tracked time",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "igLXV",
+              "name": "SV Stat Cards",
+              "width": "fill_container",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WrIyY",
+                  "name": "SV Stat Planned hours",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xMEPN",
+                      "name": "SV Stat Label Planned hours",
+                      "fill": "$slate",
+                      "content": "PLANNED HOURS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "o9ZBM",
+                      "name": "SV Stat Value Planned hours",
+                      "fill": "$ink",
+                      "content": "148 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GzVtf",
+                  "name": "SV Stat Tracked hours",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A3pKXG",
+                      "name": "SV Stat Label Tracked hours",
+                      "fill": "$slate",
+                      "content": "TRACKED HOURS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m9eawH",
+                      "name": "SV Stat Value Tracked hours",
+                      "fill": "$ink",
+                      "content": "163 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mO8ry",
+                  "name": "SV Stat Approved",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KpnzM",
+                      "name": "SV Stat Label Approved",
+                      "fill": "$slate",
+                      "content": "APPROVED",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fXSNA",
+                      "name": "SV Stat Value Approved",
+                      "fill": "$ink",
+                      "content": "141 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eoRdl",
+                  "name": "SV Stat Service margin",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "n3h3yn",
+                      "name": "SV Stat Label Service margin",
+                      "fill": "$slate",
+                      "content": "SERVICE MARGIN",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ay51R",
+                      "name": "SV Stat Value Service margin",
+                      "fill": "#1D7A4F",
+                      "content": "34%",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kJSAR",
+              "name": "SV Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Lm5xg",
+                  "name": "SV Table Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WvuVC",
+                      "name": "SV Col Service",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SERVICE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WCh5U",
+                      "name": "SV Col Tasks",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "TASKS",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fzCKr",
+                      "name": "SV Col Planned",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "PLANNED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j1MaP4",
+                      "name": "SV Col Tracked",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "TRACKED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "omv2e",
+                      "name": "SV Col Cost/h",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "COST/H",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GeIXb",
+                      "name": "SV Col Price",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "PRICE",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Vui6B",
+                      "name": "SV Col Margin",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "MARGIN",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O0hzAT",
+                  "name": "SV Row Video editing",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "k1L19",
+                      "name": "SV Svc Video editing",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Video editing — recap",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iCEH9",
+                      "name": "SV Cell 6 Video ed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "6",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "afSh9",
+                      "name": "SV Cell 24 h Video ed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "24 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vt5TS",
+                      "name": "SV Cell 31 h Video ed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "31 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LXX4w",
+                      "name": "SV Cell €38 Video ed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "€38",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Cl8rg",
+                      "name": "SV Cell €1,590 Video ed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "€1,590",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hKLBJ",
+                      "name": "SV Margin Video editing",
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        7
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Wh1EW",
+                          "name": "SV Margin Label Video editing",
+                          "fill": "#1D7A4F",
+                          "content": "+19%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "InKJs",
+                  "name": "SV Row Colour grading",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AGUxm",
+                      "name": "SV Svc Colour grading",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Colour grading — dailies",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iIKWo",
+                      "name": "SV Cell 3 Colour g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "3",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Mib80",
+                      "name": "SV Cell 12 h Colour g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "12 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "acgJq",
+                      "name": "SV Cell 9 h Colour g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "9 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GNyz2",
+                      "name": "SV Cell €42 Colour g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "€42",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sNLtV",
+                      "name": "SV Cell €730 Colour g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "€730",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OjU8m",
+                      "name": "SV Margin Colour grading",
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        7
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ck9sM",
+                          "name": "SV Margin Label Colour grading",
+                          "fill": "#1D7A4F",
+                          "content": "+31%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mqra7",
+                  "name": "SV Row Sound design",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "slAVe",
+                      "name": "SV Svc Sound design",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sound design",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EfZTS",
+                      "name": "SV Cell 4 Sound de",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "4",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "csY1e",
+                      "name": "SV Cell 18 h Sound de",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "18 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XnJsy",
+                      "name": "SV Cell 22 h Sound de",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "22 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O2CMC",
+                      "name": "SV Cell €45 Sound de",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "€45",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "plusL",
+                      "name": "SV Cell €1,210 Sound de",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "€1,210",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tPQU2",
+                      "name": "SV Margin Sound design",
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        7
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xbRGI",
+                          "name": "SV Margin Label Sound design",
+                          "fill": "#1D7A4F",
+                          "content": "+9%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fFtse",
+                  "name": "SV Row Motion graphics",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "FFUOS",
+                      "name": "SV Svc Motion graphics",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Motion graphics — screens",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oo5uF",
+                      "name": "SV Cell 5 Motion g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "5",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V2WQuC",
+                      "name": "SV Cell 22 h Motion g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "22 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OAvAc",
+                      "name": "SV Cell 30 h Motion g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "30 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Elkb9",
+                      "name": "SV Cell €40 Motion g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "€40",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ovVw6",
+                      "name": "SV Cell €1,480 Motion g",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "€1,480",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IhotJ",
+                      "name": "SV Margin Motion graphics",
+                      "fill": "#FDE3E0",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        7
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "K8mFuS",
+                          "name": "SV Margin Label Motion graphics",
+                          "fill": "#B3261E",
+                          "content": "−3%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IfJdr",
+                  "name": "SV Row Media management",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CiSFx",
+                      "name": "SV Svc Media management",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Media management",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ty7TM",
+                      "name": "SV Cell 2 Media ma",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 64,
+                      "content": "2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vOQMc",
+                      "name": "SV Cell 8 h Media ma",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "8 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zXddN",
+                      "name": "SV Cell 6 h Media ma",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "6 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Yl5Bj",
+                      "name": "SV Cell €30 Media ma",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "€30",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iCOst",
+                      "name": "SV Cell €320 Media ma",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "€320",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yZFpd",
+                      "name": "SV Margin Media management",
+                      "fill": "#FDE3E0",
+                      "cornerRadius": 4,
+                      "padding": [
+                        2,
+                        7
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "G838Nq",
+                          "name": "SV Margin Label Media management",
+                          "fill": "#B3261E",
+                          "content": "+27%",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jFEld",
+              "name": "SV Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "y1Ar7a",
+                  "name": "SV Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "warning",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A5A00"
+                },
+                {
+                  "type": "text",
+                  "id": "QjNGv",
+                  "name": "SV Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Export includes unapproved hours — 22 h pending approval. Services without a cost per hour show no cost or profit.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

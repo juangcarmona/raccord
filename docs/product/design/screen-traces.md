@@ -82,6 +82,19 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Service planned-vs-actual (management, desktop)
+
+File: `service-planned-actual.png` / `service-planned-actual.html`
+
+| Design decision | Decided by |
+|---|---|
+| Planned vs tracked hours compared per service, with tasks count, cost/h, price, margin | [UC-PRJ-REPORT-TASK-TIME](../model/use-cases/uc-prj-report-task-time.md) step 1, [BR-PRJ-SERVICE-BREAKDOWN](../model/business-rules/br-prj-service-breakdown.md) |
+| Hours tracked on tasks flow to their linked service | [UC-PRJ-TRACK-TASK-TIME](../model/use-cases/uc-prj-track-task-time.md) step 2, [UC-PRJ-MANAGE-SERVICES](../model/use-cases/uc-prj-manage-services.md) step 3 |
+| Export of tracked time (team-board export contains only that team's work) | [UC-PRJ-REPORT-TASK-TIME](../model/use-cases/uc-prj-report-task-time.md) main/alternative flows |
+| Export warns when it includes unapproved hours (footnote) | [BR-PRJ-UNAPPROVED-HOURS-EXPORT-WARNING](../model/business-rules/br-prj-unapproved-hours-export-warning.md) |
+| Negative margin shown in error tint, positive in success tint | [docs/design/color-tokens.md](../../design/color-tokens.md) status tints |
+| Services listed in their own section of quotes/invoices (context) | [BR-PRJ-SERVICE-DOCUMENT-SECTION](../model/business-rules/br-prj-service-document-section.md) |
+
 ## Screen — Project task board (management, desktop)
 
 File: `project-task-board.png` / `project-task-board.html`

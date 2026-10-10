@@ -82,6 +82,19 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Crew availability (management, desktop)
+
+File: `crew-availability.png` / `crew-availability.html`
+
+| Design decision | Decided by |
+|---|---|
+| Availability viewed per function/period with crew rows and day columns | [UC-CRW-VIEW-CREW-AVAILABILITY](../model/use-cases/uc-crw-view-crew-availability.md) steps 1–2 |
+| States: available, unavailable, invited, reserved, unknown | [UC-CRW-VIEW-CREW-AVAILABILITY](../model/use-cases/uc-crw-view-crew-availability.md) step 2, [TERM-AVAILABILITY-STATE](../model/domain/terms/term-availability-state.md) |
+| Any known clash in the period → unavailable, even if free the rest of it | [BR-CRW-PARTIAL-AVAILABILITY](../model/business-rules/br-crw-partial-availability.md) |
+| No declaration, planning or answer → unknown, not refused | [BR-CRW-AVAILABILITY-DERIVATION](../model/business-rules/br-crw-availability-derivation.md) |
+| Planner can enter availability for crew members (available/unavailable/unknown, recurrence, remark) | [UC-CRW-ENTER-CREW-AVAILABILITY](../model/use-cases/uc-crw-enter-crew-availability.md) steps 1–2, [BR-CRW-AVAILABILITY-RIGHTS](../model/business-rules/br-crw-availability-rights.md) |
+| State colors pair with text notes (grayscale-readable) | [docs/design/color-tokens.md](../../design/color-tokens.md) semantic guidance |
+
 ## Screen — Contact detail & commercial defaults (management, desktop)
 
 File: `contact-detail.png` / `contact-detail.html`

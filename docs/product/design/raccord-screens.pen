@@ -32171,6 +32171,1135 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "YoJQp",
+      "x": 6310,
+      "y": 24840,
+      "name": "Crew Availability",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "q9XEb",
+          "name": "CA Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q2b5va",
+              "name": "CA Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lbcRz",
+                  "name": "CA Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "pchSA",
+                  "name": "CA Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "L2a8aB",
+              "name": "CA Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YxTaq",
+                  "name": "CA Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "CfpaJ",
+                      "name": "CA Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DHoU2",
+                      "name": "CA Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nZMmN",
+                  "name": "CA Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "I8WXIt",
+                      "name": "CA Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OrOk4",
+                      "name": "CA Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pFy8Y",
+                  "name": "CA Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "sIry3",
+                      "name": "CA Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GoJcT",
+                      "name": "CA Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VF2sn",
+                  "name": "CA Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "gl0ml",
+                      "name": "CA Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TaMUf",
+                      "name": "CA Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Z0lmzS",
+              "name": "CA Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dTQ2M",
+          "name": "CA Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "O0aSa",
+              "name": "CA Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "x4XUt4",
+                  "name": "CA Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VJFgB",
+                      "name": "CA Title",
+                      "fill": "$ink",
+                      "content": "Availability — Camera operator, 14–17 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V49X6O",
+                      "name": "CA Subtitle",
+                      "fill": "$slate",
+                      "content": "Function: A-cam operator · Corona Festival · any known clash in the period counts as unavailable",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "c7If3M",
+                  "name": "CA Legend",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "aU2JM",
+                      "name": "CA LG Available",
+                      "gap": 5,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "E75WeR",
+                          "name": "CA LGDot Available",
+                          "width": 9,
+                          "height": 9,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        },
+                        {
+                          "type": "text",
+                          "id": "wPeVt",
+                          "name": "CA LGT Available",
+                          "fill": "$slate",
+                          "content": "Available",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DSosy",
+                      "name": "CA LG Unavailable",
+                      "gap": 5,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "D4Flq",
+                          "name": "CA LGDot Unavailable",
+                          "width": 9,
+                          "height": 9,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        },
+                        {
+                          "type": "text",
+                          "id": "Q3UnhF",
+                          "name": "CA LGT Unavailable",
+                          "fill": "$slate",
+                          "content": "Unavailable",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "i7xHL",
+                      "name": "CA LG Invited",
+                      "gap": 5,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "JLhvI",
+                          "name": "CA LGDot Invited",
+                          "width": 9,
+                          "height": 9,
+                          "fill": "#0B7FBF",
+                          "cornerRadius": 5
+                        },
+                        {
+                          "type": "text",
+                          "id": "u5kwW",
+                          "name": "CA LGT Invited",
+                          "fill": "$slate",
+                          "content": "Invited",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "swrKN",
+                      "name": "CA LG Reserved",
+                      "gap": 5,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MmhT9",
+                          "name": "CA LGDot Reserved",
+                          "width": 9,
+                          "height": 9,
+                          "fill": "#8A5A00",
+                          "cornerRadius": 5
+                        },
+                        {
+                          "type": "text",
+                          "id": "QKMG7",
+                          "name": "CA LGT Reserved",
+                          "fill": "$slate",
+                          "content": "Reserved",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "I2HrOT",
+                      "name": "CA LG Unknown",
+                      "gap": 5,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "gIfm3",
+                          "name": "CA LGDot Unknown",
+                          "width": 9,
+                          "height": 9,
+                          "fill": "#667085",
+                          "cornerRadius": 5
+                        },
+                        {
+                          "type": "text",
+                          "id": "T5v9Xw",
+                          "name": "CA LGT Unknown",
+                          "fill": "$slate",
+                          "content": "Unknown",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UFgJh",
+              "name": "CA Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AkOgs",
+                  "name": "CA Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "LJxlJ",
+                      "name": "CA Col Crew",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "CREW",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PTakY",
+                      "name": "CA Col Fri 14",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "FRI 14",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VBQ1Z",
+                      "name": "CA Col Sat 15",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SAT 15",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Zkkfe",
+                      "name": "CA Col Sun 16",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SUN 16",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "muvl8",
+                      "name": "CA Col Mon 17",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "MON 17",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H6Mde",
+                      "name": "CA Col Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "NOTE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "uaCCS",
+                  "name": "CA Row Nerea",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "N3zOr",
+                      "name": "CA C Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "Nerea Vidal",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sUOPO",
+                      "name": "CA Cell Nerea0",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "VC0Cn",
+                          "name": "CA CellF Nerea0",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "F9YUrC",
+                      "name": "CA Cell Nerea1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "TifL5",
+                          "name": "CA CellF Nerea1",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FPtmA",
+                      "name": "CA Cell Nerea2",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "KurHx",
+                          "name": "CA CellF Nerea2",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "c0MeAD",
+                      "name": "CA Cell Nerea3",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "tUvAF",
+                          "name": "CA CellF Nerea3",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "czFT4",
+                      "name": "CA N Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "Free all four days",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FyfVk",
+                  "name": "CA Row Ibai",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dVYjC",
+                      "name": "CA C Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "Ibai Ruiz",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TrAyQ",
+                      "name": "CA Cell Ibai0",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "eXuKg",
+                          "name": "CA CellF Ibai0",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zuAq3",
+                      "name": "CA Cell Ibai1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "r3RLS",
+                          "name": "CA CellF Ibai1",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ju6oR",
+                      "name": "CA Cell Ibai2",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "DrgIS",
+                          "name": "CA CellF Ibai2",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "q8J7bt",
+                      "name": "CA Cell Ibai3",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "y7FmqN",
+                          "name": "CA CellF Ibai3",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#000000",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "yIbsf",
+                      "name": "CA N Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "Gala Dinner 15–16, invited here 17",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t4VZC",
+                  "name": "CA Row Óscar",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "W3SWo",
+                      "name": "CA C Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "Óscar Miranda",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fL3oY",
+                      "name": "CA Cell Óscar0",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jvm57",
+                          "name": "CA CellF Óscar0",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Qi1FT",
+                      "name": "CA Cell Óscar1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "RVOsp",
+                          "name": "CA CellF Óscar1",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dPoLi",
+                      "name": "CA Cell Óscar2",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "uCMbr",
+                          "name": "CA CellF Óscar2",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uVTj0",
+                      "name": "CA Cell Óscar3",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WhKZ9",
+                          "name": "CA CellF Óscar3",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#B3261E",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "c8tY27",
+                      "name": "CA N Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "Family event",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SpRZc",
+                  "name": "CA Row Alba",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dbegQ",
+                      "name": "CA C Alba",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "Alba Ferrer",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uu9Of",
+                      "name": "CA Cell Alba0",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "fzTGH",
+                          "name": "CA CellF Alba0",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#E4E8EF",
+                          "cornerRadius": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "l7LXE4",
+                              "name": "CA CellQ Alba0",
+                              "fill": "#667085",
+                              "textGrowth": "fixed-width-height",
+                              "width": 26,
+                              "height": 10,
+                              "content": "?",
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "$font-body",
+                              "fontSize": 9,
+                              "fontWeight": "bold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kWVUI",
+                      "name": "CA Cell Alba1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "UfdKo",
+                          "name": "CA CellF Alba1",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b73ViH",
+                      "name": "CA Cell Alba2",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "TGdKU",
+                          "name": "CA CellF Alba2",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x2MLl1",
+                      "name": "CA Cell Alba3",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y2ttDW",
+                          "name": "CA CellF Alba3",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#1D7A4F",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "istdl",
+                      "name": "CA N Alba",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "No declaration for the 14th",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "djJqr",
+                  "name": "CA Row Dídac",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fGsBt",
+                      "name": "CA C Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "Dídac Torres",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nqWgr",
+                      "name": "CA Cell Dídac0",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "iXULQ",
+                          "name": "CA CellF Dídac0",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#8A5A00",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IZddD",
+                      "name": "CA Cell Dídac1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "sOjqf",
+                          "name": "CA CellF Dídac1",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#8A5A00",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NRnem",
+                      "name": "CA Cell Dídac2",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "s5h9l",
+                          "name": "CA CellF Dídac2",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#8A5A00",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "W86Vz",
+                      "name": "CA Cell Dídac3",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Z2QKYb",
+                          "name": "CA CellF Dídac3",
+                          "width": 26,
+                          "height": 10,
+                          "fill": "#8A5A00",
+                          "cornerRadius": 5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "EH9Am",
+                      "name": "CA N Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "Held for Corona function",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GW75G",
+              "name": "CA Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "PqqN6",
+                  "name": "CA Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "uEN21",
+                  "name": "CA Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "States derive from declared availability, planning and invitations; a member free for only part of the period still shows as unavailable. Entries can be recorded by the planner on behalf of crew, with recurrence and remark.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

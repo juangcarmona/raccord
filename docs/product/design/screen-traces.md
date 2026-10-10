@@ -82,6 +82,19 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Function staffing (management, desktop)
+
+File: `function-staffing.png` / `function-staffing.html`
+
+| Design decision | Decided by |
+|---|---|
+| Crew or vehicles picked per function, possibly from crew lists | [UC-CRW-PLAN-RESOURCE-ON-FUNCTION](../model/use-cases/uc-crw-plan-resource-on-function.md) steps 1–2 |
+| Assignments take the default plan status and the member's default rate | [UC-CRW-PLAN-RESOURCE-ON-FUNCTION](../model/use-cases/uc-crw-plan-resource-on-function.md) step 3, [BR-CRW-DEFAULT-RATE-ON-ASSIGNMENT](../model/business-rules/br-crw-default-rate-on-assignment.md), [BR-CRW-DEFAULT-PLAN-STATUS-NEW-ONLY](../model/business-rules/br-crw-default-plan-status-new-only.md) |
+| Staffing status derives from assignments (open → planned → final) | [BR-CRW-STAFFING-STATUS-DERIVATION](../model/business-rules/br-crw-staffing-status-derivation.md), [TERM-STAFFING-STATUS](../model/domain/terms/term-staffing-status.md) |
+| Availability advisory, not blocking | [BR-CRW-AVAILABILITY-ADVISORY](../model/business-rules/br-crw-availability-advisory.md) |
+| Period invitations (availability / reservation) with due date, reminder, message | [UC-CRW-INVITE-CREW-FOR-PERIOD](../model/use-cases/uc-crw-invite-crew-for-period.md) steps 1–4, [BR-CRW-PERIOD-INVITATION-TYPES](../model/business-rules/br-crw-period-invitation-types.md) |
+| Agency crew can be double-booked | [BR-CRW-AGENCY-MULTIPLE-BOOKING](../model/business-rules/br-crw-agency-multiple-booking.md) |
+
 ## Screen — Crew availability (management, desktop)
 
 File: `crew-availability.png` / `crew-availability.html`

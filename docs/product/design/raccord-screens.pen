@@ -33300,6 +33300,895 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "Tde2c",
+      "x": 6310,
+      "y": 26024,
+      "name": "Function Staffing",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "t8iMxE",
+          "name": "FS Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "h7sDk5",
+              "name": "FS Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tP3hi",
+                  "name": "FS Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "wKi7q",
+                  "name": "FS Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "s3slg",
+              "name": "FS Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "k1yhfo",
+                  "name": "FS Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "EaFxF",
+                      "name": "FS Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TdSGL",
+                      "name": "FS Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ztuwM",
+                  "name": "FS Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "A8d43",
+                      "name": "FS Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CA314",
+                      "name": "FS Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "woQuG",
+                  "name": "FS Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "T6QUF",
+                      "name": "FS Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JvlTE",
+                      "name": "FS Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B1jm2",
+                  "name": "FS Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "fr0wt",
+                      "name": "FS Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SFqzi",
+                      "name": "FS Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "x3sX4",
+              "name": "FS Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PU20Y",
+          "name": "FS Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "T6gU42",
+              "name": "FS Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "LUSla",
+                  "name": "FS Title",
+                  "fill": "$ink",
+                  "content": "Function staffing — Corona Festival",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "HLARj",
+                  "name": "FS Subtitle",
+                  "fill": "$slate",
+                  "content": "Pick crew for each function; assignments take the default plan status and the member's default rate.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AExMQ",
+              "name": "FS Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kNxBk",
+                  "name": "FS Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VF7UF",
+                      "name": "FS Col Function",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "FUNCTION",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pRZcr",
+                      "name": "FS Col When",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "WHEN",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CSUv9",
+                      "name": "FS Col Crew / vehicles",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "CREW / VEHICLES",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Niaa0",
+                      "name": "FS Col Rate",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "RATE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tFHZs",
+                      "name": "FS Col Availability",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "AVAILABILITY",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m651h",
+                      "name": "FS Col Plan status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "PLAN STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "izH7G",
+                  "name": "FS Row A-cam op",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mfYUr",
+                      "name": "FS F A-cam op",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "A-cam operator",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tUoZu",
+                      "name": "FS W A-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "14–17 Nov · 09:00–21:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SZi2G",
+                      "name": "FS C A-cam op",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Nerea Vidal",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Vsvjp",
+                      "name": "FS R A-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "€340 / day",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "o53xbX",
+                      "name": "FS A A-cam op",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "Available",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t5Yuv",
+                      "name": "FS S A-cam op",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "i18YJ",
+                          "name": "FS Schip A-cam op",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GIHXH",
+                              "name": "FS SchipT A-cam op",
+                              "fill": "#1D7A4F",
+                              "content": "Planned",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ssVgG",
+                  "name": "FS Row B-cam op",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NM8Bj",
+                      "name": "FS F B-cam op",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "B-cam operator",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mLSyd",
+                      "name": "FS W B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "14–17 Nov · 09:00–21:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QhrvB",
+                      "name": "FS C B-cam op",
+                      "fill": "#000000",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "— ask or invite",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qKgLq",
+                      "name": "FS R B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Max rate €300",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MjaPH",
+                      "name": "FS A B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "Unknown",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LS8zM",
+                      "name": "FS S B-cam op",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "lMPk6",
+                          "name": "FS Schip B-cam op",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Ah3Sm",
+                              "name": "FS SchipT B-cam op",
+                              "fill": "$slate",
+                              "content": "Open",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B9jmIY",
+                  "name": "FS Row Gaffer",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Pp7JC",
+                      "name": "FS F Gaffer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Gaffer",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "a0KRo",
+                      "name": "FS W Gaffer",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "15–16 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eSVxQ",
+                      "name": "FS C Gaffer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Óscar Miranda (agency)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "irbEk",
+                      "name": "FS R Gaffer",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "€380 / day",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jzV0v",
+                      "name": "FS A Gaffer",
+                      "fill": "#B3261E",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "Unavailable",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TfX6f",
+                      "name": "FS S Gaffer",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "DyXOx",
+                          "name": "FS Schip Gaffer",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "E0By4",
+                              "name": "FS SchipT Gaffer",
+                              "fill": "#8A5A00",
+                              "content": "Tentative",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tKMyw",
+                  "name": "FS Row Driver ·",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RTncy",
+                      "name": "FS F Driver ·",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Driver · sprinter",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "viOL4",
+                      "name": "FS W Driver ·",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "14 Nov · 06:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FrUVm",
+                      "name": "FS C Driver ·",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Van 12 (Karel V.)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Uljc2",
+                      "name": "FS R Driver ·",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "€45 / h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "seCxn",
+                      "name": "FS A Driver ·",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "Available",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DFgc3",
+                      "name": "FS S Driver ·",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "h8NtM",
+                          "name": "FS Schip Driver ·",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "OVh1Z",
+                              "name": "FS SchipT Driver ·",
+                              "fill": "#1D7A4F",
+                              "content": "Planned",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "QwI3d",
+              "name": "FS Invite Panel",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CPwqJ",
+                  "name": "FS Invite Header",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "YwEf2",
+                      "name": "FS Invite Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wcZTV",
+                      "name": "FS Invite Title",
+                      "fill": "$ink",
+                      "content": "Invite crew for a period (no function yet)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G0fTIY",
+                  "name": "FS Invite Row",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c6kRy7",
+                      "name": "FS Invite Sub",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Availability or reservation invite · 20–22 Nov · to: Alba Ferrer, Dídac Torres · reply by 12 Nov with reminder the day before, message: “holding you for the gala build”",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jojD4",
+              "name": "FS Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "nO232",
+                  "name": "FS Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "zzco3",
+                  "name": "FS Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Staffing status derives from the assignments (BR-CRW-STAFFING-STATUS-DERIVATION): open while a function is unstaffed, final when every line is planned. Availability is advisory, not blocking. Agency crew can be double-booked.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

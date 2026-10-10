@@ -207,7 +207,7 @@ jobs:
             p/owasp-top-ten
             p/secrets
       - name: Trivy (repository filesystem)
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -232,7 +232,7 @@ jobs:
       - name: Build container image
         run: docker build -f deploy/docker/Dockerfile -t raccord:ci .
       - name: Trivy (container image)
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: image
           image-ref: raccord:ci

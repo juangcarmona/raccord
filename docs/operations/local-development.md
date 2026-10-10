@@ -48,11 +48,53 @@ dotnet test Raccord.slnx
 
 Integration tests start a PostgreSQL container through Testcontainers and create one database per test.
 
+Formatting is enforced by CSharpier (C#) and Prettier (frontend) — no `dotnet format`:
+
 ```bash
-dotnet format Raccord.slnx --verify-no-changes
+dotnet tool restore
+dotnet csharpier check .
 ```
 
-In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
+In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`.
+
+### Git hooks (auto-installed on build)
+
+The first `dotnet build` after cloning installs husky hooks (`git config core.hooksPath .husky`):
+
+- **pre-commit**: CSharpier on staged `.cs` files, then lint-staged (ESLint `--fix` + Prettier).
+- **commit-msg**: [conventional commits](https://www.conventionalcommits.org/) with types `feat, fix, chore, docs, refactor, test, ci`.
+
+Every commit-time gate is mirrored in CI's `lint` job, so bypassing locally (`HUSKY=0 git commit ...` or `--no-verify`) still produces a red build before merge.
+
+### End-to-end journeys
+
+`tests/Raccord.EndToEndTests` boots the whole Aspire AppHost (fresh session Postgres) and drives the real SPA with Playwright. Docker must be running:
+
+```bash
+dotnet test tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj -c Release --filter "Quarantine!=true"
+```
+
+The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selection.txt`; regenerate it after adding or renaming journeys:
+
+```bash
+bash .github/scripts/check-e2e-selection.sh --update
+```
+
+### Security and license gates
+
+The CI `security` job runs TruffleHog (secrets in history since the base), Semgrep (`.semgrep/` in-repo rules + OWASP/secrets registry sets) and Trivy; the `sbom` job Trivy-scans the built image, publishes the Syft SPDX SBOM, and enforces the license allowlist via `tools/dependency-licenses`. To run the license check locally:
+
+```bash
+dotnet run --project tools/dependency-licenses/dependency-licenses.csproj -- --check
+```
+
+### OpenSpec changes
+
+Every meaningful change ships an OpenSpec change under `openspec/changes/` (proposal, tasks, capability deltas). PDaC (`docs/product/`) stays the product-model source of truth. Validate locally:
+
+```bash
+npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive
+```
 
 ## Changing the API contract
 

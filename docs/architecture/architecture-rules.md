@@ -37,6 +37,15 @@ Domain, Contracts -> base class library only
 
 - TDD: failing test at a public seam, minimal implementation, refactor when green.
 - Nullable, .NET analyzers, Roslynator, Meziantou; warnings are errors; suppressions are scoped and justified in `.editorconfig` **(enforced)**.
-- `dotnet format`, ESLint (strict type-checked + jsx-a11y strict) and TypeScript strict mode **(enforced in CI)**.
+- One formatter per language **(enforced)**: CSharpier for C#, ESLint (strict type-checked + jsx-a11y strict) + Prettier for the frontend, TypeScript strict mode.
+- Conventional commits with a restricted type-enum **(enforced at commit time by husky/commitlint, mirrored in CI)**.
+- Test names follow `Thing_Should_Outcome` and assertions use Shouldly **(enforced over every test assembly)**.
+- Playwright E2E journeys over the booted Aspire AppHost; the per-PR selection is pinned by the committed manifest — a narrowed filter is a red build **(enforced)**.
+- Every meaningful change ships a validated OpenSpec change (proposal, tasks, capability deltas); PDaC stays the product-model source of truth **(enforced in CI)**.
+- Security gates on every PR: TruffleHog (secrets in history since base), Semgrep (in-repo rules + OWASP/secrets registry sets), Trivy fs scan **(blocking, see ADR-0016)**.
+- SBOM + license policy on the built image and the runtime dependency graph — only allowlisted licenses ship in a deliverable (ADR-0002/0016) **(enforced)**.
+- Stryker mutation score over the Domain layer, nightly with thresholds **(nightly, not per-PR — ADR-0016)**.
+- ZAP baseline scan of the Compose stack after merge to main **(enforced, blocking on FAIL)**.
 - No secrets, customer data, generated PDFs or local state in Git.
 - New production dependencies require an ADR.
+- Agent red lines (AGENTS.md): credentials, shared history, production — stop and ask a person first.

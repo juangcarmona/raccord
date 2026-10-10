@@ -9,7 +9,7 @@ public sealed class MoneyTests
     [InlineData("10.004", "10.00")]
     [InlineData("-10.005", "-10.01")]
     [InlineData("0.125", "0.13")]
-    public void Amounts_are_rounded_to_cents_with_midpoint_away_from_zero(
+    public void Amounts_Should_be_rounded_to_cents_with_midpoint_away_from_zero(
         string raw,
         string expected
     )

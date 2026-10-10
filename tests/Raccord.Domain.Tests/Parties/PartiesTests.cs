@@ -18,7 +18,10 @@ public sealed class PartiesTests
     [Theory]
     [InlineData(" a-00000000 ", "A00000000")]
     [InlineData("es b 0000 0000", "ESB00000000")]
-    public void Tax_ids_are_normalized_to_uppercase_without_separators(string raw, string expected)
+    public void Tax_ids_Should_be_normalized_to_uppercase_without_separators(
+        string raw,
+        string expected
+    )
     {
         var customer = Customer.Register("Productora Ejemplo S.A.", raw, Address, null);
 
@@ -26,7 +29,7 @@ public sealed class PartiesTests
     }
 
     [Fact]
-    public void A_customer_without_tax_id_can_be_registered_but_is_not_invoiceable_yet()
+    public void A_customer_without_tax_id_Should_be_registrable_but_not_invoiceable_yet()
     {
         var customer = Customer.Register(
             "Productora Ejemplo S.A.",
@@ -40,7 +43,7 @@ public sealed class PartiesTests
     }
 
     [Fact]
-    public void Customers_need_a_legal_name()
+    public void Customers_Should_require_a_legal_name()
     {
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             Customer.Register(" ", "A00000000", Address, null)
@@ -50,7 +53,7 @@ public sealed class PartiesTests
     }
 
     [Fact]
-    public void The_issuer_profile_requires_name_tax_id_and_complete_address()
+    public void The_issuer_profile_Should_require_name_tax_id_and_complete_address()
     {
         var missingTaxId = Should.Throw<BusinessRuleViolationException>(() =>
             IssuerProfile.Define("Fotograma Rental S.L.", "", Address)
@@ -64,7 +67,7 @@ public sealed class PartiesTests
     }
 
     [Fact]
-    public void Updating_the_issuer_profile_does_not_change_its_identity()
+    public void Updating_the_issuer_profile_Should_not_change_its_identity()
     {
         var profile = IssuerProfile.Define("Fotograma Rental S.L.", "B00000000", Address);
         var id = profile.Id;

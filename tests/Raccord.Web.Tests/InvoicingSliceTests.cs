@@ -44,7 +44,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task A_project_is_billed_through_draft_finalization_document_and_audit()
+    public async Task A_project_Should_be_billed_through_draft_finalization_document_and_audit()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);
 

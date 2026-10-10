@@ -6,7 +6,7 @@ namespace Raccord.Domain.Tests.Billing;
 public sealed class InvoiceNumberSequenceTests
 {
     [Fact]
-    public void Numbers_are_correlative_within_a_series_and_year()
+    public void Numbers_Should_be_correlative_within_a_series_and_year()
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
 
@@ -20,7 +20,7 @@ public sealed class InvoiceNumberSequenceTests
     }
 
     [Fact]
-    public void Issue_dates_cannot_go_backwards_within_a_series()
+    public void Issue_dates_Should_not_go_backwards_within_a_series()
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
         sequence.Allocate(new DateOnly(2026, 3, 10));
@@ -34,7 +34,7 @@ public sealed class InvoiceNumberSequenceTests
     }
 
     [Fact]
-    public void A_yearly_sequence_only_numbers_invoices_of_its_year()
+    public void A_yearly_sequence_Should_only_number_invoices_of_its_year()
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
 
@@ -50,7 +50,7 @@ public sealed class InvoiceNumberSequenceTests
     [InlineData("f")]
     [InlineData("F-1")]
     [InlineData("ABCDEFGHIJK")]
-    public void Series_codes_are_short_uppercase_alphanumerics(string code)
+    public void Series_codes_Should_be_short_uppercase_alphanumerics(string code)
     {
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             InvoiceNumberSequence.Start(code, 2026)
@@ -60,7 +60,7 @@ public sealed class InvoiceNumberSequenceTests
     }
 
     [Fact]
-    public void Validation_reports_an_issue_date_before_the_last_issued_invoice()
+    public void Validation_Should_report_an_issue_date_before_the_last_issued_invoice()
     {
         var sequence = InvoiceNumberSequence.Start("F", 2026);
         sequence.Allocate(new DateOnly(2026, 6, 30));

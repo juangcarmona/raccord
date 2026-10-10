@@ -9,7 +9,7 @@ public sealed class ProjectTests
     private static readonly Guid CustomerId = Guid.CreateVersion7();
 
     [Fact]
-    public void A_project_cannot_end_before_it_starts()
+    public void A_project_Should_not_end_before_it_starts()
     {
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             Project.Create(
@@ -24,7 +24,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void New_billable_lines_are_unbilled()
+    public void New_billable_lines_Should_be_unbilled()
     {
         var project = NewProject();
 
@@ -39,7 +39,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void Reserving_lines_for_a_draft_moves_them_out_of_the_unbilled_pool()
+    public void Reserving_lines_for_a_draft_Should_move_them_out_of_the_unbilled_pool()
     {
         var project = NewProject();
         var camera = project.AddBillableLine(
@@ -63,7 +63,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void A_line_already_in_a_draft_cannot_be_reserved_again()
+    public void A_line_already_in_a_draft_Should_not_be_reserved_again()
     {
         var project = NewProject();
         var line = project.AddBillableLine(
@@ -81,7 +81,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void Reserving_an_unknown_line_is_rejected()
+    public void Reserving_an_unknown_line_Should_be_rejected()
     {
         var project = NewProject();
 
@@ -93,7 +93,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void Released_lines_can_be_billed_again()
+    public void Released_lines_Should_be_billable_again()
     {
         var project = NewProject();
         var line = project.AddBillableLine(
@@ -111,7 +111,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void Invoiced_lines_are_never_billable_again()
+    public void Invoiced_lines_Should_never_be_billable_again()
     {
         var project = NewProject();
         var line = project.AddBillableLine(
@@ -136,7 +136,7 @@ public sealed class ProjectTests
     }
 
     [Fact]
-    public void Billable_lines_need_a_description()
+    public void Billable_lines_Should_require_a_description()
     {
         var project = NewProject();
 

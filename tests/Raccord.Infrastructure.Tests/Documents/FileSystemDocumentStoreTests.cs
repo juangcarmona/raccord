@@ -11,7 +11,7 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
     );
 
     [Fact]
-    public async Task Saved_documents_can_be_read_back()
+    public async Task Saved_documents_Should_be_read_back()
     {
         var store = new FileSystemDocumentStore(root);
         byte[] content = [1, 2, 3, 4];
@@ -32,7 +32,7 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
     }
 
     [Fact]
-    public async Task Missing_documents_read_as_null()
+    public async Task Missing_documents_Should_read_as_null()
     {
         var store = new FileSystemDocumentStore(root);
 
@@ -46,7 +46,7 @@ public sealed class FileSystemDocumentStoreTests : IDisposable
     [InlineData("invoices/../../outside.pdf")]
     [InlineData("/etc/passwd")]
     [InlineData("C:/Windows/win.ini")]
-    public async Task Keys_cannot_escape_the_storage_root(string key)
+    public async Task Keys_Should_not_escape_the_storage_root(string key)
     {
         var store = new FileSystemDocumentStore(root);
 

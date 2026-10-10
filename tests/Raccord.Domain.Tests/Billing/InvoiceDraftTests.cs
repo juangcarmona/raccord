@@ -31,7 +31,7 @@ public sealed class InvoiceDraftTests
     );
 
     [Fact]
-    public void A_draft_copies_the_selected_lines_and_reserves_them_on_the_project()
+    public void A_draft_Should_copy_the_selected_lines_and_reserve_them_on_the_project()
     {
         var camera = AddLine("Cinema camera kit", 2m, 450m);
         var gaffer = AddLine("Gaffer, 10h day", 1m, 380m);
@@ -49,7 +49,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Draft_lines_follow_the_project_order_whatever_the_selection_order()
+    public void Draft_lines_Should_follow_the_project_order_whatever_the_selection_order()
     {
         var camera = AddLine("Cinema camera kit", 2m, 450m);
         var gaffer = AddLine("Gaffer, 10h day", 1m, 380m);
@@ -70,7 +70,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void A_draft_needs_at_least_one_line()
+    public void A_draft_Should_require_at_least_one_line()
     {
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             InvoiceDraft.CreateFromProject(project, [], "F", Now)
@@ -80,7 +80,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void A_complete_draft_has_no_validation_issues()
+    public void A_complete_draft_Should_have_no_validation_issues()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
@@ -88,7 +88,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Validation_lists_every_missing_recipient_detail()
+    public void Validation_Should_list_every_missing_recipient_detail()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         var incomplete = Recipient with { TaxId = null, Address = null };
@@ -101,7 +101,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Validation_requires_an_issuer_profile_with_tax_id()
+    public void Validation_Should_require_an_issuer_profile_with_tax_id()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
@@ -116,7 +116,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Validation_rejects_drafts_without_lines_or_with_a_zero_total()
+    public void Validation_Should_reject_drafts_without_lines_or_with_a_zero_total()
     {
         var free = DraftWith(AddLine("Courtesy recce visit", 1m, 0m));
         var emptied = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
@@ -132,7 +132,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Validation_rejects_an_issue_date_that_would_break_series_order()
+    public void Validation_Should_reject_an_issue_date_that_would_break_series_order()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         var sequence = Sequence();
@@ -144,7 +144,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Removing_a_line_returns_the_billable_line_to_release()
+    public void Removing_a_line_Should_return_the_billable_line_to_release()
     {
         var camera = AddLine("Cinema camera kit", 2m, 450m);
         var draft = DraftWith(camera);
@@ -156,7 +156,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void Finalizing_issues_a_numbered_invoice_with_snapshots_of_parties_and_lines()
+    public void Finalizing_Should_issue_a_numbered_invoice_with_snapshots_of_parties_and_lines()
     {
         var camera = AddLine("Cinema camera kit", 2m, 450m);
         var gaffer = AddLine("Gaffer, 10h day", 1m, 380m);
@@ -183,7 +183,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void The_operation_date_is_omitted_when_it_equals_the_issue_date()
+    public void The_operation_date_Should_be_omitted_when_it_equals_the_issue_date()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 
@@ -193,7 +193,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void An_invalid_draft_is_not_finalized_and_consumes_no_number()
+    public void An_invalid_draft_Should_not_be_finalized_and_consume_no_number()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         var sequence = Sequence();
@@ -208,7 +208,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void An_issued_draft_can_no_longer_change()
+    public void An_issued_draft_Should_no_longer_change()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
         draft.Finalize(Issuer, Recipient, Sequence(), IssueDate, Now);
@@ -225,7 +225,7 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
-    public void The_draft_must_use_the_sequence_of_its_own_series()
+    public void The_draft_Should_use_the_sequence_of_its_own_series()
     {
         var draft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
 

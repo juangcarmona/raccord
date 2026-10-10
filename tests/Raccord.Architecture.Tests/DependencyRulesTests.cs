@@ -36,7 +36,7 @@ public sealed class DependencyRulesTests
     ];
 
     [Fact]
-    public void Domain_depends_only_on_the_base_class_library()
+    public void Domain_Should_depend_only_on_the_base_class_library()
     {
         var offending = ReferencedNames(Domain)
             .Where(name =>
@@ -47,7 +47,7 @@ public sealed class DependencyRulesTests
     }
 
     [Fact]
-    public void Contracts_depend_only_on_the_base_class_library()
+    public void Contracts_Should_depend_only_on_the_base_class_library()
     {
         var offending = ReferencedNames(Contracts)
             .Where(name =>
@@ -58,7 +58,7 @@ public sealed class DependencyRulesTests
     }
 
     [Fact]
-    public void Application_has_no_web_database_cloud_or_infrastructure_dependencies()
+    public void Application_Should_have_no_web_database_cloud_or_infrastructure_dependencies()
     {
         var offending = ReferencedNames(Application)
             .Where(name =>
@@ -69,7 +69,7 @@ public sealed class DependencyRulesTests
     }
 
     [Fact]
-    public void Infrastructure_does_not_depend_on_the_web_host()
+    public void Infrastructure_Should_not_depend_on_the_web_host()
     {
         ReferencedNames(Infrastructure)
             .ShouldNotContain(name => name.StartsWith("Raccord.Web", StringComparison.Ordinal));
@@ -94,7 +94,10 @@ public sealed class DependencyRulesTests
         }
     )]
     [InlineData("Raccord.Aspire", new[] { "Raccord.Web" })]
-    public void Project_references_follow_the_dependency_direction(string project, string[] allowed)
+    public void Project_references_Should_follow_the_dependency_direction(
+        string project,
+        string[] allowed
+    )
     {
         var references = ProjectReferences(project);
 
@@ -105,7 +108,7 @@ public sealed class DependencyRulesTests
     [InlineData("Raccord.Domain")]
     [InlineData("Raccord.Contracts")]
     [InlineData("Raccord.Application")]
-    public void Core_projects_add_no_package_references(string project)
+    public void Core_projects_Should_add_no_package_references(string project)
     {
         ProjectFile(project).Descendants("PackageReference").ShouldBeEmpty();
     }

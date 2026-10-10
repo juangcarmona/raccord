@@ -44,7 +44,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Finalizing_an_incomplete_draft_lists_every_issue_and_consumes_no_number()
+    public async Task Finalizing_an_incomplete_draft_Should_list_every_issue_and_consume_no_number()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, customerTaxId: null, Camera);
         var draft = await CreateDraftAsync(project);
@@ -68,7 +68,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task A_billable_line_cannot_be_in_two_drafts()
+    public async Task A_billable_line_Should_not_be_in_two_drafts()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         await CreateDraftAsync(project);
@@ -83,7 +83,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Discarding_a_draft_or_removing_a_line_releases_the_billable_lines()
+    public async Task Discarding_a_draft_or_removing_a_line_Should_release_the_billable_lines()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);
         var draft = await CreateDraftAsync(project);
@@ -114,7 +114,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task An_issued_draft_cannot_be_finalized_or_discarded_again()
+    public async Task An_issued_draft_Should_not_be_finalized_or_discarded_again()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         var draft = await CreateDraftAsync(project);
@@ -136,7 +136,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Numbers_follow_issue_order_and_reject_earlier_dates()
+    public async Task Numbers_Should_follow_issue_order_and_reject_earlier_dates()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);
         var first = await CreateDraftAsync(project, project.BillableLines[0].Id);
@@ -159,7 +159,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task The_database_rejects_changes_to_issued_invoices_and_audit_events()
+    public async Task The_database_Should_reject_changes_to_issued_invoices_and_audit_events()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         var draft = await CreateDraftAsync(project);
@@ -185,7 +185,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task A_lost_document_is_regenerated_identically_from_the_issued_representation()
+    public async Task A_lost_document_Should_be_regenerated_identically_from_the_issued_representation()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         var draft = await CreateDraftAsync(project);
@@ -206,7 +206,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task A_tampered_issued_invoice_is_refused_instead_of_served()
+    public async Task A_tampered_issued_invoice_Should_be_refused_instead_of_served()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         var draft = await CreateDraftAsync(project);
@@ -228,7 +228,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Concurrent_drafts_for_the_same_line_produce_exactly_one_draft()
+    public async Task Concurrent_drafts_for_the_same_line_Should_produce_exactly_one_draft()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
         var request = new CreateInvoiceDraftRequest(
@@ -258,7 +258,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Concurrent_finalizations_never_duplicate_or_skip_numbers()
+    public async Task Concurrent_finalizations_Should_never_duplicate_or_skip_numbers()
     {
         var lines = Enumerable
             .Range(1, 6)
@@ -298,7 +298,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     [Theory]
     [InlineData("rocket", "projects.billable-line-kind-invalid")]
     [InlineData("equipment", "pricing.vat-rate-out-of-range")]
-    public async Task Invalid_billable_lines_are_rejected_with_rule_codes(
+    public async Task Invalid_billable_lines_Should_be_rejected_with_rule_codes(
         string kind,
         string expectedCode
     )
@@ -317,7 +317,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
-    public async Task Unknown_resources_return_not_found_and_health_is_ready()
+    public async Task Unknown_resources_Should_return_not_found_and_health_is_ready()
     {
         (await client.GetAsync($"/api/invoices/{Guid.NewGuid()}")).StatusCode.ShouldBe(
             HttpStatusCode.NotFound

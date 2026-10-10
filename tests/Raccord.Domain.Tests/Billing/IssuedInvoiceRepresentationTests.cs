@@ -11,7 +11,7 @@ public sealed class IssuedInvoiceRepresentationTests
     private readonly IssuedInvoice invoice = IssueSampleInvoice();
 
     [Fact]
-    public void The_representation_is_deterministic()
+    public void The_representation_Should_be_deterministic()
     {
         var first = IssuedInvoiceRepresentation.From(invoice);
         var second = IssuedInvoiceRepresentation.From(invoice);
@@ -22,7 +22,7 @@ public sealed class IssuedInvoiceRepresentationTests
     }
 
     [Fact]
-    public void Amounts_are_written_as_fixed_point_strings()
+    public void Amounts_Should_be_written_as_fixed_point_strings()
     {
         var json = IssuedInvoiceRepresentation.From(invoice).Json;
 
@@ -32,7 +32,7 @@ public sealed class IssuedInvoiceRepresentationTests
     }
 
     [Fact]
-    public void A_stored_representation_restores_the_same_invoice()
+    public void A_stored_representation_Should_restore_the_same_invoice()
     {
         var stored = IssuedInvoiceRepresentation.From(invoice);
 
@@ -47,7 +47,7 @@ public sealed class IssuedInvoiceRepresentationTests
     }
 
     [Fact]
-    public void A_tampered_representation_is_rejected()
+    public void A_tampered_representation_Should_be_rejected()
     {
         var stored = IssuedInvoiceRepresentation.From(invoice);
         var tampered = stored.Json.Replace(

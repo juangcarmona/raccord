@@ -4,5 +4,10 @@
         <ProjectReference Include="..\..\src\Raccord.Application\Raccord.Application.csproj" />
         <ProjectReference Include="..\..\src\Raccord.Contracts\Raccord.Contracts.csproj" />
         <ProjectReference Include="..\..\src\Raccord.Infrastructure\Raccord.Infrastructure.csproj" />
+        <!-- Referenced so the naming rule can reflect over every test assembly in the output
+             directory; their tests still run only in their own projects. -->
+        <ProjectReference Include="..\Raccord.Domain.Tests\Raccord.Domain.Tests.csproj" />
+        <ProjectReference Include="..\Raccord.Infrastructure.Tests\Raccord.Infrastructure.Tests.csproj" />
+        <ProjectReference Include="..\Raccord.Web.Tests\Raccord.Web.Tests.csproj" />
     </ItemGroup>
 </Project>

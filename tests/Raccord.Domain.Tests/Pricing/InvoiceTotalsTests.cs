@@ -9,7 +9,7 @@ public sealed class InvoiceTotalsTests
     private static readonly VatRate Reduced = VatRate.Of(10m);
 
     [Fact]
-    public void Vat_is_calculated_per_rate_on_the_summed_taxable_base()
+    public void Vat_Should_be_calculated_per_rate_on_the_summed_taxable_base()
     {
         // Rounding each line would give 3 × 0.02 = 0.06; the base-level method gives round(0.045) = 0.05.
         var lines = Enumerable.Range(0, 3).Select(_ => LinePricing.Create(1m, 0.15m, 0m, Reduced));
@@ -22,7 +22,7 @@ public sealed class InvoiceTotalsTests
     }
 
     [Fact]
-    public void Lines_are_grouped_by_rate_and_ordered_from_highest_rate()
+    public void Lines_Should_be_grouped_by_rate_and_ordered_from_highest_rate()
     {
         var lines = new[]
         {
@@ -47,7 +47,7 @@ public sealed class InvoiceTotalsTests
     }
 
     [Fact]
-    public void Zero_rated_lines_still_appear_in_the_breakdown()
+    public void Zero_rated_lines_Should_still_appear_in_the_breakdown()
     {
         var totals = InvoiceTotals.Calculate(
             [LinePricing.Create(1m, 50m, 0m, VatRate.Of(0m))],
@@ -60,7 +60,7 @@ public sealed class InvoiceTotalsTests
     }
 
     [Fact]
-    public void No_lines_give_zero_totals()
+    public void No_lines_Should_give_zero_totals()
     {
         var totals = InvoiceTotals.Calculate([], Currency.Eur);
 

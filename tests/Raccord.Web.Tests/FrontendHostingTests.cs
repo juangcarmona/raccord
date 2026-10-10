@@ -35,7 +35,7 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
     }
 
     [Fact]
-    public async Task Built_assets_are_served_as_files_and_client_routes_fall_back_to_the_app()
+    public async Task Built_assets_Should_be_served_as_files_and_client_routes_fall_back_to_the_app()
     {
         using var client = api.WithWebHostBuilder(builder => builder.UseWebRoot(webRoot))
             .CreateClient();

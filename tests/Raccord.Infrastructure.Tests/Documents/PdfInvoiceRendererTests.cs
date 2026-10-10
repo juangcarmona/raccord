@@ -11,7 +11,7 @@ public sealed class PdfInvoiceRendererTests
     private readonly PdfInvoiceRenderer renderer = new();
 
     [Fact]
-    public void The_document_is_a_structurally_valid_pdf()
+    public void The_document_Should_be_a_structurally_valid_pdf()
     {
         var pdf = renderer.Render(SampleInvoices.Issue());
         var text = Latin1.GetString(pdf);
@@ -42,7 +42,7 @@ public sealed class PdfInvoiceRendererTests
     }
 
     [Fact]
-    public void The_document_shows_number_parties_and_spanish_formatted_totals()
+    public void The_document_Should_show_number_parties_and_spanish_formatted_totals()
     {
         var text = Latin1.GetString(renderer.Render(SampleInvoices.Issue()));
 
@@ -55,7 +55,7 @@ public sealed class PdfInvoiceRendererTests
     }
 
     [Fact]
-    public void Non_ascii_text_is_encoded_as_single_win_ansi_bytes()
+    public void Non_ascii_text_Should_be_encoded_as_single_win_ansi_bytes()
     {
         var pdf = renderer.Render(SampleInvoices.Issue());
 
@@ -79,7 +79,7 @@ public sealed class PdfInvoiceRendererTests
     }
 
     [Fact]
-    public void Rendering_is_deterministic()
+    public void Rendering_Should_be_deterministic()
     {
         var invoice = SampleInvoices.Issue();
 
@@ -87,7 +87,7 @@ public sealed class PdfInvoiceRendererTests
     }
 
     [Fact]
-    public void Long_invoices_continue_on_further_pages()
+    public void Long_invoices_Should_continue_on_further_pages()
     {
         var text = Latin1.GetString(renderer.Render(SampleInvoices.Issue(lineCount: 90)));
 

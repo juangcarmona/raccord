@@ -82,6 +82,22 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Project creation (management, desktop)
+
+File: `project-creation.png` / `project-creation.html`
+
+| Design decision | Decided by |
+|---|---|
+| Step flow: type & template → start date → preview of copied content → save | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) main flow |
+| Project type and template selection, with blank-project alternative | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 1, alternative flows ([UC-PRJ-CREATE-PROJECT](../model/use-cases/uc-prj-create-project.md)) |
+| Start date prefilled when started from a calendar day | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 2, [BR-PRJ-CALENDAR-QUICK-CREATE](../model/business-rules/br-prj-calendar-quick-create.md) |
+| Schedule copied from template and shifted to the chosen start date, period times adjustable | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 3, [BR-PRJ-TEMPLATE-START-ANCHOR](../model/business-rules/br-prj-template-start-anchor.md) |
+| Preview shows copied schedule, equipment and function groups | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 4, [BR-PRJ-TEMPLATE-CONTENT](../model/business-rules/br-prj-template-content.md) |
+| Archived template item note ("copied but marked as no longer existing") | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) alternative flows, [BR-PRJ-ARCHIVED-TEMPLATE-ITEM](../model/business-rules/br-prj-archived-template-item.md) |
+| Save assigns a project number; crew/vehicle assignments start empty | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 5, [BR-PRJ-PROJECT-NUMBER-ASSIGNMENT](../model/business-rules/br-prj-project-number-assignment.md) |
+| Saving without a time schedule refused (error card) | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) failure conditions, [BR-PRJ-SCHEDULE-REQUIRED](../model/business-rules/br-prj-schedule-required.md) |
+| Selected template card and selected type use the blue selected token | [docs/design/color-tokens.md](../../design/color-tokens.md) `--raccord-selected` |
+
 ## Screen — Issuer profile settings (management, desktop)
 
 File: `issuer-profile.png` / `issuer-profile.html`

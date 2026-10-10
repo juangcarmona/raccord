@@ -15246,6 +15246,1051 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "TLwAk",
+      "x": 6310,
+      "y": 7080,
+      "name": "Project Creation",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "l7ZRd",
+          "name": "PC Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Go75P",
+              "name": "PC Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "oNDs4",
+                  "name": "PC Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "f5DFM",
+                  "name": "PC Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u39NVy",
+              "name": "PC Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jue8g",
+                  "name": "PC Nav Invoicing",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "RYcaV",
+                      "name": "PC Nav Icon Invoicing",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "description",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z4DI42",
+                      "name": "PC Nav Label Invoicing",
+                      "fill": "#8A93A8",
+                      "content": "Invoicing",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "C8wrEO",
+                  "name": "PC Nav Payments & dunning",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "sfKYp",
+                      "name": "PC Nav Icon Payments & dunning",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "M0nz3d",
+                      "name": "PC Nav Label Payments & dunning",
+                      "fill": "#8A93A8",
+                      "content": "Payments & dunning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M60fN2",
+                  "name": "PC Nav Financial settings",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "JrHNm",
+                      "name": "PC Nav Icon Financial settings",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "leaderboard",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LwDNY",
+                      "name": "PC Nav Label Financial settings",
+                      "fill": "#8A93A8",
+                      "content": "Financial settings",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QQHbg",
+                  "name": "PC Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "NS5CG",
+                      "name": "PC Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HKpvp",
+                      "name": "PC Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fC411",
+                  "name": "PC Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "xhI6i",
+                      "name": "PC Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "M9U5TJ",
+                      "name": "PC Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "WVAVM",
+              "name": "PC Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Operations · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "r8Teg7",
+          "name": "PC Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            32,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "L0Mz3s",
+              "name": "PC Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "yb3xg",
+                  "name": "PC Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NmWOF",
+                      "name": "PC Title",
+                      "fill": "$ink",
+                      "content": "New project",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y9feN1",
+                      "name": "PC Subtitle",
+                      "fill": "$slate",
+                      "content": "Start from a template and anchor its schedule to your start date. A project number is assigned on save.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xvdfM",
+                  "name": "PC Cancel Btn",
+                  "fill": "$white",
+                  "cornerRadius": 8,
+                  "stroke": "$hairline",
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "b6U5MN",
+                      "name": "PC Cancel Label",
+                      "fill": "$ink",
+                      "content": "Cancel",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "g6mv13",
+              "name": "PC Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LWhRO",
+                  "name": "PC Left",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "IbveP",
+                      "name": "PC Template Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Sir0e",
+                          "name": "PC Template Title",
+                          "fill": "$ink",
+                          "content": "1 · Type and template",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "GTPOP",
+                          "name": "PC Template Row",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "X30ck",
+                              "name": "PC Sel Type",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "#000000",
+                              "strokeWidth": 2,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "v1775",
+                                  "name": "PC Sel Type Label",
+                                  "fill": "$ink",
+                                  "content": "Festival · 3-day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "v3YG1L",
+                                  "name": "PC Sel Type Check",
+                                  "width": 16,
+                                  "height": 16,
+                                  "icon": "check_circle",
+                                  "library": "Material Symbols Rounded",
+                                  "fill": "#000000"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "TyDEt",
+                              "name": "PC Sel Blank",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "svUcj",
+                                  "name": "PC Sel Blank Label",
+                                  "fill": "$slate",
+                                  "content": "Blank project",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KRSJU",
+                          "name": "PC Template Cards",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "pLsmM",
+                              "name": "PC Template Festival main stage",
+                              "width": "fill_container",
+                              "fill": "#EDF6FC",
+                              "cornerRadius": 8,
+                              "stroke": "#000000",
+                              "strokeWidth": 2,
+                              "layout": "vertical",
+                              "gap": 6,
+                              "padding": 14,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "p0W4Xz",
+                                  "name": "PC Template Name Festival main stage",
+                                  "fill": "$ink",
+                                  "content": "Festival main stage",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 13,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HX0vW",
+                                  "name": "PC Template Meta Festival main stage",
+                                  "fill": "$slate",
+                                  "content": "105 items · 14 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "O4kAl",
+                              "name": "PC Template Arena concert",
+                              "width": "fill_container",
+                              "fill": "$white",
+                              "cornerRadius": 8,
+                              "stroke": "$hairline",
+                              "strokeWidth": 1,
+                              "layout": "vertical",
+                              "gap": 6,
+                              "padding": 14,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pexD5",
+                                  "name": "PC Template Name Arena concert",
+                                  "fill": "$ink",
+                                  "content": "Arena concert",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 13,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "uq3as",
+                                  "name": "PC Template Meta Arena concert",
+                                  "fill": "$slate",
+                                  "content": "88 items · 7 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "VjPGb",
+                              "name": "PC Template Corporate gala",
+                              "width": "fill_container",
+                              "fill": "$white",
+                              "cornerRadius": 8,
+                              "stroke": "$hairline",
+                              "strokeWidth": 1,
+                              "layout": "vertical",
+                              "gap": 6,
+                              "padding": 14,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IzFd4",
+                                  "name": "PC Template Name Corporate gala",
+                                  "fill": "$ink",
+                                  "content": "Corporate gala",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 13,
+                                  "fontWeight": "medium"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "zpgwn",
+                                  "name": "PC Template Meta Corporate gala",
+                                  "fill": "$slate",
+                                  "content": "40 items · 3 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HdmTr",
+                      "name": "PC Date Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lbsmW",
+                          "name": "PC Date Title",
+                          "fill": "$ink",
+                          "content": "2 · Start date",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uglw8",
+                          "name": "PC Date Row",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "MZ0ur",
+                              "name": "PC Date Box",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "gap": 8,
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "Bjn18",
+                                  "name": "PC Date Icon",
+                                  "width": 15,
+                                  "height": 15,
+                                  "icon": "calendar_month",
+                                  "library": "Material Symbols Rounded",
+                                  "fill": "$slate"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "IwJuq",
+                                  "name": "PC Date Value",
+                                  "fill": "$ink",
+                                  "content": "12 Feb 2026 (prefilled from calendar)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "q93AO",
+                              "name": "PC Date Note",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Schedule is shifted so it starts on this date.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "I6CRXo",
+                  "name": "PC Right",
+                  "width": 480,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DFs43",
+                      "name": "PC Preview Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hgy9W",
+                          "name": "PC Preview Title",
+                          "fill": "$ink",
+                          "content": "3 · Preview of copied content",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BkO68",
+                          "name": "PC Sched Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Qdapo",
+                              "name": "PC Sched Build-up and prep",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "n2QWFs",
+                                  "name": "PC Sched Label Build-up and prep",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Build-up and prep",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "LthJC",
+                                  "name": "PC Sched Time Build-up and prep",
+                                  "fill": "$slate",
+                                  "content": "12 Feb 08:00 → 20:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "rpaYD",
+                              "name": "PC Sched Show days",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "yH3iU",
+                                  "name": "PC Sched Label Show days",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Show days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Fz30Q",
+                                  "name": "PC Sched Time Show days",
+                                  "fill": "$slate",
+                                  "content": "13–14 Feb 09:00 → 23:30",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nHiRX",
+                              "name": "PC Sched Teardown and returns",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "FVyi6",
+                                  "name": "PC Sched Label Teardown and returns",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Teardown and returns",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Y9skuZ",
+                                  "name": "PC Sched Time Teardown and returns",
+                                  "fill": "$slate",
+                                  "content": "15 Feb 08:00 → 18:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "hplaE",
+                          "name": "PC Preview Divider",
+                          "width": "fill_container",
+                          "height": 1,
+                          "fill": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "b2FXLD",
+                          "name": "PC Groups Title",
+                          "fill": "$slate",
+                          "content": "EQUIPMENT GROUPS (COPIED)",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IWDY6",
+                          "name": "PC Group Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "nmbcX",
+                              "name": "PC Group Camera package A",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "CVi6t",
+                                  "name": "PC Group Label Camera package A",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Camera package A",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "XlLcz",
+                                  "name": "PC Group Count Camera package A",
+                                  "fill": "$slate",
+                                  "content": "12 items",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "XQeso",
+                              "name": "PC Group Fiber and truss",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "jVofm",
+                                  "name": "PC Group Label Fiber and truss",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Fiber and truss",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "p2mly",
+                                  "name": "PC Group Count Fiber and truss",
+                                  "fill": "$slate",
+                                  "content": "30 items",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "jGkdW",
+                              "name": "PC Group LED wall 6×3m",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "dbz27",
+                                  "name": "PC Group Label LED wall 6×3m",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "LED wall 6×3m",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "rklOB",
+                                  "name": "PC Group Count LED wall 6×3m",
+                                  "fill": "$slate",
+                                  "content": "6 items",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bjFJj",
+                              "name": "PC Group Audio basics",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "fWzxC",
+                                  "name": "PC Group Label Audio basics",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Audio basics",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "O746fe",
+                                  "name": "PC Group Count Audio basics",
+                                  "fill": "$slate",
+                                  "content": "18 items",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "D27zUw",
+                          "name": "PC Fn Note",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "paUXw",
+                              "name": "PC Fn Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "info",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "text",
+                              "id": "G0Lfh5",
+                              "name": "PC Fn Text",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Archived template items are copied but marked as no longer existing. Crew and vehicle assignments start empty.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uM7BU",
+                      "name": "PC Save Row",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "cUKO7",
+                          "name": "PC Save Btn",
+                          "width": "fill_container",
+                          "fill": "$ink",
+                          "cornerRadius": 8,
+                          "padding": [
+                            11,
+                            18
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "P9g5gZ",
+                              "name": "PC Save Label",
+                              "fill": "$white",
+                              "content": "Create project",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "T4HtV",
+                      "name": "PC Error Card",
+                      "width": "fill_container",
+                      "fill": "#FDE3E0",
+                      "cornerRadius": 8,
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": [
+                        12,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "S9cdj",
+                          "name": "PC Error Title",
+                          "fill": "#B3261E",
+                          "content": "A time schedule is required for this project type.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qfh3B",
+                          "name": "PC Error Text",
+                          "fill": "#B3261E",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Saving without one is refused — adjust the copied periods above.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

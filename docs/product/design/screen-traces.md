@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Project task board (management, desktop)
+
+File: `project-task-board.png` / `project-task-board.html`
+
+| Design decision | Decided by |
+|---|---|
+| Board (status columns) or list view shared with team and external collaborators | [UC-PRJ-WORK-WITH-TASK-BOARD](../model/use-cases/uc-prj-work-with-task-board.md) main flow, [JRN-PRJ-DELIVER-PRODUCTION-WORK](../model/journeys/jrn-prj-deliver-production-work.md) narrative |
+| Columns are statuses; task statuses configured per workspace | [UC-PRJ-PROGRESS-TASK](../model/use-cases/uc-prj-progress-task.md) step 1, [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) |
+| Filters, grouping/ordering, extra columns (planned/tracked time) | [UC-PRJ-WORK-WITH-TASK-BOARD](../model/use-cases/uc-prj-work-with-task-board.md) step 2 |
+| Saved views, personal vs shared-for-everyone grouping | [UC-PRJ-WORK-WITH-TASK-BOARD](../model/use-cases/uc-prj-work-with-task-board.md) step 3, [BR-PRJ-BOARD-GROUPING-SCOPE](../model/business-rules/br-prj-board-grouping-scope.md), [TERM-TASK-BOARD](../model/domain/terms/term-task-board.md) |
+| Cards show assignee, planned/tracked time, deadline; overdue chip in error tint | [UC-PRJ-ADD-TASK](../model/use-cases/uc-prj-add-task.md), [BR-PRJ-TASK-OVERDUE](../model/business-rules/br-prj-task-overdue.md) |
+| Status tints readable in grayscale (error overdue, neutral done) | [docs/design/color-tokens.md](../../design/color-tokens.md) status tints |
+| Footnote: moving a card edits the task; one running timer; hours flow to the linked service and need approval | [BR-PRJ-BOARD-MOVE-EDITS-TASK](../model/business-rules/br-prj-board-move-edits-task.md), [BR-PRJ-SINGLE-RUNNING-TIMER](../model/business-rules/br-prj-single-running-timer.md), [UC-PRJ-TRACK-TASK-TIME](../model/use-cases/uc-prj-track-task-time.md), [BR-PRJ-TASK-HOURS-APPROVAL](../model/business-rules/br-prj-task-hours-approval.md) |
+
 ## Screen — Project detail & schedule (management, desktop)
 
 File: `project-detail.png` / `project-detail.html`

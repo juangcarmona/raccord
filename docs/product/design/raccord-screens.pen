@@ -17941,6 +17941,1164 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "S8j5N4",
+      "x": 6310,
+      "y": 9448,
+      "name": "Project Task Board",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "LMxo5",
+          "name": "TB Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "jLdUN",
+              "name": "TB Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ig0mu",
+                  "name": "TB Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "s7qAh1",
+                  "name": "TB Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "L11hf",
+              "name": "TB Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CpYth",
+                  "name": "TB Nav Task boards",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "QNhO1",
+                      "name": "TB Nav Icon Task boards",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "view_kanban",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TAJ8Q",
+                      "name": "TB Nav Label Task boards",
+                      "fill": "$white",
+                      "content": "Task boards",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wxdxn",
+                  "name": "TB Nav Schedule",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "r1eRj",
+                      "name": "TB Nav Icon Schedule",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "calendar_month",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x59rt",
+                      "name": "TB Nav Label Schedule",
+                      "fill": "#8A93A8",
+                      "content": "Schedule",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dw8Vm",
+                  "name": "TB Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "I7RaHe",
+                      "name": "TB Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gSw61",
+                      "name": "TB Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VU20Z",
+                  "name": "TB Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "h6at3M",
+                      "name": "TB Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YnDxS",
+                      "name": "TB Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "q6P3u",
+              "name": "TB Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Operations · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "vIXAG",
+          "name": "TB Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "e1RGiZ",
+              "name": "TB Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u7nKI",
+                  "name": "TB Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "q0ipI",
+                      "name": "TB Title",
+                      "fill": "$ink",
+                      "content": "Corona Festival — project board",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c3D9e",
+                      "name": "TB Subtitle",
+                      "fill": "$slate",
+                      "content": "Board view · grouped by status · shared with team and external collaborators",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NOCaB",
+                  "name": "TB Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "GDv1k",
+                      "name": "TB View Menu",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mtEoE",
+                          "name": "TB View Label",
+                          "fill": "$ink",
+                          "content": "View: Festival prep",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rDJZQ",
+                      "name": "TB Save View",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "j3RLjF",
+                          "name": "TB Save Label",
+                          "fill": "$ink",
+                          "content": "Save as view",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fHOfI",
+                      "name": "TB Add Task",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "p9UzCy",
+                          "name": "TB Add Label",
+                          "fill": "$white",
+                          "content": "+ Task",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "M8Lcy",
+              "name": "TB Board",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "e5Knmz",
+                  "name": "TB Col To do",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "JzkuD",
+                      "name": "TB Col Head To do",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "QXv7F",
+                          "name": "TB Col Title To do",
+                          "fill": "$ink",
+                          "content": "To do",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "iR31K",
+                          "name": "TB Col Count To do",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "LfTR2",
+                              "name": "TB Col Count Label To do",
+                              "fill": "$slate",
+                              "content": "4",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oftmc",
+                      "name": "TB Card Prep camera package",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "p0pUFi",
+                          "name": "TB Card Title Prep camera package",
+                          "fill": "$ink",
+                          "content": "Prep camera package",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Cm2hC",
+                          "name": "TB Card Assignee Prep camera package",
+                          "fill": "$slate",
+                          "content": "Elena\n2h planned",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aNomf",
+                          "name": "TB Card Due Prep camera package",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "wryxB",
+                              "name": "TB Card Due Label Prep camera package",
+                              "fill": "$slate",
+                              "content": "12 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JPDmE",
+                      "name": "TB Card Check truss and rigging",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YyAEh",
+                          "name": "TB Card Title Check truss and rigging",
+                          "fill": "$ink",
+                          "content": "Check truss and rigging",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "QuzeB",
+                          "name": "TB Card Assignee Check truss and rigging",
+                          "fill": "$slate",
+                          "content": "Pablo\n1h planned",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "B407p",
+                          "name": "TB Card Due Check truss and rigging",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "v8eroX",
+                              "name": "TB Card Due Label Check truss and rigging",
+                              "fill": "$slate",
+                              "content": "13 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vv0ds",
+                      "name": "TB Card Book satellite dish",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "AmVwc",
+                          "name": "TB Card Title Book satellite dish",
+                          "fill": "$ink",
+                          "content": "Book satellite dish",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eMUzE",
+                      "name": "TB Card Media-server prep",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rg9BV",
+                          "name": "TB Card Title Media-server prep",
+                          "fill": "$ink",
+                          "content": "Media-server prep",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "aG1KF",
+                          "name": "TB Card Assignee Media-server prep",
+                          "fill": "$slate",
+                          "content": "Ana\n3h planned",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "R9wdu",
+                          "name": "TB Card Due Media-server prep",
+                          "fill": "#FDE3E0",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "eph5h",
+                              "name": "TB Card Due Label Media-server prep",
+                              "fill": "#B3261E",
+                              "content": "23:00 overdue",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "P2wQq",
+                  "name": "TB Col In progress",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "pHVt7",
+                      "name": "TB Col Head In progress",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uD5z0",
+                          "name": "TB Col Title In progress",
+                          "fill": "$ink",
+                          "content": "In progress",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "v9bwK5",
+                          "name": "TB Col Count In progress",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "eQSzq",
+                              "name": "TB Col Count Label In progress",
+                              "fill": "$slate",
+                              "content": "3",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tQxa3",
+                      "name": "TB Card Video engineer on site",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ogJZ2",
+                          "name": "TB Card Title Video engineer on site",
+                          "fill": "$ink",
+                          "content": "Video engineer on site",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Q1m3U5",
+                          "name": "TB Card Assignee Video engineer on site",
+                          "fill": "$slate",
+                          "content": "Marcos\n8h tracked",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ZuDDZ",
+                          "name": "TB Card Due Video engineer on site",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "o3m7h",
+                              "name": "TB Card Due Label Video engineer on site",
+                              "fill": "$slate",
+                              "content": "13–14 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HR9sF",
+                      "name": "TB Card Camera list export",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nHZAl",
+                          "name": "TB Card Title Camera list export",
+                          "fill": "$ink",
+                          "content": "Camera list export",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "K0XaAm",
+                          "name": "TB Card Assignee Camera list export",
+                          "fill": "$slate",
+                          "content": "Elena\n1h tracked",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lm4Pf",
+                          "name": "TB Card Due Camera list export",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "P9pMDy",
+                              "name": "TB Card Due Label Camera list export",
+                              "fill": "$slate",
+                              "content": "11 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "E6sxYN",
+                  "name": "TB Col Review",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "x67VQr",
+                      "name": "TB Col Head Review",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "E9tgKs",
+                          "name": "TB Col Title Review",
+                          "fill": "$ink",
+                          "content": "Review",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SBz1u",
+                          "name": "TB Col Count Review",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Y9U7L",
+                              "name": "TB Col Count Label Review",
+                              "fill": "$slate",
+                              "content": "2",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "D1J4rS",
+                      "name": "TB Card LED mapping fix",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "aQfTK",
+                          "name": "TB Card Title LED mapping fix",
+                          "fill": "$ink",
+                          "content": "LED mapping fix",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "YZHmv",
+                          "name": "TB Card Assignee LED mapping fix",
+                          "fill": "$slate",
+                          "content": "Marcos\n2h tracked",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OAs2C",
+                          "name": "TB Card Due LED mapping fix",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "IGhBV",
+                              "name": "TB Card Due Label LED mapping fix",
+                              "fill": "$slate",
+                              "content": "14 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "uBTm2",
+                  "name": "TB Col Done",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FYaDs",
+                      "name": "TB Col Head Done",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "D3XmE",
+                          "name": "TB Col Title Done",
+                          "fill": "$ink",
+                          "content": "Done",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Wfjtx",
+                          "name": "TB Col Count Done",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "F81bm",
+                              "name": "TB Col Count Label Done",
+                              "fill": "$slate",
+                              "content": "5",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "UIyn7",
+                      "name": "TB Card Load-in completed",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EX9qA",
+                          "name": "TB Card Title Load-in completed",
+                          "fill": "$ink",
+                          "content": "Load-in completed",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "PzxeG",
+                          "name": "TB Card Assignee Load-in completed",
+                          "fill": "$slate",
+                          "content": "Team\n—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BAUYZ",
+                          "name": "TB Card Due Load-in completed",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "TNa1T",
+                              "name": "TB Card Due Label Load-in completed",
+                              "fill": "$slate",
+                              "content": "12 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SwRP5",
+                      "name": "TB Card Sound check done",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VIr0k",
+                          "name": "TB Card Title Sound check done",
+                          "fill": "$ink",
+                          "content": "Sound check done",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jiMT3",
+                          "name": "TB Card Assignee Sound check done",
+                          "fill": "$slate",
+                          "content": "Team\n—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "K2JGx0",
+                          "name": "TB Card Due Sound check done",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "nKLqv",
+                              "name": "TB Card Due Label Sound check done",
+                              "fill": "$slate",
+                              "content": "13 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f08qvC",
+                      "name": "TB Card Fiber run verified",
+                      "width": "fill_container",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "a6TNoS",
+                          "name": "TB Card Title Fiber run verified",
+                          "fill": "$ink",
+                          "content": "Fiber run verified",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "f4tbZ",
+                          "name": "TB Card Assignee Fiber run verified",
+                          "fill": "$slate",
+                          "content": "Pablo\n—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "b8SRwe",
+                          "name": "TB Card Due Fiber run verified",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            6
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Vd41N",
+                              "name": "TB Card Due Label Fiber run verified",
+                              "fill": "$slate",
+                              "content": "12 Feb",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TyHeU",
+              "name": "TB Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Q6G4wA",
+                  "name": "TB Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "pluQl",
+                  "name": "TB Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Moving a card edits the task's status; one timer runs at a time. Hours tracked on a task flow to its linked service and need approval before payroll.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

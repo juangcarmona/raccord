@@ -1,0 +1,2370 @@
+{
+  "version": "2.21",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "vu32x",
+      "x": 920,
+      "y": 0,
+      "name": "Invoice List",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "g3mp2m",
+          "name": "Nav",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "NPDXS",
+              "name": "Brand",
+              "fill": "$white",
+              "content": "Raccord",
+              "fontFamily": "$font-body",
+              "fontSize": 17,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "frame",
+              "id": "G1bu8",
+              "name": "Brand Underline",
+              "width": 28,
+              "height": 3,
+              "fill": "$cyan",
+              "cornerRadius": 2
+            },
+            {
+              "type": "frame",
+              "id": "qXG2C",
+              "name": "Nav Spacer",
+              "width": "fill_container",
+              "height": 18
+            },
+            {
+              "type": "frame",
+              "id": "lLnW5",
+              "name": "Nav Overview",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "gdhib",
+                  "name": "Nav Icon Overview",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "p0MmL",
+                  "name": "Nav Label Overview",
+                  "fill": "#8A93A8",
+                  "content": "Overview",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pAoRk",
+              "name": "Nav Projects",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "fBIf0",
+                  "name": "Nav Icon Projects",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "P52vhT",
+                  "name": "Nav Label Projects",
+                  "fill": "#8A93A8",
+                  "content": "Projects",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rc8Pw",
+              "name": "Nav Equipment",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "qTvxY",
+                  "name": "Nav Icon Equipment",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "W2ZFXa",
+                  "name": "Nav Label Equipment",
+                  "fill": "#8A93A8",
+                  "content": "Equipment",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NDy7O",
+              "name": "Nav Crew",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "v7hP1",
+                  "name": "Nav Icon Crew",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "TiCH6",
+                  "name": "Nav Label Crew",
+                  "fill": "#8A93A8",
+                  "content": "Crew",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wbLoi",
+              "name": "Nav Invoices",
+              "fill": "#1A2440",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "uEMVH",
+                  "name": "Nav Icon Invoices",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "file-text",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "k1dHC",
+                  "name": "Nav Label Invoices",
+                  "fill": "$white",
+                  "content": "Invoices",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XfxyT",
+              "name": "Nav Customers",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ZsloN",
+                  "name": "Nav Icon Customers",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "vYxzl",
+                  "name": "Nav Label Customers",
+                  "fill": "#8A93A8",
+                  "content": "Customers",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bDp9V",
+              "name": "Nav Documents",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "qZC5z",
+                  "name": "Nav Icon Documents",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "RYQep",
+                  "name": "Nav Label Documents",
+                  "fill": "#8A93A8",
+                  "content": "Documents",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GBU1d",
+              "name": "Nav Reports",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "jd5lK",
+                  "name": "Nav Icon Reports",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "BB2dm",
+                  "name": "Nav Label Reports",
+                  "fill": "#8A93A8",
+                  "content": "Reports",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N2TE1l",
+              "name": "Nav Settings",
+              "fill": "$ink",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "WdwSv",
+                  "name": "Nav Icon Settings",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "circle",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "iPjSN",
+                  "name": "Nav Label Settings",
+                  "fill": "#8A93A8",
+                  "content": "Settings",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Nusxj",
+              "name": "Nav Footer",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 6,
+              "layout": "vertical",
+              "gap": 3,
+              "padding": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "X4GtBn",
+                  "name": "Nav User",
+                  "fill": "$white",
+                  "content": "Estudio Norte S.L.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "DEr3T",
+                  "name": "Nav Role",
+                  "fill": "#8A93A8",
+                  "content": "Billing administrator",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bUBgX",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$cloud",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "DlE6C",
+              "name": "Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dAhZD",
+                  "name": "Title Block",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F8mlq",
+                      "name": "Page Title",
+                      "fill": "$ink",
+                      "content": "Invoices",
+                      "fontFamily": "$font-body",
+                      "fontSize": 24,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dxxbE",
+                      "name": "Page Subtitle",
+                      "fill": "$slate",
+                      "content": "Project and standalone invoices, drafts and issued",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "haG96",
+                  "name": "Header Actions",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "M7yLQV",
+                      "name": "Export Button",
+                      "fill": "$white",
+                      "cornerRadius": 6,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        9,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "IF0cp",
+                          "name": "Export Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "download",
+                          "library": "lucide",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "text",
+                          "id": "oq7VQ",
+                          "name": "Export Label",
+                          "fill": "$ink",
+                          "content": "Export",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V6VGeZ",
+                      "name": "New Invoice Button",
+                      "fill": "$ink",
+                      "cornerRadius": 6,
+                      "gap": 8,
+                      "padding": [
+                        9,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "TSvDk",
+                          "name": "New Invoice Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "file-plus",
+                          "library": "lucide",
+                          "fill": "$cyan"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pVdV1",
+                          "name": "New Invoice Label",
+                          "fill": "$white",
+                          "content": "New invoice",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NDhfK",
+              "name": "Filters",
+              "width": "fill_container",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TtfcK",
+                  "name": "Filter Status",
+                  "fill": "$white",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "H13KQ",
+                      "name": "Filter Label Status",
+                      "fill": "$slate",
+                      "content": "Status",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E21hnI",
+                      "name": "Filter Value Status",
+                      "fill": "$ink",
+                      "content": "All statuses",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "QG1GX",
+                      "name": "Filter Chevron Status",
+                      "width": 12,
+                      "height": 12,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$slate"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Vkte9",
+                  "name": "Filter Series",
+                  "fill": "$white",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L5Ela",
+                      "name": "Filter Label Series",
+                      "fill": "$slate",
+                      "content": "Series",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HwbBQ",
+                      "name": "Filter Value Series",
+                      "fill": "$ink",
+                      "content": "All series",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "W5LeX",
+                      "name": "Filter Chevron Series",
+                      "width": 12,
+                      "height": 12,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$slate"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "V2iBZL",
+                  "name": "Filter Customer",
+                  "fill": "$white",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m1pE6C",
+                      "name": "Filter Label Customer",
+                      "fill": "$slate",
+                      "content": "Customer",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "aeJKr",
+                      "name": "Filter Value Customer",
+                      "fill": "$ink",
+                      "content": "All customers",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "p0e2iD",
+                      "name": "Filter Chevron Customer",
+                      "width": 12,
+                      "height": 12,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$slate"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ECqcS",
+                  "name": "Filter Issued",
+                  "fill": "$white",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RPm4j",
+                      "name": "Filter Label Issued",
+                      "fill": "$slate",
+                      "content": "Issued",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y7MECD",
+                      "name": "Filter Value Issued",
+                      "fill": "$ink",
+                      "content": "This year",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "yqMJN",
+                      "name": "Filter Chevron Issued",
+                      "width": 12,
+                      "height": 12,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$slate"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M8K8QR",
+                  "name": "Search",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "q7l6v",
+                      "name": "Search Icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "search",
+                      "library": "lucide",
+                      "fill": "$slate"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xCkGN",
+                      "name": "Search Placeholder",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Search by number, customer or project",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LOPb6",
+                  "name": "Status Tabs",
+                  "gap": 4,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "OjTVo",
+                      "name": "Tab All",
+                      "fill": "$ink",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "S4pWYA",
+                          "name": "Tab Label All",
+                          "fill": "$white",
+                          "content": "All",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bFKEl",
+                      "name": "Tab Drafts",
+                      "fill": "$cloud",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "f7raD5",
+                          "name": "Tab Label Drafts",
+                          "fill": "$ink",
+                          "content": "Drafts",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "F8ipLz",
+                      "name": "Tab Issued",
+                      "fill": "$cloud",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J48Xf",
+                          "name": "Tab Label Issued",
+                          "fill": "$ink",
+                          "content": "Issued",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tcMFF",
+                      "name": "Tab Unpaid",
+                      "fill": "$cloud",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dtwAj",
+                          "name": "Tab Label Unpaid",
+                          "fill": "$ink",
+                          "content": "Unpaid",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "o3TNx",
+                      "name": "Tab Overdue",
+                      "fill": "$cloud",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MVBCB",
+                          "name": "Tab Label Overdue",
+                          "fill": "$ink",
+                          "content": "Overdue",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "J2ccX",
+              "name": "Stat Cards",
+              "width": "fill_container",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "L8qEp",
+                  "name": "Stat Outstanding",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NfFKg",
+                      "name": "Stat Label Outstanding",
+                      "fill": "$slate",
+                      "content": "Outstanding",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QPvK1",
+                      "name": "Stat Value Outstanding",
+                      "fill": "$ink",
+                      "content": "€ 48,250",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PH69B",
+                      "name": "Stat Hint Outstanding",
+                      "fill": "$slate",
+                      "content": "133 unpaid or partially paid",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cr3E0",
+                  "name": "Stat Overdue",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yst4D",
+                      "name": "Stat Label Overdue",
+                      "fill": "$slate",
+                      "content": "Overdue",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cbuJF",
+                      "name": "Stat Value Overdue",
+                      "fill": "$ink",
+                      "content": "€ 12,480",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oAecT",
+                      "name": "Stat Hint Overdue",
+                      "fill": "$slate",
+                      "content": "4 past their due date",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kY0Hv",
+                  "name": "Stat Drafts",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HxM4h",
+                      "name": "Stat Label Drafts",
+                      "fill": "$slate",
+                      "content": "Drafts",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "n6z1V",
+                      "name": "Stat Value Drafts",
+                      "fill": "$ink",
+                      "content": "12",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ofM4S",
+                      "name": "Stat Hint Drafts",
+                      "fill": "$slate",
+                      "content": "awaiting review",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "A8TC3",
+                  "name": "Stat Issued this year",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eAdr5",
+                      "name": "Stat Label Issued this year",
+                      "fill": "$slate",
+                      "content": "Issued this year",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LqyAX",
+                      "name": "Stat Value Issued this year",
+                      "fill": "$ink",
+                      "content": "318",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OIipH",
+                      "name": "Stat Hint Issued this year",
+                      "fill": "$slate",
+                      "content": "€ 391,760 total",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hBTFK",
+              "name": "Invoice Table",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 8,
+              "stroke": "$hairline",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "uljTv",
+                  "name": "Head Row",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gETlA",
+                      "name": "Checkbox Column",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$white",
+                      "cornerRadius": 3,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "K8GTK",
+                      "name": "Col Number",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "NUMBER",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "LNYdR",
+                      "name": "Col Customer",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "CUSTOMER",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "D6vKT",
+                      "name": "Col Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "PROJECT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "bOZUX",
+                      "name": "Col Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "ISSUED",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "B6CLr",
+                      "name": "Col Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "DUE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "UdQlP",
+                      "name": "Col Total",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "TOTAL",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "W76MkL",
+                      "name": "Col Payment",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 106,
+                      "content": "PAYMENT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "Db57h",
+                      "name": "Col Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "text",
+                      "id": "srTms",
+                      "name": "Col Actions",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium",
+                      "letterSpacing": 0.4
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Hxj2w",
+                  "name": "Row F 2026-0342",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z7peSV",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$white",
+                      "cornerRadius": 3,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "WDq9W",
+                      "name": "Number",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0342",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PTUdy",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Producciones Ávila S.L.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NsHal",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "CONcierto Mad Cool",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fUNL4",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "12 Feb 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "b2iRNJ",
+                      "name": "Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "21 Mar 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PwvJV",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 8,420.50",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cRVls",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xZIon",
+                          "name": "Badge F 2026-0342",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "JIHsa",
+                              "name": "Badge Label",
+                              "fill": "#1D7A4F",
+                              "content": "Paid",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ra6HI",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "DC2OR",
+                          "name": "Status Badge F 2026-0342",
+                          "fill": "$ink",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Oleat",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Issued",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yhE6Q",
+                  "name": "Row F 2026-0341",
+                  "width": "fill_container",
+                  "fill": "#EDF6FC",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SbW8a",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "#D6EBF7",
+                      "cornerRadius": 3,
+                      "stroke": "#0B7FBF",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "S5ud4",
+                          "layoutPosition": "absolute",
+                          "x": 2,
+                          "y": 2,
+                          "name": "Check Icon",
+                          "width": 11,
+                          "height": 11,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "#0B7FBF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "L4jTOm",
+                      "name": "Number",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0341",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sdrBU",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Estudio Norte S.L.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UxPhc",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Roda de prensa BMW",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "G6Ck0w",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "11 Feb 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m29zc",
+                      "name": "Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "13 Mar 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "s8GiS",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 2,150.00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "C7KDh3",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "zOyn0",
+                          "name": "Badge F 2026-0341",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "O9RfFt",
+                              "name": "Badge Label",
+                              "fill": "#8A5A00",
+                              "content": "Partially paid",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xCNGO",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "eTmCg",
+                          "name": "Status Badge F 2026-0341",
+                          "fill": "$ink",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GpGMd",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Issued",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sqCIm",
+                  "name": "Row F 2026-0339",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "quFUn",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$white",
+                      "cornerRadius": 3,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "wG3i5",
+                      "name": "Number",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0339",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YT65H",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Canal Sur Producciones",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bW7nS",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Grabación documental",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZOhm7",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zyFNy",
+                      "name": "Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XbpNp",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 12,980.75",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AfJp5",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "t4sG4",
+                          "name": "Badge F 2026-0339",
+                          "fill": "$white",
+                          "cornerRadius": 99,
+                          "stroke": "$hairline",
+                          "strokeWidth": 1,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iG2KI",
+                              "name": "Badge Label",
+                              "fill": "$slate",
+                              "content": "€ 12,980.75",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ulZ9R",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oCKkf",
+                          "name": "Status Badge F 2026-0339",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "stroke": "$hairline",
+                          "strokeWidth": 1,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gjAFD",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Draft",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ojbi7",
+                  "name": "Row F 2026-0338",
+                  "width": "fill_container",
+                  "fill": "#EDF6FC",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "WT1xB",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "#D6EBF7",
+                      "cornerRadius": 3,
+                      "stroke": "#0B7FBF",
+                      "strokeWidth": 1,
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "JC3QS",
+                          "layoutPosition": "absolute",
+                          "x": 2,
+                          "y": 2,
+                          "name": "Check Icon",
+                          "width": 11,
+                          "height": 11,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "#0B7FBF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ksEfg",
+                      "name": "Number",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0338",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SqDtx",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Teatro Real",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FHpFv",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Montaje gala anual",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dovMV",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "07 Feb 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UW1ys",
+                      "name": "Due",
+                      "fill": "#B3261E",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "09 Mar 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z7K0wM",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 6,720.00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "unVvC",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "NNTII",
+                          "name": "Badge F 2026-0338",
+                          "fill": "#FDE3E0",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VDIw2",
+                              "name": "Badge Label",
+                              "fill": "#B3261E",
+                              "content": "Overdue",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vGckp",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "j75ZK",
+                          "name": "Status Badge F 2026-0338",
+                          "fill": "$ink",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qIgl6",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Issued",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u57Fy",
+                  "name": "Row F 2026-0336",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "c9W76",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$white",
+                      "cornerRadius": 3,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "nIQMc",
+                      "name": "Number",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0336",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gurPu",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Ática Films",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bP5lz",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Spot Navidad",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GTa5O",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "05 Feb 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bQWeY",
+                      "name": "Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "07 Mar 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VOH1c",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 4,310.25",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "R8g94",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "X6E6M1",
+                          "name": "Badge F 2026-0336",
+                          "fill": "$white",
+                          "cornerRadius": 99,
+                          "stroke": "$hairline",
+                          "strokeWidth": 1,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "y1xyKo",
+                              "name": "Badge Label",
+                              "fill": "$ink",
+                              "content": "—",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U7T2q",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "SdKvn",
+                          "name": "Status Badge F 2026-0336",
+                          "fill": "$cloud",
+                          "cornerRadius": 99,
+                          "stroke": "$hairline",
+                          "strokeWidth": 1,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "t0SXQR",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Draft",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wjT5f",
+                  "name": "Row F 2026-0335",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "fcDjv",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$white",
+                      "cornerRadius": 3,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "DMRWI",
+                      "name": "Number",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 118,
+                      "content": "F 2026-0335",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BrSdU",
+                      "name": "Customer",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 210,
+                      "content": "Producciones Ávila S.L.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j0aaUQ",
+                      "name": "Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "CONcierto Mad Cool",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VES6f",
+                      "name": "Issued",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 82,
+                      "content": "04 Feb 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "keJOM",
+                      "name": "Due",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 75,
+                      "content": "06 Mar 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iqWS6",
+                      "name": "Total",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 92,
+                      "content": "€ 8,420.50",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "RIID8",
+                      "name": "Payment Cell",
+                      "width": 106,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "sN7tu",
+                          "name": "Badge F 2026-0335",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Oihra",
+                              "name": "Badge Label",
+                              "fill": "#1D7A4F",
+                              "content": "Paid",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "X111H",
+                      "name": "Status Cell",
+                      "width": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "zFH3G",
+                          "name": "Status Badge F 2026-0335",
+                          "fill": "$ink",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "w2WQA2",
+                              "name": "Status Badge Label",
+                              "fill": "$white",
+                              "content": "Issued",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "B0hlYF",
+              "name": "Selection Bar",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 8,
+              "gap": 16,
+              "padding": [
+                12,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "f64HlD",
+                  "name": "Selection Left",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "afjRW",
+                      "name": "Selection Count",
+                      "fill": "$cyan",
+                      "content": "2 selected",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pBiFd",
+                      "name": "Selection Total",
+                      "fill": "$white",
+                      "content": "€ 8,870.00 outstanding",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j5GON",
+                      "name": "Selection Paid",
+                      "fill": "#8A93A8",
+                      "content": "€ 3,580.00 paid",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AEnzE",
+                  "name": "Selection Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "V7OY6",
+                      "name": "Remind Button",
+                      "cornerRadius": 6,
+                      "stroke": "#3A4763",
+                      "strokeWidth": 1,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "PtAQq",
+                          "name": "Remind Label",
+                          "fill": "$white",
+                          "content": "Send reminder",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "scXD6",
+                      "name": "Remind Primary",
+                      "fill": "$cyan",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "g2obn2",
+                          "name": "Remind Primary Label",
+                          "fill": "$ink",
+                          "content": "Record payment",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "ink": {
+      "type": "color",
+      "value": "#0B1020"
+    },
+    "cyan": {
+      "type": "color",
+      "value": "#2DE2E6"
+    },
+    "coral": {
+      "type": "color",
+      "value": "#FF6B5E"
+    },
+    "cloud": {
+      "type": "color",
+      "value": "#F5F7FA"
+    },
+    "slate": {
+      "type": "color",
+      "value": "#667085"
+    },
+    "white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "hairline": {
+      "type": "color",
+      "value": "#E4E8EF"
+    },
+    "font-body": {
+      "type": "string",
+      "value": "Inter"
+    }
+  },
+  "fileToken": "4e6ca17d-59df-441c-a957-b7e156ada9c6"
+}

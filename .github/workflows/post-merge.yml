@@ -12,6 +12,9 @@ on:
 
 permissions:
   contents: read
+  # The ZAP action files its report as an issue on WARN/FAIL; without this grant it
+  # 403s ("Resource not accessible by integration") after a successful scan.
+  issues: write
 
 jobs:
   zap-baseline:
@@ -37,4 +40,8 @@ jobs:
       - name: Tear down the Compose stack
         if: always()
         working-directory: deploy
+        # Same CI-only value as the boot step: compose interpolates the connection
+        # string even when only tearing down, so the variable must be set here too.
+        env:
+          POSTGRES_PASSWORD: ci-only
         run: docker compose down --volumes

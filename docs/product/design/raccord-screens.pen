@@ -2969,6 +2969,1541 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "sve95",
+      "x": 1510,
+      "y": 1104,
+      "name": "Ops Board",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$ink",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ipqj0",
+          "name": "Board Header",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": [
+            28,
+            48
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "gS79g",
+              "name": "Board Brand",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "W59ZJn",
+                  "name": "Board Mark",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "$cyan",
+                  "cornerRadius": 8
+                },
+                {
+                  "type": "frame",
+                  "id": "FuKB6",
+                  "name": "Board Brand Text",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "B8Kq0",
+                      "name": "Board Title",
+                      "fill": "$white",
+                      "content": "Operations board",
+                      "fontFamily": "$font-body",
+                      "fontSize": 22,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XfAoC",
+                      "name": "Board Subtitle",
+                      "fill": "#8A93A8",
+                      "content": "Read-only · office display · refreshes automatically",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XkTGs",
+              "name": "Header Spacer",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "Xgng6",
+              "name": "Board Date",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "K3GLId",
+                  "name": "Board Date Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "calendar",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "K638N",
+                  "name": "Board Date Text",
+                  "fill": "$white",
+                  "content": "Tuesday, 10 February 2026 · today",
+                  "fontFamily": "$font-body",
+                  "fontSize": 15,
+                  "fontWeight": "medium"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eZmuV",
+              "name": "Board Live",
+              "fill": "#141B33",
+              "cornerRadius": 20,
+              "gap": 8,
+              "padding": [
+                6,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "d6keOX",
+                  "name": "Live Dot",
+                  "width": 8,
+                  "height": 8,
+                  "fill": "$cyan",
+                  "cornerRadius": 4
+                },
+                {
+                  "type": "text",
+                  "id": "k8V4yD",
+                  "name": "Live Label",
+                  "fill": "$cyan",
+                  "content": "Live board v0",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "p58yju",
+          "name": "Board Stats",
+          "width": "fill_container",
+          "gap": 16,
+          "padding": [
+            0,
+            48,
+            24,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "IPqnP",
+              "name": "Stat To pack today",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aEEzk",
+                  "name": "Stat Label To pack today",
+                  "fill": "#8A93A8",
+                  "content": "To pack today",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "HLeuw",
+                  "name": "Stat Value To pack today",
+                  "fill": "$cyan",
+                  "content": "3",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "QUstG",
+                  "name": "Stat Hint To pack today",
+                  "fill": "#667085",
+                  "content": "packing lists confirmed",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cafZe",
+              "name": "Stat Out on location",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CZqYG",
+                  "name": "Stat Label Out on location",
+                  "fill": "#8A93A8",
+                  "content": "Out on location",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "vK0s1",
+                  "name": "Stat Value Out on location",
+                  "fill": "$white",
+                  "content": "2",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "xG1ND",
+                  "name": "Stat Hint Out on location",
+                  "fill": "#667085",
+                  "content": "equipment in the field",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ywc9j",
+              "name": "Stat Delayed",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "QFBBY",
+                  "name": "Stat Label Delayed",
+                  "fill": "#8A93A8",
+                  "content": "Delayed",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "SsnbI",
+                  "name": "Stat Value Delayed",
+                  "fill": "$coral",
+                  "content": "2 lists",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "BVeKc",
+                  "name": "Stat Hint Delayed",
+                  "fill": "#667085",
+                  "content": "no manual override · derived",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "M334X",
+              "name": "Stat Crew working now",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ejnqi",
+                  "name": "Stat Label Crew working now",
+                  "fill": "#8A93A8",
+                  "content": "Crew working now",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "gNzxu",
+                  "name": "Stat Value Crew working now",
+                  "fill": "$cyan",
+                  "content": "12",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "lFRtW",
+                  "name": "Stat Hint Crew working now",
+                  "fill": "#667085",
+                  "content": "6 clocked in via phone",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "J5q9l6",
+              "name": "Stat Expected back",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aLp8j",
+                  "name": "Stat Label Expected back",
+                  "fill": "#8A93A8",
+                  "content": "Expected back",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "F9krw",
+                  "name": "Stat Value Expected back",
+                  "fill": "$white",
+                  "content": "3",
+                  "fontFamily": "$font-body",
+                  "fontSize": 34,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "EHpIg",
+                  "name": "Stat Hint Expected back",
+                  "fill": "#667085",
+                  "content": "before 18:00",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "atBii",
+          "name": "Board Columns",
+          "width": "fill_container",
+          "height": "fill_container",
+          "gap": 16,
+          "padding": [
+            0,
+            48,
+            32,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "MmdHP",
+              "name": "Column To pack",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#101731",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                18,
+                16
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "L2ksC1",
+                  "name": "Column Head To pack",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HeazY",
+                      "name": "Head Dot To pack",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#2DE2E6",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "EiLQd",
+                      "name": "Head Label To pack",
+                      "fill": "$white",
+                      "content": "To pack",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "I1ybq",
+                      "name": "Head Spacer To pack",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JCb4o",
+                      "name": "Head Count To pack",
+                      "fill": "#1D2748",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "N5ym4",
+                          "name": "Head Count Text To pack",
+                          "fill": "#2DE2E6",
+                          "content": "3",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nXGDZ",
+                  "name": "Card Corona Festival — Main stage",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "b3rqX",
+                      "name": "Card Top Corona Festival — Main stage",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "c2H51d",
+                          "name": "Progress Dot Corona Festival — Main stage",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "$coral",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "Xwwpk",
+                          "name": "Card Name Corona Festival — Main stage",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Corona Festival — Main stage",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "o4I4wW",
+                      "name": "Card Number Corona Festival — Main stage",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0188 · due in today · 14:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VKeWP",
+                      "name": "Card Extra Corona Festival — Main stage",
+                      "fill": "$coral",
+                      "content": "shortage: 2 items",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hvJip",
+                  "name": "Card Estudio Norte — Studio B",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "poRfn",
+                      "name": "Card Top Estudio Norte — Studio B",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xx8JY",
+                          "name": "Progress Dot Estudio Norte — Studio B",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "D1K5gf",
+                          "name": "Card Name Estudio Norte — Studio B",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Estudio Norte — Studio B",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ENHY9",
+                      "name": "Card Number Estudio Norte — Studio B",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0187 · due in today · 15:30",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "b6suk",
+                  "name": "Card Teatro Real — Gala",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gP3Gg",
+                      "name": "Card Top Teatro Real — Gala",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "v6QxL",
+                          "name": "Progress Dot Teatro Real — Gala",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#F5A623",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "yZARH",
+                          "name": "Card Name Teatro Real — Gala",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Teatro Real — Gala",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "MG0hC",
+                      "name": "Card Number Teatro Real — Gala",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0191 · due in today · 17:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y5aUI",
+                      "name": "Card Extra Teatro Real — Gala",
+                      "fill": "#8A93A8",
+                      "content": "notes: fragile",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "R09kCZ",
+              "name": "Column Prepped",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#101731",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                18,
+                16
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WDNx3",
+                  "name": "Column Head Prepped",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "oY9RE",
+                      "name": "Head Dot Prepped",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "FRE1Q",
+                      "name": "Head Label Prepped",
+                      "fill": "$white",
+                      "content": "Prepped",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tjMkw",
+                      "name": "Head Spacer Prepped",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fHnbh",
+                      "name": "Head Count Prepped",
+                      "fill": "#1D2748",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "c2b9k",
+                          "name": "Head Count Text Prepped",
+                          "fill": "#FFFFFF",
+                          "content": "2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M1NQqw",
+                  "name": "Card Auditorio — Conference",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "GIlE6",
+                      "name": "Card Top Auditorio — Conference",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "W6EpSV",
+                          "name": "Progress Dot Auditorio — Conference",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "ThOc1",
+                          "name": "Card Name Auditorio — Conference",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Auditorio — Conference",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "c9e9sq",
+                      "name": "Card Number Auditorio — Conference",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0179 · packed · ready",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DCXu4",
+                  "name": "Card Bodega Fuentemayor",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "TZzMs",
+                      "name": "Card Top Bodega Fuentemayor",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "PetpY",
+                          "name": "Progress Dot Bodega Fuentemayor",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "lNARJ",
+                          "name": "Card Name Bodega Fuentemayor",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Bodega Fuentemayor",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "PRC3s",
+                      "name": "Card Number Bodega Fuentemayor",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0182 · packed · ready",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Z3wKi",
+              "name": "Column On location",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#101731",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                18,
+                16
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n6jYUa",
+                  "name": "Column Head On location",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j7BchI",
+                      "name": "Head Dot On location",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "AWGKG",
+                      "name": "Head Label On location",
+                      "fill": "$white",
+                      "content": "On location",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ohfb2",
+                      "name": "Head Spacer On location",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YrWMN",
+                      "name": "Head Count On location",
+                      "fill": "#1D2748",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FCJ1J",
+                          "name": "Head Count Text On location",
+                          "fill": "#FFFFFF",
+                          "content": "2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "e5H3d3",
+                  "name": "Card Corona Festival — Site A",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jdKzb",
+                      "name": "Card Top Corona Festival — Site A",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y0LUd",
+                          "name": "Progress Dot Corona Festival — Site A",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "j9uV3",
+                          "name": "Card Name Corona Festival — Site A",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Corona Festival — Site A",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "TK9i6",
+                      "name": "Card Number Corona Festival — Site A",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0176 · on site since 08 Feb",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eYwub",
+                  "name": "Card Rodaje TV5 — Platô 2",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "U8k5iK",
+                      "name": "Card Top Rodaje TV5 — Platô 2",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ogn0P",
+                          "name": "Progress Dot Rodaje TV5 — Platô 2",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "MeIy2",
+                          "name": "Card Name Rodaje TV5 — Platô 2",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Rodaje TV5 — Platô 2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "rdaNS",
+                      "name": "Card Number Rodaje TV5 — Platô 2",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0180 · on site since 09 Feb",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ljZvz",
+                      "name": "Card Extra Rodaje TV5 — Platô 2",
+                      "fill": "#8A93A8",
+                      "content": "crew: 6 now",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UmUWi",
+              "name": "Column Expected back",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#101731",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                18,
+                16
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "g2XUvr",
+                  "name": "Column Head Expected back",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "OIgSM",
+                      "name": "Head Dot Expected back",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#2DE2E6",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "Sy27l",
+                      "name": "Head Label Expected back",
+                      "fill": "$white",
+                      "content": "Expected back",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NsTab",
+                      "name": "Head Spacer Expected back",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "i7Yl8V",
+                      "name": "Head Count Expected back",
+                      "fill": "#1D2748",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "L4nyCb",
+                          "name": "Head Count Text Expected back",
+                          "fill": "#2DE2E6",
+                          "content": "3",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bXHrk",
+                  "name": "Card Canal+ Francia",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Bdywe",
+                      "name": "Card Top Canal+ Francia",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xvJbJ",
+                          "name": "Progress Dot Canal+ Francia",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#F5A623",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "bbRoT",
+                          "name": "Card Name Canal+ Francia",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Canal+ Francia",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "AnpyK",
+                      "name": "Card Number Canal+ Francia",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0168 · expected 16:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hjOYt",
+                      "name": "Card Extra Canal+ Francia",
+                      "fill": "#8A93A8",
+                      "content": "notes: partial return",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Cgs6r",
+                  "name": "Card Hotel Ritz — Salón Dorado",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "YcgQS",
+                      "name": "Card Top Hotel Ritz — Salón Dorado",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Aw8tc",
+                          "name": "Progress Dot Hotel Ritz — Salón Dorado",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "FO9t2",
+                          "name": "Card Name Hotel Ritz — Salón Dorado",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Hotel Ritz — Salón Dorado",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "A270pw",
+                      "name": "Card Number Hotel Ritz — Salón Dorado",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0171 · expected 17:30",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WJQQP",
+                  "name": "Card Sala Apolo",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "TDUrj",
+                      "name": "Card Top Sala Apolo",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d4iJXD",
+                          "name": "Progress Dot Sala Apolo",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#27C79A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "G6s2Ux",
+                          "name": "Card Name Sala Apolo",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Sala Apolo",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "nSq6s",
+                      "name": "Card Number Sala Apolo",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0174 · expected 18:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AgUkE",
+              "name": "Column Delayed",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#101731",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                18,
+                16
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tU6FP",
+                  "name": "Column Head Delayed",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "WzOCW",
+                      "name": "Head Dot Delayed",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#FF6B5E",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "AHDUi",
+                      "name": "Head Label Delayed",
+                      "fill": "$white",
+                      "content": "Delayed",
+                      "fontFamily": "$font-body",
+                      "fontSize": 14,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U9WDG",
+                      "name": "Head Spacer Delayed",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HOZOj",
+                      "name": "Head Count Delayed",
+                      "fill": "#1D2748",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "bMiIk",
+                          "name": "Head Count Text Delayed",
+                          "fill": "#FF6B5E",
+                          "content": "2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jWM6r",
+                  "name": "Card Expo Zaragoza — Pabellón 4",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "k5dX0W",
+                      "name": "Card Top Expo Zaragoza — Pabellón 4",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WT1GS",
+                          "name": "Progress Dot Expo Zaragoza — Pabellón 4",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "$coral",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "r3b60V",
+                          "name": "Card Name Expo Zaragoza — Pabellón 4",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Expo Zaragoza — Pabellón 4",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "RkzG8",
+                      "name": "Card Number Expo Zaragoza — Pabellón 4",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0159 · planning period ended 07 Feb",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oVY9h",
+                      "name": "Card Extra Expo Zaragoza — Pabellón 4",
+                      "fill": "#8A93A8",
+                      "content": "expected return 12 Feb 10:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ciym2",
+                  "name": "Card Marca Fashion Week",
+                  "width": "fill_container",
+                  "fill": "#1A2340",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mwG63",
+                      "name": "Card Top Marca Fashion Week",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "vSCCd",
+                          "name": "Progress Dot Marca Fashion Week",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "$coral",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "YR3yI",
+                          "name": "Card Name Marca Fashion Week",
+                          "fill": "$white",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Marca Fashion Week",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "n82YK",
+                      "name": "Card Number Marca Fashion Week",
+                      "fill": "#8A93A8",
+                      "content": "PL-2026-0164 · planning period ended 08 Feb",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t6yRQ",
+                      "name": "Card Extra Marca Fashion Week",
+                      "fill": "#8A93A8",
+                      "content": "remark: truck breakdown",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

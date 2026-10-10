@@ -47248,6 +47248,856 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "VFthI",
+      "x": 6310,
+      "y": 41416,
+      "name": "API Access",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "A3kud",
+          "name": "AI Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "wjC57",
+              "name": "AI Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "GchAM",
+                  "name": "AI Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "k7YIm",
+                  "name": "AI Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "igdfR",
+              "name": "AI Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "J0dv0",
+                  "name": "AI Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "bChEo",
+                      "name": "AI Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "g5yvbj",
+                      "name": "AI Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ps29n",
+                  "name": "AI Nav Crew",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "hq1JN",
+                      "name": "AI Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Nztqi",
+                      "name": "AI Nav Label Crew",
+                      "fill": "#8A93A8",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "N7o03B",
+                  "name": "AI Nav Workspace",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Wq1Lp",
+                      "name": "AI Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "owzhJ",
+                      "name": "AI Nav Label Workspace",
+                      "fill": "$white",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "acsUw",
+                  "name": "AI Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "hFT1o",
+                      "name": "AI Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mR6bt",
+                      "name": "AI Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "HWHqv",
+              "name": "AI Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "T9cmB",
+          "name": "AI Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "EabaA",
+              "name": "AI Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GC2VX",
+                  "name": "AI Title",
+                  "fill": "$ink",
+                  "content": "API access & tokens",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "O1061W",
+                  "name": "AI Subtitle",
+                  "fill": "$slate",
+                  "content": "Integrations configuration: the public interface authenticates with a token that inherits its owner's role.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JovDz",
+              "name": "AI Token Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dnakq",
+                  "name": "AI Token Head",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "FFwks",
+                      "name": "AI Token Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "key",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jrDlw",
+                      "name": "AI Token Title",
+                      "fill": "$ink",
+                      "content": "Public interface — connected",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GiYJ8",
+                  "name": "AI TRow Status",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "N4nmL",
+                      "name": "AI TK Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Status",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kyMZk",
+                      "name": "AI TV Status",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Connected · integration active",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QnF7P",
+                  "name": "AI TRow Token",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NJ0Jt",
+                      "name": "AI TK Token",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Token owner",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t8Pkt",
+                      "name": "AI TV Token",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Administrator (Juan G. Carmona)",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lWuyf",
+                  "name": "AI TRow Validity",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "LxrfU",
+                      "name": "AI TK Validity",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Validity",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z58Si",
+                      "name": "AI TV Validity",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "10 years · issued 10 Oct 2026",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G3FObM",
+                  "name": "AI TRow Permissions",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VojU2",
+                      "name": "AI TK Permissions",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "Permissions",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QRxb3",
+                      "name": "AI TV Permissions",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Calls beyond the owner's role permissions are refused",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "v0NWM8",
+                  "name": "AI Token Reveal",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "r04bq6",
+                      "name": "AI Reveal Btn",
+                      "fill": "$cyan",
+                      "cornerRadius": 6,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "V8yvU",
+                          "name": "AI Reveal Btn Text",
+                          "fill": "$ink",
+                          "content": "Show token",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TED5k",
+                      "name": "AI Regen Btn",
+                      "fill": "$white",
+                      "cornerRadius": 6,
+                      "stroke": "#000000",
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "T6vvY",
+                          "name": "AI Regen Btn Text",
+                          "fill": "#000000",
+                          "content": "Regenerate token",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "rccSJ",
+                      "name": "AI Regen Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "regenerating revokes the old token immediately — update every application",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Hpk9O",
+              "name": "AI Version Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UoOR6",
+                  "name": "AI Version Head",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Ee9Mv",
+                      "name": "AI Version Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "update",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uwjnt",
+                      "name": "AI Version Title",
+                      "fill": "$ink",
+                      "content": "Interface versions & deprecations",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GTT04",
+                  "name": "AI Version Table",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LlFyw",
+                      "name": "AI Version Head Row",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "padding": [
+                        7,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ZuMLK",
+                          "name": "AI VCol Version",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "VERSION",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WGTo5",
+                          "name": "AI VCol Change",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "CHANGE",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WWqND",
+                          "name": "AI VCol Transition",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 240,
+                          "content": "TRANSITION",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GmvHI",
+                          "name": "AI VCol Final",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 130,
+                          "content": "FINAL",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GcFWV",
+                      "name": "AI Ver Row v3)",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yHbBS",
+                          "name": "AI VV v3 (current)",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "v3 (current)",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iH4nR",
+                          "name": "AI VC v3 (current)",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "tEYoq",
+                          "name": "AI VT v3 (current)",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 240,
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "B62jNU",
+                          "name": "AI VF v3 (current)",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 130,
+                          "content": "—",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V778r1",
+                      "name": "AI Ver Row v23",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rphxS",
+                          "name": "AI VV v2 → v3",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "v2 → v3",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "v8XQeV",
+                          "name": "AI VC v2 → v3",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Field item.code moved to item.reference.number",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "rM7Pc",
+                          "name": "AI VT v2 → v3",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 240,
+                          "content": "Both places returned until 30 Apr 2027",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vukL4",
+                          "name": "AI VF v2 → v3",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 130,
+                          "content": "30 Apr 2027",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "qyMew",
+                      "name": "AI Ver Row v12",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 12,
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UKz0c",
+                          "name": "AI VV v1 → v2",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "v1 → v2",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MqVbH",
+                          "name": "AI VC v1 → v2",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Breaking: contacts endpoint reworked",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "A5MTRI",
+                          "name": "AI VT v1 → v2",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 240,
+                          "content": "None — flagged as breaking",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "uCbmt",
+                          "name": "AI VF v1 → v2",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 130,
+                          "content": "removed",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ixum4",
+              "name": "AI Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "LkY8r",
+                  "name": "AI Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "CZo7P",
+                  "name": "AI Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "The public interface exposes what the integration requests within the token owner's permissions. During a transition period the field is returned in both places with the same values; integrations not updated in time lose the old field after it.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

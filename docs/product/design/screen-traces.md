@@ -164,6 +164,20 @@ File: `workspace-settings.png` / `workspace-settings.html`
 | Footnote: role changes apply to all its users immediately | [UC-WSP-MANAGE-ROLE](../model/use-cases/uc-wsp-manage-role.md) step 3 and postconditions |
 | Overall journey context: setup from company details through roles to go-live | [JRN-WSP-SET-UP-WORKSPACE](../model/journeys/jrn-wsp-set-up-workspace.md) |
 
+## Screen — API access & tokens (management, desktop, setup)
+
+File: `api-access.png` / `api-access.html`
+
+| Design decision | Decided by |
+|---|---|
+| Public interface status card within the integrations configuration | [UC-INT-ENABLE-API-ACCESS](../model/use-cases/uc-int-enable-api-access.md) step 1, [TERM-INTEGRATION](../model/domain/terms/term-integration.md) |
+| Token owned by the administrator, valid ten years, shown on demand | [UC-INT-ENABLE-API-ACCESS](../model/use-cases/uc-int-enable-api-access.md) steps 2–3, [TERM-API-TOKEN](../model/domain/terms/term-api-token.md), [BR-INT-TOKEN-VALIDITY-PERIOD](../model/business-rules/br-int-token-validity-period.md) |
+| Token inherits the owner's role; calls beyond it are refused | [BR-INT-TOKEN-INHERITS-OWNER-ROLE](../model/business-rules/br-int-token-inherits-owner-role.md) |
+| Regenerate-token action with warning that it revokes the old token immediately | [UC-INT-REGENERATE-API-TOKEN](../model/use-cases/uc-int-regenerate-api-token.md) step 2, [BR-INT-REGENERATION-REVOKES-TOKEN](../model/business-rules/br-int-regeneration-revokes-token.md) |
+| Version & deprecation table: change, transition period, removal date, breaking-change flag | [UC-INT-ADAPT-TO-API-CHANGE](../model/use-cases/uc-int-adapt-to-api-change.md) steps 1–4, [TERM-API-DEPRECATION](../model/domain/terms/term-api-deprecation.md) |
+| Footnote: interface exposes only what the integration requests within the owner's permissions | [BR-WSP-INTEGRATION-DATA-SCOPE](../model/business-rules/br-wsp-integration-data-scope.md) |
+| Journey context: enable → token → read/write → adapt across versions; leak → regenerate | [JRN-INT-BUILD-API-INTEGRATION](../model/journeys/jrn-int-build-api-integration.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -85,7 +85,7 @@ public sealed class DependencyRulesTests
     private static IEnumerable<string> ProjectReferences(string project) =>
         ProjectFile(project)
             .Descendants("ProjectReference")
-            .Select(reference => Path.GetFileNameWithoutExtension((string?)reference.Attribute("Include") ?? string.Empty));
+            .Select(reference => Path.GetFileNameWithoutExtension(((string?)reference.Attribute("Include") ?? string.Empty).Replace('\\', '/')));
 
     private static XDocument ProjectFile(string project)
     {

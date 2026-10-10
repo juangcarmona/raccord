@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Contact import (management, desktop)
+
+File: `contact-import.png` / `contact-import.html`
+
+| Design decision | Decided by |
+|---|---|
+| Mode: add all as new / update existing / add new and skip existing | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 1, [BR-PRJ-CONTACT-IMPORT-MODES](../model/business-rules/br-prj-contact-import-modes.md) |
+| Contact persons included, imported as person rows under their contact | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 1, [BR-PRJ-CONTACT-PERSON-IMPORT-ROWS](../model/business-rules/br-prj-contact-person-import-rows.md) |
+| Column mapping against contact and contact person fields (incl. custom fields) | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 2 |
+| Root folder with rows placed by folder path | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 3, [BR-PRJ-IMPORT-FOLDER-PLACEMENT](../model/business-rules/br-prj-import-folder-placement.md) |
+| Match columns for update/skip modes | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 4 |
+| Ten-row preview, import tag, result report; undo = delete by tag; bulk edits via export/re-import | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 5, alternative flows, [BR-PRJ-IMPORT-TAG](../model/business-rules/br-prj-import-tag.md), [BR-PRJ-IMPORT-RESULT-REPORT](../model/business-rules/br-prj-import-result-report.md) |
+| Failed rows listed with reasons, downloadable | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) failure conditions |
+
 ## Screen — Kit builder (management, desktop)
 
 File: `kit-builder.png` / `kit-builder.html`

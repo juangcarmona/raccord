@@ -30045,6 +30045,1068 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "A7cRTl",
+      "x": 6310,
+      "y": 22472,
+      "name": "Contact Import",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "FkuNE",
+          "name": "CI Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "v52uNu",
+              "name": "CI Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nlqka",
+                  "name": "CI Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "wQi9r",
+                  "name": "CI Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "b7MXm",
+              "name": "CI Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Ld2D5",
+                  "name": "CI Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "DkDh3",
+                      "name": "CI Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Xp78m",
+                      "name": "CI Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G5O2c",
+                  "name": "CI Nav Equipment",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ZGuxf",
+                      "name": "CI Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fo5lQ",
+                      "name": "CI Nav Label Equipment",
+                      "fill": "#8A93A8",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zSKq5",
+                  "name": "CI Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "wVoCT",
+                      "name": "CI Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "A9nbE",
+                      "name": "CI Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "V4OvS",
+                  "name": "CI Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O7UPi",
+                      "name": "CI Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mnJVM",
+                      "name": "CI Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "qs8vC",
+              "name": "CI Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Projects · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "W3pciN",
+          "name": "CI Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Ay1wW",
+              "name": "CI Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "v3dPt",
+                  "name": "CI Title",
+                  "fill": "$ink",
+                  "content": "Import contacts",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "mlpmU",
+                  "name": "CI Subtitle",
+                  "fill": "$slate",
+                  "content": "Load the contact database from a file — contacts, contact persons and folders, tagged with the import tag.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zSFcz",
+              "name": "CI Middle Row",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nk0n5",
+                  "name": "CI Mapping Card",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "pVicN",
+                      "name": "CI Mapping Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "ryJHX",
+                          "name": "CI Mapping Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "swap_horiz",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OEnwX",
+                          "name": "CI Mapping Title",
+                          "fill": "$ink",
+                          "content": "Column mapping — contacts-2026.xlsx",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Tln9F",
+                      "name": "CI Mapping Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "dBfy0",
+                          "name": "CI MRow A — Comp",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "w1zFo",
+                              "name": "CI MF A — Comp",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "A — Company name",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "l9cpZ",
+                              "name": "CI MArrow A — Comp",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "zRTnV",
+                              "name": "CI MT A — Comp",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "vy9s8",
+                                  "name": "CI MTL A — Comp",
+                                  "fill": "$ink",
+                                  "content": "Contact name",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "XFQh0",
+                          "name": "CI MRow B — Fold",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HkH1J",
+                              "name": "CI MF B — Fold",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "B — Folder path",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "CUEPU",
+                              "name": "CI MArrow B — Fold",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aGqDT",
+                              "name": "CI MT B — Fold",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "kMECw",
+                                  "name": "CI MTL B — Fold",
+                                  "fill": "$ink",
+                                  "content": "Folder path",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "T7Efh",
+                          "name": "CI MRow C — Emai",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "QE5ZT",
+                              "name": "CI MF C — Emai",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "C — Email",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "N409VA",
+                              "name": "CI MArrow C — Emai",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "AKO3v",
+                              "name": "CI MT C — Emai",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pV2wK",
+                                  "name": "CI MTL C — Emai",
+                                  "fill": "$ink",
+                                  "content": "Email",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ShZVY",
+                          "name": "CI MRow D — Phon",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oWdvp",
+                              "name": "CI MF D — Phon",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "D — Phone",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "qU7HA",
+                              "name": "CI MArrow D — Phon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "NvOOi",
+                              "name": "CI MT D — Phon",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "d7Zjn",
+                                  "name": "CI MTL D — Phon",
+                                  "fill": "$ink",
+                                  "content": "Phone",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j2NYM",
+                          "name": "CI MRow E — VAT ",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "q9FqP",
+                              "name": "CI MF E — VAT ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "E — VAT number",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "i2o26r",
+                              "name": "CI MArrow E — VAT ",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "wHUxu",
+                              "name": "CI MT E — VAT ",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "SOu3l",
+                                  "name": "CI MTL E — VAT ",
+                                  "fill": "$ink",
+                                  "content": "VAT number",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uYKvE",
+                          "name": "CI MRow F — Cont",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "J2hc1",
+                              "name": "CI MF F — Cont",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "F — Contact person",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "QwCYz",
+                              "name": "CI MArrow F — Cont",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "w7jlX",
+                              "name": "CI MT F — Cont",
+                              "fill": "$cloud",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "VV6SB",
+                                  "name": "CI MTL F — Cont",
+                                  "fill": "$ink",
+                                  "content": " → person rows",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "hvM8Z",
+                          "name": "CI MRow G — Pers",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qeawA",
+                              "name": "CI MF G — Pers",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "G — Person email",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "mdIht",
+                              "name": "CI MArrow G — Pers",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "SGZEK",
+                              "name": "CI MT G — Pers",
+                              "fill": "#FFF3D6",
+                              "cornerRadius": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "XRY2A",
+                                  "name": "CI MTL G — Pers",
+                                  "fill": "#8A5A00",
+                                  "content": "Person email",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "s4slkr",
+                      "name": "CI Person Note",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Rows with a person import to contact persons under their contact; empty person columns import the contact only.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YT42r",
+                  "name": "CI Options Card",
+                  "width": 360,
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "z9jpm5",
+                      "name": "CI Options Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Dfpq2",
+                          "name": "CI Options Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "settings",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Fj7ZC",
+                          "name": "CI Options Title",
+                          "fill": "$ink",
+                          "content": "Import options",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "GjfUe",
+                      "name": "CI Mode Label",
+                      "fill": "$slate",
+                      "content": "MODE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b4bO9",
+                      "name": "CI Mode Add al",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WYlpK",
+                          "name": "CI RB Add al",
+                          "width": 14,
+                          "height": 14,
+                          "cornerRadius": 7,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "P9WPO",
+                          "name": "CI Mode Label Add al",
+                          "fill": "$ink",
+                          "content": "Add all as new",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hPBO4",
+                      "name": "CI Mode Update",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "H3nUe",
+                          "name": "CI RB Update",
+                          "width": 14,
+                          "height": 14,
+                          "fill": "#000000",
+                          "cornerRadius": 7
+                        },
+                        {
+                          "type": "text",
+                          "id": "ixm1W",
+                          "name": "CI Mode Label Update",
+                          "fill": "$ink",
+                          "content": "Update existing",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "H5CdYs",
+                      "name": "CI Mode Add ne",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ANrLI",
+                          "name": "CI RB Add ne",
+                          "width": 14,
+                          "height": 14,
+                          "cornerRadius": 7,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zLzgp",
+                          "name": "CI Mode Label Add ne",
+                          "fill": "$ink",
+                          "content": "Add new, skip existing",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "y3qUM",
+                      "name": "CI Match Label",
+                      "fill": "$slate",
+                      "content": "MATCH COLUMNS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "G8Idu",
+                      "name": "CI Match Contact name",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ImIv4",
+                          "name": "CI CB Contact name",
+                          "width": 14,
+                          "height": 14,
+                          "fill": "#000000",
+                          "cornerRadius": 3,
+                          "stroke": "#000000"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Z6jcGQ",
+                          "name": "CI MatchL Contact name",
+                          "fill": "$ink",
+                          "content": "Contact name",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V3cRV",
+                      "name": "CI Match Email",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "U61dvF",
+                          "name": "CI CB Email",
+                          "width": 14,
+                          "height": 14,
+                          "cornerRadius": 3,
+                          "stroke": "$hairline"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WEHM9",
+                          "name": "CI MatchL Email",
+                          "fill": "$ink",
+                          "content": "Email",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "D5W6u",
+                      "name": "CI Persons Row",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "i47ps",
+                          "name": "CI Persons CB",
+                          "width": 14,
+                          "height": 14,
+                          "fill": "#000000",
+                          "cornerRadius": 3
+                        },
+                        {
+                          "type": "text",
+                          "id": "w6RUH",
+                          "name": "CI Persons Label",
+                          "fill": "$ink",
+                          "content": "Include contact persons",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zVuJg",
+                      "name": "CI Folder Row",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hnE5N",
+                          "name": "CI Folder Label",
+                          "fill": "$slate",
+                          "content": "ROOT FOLDER",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MjmeQ",
+                          "name": "CI Folder Select",
+                          "width": "fill_container",
+                          "cornerRadius": 6,
+                          "stroke": "$hairline",
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "O1uQIB",
+                              "name": "CI Folder Value",
+                              "fill": "$ink",
+                              "content": "Clients",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "flez8",
+                              "name": "CI Folder Caret",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow_forward",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$slate"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fnCEA",
+              "name": "CI Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "AI5nA",
+                  "name": "CI Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "inJcB",
+                  "name": "CI Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Ten-row preview before import; failed rows come back with reasons as a downloadable file. Undo = delete records carrying the import tag; bulk edits go via export, edit, re-import in update mode.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

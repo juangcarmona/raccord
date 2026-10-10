@@ -24051,6 +24051,1054 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "fcxaA",
+      "x": 6310,
+      "y": 16552,
+      "name": "Stock Count Session",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "z7wT4t",
+          "name": "SC Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "k928El",
+              "name": "SC Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Nt40N",
+                  "name": "SC Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "e89DGY",
+                  "name": "SC Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u8bqo",
+              "name": "SC Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "K5icCi",
+                  "name": "SC Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "y7JC9",
+                      "name": "SC Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cpddM",
+                      "name": "SC Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BslZM",
+                  "name": "SC Nav Equipment",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "KVmQG",
+                      "name": "SC Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nCGFQ",
+                      "name": "SC Nav Label Equipment",
+                      "fill": "$white",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j7h7u",
+                  "name": "SC Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "czgEg",
+                      "name": "SC Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xynCh",
+                      "name": "SC Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tOyQN",
+                  "name": "SC Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "caEfY",
+                      "name": "SC Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eBc0d",
+                      "name": "SC Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "w7FHh6",
+              "name": "SC Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Equipment · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sRonS",
+          "name": "SC Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "LpEr2",
+              "name": "SC Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tq3C5",
+                  "name": "SC Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m7NEyB",
+                      "name": "SC Title",
+                      "fill": "$ink",
+                      "content": "Count: Q4 warehouse check",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H9E8yt",
+                      "name": "SC Subtitle",
+                      "fill": "$slate",
+                      "content": "Started 09:12 by Marta R. — cam rig shelf, cables and accessories · 18 of 40 items counted",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ikkrv",
+                  "name": "SC Progress",
+                  "width": 260,
+                  "layout": "vertical",
+                  "gap": 5,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PRRAG",
+                      "name": "SC Progress Label",
+                      "fill": "$slate",
+                      "content": "18 / 40 LINES COUNTED",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mk1e0",
+                      "name": "SC Progress Bar BG",
+                      "width": 260,
+                      "height": 8,
+                      "fill": "#E4E8EF",
+                      "cornerRadius": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "gP1Py",
+                          "name": "SC Progress Bar Fill",
+                          "width": 117,
+                          "height": 8,
+                          "fill": "$cyan",
+                          "cornerRadius": 4
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qqlSZ",
+              "name": "SC Scan Bar",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 10,
+              "gap": 14,
+              "padding": [
+                16,
+                20
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "A5GVqK",
+                  "name": "SC Scan Icon",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "qr_code_scanner",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "frame",
+                  "id": "jjXq7",
+                  "name": "SC Scan Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "T5Y9N",
+                      "name": "SC Scan Title",
+                      "fill": "$white",
+                      "content": "Scan or type the code, then enter the count — the camera works too",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "B9O66H",
+                      "name": "SC Scan Sub",
+                      "fill": "#8A93A8",
+                      "content": "Camera ready; each scan fills the next-open line for that code.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "B6e4kp",
+              "name": "SC Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "C6bNCj",
+                  "name": "SC Table Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oE3Bq",
+                      "name": "SC Col Item",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "ITEM",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RXSyo",
+                      "name": "SC Col Expected",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "EXPECTED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "d7EWnw",
+                      "name": "SC Col Counted",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "COUNTED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jru8L",
+                      "name": "SC Col Difference",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "DIFFERENCE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q2yUPA",
+                      "name": "SC Col Outcome",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "OUTCOME",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OsJ3f",
+                      "name": "SC Col Remark",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "REMARK",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AvcRo",
+                  "name": "SC Row Alexa 35 bod",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hgRuy",
+                      "name": "SC I Alexa 35 b",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Alexa 35 body ",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "R2NNg",
+                      "name": "SC E Alexa 35 b",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "12",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sY7XV",
+                      "name": "SC C Alexa 35 b",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "12",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pY2vR",
+                      "name": "SC D Alexa 35 b",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "—",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aFv6c",
+                      "name": "SC O Alexa 35 b",
+                      "width": 120,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "mjJXJ",
+                          "name": "SC Chip Alexa 35 b",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KfYPI",
+                              "name": "SC ChipL Alexa 35 b",
+                              "fill": "#1D7A4F",
+                              "content": "Correct",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "mHrtz",
+                      "name": "SC R Alexa 35 b",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YJPxU",
+                  "name": "SC Row Easyrig Vari",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pnIp8",
+                      "name": "SC I Easyrig Va",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Easyrig Vario 5",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MYqyJ",
+                      "name": "SC E Easyrig Va",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "8",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Pm0vB",
+                      "name": "SC C Easyrig Va",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "7",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "A7UpCk",
+                      "name": "SC D Easyrig Va",
+                      "fill": "#B3261E",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "-1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L6cFa",
+                      "name": "SC O Easyrig Va",
+                      "width": 120,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "H0jS05",
+                          "name": "SC Chip Easyrig Va",
+                          "fill": "#FDE3E0",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "fRVTp",
+                              "name": "SC ChipL Easyrig Va",
+                              "fill": "#B3261E",
+                              "content": "Short",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "R31SA",
+                      "name": "SC R Easyrig Va",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "Latched case strap, count folder says 8",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "I7Skw",
+                  "name": "SC Row SDI cable 30",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vW1I3",
+                      "name": "SC I SDI cable ",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SDI cable 30m",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WUiv4",
+                      "name": "SC E SDI cable ",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "40",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LdlWX",
+                      "name": "SC C SDI cable ",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "42",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "S3bA9",
+                      "name": "SC D SDI cable ",
+                      "fill": "#1D7A4F",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "+2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VwToR",
+                      "name": "SC O SDI cable ",
+                      "width": 120,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "O2NAM9",
+                          "name": "SC Chip SDI cable ",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "kmGnJ",
+                              "name": "SC ChipL SDI cable ",
+                              "fill": "#B3261E",
+                              "content": "Surplus",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "cavyU",
+                      "name": "SC R SDI cable ",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "Two from Corona return, not yet scanned back in",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n42Wa",
+                  "name": "SC Row AA battery p",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hmy4J",
+                      "name": "SC I AA battery",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "AA battery pack",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QOfIM",
+                      "name": "SC E AA battery",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "25",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "siXEh",
+                      "name": "SC C AA battery",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "25",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J2A7i",
+                      "name": "SC D AA battery",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "—",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "X2P33t",
+                      "name": "SC O AA battery",
+                      "width": 120,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d37HHU",
+                          "name": "SC Chip AA battery",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Xz34B",
+                              "name": "SC ChipL AA battery",
+                              "fill": "#1D7A4F",
+                              "content": "Correct",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "V4uUs",
+                      "name": "SC R AA battery",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j20FVh",
+                  "name": "SC Row Anton batter",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X3cjTv",
+                      "name": "SC I Anton batt",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Anton battery D",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "THZfg",
+                      "name": "SC E Anton batt",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "14",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LS9R1",
+                      "name": "SC C Anton batt",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "12",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "csoyS",
+                      "name": "SC D Anton batt",
+                      "fill": "#B3261E",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "-2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ENCbd",
+                      "name": "SC O Anton batt",
+                      "width": 120,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "FxlSd",
+                          "name": "SC Chip Anton batt",
+                          "fill": "#FDE3E0",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "a4r2O",
+                              "name": "SC ChipL Anton batt",
+                              "fill": "#B3261E",
+                              "content": "Short",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "fzWtW",
+                      "name": "SC R Anton batt",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 200,
+                      "content": "Not found after teardown — recorded as lost",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "y02CY",
+              "name": "SC Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "k3XAY",
+                  "name": "SC Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "HzMDi",
+                  "name": "SC Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Completing the count corrects stock with the differences and records missing units as lost equipment. Virtual kits are excluded; a kit's stock is derived from its content.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

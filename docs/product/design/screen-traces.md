@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Stock count session (management, desktop)
+
+File: `stock-count.png` / `stock-count.html`
+
+| Design decision | Decided by |
+|---|---|
+| Count given a name and remark, tasks/notes may be added; subtitle shows who started it | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 1 |
+| Items listed with expected warehouse stock at the moment of creation | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 2, [TERM-EXPECTED-WAREHOUSE-STOCK](../model/domain/terms/term-expected-warehouse-stock.md) |
+| Quantities recorded by entry or by scanning codes with a camera | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 3, [TERM-SCAN-CODE](../model/domain/terms/term-scan-code.md) |
+| Per line: correct / short / in surplus, so differences can be reviewed | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 4, [TERM-COUNT-RESULT](../model/domain/terms/term-count-result.md) |
+| Count of selected items only (part of the warehouse in doubt) | [JRN-EQP-KEEP-STOCK-ACCURATE](../model/journeys/jrn-eqp-keep-stock-accurate.md) variants |
+| Completing corrects stock with the differences; missing units recorded as lost equipment | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) steps 5–6, [TERM-LOST-EQUIPMENT](../model/domain/terms/term-lost-equipment.md) |
+| Virtual kits excluded — stock derived from content | [BR-EQP-COUNT-EXCLUDES-VIRTUAL-KITS](../model/business-rules/br-eqp-count-excludes-virtual-kits.md) |
+
 ## Screen — Return handling (management/warehouse, desktop)
 
 File: `return-handling.png` / `return-handling.html`

@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Financial settings hub (management, desktop)
+
+File: `financial-settings.png` / `financial-settings.html`
+
+| Design decision | Decided by |
+|---|---|
+| Hub groups all finance preparation: document settings, price factors, ledgers, VAT, invoice moments, payment terms (tab bar) | [JRN-FIN-PREPARE-FINANCE](../model/journeys/jrn-fin-prepare-finance.md) steps |
+| Default quote/contract validity in days and sign-after-expiry switch | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 1, [BR-FIN-SIGN-AFTER-EXPIRY](../model/business-rules/br-fin-sign-after-expiry.md) |
+| Terms PDF upload with per-document-type "sent with" switches (quotes/contracts/invoices) | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 2, [BR-FIN-TERMS-ATTACHMENT](../model/business-rules/br-fin-terms-attachment.md) |
+| Reusable additional conditions with defaults per project type | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 3 |
+| Number series for quotes, contracts, invoices and credit notes, shown as prefix + next number | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 4, [TERM-INVOICE-SERIES](../model/domain/terms/term-invoice-series.md) |
+| Invoice moments with up to three parts, percentage + trigger, defaults per project type | [UC-FIN-CONFIGURE-INVOICE-MOMENTS](../model/use-cases/uc-fin-configure-invoice-moments.md) step 1–2, [BR-FIN-MOMENT-PERCENTAGES](../model/business-rules/br-fin-moment-percentages.md) |
+| Payment terms (days + method) with default assigned to customers | [UC-FIN-CONFIGURE-PAYMENT-TERMS](../model/use-cases/uc-fin-configure-payment-terms.md), [BR-FIN-DUE-DATE-FROM-TERM](../model/business-rules/br-fin-due-date-from-term.md) |
+
 ## Screens 5–7 — Invoicing queue · Payments & dunning · Quote review (management, desktop)
 
 Files: `invoicing-queue.png/html` · `payments-dunning.png/html` · `quote-review.png/html`

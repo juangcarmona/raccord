@@ -13035,6 +13035,1334 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "v14LZF",
+      "x": 6310,
+      "y": 4712,
+      "name": "Financial Settings Hub",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "cTbxX",
+          "name": "FS Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "nH4O5",
+              "name": "FS Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WWLRz",
+                  "name": "FS Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "nU7lr",
+                  "name": "FS Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Z7ssk5",
+              "name": "FS Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kwHtF",
+                  "name": "FS Nav Invoicing",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "oCkpr",
+                      "name": "FS Nav Icon Invoicing",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "description",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GWy2M",
+                      "name": "FS Nav Label Invoicing",
+                      "fill": "#8A93A8",
+                      "content": "Invoicing",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u5hP3o",
+                  "name": "FS Nav Payments & dunning",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "awgEN",
+                      "name": "FS Nav Icon Payments & dunning",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gvfxN",
+                      "name": "FS Nav Label Payments & dunning",
+                      "fill": "#8A93A8",
+                      "content": "Payments & dunning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u2nLg",
+                  "name": "FS Nav Financial settings",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "e3bwhF",
+                      "name": "FS Nav Icon Financial settings",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "leaderboard",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kk6yB",
+                      "name": "FS Nav Label Financial settings",
+                      "fill": "$white",
+                      "content": "Financial settings",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "X9Aor6",
+                  "name": "FS Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O6JzF",
+                      "name": "FS Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AQu0a",
+                      "name": "FS Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hZmYL",
+                  "name": "FS Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "G8oDci",
+                      "name": "FS Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Zk2xE",
+                      "name": "FS Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "zk00S",
+              "name": "FS Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace admin · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Zih6K",
+          "name": "FS Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            32,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "iZXMm",
+              "name": "FS Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fKiA9",
+                  "name": "FS Title",
+                  "fill": "$ink",
+                  "content": "Financial settings",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "gseiP",
+                  "name": "FS Subtitle",
+                  "fill": "$slate",
+                  "content": "Defaults for every financial document: validity, conditions, numbering, pricing factors, ledgers, VAT, invoice moments and payment terms.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "F8AeM",
+              "name": "FS Tabs",
+              "width": "fill_container",
+              "gap": 20,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u7UJO",
+                  "name": "FS Tab Documents & numbering",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oH5fJ",
+                      "name": "FS Tab Label Documents & numbering",
+                      "fill": "$ink",
+                      "content": "Documents & numbering",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w3fQv",
+                      "name": "FS Tab Underline Documents & numbering",
+                      "width": "fill_container",
+                      "height": 2,
+                      "fill": "$cyan"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UJBQB",
+                  "name": "FS Tab Price factors",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "umyzv",
+                      "name": "FS Tab Label Price factors",
+                      "fill": "$slate",
+                      "content": "Price factors",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jKAmL",
+                      "name": "FS Tab Underline Price factors",
+                      "width": "fill_container",
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JES6L",
+                  "name": "FS Tab Ledgers",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "d4Ktnq",
+                      "name": "FS Tab Label Ledgers",
+                      "fill": "$slate",
+                      "content": "Ledgers",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Hln6Y",
+                      "name": "FS Tab Underline Ledgers",
+                      "width": "fill_container",
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kg2W6",
+                  "name": "FS Tab VAT",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iySR8",
+                      "name": "FS Tab Label VAT",
+                      "fill": "$slate",
+                      "content": "VAT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nm5zx",
+                      "name": "FS Tab Underline VAT",
+                      "width": "fill_container",
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M9gnjd",
+                  "name": "FS Tab Invoice moments",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aWIlL",
+                      "name": "FS Tab Label Invoice moments",
+                      "fill": "$slate",
+                      "content": "Invoice moments",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dTp0U",
+                      "name": "FS Tab Underline Invoice moments",
+                      "width": "fill_container",
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WW07m",
+                  "name": "FS Tab Payment terms",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "n9TSV",
+                      "name": "FS Tab Label Payment terms",
+                      "fill": "$slate",
+                      "content": "Payment terms",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Bkq2s",
+                      "name": "FS Tab Underline Payment terms",
+                      "width": "fill_container",
+                      "height": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vQLYr",
+              "name": "FS Content",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LlMyS",
+                  "name": "FS Left Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "tvGAx",
+                      "name": "FS Validity Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pN1bA",
+                          "name": "FS Validity Title",
+                          "fill": "$ink",
+                          "content": "Validity and signing windows",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "eGs7Y",
+                          "name": "FS Validity Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "zsxJB",
+                              "name": "FS V Row Default quote validity",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "h52pi",
+                                  "name": "FS V Label Default quote validity",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Default quote validity",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "G7DAB1",
+                                  "name": "FS V Val Default quote validity",
+                                  "fill": "$ink",
+                                  "content": "14 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "H2zTyN",
+                              "name": "FS V Row Default contract validity",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "NYpAG",
+                                  "name": "FS V Label Default contract validity",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Default contract validity",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Fq2PF",
+                                  "name": "FS V Val Default contract validity",
+                                  "fill": "$ink",
+                                  "content": "30 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "t3q5c",
+                              "name": "FS V Row Customers may sign after expiry",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "SMuFe",
+                                  "name": "FS V Label Customers may sign after expiry",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Customers may sign after expiry",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "j3J5n",
+                                  "name": "FS V Val Customers may sign after expiry",
+                                  "fill": "$ink",
+                                  "content": "No",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CT5F7",
+                      "name": "FS Terms Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ehuZ6",
+                          "name": "FS Terms Title",
+                          "fill": "$ink",
+                          "content": "Terms and conditions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "p0CZw2",
+                          "name": "FS Terms File",
+                          "fill": "$ink",
+                          "content": "terms-and-conditions-2026.pdf  ·  uploaded 2 Jan 2026",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YNGXv",
+                          "name": "FS Terms Flag Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "NhGWx",
+                              "name": "FS TF Row Sent with quotes",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "AuKj0",
+                                  "name": "FS TF Box Sent with quotes",
+                                  "width": 14,
+                                  "height": 14,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "GxNDx",
+                                  "name": "FS TF Label Sent with quotes",
+                                  "fill": "$ink",
+                                  "content": "Sent with quotes",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "P1fplu",
+                              "name": "FS TF Row Sent with contracts",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "jVzmw",
+                                  "name": "FS TF Box Sent with contracts",
+                                  "width": 14,
+                                  "height": 14,
+                                  "fill": "#000000",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "YVG2i",
+                                  "name": "FS TF Label Sent with contracts",
+                                  "fill": "$ink",
+                                  "content": "Sent with contracts",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "K8GBoL",
+                              "name": "FS TF Row Sent with invoices",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "yoB10",
+                                  "name": "FS TF Box Sent with invoices",
+                                  "width": 14,
+                                  "height": 14,
+                                  "cornerRadius": 3,
+                                  "stroke": "$hairline"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "C5Bku",
+                                  "name": "FS TF Label Sent with invoices",
+                                  "fill": "$ink",
+                                  "content": "Sent with invoices",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xsk5k",
+                      "name": "FS Series Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oDJ64",
+                          "name": "FS Series Title",
+                          "fill": "$ink",
+                          "content": "Number series",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yp7zn",
+                          "name": "FS Series Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "p2NXi",
+                              "name": "FS S Row Quotes",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "l3oOtp",
+                                  "name": "FS S Label Quotes",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Quotes",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "c7UTq",
+                                  "name": "FS S Val Quotes",
+                                  "fill": "$ink",
+                                  "content": "P 2026-0001",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "VDXTg",
+                              "name": "FS S Row Contracts",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "GeRL8",
+                                  "name": "FS S Label Contracts",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Contracts",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "eQfXW",
+                                  "name": "FS S Val Contracts",
+                                  "fill": "$ink",
+                                  "content": "C 2026-0001",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "u6Tuf",
+                              "name": "FS S Row Invoices (ordinary)",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "R64je",
+                                  "name": "FS S Label Invoices (ordinary)",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Invoices (ordinary)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "hUMWI",
+                                  "name": "FS S Val Invoices (ordinary)",
+                                  "fill": "$ink",
+                                  "content": "F 2026-0001",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "hNrld",
+                              "name": "FS S Row Credit notes (rectifying)",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "JzYUM",
+                                  "name": "FS S Label Credit notes (rectifying)",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Credit notes (rectifying)",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "F2pqS",
+                                  "name": "FS S Val Credit notes (rectifying)",
+                                  "fill": "$ink",
+                                  "content": "R 2026-0001",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "uAbiv",
+                          "name": "FS Series Note",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "New series cannot reuse a previously used prefix. Series prefixes per project type can be changed per project type.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fJ9T1",
+                  "name": "FS Right Col",
+                  "width": 420,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "yLsNX",
+                      "name": "FS Additional Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CfXKG",
+                          "name": "FS Additional Title",
+                          "fill": "$ink",
+                          "content": "Additional conditions",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MEuAQ",
+                          "name": "FS AC Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "mH5K9",
+                              "name": "FS AC Row Rush fee — 48h prep",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Z352p",
+                                  "name": "FS AC Label Rush fee — 48h prep",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Rush fee — 48h prep",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "oFm9C",
+                                  "name": "FS AC Val Rush fee — 48h prep",
+                                  "fill": "$ink",
+                                  "content": "10%",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "N9smPb",
+                              "name": "FS AC Row Overtime after 02:00",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "g0kX7R",
+                                  "name": "FS AC Label Overtime after 02:00",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Overtime after 02:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "NmHy0",
+                                  "name": "FS AC Val Overtime after 02:00",
+                                  "fill": "$ink",
+                                  "content": "1.5×",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "vvFsH",
+                              "name": "FS AC Row Storage over 30 days",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "zWjf7",
+                                  "name": "FS AC Label Storage over 30 days",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Storage over 30 days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "i77V6H",
+                                  "name": "FS AC Val Storage over 30 days",
+                                  "fill": "$ink",
+                                  "content": "6.00/day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "bxkvj",
+                          "name": "FS AC Note",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Reusable extra lines with own pricing, optional default per project type.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mfnig",
+                      "name": "FS Moments Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "vRKYH",
+                          "name": "FS Moments Title",
+                          "fill": "$ink",
+                          "content": "Invoice moments",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "XokZN",
+                          "name": "FS Moment Row",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iNUQU",
+                              "name": "FS Moment Name",
+                              "fill": "$ink",
+                              "content": "30% deposit · 70% on completion",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "rbaJa",
+                              "name": "FS Moment Parts",
+                              "fill": "$slate",
+                              "content": "30% on confirmation · 70% on project end  — default for Festival type",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BDjUQ",
+                          "name": "FS Moment Row 2",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "UZ1VZ",
+                              "name": "FS Moment Name 2",
+                              "fill": "$ink",
+                              "content": "Rental period · 14 days after",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12.5,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "jkZXm",
+                              "name": "FS Moment Parts 2",
+                              "fill": "$slate",
+                              "content": "100% on return of equipment — default for Rental type",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "kNJj4",
+                          "name": "FS Moments Note",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Up to three parts per moment; percentages must add up to the whole total.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Q0aIST",
+                      "name": "FS PayTerms Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Ya09j",
+                          "name": "FS PayTerms Title",
+                          "fill": "$ink",
+                          "content": "Payment terms",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "sZlu2",
+                          "name": "FS PT Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "NUmks",
+                              "name": "FS PT Row 14 days · bank transfer",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "brAzN",
+                                  "name": "FS PT Label 14 days · bank transfer",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "14 days · bank transfer",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "e9SWEo",
+                                  "name": "FS PT Badge 14 days · bank transfer",
+                                  "fill": "#000000",
+                                  "content": "DEFAULT",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "eohsR",
+                              "name": "FS PT Row 30 days · bank transfer",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "z2CQN",
+                                  "name": "FS PT Label 30 days · bank transfer",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "30 days · bank transfer",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "M7il7C",
+                              "name": "FS PT Row Paid in cash",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "PVaF7",
+                                  "name": "FS PT Label Paid in cash",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Paid in cash",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

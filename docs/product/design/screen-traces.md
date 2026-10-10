@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Stock movements & disposition (management, desktop)
+
+File: `stock-movements.png` / `stock-movements.html`
+
+| Design decision | Decided by |
+|---|---|
+| Movements scheduled from the item's stock history: positive (delivery) / negative (reduction) quantity with date and description | [UC-EQP-SCHEDULE-STOCK-MOVEMENT](../model/use-cases/uc-eqp-schedule-stock-movement.md) steps 1–2 |
+| Availability changes from the movement's date | [UC-EQP-SCHEDULE-STOCK-MOVEMENT](../model/use-cases/uc-eqp-schedule-stock-movement.md) step 3, [BR-EQP-MOVEMENT-EFFECTIVE-DATE](../model/business-rules/br-eqp-movement-effective-date.md) |
+| Selling rented equipment via a separate sale copy, never by flipping the rental item | [UC-EQP-SELL-RENTAL-EQUIPMENT](../model/use-cases/uc-eqp-sell-rental-equipment.md) steps 1–3, [BR-EQP-SELL-RENTAL-VIA-SALE-COPY](../model/business-rules/br-eqp-sell-rental-via-sale-copy.md) |
+| Rental stock reduced by quantity sold; note explaining the stock change | [UC-EQP-SELL-RENTAL-EQUIPMENT](../model/use-cases/uc-eqp-sell-rental-equipment.md) step 2, alternative flow 2a |
+| Archive removes items from stock and planning, keeps history (struck through in planning) | [UC-EQP-ARCHIVE-ITEM](../model/use-cases/uc-eqp-archive-item.md) steps 1–3, [BR-EQP-ARCHIVE-PRESERVES-HISTORY](../model/business-rules/br-eqp-archive-preserves-history.md) |
+| Restore and delete actions on archived items | [UC-EQP-ARCHIVE-ITEM](../model/use-cases/uc-eqp-archive-item.md) alternative flows 3a–3b |
+| Hidden (planner-invisible) items stay bookable | [BR-EQP-HIDDEN-ITEM-STILL-BOOKABLE](../model/business-rules/br-eqp-hidden-item-still-bookable.md) |
+
 ## Screen — Stock count session (management, desktop)
 
 File: `stock-count.png` / `stock-count.html`

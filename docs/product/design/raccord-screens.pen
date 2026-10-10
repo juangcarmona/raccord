@@ -25099,6 +25099,1213 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "jjYMu",
+      "x": 6310,
+      "y": 17736,
+      "name": "Stock Movements & Disposition",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "DRPvz",
+          "name": "SM Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "ML9B1",
+              "name": "SM Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jEEEJ",
+                  "name": "SM Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "gXFi6",
+                  "name": "SM Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XMWq6",
+              "name": "SM Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JZqy8",
+                  "name": "SM Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "AJEwW",
+                      "name": "SM Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z7VRej",
+                      "name": "SM Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jdoOx",
+                  "name": "SM Nav Equipment",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "awtDs",
+                      "name": "SM Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y59KHe",
+                      "name": "SM Nav Label Equipment",
+                      "fill": "$white",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hoEKk",
+                  "name": "SM Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "gjWJ5",
+                      "name": "SM Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QI65d",
+                      "name": "SM Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YXwNH",
+                  "name": "SM Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "roTrU",
+                      "name": "SM Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tdiJ2",
+                      "name": "SM Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "PR44u",
+              "name": "SM Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Equipment · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EMr7t",
+          "name": "SM Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "P7TTTA",
+              "name": "SM Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ez5XH",
+                  "name": "SM Title",
+                  "fill": "$ink",
+                  "content": "Stock movements & disposition",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "G4miS",
+                  "name": "SM Subtitle",
+                  "fill": "$slate",
+                  "content": "Scheduled deliveries and reductions affect availability from their date; sold and retired items leave stock via archive.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a91hc",
+              "name": "SM Top Row",
+              "width": "fill_container",
+              "height": "fit_content(0)",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "oCc0X",
+                  "name": "SM Scheduled Card",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "OEbaw",
+                      "name": "SM Scheduled Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "aQMJl",
+                          "name": "SM Scheduled Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "calendar_month",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gVOQH",
+                          "name": "SM Scheduled Title",
+                          "fill": "$ink",
+                          "content": "Scheduled movements",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gH1yH",
+                      "name": "SM Sched Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "bMyfq",
+                          "name": "SM Sched Head",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "M38N9a",
+                              "name": "SM SCol Item",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "ITEM",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "L2L3Q3",
+                              "name": "SM SCol Movement",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "MOVEMENT",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "o307n",
+                              "name": "SM SCol Qty",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 60,
+                              "content": "QTY",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qCtw6",
+                              "name": "SM SCol Date",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "DATE",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qwXBU",
+                              "name": "SM SCol Detail",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "DETAIL",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QnoE3",
+                          "name": "SM SRow Alexa 35 b",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "i14Osj",
+                              "name": "SM SI Alexa 35 b",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Alexa 35 body",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "f8B9SK",
+                              "name": "SM SM Alexa 35 b",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Delivery",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "A4uml",
+                              "name": "SM SQ Alexa 35 b",
+                              "fill": "#1D7A4F",
+                              "textGrowth": "fixed-width",
+                              "width": 60,
+                              "content": "+4",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "dgF2i",
+                              "name": "SM SD Alexa 35 b",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "12 Nov",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "BQpeX",
+                              "name": "SM SX Alexa 35 b",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "PO season top-up",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QyAUN",
+                          "name": "SM SRow SDI cable ",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "MbKZD",
+                              "name": "SM SI SDI cable ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "SDI cable 30m",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "eTx4I",
+                              "name": "SM SM SDI cable ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Delivery",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "b7rLv",
+                              "name": "SM SQ SDI cable ",
+                              "fill": "#1D7A4F",
+                              "textGrowth": "fixed-width",
+                              "width": 60,
+                              "content": "+30",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "D8afo",
+                              "name": "SM SD SDI cable ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "12 Nov",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "I0QhC4",
+                              "name": "SM SX SDI cable ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "Batch order with connectors",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jT0WT",
+                          "name": "SM SRow Anton batt",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rfmB9",
+                              "name": "SM SI Anton batt",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Anton battery D",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "c7In9S",
+                              "name": "SM SM Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Reduction",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "uZYhO",
+                              "name": "SM SQ Anton batt",
+                              "fill": "#B3261E",
+                              "textGrowth": "fixed-width",
+                              "width": 60,
+                              "content": "-2",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "H4ixR",
+                              "name": "SM SD Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 90,
+                              "content": "05 Nov",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "D2X3K",
+                              "name": "SM SX Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "Sold with engine rig",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "im81F",
+                      "name": "SM Disp Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UUJ6G",
+                  "name": "SM Disposition Card",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "CGrm9",
+                      "name": "SM Disp Header",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "ANCXy",
+                          "name": "SM Disp Icon",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "swap_horiz",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "eH4pf",
+                          "name": "SM Disp Title",
+                          "fill": "$ink",
+                          "content": "Sell & retire",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IoaWl",
+                      "name": "SM Disp Table",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XJ83G",
+                          "name": "SM DRow Anton batt",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RVWMa",
+                              "name": "SM DI Anton batt",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Anton battery D",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zG9xF",
+                              "name": "SM DA Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Sold · sale copy",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "fMoG5",
+                              "name": "SM DQ Anton batt",
+                              "fill": "#B3261E",
+                              "textGrowth": "fixed-width",
+                              "width": 50,
+                              "content": "-2",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "h74PN",
+                              "name": "SM DD Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "05 Nov",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "jWjOl",
+                              "name": "SM DX Anton batt",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "Note: sold with engine rig",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kCiDf",
+                          "name": "SM DRow LED panel ",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sA3Qs",
+                              "name": "SM DI LED panel ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "LED panel P2.6 #P114",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ijBcY",
+                              "name": "SM DA LED panel ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Sold · sale copy",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zWS4X",
+                              "name": "SM DQ LED panel ",
+                              "fill": "#B3261E",
+                              "textGrowth": "fixed-width",
+                              "width": 50,
+                              "content": "-4",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "df6Cj",
+                              "name": "SM DD LED panel ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "22 Oct",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "pZcog",
+                              "name": "SM DX LED panel ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "Fleet refresh",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xCsW9",
+                          "name": "SM DRow Easyrig ca",
+                          "width": "fill_container",
+                          "stroke": "$hairline",
+                          "gap": 12,
+                          "padding": [
+                            7,
+                            0
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "wmj9p",
+                              "name": "SM DI Easyrig ca",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Easyrig cargo case",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Y22gCU",
+                              "name": "SM DA Easyrig ca",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 120,
+                              "content": "Archived",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "oaOcF",
+                              "name": "SM DQ Easyrig ca",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 50,
+                              "content": "—",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "tUytt",
+                              "name": "SM DD Easyrig ca",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 70,
+                              "content": "18 Oct",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "DmLz2",
+                              "name": "SM DX Easyrig ca",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 150,
+                              "content": "Scrapped — cracked frame",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "i7jiPO",
+              "name": "SM Archive Card",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XnIMs",
+                  "name": "SM Archive Header",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "RCvAD",
+                      "name": "SM Archive Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UTCcu",
+                      "name": "SM Archive Title",
+                      "fill": "$ink",
+                      "content": "Archive — hidden from stock and planning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "a3OciN",
+                  "name": "SM Archive Table",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "acuOl",
+                      "name": "SM Arch Head",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "padding": [
+                        7,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "RK3rp",
+                          "name": "SM ACol Item",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "ITEM",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "z0HZ5",
+                          "name": "SM ACol Archived",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "ARCHIVED",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SltwR",
+                          "name": "SM ACol Reason",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "REASON",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yRLNd",
+                          "name": "SM ACol Action",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 110,
+                          "content": "ACTION",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eDoWy",
+                      "name": "SM ARow Easyrig ca",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 13,
+                      "padding": [
+                        7,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "i85s7S",
+                          "name": "SM AI Easyrig ca",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Easyrig cargo case",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wn3On",
+                          "name": "SM AD Easyrig ca",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "18 Oct",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "tkwHs",
+                          "name": "SM AR Easyrig ca",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "Scrapped — cracked frame",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wPrug",
+                          "name": "SM AA Easyrig ca",
+                          "fill": "#000000",
+                          "textGrowth": "fixed-width",
+                          "width": 110,
+                          "content": "Delete",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PWAa1",
+                      "name": "SM ARow Wireless m",
+                      "width": "fill_container",
+                      "stroke": "$hairline",
+                      "gap": 13,
+                      "padding": [
+                        7,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "aTorI",
+                          "name": "SM AI Wireless m",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Wireless mic set A (old)",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "j4BXYG",
+                          "name": "SM AD Wireless m",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 90,
+                          "content": "02 Oct",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Y8QZdP",
+                          "name": "SM AR Wireless m",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "Replaced by new 4-channel kit",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SCfgT",
+                          "name": "SM AA Wireless m",
+                          "fill": "#000000",
+                          "textGrowth": "fixed-width",
+                          "width": 110,
+                          "content": "Restore",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Rv3Yc",
+              "name": "SM Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "VnGFN",
+                  "name": "SM Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "pKrSJ",
+                  "name": "SM Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Selling rented equipment goes through a separate sale copy (never by flipping the rental item). Archived equipment keeps its history on past projects — struck through in planning — and hidden items stay bookable.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

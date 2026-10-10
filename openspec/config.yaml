@@ -1,0 +1,37 @@
+schema: spec-driven
+context: |
+  Product: Raccord — an audiovisual production management platform for rental houses and
+  freelancers in the Spanish market (es-ES product copy). The product model and its source of
+  truth is the PDaC baseline in docs/product/ (personas, journeys, bounded capabilities,
+  Product Changes under docs/product/changes/active, validated by @prodshape/cli). OpenSpec
+  describes implementation behavior per change; it is NOT the product-model source of truth.
+
+  Backend: .NET modular monolith (src/Raccord.Domain, Application, Contracts, Infrastructure,
+  Web with C# Minimal APIs). Dependencies flow one way, enforced by
+  tests/Raccord.Architecture.Tests. PostgreSQL via EF Core; issued invoices are immutable and
+  hash-verified with an append-only event/audit trail. External imports stay outside the core
+  domain; terminology, UX and code are original.
+
+  Frontend (src/Raccord.Frontend): React + TypeScript SPA built with Vite, served same-origin
+  by Raccord.Web. The OpenAPI client (openapi/ + src/shared/api/schema.d.ts) is generated, and
+  CI fails on drift against the backend.
+
+  Conventions: conventional commits (commitlint via .config/commitlint.config.cjs); husky hooks
+  (.husky/) activate CSharpier and lint-staged at commit time, mirrored in CI's lint job;
+  tests are xUnit v3 + Shouldly with Thing_Should_Outcome naming enforced by an arch test.
+
+rules:
+  proposal:
+    - Ground capabilities in the PDaC model (docs/product/) and existing specs (openspec/specs/) — cite the Product Change id where applicable
+    - OpenSpec describes implementation behavior; product scope comes from PDaC. A proposal that needs new product scope surfaces the gap and points at the PDaC change instead of inventing it
+    - Mark breaking changes with **BREAKING** and state which integration contracts (API schema, database, CI, deployed environment) are affected or preserved
+  design:
+    - Record decisions with rationale and rejected alternatives
+    - Explicitly call out any deviation from the architecture rules (docs/architecture/architecture-rules.md) and justify it
+  specs:
+    - Requirements use SHALL/MUST; every requirement has at least one testable scenario
+    - Reference repository artifacts by real path so specs stay verifiable
+  tasks:
+    - Order tasks so prerequisites (shared building blocks, tooling) complete before dependent implementation tasks
+    - Include verification tasks that run the CI-equivalent gates (dotnet build/test, csharpier, prettier, lint-staged, commitlint)
+    - Each task must be small, verifiable, and completable in one session

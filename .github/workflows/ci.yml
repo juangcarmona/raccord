@@ -74,6 +74,19 @@ jobs:
         run: npx commitlint --config ../../.config/commitlint.config.cjs --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
         working-directory: src/Raccord.Frontend
 
+  openspec:
+    name: OpenSpec changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      # Pinned like @prodshape/cli in the product job: unpinned, a CLI drift silently changes
+      # what "a valid change" means between a contributor's machine and CI.
+      - name: Validate OpenSpec changes (PDaC stays the product-model source of truth)
+        run: npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive
+
   product:
     name: Product definition (PDaC)
     runs-on: ubuntu-latest

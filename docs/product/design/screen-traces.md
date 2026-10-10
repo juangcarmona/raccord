@@ -66,3 +66,24 @@ File: `invoice-draft-editor.png` / `invoice-draft-editor.html`
 | Validation issues block shown before issue (e.g. missing customer tax details) | [TERM-VALIDATION-ISSUE](../model/domain/terms/term-validation-issue.md), [UC-ISSUE-INVOICE](../model/use-cases/uc-issue-invoice.md) step 2 |
 | VAT shown per rate (21%/10%/4% rows) | [BR-VAT-PER-RATE](../model/business-rules/br-vat-per-rate.md) |
 | Selection and validation states use the selected-blue token, not cyan | [docs/design/color-tokens.md](../../design/color-tokens.md) `--raccord-selected` (decided 2026-10-10) |
+
+## Screens 5–7 — Invoicing queue · Payments & dunning · Quote review (management, desktop)
+
+Files: `invoicing-queue.png/html` · `payments-dunning.png/html` · `quote-review.png/html`
+
+| Design decision | Decided by |
+|---|---|
+| Queue lists confirmed projects whose invoice-moment parts fall in a selected period | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md) main flow |
+| Overdue parts highlighted; non-confirmed and already-invoiced projects excluded via eligibility rule | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md), [BR-FIN-QUEUE-ELIGIBILITY](../model/business-rules/br-fin-queue-eligibility.md) |
+| "Invoice externally" as separate tab (externally invoiced items) | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md) alternative flow, [UC-FIN-MARK-INVOICED-EXTERNALLY](../model/use-cases/uc-fin-mark-invoiced-externally.md) |
+| Invoice action per entry starts a draft with proposed terms | [UC-FIN-GENERATE-PROJECT-INVOICE](../model/use-cases/uc-fin-generate-project-invoice.md) step 1 |
+| Payments recorded with date, method, amount, description; outstanding recalculated | [UC-FIN-RECORD-PAYMENT](../model/use-cases/uc-fin-record-payment.md) main flow |
+| Payment that would overpay is refused (outstanding never below zero) | [BR-FIN-OUTSTANDING-AMOUNT](../model/business-rules/br-fin-outstanding-amount.md) |
+| Payment status badges Unpaid / Partially paid / Paid with amounts | [TERM-PAYMENT-STATUS](../model/domain/terms/term-payment-status.md) |
+| Overdue invoices get a "Remind" action; reminder count + last date shown per invoice | [UC-FIN-SEND-PAYMENT-REMINDER](../model/use-cases/uc-fin-send-payment-reminder.md), [TERM-PAYMENT-REMINDER](../model/domain/terms/term-payment-reminder.md) |
+| Quote screen shows number series, expiration from default validity, template + letterhead from project type | [UC-FIN-GENERATE-QUOTE](../model/use-cases/uc-fin-generate-quote.md) step 2 |
+| Financial overview per revenue category: estimated / planned / actual cost, revenue, discount, profit | [UC-FIN-REVIEW-PROJECT-FINANCIALS](../model/use-cases/uc-fin-review-project-financials.md) step 2 |
+| Profit-amount ↔ margin-percent toggle | [UC-FIN-REVIEW-PROJECT-FINANCIALS](../model/use-cases/uc-fin-review-project-financials.md) step 3 |
+| Project documents list shows quotes, contracts and invoices together, with status | [UC-FIN-REVIEW-PROJECT-FINANCIALS](../model/use-cases/uc-fin-review-project-financials.md) step 4 |
+| "Lock price" action on the quote | [UC-FIN-LOCK-PROJECT-PRICE](../model/use-cases/uc-fin-lock-project-price.md) |
+| "Publish online" opens the customer-facing quote page | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) |

@@ -3,7 +3,7 @@
 ## Level 1 — deployable and projects
 
 ```text
-Raccord.AppHost ──(orchestrates)──► Raccord.Web, PostgreSQL, Azurite, Vite dev server
+Raccord.Aspire ──(orchestrates)──► Raccord.Web, PostgreSQL, Azurite, Vite dev server
 Raccord.Frontend (React) ──HTTP──► Raccord.Web
 
 Raccord.Web ─────────► Raccord.Application ─► Raccord.Domain

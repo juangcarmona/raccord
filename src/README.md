@@ -8,7 +8,7 @@ src/
 ├── Raccord.Infrastructure/   # EF Core/PostgreSQL, migrations, PDF renderer, document stores, compliance recorder, clock
 ├── Raccord.Web/              # Minimal API endpoints, problem details, `migrate` command, SPA hosting
 ├── Raccord.ServiceDefaults/  # health checks, OpenTelemetry, resilience
-├── Raccord.AppHost/          # .NET Aspire orchestration
+├── Raccord.Aspire/          # .NET Aspire orchestration
 └── Raccord.Frontend/         # React + TypeScript UI
 ```
 

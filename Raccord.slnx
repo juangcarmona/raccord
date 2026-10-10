@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Raccord.AppHost/Raccord.AppHost.csproj" />
+    <Project Path="src/Raccord.Aspire/Raccord.Aspire.csproj" />
     <Project Path="src/Raccord.Application/Raccord.Application.csproj" />
     <Project Path="src/Raccord.Contracts/Raccord.Contracts.csproj" />
     <Project Path="src/Raccord.Domain/Raccord.Domain.csproj" />

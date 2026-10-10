@@ -62,7 +62,7 @@ public sealed class DependencyRulesTests
     [InlineData("Raccord.Application", new[] { "Raccord.Contracts", "Raccord.Domain" })]
     [InlineData("Raccord.Infrastructure", new[] { "Raccord.Application", "Raccord.Contracts", "Raccord.Domain" })]
     [InlineData("Raccord.Web", new[] { "Raccord.Application", "Raccord.Contracts", "Raccord.Infrastructure", "Raccord.ServiceDefaults" })]
-    [InlineData("Raccord.AppHost", new[] { "Raccord.Web" })]
+    [InlineData("Raccord.Aspire", new[] { "Raccord.Web" })]
     public void Project_references_follow_the_dependency_direction(string project, string[] allowed)
     {
         var references = ProjectReferences(project);

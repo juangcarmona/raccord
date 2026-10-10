@@ -176,6 +176,51 @@ jobs:
           npm run api:generate
           git diff --exit-code -- openapi src/shared/api/schema.d.ts
 
+  # Result-checking security gates, all blocking: secrets in history (TruffleHog over the
+  # PR range), insecure code patterns (Semgrep over the in-repo rules plus OWASP/secrets
+  # registry sets), and known vulnerabilities in the repo tree and the built container
+  # image (Trivy). The deep per-ecosystem audits (dotnet list package --vulnerable, npm
+  # audit) stay in their own jobs — they know NuGet/npm dependency graphs better than
+  # Trivy does.
+  security:
+    name: Security gates (secrets, patterns, vulnerabilities)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # TruffleHog walks history back from the PR head; a shallow clone has nothing
+          # for it to scan since the base sha.
+          fetch-depth: 500
+      - name: TruffleHog (secrets in git history since the base)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          # Scan the full history of the checked-out ref, but only report findings newer
+          # than the PR base so pre-existing noise doesn't block unrelated PRs.
+          path: ./
+          base: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
+          head: HEAD
+      - name: Semgrep (insecure code patterns)
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            .semgrep/csharp-core-rules.yml
+            p/owasp-top-ten
+            p/secrets
+      - name: Trivy (repository filesystem)
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+      - name: Trivy (container image)
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: image
+          image-ref: raccord:ci
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
   deployment:
     name: Container image, Compose and Bicep
     runs-on: ubuntu-latest

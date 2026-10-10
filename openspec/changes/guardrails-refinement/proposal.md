@@ -25,6 +25,13 @@ expectation that broke. GitHub issue
   suite; failed journeys leave a trace and screenshot as CI artifacts.
 - **CI mirror**: a lint job re-runs the commit-time gates in `--check` mode (CSharpier,
   Prettier, commitlint over the PR commit range) so a hook bypass is still caught before merge.
+- **Security gates**: a `security` CI job runs three result-checking gates, all blocking:
+  TruffleHog over git history since the PR base (secrets), Semgrep with the in-repo
+  `.semgrep/` rules plus the OWASP Top 10 and secrets registry sets (insecure code
+  patterns — the static twin of the ForbiddenInCore architecture rule), and Trivy over
+  both the repository tree and the built container image (known vulnerabilities, blocking
+  on high/critical). The deep per-ecosystem audits (dotnet package --vulnerable, npm
+  audit) stay where they are.
 - **Arbitrary-bypass note**: direct pushes to main skip the commitlint mirror (it runs on
   `pull_request` only); branch protection is the policy answer.
 
@@ -41,6 +48,8 @@ expectation that broke. GitHub issue
   machine-enforced.
 - `e2e-testing`: browser journeys over the booted Aspire AppHost, with a manifest-pinned
   per-PR selection and failure evidence as artifacts.
+- `security-scanning`: blocking secrets/pattern/vulnerability gates on every PR —
+  TruffleHog, Semgrep (in-repo rules + registry sets), Trivy fs and image scans.
 
 ### Modified Capabilities
 _(none — no spec'd capability's requirements change; this change is the seed for the
@@ -54,5 +63,6 @@ spec layer itself)_
   4.3.0, Aspire.Hosting.Testing 13.6.0 and Microsoft.Playwright 1.63.0 in
   Directory.Packages.props; prettier 3.6.2, lint-staged 16.2.3, @commitlint 19.8.1 in the
   frontend devDependencies.
-- **CI**: new lint and e2e jobs in .github/workflows/ci.yml; backend job's Format step is
-  CSharpier and its test run excludes the E2E project (the e2e job runs it with Docker).
+- **CI**: new lint, e2e and security jobs in .github/workflows/ci.yml; backend job's Format
+  step is CSharpier and its test run excludes the E2E project (the e2e job runs it with
+  Docker). The security job checks out with fetch-depth 500 for TruffleHog.

@@ -57,3 +57,15 @@
       manifest.
 - [x] 6.4 New test project wired into Raccord.slnx, Architecture.Tests' naming-rule references
       and tests/README.md.
+
+## 7. Security gates
+
+- [x] 7.1 New `security` job in .github/workflows/ci.yml: checkout with fetch-depth 500;
+      TruffleHog over the ref's history since the PR base; Semgrep over `.semgrep/` +
+      p/owasp-top-ten + p/secrets; Trivy fs + image scans, blocking on HIGH/CRITICAL.
+      Verify: all three tools run clean on the branch (fs and image verified locally via
+      the aquasec/trivy and returntocorp/semgrep containers).
+- [x] 7.2 In-repo rules in .semgrep/csharp-core-rules.yml: no HttpClient in Domain/
+      Application, no direct file IO in Domain/Application, no hardcoded credential-looking
+      literals. Verify: planting each violation makes `semgrep --error` exit 1 (checked
+      locally for all three; plants removed afterwards).

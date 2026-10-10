@@ -13,6 +13,23 @@ mobile-delivery decision recorded in
 check-in/out and read-only assignments, a management mode for operational
 control, and a read-only large-screen board").
 
+## Screen — Time approvals & reconciliation (management, desktop)
+
+File: `time-approvals.png` / `time-approvals.html`
+
+| Design decision | Decided by |
+|---|---|
+| Pending time registrations listed per crew member and activity with planned vs registered hours and approval checks | [UC-CRW-APPROVE-TIME-REGISTRATIONS](../model/use-cases/uc-crw-approve-time-registrations.md) steps 1–3, [JRN-CRW-HOURS-TO-PAYROLL](../model/journeys/jrn-crw-hours-to-payroll.md) |
+| Approval check column showing threshold deviation and minimum paid hours signals on the rows that trip them | [BR-CRW-APPROVAL-CHECK-THRESHOLDS](../model/business-rules/br-crw-approval-check-thresholds.md), [BR-CRW-MINIMUM-PAID-HOURS-CHECK](../model/business-rules/br-crw-minimum-paid-hours-check.md) |
+| Overtime signal derived from registered hours against rate factors ("Overtime ×1.25 after 10 h") | [BR-CRW-OVERTIME-FROM-REGISTERED-HOURS](../model/business-rules/br-crw-overtime-from-registered-hours.md) |
+| Approved registration shown read-only, revert to pending to edit then approve again ("Dídac" row) | [BR-CRW-APPROVED-READ-ONLY](../model/business-rules/br-crw-approved-read-only.md) |
+| Reverted registration displays its registration history reason | [BR-CRW-REGISTRATION-HISTORY](../model/business-rules/br-crw-registration-history.md) |
+| Plan-vs-reality card: planned vs registered time, planned vs actual cost, difference | [UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME](../model/use-cases/uc-crw-reconcile-planned-and-registered-time.md) step 2 |
+| Actual cost computed from registrations shown per row and totaled | [BR-CRW-ACTUAL-COST-FROM-REGISTRATIONS](../model/business-rules/br-crw-actual-cost-from-registrations.md) |
+| Footnote: only approved hours count in totals | [BR-CRW-PENDING-NOT-IN-TOTAL](../model/business-rules/br-crw-pending-not-in-total.md) |
+| Footnote: break and travel time excluded from payroll reconciliation | [BR-CRW-BREAK-AND-TRAVEL-EXCLUDED](../model/business-rules/br-crw-break-and-travel-excluded.md) |
+| Planned cost column visible to planner role only (role-gated note in journey) | [BR-CRW-PLANNED-COST-VISIBILITY](../model/business-rules/br-crw-planned-cost-visibility.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

@@ -36164,6 +36164,1151 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "LFN3p",
+      "x": 6310,
+      "y": 29576,
+      "name": "Time Approvals",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Pv2PJ",
+          "name": "TA Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "m0a0U",
+              "name": "TA Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xhWKC",
+                  "name": "TA Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "d4AoJB",
+                  "name": "TA Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "O2qCh",
+              "name": "TA Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YTWph",
+                  "name": "TA Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Dkxwa",
+                      "name": "TA Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ocaga",
+                      "name": "TA Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "uMv9c",
+                  "name": "TA Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "vkrJT",
+                      "name": "TA Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GkpgB",
+                      "name": "TA Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xWqDO",
+                  "name": "TA Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "qsKGV",
+                      "name": "TA Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "v629W2",
+                      "name": "TA Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t6jz8",
+                  "name": "TA Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "JApM8",
+                      "name": "TA Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E6bkY",
+                      "name": "TA Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "psNsV",
+              "name": "TA Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "by34n",
+          "name": "TA Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "q6aiN",
+              "name": "TA Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Cznlw",
+                  "name": "TA Title",
+                  "fill": "$ink",
+                  "content": "Time approvals & reconciliation — week 47",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "a1mTUw",
+                  "name": "TA Subtitle",
+                  "fill": "$slate",
+                  "content": "Pending registrations with approval checks; approved hours become read-only and feed the plan-vs-reality comparison.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "k8wRS",
+              "name": "TA Table",
+              "width": "fill_container",
+              "height": 470,
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aklfp",
+                  "name": "TA Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NDALy",
+                      "name": "TA Col Crew / activity",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "CREW / ACTIVITY",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "P5G0t",
+                      "name": "TA Col Registered",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "REGISTERED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AOliB",
+                      "name": "TA Col Planned",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "PLANNED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pLKK2",
+                      "name": "TA Col Cost actual",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "COST ACTUAL",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "a2wjv2",
+                      "name": "TA Col Approval check",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "APPROVAL CHECK",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XzlVd",
+                      "name": "TA Col Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dWYRP",
+                  "name": "TA Row Nerea",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VF0bx",
+                      "name": "TA C Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Nerea Vidal · A-cam, 14 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dzav4",
+                      "name": "TA R Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "9.5 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V5SMI",
+                      "name": "TA P Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "9 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VDtyZ",
+                      "name": "TA CA Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "€323",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oPCkB",
+                      "name": "TA Ch Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "— all checks pass",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x9EUqr",
+                      "name": "TA St Nerea",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "AdPUl",
+                          "name": "TA StF Nerea",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "h2UJ1",
+                              "name": "TA StT Nerea",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CJLta",
+                  "name": "TA Row Ibai",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X4qoG",
+                      "name": "TA C Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Ibai Ruiz · B-cam, 15 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "taCeW",
+                      "name": "TA R Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "12 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DNO49",
+                      "name": "TA P Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "9 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t2k7i",
+                      "name": "TA CA Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "€408",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LvDxj",
+                      "name": "TA Ch Ibai",
+                      "fill": "#8A5A00",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Overtime ×1.25 after 10 h",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MFRng",
+                      "name": "TA St Ibai",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Nx8nf",
+                          "name": "TA StF Ibai",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AiaJb",
+                              "name": "TA StT Ibai",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EDlza",
+                  "name": "TA Row Marta",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "r2aLQ",
+                      "name": "TA C Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Marta R. · warehouse shift",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "g522z6",
+                      "name": "TA R Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "4 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E2hYGb",
+                      "name": "TA P Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "5 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Uw0A1",
+                      "name": "TA CA Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "€60",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sA7mJ",
+                      "name": "TA Ch Marta",
+                      "fill": "#8A5A00",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Under minimum paid hours — review",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k5DN4o",
+                      "name": "TA St Marta",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "CNh7x",
+                          "name": "TA StF Marta",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "S5JxJ1",
+                              "name": "TA StT Marta",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wr2OR",
+                  "name": "TA Row Óscar",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TZ3gJ",
+                      "name": "TA C Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Óscar Miranda · gaffer",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TE5y2",
+                      "name": "TA R Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "8 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NnIPt",
+                      "name": "TA P Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "8 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "e0moKE",
+                      "name": "TA CA Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "€380",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O2ZFh",
+                      "name": "TA Ch Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HtqUy",
+                      "name": "TA St Óscar",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Ea2F4",
+                          "name": "TA StF Óscar",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RTQSY",
+                              "name": "TA StT Óscar",
+                              "fill": "#1D7A4F",
+                              "content": "Approved",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MEd7x",
+                  "name": "TA Row Dídac",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "S6quWz",
+                      "name": "TA C Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dídac Torres · playback",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Aw3dD",
+                      "name": "TA R Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "3.5 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xYier",
+                      "name": "TA P Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "4 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vcgCr",
+                      "name": "TA CA Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "€105",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bylVt",
+                      "name": "TA Ch Dídac",
+                      "fill": "#8A5A00",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Reverted to pending — corrected hours",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PtLvO",
+                      "name": "TA St Dídac",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rnw7v",
+                          "name": "TA StF Dídac",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "k7YDLw",
+                              "name": "TA StT Dídac",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Xvl8O",
+              "name": "TA Reconcile Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Rhx4E",
+                  "name": "TA Rec Header",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "JWll9",
+                      "name": "TA Rec Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "leaderboard",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SJnVc",
+                      "name": "TA Rec Title",
+                      "fill": "$ink",
+                      "content": "Corona Festival · plan vs reality · totals",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GDPiv",
+                  "name": "TA Rec Row",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "tgu0D",
+                      "name": "TA Tot Planned time",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "c9JNHS",
+                          "name": "TA TotL Planned time",
+                          "fill": "$slate",
+                          "content": "PLANNED TIME",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Iy1sc",
+                          "name": "TA TotV Planned time",
+                          "fill": "$ink",
+                          "content": "214 h",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Fmacw",
+                      "name": "TA Tot Registered time",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "z8TWo",
+                          "name": "TA TotL Registered time",
+                          "fill": "$slate",
+                          "content": "REGISTERED TIME",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "x6y9d",
+                          "name": "TA TotV Registered time",
+                          "fill": "$ink",
+                          "content": "207 h",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fH689",
+                      "name": "TA Tot Difference",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kPizJ",
+                          "name": "TA TotL Difference",
+                          "fill": "$slate",
+                          "content": "DIFFERENCE",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "j8rtV",
+                          "name": "TA TotV Difference",
+                          "fill": "#B3261E",
+                          "content": "−7 h",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KHtOk",
+                      "name": "TA Tot Planned cost",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xFTSC",
+                          "name": "TA TotL Planned cost",
+                          "fill": "$slate",
+                          "content": "PLANNED COST",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZeZ9b",
+                          "name": "TA TotV Planned cost",
+                          "fill": "$ink",
+                          "content": "€8,120",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YOrXB",
+                      "name": "TA Tot Actual cost",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "b85qrI",
+                          "name": "TA TotL Actual cost",
+                          "fill": "$slate",
+                          "content": "ACTUAL COST",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wmGkm",
+                          "name": "TA TotV Actual cost",
+                          "fill": "$ink",
+                          "content": "€7,886",
+                          "fontFamily": "$font-body",
+                          "fontSize": 14,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MNR9B",
+              "name": "TA Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "vXjZW",
+                  "name": "TA Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "B87d3Z",
+                  "name": "TA Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Approved registrations are read-only until reverted to pending, and only approved hours count in totals. Overtime derives from registered hours against rate factors; break and travel time are excluded from payroll reconciliation.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

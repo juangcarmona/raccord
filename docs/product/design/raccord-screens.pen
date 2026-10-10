@@ -34189,6 +34189,1010 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "zys2I",
+      "x": 6310,
+      "y": 27208,
+      "name": "Job Board Postings",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "II4o4",
+          "name": "JB Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "jo1RD",
+              "name": "JB Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "unQJy",
+                  "name": "JB Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "DkOGe",
+                  "name": "JB Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cLHzT",
+              "name": "JB Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TUnbH",
+                  "name": "JB Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "pcD2S",
+                      "name": "JB Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fz01Q",
+                      "name": "JB Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PYBo9",
+                  "name": "JB Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "fv5Gs",
+                      "name": "JB Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fG2B9",
+                      "name": "JB Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "N6X2NQ",
+                  "name": "JB Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "owKv4",
+                      "name": "JB Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XMOV4",
+                      "name": "JB Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VwPqp",
+                  "name": "JB Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "M2Ray",
+                      "name": "JB Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZYL4l",
+                      "name": "JB Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "kJfsK",
+              "name": "JB Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JhcVn",
+          "name": "JB Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Rs6xW",
+              "name": "JB Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mfmbK",
+                  "name": "JB Title",
+                  "fill": "$ink",
+                  "content": "Job board postings",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "uyOQj",
+                  "name": "JB Subtitle",
+                  "fill": "$slate",
+                  "content": "Posted functions accept sign-ups from crew on web and mobile; notifications batch at most every six hours.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Qvcf9",
+              "name": "JB Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IqaVJ",
+                  "name": "JB Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xXOHC",
+                      "name": "JB Col Function",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "FUNCTION",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m22qw",
+                      "name": "JB Col Project",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "PROJECT",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BQPUL",
+                      "name": "JB Col When",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "WHEN",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YkAqc",
+                      "name": "JB Col Sign-ups",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "SIGN-UPS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E0aVha",
+                      "name": "JB Col Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OhC0y",
+                      "name": "JB Col Removable",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "REMOVABLE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "c8MC3O",
+                  "name": "JB Row Sound en",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DfhD4",
+                      "name": "JB F Sound en",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sound engineer",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Cycnu",
+                      "name": "JB P Sound en",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nbS9t",
+                      "name": "JB W Sound en",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "15–16 Nov · 08:00–20:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GY6Ne",
+                      "name": "JB S Sound en",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "3",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yvq3P",
+                      "name": "JB Chip Sound en",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "etzkZ",
+                          "name": "JB ChipF Sound en",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "R7GCmu",
+                              "name": "JB ChipT Sound en",
+                              "fill": "#1D7A4F",
+                              "content": "Posted",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "kkRm6",
+                      "name": "JB R Sound en",
+                      "fill": "#000000",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "✓",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jPf06",
+                  "name": "JB Row Rigging ",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kEWr4",
+                      "name": "JB F Rigging ",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Rigging electrician",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZYwvh",
+                      "name": "JB P Rigging ",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Gala Dinner",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IXXCf",
+                      "name": "JB W Rigging ",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "20 Nov · 07:00–16:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FpGwi",
+                      "name": "JB S Rigging ",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MlAAK",
+                      "name": "JB Chip Rigging ",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ieaRM",
+                          "name": "JB ChipF Rigging ",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Shu6p",
+                              "name": "JB ChipT Rigging ",
+                              "fill": "#1D7A4F",
+                              "content": "Posted",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "aXUFR",
+                      "name": "JB R Rigging ",
+                      "fill": "#000000",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "✓",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lc0B6",
+                  "name": "JB Row B-cam op",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L407Z",
+                      "name": "JB F B-cam op",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "B-cam operator",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O90xWx",
+                      "name": "JB P B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jQ0tT",
+                      "name": "JB W B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "14–17 Nov · 09:00–21:00",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "g4J4NM",
+                      "name": "JB S B-cam op",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "7",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SPmKT",
+                      "name": "JB Chip B-cam op",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oTHxa",
+                          "name": "JB ChipF B-cam op",
+                          "fill": "#EDF6FC",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "T3GYaK",
+                              "name": "JB ChipT B-cam op",
+                              "fill": "#000000",
+                              "content": "Filled",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "HHRsF",
+                      "name": "JB R B-cam op",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "—",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gxrWk",
+                  "name": "JB Row Playback",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F72wr",
+                      "name": "JB F Playback",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Playback op",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EjXyf",
+                      "name": "JB P Playback",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 170,
+                      "content": "Gala Dinner",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bEhhb",
+                      "name": "JB W Playback",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 190,
+                      "content": "20 Nov · full day",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pKbyR",
+                      "name": "JB S Playback",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "0",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ixhOP",
+                      "name": "JB Chip Playback",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xptjO",
+                          "name": "JB ChipF Playback",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "C9VXZ9",
+                              "name": "JB ChipT Playback",
+                              "fill": "#8A5A00",
+                              "content": "Draft — missing times",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "XiJL5",
+                      "name": "JB R Playback",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "—",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qx4s6",
+              "name": "JB Signups Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KFwRu",
+                  "name": "JB Signups Header",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "tRz7y",
+                      "name": "JB Signups Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WuQMT",
+                      "name": "JB Signups Title",
+                      "fill": "$ink",
+                      "content": "Sign-ups for Sound engineer · 3",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vIB9Z",
+                  "name": "JB Sig Nerea",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z39vrD",
+                      "name": "JB SigDot Nerea",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "a5HZg",
+                      "name": "JB SigN Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Nerea Vidal",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j9V2U",
+                      "name": "JB SigN2 Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "planned on the function",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "W8CYC",
+                  "name": "JB Sig Toya",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "YwUWZ",
+                      "name": "JB SigDot Toya",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#E3F5EE",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "vKdVe",
+                      "name": "JB SigN Toya",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Toya Ahmed",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AtEvX",
+                      "name": "JB SigN2 Toya",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "planned on the function",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O7DtMa",
+                  "name": "JB Sig Rubén",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "A5n4O",
+                      "name": "JB SigDot Rubén",
+                      "width": 8,
+                      "height": 8,
+                      "fill": "#FFF3D6",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "c2dUVA",
+                      "name": "JB SigN Rubén",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Rubén Costa",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kXLTm",
+                      "name": "JB SigN2 Rubén",
+                      "fill": "#8A5A00",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "double booking with Gala Dinner — planner resolves",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ep7i5",
+              "name": "JB Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "iledA",
+                  "name": "JB Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "S8quPD",
+                  "name": "JB Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A sign-up plans the crew member on the function without checking availability or conflicts — double bookings land back on the planner. Postings without the details needed to sign up (e.g. times) are refused. Bulk removal removes selected postings at once.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

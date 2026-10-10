@@ -82,6 +82,19 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Job board postings (management, desktop)
+
+File: `job-board.png` / `job-board.html`
+
+| Design decision | Decided by |
+|---|---|
+| Planner posts selected functions with details; visible to crew on web and mobile | [UC-CRW-POST-JOB-ON-BOARD](../model/use-cases/uc-crw-post-job-on-board.md) steps 1–2, postconditions |
+| Postings without details needed to sign up (e.g. times) refused | [UC-CRW-POST-JOB-ON-BOARD](../model/use-cases/uc-crw-post-job-on-board.md) failure conditions |
+| Notifications batched at most every six hours; opt-outs not notified | [BR-CRW-JOB-BOARD-NOTIFICATION-CADENCE](../model/business-rules/br-crw-job-board-notification-cadence.md) |
+| Sign-up plans the crew member on the function directly | [UC-CRW-SIGN-UP-FOR-POSTED-JOB](../model/use-cases/uc-crw-sign-up-for-posted-job.md) steps 2–3 |
+| Sign-ups ignore availability/conflicts; double bookings flagged for the planner | [UC-CRW-SIGN-UP-FOR-POSTED-JOB](../model/use-cases/uc-crw-sign-up-for-posted-job.md) failure conditions, [BR-CRW-JOB-BOARD-IGNORES-CONFLICTS](../model/business-rules/br-crw-job-board-ignores-conflicts.md) |
+| Bulk removal of selected postings | [UC-CRW-POST-JOB-ON-BOARD](../model/use-cases/uc-crw-post-job-on-board.md) alternative flows |
+
 ## Screen — Function staffing (management, desktop)
 
 File: `function-staffing.png` / `function-staffing.html`

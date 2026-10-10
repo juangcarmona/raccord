@@ -60,6 +60,22 @@ File: `crew-import.png` / `crew-import.html`
 | Footnote: invitations expire after 30 days; resending opens a fresh window | [BR-CRW-ACCOUNT-INVITATION-EXPIRY](../model/business-rules/br-crw-account-invitation-expiry.md), [TERM-ACCOUNT-INVITATION-STATUS](../model/domain/terms/term-account-invitation-status.md) |
 | Footer: imported crew get the default user role | [JRN-CRW-ONBOARD-CREW](../model/journeys/jrn-crw-onboard-crew.md) narrative |
 
+## Screen — Crew member profile (management, desktop)
+
+File: `crew-profile.png` / `crew-profile.html`
+
+| Design decision | Decided by |
+|---|---|
+| Profile header with contact, folder, and login state | [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md), [JRN-CRW-ONBOARD-CREW](../model/journeys/jrn-crw-onboard-crew.md) |
+| "Active contract · ends 30 Jun 2027" chip derived from a contract document covering today | [BR-CRW-ACTIVE-CONTRACT-DERIVATION](../model/business-rules/br-crw-active-contract-derivation.md), [TERM-ACTIVE-CONTRACT](../model/domain/terms/term-active-contract.md) |
+| Cost rates table: linked global + individual rates, hourly/daily/max-hours, exactly one default | [UC-CRW-LINK-RATES-TO-CREW-MEMBERS](../model/use-cases/uc-crw-link-rates-to-crew-member.md) steps 1–4, [TERM-CREW-RATE](../model/domain/terms/term-crew-rate.md), [BR-CRW-ONE-DEFAULT-RATE](../model/business-rules/br-crw-one-default-rate.md) |
+| Simple rate form attributes (hourly, daily, max daily hours) shown as columns | [TERM-CREW-RATE](../model/domain/terms/term-crew-rate.md) definition |
+| Footnote: price rates are governed on functions, not crew members | [BR-CRW-PRICE-RATES-ON-FUNCTIONS-ONLY](../model/business-rules/br-crw-price-rates-on-functions-only.md) |
+| Administrative details (address, bank, ID) marked self-maintained | [UC-CRW-SET-UP-OWN-PROFILE](../model/use-cases/uc-crw-set-up-own-profile.md) step 2, [BR-CRW-PROFILE-OWNERSHIP](../model/business-rules/br-crw-profile-ownership.md) |
+| Documents grouped by type with name, start/end dates, signature status "Not requested" | [UC-CRW-MANAGE-CREW-DOCUMENTS](../model/use-cases/uc-crw-manage-crew-documents.md) steps 2–4, [TERM-CREW-DOCUMENT](../model/domain/terms/term-crew-document.md), [BR-CRW-SIGNATURE-STATUS-ASSIGNMENT](../model/business-rules/br-crw-signature-status-assignment.md) |
+| ID document with front + back files forming one document | [TERM-CREW-DOCUMENT](../model/domain/terms/term-crew-document.md) definition |
+| Footnote: derived active contract can be overridden by an administrator | [BR-CRW-ACTIVE-CONTRACT-DERIVATION](../model/business-rules/br-crw-active-contract-derivation.md) override clause |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

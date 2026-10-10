@@ -39652,6 +39652,1246 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "dEswp",
+      "x": 6310,
+      "y": 33128,
+      "name": "Crew Profile",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "to3oy",
+          "name": "CP Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Y8XWe6",
+              "name": "CP Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mSAiI",
+                  "name": "CP Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "aILDt",
+                  "name": "CP Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wunyS",
+              "name": "CP Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "fCkda",
+                  "name": "CP Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "OC2rO",
+                      "name": "CP Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "f3jtV0",
+                      "name": "CP Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nEQKq",
+                  "name": "CP Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "DFWyp",
+                      "name": "CP Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GZPmx",
+                      "name": "CP Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nPwRI",
+                  "name": "CP Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "z0Nr1",
+                      "name": "CP Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r0e10",
+                      "name": "CP Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DLQVu",
+                  "name": "CP Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "nsfrs",
+                      "name": "CP Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t0rL9",
+                      "name": "CP Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "B58vR",
+              "name": "CP Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mkGsv",
+          "name": "CP Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "pBoAh",
+              "name": "CP Header",
+              "width": "fill_container",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "qqVui",
+                  "name": "CP Avatar",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "#1A2440",
+                  "cornerRadius": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Y7KaUp",
+                      "name": "CP Avatar Initials",
+                      "fill": "$cyan",
+                      "content": "NR",
+                      "fontFamily": "$font-body",
+                      "fontSize": 16,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rQLMD",
+                  "name": "CP Title Block",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xmCL7",
+                      "name": "CP Title",
+                      "fill": "$ink",
+                      "content": "Nerea Vidal",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pN90N",
+                      "name": "CP Sub Chips",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jONXn",
+                          "name": "CP Contract Chip",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yYqCU",
+                              "name": "CP Contract Chip Text",
+                              "fill": "#1D7A4F",
+                              "content": "Active contract · ends 30 Jun 2027",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "rOugx",
+                          "name": "CP Sub Meta",
+                          "fill": "$slate",
+                          "content": "Camera A · Crew › Camera · nerea@lumen.events · login enabled",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Eu5hi",
+              "name": "CP Columns",
+              "width": "fill_container",
+              "height": 340,
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IIGFt",
+                  "name": "CP Left",
+                  "width": 640,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "a90Nq6",
+                      "name": "CP Rates Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "tdfAt",
+                          "name": "CP Rates Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "eU1iz",
+                              "name": "CP Rates Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "payments",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Lzngp",
+                              "name": "CP Rates Title",
+                              "fill": "$ink",
+                              "content": "Cost rates",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "hRDY4",
+                              "name": "CP Rates Default Note",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "one default",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "G0NPp4",
+                          "name": "CP Rates Table",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "gnWKY",
+                              "name": "CP Rates Head Row",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "WmCL1",
+                                  "name": "CP RCol Rate / skill",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Rate / skill",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "e2bRA",
+                                  "name": "CP RCol Hourly",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "Hourly",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "wFH0i",
+                                  "name": "CP RCol Daily",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "Daily",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ILHvB",
+                                  "name": "CP RCol Max h/day",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "Max h/day",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "VWUt2",
+                                  "name": "CP RCol ",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 55,
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bZn2a",
+                              "name": "CP Rate Row Camera",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "F1Km8",
+                                  "name": "CP Rate N Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Camera operator A · global",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cVeFn",
+                                  "name": "CP Rate H Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€28",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "JzjaH",
+                                  "name": "CP Rate D Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€224",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "iuiix",
+                                  "name": "CP Rate M Camera",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "10",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "b9VGGr",
+                                  "name": "CP Rate Def Camera",
+                                  "width": 55,
+                                  "fill": "#D6EBF7",
+                                  "cornerRadius": 4,
+                                  "padding": [
+                                    2,
+                                    8
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Adunw",
+                                      "name": "CP Rate DefT Camera",
+                                      "fill": "#000000",
+                                      "content": "DEFAULT",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 9.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aO8rX",
+                              "name": "CP Rate Row Camera",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "CSEnC",
+                                  "name": "CP Rate N Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Camera operator B · global",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ifwSP",
+                                  "name": "CP Rate H Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€25",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "k0UNYd",
+                                  "name": "CP Rate D Camera",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€200",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "crYeo",
+                                  "name": "CP Rate M Camera",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "10",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "O1qy7",
+                                  "name": "CP Rate NoDef Camera",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 55,
+                                  "content": "set default",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "RWdtk",
+                              "name": "CP Rate Row Trainer",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "L5PGtE",
+                                  "name": "CP Rate N Trainer",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Trainer · individual",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "pCZnf",
+                                  "name": "CP Rate H Trainer",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€35",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "VMau0",
+                                  "name": "CP Rate D Trainer",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": 70,
+                                  "content": "€—",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "iOYSG",
+                                  "name": "CP Rate M Trainer",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "—",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "CRTo4",
+                                  "name": "CP Rate NoDef Trainer",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 55,
+                                  "content": "set default",
+                                  "textAlign": "right",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x32dEz",
+                      "name": "CP Profile Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d3QacH",
+                          "name": "CP Profile Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "vo2v8",
+                              "name": "CP Profile Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "badge",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "R7Ugcf",
+                              "name": "CP Profile Title",
+                              "fill": "$ink",
+                              "content": "Administrative details",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "UXva6",
+                              "name": "CP Profile Note",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "self-maintained",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "By2uC",
+                          "name": "CP Prof Row Address",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "P6Ykq",
+                              "name": "CP ProfK Address",
+                              "fill": "$slate",
+                              "content": "Address",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "szHDr",
+                              "name": "CP ProfV Address",
+                              "fill": "$ink",
+                              "content": "Carrer de Ferran 12, Barcelona",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bnFhe",
+                          "name": "CP Prof Row Bank account",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "skuMM",
+                              "name": "CP ProfK Bank account",
+                              "fill": "$slate",
+                              "content": "Bank account",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zq7pC",
+                              "name": "CP ProfV Bank account",
+                              "fill": "$ink",
+                              "content": "ES91 2100 •••• 1234",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "y370im",
+                          "name": "CP Prof Row ID document",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ZlObP",
+                              "name": "CP ProfK ID document",
+                              "fill": "$slate",
+                              "content": "ID document",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "E9lDkX",
+                              "name": "CP ProfV ID document",
+                              "fill": "$ink",
+                              "content": "DNI 46····33L (front + back)",
+                              "textAlign": "right",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pH8IP",
+                  "name": "CP Right",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SW4tB",
+                      "name": "CP Docs Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "z61N5y",
+                          "name": "CP Docs Head",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "mS2C7",
+                              "name": "CP Docs Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "folder",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "m7w3za",
+                              "name": "CP Docs Title",
+                              "fill": "$ink",
+                              "content": "Documents by type",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KUwGs",
+                          "name": "CP Docs Table",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "JZyXP",
+                              "name": "CP Docs Head Row",
+                              "width": "fill_container",
+                              "gap": 10,
+                              "padding": [
+                                7,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "o86aH",
+                                  "name": "CP DCol Name / type",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "NAME / TYPE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "QkpF8",
+                                  "name": "CP DCol Start",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "START",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "TJK6v",
+                                  "name": "CP DCol End",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "END",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "USRIZ",
+                                  "name": "CP DCol Signature",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 100,
+                                  "content": "SIGNATURE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "rLnpc",
+                              "name": "CP Doc Row Employment",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "qWBcw",
+                                  "name": "CP Doc N Employment",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Employment contract 2027 · Contract",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "O98Ylg",
+                                  "name": "CP Doc S Employment",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "1 Jan 2027",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "qRqPA",
+                                  "name": "CP Doc E Employment",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "30 Jun 2027",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "jqIrp",
+                                  "name": "CP Doc G Employment",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 100,
+                                  "content": "Not requested",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qxu76",
+                              "name": "CP Doc Row DNI",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "opuLT",
+                                  "name": "CP Doc N DNI",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "DNI front + back · ID",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "lb5BD",
+                                  "name": "CP Doc S DNI",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "12 Mar 2026",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ptr2l",
+                                  "name": "CP Doc E DNI",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "—",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "hb0bg",
+                                  "name": "CP Doc G DNI",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 100,
+                                  "content": "Not requested",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "dLhcN",
+                              "name": "CP Doc Row Driving",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 10,
+                              "padding": [
+                                8,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "qucEn",
+                                  "name": "CP Doc N Driving",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Driving licence B · Licence",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "zlSNq",
+                                  "name": "CP Doc S Driving",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "4 May 2026",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "vqn8G",
+                                  "name": "CP Doc E Driving",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 80,
+                                  "content": "3 May 2030",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "X8jQXG",
+                                  "name": "CP Doc G Driving",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 100,
+                                  "content": "Not requested",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kYkIy",
+              "name": "CP Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "FqlhK",
+                  "name": "CP Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "NQGft",
+                  "name": "CP Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "The active contract is derived from a contract document covering today (no end date counts as ongoing) and can be overridden by an administrator. Documents need a name, are grouped by type, and can hold several files that together form one document. Price rates are governed on functions, not crew members.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

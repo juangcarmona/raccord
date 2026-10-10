@@ -31107,6 +31107,1070 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "iKQlP",
+      "x": 6310,
+      "y": 23656,
+      "name": "Contact Detail",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "gc1eS",
+          "name": "CD Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "BiTab",
+              "name": "CD Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ErwSt",
+                  "name": "CD Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "Lv6Mz",
+                  "name": "CD Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VEL5E",
+              "name": "CD Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PWVcW",
+                  "name": "CD Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "rGO37",
+                      "name": "CD Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BGLxg",
+                      "name": "CD Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cL6Gf",
+                  "name": "CD Nav Equipment",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "sfX3Q",
+                      "name": "CD Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ucco2",
+                      "name": "CD Nav Label Equipment",
+                      "fill": "#8A93A8",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SDEs6",
+                  "name": "CD Nav Warehouse",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "eN3Qb",
+                      "name": "CD Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GOFpI",
+                      "name": "CD Nav Label Warehouse",
+                      "fill": "#8A93A8",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yudOW",
+                  "name": "CD Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "BWcVm",
+                      "name": "CD Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i3rzl",
+                      "name": "CD Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Q5qEU",
+              "name": "CD Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Projects · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LKHSO",
+          "name": "CD Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "x0p6D8",
+              "name": "CD Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "qMJem",
+                  "name": "CD Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JoyIl",
+                      "name": "CD Title",
+                      "fill": "$ink",
+                      "content": "Corona Festival S.L.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kOKsg",
+                      "name": "CD Meta",
+                      "gap": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UT6QY",
+                          "name": "CD Meta Num",
+                          "fill": "$slate",
+                          "content": "C-0142 · Company",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NlOtn",
+                          "name": "CD Meta Folder",
+                          "fill": "$slate",
+                          "content": "Clients / Festivals",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "okF7K",
+                          "name": "CD Meta VAT",
+                          "fill": "$slate",
+                          "content": "ES-B87412569",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HkacE",
+                  "name": "CD Warn",
+                  "fill": "#FFF3D6",
+                  "cornerRadius": 6,
+                  "gap": 6,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "uICPt",
+                      "name": "CD Warn Icon",
+                      "width": 13,
+                      "height": 13,
+                      "icon": "warning",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A5A00"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UXzR5",
+                      "name": "CD Warn Text",
+                      "fill": "#8A5A00",
+                      "content": "Payment behaviour: usually 60+ days",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gsNES",
+              "name": "CD Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aUgkm",
+                  "name": "CD Left",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "F3kqX",
+                      "name": "CD Address Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qigvm",
+                          "name": "CD Addr Title",
+                          "fill": "$ink",
+                          "content": "Addresses",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "El0uz",
+                          "name": "CD ARow Visiting",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gndZw",
+                              "name": "CD AL Visiting",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Visiting",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "nBkxv",
+                              "name": "CD AV Visiting",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Av. de la Constitución 20, 41004 Sevilla",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "c9PKkz",
+                          "name": "CD ARow Mailing",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yAM88",
+                              "name": "CD AL Mailing",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Mailing",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "RQTbY",
+                              "name": "CD AV Mailing",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Same as visiting",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ly2tD",
+                          "name": "CD ARow Billing",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "n4uHOm",
+                              "name": "CD AL Billing",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 100,
+                              "content": "Billing",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "PF0yA",
+                              "name": "CD AV Billing",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "C/ Alcalá 45, 28014 Madrid",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tWHKD",
+                      "name": "CD Persons Card",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rjeik",
+                          "name": "CD Persons Header",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "jtwf6",
+                              "name": "CD Persons Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "groups",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "TjFkl",
+                              "name": "CD PersonsTitle",
+                              "fill": "$ink",
+                              "content": "Contact persons",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "VBUnu",
+                          "name": "CD Persons Table",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "MmcID",
+                              "name": "CD Person Lucía Fe",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 4,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "MnHUj",
+                                  "name": "CD PRow Lucía Fe",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Xg1gL",
+                                      "name": "CD PN Lucía Fe",
+                                      "fill": "$ink",
+                                      "content": "Lucía Fernández",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "xWw76",
+                                  "name": "CD PTags Lucía Fe",
+                                  "width": "fill_container",
+                                  "gap": 6,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "y3nKVV",
+                                      "name": "CD PRole Lucía Fe",
+                                      "fill": "$cloud",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        2,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "IzYDl",
+                                          "name": "CD PRoleT Lucía Fe",
+                                          "fill": "$ink",
+                                          "content": "Production manager",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "jGvjy",
+                                      "name": "DArea Lucía Fe",
+                                      "fill": "#EDF6FC",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        2,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "c6a9Zj",
+                                          "name": "CD PAreaT Lucía Fe",
+                                          "fill": "#000000",
+                                          "content": "Finance",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "r8xQD5",
+                                  "name": "CD PE Lucía Fe",
+                                  "fill": "$slate",
+                                  "content": "lucia@coronafestival.es",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "bE13s",
+                              "name": "CD Person Marc Sol",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 4,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "b3IG5M",
+                                  "name": "CD PRow Marc Sol",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "KM1GH",
+                                      "name": "CD PN Marc Sol",
+                                      "fill": "$ink",
+                                      "content": "Marc Solé",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 12.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "PMEce",
+                                  "name": "CD PTags Marc Sol",
+                                  "width": "fill_container",
+                                  "gap": 6,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "SUVEH",
+                                      "name": "CD PRole Marc Sol",
+                                      "fill": "$cloud",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        2,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "oe43L",
+                                          "name": "CD PRoleT Marc Sol",
+                                          "fill": "$ink",
+                                          "content": "Technical director",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "KlAUZ",
+                                      "name": "DArea Marc Sol",
+                                      "fill": "$cloud",
+                                      "cornerRadius": 4,
+                                      "padding": [
+                                        2,
+                                        8
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "dSFtX",
+                                          "name": "CD PAreaT Marc Sol",
+                                          "fill": "$slate",
+                                          "content": "—",
+                                          "fontFamily": "$font-body",
+                                          "fontSize": 10.5,
+                                          "fontWeight": "medium"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "hzQGp",
+                                  "name": "CD PE Marc Sol",
+                                  "fill": "$slate",
+                                  "content": "marc@coronafestival.es",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XImUF",
+                  "name": "CD Right",
+                  "width": 400,
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mgfH6",
+                      "name": "CD Commercial Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "fwhIN",
+                          "name": "CD Com Header",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "l7fnK",
+                              "name": "CD Com Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "payments",
+                              "library": "Material Symbols Rounded",
+                              "fill": "$ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "IvaIR",
+                              "name": "CD Com Title",
+                              "fill": "$ink",
+                              "content": "Commercial defaults",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "TnvGd",
+                          "name": "CD CRow Invoice ",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "c3CWqZ",
+                              "name": "CD CL Invoice ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Invoice moment",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "U9i6B",
+                              "name": "CD CV Invoice ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Per project phase (milestones)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DAuvU",
+                          "name": "CD CRow Payment ",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "l6TWC",
+                              "name": "CD CL Payment ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Payment term",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "pTbZl",
+                              "name": "CD CV Payment ",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "50% in advance",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "G16Mai",
+                          "name": "CD CRow VAT sche",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "l8Ovk",
+                              "name": "CD CL VAT sche",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "VAT scheme",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "UX3br",
+                              "name": "CD CV VAT sche",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Reverse charge (EU)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "L0kh9",
+                          "name": "CD CRow Insuranc",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "niYLt",
+                              "name": "CD CL Insuranc",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Insurance %",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "PrdMG",
+                              "name": "CD CV Insuranc",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "4% of rental value",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RK6Xv",
+                          "name": "CD CRow Discount",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AQh4d",
+                              "name": "CD CL Discount",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Discount group · rental",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "DTUyU",
+                              "name": "CD CV Discount",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Festival recurring",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rg1hh",
+                          "name": "CD CRow Discount",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Mp3x7",
+                              "name": "CD CL Discount",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": 140,
+                              "content": "Discount group · sale",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "xrMsK",
+                              "name": "CD CV Discount",
+                              "fill": "$ink",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Standard",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "j7O3i",
+                      "name": "CD Project Note Card",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": [
+                        18,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "exya5",
+                          "name": "CD Note Title",
+                          "fill": "$ink",
+                          "content": "Automatic project note",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "rxeLZ",
+                          "name": "CD Note Body",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Festival load-in only after 08:00 — quiet zone until 10:00. Security passes required for the whole crew; send the list one week ahead.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AtSti",
+              "name": "CD Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "c3TvDw",
+                  "name": "CD Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "ti2hH",
+                  "name": "CD Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Commercial defaults apply automatically to future projects with this client, overriding project-type defaults. One contact person per area; travel estimates refresh on demand.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

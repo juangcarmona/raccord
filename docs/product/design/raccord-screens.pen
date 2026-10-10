@@ -22188,6 +22188,954 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "eEnEg",
+      "x": 6310,
+      "y": 14184,
+      "name": "Packing List Detail",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ux0IT",
+          "name": "PL Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "U1yKi",
+              "name": "PL Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "fNXng",
+                  "name": "PL Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "F70dIp",
+                  "name": "PL Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "idoco",
+              "name": "PL Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aBpO9",
+                  "name": "PL Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "RZtm9",
+                      "name": "PL Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "roZOX",
+                      "name": "PL Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pIu9R",
+                  "name": "PL Nav Equipment",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "r0Dc4e",
+                      "name": "PL Nav Icon Equipment",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "inventory_2",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Hq2oZ",
+                      "name": "PL Nav Label Equipment",
+                      "fill": "#8A93A8",
+                      "content": "Equipment",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hDdY8",
+                  "name": "PL Nav Warehouse",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "DkVFD",
+                      "name": "PL Nav Icon Warehouse",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "local_shipping",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z7arj",
+                      "name": "PL Nav Label Warehouse",
+                      "fill": "$white",
+                      "content": "Warehouse",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NbVWx",
+                  "name": "PL Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "M9dDD",
+                      "name": "PL Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mdKlW",
+                      "name": "PL Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "iLVuy",
+              "name": "PL Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Warehouse · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "R6eUF",
+          "name": "PL Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "yuU1c",
+              "name": "PL Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "miOnr",
+                  "name": "PL Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qMuyE",
+                      "name": "PL Title",
+                      "fill": "$ink",
+                      "content": "Packing list — Cameras · Corona Festival",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FC4kA",
+                      "name": "PL Header Badges",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rboJN",
+                          "name": "PL Ready Badge",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 99,
+                          "gap": 5,
+                          "padding": [
+                            3,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oDE9h",
+                              "name": "PL Ready Badge Label",
+                              "fill": "#1D7A4F",
+                              "content": "Ready to pack",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZbfDu",
+                          "name": "PL Meta",
+                          "fill": "$slate",
+                          "content": "Book out from 12 Feb 08:00 · list 2 of 3 · created from locked plan",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Xu8xn",
+                  "name": "PL Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "vs7P3",
+                      "name": "PL Print Btn",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "TeQYo",
+                          "name": "PL Print Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "print",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$slate"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GRgLX",
+                          "name": "PL Print Label",
+                          "fill": "$ink",
+                          "content": "Print packing slip",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p3STN3",
+                      "name": "PL Scan Btn",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "thJEw",
+                          "name": "PL Scan Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "qr_code_scanner",
+                          "library": "Material Symbols Rounded",
+                          "fill": "$cyan"
+                        },
+                        {
+                          "type": "text",
+                          "id": "LX9PW",
+                          "name": "PL Scan Label",
+                          "fill": "$white",
+                          "content": "Scan in / out",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Q4ce9f",
+              "name": "PL Scan Bar",
+              "width": "fill_container",
+              "fill": "$ink",
+              "cornerRadius": 10,
+              "gap": 12,
+              "padding": [
+                14,
+                18
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "cKZHM",
+                  "name": "PL Scan Bar Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "qr_code_scanner",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "frame",
+                  "id": "hr010",
+                  "name": "PL Scan Bar Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lZXwP",
+                      "name": "PL Scan Bar Title",
+                      "fill": "$white",
+                      "content": "Scanning to: Booked out · target: this packing list",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IOuVo",
+                      "name": "PL Scan Bar Sub",
+                      "fill": "#8A93A8",
+                      "content": "Each scan books one unit to the target status. Unplanned codes offer to add additional equipment.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jhMVm",
+              "name": "PL Table",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QugQf",
+                  "name": "PL Table Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "chg0y",
+                      "name": "PL Col Article",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "ARTICLE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "plfLn",
+                      "name": "PL Col Scan code",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "SCAN CODE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "v6TiyV",
+                      "name": "PL Col Planned",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "PLANNED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J7SUdP",
+                      "name": "PL Col Packed",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "PACKED",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pGJa9",
+                      "name": "PL Col Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m6kxP",
+                  "name": "PL Row Alexa AC-0041",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OmGGz",
+                      "name": "PL A AC-0041",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Alexa 35 body #0041",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tY4sg",
+                      "name": "PL C AC-0041",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "AC-0041",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AeU3Y",
+                      "name": "PL P AC-0041",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tluGk",
+                      "name": "PL K AC-0041",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GTEPJ",
+                      "name": "PL S AC-0041",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "lVjiA",
+                          "name": "PL S Chip AC-0041",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "E0l87d",
+                              "name": "PL S Label AC-0041",
+                              "fill": "#1D7A4F",
+                              "content": "Packed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dMXXo",
+                  "name": "PL Row Zeiss ZS-0301",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "x1Ssph",
+                      "name": "PL A ZS-0301",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Zeiss Supreme set #ASC30",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Doqew",
+                      "name": "PL C ZS-0301",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "ZS-0301",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "C1Re1Y",
+                      "name": "PL P ZS-0301",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xpIQ1",
+                      "name": "PL K ZS-0301",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "iT9Hy",
+                      "name": "PL S ZS-0301",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "t1T59R",
+                          "name": "PL S Chip ZS-0301",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "j4MbUn",
+                              "name": "PL S Label ZS-0301",
+                              "fill": "#1D7A4F",
+                              "content": "Packed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "owOyj",
+                  "name": "PL Row Easyrig EV-0107",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qFoDw",
+                      "name": "PL A EV-0107",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Easyrig Vario 5 #EV5-7",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZehyB",
+                      "name": "PL C EV-0107",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "EV-0107",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Or5kc",
+                      "name": "PL P EV-0107",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "3",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TbPyO",
+                      "name": "PL K EV-0107",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "1",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VQO87",
+                      "name": "PL S EV-0107",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "EaE5L",
+                          "name": "PL S Chip EV-0107",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Z3TiDk",
+                              "name": "PL S Label EV-0107",
+                              "fill": "#8A5A00",
+                              "content": "Packing",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oSXCn",
+                  "name": "PL Row Monitor SM-1911",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "C3eTWl",
+                      "name": "PL A SM-1911",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Monitor SmallHD 7 #M19x",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WZXcC",
+                      "name": "PL C SM-1911",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 110,
+                      "content": "SM-1911",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V6Ku2l",
+                      "name": "PL P SM-1911",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "2",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "N7l5rA",
+                      "name": "PL K SM-1911",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 70,
+                      "content": "0",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XLgdO",
+                      "name": "PL S SM-1911",
+                      "width": 110,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "uUx5k",
+                          "name": "PL S Chip SM-1911",
+                          "fill": "$cloud",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "wigil",
+                              "name": "PL S Label SM-1911",
+                              "fill": "$slate",
+                              "content": "To scan",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "P6z0Xu",
+              "name": "PL Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "oQ70y",
+                  "name": "PL Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "xuMDH",
+                  "name": "PL Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Booking out takes the reservation. No early check-out before the booked time. The slip can be generated per list or for the whole project grouped by times, with template, letterhead and text.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

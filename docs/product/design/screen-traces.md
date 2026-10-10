@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Packing list detail (management/warehouse, desktop)
+
+File: `packing-list.png` / `packing-list.html`
+
+| Design decision | Decided by |
+|---|---|
+| Hand-over lock: list marked "Ready to pack" from the locked plan, visible on the warehouse board | [UC-WHS-MARK-READY-TO-PACK](../model/use-cases/uc-whs-mark-ready-to-pack.md) steps 1–2, [TERM-READY-TO-PACK](../model/domain/terms/term-ready-to-pack.md) |
+| Scan in/out: each scan books one unit to the target status, live-scanning bar with target | [UC-WHS-BOOK-BY-SCANNING](../model/use-cases/uc-whs-book-by-scanning.md) steps 1–3 |
+| Unplanned codes offer to add additional equipment | [UC-WHS-BOOK-BY-SCANNING](../model/use-cases/uc-whs-book-by-scanning.md) alternative flows, [BR-WHS-UNPLANNED-SCAN-ADDS](../model/business-rules/br-whs-unplanned-scan-adds.md) |
+| Booking out takes the reservation; no early check-out | [BR-WHS-BOOK-OUT-TAKES-RESERVATION](../model/business-rules/br-whs-book-out-takes-reservation.md), [BR-WHS-NO-EARLY-CHECK-OUT](../model/business-rules/br-whs-no-early-check-out.md) |
+| Per-article scan codes from equipment labels | [TERM-SCAN-CODE](../model/domain/terms/term-scan-code.md), [UC-WHS-ASSIGN-SCAN-CODES](../model/use-cases/uc-whs-assign-scan-codes.md) |
+| Print packing slip per list or whole project grouped by times, with template/letterhead/text | [UC-WHS-PRINT-PACKING-SLIP](../model/use-cases/uc-whs-print-packing-slip.md) step 1 |
+| Packed/Packing/To-scan chips in status tints | [BR-WHS-AUTOMATIC-PROGRESS](../model/business-rules/br-whs-automatic-progress.md), [docs/design/color-tokens.md](../../design/color-tokens.md) |
+
 ## Screen — Project equipment plan & shortages (management, desktop)
 
 File: `equipment-plan.png` / `equipment-plan.html`

@@ -3,18 +3,6 @@
   "children": [
     {
       "type": "frame",
-      "id": "bi8Au",
-      "x": 0,
-      "y": 0,
-      "name": "Frame",
-      "clip": true,
-      "width": 800,
-      "height": 600,
-      "fill": "#FFFFFF",
-      "layout": "none"
-    },
-    {
-      "type": "frame",
       "id": "vu32x",
       "x": 920,
       "y": 0,
@@ -2324,6 +2312,657 @@
                       ]
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ggm0v",
+      "x": 920,
+      "y": 1104,
+      "name": "Field Check-in",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$ink",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "BGMYX",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "padding": [
+            14,
+            24,
+            8,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "N6PYZ",
+              "name": "Status Time",
+              "fill": "$white",
+              "content": "22:14",
+              "fontFamily": "$font-body",
+              "fontSize": 13,
+              "fontWeight": "semibold"
+            },
+            {
+              "type": "frame",
+              "id": "ZPb1a",
+              "name": "Status Icons",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "VHzG9",
+                  "name": "Status Signal",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "signal",
+                  "library": "lucide",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "UF58C",
+                  "name": "Status Wifi",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "wifi",
+                  "library": "lucide",
+                  "fill": "$white"
+                },
+                {
+                  "type": "icon",
+                  "id": "Lv4E4",
+                  "name": "Status Battery",
+                  "width": 18,
+                  "height": 14,
+                  "icon": "battery-full",
+                  "library": "lucide",
+                  "fill": "$white"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NxMMm",
+          "name": "Hero",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 6,
+          "padding": [
+            28,
+            24,
+            24,
+            24
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "GjlE9",
+              "name": "Hero Date",
+              "fill": "#8A93A8",
+              "content": "Tuesday, 10 February 2026",
+              "fontFamily": "$font-body",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "EdieW",
+              "name": "Hero Greeting",
+              "fill": "$white",
+              "content": "Good evening, Marta",
+              "fontFamily": "$font-body",
+              "fontSize": 20,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "frame",
+              "id": "Hbf1n",
+              "name": "Chip Spacer",
+              "width": "fill_container",
+              "height": 10
+            },
+            {
+              "type": "frame",
+              "id": "jTJ2s",
+              "name": "Today State",
+              "fill": "#1A2440",
+              "cornerRadius": 99,
+              "padding": [
+                3,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RxhGh",
+                  "name": "Today State Label",
+                  "fill": "$cyan",
+                  "content": "Working — since 08:03",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11.5,
+                  "fontWeight": "medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XsEks",
+          "name": "Timer Card",
+          "width": "fill_container",
+          "height": 248,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 24,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "oK0iz",
+              "name": "Timer Subtle Icon",
+              "width": 0,
+              "height": 0,
+              "icon": "circle",
+              "library": "lucide",
+              "fill": "$ink"
+            },
+            {
+              "type": "frame",
+              "id": "iuPBJ",
+              "name": "Timer Display",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vzYen",
+                  "name": "Timer Value",
+                  "fill": "$white",
+                  "content": "13:41",
+                  "fontFamily": "$font-body",
+                  "fontSize": 64,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "YCb9R",
+              "name": "Timer Caption",
+              "fill": "#8A93A8",
+              "content": "Clocked in 08:03 · 30 min break at 12:30 · building up today's record",
+              "fontFamily": "$font-body",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yb24H",
+          "name": "Clock Button",
+          "width": "fill_container",
+          "fill": "$white",
+          "cornerRadius": 12,
+          "gap": 10,
+          "padding": [
+            18,
+            24
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "cnbXA",
+              "name": "Clock In Icon",
+              "width": 18,
+              "height": 18,
+              "icon": "square",
+              "library": "lucide",
+              "fill": "#B3261E"
+            },
+            {
+              "type": "text",
+              "id": "ZyNfJ",
+              "name": "Clock Button Label",
+              "fill": "#B3261E",
+              "content": "Clock out",
+              "fontFamily": "$font-body",
+              "fontSize": 16,
+              "fontWeight": "bold"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DbpNP",
+          "name": "Break Row",
+          "width": "fill_container",
+          "gap": 10,
+          "padding": [
+            0,
+            24,
+            8,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "rb4Xz",
+              "name": "Break Button",
+              "width": "fill_container",
+              "fill": "#141B33",
+              "cornerRadius": 12,
+              "stroke": "#3A4763",
+              "strokeWidth": 1,
+              "gap": 8,
+              "padding": [
+                14,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "sUvjK",
+                  "name": "Break Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "coffee",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "q1qR5",
+                  "name": "Break Label",
+                  "fill": "$white",
+                  "content": "Start break",
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "semibold"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "K1B38s",
+          "name": "Today Entries",
+          "width": "fill_container",
+          "fill": "#0F1628",
+          "cornerRadius": [
+            16,
+            16,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 2,
+          "padding": [
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "prQ52",
+              "name": "Entries Title",
+              "fill": "#8A93A8",
+              "content": "TODAY'S ENTRIES",
+              "fontFamily": "$font-body",
+              "fontSize": 11,
+              "fontWeight": "medium",
+              "letterSpacing": 0.4
+            },
+            {
+              "type": "frame",
+              "id": "IsSSZ",
+              "name": "Empty Entries",
+              "width": "fill_container",
+              "gap": 10,
+              "padding": [
+                18,
+                0,
+                10,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "kqpp6",
+                  "name": "Empty Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "coffee",
+                  "library": "lucide",
+                  "fill": "#3A4763"
+                },
+                {
+                  "type": "text",
+                  "id": "vPWFe",
+                  "name": "Empty Label",
+                  "fill": "#667085",
+                  "content": "No entries yet. Clock in to start today's record.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "W4EEeq",
+              "name": "Row Clock In",
+              "width": "fill_container",
+              "gap": 10,
+              "padding": [
+                10,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "egzAe",
+                  "name": "Entry Icon In",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "log-in",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "g8oRA",
+                  "name": "Entry Time In",
+                  "fill": "$white",
+                  "content": "08:03",
+                  "fontFamily": "$font-body",
+                  "fontSize": 13,
+                  "fontWeight": "medium"
+                },
+                {
+                  "type": "text",
+                  "id": "oiYg9",
+                  "name": "Entry Kind In",
+                  "fill": "#8A93A8",
+                  "content": "Clocked in · Estudio Norte S.L. · warehouse store",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "J52fO",
+                  "name": "Entry Source In",
+                  "fill": "#667085",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "phone · device of Marta",
+                  "textAlign": "right",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZJGyO",
+              "name": "Row Break",
+              "width": "fill_container",
+              "gap": 10,
+              "padding": [
+                10,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "aoH9X",
+                  "name": "Entry Icon Break",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "coffee",
+                  "library": "lucide",
+                  "fill": "$coral"
+                },
+                {
+                  "type": "text",
+                  "id": "X4rOi",
+                  "name": "Entry Time Break",
+                  "fill": "$white",
+                  "content": "12:30",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "medium"
+                },
+                {
+                  "type": "text",
+                  "id": "EHwde",
+                  "name": "Entry Kind Break",
+                  "fill": "#8A93A8",
+                  "content": "Break · 12:30 to 13:00 · 30 min",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "NJdAr",
+                  "name": "Entry Source Break",
+                  "fill": "#667085",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "phone",
+                  "textAlign": "right",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "obORq",
+          "name": "Offline Note",
+          "width": "fill_container",
+          "fill": "#141B33",
+          "cornerRadius": 8,
+          "gap": 8,
+          "padding": [
+            10,
+            14
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "cjaUT",
+              "name": "Offline Icon",
+              "width": 14,
+              "height": 14,
+              "icon": "cloud-off",
+              "library": "lucide",
+              "fill": "$coral"
+            },
+            {
+              "type": "text",
+              "id": "h8lqq1",
+              "name": "Offline Label",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Events are recorded with server time. Offline, clocking is refused — retry when connected.",
+              "fontFamily": "$font-body",
+              "fontSize": 11.5,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "k1RsXc",
+          "name": "Field Nav",
+          "width": "fill_container",
+          "fill": "#0F1628",
+          "padding": [
+            12,
+            20,
+            24,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "eudg4",
+              "name": "Nav Today",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "OpSSq",
+                  "name": "NavIcon Today",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "clock-3",
+                  "library": "lucide",
+                  "fill": "$cyan"
+                },
+                {
+                  "type": "text",
+                  "id": "N84NQ0",
+                  "name": "NavLabel Today",
+                  "fill": "$cyan",
+                  "content": "Today",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CuYWV",
+              "name": "Nav My jobs",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "zVnmw",
+                  "name": "NavIcon My jobs",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "calendar-days",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "RHXfY",
+                  "name": "NavLabel My jobs",
+                  "fill": "#8A93A8",
+                  "content": "My jobs",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lZddr",
+              "name": "Nav Hours",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "PirtC",
+                  "name": "NavIcon Hours",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "timer",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "w3eih",
+                  "name": "NavLabel Hours",
+                  "fill": "#8A93A8",
+                  "content": "Hours",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ek8eR",
+              "name": "Nav Me",
+              "width": 64,
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "IGFkq",
+                  "name": "NavIcon Me",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "user",
+                  "library": "lucide",
+                  "fill": "#8A93A8"
+                },
+                {
+                  "type": "text",
+                  "id": "V59Jt",
+                  "name": "NavLabel Me",
+                  "fill": "#8A93A8",
+                  "content": "Me",
+                  "fontFamily": "$font-body",
+                  "fontSize": 10.5,
+                  "fontWeight": "normal"
                 }
               ]
             }

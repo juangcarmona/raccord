@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter%3Awght%40100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, ::before, ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body style="background-color: #F5F7FA">
+    <div
+      data-pencil-name="Shift Planner"
+      class="box-border w-[1440px] h-[1024px] flex flex-row gap-0 justify-start items-start bg-[#F5F7FA]"
+    >
+      <div
+        data-pencil-name="SP Sidebar"
+        class="box-border w-[236px] shrink-0 h-full flex flex-col gap-[16px] p-[20px_16px] justify-start items-start bg-[#0B1020]"
+      >
+        <div
+          data-pencil-name="SP Brand"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+        >
+          <div
+            data-pencil-name="SP Brand Mark"
+            class="box-border w-[26px] shrink-0 h-[26px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[6px]"
+          ></div>
+          <div
+            data-pencil-name="SP Brand Name"
+            class="text-[16px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Raccord
+          </div>
+        </div>
+        <div
+          data-pencil-name="SP Nav"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[2px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="SP Nav Projects"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="SP Nav Icon Projects"
+              data-icon-name="folder"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M2.69336 11.08447q-0.40332 0-0.67334-0.27002-0.27002-0.27002-0.27002-0.67334l0-6.28222q0-0.40332 0.27002-0.67334 0.27002-0.27002 0.67334-0.27002l2.51221 0q0.18799 0 0.36572 0.07861 0.17773 0.0752 0.3042 0.20166l0.88867 0.88867 4.54248 0q0.40332 0 0.67334 0.27002 0.27002 0.27002 0.27002 0.66992l0 5.1167q0 0.40332-0.27002 0.67334-0.27002 0.27002-0.67334 0.27002l-8.61328 0z m0-0.58447l8.61328 0q0.15723 0 0.25635-0.09912 0.10254-0.10254 0.10254-0.25977l0-5.1167q0-0.15723-0.10254-0.25634-0.09912-0.10254-0.25635-0.10254l-4.77832 0-1.06299-1.06299q-0.05811-0.05811-0.11963-0.07861-0.06152-0.02393-0.12988-0.02393l-2.52246 0q-0.15723 0-0.25977 0.10254-0.09912 0.09912-0.09912 0.25635l0 6.28222q0 0.15723 0.09912 0.25977 0.10254 0.09912 0.25977 0.09912z m-0.35889 0q0 0 0-0.09912 0-0.10254 0-0.25977l0-6.28222q0-0.15723 0-0.25635 0-0.10254 0-0.10254 0 0 0 0.02393 0 0.02051 0 0.07861l0 1.06299q0 0 0 0.10254 0 0.09912 0 0.25634l0 5.1167q0 0.15723 0 0.25977 0 0.09912 0 0.09912z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="SP Nav Label Projects"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Projects
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Nav Crew"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center bg-[#1A2440] rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="SP Nav Icon Crew"
+              data-icon-name="groups"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M1.0083 10.25391q-0.18115 0-0.3042-0.12305-0.11963-0.12305-0.11963-0.3042l0-0.07861q0-0.53662 0.57422-0.88867 0.57422-0.35547 1.47656-0.35547 0.1333 0 0.28711 0.01367 0.15381 0.01025 0.32471 0.04101-0.13672 0.23926-0.20166 0.49219-0.06152 0.24951-0.06152 0.50244l0 0.70069-1.97559 0z m3.55127 0q-0.2085 0-0.3418-0.13331-0.1333-0.13672-0.1333-0.33837l0-0.18457q0-0.35205 0.20166-0.64258 0.20508-0.29395 0.60498-0.50928 0.3999-0.21191 0.92969-0.31787 0.5332-0.10596 1.17578-0.10596 0.65283 0 1.18262 0.10596 0.5332 0.10596 0.9331 0.31787 0.3999 0.21533 0.60157 0.50928 0.20166 0.29053 0.20166 0.64258l0 0.18457q0 0.20166-0.13672 0.33837-0.1333 0.1333-0.33496 0.13331l-4.88428 0z m6.45654 0l0-0.70069q0-0.28027-0.06152-0.52295-0.06152-0.24609-0.18457-0.47168 0.18457-0.03076 0.32813-0.04101 0.14697-0.01367 0.27685-0.01367 0.90576 0 1.47315 0.35205 0.56738 0.35205 0.56738 0.89209l0 0.07861q0 0.18115-0.12305 0.3042-0.11963 0.12305-0.30078 0.12305l-1.97559 0z m-6.33349-0.58448l4.63818 0 0-0.12304q-0.03418-0.41357-0.68359-0.67676-0.646-0.2666-1.63721-0.2666-0.99121 0-1.64063 0.2666-0.646 0.26318-0.67675 0.67676l0 0.12304z m-2.05078-1.71582q-0.3418 0-0.58448-0.24267-0.24268-0.24609-0.24267-0.58789 0-0.33838 0.24267-0.57764 0.24609-0.23926 0.58789-0.23926 0.33838 0 0.58448 0.23926 0.24609 0.23926 0.24609 0.58105 0 0.33154-0.23926 0.58106-0.23926 0.24609-0.59472 0.24609z m8.74316 0q-0.33496 0-0.58447-0.24609-0.24609-0.24951-0.2461-0.58106 0-0.3418 0.2461-0.58105 0.24951-0.23926 0.58789-0.23926 0.34521 0 0.58447 0.23926 0.24267 0.23926 0.24268 0.57764 0 0.3418-0.23926 0.58789-0.23926 0.24268-0.59131 0.24267z m-4.37158-0.36914q-0.52979 0-0.90576-0.37256-0.37598-0.37598-0.37598-0.90576 0-0.54688 0.37256-0.9126 0.37256-0.36914 0.90576-0.36914 0.54346 0 0.90918 0.36914 0.36914 0.36572 0.36914 0.90577 0 0.5332-0.36572 0.90918-0.36572 0.37598-0.90918 0.37597z m0.00342-0.58447q0.28711 0 0.48535-0.20508 0.20166-0.2085 0.20166-0.4956 0-0.28711-0.20166-0.48877-0.19824-0.20166-0.49219-0.20166-0.28027 0-0.48877 0.20166-0.20508 0.19824-0.20508 0.4956 0 0.28027 0.20508 0.48877 0.2085 0.20508 0.49561 0.20508z"
+                fill="#2DE2E6"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="SP Nav Label Crew"
+              class="text-[12.5px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Crew
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Nav Workspace"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="SP Nav Icon Workspace"
+              data-icon-name="settings"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M6.3916 12.25q-0.20166 0-0.35205-0.1333-0.15039-0.1333-0.18457-0.33496l-0.15381-1.22022q-0.28027-0.08203-0.60498-0.26318-0.32471-0.18115-0.55029-0.38623l-1.11768 0.47852q-0.18457 0.08203-0.37597 0.0205-0.19141-0.06494-0.29395-0.24267l-0.62891-1.08692q-0.10596-0.17773-0.06494-0.36914 0.04443-0.19482 0.20508-0.32129l0.97412-0.72802q-0.02393-0.15723-0.04101-0.32471-0.01709-0.16748-0.01709-0.32813 0-0.14697 0.01709-0.30761 0.01709-0.16406 0.04101-0.36573l-0.97412-0.72802q-0.16064-0.12646-0.19824-0.32471-0.03418-0.20166 0.06836-0.37939l0.61865-1.04932q0.10254-0.16748 0.29395-0.23584 0.19141-0.07178 0.37597 0.01025l1.10401 0.47168q0.26318-0.21875 0.56738-0.39306 0.3042-0.17432 0.59131-0.27002l0.16406-1.22022q0.03418-0.20166 0.18457-0.33496 0.15039-0.1333 0.35205-0.1333l1.2168 0q0.20166 0 0.35205 0.1333 0.15039 0.1333 0.18457 0.33496l0.15381 1.23047q0.33496 0.11621 0.59131 0.27002 0.25977 0.15381 0.5332 0.38281l1.16211-0.47168q0.18457-0.08203 0.37256-0.01025 0.19141 0.06836 0.29736 0.23584l0.61523 1.06299q0.10596 0.17773 0.06153 0.37256-0.04102 0.19141-0.20166 0.31787l-1.02197 0.7622q0.04785 0.18115 0.05468 0.33155 0.00684 0.15039 0.00684 0.29736 0 0.13672-0.01367 0.28711-0.01025 0.15039-0.05127 0.36572l0.98779 0.73828q0.16065 0.12646 0.2085 0.32129 0.04785 0.19141-0.05469 0.36914l-0.62207 1.07325q-0.10254 0.17774-0.30078 0.24267-0.19482 0.06494-0.3794-0.01709l-1.12109-0.48193q-0.27344 0.229-0.55029 0.39306-0.27686 0.16406-0.57422 0.25977l-0.15381 1.23047q-0.03418 0.20166-0.18457 0.33496-0.15039 0.1333-0.35205 0.1333l-1.2168 0z m0.02393-0.58447l1.1416 0 0.21533-1.5791q0.44092-0.11621 0.79297-0.31788 0.35547-0.20508 0.72119-0.56054l1.45264 0.62207 0.58105-0.99121-1.27832-0.96045q0.0752-0.24951 0.09912-0.45801 0.02393-0.2085 0.02393-0.42041 0-0.22217-0.02393-0.42041-0.02393-0.19824-0.09912-0.43408l1.29883-0.98438-0.57764-0.99121-1.49023 0.62549q-0.26318-0.29053-0.69727-0.54346-0.43066-0.25635-0.81347-0.33838l-0.17774-1.5791-1.16552 0-0.18116 1.56543q-0.44092 0.0957-0.81006 0.3042-0.36914 0.2085-0.73486 0.57422l-1.45605-0.6084-0.57764 0.99121 1.26465 0.94678q-0.0752 0.19482-0.10596 0.42725-0.02734 0.229-0.02734 0.47509 0 0.22217 0.02734 0.44092 0.03076 0.21875 0.09229 0.42725l-1.25098 0.96045 0.57764 0.99121 1.4458-0.61182q0.3418 0.34521 0.71093 0.55371 0.36914 0.2085 0.83399 0.32813l0.18799 1.56543z m0.56738-3.20606q0.61182 0 1.03564-0.42383 0.42383-0.42383 0.42383-1.03564 0-0.61182-0.42383-1.03564-0.42383-0.42383-1.03564-0.42383-0.61182 0-1.03564 0.42383-0.42041 0.42383-0.42041 1.03564 0 0.61182 0.42041 1.03564 0.42383 0.42383 1.03564 0.42383z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="SP Nav Label Workspace"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Workspace
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Nav Finance"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="SP Nav Icon Finance"
+              data-icon-name="payments"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M7.875 7.24609q-0.49219 0-0.83057-0.33496-0.33496-0.33838-0.33496-0.83056 0-0.49561 0.33496-0.83057 0.33838-0.33496 0.83057-0.33496 0.49219 0 0.82715 0.33496 0.33838 0.33496 0.33838 0.83057 0 0.49219-0.33838 0.83056-0.33496 0.33496-0.82715 0.33496z m-3.61279 1.8628q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.17334q0-0.38623 0.27685-0.66309 0.27686-0.27686 0.66651-0.27685l7.22558 0q0.38965 0 0.66651 0.27685 0.27686 0.27686 0.27685 0.66309l0 4.17334q0 0.38965-0.27685 0.6665-0.27686 0.27686-0.66651 0.27686l-7.22558 0z m0.58447-0.58448l6.05664 0q0-0.38965 0.27686-0.66308 0.27686-0.27686 0.6665-0.27686l0-3.00781q-0.39307 0-0.66992-0.27686-0.27344-0.27686-0.27344-0.6665l-6.05664 0q0 0.39307-0.27686 0.66992-0.27686 0.27344-0.6665 0.27344l0 3.00781q0.39307 0 0.6665 0.27686 0.27686 0.27686 0.27686 0.66308z m5.56445 2.33448l-7.89892 0q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.84668q0-0.12305 0.08545-0.20508 0.08545-0.08545 0.20849-0.08545 0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.20508l0 4.84668q0 0.13672 0.11279 0.24951 0.11279 0.10938 0.2461 0.10937l7.89892 0q0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.2085 0 0.12305-0.08545 0.20849-0.08203 0.08203-0.20508 0.08204z m-6.14892-2.33448l-0.35889 0q0 0 0-0.10595 0-0.10596 0-0.25293l0-4.17334q0-0.14355 0-0.24951 0-0.10938 0-0.10938l0.35889 0q-0.14355 0-0.25293 0.10938-0.10596 0.10596-0.10596 0.24951l0 4.17334q0 0.14697 0.10596 0.25293 0.10938 0.10596 0.25293 0.10595z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="SP Nav Label Finance"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Finance
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="SP Nav Note"
+          class="text-[10px]/[normal] box-border w-full text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left"
+        >
+          Crew · Lumen Events
+        </div>
+      </div>
+      <div
+        data-pencil-name="SP Main"
+        class="box-border [flex:1_1_0] h-full flex flex-col gap-[18px] p-[28px_40px] justify-start items-start"
+      >
+        <div
+          data-pencil-name="SP Header"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[4px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="SP Title"
+            class="text-[20px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Shift planner — week 47
+          </div>
+          <div
+            data-pencil-name="SP Subtitle"
+            class="text-[12.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            Recurring internal work (non-project): warehouse, delivery and office shifts, each with
+            crew, vehicles and remarks.
+          </div>
+        </div>
+        <div
+          data-pencil-name="SP Table"
+          class="box-border w-full [flex:1_1_0] flex flex-col gap-0 justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+        >
+          <div
+            data-pencil-name="SP Head"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[9px_16px] justify-start items-center bg-[#F5F7FA]"
+          >
+            <div
+              data-pencil-name="SP Col Shift"
+              class="text-[10.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              SHIFT
+            </div>
+            <div
+              data-pencil-name="SP Col When"
+              class="text-[10.5px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              WHEN
+            </div>
+            <div
+              data-pencil-name="SP Col Crew / vehicles"
+              class="text-[10.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              CREW / VEHICLES
+            </div>
+            <div
+              data-pencil-name="SP Col Qty"
+              class="text-[10.5px]/[normal] box-border w-[60px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-right"
+            >
+              QTY
+            </div>
+            <div
+              data-pencil-name="SP Col Blocking"
+              class="text-[10.5px]/[normal] box-border w-[90px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              BLOCKING
+            </div>
+            <div
+              data-pencil-name="SP Col Status"
+              class="text-[10.5px]/[normal] box-border w-[110px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              STATUS
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Row Warehous"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[10px_16px] justify-start items-center"
+          >
+            <div
+              data-pencil-name="SP S Warehous"
+              class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Warehouse prep · recurring
+            </div>
+            <div
+              data-pencil-name="SP W Warehous"
+              class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Mon–Fri 08:00–13:00 · until 19 Dec
+            </div>
+            <div
+              data-pencil-name="SP C Warehous"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Marta R., Jon L.
+            </div>
+            <div
+              data-pencil-name="SP Q Warehous"
+              class="text-[12px]/[normal] box-border w-[60px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+            >
+              2
+            </div>
+            <div
+              data-pencil-name="SP B Warehous"
+              class="text-[11.5px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Yes
+            </div>
+            <div
+              data-pencil-name="SP Chip Warehous"
+              class="box-border w-[110px] shrink-0 h-fit flex flex-row gap-0 justify-start items-start"
+            >
+              <div
+                data-pencil-name="SP ChipF Warehous"
+                class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[2px_8px] justify-start items-start bg-[#E3F5EE] rounded-[4px]"
+              >
+                <div
+                  data-pencil-name="SP ChipT Warehous"
+                  class="text-[10.5px]/[normal] box-border text-[#1D7A4F] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Final
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Row Van 12 d"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[10px_16px] justify-start items-center"
+          >
+            <div
+              data-pencil-name="SP S Van 12 d"
+              class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Van 12 delivery round
+            </div>
+            <div
+              data-pencil-name="SP W Van 12 d"
+              class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Tue 18 Nov · 06:00–14:00
+            </div>
+            <div
+              data-pencil-name="SP C Van 12 d"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Karel V. + Van 12
+            </div>
+            <div
+              data-pencil-name="SP Q Van 12 d"
+              class="text-[12px]/[normal] box-border w-[60px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+            >
+              1
+            </div>
+            <div
+              data-pencil-name="SP B Van 12 d"
+              class="text-[11.5px]/[normal] box-border w-[90px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Yes
+            </div>
+            <div
+              data-pencil-name="SP Chip Van 12 d"
+              class="box-border w-[110px] shrink-0 h-fit flex flex-row gap-0 justify-start items-start"
+            >
+              <div
+                data-pencil-name="SP ChipF Van 12 d"
+                class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[2px_8px] justify-start items-start bg-[#E3F5EE] rounded-[4px]"
+              >
+                <div
+                  data-pencil-name="SP ChipT Van 12 d"
+                  class="text-[10.5px]/[normal] box-border text-[#1D7A4F] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Final
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Row Shop cab"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[10px_16px] justify-start items-center"
+          >
+            <div
+              data-pencil-name="SP S Shop cab"
+              class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Shop cable audit
+            </div>
+            <div
+              data-pencil-name="SP W Shop cab"
+              class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Wed 19 Nov · 09:00–17:00
+            </div>
+            <div
+              data-pencil-name="SP C Shop cab"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#000000] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              — pick crew
+            </div>
+            <div
+              data-pencil-name="SP Q Shop cab"
+              class="text-[12px]/[normal] box-border w-[60px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+            >
+              1
+            </div>
+            <div
+              data-pencil-name="SP B Shop cab"
+              class="text-[11.5px]/[normal] box-border w-[90px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              No
+            </div>
+            <div
+              data-pencil-name="SP Chip Shop cab"
+              class="box-border w-[110px] shrink-0 h-fit flex flex-row gap-0 justify-start items-start"
+            >
+              <div
+                data-pencil-name="SP ChipF Shop cab"
+                class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[2px_8px] justify-start items-start bg-[#F5F7FA] rounded-[4px]"
+              >
+                <div
+                  data-pencil-name="SP ChipT Shop cab"
+                  class="text-[10.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Draft
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP Row Office ·"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[10px_16px] justify-start items-center"
+          >
+            <div
+              data-pencil-name="SP S Office ·"
+              class="text-[12.5px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Office · invoicing batch
+            </div>
+            <div
+              data-pencil-name="SP W Office ·"
+              class="text-[11.5px]/[normal] box-border w-[200px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Fri 21 Nov · 10:00–16:00
+            </div>
+            <div
+              data-pencil-name="SP C Office ·"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Alba F.
+            </div>
+            <div
+              data-pencil-name="SP Q Office ·"
+              class="text-[12px]/[normal] box-border w-[60px] shrink-0 text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-right"
+            >
+              1
+            </div>
+            <div
+              data-pencil-name="SP B Office ·"
+              class="text-[11.5px]/[normal] box-border w-[90px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              No
+            </div>
+            <div
+              data-pencil-name="SP Chip Office ·"
+              class="box-border w-[110px] shrink-0 h-fit flex flex-row gap-0 justify-start items-start"
+            >
+              <div
+                data-pencil-name="SP ChipF Office ·"
+                class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[2px_8px] justify-start items-start bg-[#F5F7FA] rounded-[4px]"
+              >
+                <div
+                  data-pencil-name="SP ChipT Office ·"
+                  class="text-[10.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Draft
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="SP Detail Card"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[16px_20px] justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+        >
+          <div
+            data-pencil-name="SP Detail Header"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+          >
+            <svg
+              data-pencil-name="SP Detail Icon"
+              data-icon-name="calendar_month"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M3.27441 12.25q-0.3999 0-0.66992-0.27002-0.27002-0.27002-0.27002-0.67334l0-7.44775q0-0.40332 0.27002-0.67334 0.27002-0.27002 0.66992-0.27002l1.03223 0 0-0.98438q0-0.13672 0.08887-0.22558 0.08887-0.08887 0.22558-0.08887 0.13672 0 0.22559 0.08887 0.08887 0.08887 0.08887 0.22558l0 0.98438 4.17334 0 0-1.0083q0-0.12305 0.08203-0.20508 0.08545-0.08545 0.20849-0.08545 0.12646 0 0.2085 0.08545 0.08545 0.08203 0.08545 0.20508l0 1.0083 1.03223 0q0.3999 0 0.66992 0.27002 0.27002 0.27002 0.27002 0.67334l0 7.44775q0 0.40332-0.27002 0.67334-0.27002 0.27002-0.66992 0.27002l-7.45118 0z m0-0.58447l7.45118 0q0.1333 0 0.24609-0.10938 0.11279-0.11279 0.11279-0.24951l0-5.11328-8.16894 0 0 5.11328q0 0.13672 0.11279 0.24951 0.11279 0.10938 0.24609 0.10938z m-0.35888-6.05664l8.16894 0 0-1.75q0-0.1333-0.11279-0.2461-0.11279-0.11279-0.24609-0.11279l-7.45118 0q-0.1333 0-0.24609 0.11279-0.11279 0.11279-0.11279 0.2461l0 1.75z m0 0l0-1.75q0-0.1333 0-0.2461 0-0.11279 0-0.11279 0 0 0 0.11279 0 0.11279 0 0.2461l0 1.75z m4.08447 2.64892q-0.18115 0-0.31445-0.1333-0.1333-0.13672-0.1333-0.31787 0-0.18115 0.1333-0.31445 0.1333-0.1333 0.31445-0.1333 0.18115 0 0.31445 0.1333 0.1333 0.1333 0.1333 0.31445 0 0.18115-0.1333 0.31787-0.1333 0.1333-0.31445 0.1333z m-2.33447 0q-0.18115 0-0.31446-0.1333-0.1333-0.13672-0.1333-0.31787 0-0.18115 0.1333-0.31445 0.1333-0.1333 0.31446-0.1333 0.18115 0 0.31445 0.1333 0.13672 0.1333 0.13672 0.31445 0 0.18115-0.13672 0.31787-0.1333 0.1333-0.31445 0.1333z m4.66894 0q-0.18115 0-0.31787-0.1333-0.1333-0.13672-0.1333-0.31787 0-0.18115 0.1333-0.31445 0.13672-0.1333 0.31787-0.1333 0.18115 0 0.31446 0.1333 0.1333 0.1333 0.1333 0.31445 0 0.18115-0.1333 0.31787-0.1333 0.1333-0.31446 0.1333z m-2.33447 2.24219q-0.18115 0-0.31445-0.1333-0.1333-0.1333-0.1333-0.31445 0-0.18115 0.1333-0.31446 0.1333-0.13672 0.31445-0.13672 0.18115 0 0.31445 0.13672 0.1333 0.1333 0.1333 0.31446 0 0.18115-0.1333 0.31445-0.1333 0.1333-0.31445 0.1333z m-2.33447 0q-0.18115 0-0.31446-0.1333-0.1333-0.1333-0.1333-0.31445 0-0.18115 0.1333-0.31446 0.1333-0.13672 0.31446-0.13672 0.18115 0 0.31445 0.13672 0.13672 0.1333 0.13672 0.31446 0 0.18115-0.13672 0.31445-0.1333 0.1333-0.31445 0.1333z m4.66894 0q-0.18115 0-0.31787-0.1333-0.1333-0.1333-0.1333-0.31445 0-0.18115 0.1333-0.31446 0.13672-0.13672 0.31787-0.13672 0.18115 0 0.31446 0.13672 0.1333 0.1333 0.1333 0.31446 0 0.18115-0.1333 0.31445-0.1333 0.1333-0.31446 0.1333z"
+                fill="#0B1020"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="SP Detail Title"
+              class="text-[13.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Warehouse prep · recurring series
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP DRow Recurren"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="SP DL Recurren"
+              class="text-[11px]/[normal] box-border w-[140px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Recurrence
+            </div>
+            <div
+              data-pencil-name="SP DV Recurren"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Every weekday, ends 19 Dec — one shift is created when no end date is set
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP DRow Planned "
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="SP DL Planned "
+              class="text-[11px]/[normal] box-border w-[140px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Planned on series
+            </div>
+            <div
+              data-pencil-name="SP DV Planned "
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Marta R. on all recurrences · Jon L. on future ones only
+            </div>
+          </div>
+          <div
+            data-pencil-name="SP DRow Break"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[12px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="SP DL Break"
+              class="text-[11px]/[normal] box-border w-[140px] shrink-0 text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              Break
+            </div>
+            <div
+              data-pencil-name="SP DV Break"
+              class="text-[12px]/[normal] box-border [flex:1_1_0] text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left"
+            >
+              30 min total · tags: internal, warehouse
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="SP Footnote"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+        >
+          <svg
+            data-pencil-name="SP Footnote Icon"
+            data-icon-name="info"
+            data-icon-set="Material Symbols Rounded"
+            viewBox="0 0 14.000015258789062 14"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            class="box-border w-[13px] shrink-0 h-[13px]"
+          >
+            <path
+              d="M7 9.625q0.12305 0 0.20508-0.08203 0.08545-0.08545 0.08545-0.2085l0-2.625q0-0.12646-0.08545-0.20849-0.08203-0.08545-0.20508-0.08545-0.12305 0-0.2085 0.08545-0.08203 0.08203-0.08203 0.20849l0 2.625q0 0.12305 0.08203 0.2085 0.08545 0.08203 0.2085 0.08203z m0-4.04004q0.15381 0 0.25635-0.10254 0.10254-0.10254 0.10254-0.25635 0-0.15039-0.10254-0.25293-0.10254-0.10596-0.25635-0.10595-0.15381 0-0.25635 0.10595-0.10254 0.10254-0.10254 0.25293 0 0.15381 0.10254 0.25635 0.10254 0.10254 0.25635 0.10254z m0.00342 6.66504q-1.09033 0-2.05078-0.41357-0.95703-0.41357-1.66797-1.1211-0.70752-0.70752-1.1211-1.66455-0.41357-0.96045-0.41357-2.04736 0-1.09033 0.41357-2.04737 0.41357-0.96045 1.1211-1.66796 0.70752-0.71094 1.66455-1.12452 0.96045-0.41357 2.04736-0.41357 1.09033 0 2.04737 0.41357 0.96045 0.41357 1.66796 1.1211 0.71094 0.70752 1.12452 1.66797 0.41357 0.95703 0.41357 2.04394 0 1.09033-0.41357 2.05078-0.41357 0.95703-1.1211 1.66797-0.70752 0.70752-1.66797 1.1211-0.95703 0.41357-2.04394 0.41357z m-0.00342-0.58447q1.95508 0 3.30859-1.35352 1.35693-1.35693 1.35694-3.31201 0-1.95508-1.35694-3.30859-1.35352-1.35693-3.30859-1.35694-1.95508 0-3.31201 1.35694-1.35352 1.35352-1.35352 3.30859 0 1.95508 1.35352 3.31201 1.35693 1.35352 3.31201 1.35352z"
+              fill="#667085"
+            ></path>
+          </svg>
+          <div
+            data-pencil-name="SP Footnote Text"
+            class="text-[11px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+          >
+            Shifts are non-project work. Blocking shifts make the planned crew unavailable for that
+            time; non-blocking ones do not. Default shifts can be copied as a starting point; a
+            series without end date stays a single shift.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

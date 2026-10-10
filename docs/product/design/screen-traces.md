@@ -82,6 +82,20 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Shift planner (management, desktop)
+
+File: `shift-planner.png` / `shift-planner.html`
+
+| Design decision | Decided by |
+|---|---|
+| Shifts are non-project internal work (warehouse, delivery, office) | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) trigger, [BR-CRW-SHIFTS-ARE-NON-PROJECT](../model/business-rules/br-crw-shifts-are-non-project.md) |
+| Shift fields: name, times, break, recurrence, blocking, quantity, crew, vehicles, remarks, tags | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) step 2 |
+| Recurring series; without end date only one shift is created | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) step 2, [BR-CRW-RECURRENCE-SERIES](../model/business-rules/br-crw-recurrence-series.md) |
+| Blocking shifts make planned crew unavailable for that time | [BR-CRW-SHIFT-AVAILABILITY-BLOCKING](../model/business-rules/br-crw-shift-availability-blocking.md) |
+| Crew/vehicles planned on a shift as final or draft | [UC-CRW-PLAN-RESOURCE-ON-SHIFT](../model/use-cases/uc-crw-plan-resource-on-shift.md) steps 1–2 |
+| Planning on all recurrences or future ones only | [UC-CRW-PLAN-RESOURCE-ON-SHIFT](../model/use-cases/uc-crw-plan-resource-on-shift.md) alternative flows, [BR-CRW-RECURRING-SHIFT-PLANNING](../model/business-rules/br-crw-recurring-shift-planning.md) |
+| Default shift copied as a starting point | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) step 1, [BR-CRW-DEFAULT-SHIFT-COPY](../model/business-rules/br-crw-default-shift-copy.md) |
+
 ## Screen — Job board postings (management, desktop)
 
 File: `job-board.png` / `job-board.html`

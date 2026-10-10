@@ -82,6 +82,21 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Project detail & schedule (management, desktop)
+
+File: `project-detail.png` / `project-detail.html`
+
+| Design decision | Decided by |
+|---|---|
+| Tabs: overview, equipment plan, planning, crew, finances, files | [JRN-PRJ-RUN-RENTAL-PROJECT](../model/journeys/jrn-prj-run-rental-project.md) |
+| Project number + status chip (Confirmed) + dates and location in header | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 1, [TERM-PROJECT-STATUS](../model/domain/terms/term-project-status.md), [BR-PRJ-PROJECT-NUMBER-ASSIGNMENT](../model/business-rules/br-prj-project-number-assignment.md) |
+| Client + contact person chosen from contact database fill address and automatic note | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 2, [BR-PRJ-PARTIES-FROM-CONTACTS](../model/business-rules/br-prj-parties-from-contacts.md), [BR-PRJ-CONTACT-SELECTION-EFFECTS](../model/business-rules/br-prj-contact-selection-effects.md) |
+| Location shown with distance/travel time from warehouse | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 3 |
+| Named periods with start/end, default planning + usage period designation, per-period document display toggle | [UC-PRJ-MANAGE-TIME-SCHEDULE](../model/use-cases/uc-prj-manage-time-schedule.md) steps 2–4, [BR-PRJ-DEFAULT-PERIOD-DESIGNATION](../model/business-rules/br-prj-default-period-designation.md), [BR-PRJ-PERIOD-DOCUMENT-DISPLAY](../model/business-rules/br-prj-period-document-display.md) |
+| "Select periods → generate crew and transport functions" note | [UC-PRJ-MANAGE-TIME-SCHEDULE](../model/use-cases/uc-prj-manage-time-schedule.md) alternative flows, [BR-PRJ-FUNCTIONS-FROM-PERIODS](../model/business-rules/br-prj-functions-from-periods.md) |
+| Automatic client warning note from the client record | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 2 |
+| Account manager, colour, external reference, project-type defaults as details | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 1, [BR-PRJ-PROJECT-TYPE-DEFAULTS](../model/business-rules/br-prj-project-type-defaults.md) |
+
 ## Screen — Project creation (management, desktop)
 
 File: `project-creation.png` / `project-creation.html`

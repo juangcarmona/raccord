@@ -16291,6 +16291,1656 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "eDLlC",
+      "x": 6310,
+      "y": 8264,
+      "name": "Project Detail",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "bsITF",
+          "name": "PD Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "i0Ygz",
+              "name": "PD Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "rB3hX",
+                  "name": "PD Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "eeUZA",
+                  "name": "PD Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "leF84",
+              "name": "PD Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "w93oNT",
+                  "name": "PD Nav Invoicing",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "JEZc1",
+                      "name": "PD Nav Icon Invoicing",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "description",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "irLSQ",
+                      "name": "PD Nav Label Invoicing",
+                      "fill": "#8A93A8",
+                      "content": "Invoicing",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ODK8V",
+                  "name": "PD Nav Payments & dunning",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "feFYO",
+                      "name": "PD Nav Icon Payments & dunning",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HrI9X",
+                      "name": "PD Nav Label Payments & dunning",
+                      "fill": "#8A93A8",
+                      "content": "Payments & dunning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Pweve",
+                  "name": "PD Nav Financial settings",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "S04vq",
+                      "name": "PD Nav Icon Financial settings",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "leaderboard",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "R1aHW",
+                      "name": "PD Nav Label Financial settings",
+                      "fill": "#8A93A8",
+                      "content": "Financial settings",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "R9sUj",
+                  "name": "PD Nav Projects",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "mwVW3",
+                      "name": "PD Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OaqAt",
+                      "name": "PD Nav Label Projects",
+                      "fill": "$white",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wsEmS",
+                  "name": "PD Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "J385Gr",
+                      "name": "PD Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ugPEO",
+                      "name": "PD Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "cEkje",
+              "name": "PD Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Operations · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mbLFh",
+          "name": "PD Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "CdYLm",
+              "name": "PD Header",
+              "width": "fill_container",
+              "gap": 14,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RJ8I3",
+                  "name": "PD Header Text",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X9lst",
+                      "name": "PC Title",
+                      "fill": "$ink",
+                      "content": "Corona Festival — Main stage",
+                      "fontFamily": "$font-body",
+                      "fontSize": 20,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "S9MYZ",
+                      "name": "PD Header Badges",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "S1jAFW",
+                          "name": "PD Number",
+                          "fill": "$slate",
+                          "content": "PRJ 2026-014",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wvEE4",
+                          "name": "PD Status Chip",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 99,
+                          "padding": [
+                            3,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ShVsO",
+                              "name": "PD Status Label",
+                              "fill": "#8A5A00",
+                              "content": "Confirmed",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "RZWr6",
+                          "name": "PD Dates",
+                          "fill": "$slate",
+                          "content": "12–15 Feb 2026 · Plaza Mayor, Valencia",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bIGjj",
+                  "name": "PD Actions",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NQu4z",
+                      "name": "PD Btn History",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "B4q2L",
+                          "name": "PD Btn History Label",
+                          "fill": "$ink",
+                          "content": "History",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aMK09",
+                      "name": "PD Btn Docs",
+                      "fill": "$white",
+                      "cornerRadius": 8,
+                      "stroke": "$hairline",
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Asey9",
+                          "name": "PD Btn Docs Label",
+                          "fill": "$ink",
+                          "content": "Documents",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VGsSu",
+                      "name": "PD Btn Edit",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "padding": [
+                        8,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xU5tg",
+                          "name": "PD Btn Edit Label",
+                          "fill": "$white",
+                          "content": "Edit details",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "T66MZO",
+              "name": "PD Tabs",
+              "width": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Kyic0",
+                  "name": "PD Tab Overview",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YbjmA",
+                      "name": "PD Tab Label Overview",
+                      "fill": "$ink",
+                      "content": "Overview",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "c2ZwC",
+                      "name": "PD Tab Line Overview",
+                      "width": 40,
+                      "height": 2,
+                      "fill": "$cyan"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "brBJL",
+                  "name": "PD Tab Equipment plan",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oKxia",
+                      "name": "PD Tab Label Equipment plan",
+                      "fill": "$slate",
+                      "content": "Equipment plan",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u7fiZ",
+                      "name": "PD Tab Line Equipment plan",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ynkn3",
+                  "name": "PD Tab Planning",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c5bQy",
+                      "name": "PD Tab Label Planning",
+                      "fill": "$slate",
+                      "content": "Planning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EP9VB",
+                      "name": "PD Tab Line Planning",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "i33k0",
+                  "name": "PD Tab Crew",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "E4VEW",
+                      "name": "PD Tab Label Crew",
+                      "fill": "$slate",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IZPFJ",
+                      "name": "PD Tab Line Crew",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SdkJR",
+                  "name": "PD Tab Finances",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kPbCF",
+                      "name": "PD Tab Label Finances",
+                      "fill": "$slate",
+                      "content": "Finances",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "e1EIvr",
+                      "name": "PD Tab Line Finances",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "z7i2v",
+                  "name": "PD Tab Files",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PoSKQ",
+                      "name": "PD Tab Label Files",
+                      "fill": "$slate",
+                      "content": "Files",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HvIjb",
+                      "name": "PD Tab Line Files",
+                      "width": 40,
+                      "height": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fTS9k",
+              "name": "PD Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Ruto7",
+                  "name": "PD Left",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "XmJwA",
+                      "name": "PD Details Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "bE0tu",
+                          "name": "PD Details Title",
+                          "fill": "$ink",
+                          "content": "Details",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "btwIR",
+                          "name": "PD Detail Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 9,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "X2LT4",
+                              "name": "PD Detail Client",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pboAN",
+                                  "name": "PD Detail Label Client",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "CLIENT",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "RCdMS",
+                                  "name": "PD Detail Value Client",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Ayuntamiento de Valencia · Mª José Ibáñez",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "FIyAy",
+                              "name": "PD Detail Location",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IXgpq",
+                                  "name": "PD Detail Label Location",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "LOCATION",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "i5MMgC",
+                                  "name": "PD Detail Value Location",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Plaza Mayor, Valencia · 4.2 km from warehouse",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qf7a5",
+                              "name": "PD Detail Account manager",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "TUh1F",
+                                  "name": "PD Detail Label Account manager",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "ACCOUNT MANAGER",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "zsmrZ",
+                                  "name": "PD Detail Value Account manager",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Rocío Vega",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ptBUT",
+                              "name": "PD Detail Project type",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "KPCyW",
+                                  "name": "PD Detail Label Project type",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "PROJECT TYPE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xemUq",
+                                  "name": "PD Detail Value Project type",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Festival · 3-day",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "p1NTiO",
+                              "name": "PD Detail External reference",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Y2bawp",
+                                  "name": "PD Detail Label External reference",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "EXTERNAL REFERENCE",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "IzqSx",
+                                  "name": "PD Detail Value External reference",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "CF-2026-118",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ByNaC",
+                              "name": "PD Detail Colour spot",
+                              "width": "fill_container",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "TsB6c",
+                                  "name": "PD Detail Label Colour spot",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 140,
+                                  "content": "COLOUR SPOT",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "edUam",
+                                  "name": "PD Detail Value Colour spot",
+                                  "fill": "$cyan",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "#2DE2E6",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O2Axt9",
+                      "name": "PD Schedule Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XVOqR",
+                          "name": "PD Sched Caption",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "NpKZ8",
+                              "name": "PD Sched Title",
+                              "fill": "$ink",
+                              "content": "Time schedule",
+                              "fontFamily": "$font-body",
+                              "fontSize": 13.5,
+                              "fontWeight": "semibold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "m3skq",
+                              "name": "PD Sched Add",
+                              "cornerRadius": 6,
+                              "stroke": "#000000",
+                              "strokeWidth": 1.5,
+                              "padding": [
+                                5,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "aM8pl",
+                                  "name": "PD Sched Add Label",
+                                  "fill": "#000000",
+                                  "content": "+ Period",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lHj3r",
+                          "name": "PD Sched Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "y3NiC",
+                              "name": "PD Sched Head",
+                              "width": "fill_container",
+                              "fill": "$cloud",
+                              "gap": 12,
+                              "padding": [
+                                6,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "q5tC9p",
+                                  "name": "PD Sched Col Period",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "PERIOD",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xlQWP",
+                                  "name": "PD Sched Col Start",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "START",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "f2r9P",
+                                  "name": "PD Sched Col End",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "END",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "dE38f",
+                                  "name": "PD Sched Col Docs",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 54,
+                                  "content": "DOCS",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 10,
+                                  "fontWeight": "semibold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "fqNLx",
+                              "name": "PD Sched Row Load-in · default planning + usage",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                8,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "fdBNo",
+                                  "name": "PD Sched P Load-in · default planning + usage",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Load-in · default planning + usage",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "eg9WL",
+                                  "name": "PD Sched S Load-in · default planning + usage",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "12 Feb 08:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "hdY6g",
+                                  "name": "PD Sched E Load-in · default planning + usage",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "12 Feb 20:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "tAeLg",
+                                  "name": "PD Sched D Load-in · default planning + usage",
+                                  "fill": "#000000",
+                                  "textGrowth": "fixed-width",
+                                  "width": 54,
+                                  "content": "Int + Ext",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "h2dFn",
+                              "name": "PD Sched Row Build-up",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                8,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "sdnE6",
+                                  "name": "PD Sched P Build-up",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Build-up",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "SveK5",
+                                  "name": "PD Sched S Build-up",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "13 Feb 07:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "pdemL",
+                                  "name": "PD Sched E Build-up",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "13 Feb 10:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ZiOte",
+                                  "name": "PD Sched D Build-up",
+                                  "fill": "#000000",
+                                  "textGrowth": "fixed-width",
+                                  "width": 54,
+                                  "content": "Int",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "OyYVv",
+                              "name": "PD Sched Row Show days",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                8,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "c9Asl",
+                                  "name": "PD Sched P Show days",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Show days",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cGHpE",
+                                  "name": "PD Sched S Show days",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "13 Feb 10:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "mn1lq",
+                                  "name": "PD Sched E Show days",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "14 Feb 23:30",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "gQgvz",
+                                  "name": "PD Sched D Show days",
+                                  "fill": "#000000",
+                                  "textGrowth": "fixed-width",
+                                  "width": 54,
+                                  "content": "Int + Ext",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "B8Y2P",
+                              "name": "PD Sched Row Teardown and returns",
+                              "width": "fill_container",
+                              "stroke": "$hairline",
+                              "gap": 12,
+                              "padding": [
+                                8,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "H4HMV",
+                                  "name": "PD Sched P Teardown and returns",
+                                  "fill": "$ink",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Teardown and returns",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "PXBx1",
+                                  "name": "PD Sched S Teardown and returns",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "15 Feb 08:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "j03en9",
+                                  "name": "PD Sched E Teardown and returns",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": 110,
+                                  "content": "15 Feb 18:00",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "x896O",
+                                  "name": "PD Sched D Teardown and returns",
+                                  "fill": "#000000",
+                                  "textGrowth": "fixed-width",
+                                  "width": 54,
+                                  "content": "Int + Ext",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "TzmsQ",
+                          "name": "PD Sched Note",
+                          "fill": "$slate",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Each period shows what is linked to it. Select periods to generate crew and transport functions in one step.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DwId2",
+                  "name": "PD Right",
+                  "width": 380,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "yRumQ",
+                      "name": "PD Progress Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dUvso",
+                          "name": "PD Progress Title",
+                          "fill": "$ink",
+                          "content": "Progress",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "G9mUAl",
+                          "name": "PD Progress Rows",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "UE8sJ",
+                              "name": "PD Prog Equipment reserved",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 5,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "hzwvM",
+                                  "name": "PD Prog Label Equipment reserved",
+                                  "width": "fill_container",
+                                  "justifyContent": "space_between",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "J0X4O",
+                                      "name": "PD PL Equipment reserved",
+                                      "fill": "$slate",
+                                      "content": "Equipment reserved",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "ZSgpA",
+                                      "name": "PD PV Equipment reserved",
+                                      "fill": "$ink",
+                                      "content": "70%",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "QAjIM",
+                                  "name": "PD Bar Equipment reserved",
+                                  "width": "fill_container",
+                                  "height": 5,
+                                  "fill": "$hairline",
+                                  "cornerRadius": 2,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "BKyVw",
+                                      "name": "PD Bar Fill Equipment reserved",
+                                      "width": 70,
+                                      "height": 5,
+                                      "fill": "#1D7A4F",
+                                      "cornerRadius": 2
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "jA9XW",
+                              "name": "PD Prog Crew confirmed",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 5,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "OGPvO",
+                                  "name": "PD Prog Label Crew confirmed",
+                                  "width": "fill_container",
+                                  "justifyContent": "space_between",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "yE3iT",
+                                      "name": "PD PL Crew confirmed",
+                                      "fill": "$slate",
+                                      "content": "Crew confirmed",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "YVSNt",
+                                      "name": "PD PV Crew confirmed",
+                                      "fill": "$ink",
+                                      "content": "50%",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Gde9S",
+                                  "name": "PD Bar Crew confirmed",
+                                  "width": "fill_container",
+                                  "height": 5,
+                                  "fill": "$hairline",
+                                  "cornerRadius": 2,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "S0aaDM",
+                                      "name": "PD Bar Fill Crew confirmed",
+                                      "width": 50,
+                                      "height": 5,
+                                      "fill": "#8A5A00",
+                                      "cornerRadius": 2
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "J8PCSy",
+                              "name": "PD Prog Documents signed",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 5,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "bVDCL",
+                                  "name": "PD Prog Label Documents signed",
+                                  "width": "fill_container",
+                                  "justifyContent": "space_between",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "oWck2",
+                                      "name": "PD PL Documents signed",
+                                      "fill": "$slate",
+                                      "content": "Documents signed",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "j4gK7w",
+                                      "name": "PD PV Documents signed",
+                                      "fill": "$ink",
+                                      "content": "30%",
+                                      "fontFamily": "$font-body",
+                                      "fontSize": 11.5,
+                                      "fontWeight": "medium"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "uy9az",
+                                  "name": "PD Bar Documents signed",
+                                  "width": "fill_container",
+                                  "height": 5,
+                                  "fill": "$hairline",
+                                  "cornerRadius": 2,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "zjiF5",
+                                      "name": "PD Bar Fill Documents signed",
+                                      "width": 30,
+                                      "height": 5,
+                                      "fill": "#8A5A00",
+                                      "cornerRadius": 2
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zJFP7",
+                      "name": "PD Warning Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VS2RO",
+                          "name": "PD Warning Title",
+                          "fill": "$ink",
+                          "content": "Client note (automatic)",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "q4gPB",
+                          "name": "PD Warning Note",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "lsKtf",
+                              "name": "PD Warning Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "warning",
+                              "library": "Material Symbols Rounded",
+                              "fill": "#B3261E"
+                            },
+                            {
+                              "type": "text",
+                              "id": "r5dCYB",
+                              "name": "PD Warning Text",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Ayuntamiento de Valencia: payment delays on previous projects. Filled from the client record.",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NvEda",
+                      "name": "PD Notes Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "P1nrxu",
+                          "name": "PD Notes Title",
+                          "fill": "$ink",
+                          "content": "Notes and files",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xFQR1",
+                          "name": "PD Note Power via di",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Mkqq0",
+                              "name": "PD Note Dot Power via di",
+                              "width": 5,
+                              "height": 5,
+                              "fill": "$cyan",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "dPC2o",
+                              "name": "PD Note Text Power via di",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Power via distro at stage-left pillar (city grid form B)...",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "liWh5",
+                          "name": "PD Note Fire-safety ",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "k4LWw",
+                              "name": "PD Note Dot Fire-safety ",
+                              "width": 5,
+                              "height": 5,
+                              "fill": "$cyan",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "HsaVc",
+                              "name": "PD Note Text Fire-safety ",
+                              "fill": "$slate",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Fire-safety certificate in project files",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11.5,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

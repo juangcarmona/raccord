@@ -11,14 +11,14 @@ openapi/       OpenAPI document generated from Raccord.Web
 
 ## Scripts
 
-| Script | Purpose |
-|---|---|
-| `npm run dev` | Vite dev server; proxies `/api` and `/health` to `RACCORD_API_URL` (Aspire injects it) |
-| `npm run build` | Type check and production build into `dist/` (copied into the web image's `wwwroot`) |
-| `npm run lint` | ESLint: strict type-checked rules, React hooks, jsx-a11y strict |
-| `npm run typecheck` | TypeScript for app and config files |
-| `npm test` | Vitest + Testing Library |
-| `npm run api:generate` | Regenerate `openapi/raccord.json` from the backend and `src/shared/api/schema.d.ts` |
+| Script                 | Purpose                                                                                |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| `npm run dev`          | Vite dev server; proxies `/api` and `/health` to `RACCORD_API_URL` (Aspire injects it) |
+| `npm run build`        | Type check and production build into `dist/` (copied into the web image's `wwwroot`)   |
+| `npm run lint`         | ESLint: strict type-checked rules, React hooks, jsx-a11y strict                        |
+| `npm run typecheck`    | TypeScript for app and config files                                                    |
+| `npm test`             | Vitest + Testing Library                                                               |
+| `npm run api:generate` | Regenerate `openapi/raccord.json` from the backend and `src/shared/api/schema.d.ts`    |
 
 ## Rules
 

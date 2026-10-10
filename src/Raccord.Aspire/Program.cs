@@ -24,7 +24,11 @@ var web = builder
     .WaitFor(database)
     .WaitFor(documents)
     .WaitForCompletion(migrations)
-    .WithHttpHealthCheck("/health/ready");
+    // Pinned to the http endpoint: when both schemes are modelled (the testing builder runs
+    // projects with --no-launch-profile, so Aspire models http and https), the check prefers
+    // https — which fails forever on a CI runner where nothing trusts the self-signed dev
+    // cert, stalling every resource that waits on web.
+    .WithHttpHealthCheck("/health/ready", endpointName: "http");
 
 builder
     .AddViteApp("frontend", "../Raccord.Frontend")

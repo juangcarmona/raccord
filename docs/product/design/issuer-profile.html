@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter%3Awght%40100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, ::before, ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body style="background-color: #F5F7FA">
+    <div
+      data-pencil-name="Issuer Profile"
+      class="box-border w-[1440px] h-[1024px] flex flex-row gap-0 justify-start items-start bg-[#F5F7FA]"
+    >
+      <div
+        data-pencil-name="IP Sidebar"
+        class="box-border w-[236px] shrink-0 h-full flex flex-col gap-[16px] p-[20px_16px] justify-start items-start bg-[#0B1020]"
+      >
+        <div
+          data-pencil-name="IP Brand"
+          class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-center"
+        >
+          <div
+            data-pencil-name="IP Brand Mark"
+            class="box-border w-[26px] shrink-0 h-[26px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[6px]"
+          ></div>
+          <div
+            data-pencil-name="IP Brand Name"
+            class="text-[16px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Raccord
+          </div>
+        </div>
+        <div
+          data-pencil-name="IP Nav"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[2px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="IP Nav Invoicing"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center bg-[#1A2440] rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="IP Nav Icon Invoicing"
+              data-icon-name="description"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M5.25 10.20947l3.5 0q0.12305 0 0.20508-0.08203 0.08545-0.08545 0.08545-0.21191 0-0.12305-0.08545-0.20508-0.08203-0.08545-0.20508-0.08545l-3.5 0q-0.12305 0-0.2085 0.08545-0.08203 0.08203-0.08203 0.20508 0 0.12646 0.08203 0.21191 0.08545 0.08203 0.2085 0.08203z m0-2.33447l3.5 0q0.12305 0 0.20508-0.08203 0.08545-0.08545 0.08545-0.2085 0-0.12646-0.08545-0.20849-0.08203-0.08545-0.20508-0.08545l-3.5 0q-0.12305 0-0.2085 0.08545-0.08203 0.08203-0.08203 0.20849 0 0.12305 0.08203 0.2085 0.08545 0.08203 0.2085 0.08203z m-1.39111 4.375q-0.40332 0-0.67334-0.27002-0.27002-0.27002-0.27002-0.67334l0-8.61328q0-0.40332 0.27002-0.67334 0.27002-0.27002 0.67334-0.27002l4.20752 0q0.18799 0 0.36572 0.07861 0.17773 0.0752 0.3042 0.20166l2.06787 2.06446q0.12646 0.12646 0.20166 0.3042 0.07861 0.17773 0.07861 0.36914l0 6.53857q0 0.40332-0.27002 0.67334-0.27002 0.27002-0.67334 0.27002l-6.28222 0z m4.30664-8.05615l0-1.85938-4.30664 0q-0.1333 0-0.2461 0.1128-0.11279 0.10938-0.11279 0.24609l0 8.61328q0 0.13672 0.11279 0.24951 0.11279 0.10938 0.2461 0.10938l6.28222 0q0.1333 0 0.2461-0.10938 0.11279-0.11279 0.11279-0.24951l0-6.64111-1.86279 0q-0.20166 0-0.33838-0.1333-0.1333-0.1333-0.1333-0.33838z m-4.66553-1.85938l0 1.85938q0 0.20508 0 0.33838 0 0.1333 0 0.1333l0-2.33106 0 1.85938q0 0.20508 0 0.33838 0 0.1333 0 0.1333l0 6.64111q0 0.13672 0 0.24951 0 0.10938 0 0.10938 0 0 0-0.10938 0-0.11279 0-0.24951l0-8.61328q0-0.13672 0-0.24609 0-0.11279 0-0.1128z"
+                fill="#2DE2E6"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="IP Nav Label Invoicing"
+              class="text-[12.5px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Invoicing
+            </div>
+          </div>
+          <div
+            data-pencil-name="IP Nav Payments &amp; dunning"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="IP Nav Icon Payments &amp; dunning"
+              data-icon-name="payments"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M7.875 7.24609q-0.49219 0-0.83057-0.33496-0.33496-0.33838-0.33496-0.83056 0-0.49561 0.33496-0.83057 0.33838-0.33496 0.83057-0.33496 0.49219 0 0.82715 0.33496 0.33838 0.33496 0.33838 0.83057 0 0.49219-0.33838 0.83056-0.33496 0.33496-0.82715 0.33496z m-3.61279 1.8628q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.17334q0-0.38623 0.27685-0.66309 0.27686-0.27686 0.66651-0.27685l7.22558 0q0.38965 0 0.66651 0.27685 0.27686 0.27686 0.27685 0.66309l0 4.17334q0 0.38965-0.27685 0.6665-0.27686 0.27686-0.66651 0.27686l-7.22558 0z m0.58447-0.58448l6.05664 0q0-0.38965 0.27686-0.66308 0.27686-0.27686 0.6665-0.27686l0-3.00781q-0.39307 0-0.66992-0.27686-0.27344-0.27686-0.27344-0.6665l-6.05664 0q0 0.39307-0.27686 0.66992-0.27686 0.27344-0.6665 0.27344l0 3.00781q0.39307 0 0.6665 0.27686 0.27686 0.27686 0.27686 0.66308z m5.56445 2.33448l-7.89892 0q-0.38965 0-0.66651-0.27686-0.27686-0.27686-0.27685-0.6665l0-4.84668q0-0.12305 0.08545-0.20508 0.08545-0.08545 0.20849-0.08545 0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.20508l0 4.84668q0 0.13672 0.11279 0.24951 0.11279 0.10938 0.2461 0.10937l7.89892 0q0.12305 0 0.20508 0.08545 0.08545 0.08203 0.08545 0.2085 0 0.12305-0.08545 0.20849-0.08203 0.08203-0.20508 0.08204z m-6.14892-2.33448l-0.35889 0q0 0 0-0.10595 0-0.10596 0-0.25293l0-4.17334q0-0.14355 0-0.24951 0-0.10938 0-0.10938l0.35889 0q-0.14355 0-0.25293 0.10938-0.10596 0.10596-0.10596 0.24951l0 4.17334q0 0.14697 0.10596 0.25293 0.10938 0.10596 0.25293 0.10595z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="IP Nav Label Payments &amp; dunning"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Payments &amp; dunning
+            </div>
+          </div>
+          <div
+            data-pencil-name="IP Nav Financial settings"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="IP Nav Icon Financial settings"
+              data-icon-name="leaderboard"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M2.33447 11.08447l2.72412 0 0-4.66894-2.72412 0 0 4.66894z m3.3086 0l2.71386 0 0-8.16894-2.71386 0 0 8.16894z m3.29834 0l2.72412 0 0-3.5-2.72412 0 0 3.5z m-7.19141-0.35888l0-3.95118q0-0.38623 0.27686-0.66308 0.27686-0.27686 0.6665-0.27686l2.36523 0 0-2.56006q0-0.38623 0.27686-0.66308 0.27686-0.27686 0.6665-0.27686l1.9961 0q0.38965 0 0.6665 0.27686 0.27686 0.27686 0.27686 0.66308l0 3.72559 2.36523 0q0.38965 0 0.66651 0.27686 0.27685 0.27686 0.27685 0.6665l0 2.78223q0 0.38623-0.27685 0.66308-0.27686 0.27686-0.66651 0.27686l-8.61328 0q-0.38965 0-0.6665-0.27686-0.27686-0.27686-0.27686-0.66308z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="IP Nav Label Financial settings"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Financial settings
+            </div>
+          </div>
+          <div
+            data-pencil-name="IP Nav Projects"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="IP Nav Icon Projects"
+              data-icon-name="folder"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M2.69336 11.08447q-0.40332 0-0.67334-0.27002-0.27002-0.27002-0.27002-0.67334l0-6.28222q0-0.40332 0.27002-0.67334 0.27002-0.27002 0.67334-0.27002l2.51221 0q0.18799 0 0.36572 0.07861 0.17773 0.0752 0.3042 0.20166l0.88867 0.88867 4.54248 0q0.40332 0 0.67334 0.27002 0.27002 0.27002 0.27002 0.66992l0 5.1167q0 0.40332-0.27002 0.67334-0.27002 0.27002-0.67334 0.27002l-8.61328 0z m0-0.58447l8.61328 0q0.15723 0 0.25635-0.09912 0.10254-0.10254 0.10254-0.25977l0-5.1167q0-0.15723-0.10254-0.25634-0.09912-0.10254-0.25635-0.10254l-4.77832 0-1.06299-1.06299q-0.05811-0.05811-0.11963-0.07861-0.06152-0.02393-0.12988-0.02393l-2.52246 0q-0.15723 0-0.25977 0.10254-0.09912 0.09912-0.09912 0.25635l0 6.28222q0 0.15723 0.09912 0.25977 0.10254 0.09912 0.25977 0.09912z m-0.35889 0q0 0 0-0.09912 0-0.10254 0-0.25977l0-6.28222q0-0.15723 0-0.25635 0-0.10254 0-0.10254 0 0 0 0.02393 0 0.02051 0 0.07861l0 1.06299q0 0 0 0.10254 0 0.09912 0 0.25634l0 5.1167q0 0.15723 0 0.25977 0 0.09912 0 0.09912z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="IP Nav Label Projects"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Projects
+            </div>
+          </div>
+          <div
+            data-pencil-name="IP Nav Workspace"
+            class="box-border w-full h-fit shrink-0 flex flex-row gap-[10px] p-[8px_10px] justify-start items-center rounded-[6px]"
+          >
+            <svg
+              data-pencil-name="IP Nav Icon Workspace"
+              data-icon-name="settings"
+              data-icon-set="Material Symbols Rounded"
+              viewBox="0 0 14.000015258789062 14"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              class="box-border w-[16px] shrink-0 h-[16px]"
+            >
+              <path
+                d="M6.3916 12.25q-0.20166 0-0.35205-0.1333-0.15039-0.1333-0.18457-0.33496l-0.15381-1.22022q-0.28027-0.08203-0.60498-0.26318-0.32471-0.18115-0.55029-0.38623l-1.11768 0.47852q-0.18457 0.08203-0.37597 0.0205-0.19141-0.06494-0.29395-0.24267l-0.62891-1.08692q-0.10596-0.17773-0.06494-0.36914 0.04443-0.19482 0.20508-0.32129l0.97412-0.72802q-0.02393-0.15723-0.04101-0.32471-0.01709-0.16748-0.01709-0.32813 0-0.14697 0.01709-0.30761 0.01709-0.16406 0.04101-0.36573l-0.97412-0.72802q-0.16064-0.12646-0.19824-0.32471-0.03418-0.20166 0.06836-0.37939l0.61865-1.04932q0.10254-0.16748 0.29395-0.23584 0.19141-0.07178 0.37597 0.01025l1.10401 0.47168q0.26318-0.21875 0.56738-0.39306 0.3042-0.17432 0.59131-0.27002l0.16406-1.22022q0.03418-0.20166 0.18457-0.33496 0.15039-0.1333 0.35205-0.1333l1.2168 0q0.20166 0 0.35205 0.1333 0.15039 0.1333 0.18457 0.33496l0.15381 1.23047q0.33496 0.11621 0.59131 0.27002 0.25977 0.15381 0.5332 0.38281l1.16211-0.47168q0.18457-0.08203 0.37256-0.01025 0.19141 0.06836 0.29736 0.23584l0.61523 1.06299q0.10596 0.17773 0.06153 0.37256-0.04102 0.19141-0.20166 0.31787l-1.02197 0.7622q0.04785 0.18115 0.05468 0.33155 0.00684 0.15039 0.00684 0.29736 0 0.13672-0.01367 0.28711-0.01025 0.15039-0.05127 0.36572l0.98779 0.73828q0.16065 0.12646 0.2085 0.32129 0.04785 0.19141-0.05469 0.36914l-0.62207 1.07325q-0.10254 0.17774-0.30078 0.24267-0.19482 0.06494-0.3794-0.01709l-1.12109-0.48193q-0.27344 0.229-0.55029 0.39306-0.27686 0.16406-0.57422 0.25977l-0.15381 1.23047q-0.03418 0.20166-0.18457 0.33496-0.15039 0.1333-0.35205 0.1333l-1.2168 0z m0.02393-0.58447l1.1416 0 0.21533-1.5791q0.44092-0.11621 0.79297-0.31788 0.35547-0.20508 0.72119-0.56054l1.45264 0.62207 0.58105-0.99121-1.27832-0.96045q0.0752-0.24951 0.09912-0.45801 0.02393-0.2085 0.02393-0.42041 0-0.22217-0.02393-0.42041-0.02393-0.19824-0.09912-0.43408l1.29883-0.98438-0.57764-0.99121-1.49023 0.62549q-0.26318-0.29053-0.69727-0.54346-0.43066-0.25635-0.81347-0.33838l-0.17774-1.5791-1.16552 0-0.18116 1.56543q-0.44092 0.0957-0.81006 0.3042-0.36914 0.2085-0.73486 0.57422l-1.45605-0.6084-0.57764 0.99121 1.26465 0.94678q-0.0752 0.19482-0.10596 0.42725-0.02734 0.229-0.02734 0.47509 0 0.22217 0.02734 0.44092 0.03076 0.21875 0.09229 0.42725l-1.25098 0.96045 0.57764 0.99121 1.4458-0.61182q0.3418 0.34521 0.71093 0.55371 0.36914 0.2085 0.83399 0.32813l0.18799 1.56543z m0.56738-3.20606q0.61182 0 1.03564-0.42383 0.42383-0.42383 0.42383-1.03564 0-0.61182-0.42383-1.03564-0.42383-0.42383-1.03564-0.42383-0.61182 0-1.03564 0.42383-0.42041 0.42383-0.42041 1.03564 0 0.61182 0.42041 1.03564 0.42383 0.42383 1.03564 0.42383z"
+                fill="#8A93A8"
+              ></path>
+            </svg>
+            <div
+              data-pencil-name="IP Nav Label Workspace"
+              class="text-[12.5px]/[normal] box-border text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Workspace
+            </div>
+          </div>
+        </div>
+        <div
+          data-pencil-name="IP Nav Note"
+          class="text-[10px]/[normal] box-border w-full text-[#8A93A8] font-[Inter,system-ui,sans-serif] font-normal text-left"
+        >
+          Workspace admin · Lumen Events
+        </div>
+      </div>
+      <div
+        data-pencil-name="IP Main"
+        class="box-border [flex:1_1_0] h-full flex flex-col gap-[20px] p-[32px_40px] justify-start items-start"
+      >
+        <div
+          data-pencil-name="IP Header"
+          class="box-border w-full h-fit shrink-0 flex flex-col gap-[4px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="IP Title"
+            class="text-[20px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-bold text-left [white-space:nowrap]"
+          >
+            Issuer profile
+          </div>
+          <div
+            data-pencil-name="IP Subtitle"
+            class="text-[12.5px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+          >
+            Legal details of the invoicing company. Entered once; every issued invoice keeps the
+            snapshot of the details it was issued with.
+          </div>
+        </div>
+        <div
+          data-pencil-name="IP Shell"
+          class="box-border w-full [flex:1_1_0] flex flex-row gap-[20px] justify-start items-start"
+        >
+          <div
+            data-pencil-name="IP Form Card"
+            class="box-border [flex:1_1_0] h-fit flex flex-col gap-[18px] p-[28px] justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+          >
+            <div
+              data-pencil-name="IP Form Title"
+              class="text-[13.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+            >
+              Legal details
+            </div>
+            <div
+              data-pencil-name="IP Field Rows"
+              class="box-border w-full h-fit shrink-0 flex flex-col gap-[12px] justify-start items-start"
+            >
+              <div
+                data-pencil-name="IP Field Legal name"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Legal name"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  LEGAL NAME
+                </div>
+                <div
+                  data-pencil-name="IP Box Legal name"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Legal name"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    Lumen Events S.L.
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field Trade name"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Trade name"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  TRADE NAME
+                </div>
+                <div
+                  data-pencil-name="IP Box Trade name"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Trade name"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    Lumen Events
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field Tax identifier (NIF)"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Tax identifier (NIF)"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  TAX IDENTIFIER (NIF)
+                </div>
+                <div
+                  data-pencil-name="IP Box Tax identifier (NIF)"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Tax identifier (NIF)"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    B-12345678
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field Address line"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Address line"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  ADDRESS LINE
+                </div>
+                <div
+                  data-pencil-name="IP Box Address line"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Address line"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    C/ del Film 12, 2º
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field Postal code"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Postal code"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  POSTAL CODE
+                </div>
+                <div
+                  data-pencil-name="IP Box Postal code"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Postal code"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    46001
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field City"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label City"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  CITY
+                </div>
+                <div
+                  data-pencil-name="IP Box City"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value City"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    Valencia
+                  </div>
+                </div>
+              </div>
+              <div
+                data-pencil-name="IP Field Country"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[5px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Label Country"
+                  class="text-[11px]/[normal] box-border text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  COUNTRY
+                </div>
+                <div
+                  data-pencil-name="IP Box Country"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-0 p-[9px_12px] justify-start items-center rounded-[6px]"
+                >
+                  <div
+                    data-pencil-name="IP Value Country"
+                    class="text-[12.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                  >
+                    Spain
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-pencil-name="IP Save Btn"
+              class="box-border w-fit h-fit shrink-0 flex flex-row gap-0 p-[10px_18px] justify-center items-center bg-[#0B1020] rounded-[8px]"
+            >
+              <div
+                data-pencil-name="IP Save Label"
+                class="text-[12.5px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                Save issuer profile
+              </div>
+            </div>
+          </div>
+          <div
+            data-pencil-name="IP Side"
+            class="box-border w-[360px] shrink-0 h-fit flex flex-col gap-[16px] justify-start items-start"
+          >
+            <div
+              data-pencil-name="IP Audit Card"
+              class="box-border w-full h-fit shrink-0 flex flex-col gap-[10px] p-[20px] justify-start items-start bg-[#FFFFFF] rounded-[10px]"
+            >
+              <div
+                data-pencil-name="IP Audit Title"
+                class="text-[13.5px]/[normal] box-border text-[#0B1020] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                How this is used
+              </div>
+              <div
+                data-pencil-name="IP Audit Notes"
+                class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="IP Audit Note 0"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+                >
+                  <div
+                    data-pencil-name="IP Audit Dot 0"
+                    class="box-border w-[5px] shrink-0 h-[5px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[2px]"
+                  ></div>
+                  <div
+                    data-pencil-name="IP Audit Text 0"
+                    class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+                  >
+                    New invoices use the current profile.
+                  </div>
+                </div>
+                <div
+                  data-pencil-name="IP Audit Note 1"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+                >
+                  <div
+                    data-pencil-name="IP Audit Dot 1"
+                    class="box-border w-[5px] shrink-0 h-[5px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[2px]"
+                  ></div>
+                  <div
+                    data-pencil-name="IP Audit Text 1"
+                    class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+                  >
+                    Issued invoices keep the legal-details snapshot they were issued with.
+                  </div>
+                </div>
+                <div
+                  data-pencil-name="IP Audit Note 2"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+                >
+                  <div
+                    data-pencil-name="IP Audit Dot 2"
+                    class="box-border w-[5px] shrink-0 h-[5px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[2px]"
+                  ></div>
+                  <div
+                    data-pencil-name="IP Audit Text 2"
+                    class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+                  >
+                    The tax identifier is normalized on save.
+                  </div>
+                </div>
+                <div
+                  data-pencil-name="IP Audit Note 3"
+                  class="box-border w-full h-fit shrink-0 flex flex-row gap-[8px] justify-start items-start"
+                >
+                  <div
+                    data-pencil-name="IP Audit Dot 3"
+                    class="box-border w-[5px] shrink-0 h-[5px] flex flex-row gap-0 justify-start items-start bg-[#2DE2E6] rounded-[2px]"
+                  ></div>
+                  <div
+                    data-pencil-name="IP Audit Text 3"
+                    class="text-[11.5px]/[normal] box-border [flex:1_1_0] text-[#667085] font-[Inter,system-ui,sans-serif] font-normal text-left"
+                  >
+                    Every profile change is audited.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-pencil-name="IP Warn Card"
+              class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] p-[20px] justify-start items-start bg-[#FFF3D6] rounded-[10px]"
+            >
+              <div
+                data-pencil-name="IP Warn Title"
+                class="text-[12.5px]/[normal] box-border text-[#8A5A00] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+              >
+                Required before first invoice
+              </div>
+              <div
+                data-pencil-name="IP Warn Text"
+                class="text-[11.5px]/[normal] box-border w-full text-[#8A5A00] font-[Inter,system-ui,sans-serif] font-normal text-left"
+              >
+                A missing legal name, tax identifier or incomplete address is refused with the
+                reason. Customers without tax details are flagged until completed.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -14363,6 +14363,889 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "qH5OO",
+      "x": 6310,
+      "y": 5896,
+      "name": "Issuer Profile",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "V5I4Z",
+          "name": "IP Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "vcNaB",
+              "name": "IP Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "h77FCk",
+                  "name": "IP Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "gEwKH",
+                  "name": "IP Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n6TPiB",
+              "name": "IP Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "fVdSO",
+                  "name": "IP Nav Invoicing",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "v6iIBx",
+                      "name": "IP Nav Icon Invoicing",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "description",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jQKih",
+                      "name": "IP Nav Label Invoicing",
+                      "fill": "$white",
+                      "content": "Invoicing",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "am3ZF",
+                  "name": "IP Nav Payments & dunning",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "j47tL",
+                      "name": "IP Nav Icon Payments & dunning",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O4WSv",
+                      "name": "IP Nav Label Payments & dunning",
+                      "fill": "#8A93A8",
+                      "content": "Payments & dunning",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gHoSO",
+                  "name": "IP Nav Financial settings",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "WKFZO",
+                      "name": "IP Nav Icon Financial settings",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "leaderboard",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gq6Ow",
+                      "name": "IP Nav Label Financial settings",
+                      "fill": "#8A93A8",
+                      "content": "Financial settings",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eE6PK",
+                  "name": "IP Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "UdDu4",
+                      "name": "IP Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H4XT3",
+                      "name": "IP Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UAfHI",
+                  "name": "IP Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "W5NK8b",
+                      "name": "IP Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mhKKj",
+                      "name": "IP Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "rXYKg",
+              "name": "IP Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace admin · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "L3uor",
+          "name": "IP Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            32,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "VM6F8",
+              "name": "IP Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YtIEn",
+                  "name": "IP Title",
+                  "fill": "$ink",
+                  "content": "Issuer profile",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "WaF3u",
+                  "name": "IP Subtitle",
+                  "fill": "$slate",
+                  "content": "Legal details of the invoicing company. Entered once; every issued invoice keeps the snapshot of the details it was issued with.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qsJYI",
+              "name": "IP Shell",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Rq6NV",
+                  "name": "IP Form Card",
+                  "width": "fill_container",
+                  "fill": "$white",
+                  "cornerRadius": 10,
+                  "stroke": "$hairline",
+                  "layout": "vertical",
+                  "gap": 18,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A570a",
+                      "name": "IP Form Title",
+                      "fill": "$ink",
+                      "content": "Legal details",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t03elA",
+                      "name": "IP Field Rows",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "H0ob4a",
+                          "name": "IP Field Legal name",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "S0r4fM",
+                              "name": "IP Label Legal name",
+                              "fill": "$slate",
+                              "content": "LEGAL NAME",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "CPMGT",
+                              "name": "IP Box Legal name",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "wzLDg",
+                                  "name": "IP Value Legal name",
+                                  "fill": "$ink",
+                                  "content": "Lumen Events S.L.",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Y2PmdI",
+                          "name": "IP Field Trade name",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "BzdrF",
+                              "name": "IP Label Trade name",
+                              "fill": "$slate",
+                              "content": "TRADE NAME",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "a24XCi",
+                              "name": "IP Box Trade name",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "yl75W",
+                                  "name": "IP Value Trade name",
+                                  "fill": "$ink",
+                                  "content": "Lumen Events",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xtLtA",
+                          "name": "IP Field Tax identifier (NIF)",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "FjfA7",
+                              "name": "IP Label Tax identifier (NIF)",
+                              "fill": "$slate",
+                              "content": "TAX IDENTIFIER (NIF)",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "OMwXa",
+                              "name": "IP Box Tax identifier (NIF)",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "P3skX",
+                                  "name": "IP Value Tax identifier (NIF)",
+                                  "fill": "$ink",
+                                  "content": "B-12345678",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aitib",
+                          "name": "IP Field Address line",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "THpWD",
+                              "name": "IP Label Address line",
+                              "fill": "$slate",
+                              "content": "ADDRESS LINE",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nE8On",
+                              "name": "IP Box Address line",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "j861S",
+                                  "name": "IP Value Address line",
+                                  "fill": "$ink",
+                                  "content": "C/ del Film 12, 2º",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NkWRJ",
+                          "name": "IP Field Postal code",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "UmQCX",
+                              "name": "IP Label Postal code",
+                              "fill": "$slate",
+                              "content": "POSTAL CODE",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "PEJq8",
+                              "name": "IP Box Postal code",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ZuufN",
+                                  "name": "IP Value Postal code",
+                                  "fill": "$ink",
+                                  "content": "46001",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "e5qxwy",
+                          "name": "IP Field City",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "nJnje",
+                              "name": "IP Label City",
+                              "fill": "$slate",
+                              "content": "CITY",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "x0xGIn",
+                              "name": "IP Box City",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "C4xdDU",
+                                  "name": "IP Value City",
+                                  "fill": "$ink",
+                                  "content": "Valencia",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pNmnN",
+                          "name": "IP Field Country",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qA4vY",
+                              "name": "IP Label Country",
+                              "fill": "$slate",
+                              "content": "COUNTRY",
+                              "fontFamily": "$font-body",
+                              "fontSize": 11,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZAw2U",
+                              "name": "IP Box Country",
+                              "width": "fill_container",
+                              "cornerRadius": 6,
+                              "stroke": "$hairline",
+                              "padding": [
+                                9,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "xr6Wu",
+                                  "name": "IP Value Country",
+                                  "fill": "$ink",
+                                  "content": "Spain",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BzxeA",
+                      "name": "IP Save Btn",
+                      "fill": "$ink",
+                      "cornerRadius": 8,
+                      "padding": [
+                        10,
+                        18
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "K79AM8",
+                          "name": "IP Save Label",
+                          "fill": "$white",
+                          "content": "Save issuer profile",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y5SJ1",
+                  "name": "IP Side",
+                  "width": 360,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Jyq6F",
+                      "name": "IP Audit Card",
+                      "width": "fill_container",
+                      "fill": "$white",
+                      "cornerRadius": 10,
+                      "stroke": "$hairline",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ccioT",
+                          "name": "IP Audit Title",
+                          "fill": "$ink",
+                          "content": "How this is used",
+                          "fontFamily": "$font-body",
+                          "fontSize": 13.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "FIK7x",
+                          "name": "IP Audit Notes",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "EKQz9",
+                              "name": "IP Audit Note 0",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "IMKnk",
+                                  "name": "IP Audit Dot 0",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "$cyan",
+                                  "cornerRadius": 2
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HhLUT",
+                                  "name": "IP Audit Text 0",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "New invoices use the current profile.",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "t2z8F",
+                              "name": "IP Audit Note 1",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "bhOnA",
+                                  "name": "IP Audit Dot 1",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "$cyan",
+                                  "cornerRadius": 2
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "LcAce",
+                                  "name": "IP Audit Text 1",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Issued invoices keep the legal-details snapshot they were issued with.",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "blBnF",
+                              "name": "IP Audit Note 2",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "XoIBv",
+                                  "name": "IP Audit Dot 2",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "$cyan",
+                                  "cornerRadius": 2
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "MCbID",
+                                  "name": "IP Audit Text 2",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "The tax identifier is normalized on save.",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nF7Sc",
+                              "name": "IP Audit Note 3",
+                              "width": "fill_container",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "TAZT8",
+                                  "name": "IP Audit Dot 3",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "$cyan",
+                                  "cornerRadius": 2
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "owur1",
+                                  "name": "IP Audit Text 3",
+                                  "fill": "$slate",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Every profile change is audited.",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fqK4v",
+                      "name": "IP Warn Card",
+                      "width": "fill_container",
+                      "fill": "#FFF3D6",
+                      "cornerRadius": 10,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "h369r",
+                          "name": "IP Warn Title",
+                          "fill": "#8A5A00",
+                          "content": "Required before first invoice",
+                          "fontFamily": "$font-body",
+                          "fontSize": 12.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vl3tv",
+                          "name": "IP Warn Text",
+                          "fill": "#8A5A00",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A missing legal name, tax identifier or incomplete address is refused with the reason. Customers without tax details are flagged until completed.",
+                          "fontFamily": "$font-body",
+                          "fontSize": 11.5,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

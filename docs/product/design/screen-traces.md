@@ -82,6 +82,18 @@ File: `online-quote.png` / `online-quote.html`
 | Customer actions: accept quote and sign / request a change (updated version flow) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) (customer as supporting actor), [JRN-FIN-QUOTE-TO-SIGNATURE](../model/journeys/jrn-fin-quote-to-signature.md) |
 | Private-link note: password protection, link + password delivered by e-mail, no PDF | [BR-FIN-ONLINE-QUOTE-ACCESS](../model/business-rules/br-fin-online-quote-access.md), [BR-FIN-ONLINE-QUOTE-EMAIL](../model/business-rules/br-fin-online-quote-email.md) |
 
+## Screen — Issuer profile settings (management, desktop)
+
+File: `issuer-profile.png` / `issuer-profile.html`
+
+| Design decision | Decided by |
+|---|---|
+| Issuer legal details entered once: legal name, tax identifier, complete postal address | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) step 1, [JRN-SET-UP-INVOICING](../model/journeys/jrn-set-up-invoicing.md) |
+| Tax identifier normalized on save | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) step 2, [BR-TAX-ID-NORMALIZATION](../model/business-rules/br-tax-id-normalization.md) |
+| Issued invoices keep their legal-details snapshot; profile edits don't rewrite history | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) alternative flows, [BR-PARTY-SNAPSHOT](../model/business-rules/br-party-snapshot.md) |
+| Change audited | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) step 3, [BR-AUDITED-ACTIONS](../model/business-rules/br-audited-actions.md) |
+| Required-before-first-invoice warning card (missing name/tax id/address refused with reason) | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) failure conditions, [JRN-SET-UP-INVOICING](../model/journeys/jrn-set-up-invoicing.md) flagging note |
+
 ## Screen — Financial settings hub (management, desktop)
 
 File: `financial-settings.png` / `financial-settings.html`

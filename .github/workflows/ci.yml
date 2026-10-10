@@ -40,6 +40,40 @@ jobs:
           dotnet tool restore
           dotnet ef migrations has-pending-model-changes --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --no-build --configuration Release
 
+  # Mirrors the commit-time gates (.husky/pre-commit + .husky/commit-msg) in --check mode, so a
+  # local bypass (HUSKY=0 or --no-verify) is still caught before merge. CSharpier and Prettier run
+  # in check mode; commitlint lints every commit in the PR range. ESLint is deliberately not
+  # duplicated here: the frontend job already fails on it.
+  lint:
+    name: Lint mirror (format, commit messages)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Restore local tools
+        run: dotnet tool restore
+      - name: CSharpier check
+        run: dotnet csharpier check .
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/Raccord.Frontend/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: src/Raccord.Frontend
+      - name: Prettier check
+        run: npx prettier --check "**/*.{ts,tsx,json,md,yml,yaml,css}"
+        working-directory: src/Raccord.Frontend
+      - name: Commitlint over PR commits
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --config ../../.config/commitlint.config.cjs --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+        working-directory: src/Raccord.Frontend
+
   product:
     name: Product definition (PDaC)
     runs-on: ubuntu-latest

@@ -37309,6 +37309,1295 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "k8CQ9H",
+      "x": 6310,
+      "y": 30760,
+      "name": "Payroll Export",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$cloud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "v2Nca",
+          "name": "PE Sidebar",
+          "width": 236,
+          "height": "fill_container",
+          "fill": "$ink",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            20,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "N6Loc",
+              "name": "PE Brand",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "krolK",
+                  "name": "PE Brand Mark",
+                  "width": 26,
+                  "height": 26,
+                  "fill": "$cyan",
+                  "cornerRadius": 6
+                },
+                {
+                  "type": "text",
+                  "id": "y207N9",
+                  "name": "PE Brand Name",
+                  "fill": "$white",
+                  "content": "Raccord",
+                  "fontFamily": "$font-body",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LnUnC",
+              "name": "PE Nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H2CEqb",
+                  "name": "PE Nav Projects",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "FSdYi",
+                      "name": "PE Nav Icon Projects",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "folder",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ebxfi",
+                      "name": "PE Nav Label Projects",
+                      "fill": "#8A93A8",
+                      "content": "Projects",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Zzgjc",
+                  "name": "PE Nav Crew",
+                  "width": "fill_container",
+                  "fill": "#1A2440",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "y4nw6a",
+                      "name": "PE Nav Icon Crew",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "groups",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$cyan"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rcUdJ",
+                      "name": "PE Nav Label Crew",
+                      "fill": "$white",
+                      "content": "Crew",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "medium"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Id6ZS",
+                  "name": "PE Nav Workspace",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "uxf0n",
+                      "name": "PE Nav Icon Workspace",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "settings",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m2uhRO",
+                      "name": "PE Nav Label Workspace",
+                      "fill": "#8A93A8",
+                      "content": "Workspace",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ykqYK",
+                  "name": "PE Nav Finance",
+                  "width": "fill_container",
+                  "cornerRadius": 6,
+                  "gap": 10,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "dy6Ar",
+                      "name": "PE Nav Icon Finance",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "payments",
+                      "library": "Material Symbols Rounded",
+                      "fill": "#8A93A8"
+                    },
+                    {
+                      "type": "text",
+                      "id": "U1LUA",
+                      "name": "PE Nav Label Finance",
+                      "fill": "#8A93A8",
+                      "content": "Finance",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12.5,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "GIRg7",
+              "name": "PE Nav Note",
+              "fill": "#8A93A8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crew · Lumen Events",
+              "fontFamily": "$font-body",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "t4hSD",
+          "name": "PE Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "bLn5e",
+              "name": "PE Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "w6Sxh",
+                  "name": "PE Title",
+                  "fill": "$ink",
+                  "content": "Payroll export — November 2026",
+                  "fontFamily": "$font-body",
+                  "fontSize": 20,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "lvgRf",
+                  "name": "PE Subtitle",
+                  "fill": "$slate",
+                  "content": "Select registrations, choose registration and activity columns, and produce a spreadsheet for the payroll provider.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12.5,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "p5CA6E",
+              "name": "PE Warning",
+              "width": "fill_container",
+              "fill": "#FFF3D6",
+              "cornerRadius": 8,
+              "gap": 10,
+              "padding": [
+                10,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "qdf3q",
+                  "name": "PE Warn Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "warning",
+                  "library": "Material Symbols Rounded",
+                  "fill": "#8A5A00"
+                },
+                {
+                  "type": "text",
+                  "id": "KyBOW",
+                  "name": "PE Warn Text",
+                  "fill": "#8A5A00",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "2 selected registrations are still pending. The export stays possible, but payroll should use reviewed data.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IkeaT",
+              "name": "PE Options Card",
+              "width": "fill_container",
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EwDbs",
+                  "name": "PE Opt Header",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O32NTL",
+                      "name": "PE Opt Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "tune",
+                      "library": "Material Symbols Rounded",
+                      "fill": "$ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OIwd0",
+                      "name": "PE Opt Title",
+                      "fill": "$ink",
+                      "content": "Export options",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MjJXo",
+                  "name": "PE Opt Cols",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "dhtJb",
+                      "name": "PE Opt Reg Cols",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ncv9g",
+                          "name": "PE Reg Label",
+                          "fill": "$slate",
+                          "content": "REGISTRATION COLUMNS",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "A529X",
+                          "name": "PE Reg Opt Visible columns",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "nd1ba",
+                              "name": "PE Box Visible columns",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "#000000",
+                              "cornerRadius": 3,
+                              "stroke": "#000000"
+                            },
+                            {
+                              "type": "text",
+                              "id": "gFfhE",
+                              "name": "PE BoxL Visible columns",
+                              "fill": "$ink",
+                              "content": "Visible columns",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "LKwiX",
+                          "name": "PE Reg Opt All columns",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Ocint",
+                              "name": "PE Box All columns",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "$white",
+                              "cornerRadius": 3,
+                              "stroke": "$hairline"
+                            },
+                            {
+                              "type": "text",
+                              "id": "DGws9",
+                              "name": "PE BoxL All columns",
+                              "fill": "$ink",
+                              "content": "All columns",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "heBhg",
+                          "name": "PE Reg Opt Manual selection",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "eQHXg",
+                              "name": "PE Box Manual selection",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "$white",
+                              "cornerRadius": 3,
+                              "stroke": "$hairline"
+                            },
+                            {
+                              "type": "text",
+                              "id": "LDTAE",
+                              "name": "PE BoxL Manual selection",
+                              "fill": "$ink",
+                              "content": "Manual selection",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NZh0M",
+                      "name": "PE Opt Act Cols",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xXD5L",
+                          "name": "PE Act Label",
+                          "fill": "$slate",
+                          "content": "ACTIVITY COLUMNS",
+                          "fontFamily": "$font-body",
+                          "fontSize": 10.5,
+                          "fontWeight": "semibold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "F19dhO",
+                          "name": "PE Act Opt Include activity columns",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "roCQk",
+                              "name": "PE ABox Include activity columns",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "#000000",
+                              "cornerRadius": 3,
+                              "stroke": "#000000"
+                            },
+                            {
+                              "type": "text",
+                              "id": "cbhPg",
+                              "name": "PE ABoxL Include activity columns",
+                              "fill": "$ink",
+                              "content": "Include activity columns",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "UioWk",
+                          "name": "PE Act Opt Hours without activities",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "xTmCS",
+                              "name": "PE ABox Hours without activities",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "#000000",
+                              "cornerRadius": 3,
+                              "stroke": "#000000"
+                            },
+                            {
+                              "type": "text",
+                              "id": "iUhSP",
+                              "name": "PE ABoxL Hours without activities",
+                              "fill": "$ink",
+                              "content": "Hours without activities",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "POl4X",
+                          "name": "PE Act Opt Activity invoice references",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "fXfPD",
+                              "name": "PE ABox Activity invoice references",
+                              "width": 14,
+                              "height": 14,
+                              "fill": "$white",
+                              "cornerRadius": 3,
+                              "stroke": "$hairline"
+                            },
+                            {
+                              "type": "text",
+                              "id": "M914QS",
+                              "name": "PE ABoxL Activity invoice references",
+                              "fill": "$ink",
+                              "content": "Activity invoice references",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "C6SFU",
+              "name": "PE Table",
+              "width": "fill_container",
+              "height": 360,
+              "fill": "$white",
+              "cornerRadius": 10,
+              "stroke": "$hairline",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nKVuj",
+                  "name": "PE Head",
+                  "width": "fill_container",
+                  "fill": "$cloud",
+                  "gap": 14,
+                  "padding": [
+                    9,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "klbtd",
+                      "name": "PE Col Crew / activity",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "CREW / ACTIVITY",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zdB2B",
+                      "name": "PE Col Hour type",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "HOUR TYPE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x3D3w",
+                      "name": "PE Col Payroll code",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "PAYROLL CODE",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "A6pQd",
+                      "name": "PE Col Hours",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "HOURS",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vCiy0",
+                      "name": "PE Col Status",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 100,
+                      "content": "STATUS",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lXCjg",
+                      "name": "PE Col Invoice ref",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "INVOICE REF",
+                      "fontFamily": "$font-body",
+                      "fontSize": 10.5,
+                      "fontWeight": "semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Xpb0M",
+                  "name": "PE Row Nerea",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "E7egaZ",
+                      "name": "PE Sel Nerea",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#000000",
+                      "cornerRadius": 3,
+                      "stroke": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EKWp1",
+                      "name": "PE C Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Nerea Vidal · A-cam 14–15 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GE1wR",
+                      "name": "PE HT Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Worked",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XprG8",
+                      "name": "PE PC Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "f5NIoA",
+                      "name": "PE H Nerea",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "17.5 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b6N3Ik",
+                      "name": "PE St Nerea",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "fmMQA",
+                          "name": "PE StF Nerea",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YeZul",
+                              "name": "PE StT Nerea",
+                              "fill": "#1D7A4F",
+                              "content": "Approved",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "A1DCUk",
+                      "name": "PE IR Nerea",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xbMrL",
+                  "name": "PE Row Ibai",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "sKZ3I",
+                      "name": "PE Sel Ibai",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#000000",
+                      "cornerRadius": 3,
+                      "stroke": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "id": "L0FYZj",
+                      "name": "PE C Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Ibai Ruiz · B-cam 15 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vSGX1",
+                      "name": "PE HT Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Overtime ×1.25",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oAGsE",
+                      "name": "PE PC Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "OT01",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DwR8h",
+                      "name": "PE H Ibai",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "12 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AidFL",
+                      "name": "PE St Ibai",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "CXrFa",
+                          "name": "PE StF Ibai",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "dTx9i",
+                              "name": "PE StT Ibai",
+                              "fill": "#1D7A4F",
+                              "content": "Approved",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "BQGG8",
+                      "name": "PE IR Ibai",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "INV-2026-311",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MMSvW",
+                  "name": "PE Row Marta",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "WTNK3",
+                      "name": "PE Sel Marta",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#000000",
+                      "cornerRadius": 3,
+                      "stroke": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O9L32",
+                      "name": "PE C Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Marta R. · warehouse shift",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xlT8D",
+                      "name": "PE HT Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Compensation",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E3GOj",
+                      "name": "PE PC Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VyqzA",
+                      "name": "PE H Marta",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "4 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kaEtd",
+                      "name": "PE St Marta",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ly7W7",
+                          "name": "PE StF Marta",
+                          "fill": "#E3F5EE",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hCwCH",
+                              "name": "PE StT Marta",
+                              "fill": "#1D7A4F",
+                              "content": "Approved",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Pwtxm",
+                      "name": "PE IR Marta",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bYcr0",
+                  "name": "PE Row Óscar",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "AjKZU",
+                      "name": "PE Sel Óscar",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#000000",
+                      "cornerRadius": 3,
+                      "stroke": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ad4f6",
+                      "name": "PE C Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Óscar Miranda · gaffer 12–14 Nov",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vioFL",
+                      "name": "PE HT Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Worked",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PhXqk",
+                      "name": "PE PC Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ap60l",
+                      "name": "PE H Óscar",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "24 h",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "QlXAV",
+                      "name": "PE St Óscar",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ikMM5",
+                          "name": "PE StF Óscar",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "xCB0r",
+                              "name": "PE StT Óscar",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "I0PCeE",
+                      "name": "PE IR Óscar",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "—",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "L78T1s",
+                  "name": "PE Row Dídac",
+                  "width": "fill_container",
+                  "stroke": "$hairline",
+                  "gap": 14,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "vZCmJ",
+                      "name": "PE Sel Dídac",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#000000",
+                      "cornerRadius": 3,
+                      "stroke": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DUvDD",
+                      "name": "PE C Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dídac Torres · playback setup",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IaLYY",
+                      "name": "PE HT Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 130,
+                      "content": "Correction",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11.5,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UrnA3",
+                      "name": "PE PC Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 90,
+                      "content": "CORR",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cJTos",
+                      "name": "PE H Dídac",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": 80,
+                      "content": "−30 m",
+                      "textAlign": "right",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "medium"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bMQ1C",
+                      "name": "PE St Dídac",
+                      "width": 100,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "j0Wft",
+                          "name": "PE StF Dídac",
+                          "fill": "#FFF3D6",
+                          "cornerRadius": 4,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "s5mY5",
+                              "name": "PE StT Dídac",
+                              "fill": "#8A5A00",
+                              "content": "Pending",
+                              "fontFamily": "$font-body",
+                              "fontSize": 10.5,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "u32xXS",
+                      "name": "PE IR Dídac",
+                      "fill": "$slate",
+                      "textGrowth": "fixed-width",
+                      "width": 120,
+                      "content": "INV-2026-298",
+                      "fontFamily": "$font-body",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "K3kI6V",
+              "name": "PE Footnote",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "UKLyT",
+                  "name": "PE Footnote Icon",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "info",
+                  "library": "Material Symbols Rounded",
+                  "fill": "$slate"
+                },
+                {
+                  "type": "text",
+                  "id": "K0yOU",
+                  "name": "PE Footnote Text",
+                  "fill": "$slate",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Hours leave the product by file export; salaries are not calculated here. Worked hours add to the worked total, corrections add or subtract, compensation does not. Time not covered by activities exports as hours without activities.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

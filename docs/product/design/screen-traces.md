@@ -30,6 +30,21 @@ File: `time-approvals.png` / `time-approvals.html`
 | Footnote: break and travel time excluded from payroll reconciliation | [BR-CRW-BREAK-AND-TRAVEL-EXCLUDED](../model/business-rules/br-crw-break-and-travel-excluded.md) |
 | Planned cost column visible to planner role only (role-gated note in journey) | [BR-CRW-PLANNED-COST-VISIBILITY](../model/business-rules/br-crw-planned-cost-visibility.md) |
 
+## Screen — Payroll export (management, desktop)
+
+File: `payroll-export.png` / `payroll-export.html`
+
+| Design decision | Decided by |
+|---|---|
+| Screen shows a spreadsheet export of selected time registrations for an external payroll system, not salary calculation | [UC-CRW-EXPORT-PAYROLL-DATA](../model/use-cases/uc-crw-export-payroll-data.md), [BR-CRW-NO-PAYROLL-PROCESSING](../model/business-rules/br-crw-no-payroll-processing.md), [TERM-PAYROLL-EXPORT](../model/domain/terms/term-payroll-export.md) |
+| Export options: registration columns visible/all/manual, plus optional activity columns | [UC-CRW-EXPORT-PAYROLL-DATA](../model/use-cases/uc-crw-export-payroll-data.md) step 2 |
+| Amber warning banner when selected registrations are still pending; export remains possible | [BR-CRW-EXPORT-PENDING-WARNING](../model/business-rules/br-crw-export-pending-warning.md), [SB-CRW-EXPORT-WITH-PENDING](../model/behaviours/sb-crw-export-with-pending.md) |
+| Hour type column per registration (worked / overtime / compensation / correction) | [TERM-HOUR-TYPE](../model/domain/terms/term-hour-type.md) |
+| Payroll code carried on exported hours of typed rows (OT01 on overtime, CORR on correction) | [BR-CRW-PAYROLL-CODE-IN-EXPORT](../model/business-rules/br-crw-payroll-code-in-export.md) |
+| Invoice reference column for freelancer-invoiced activities (INV-2026-311, INV-2026-298) | [UC-CRW-RECORD-ACTIVITY-INVOICE-REFERENCE](../model/use-cases/uc-crw-record-activity-invoice-reference.md), [JRN-CRW-HOURS-TO-PAYROLL](../model/journeys/jrn-crw-hours-to-payroll.md) variant "Freelancer invoice references recorded" |
+| Footnote: worked hours add to the total, corrections add or subtract, compensation does not | [BR-CRW-HOUR-TYPE-TOTALS](../model/business-rules/br-crw-hour-type-totals.md) |
+| Footnote: time not covered by activities exports as hours without activities | [BR-CRW-ACTIVITY-DURATION-CONSISTENCY](../model/business-rules/br-crw-activity-duration-consistency.md) |
+
 ## Screen 1 — Invoice list (management, desktop)
 
 File: `invoice-list.png` / `invoice-list.html`

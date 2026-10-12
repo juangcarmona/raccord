@@ -42,3 +42,7 @@ deploy/backups*/
 
 # Stryker mutation reports (regenerated per run, published as CI artifacts).
 StrykerOutput/
+
+
+# APM dependencies
+apm_modules/

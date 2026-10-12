@@ -5,6 +5,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Raccord.Web\Raccord.Web.csproj" />
+        <ProjectReference Include="..\..\src\root\Raccord.Web\Raccord.Web.csproj" />
     </ItemGroup>
 </Project>

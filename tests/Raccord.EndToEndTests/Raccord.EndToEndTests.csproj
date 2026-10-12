@@ -7,7 +7,7 @@
     <ItemGroup>
         <!-- Referencing the Aspire host makes the Aspire tooling emit Projects.Raccord_Aspire, the
              metadata DistributedApplicationTestingBuilder boots. -->
-        <ProjectReference Include="..\..\src\Raccord.Aspire\Raccord.Aspire.csproj" />
+        <ProjectReference Include="..\..\src\root\Raccord.Aspire\Raccord.Aspire.csproj" />
     </ItemGroup>
 
     <ItemGroup>

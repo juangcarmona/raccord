@@ -37,7 +37,7 @@ public sealed class InstallationSetup(
             if (!await roles.RoleExistsAsync(roleName).ConfigureAwait(false))
             {
                 var roleResult = await roles
-                    .CreateAsync(new IdentityRole<Guid>(roleName))
+                    .CreateAsync(new IdentityRole<Guid>(roleName) { Id = Guid.CreateVersion7() })
                     .ConfigureAwait(false);
                 if (!roleResult.Succeeded)
                 {

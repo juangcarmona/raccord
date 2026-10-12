@@ -134,68 +134,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_series", (string)null);
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Customers.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(320)
-                        .HasColumnType("character varying(320)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("LegalName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("legal_name");
-
-                    b.Property<string>("TaxId")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasColumnName("tax_id");
-
-                    b.ComplexProperty(typeof(Dictionary<string, object>), "BillingAddress", "Raccord.Domain.Customers.Customer.BillingAddress#AddressFields", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("City")
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("city");
-
-                            b1.Property<string>("CountryCode")
-                                .HasMaxLength(2)
-                                .HasColumnType("character varying(2)")
-                                .HasColumnName("country_code");
-
-                            b1.Property<string>("PostalCode")
-                                .HasMaxLength(20)
-                                .HasColumnType("character varying(20)")
-                                .HasColumnName("postal_code");
-
-                            b1.Property<string>("Province")
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("province");
-
-                            b1.Property<string>("Street")
-                                .HasMaxLength(200)
-                                .HasColumnType("character varying(200)")
-                                .HasColumnName("street");
-                        });
-
-                    b.HasKey("Id")
-                        .HasName("pk_customers");
-
-                    b.HasIndex("TaxId")
-                        .HasDatabaseName("ix_customers_tax_id");
-
-                    b.ToTable("customers", (string)null);
-                });
-
             modelBuilder.Entity("Raccord.Domain.Organization.IssuerProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -291,10 +229,69 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_projects");
 
-                    b.HasIndex("CustomerId")
-                        .HasDatabaseName("ix_projects_customer_id");
-
                     b.ToTable("projects", (string)null);
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("LegalName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("legal_name");
+
+                    b.Property<string>("TaxId")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("tax_id");
+
+                    b.ComplexProperty(typeof(Dictionary<string, object>), "BillingAddress", "Raccord.Infrastructure.Persistence.CustomerRow.BillingAddress#AddressFields", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("City")
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasColumnName("city");
+
+                            b1.Property<string>("CountryCode")
+                                .HasMaxLength(2)
+                                .HasColumnType("character varying(2)")
+                                .HasColumnName("country_code");
+
+                            b1.Property<string>("PostalCode")
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("postal_code");
+
+                            b1.Property<string>("Province")
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasColumnName("province");
+
+                            b1.Property<string>("Street")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("street");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_customers");
+
+                    b.HasIndex("TaxId")
+                        .HasDatabaseName("ix_customers_tax_id");
+
+                    b.ToTable("customers", "contacts");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", b =>
@@ -598,13 +595,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
                 {
-                    b.HasOne("Raccord.Domain.Customers.Customer", null)
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_projects_customers_customer_id");
-
                     b.OwnsMany("Raccord.Domain.Projects.BillableLine", "BillableLines", b1 =>
                         {
                             b1.Property<Guid>("Id")

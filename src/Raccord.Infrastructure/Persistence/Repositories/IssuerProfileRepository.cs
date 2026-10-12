@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Raccord.Application.Customers;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
-using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 

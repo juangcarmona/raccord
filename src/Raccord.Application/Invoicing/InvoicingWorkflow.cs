@@ -3,15 +3,14 @@ using System.Security.Cryptography;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
-using Raccord.Application.Customers;
 using Raccord.Application.Documents;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Customers;
 using Raccord.Domain.Projects;
+using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
@@ -24,7 +23,7 @@ public sealed class InvoicingWorkflow(
     IIssuedInvoiceRepository invoices,
     IInvoiceSeriesRepository series,
     IProjectRepository projects,
-    ICustomerRepository customers,
+    IPartyDirectory parties,
     IIssuerProfileRepository issuers,
     IAuditTrail audit,
     IComplianceRecorder compliance,
@@ -98,7 +97,7 @@ public sealed class InvoicingWorkflow(
             var project = await projects
                 .FindAsync(draft.ProjectId, cancellationToken)
                 .ConfigureAwait(false);
-            var customer = await customers
+            var customer = await parties
                 .FindAsync(draft.CustomerId, cancellationToken)
                 .ConfigureAwait(false);
             var totals = draft.Totals;
@@ -195,7 +194,7 @@ public sealed class InvoicingWorkflow(
         var issueDate = request.IssueDate ?? clock.Today;
         var project = await RequireProjectAsync(draft.ProjectId, cancellationToken)
             .ConfigureAwait(false);
-        var customer = await customers
+        var customer = await parties
             .FindAsync(draft.CustomerId, cancellationToken)
             .ConfigureAwait(false);
         var issuer = (
@@ -331,7 +330,7 @@ public sealed class InvoicingWorkflow(
     {
         project ??= await RequireProjectAsync(draft.ProjectId, cancellationToken)
             .ConfigureAwait(false);
-        Customer? customer = await customers
+        PartySnapshot? customer = await parties
             .FindAsync(draft.CustomerId, cancellationToken)
             .ConfigureAwait(false);
         IReadOnlyList<ValidationIssue> issues = [];

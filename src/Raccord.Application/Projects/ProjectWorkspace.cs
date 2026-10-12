@@ -1,7 +1,7 @@
 using Raccord.Application.Abstractions;
-using Raccord.Application.Customers;
 using Raccord.Contracts.Projects;
 using Raccord.Domain.Projects;
+using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Pricing;
 
@@ -10,7 +10,7 @@ namespace Raccord.Application.Projects;
 /// <summary>Use cases for projects and their billable work.</summary>
 public sealed class ProjectWorkspace(
     IProjectRepository projects,
-    ICustomerRepository customers,
+    IPartyDirectory parties,
     IUnitOfWork unitOfWork
 )
 {
@@ -22,7 +22,7 @@ public sealed class ProjectWorkspace(
     {
         ArgumentNullException.ThrowIfNull(request);
         var customer =
-            await customers.FindAsync(request.CustomerId, cancellationToken).ConfigureAwait(false)
+            await parties.FindAsync(request.CustomerId, cancellationToken).ConfigureAwait(false)
             ?? throw new BusinessRuleViolationException(
                 "customers.not-found",
                 $"Customer '{request.CustomerId}' does not exist."
@@ -44,9 +44,10 @@ public sealed class ProjectWorkspace(
     )
     {
         var all = await projects.ListAsync(cancellationToken).ConfigureAwait(false);
-        var names = (
-            await customers.ListAsync(cancellationToken).ConfigureAwait(false)
-        ).ToDictionary(customer => customer.Id, customer => customer.LegalName);
+        var names = (await parties.ListAsync(cancellationToken).ConfigureAwait(false)).ToDictionary(
+            customer => customer.Id,
+            customer => customer.LegalName
+        );
         return
         [
             .. all.Select(project =>
@@ -82,7 +83,7 @@ public sealed class ProjectWorkspace(
             return null;
         }
 
-        var customer = await customers
+        var customer = await parties
             .FindAsync(project.CustomerId, cancellationToken)
             .ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);

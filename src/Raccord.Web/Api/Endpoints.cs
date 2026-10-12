@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
-using Raccord.Application.Customers;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
@@ -9,6 +8,7 @@ using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Modules.Contacts;
 
 namespace Raccord.Web.Api;
 

@@ -1,15 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
+using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Parties;
 using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Infrastructure.Persistence;
 
 /// <summary>Applies migrations, reference data and (on request) fictional demo data.</summary>
-public sealed class DatabaseMaintenance(RaccordDbContext db)
+public sealed class DatabaseMaintenance(
+    RaccordDbContext db,
+    IPartyDirectory parties,
+    IPartyWriter partyWriter
+)
 {
     /// <summary>
     /// Adds a fictional issuer, customers and projects when the database has no customers.
@@ -17,7 +21,7 @@ public sealed class DatabaseMaintenance(RaccordDbContext db)
     /// </summary>
     public async Task SeedDemoDataAsync(CancellationToken cancellationToken)
     {
-        if (await db.Customers.AnyAsync(cancellationToken).ConfigureAwait(false))
+        if ((await parties.ListAsync(cancellationToken).ConfigureAwait(false)).Count > 0)
         {
             return;
         }
@@ -33,29 +37,35 @@ public sealed class DatabaseMaintenance(RaccordDbContext db)
             );
         }
 
-        var producer = Customer.Register(
+        var producer = new PartySnapshot(
+            Guid.CreateVersion7(),
             "Productora Ejemplo S.A.",
             "A00000000",
             new PostalAddress("Avenida del Puerto 20", "46023", "Valencia", "Valencia", "ES"),
             "facturacion@productora.example"
         );
-        var agency = Customer.Register(
+        var agency = new PartySnapshot(
+            Guid.CreateVersion7(),
             "Agencia Creativa Demo S.L.",
             null,
             null,
             "admin@agencia.example"
         );
-        db.Customers.AddRange(producer, agency);
+        partyWriter.Add(producer);
+        partyWriter.Add(agency);
 
-        db.Projects.AddRange(CreateShootDemoProject(producer), CreateStreamingDemoProject(agency));
+        db.Projects.AddRange(
+            CreateShootDemoProject(producer.Id),
+            CreateStreamingDemoProject(agency.Id)
+        );
         await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    private static Project CreateShootDemoProject(Customer producer)
+    private static Project CreateShootDemoProject(Guid producerId)
     {
         var shoot = Project.Create(
             "Rodaje campaña primavera",
-            producer.Id,
+            producerId,
             new DateOnly(2026, 9, 14),
             new DateOnly(2026, 9, 18)
         );
@@ -87,11 +97,11 @@ public sealed class DatabaseMaintenance(RaccordDbContext db)
         return shoot;
     }
 
-    private static Project CreateStreamingDemoProject(Customer agency)
+    private static Project CreateStreamingDemoProject(Guid agencyId)
     {
         var stream = Project.Create(
             "Streaming evento corporativo",
-            agency.Id,
+            agencyId,
             new DateOnly(2026, 10, 1),
             new DateOnly(2026, 10, 1)
         );

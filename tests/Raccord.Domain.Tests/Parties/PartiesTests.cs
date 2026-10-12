@@ -1,5 +1,5 @@
-using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
+using Raccord.Modules.Contacts.Domain;
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Parties;
 

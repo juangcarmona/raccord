@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
-using Raccord.Application.Invoicing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
 using Raccord.Modules.Contacts;
+using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
 

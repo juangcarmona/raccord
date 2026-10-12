@@ -6,5 +6,10 @@ Captured from the Vite-served React app at `/projects` using Chromium. The Vite 
 - `projects-narrow.png` — 390 × 844
 - `project-creation-desktop.png` — 1440 × 1000
 - `project-creation-narrow.png` — 390 × 844
+- `customers-desktop.png` / `customers-narrow.png`
+- `customer-creation-desktop.png` / `customer-creation-narrow.png`
+- `drafts-desktop.png` / `drafts-narrow.png`
+- `invoices-desktop.png` / `invoices-narrow.png`
+- `issuer-settings-desktop.png` / `issuer-settings-narrow.png`
 
-The new-project screenshot shows the existing “register a customer first” empty state because the stub returns no customers; it does not show the project form. Other route-specific screenshots and data-backed workflows were not captured in this environment. The issue’s full visual acceptance criterion still requires Owner review against the mapped references.
+List routes show their existing empty states because the stub returns empty collections. The new-project screenshot shows the existing “register a customer first” prerequisite; the customer-creation screenshot shows its form. Project, draft, and invoice detail routes and populated data states were not captured. The captures use the English UI only. Full visual acceptance still requires Owner review against the mapped references and all route states.

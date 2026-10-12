@@ -18,6 +18,7 @@ var migrations = builder
 
 var web = builder
     .AddProject<Projects.Raccord_Web>("web")
+    .WithHttpEndpoint(name: "http")
     .WithReference(database)
     .WithReference(documents)
     .WithEnvironment("Storage__Provider", "AzureBlob")
@@ -31,7 +32,7 @@ var web = builder
     .WithHttpHealthCheck("/health/ready", endpointName: "http");
 
 builder
-    .AddViteApp("frontend", "../Raccord.Frontend")
+    .AddViteApp("frontend", "../../Raccord.Frontend")
     .WithNpm(install: true, installCommand: "ci")
     .WithReference(web)
     .WaitFor(web);

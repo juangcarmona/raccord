@@ -108,6 +108,21 @@ public sealed class DependencyRulesTests
             .ShouldNotContain(name => name.StartsWith("Raccord.Web", StringComparison.Ordinal));
     }
 
+    [Fact]
+    public void Solution_Should_expose_only_root_hosts_and_modules()
+    {
+        var solution = SolutionFile();
+
+        solution.ShouldNotContain("src/Raccord.Domain/Raccord.Domain.csproj");
+        solution.ShouldNotContain("src/Raccord.Application/Raccord.Application.csproj");
+        solution.ShouldNotContain("src/Raccord.Contracts/Raccord.Contracts.csproj");
+        solution.ShouldNotContain("src/Raccord.Infrastructure/Raccord.Infrastructure.csproj");
+        solution.ShouldNotContain("src/Raccord.Web/Raccord.Web.csproj");
+        solution.ShouldNotContain("src/Raccord.Aspire/Raccord.Aspire.csproj");
+        solution.ShouldContain("src/root/Raccord.Web/Raccord.Web.csproj");
+        solution.ShouldContain("src/root/Raccord.Aspire/Raccord.Aspire.csproj");
+    }
+
     [Theory]
     [InlineData("Raccord.Domain", new[] { "Raccord.SharedKernel" })]
     [InlineData("Raccord.Contracts", new string[0])]
@@ -205,5 +220,19 @@ public sealed class DependencyRulesTests
         return XDocument.Load(
             Path.Combine(directory.FullName, "src", project, project + ".csproj")
         );
+    }
+
+    private static string SolutionFile()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (
+            directory is not null && !File.Exists(Path.Combine(directory.FullName, "Raccord.slnx"))
+        )
+        {
+            directory = directory.Parent;
+        }
+
+        directory.ShouldNotBeNull();
+        return File.ReadAllText(Path.Combine(directory.FullName, "Raccord.slnx"));
     }
 }

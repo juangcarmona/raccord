@@ -6,8 +6,8 @@ context: |-
   Product Changes under docs/product/changes/active, validated by @prodshape/cli). OpenSpec
   describes implementation behavior per change; it is NOT the product-model source of truth.
 
-  Backend: .NET modular monolith (src/Raccord.Domain, Application, Contracts, Infrastructure,
-  Web with C# Minimal APIs). Dependencies flow one way, enforced by
+  Backend: .NET modular monolith (src/modules, src/shared and src/root with C# Minimal APIs).
+  Dependencies flow one way, enforced by
   tests/Raccord.Architecture.Tests. PostgreSQL via EF Core; issued invoices are immutable and
   hash-verified with an append-only event/audit trail. External imports stay outside the core
   domain; terminology, UX and code are original.

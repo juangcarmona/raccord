@@ -29,7 +29,7 @@ Open <http://localhost:8080>. Details: [self-hosting](docs/operations/self-hosti
 ## Development
 
 ```bash
-dotnet run --project src/Raccord.Aspire --launch-profile http
+dotnet run --project src/root/Raccord.Aspire --launch-profile http
 ```
 
 ```bash

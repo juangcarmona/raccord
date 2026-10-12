@@ -71,13 +71,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_invoice_drafts");
 
-                    b.HasIndex("ProjectId")
-                        .HasDatabaseName("ix_invoice_drafts_project_id");
-
                     b.HasIndex("Status")
                         .HasDatabaseName("ix_invoice_drafts_status");
 
-                    b.ToTable("invoice_drafts", (string)null);
+                    b.ToTable("invoice_drafts", "invoicing");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceNumberSequence", b =>
@@ -108,7 +105,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("SeriesCode", "Year")
                         .HasName("pk_invoice_number_sequences");
 
-                    b.ToTable("invoice_number_sequences", (string)null);
+                    b.ToTable("invoice_number_sequences", "invoicing");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
@@ -332,7 +329,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_issued_invoices_series_code_year_sequence");
 
-                    b.ToTable("issued_invoices", (string)null);
+                    b.ToTable("issued_invoices", "invoicing");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuerProfileRow", b =>
@@ -510,13 +507,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceDraft", b =>
                 {
-                    b.HasOne("Raccord.Domain.Projects.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_invoice_drafts_projects_project_id");
-
                     b.OwnsMany("Raccord.Domain.Billing.InvoiceDraftLine", "Lines", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -573,7 +563,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.HasIndex("DraftId")
                                 .HasDatabaseName("ix_invoice_draft_lines_draft_id");
 
-                            b1.ToTable("invoice_draft_lines", (string)null);
+                            b1.ToTable("invoice_draft_lines", "invoicing");
 
                             b1.WithOwner()
                                 .HasForeignKey("DraftId")
@@ -675,16 +665,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         });
 
                     b.Navigation("BillableLines");
-                });
-
-            modelBuilder.Entity("Raccord.Modules.Compliance.ComplianceRecordRow", b =>
-                {
-                    b.HasOne("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", null)
-                        .WithMany()
-                        .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_compliance_records_issued_invoices_invoice_id");
                 });
 #pragma warning restore 612, 618
         }

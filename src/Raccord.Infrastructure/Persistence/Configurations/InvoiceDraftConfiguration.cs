@@ -9,15 +9,10 @@ internal sealed class InvoiceDraftConfiguration : IEntityTypeConfiguration<Invoi
 {
     public void Configure(EntityTypeBuilder<InvoiceDraft> builder)
     {
-        builder.ToTable("invoice_drafts");
+        builder.ToTable("invoice_drafts", "invoicing");
         builder.HasKey(draft => draft.Id);
         builder.Property(draft => draft.SeriesCode).HasMaxLength(10);
         builder.Property(draft => draft.Status).HasConversion<string>().HasMaxLength(20);
-        builder
-            .HasOne<Project>()
-            .WithMany()
-            .HasForeignKey(draft => draft.ProjectId)
-            .OnDelete(DeleteBehavior.Restrict);
         builder.HasIndex(draft => draft.Status);
         builder.HasConcurrencyToken();
 
@@ -25,7 +20,7 @@ internal sealed class InvoiceDraftConfiguration : IEntityTypeConfiguration<Invoi
             draft => draft.Lines,
             line =>
             {
-                line.ToTable("invoice_draft_lines");
+                line.ToTable("invoice_draft_lines", "invoicing");
                 line.WithOwner().HasForeignKey("DraftId");
                 line.HasKey(item => item.Id);
                 line.Property(item => item.Id).ValueGeneratedNever();

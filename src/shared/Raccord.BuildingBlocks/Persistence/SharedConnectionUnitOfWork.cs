@@ -31,10 +31,7 @@ public sealed class SharedConnectionUnitOfWork(
 
         var openedHere = connection.State != System.Data.ConnectionState.Open;
         executing = true;
-#pragma warning disable MA0004
-        await using var transaction = await OpenTransactionAsync(cancellationToken)
-            .ConfigureAwait(false);
-#pragma warning restore MA0004
+        var transaction = await OpenTransactionAsync(cancellationToken).ConfigureAwait(false);
         try
         {
             await EnlistAsync(transaction, cancellationToken).ConfigureAwait(false);
@@ -64,6 +61,7 @@ public sealed class SharedConnectionUnitOfWork(
         finally
         {
             await DetachAsync().ConfigureAwait(false);
+            await transaction.DisposeAsync().ConfigureAwait(false);
 
             executing = false;
             if (openedHere)

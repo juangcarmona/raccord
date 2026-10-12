@@ -47,6 +47,8 @@ public static class Program
     {
         // licenseUrl → dotnet/corefx LICENSE.TXT (MIT).
         ["System.Security.Cryptography.ProtectedData/4.5.0"] = "MIT",
+        // The package predates nuspec license metadata; upstream repository license is MIT.
+        ["ErrorOr/2.1.1"] = "MIT",
     };
 
     private static readonly string[] SPDXKeywords = ["OR", "AND", "WITH"];

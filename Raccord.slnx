@@ -11,6 +11,10 @@
         <Project Path="src/shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
     </Folder>
     <Folder Name="/src/modules/" />
+    <Folder Name="/src/modules/Workspace/">
+        <Project Path="src/modules/Workspace/Raccord.Modules.Workspace.Contracts/Raccord.Modules.Workspace.Contracts.csproj" />
+        <Project Path="src/modules/Workspace/Raccord.Modules.Workspace/Raccord.Modules.Workspace.csproj" />
+    </Folder>
     <Folder Name="/src/modules/Contacts/">
         <Project Path="src/modules/Contacts/Raccord.Modules.Contacts.Contracts/Raccord.Modules.Contacts.Contracts.csproj" />
         <Project Path="src/modules/Contacts/Raccord.Modules.Contacts/Raccord.Modules.Contacts.csproj" />

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Parties;
 using Raccord.SharedKernel.Pricing;
 
@@ -12,7 +12,8 @@ namespace Raccord.Infrastructure.Persistence;
 public sealed class DatabaseMaintenance(
     RaccordDbContext db,
     IPartyDirectory parties,
-    IPartyWriter partyWriter
+    IPartyWriter partyWriter,
+    IWorkspaceStore workspace
 )
 {
     /// <summary>
@@ -26,10 +27,11 @@ public sealed class DatabaseMaintenance(
             return;
         }
 
-        if (!await db.IssuerProfiles.AnyAsync(cancellationToken).ConfigureAwait(false))
+        if (await workspace.FindIssuerAsync(cancellationToken).ConfigureAwait(false) is null)
         {
-            db.IssuerProfiles.Add(
-                IssuerProfile.Define(
+            workspace.AddIssuer(
+                new IssuerProfileSnapshot(
+                    Guid.CreateVersion7(),
                     "Fotograma Rental Demo S.L.",
                     "B00000000",
                     new PostalAddress("Calle del Plató 12", "28045", "Madrid", "Madrid", "ES")
@@ -123,11 +125,11 @@ public sealed class DatabaseMaintenance(
     {
         await db.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
 
-        if (!await db.InvoiceSeries.AnyAsync(cancellationToken).ConfigureAwait(false))
+        if (!(await workspace.ListAsync(cancellationToken).ConfigureAwait(false)).Any())
         {
-            db.InvoiceSeries.Add(InvoiceSeries.Define("F", "Facturas ordinarias", isDefault: true));
-            db.InvoiceSeries.Add(
-                InvoiceSeries.Define("R", "Facturas rectificativas (reservada)", isDefault: false)
+            workspace.AddSeries(new InvoiceSeriesSnapshot("F", "Facturas ordinarias", true));
+            workspace.AddSeries(
+                new InvoiceSeriesSnapshot("R", "Facturas rectificativas (reservada)", false)
             );
             await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

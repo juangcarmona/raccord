@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Raccord.Application.Organization;
 using Raccord.Application.Projects;
-using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 
 namespace Raccord.Infrastructure.Persistence.Repositories;

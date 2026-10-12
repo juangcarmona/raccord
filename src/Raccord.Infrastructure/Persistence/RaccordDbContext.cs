@@ -1,7 +1,6 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Compliance;
 
@@ -17,11 +16,11 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<InvoiceDraft> InvoiceDrafts => Set<InvoiceDraft>();
 
-    internal DbSet<InvoiceSeries> InvoiceSeries => Set<InvoiceSeries>();
-
     internal DbSet<InvoiceNumberSequence> InvoiceNumberSequences => Set<InvoiceNumberSequence>();
 
-    internal DbSet<IssuerProfile> IssuerProfiles => Set<IssuerProfile>();
+    internal DbSet<InvoiceSeriesRow> InvoiceSeries => Set<InvoiceSeriesRow>();
+
+    internal DbSet<IssuerProfileRow> IssuerProfiles => Set<IssuerProfileRow>();
 
     internal DbSet<IssuedInvoiceRow> IssuedInvoices => Set<IssuedInvoiceRow>();
 

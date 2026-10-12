@@ -15,6 +15,7 @@ The SPA already has working API-backed routes but uses generic styling. The sour
 - Map `/projects`, `/projects/new`, `/projects/:id` to project list/creation/detail references; `/customers` and `/customers/new` to contact-detail patterns with an explicit list/form gap; `/drafts` and `/drafts/:id` to invoicing queue/draft editor; `/invoices` and `/invoices/:id` to invoice list/detail patterns; `/settings/issuer` to issuer profile. The shared shell follows the common dark navigation/light workspace direction.
 - Use existing API capabilities as the hard boundary: omit mockup-only template selection, extra profile fields, payment/filter interactions, and any unimplemented workflow. Document these limitations in `docs/product/design/implemented-screen-mapping.md`.
 - Use tokens for shared colors, spacing, typography, focus, surfaces, and status treatments; preserve contrast and avoid relying on color alone.
+- Use the selected blue token for keyboard focus rings rather than the exploratory cyan accent: it remains visible against the light workspace and dark navigation surfaces.
 - Considered a UI component-library migration and rejected it: this is not needed to close a visual gap and would expand the architectural/dependency scope.
 
 ## Risks / Trade-offs

@@ -13,9 +13,11 @@ The shipped management screens do not yet express the product’s established vi
 ## Capabilities
 
 ### New Capabilities
+
 - `implemented-screen-conformance`: Existing implemented management screens present consistent, accessible visual patterns grounded in the approved design references.
 
 ### Modified Capabilities
+
 - None. This changes presentation, not product requirements or workflows.
 
 ## Impact

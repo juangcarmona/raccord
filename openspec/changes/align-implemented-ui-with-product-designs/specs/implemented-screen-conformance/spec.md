@@ -5,24 +5,30 @@ Defines how existing management screens consistently apply Raccord’s documente
 ## ADDED Requirements
 
 ### Requirement: Existing screens follow documented design references
+
 The application SHALL apply the documented Raccord visual direction and shared design tokens consistently across its shell and implemented project, customer, invoice-draft, invoice, and issuer-settings routes. Each route SHALL have a recorded closest screen reference and trace, or an explicit documented gap where no exact reference exists. A reference SHALL NOT imply unsupported behavior.
 
 #### Scenario: Route has a closest design reference
+
 - **WHEN** a user opens an in-scope implemented route
 - **THEN** its composition and shared visual patterns follow the documented closest reference to the extent supported by existing behavior
 
 #### Scenario: Reference depicts unsupported workflow
+
 - **WHEN** a design reference contains controls or workflow steps absent from the implemented product behavior
 - **THEN** the screen does not present those controls as functional and the mapping records the limitation
 
 ### Requirement: Visual alignment preserves accessible localized behavior
+
 The application SHALL retain existing API-backed behavior, English and Spanish localization, semantic structure, keyboard operation, visible focus, and usability at desktop and narrow viewport widths while applying the design system.
 
 #### Scenario: Keyboard user navigates a screen
+
 - **WHEN** a user operates an in-scope route using only a keyboard
 - **THEN** interactive controls remain reachable, visibly focused, and semantically identifiable
 
 #### Scenario: User switches locale or viewport
+
 - **WHEN** a user views an in-scope route in either supported language or at a narrow viewport
 - **THEN** content remains legible and usable without losing existing route behavior
 

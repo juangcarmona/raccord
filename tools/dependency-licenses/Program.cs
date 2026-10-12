@@ -49,6 +49,9 @@ public static class Program
         ["System.Security.Cryptography.ProtectedData/4.5.0"] = "MIT",
         // The package predates nuspec license metadata; upstream repository license is MIT.
         ["ErrorOr/2.1.1"] = "MIT",
+        // Legacy .NET packages link to Microsoft's MIT license through redirect URLs.
+        ["Microsoft.NETCore.Platforms/1.1.0"] = "MIT",
+        ["NETStandard.Library/2.0.3"] = "MIT",
     };
 
     private static readonly string[] SPDXKeywords = ["OR", "AND", "WITH"];

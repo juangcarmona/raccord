@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <IsTestProject>true</IsTestProject>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../../src/shared/Raccord.ArchitectureAnalyzers/Raccord.ArchitectureAnalyzers.csproj" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    </ItemGroup>
+</Project>

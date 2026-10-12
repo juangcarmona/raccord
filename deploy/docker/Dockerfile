@@ -23,6 +23,8 @@ COPY src/shared/Raccord.ArchitectureAnalyzers/Raccord.ArchitectureAnalyzers.cspr
 COPY src/modules/Directory.Build.props src/modules/
 COPY src/modules/Contacts/Raccord.Modules.Contacts.Contracts/Raccord.Modules.Contacts.Contracts.csproj src/modules/Contacts/Raccord.Modules.Contacts.Contracts/
 COPY src/modules/Contacts/Raccord.Modules.Contacts/Raccord.Modules.Contacts.csproj src/modules/Contacts/Raccord.Modules.Contacts/
+COPY src/modules/Projects/Raccord.Modules.Projects.Contracts/Raccord.Modules.Projects.Contracts.csproj src/modules/Projects/Raccord.Modules.Projects.Contracts/
+COPY src/modules/Projects/Raccord.Modules.Projects/Raccord.Modules.Projects.csproj src/modules/Projects/Raccord.Modules.Projects/
 COPY src/modules/Workspace/Raccord.Modules.Workspace.Contracts/Raccord.Modules.Workspace.Contracts.csproj src/modules/Workspace/Raccord.Modules.Workspace.Contracts/
 COPY src/modules/Workspace/Raccord.Modules.Workspace/Raccord.Modules.Workspace.csproj src/modules/Workspace/Raccord.Modules.Workspace/
 COPY src/modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj src/modules/Compliance/Raccord.Modules.Compliance.Contracts/

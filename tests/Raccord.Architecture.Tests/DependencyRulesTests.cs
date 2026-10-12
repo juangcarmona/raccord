@@ -120,6 +120,7 @@ public sealed class DependencyRulesTests
             "Raccord.Domain",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Projects.Contracts",
             "Raccord.Modules.Workspace.Contracts",
             "Raccord.SharedKernel",
         }
@@ -135,6 +136,7 @@ public sealed class DependencyRulesTests
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Projects.Contracts",
             "Raccord.Modules.Workspace.Contracts",
             "Raccord.SharedKernel",
         }
@@ -148,6 +150,7 @@ public sealed class DependencyRulesTests
             "Raccord.Infrastructure",
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Contacts",
+            "Raccord.Modules.Projects",
             "Raccord.Modules.Workspace",
             "Raccord.BuildingBlocks",
             "Raccord.SharedKernel",

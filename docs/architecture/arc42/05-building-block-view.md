@@ -9,6 +9,7 @@ Raccord.Frontend (React) ──HTTP──► Raccord.Web
 Raccord.Web ─────────► Raccord.Application ─► Raccord.Domain ─► Raccord.SharedKernel
      │   └───────────► Raccord.Contracts ◄────┘ (Application returns contracts)
      ├───────────────► Workspace module (settings and series)
+     ├───────────────► Projects module (projects and billable work)
      ├───────────────► Raccord.Infrastructure ─► Application, Domain, Contracts, BuildingBlocks
      └───────────────► Raccord.BuildingBlocks ─► Raccord.SharedKernel
      └───────────────► Raccord.ServiceDefaults (health, telemetry, resilience)
@@ -19,8 +20,9 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 | `Raccord.SharedKernel` | BCL-only shared values and ports | Money, parties, pricing, clock, current user and audit append |
 | `Raccord.Domain` | Business rules; no framework dependencies | Aggregates and module rules |
 | `Raccord.Contracts` | Public HTTP contracts (records) | Request/response records |
-| `Raccord.Application` | Use cases and ports | `CustomerDirectory`, `ProjectWorkspace`, `InvoicingWorkflow`, `AuditLog`; port interfaces |
+| `Raccord.Application` | Use cases and ports | `InvoicingWorkflow`, `AuditLog`; port interfaces |
 | `Raccord.Modules.Workspace` | Workspace settings and invoice series | `OrganizationSettings`; Workspace contracts and domain rules |
+| `Raccord.Modules.Projects` | Projects and billable work | `ProjectWorkspace`; Projects contracts and project rules |
 | `Raccord.BuildingBlocks` | Shared technical seams | Sender, problem mapping, storage adapters and shared transaction coordinator |
 | `Raccord.Infrastructure` | Adapters | `AddRaccordInfrastructure`, `DatabaseMaintenance`, `RaccordDbContext` |
 | `Raccord.Web` | HTTP endpoints, error mapping, SPA hosting, `migrate` command | `/api/*`, `/health/*`, `/openapi/v1.json` |

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>Raccord.SharedKernel</RootNamespace>
+    </PropertyGroup>
+</Project>

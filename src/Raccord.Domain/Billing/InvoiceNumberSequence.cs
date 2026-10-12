@@ -1,5 +1,5 @@
 using System.Globalization;
-using Raccord.Domain.Common;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Domain.Billing;
 

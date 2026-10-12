@@ -2,5 +2,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Raccord.Domain\Raccord.Domain.csproj" />
         <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
+        <ProjectReference Include="..\shared\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
     </ItemGroup>
 </Project>

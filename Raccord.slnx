@@ -7,6 +7,8 @@
         <Project Path="src/Raccord.Infrastructure/Raccord.Infrastructure.csproj" />
         <Project Path="src/Raccord.ServiceDefaults/Raccord.ServiceDefaults.csproj" />
         <Project Path="src/Raccord.Web/Raccord.Web.csproj" />
+        <Project Path="src/shared/Raccord.BuildingBlocks/Raccord.BuildingBlocks.csproj" />
+        <Project Path="src/shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/Raccord.Architecture.Tests/Raccord.Architecture.Tests.csproj" />
@@ -14,5 +16,6 @@
         <Project Path="tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj" />
         <Project Path="tests/Raccord.Infrastructure.Tests/Raccord.Infrastructure.Tests.csproj" />
         <Project Path="tests/Raccord.Web.Tests/Raccord.Web.Tests.csproj" />
+        <Project Path="tests/Raccord.BuildingBlocks.Tests/Raccord.BuildingBlocks.Tests.csproj" />
     </Folder>
 </Solution>

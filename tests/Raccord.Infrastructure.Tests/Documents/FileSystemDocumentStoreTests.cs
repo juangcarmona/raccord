@@ -1,4 +1,4 @@
-using Raccord.Infrastructure.Documents;
+using Raccord.BuildingBlocks.Storage;
 
 namespace Raccord.Infrastructure.Tests.Documents;
 

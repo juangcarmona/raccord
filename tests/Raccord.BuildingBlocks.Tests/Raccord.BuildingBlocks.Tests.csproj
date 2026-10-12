@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\shared\Raccord.BuildingBlocks\Raccord.BuildingBlocks.csproj" />
+        <ProjectReference Include="..\..\src\shared\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
+        <PackageReference Include="Testcontainers.PostgreSql" />
+    </ItemGroup>
+</Project>

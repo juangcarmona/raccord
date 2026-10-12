@@ -2,4 +2,8 @@
     <PropertyGroup>
         <RootNamespace>Raccord.Domain</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\shared\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
+    </ItemGroup>
 </Project>

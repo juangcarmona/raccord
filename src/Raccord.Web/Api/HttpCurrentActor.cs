@@ -1,4 +1,4 @@
-using Raccord.Application.Abstractions;
+using Raccord.SharedKernel.Abstractions;
 
 namespace Raccord.Web.Api;
 
@@ -6,7 +6,7 @@ namespace Raccord.Web.Api;
 /// The actor recorded in audit events. Until authentication exists (see arc42 §11) every request is attributed
 /// to <c>unauthenticated</c>, which makes the gap visible in the audit trail instead of hiding it.
 /// </summary>
-internal sealed class HttpCurrentActor(IHttpContextAccessor accessor) : ICurrentActor
+internal sealed class HttpCurrentActor(IHttpContextAccessor accessor) : ICurrentUser
 {
     public string Name =>
         accessor.HttpContext?.User.Identity is { IsAuthenticated: true, Name: { } name }

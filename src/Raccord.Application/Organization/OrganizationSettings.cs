@@ -4,8 +4,9 @@ using Raccord.Application.Invoicing;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Domain.Auditing;
-using Raccord.Domain.Common;
 using Raccord.Domain.Organization;
+using Raccord.SharedKernel.Abstractions;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Application.Organization;
 
@@ -15,7 +16,7 @@ public sealed class OrganizationSettings(
     IInvoiceSeriesRepository series,
     IAuditTrail audit,
     IClock clock,
-    ICurrentActor actor,
+    ICurrentUser actor,
     IUnitOfWork unitOfWork
 )
 {

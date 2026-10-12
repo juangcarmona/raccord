@@ -1,4 +1,4 @@
-using Raccord.Domain.Common;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Domain.Tests.Common;
 

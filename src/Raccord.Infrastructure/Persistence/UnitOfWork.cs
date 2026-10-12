@@ -1,28 +1,23 @@
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using Raccord.Application.Abstractions;
+using Raccord.BuildingBlocks.Persistence;
+using ApplicationUnitOfWork = Raccord.Application.Abstractions.IUnitOfWork;
 
 namespace Raccord.Infrastructure.Persistence;
 
-internal sealed class UnitOfWork(RaccordDbContext db) : IUnitOfWork
+internal sealed class UnitOfWork(
+    RaccordDbContext db,
+    SharedConnectionUnitOfWork sharedUnitOfWork,
+    ParticipatingContexts participants
+) : ApplicationUnitOfWork
 {
     public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
+        participants.Register(db);
         try
         {
-            await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            await sharedUnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
-        catch (DbUpdateConcurrencyException exception)
-        {
-            throw new ConcurrencyConflictException(
-                "The records were changed by another operation. Reload and try again.",
-                exception
-            );
-        }
-        catch (DbUpdateException exception)
-            when (exception.InnerException
-                    is PostgresException { SqlState: PostgresErrorCodes.UniqueViolation }
-            )
+        catch (PersistenceConflictException exception)
         {
             throw new ConcurrencyConflictException(
                 "Another operation created the same record first. Reload and try again.",

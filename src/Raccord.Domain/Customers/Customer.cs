@@ -1,5 +1,5 @@
-using Raccord.Domain.Common;
-using Raccord.Domain.Parties;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Domain.Customers;
 
@@ -53,7 +53,7 @@ public sealed class Customer
 
         return new Customer(
             legalName.Trim(),
-            Parties.TaxId.Normalize(taxId),
+            Raccord.SharedKernel.Parties.TaxId.Normalize(taxId),
             address,
             string.IsNullOrWhiteSpace(email) ? null : email.Trim()
         );

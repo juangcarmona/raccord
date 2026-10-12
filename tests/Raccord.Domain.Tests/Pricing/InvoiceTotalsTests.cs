@@ -1,5 +1,5 @@
-using Raccord.Domain.Common;
-using Raccord.Domain.Pricing;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Domain.Tests.Pricing;
 

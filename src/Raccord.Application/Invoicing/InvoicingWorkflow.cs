@@ -10,9 +10,10 @@ using Raccord.Application.Projects;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Auditing;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Common;
 using Raccord.Domain.Customers;
 using Raccord.Domain.Projects;
+using Raccord.SharedKernel.Abstractions;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Application.Invoicing;
 
@@ -29,7 +30,7 @@ public sealed class InvoicingWorkflow(
     IInvoiceDocumentRenderer renderer,
     IDocumentStore documents,
     IClock clock,
-    ICurrentActor actor,
+    ICurrentUser actor,
     IUnitOfWork unitOfWork
 )
 {

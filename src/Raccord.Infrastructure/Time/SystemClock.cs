@@ -1,4 +1,4 @@
-using Raccord.Application.Abstractions;
+using Raccord.SharedKernel.Abstractions;
 
 namespace Raccord.Infrastructure.Time;
 

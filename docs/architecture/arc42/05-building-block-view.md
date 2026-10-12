@@ -6,17 +6,20 @@
 Raccord.Aspire ──(orchestrates)──► Raccord.Web, PostgreSQL, Azurite, Vite dev server
 Raccord.Frontend (React) ──HTTP──► Raccord.Web
 
-Raccord.Web ─────────► Raccord.Application ─► Raccord.Domain
+Raccord.Web ─────────► Raccord.Application ─► Raccord.Domain ─► Raccord.SharedKernel
      │   └───────────► Raccord.Contracts ◄────┘ (Application returns contracts)
-     ├───────────────► Raccord.Infrastructure ─► Application, Domain, Contracts
+     ├───────────────► Raccord.Infrastructure ─► Application, Domain, Contracts, BuildingBlocks
+     └───────────────► Raccord.BuildingBlocks ─► Raccord.SharedKernel
      └───────────────► Raccord.ServiceDefaults (health, telemetry, resilience)
 ```
 
 | Block | Responsibility | Public surface |
 | --- | --- | --- |
-| `Raccord.Domain` | Business rules; no framework dependencies | Aggregates and value objects per module |
+| `Raccord.SharedKernel` | BCL-only shared values and ports | Money, parties, pricing, clock, current user and audit append |
+| `Raccord.Domain` | Business rules; no framework dependencies | Aggregates and module rules |
 | `Raccord.Contracts` | Public HTTP contracts (records) | Request/response records |
 | `Raccord.Application` | Use cases and ports | `CustomerDirectory`, `ProjectWorkspace`, `InvoicingWorkflow`, `OrganizationSettings`, `AuditLog`; port interfaces |
+| `Raccord.BuildingBlocks` | Shared technical seams | Sender, problem mapping, storage adapters and shared transaction coordinator |
 | `Raccord.Infrastructure` | Adapters | `AddRaccordInfrastructure`, `DatabaseMaintenance`, `RaccordDbContext` |
 | `Raccord.Web` | HTTP endpoints, error mapping, SPA hosting, `migrate` command | `/api/*`, `/health/*`, `/openapi/v1.json` |
 | `Raccord.Frontend` | User interface | Routes under `/` |
@@ -43,7 +46,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 | `IDocumentStore` | `FileSystemDocumentStore`, `AzureBlobDocumentStore` | `Storage:Provider` |
 | `IComplianceRecorder` | `PendingComplianceRecorder` | See compliance seam |
 | `IClock` | `SystemClock` | UTC now; "today" in `Raccord:TimeZone` |
-| `ICurrentActor` | `HttpCurrentActor` (Web) | `unauthenticated` until sign-in exists |
+| `ICurrentUser` | `HttpCurrentActor` (Web) | `unauthenticated` until sign-in exists |
 
 ## Level 2 — frontend
 

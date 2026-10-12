@@ -2,9 +2,9 @@ using Raccord.Contracts.Common;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Projects;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Parties;
-using Raccord.Domain.Pricing;
 using Raccord.Domain.Projects;
+using Raccord.SharedKernel.Parties;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Application;
 

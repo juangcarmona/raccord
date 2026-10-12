@@ -13,6 +13,10 @@ public sealed class DependencyRulesTests
         typeof(Raccord.Contracts.Invoicing.IssuedInvoiceResponse).Assembly;
     private static readonly Assembly Infrastructure =
         typeof(Raccord.Infrastructure.DependencyInjection).Assembly;
+    private static readonly Assembly SharedKernel =
+        typeof(Raccord.SharedKernel.Common.Currency).Assembly;
+    private static readonly Assembly BuildingBlocks =
+        typeof(Raccord.BuildingBlocks.Api.ApiResults).Assembly;
 
     private static readonly string[] FrameworkPrefixes =
     [
@@ -41,6 +45,7 @@ public sealed class DependencyRulesTests
         var offending = ReferencedNames(Domain)
             .Where(name =>
                 !FrameworkPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
+                && !string.Equals(name, "Raccord.SharedKernel", StringComparison.Ordinal)
             );
 
         offending.ShouldBeEmpty();
@@ -55,6 +60,34 @@ public sealed class DependencyRulesTests
             );
 
         offending.ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void SharedKernel_Should_depend_only_on_the_base_class_library()
+    {
+        ReferencedNames(SharedKernel)
+            .Where(name =>
+                !FrameworkPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
+            )
+            .ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void BuildingBlocks_Should_depend_only_on_shared_kernel_and_allowed_frameworks()
+    {
+        ReferencedNames(BuildingBlocks)
+            .Where(name =>
+                !FrameworkPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal))
+                && !name.StartsWith("Microsoft.", StringComparison.Ordinal)
+                && !name.StartsWith("System.", StringComparison.Ordinal)
+                && !name.StartsWith("Azure.", StringComparison.Ordinal)
+                && !name.StartsWith("ErrorOr", StringComparison.Ordinal)
+                && !name.StartsWith("FluentValidation", StringComparison.Ordinal)
+                && !name.StartsWith("Npgsql", StringComparison.Ordinal)
+                && !string.Equals(name, "Raccord.SharedKernel", StringComparison.Ordinal)
+                && !string.Equals(name, "Raccord.Application", StringComparison.Ordinal)
+            )
+            .ShouldBeEmpty();
     }
 
     [Fact]
@@ -76,12 +109,22 @@ public sealed class DependencyRulesTests
     }
 
     [Theory]
-    [InlineData("Raccord.Domain", new string[0])]
+    [InlineData("Raccord.Domain", new[] { "Raccord.SharedKernel" })]
     [InlineData("Raccord.Contracts", new string[0])]
-    [InlineData("Raccord.Application", new[] { "Raccord.Contracts", "Raccord.Domain" })]
+    [InlineData(
+        "Raccord.Application",
+        new[] { "Raccord.Contracts", "Raccord.Domain", "Raccord.SharedKernel" }
+    )]
     [InlineData(
         "Raccord.Infrastructure",
-        new[] { "Raccord.Application", "Raccord.Contracts", "Raccord.Domain" }
+        new[]
+        {
+            "Raccord.Application",
+            "Raccord.BuildingBlocks",
+            "Raccord.Contracts",
+            "Raccord.Domain",
+            "Raccord.SharedKernel",
+        }
     )]
     [InlineData(
         "Raccord.Web",
@@ -90,6 +133,8 @@ public sealed class DependencyRulesTests
             "Raccord.Application",
             "Raccord.Contracts",
             "Raccord.Infrastructure",
+            "Raccord.BuildingBlocks",
+            "Raccord.SharedKernel",
             "Raccord.ServiceDefaults",
         }
     )]

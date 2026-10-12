@@ -2,9 +2,9 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using Raccord.Domain.Common;
-using Raccord.Domain.Parties;
-using Raccord.Domain.Pricing;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Parties;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Domain.Billing;
 

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>Raccord.BuildingBlocks</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Azure.Storage.Blobs" />
+        <PackageReference Include="ErrorOr" />
+        <PackageReference Include="FluentValidation" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Raccord.Application\Raccord.Application.csproj" />
+        <ProjectReference Include="..\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
+        <InternalsVisibleTo Include="Raccord.Infrastructure" />
+        <InternalsVisibleTo Include="Raccord.Infrastructure.Tests" />
+        <InternalsVisibleTo Include="Raccord.BuildingBlocks.Tests" />
+    </ItemGroup>
+</Project>

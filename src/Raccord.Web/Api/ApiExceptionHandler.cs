@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Invoicing;
 using Raccord.Contracts.Common;
-using Raccord.Domain.Common;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Web.Api;
 

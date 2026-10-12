@@ -42,6 +42,10 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         try
         {
             await page.GotoAsync("/setup");
+            await page.WaitForURLAsync(url =>
+                url.EndsWith("/setup", StringComparison.Ordinal)
+                || url.EndsWith("/sign-in", StringComparison.Ordinal)
+            );
             if (page.Url.EndsWith("/setup", StringComparison.Ordinal))
             {
                 await page.GetByLabel("Email").FillAsync("admin@example.com");

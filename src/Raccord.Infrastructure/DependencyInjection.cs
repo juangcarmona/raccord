@@ -9,7 +9,6 @@ using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
 using Raccord.Application.Invoicing;
-using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Messaging;
 using Raccord.BuildingBlocks.Persistence;
 using Raccord.BuildingBlocks.Storage;
@@ -22,6 +21,7 @@ using Raccord.Infrastructure.Time;
 using Raccord.Modules.Compliance;
 using Raccord.Modules.Compliance.Contracts;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Projects.Contracts;
 using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
@@ -68,7 +68,8 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException("Contacts persistence must support writes.")
         );
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
-        services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<IBillableWork, ProjectRepository>();
+        services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         RegisterWorkspaceServices(services);

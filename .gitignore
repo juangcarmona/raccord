@@ -44,5 +44,3 @@ deploy/backups*/
 StrykerOutput/
 
 
-# APM dependencies
-apm_modules/

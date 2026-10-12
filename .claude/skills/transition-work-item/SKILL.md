@@ -39,11 +39,17 @@ The lifecycle state is **not** GitHub's open/closed. It is exactly one `status:`
 | proposed → in-review | `status:proposed`  | `status:in-review` | `implement` |
 | in-review → done     | `status:in-review` | `status:done`      | `integrate` |
 
-**Human-only, never fired here:** setting or clearing `status:blocked`, closing an issue as not planned, and reopening an issue. If `docs/engineering-lifecycle.md` marks further transitions human-only, they are refused too; where the configuration and this table disagree, stop and report the disagreement rather than choose.
+**Human-only, never fired here:** setting or clearing `status:blocked`, closing an issue as not planned, and reopening an issue. If `docs/engineering-lifecycle.md` marks further transitions human-only, they are refused too; the configuration is the authority and this table is only a convenience copy of it, so step 0 reads the configuration on every run and stops when the two disagree.
 
 An issue with **no** `status:` label is in the backlog for one purpose only: the backlog → ready transition, which then adds `status:ready` and removes nothing. For any other target, a missing label is a mismatch.
 
 ## Workflow
+
+### 0. Read the lifecycle configuration
+
+Read the **Lifecycle stages and states** and **Transitions no capability ever fires** sections of `docs/engineering-lifecycle.md`. Confirm that every row of the table above (its from-label, to-label and firing stage) appears there, that the configuration defines no agent transition missing here, and that every human-only transition there is refused by this skill.
+
+_Done when:_ the configuration was read in this invocation and agrees with the table above, or the disagreement is reported with both versions and nothing else happens.
 
 ### 1. Resolve the requested transition
 

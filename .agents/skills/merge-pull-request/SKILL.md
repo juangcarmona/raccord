@@ -100,4 +100,4 @@ _Done when:_ the command exited zero, or the refusal is reported verbatim.
 gh pr view <number> -R juangcarmona/raccord --json state,mergedAt,mergeCommit,headRefName
 ```
 
-_Done when:_ the output reports state `MERGED`, the merge commit SHA from `mergeCommit.oid`, and whether the remote source branch was deleted (the local branch is never touched).
+_Done when:_ the output reports state `MERGED`, the merge commit SHA from `mergeCommit.oid`, and whether the source branch was deleted. With `--delete-branch`, `gh` deletes the remote branch and, run from a working copy of this repository, also switches that working copy to `main` and deletes the local branch; report all of it.

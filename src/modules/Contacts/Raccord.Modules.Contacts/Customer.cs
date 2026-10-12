@@ -1,10 +1,10 @@
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Parties;
 
-namespace Raccord.Domain.Customers;
+namespace Raccord.Modules.Contacts.Domain;
 
 /// <summary>A company or person Raccord bills.</summary>
-public sealed class Customer
+internal sealed class Customer
 {
     private Customer()
     {
@@ -21,22 +21,22 @@ public sealed class Customer
     }
 
     /// <summary>Customer identifier.</summary>
-    public Guid Id { get; private set; }
+    internal Guid Id { get; private set; }
 
     /// <summary>Registered legal name.</summary>
-    public string LegalName { get; private set; }
+    internal string LegalName { get; private set; }
 
     /// <summary>Normalized tax ID, if known.</summary>
-    public string? TaxId { get; private set; }
+    internal string? TaxId { get; private set; }
 
     /// <summary>Billing address.</summary>
-    public AddressFields BillingAddress { get; private set; } = new();
+    internal AddressFields BillingAddress { get; private set; } = new();
 
     /// <summary>Billing e-mail address.</summary>
-    public string? Email { get; private set; }
+    internal string? Email { get; private set; }
 
     /// <summary>Registers a customer. Tax ID and address may be completed before invoicing.</summary>
-    public static Customer Register(
+    internal static Customer Register(
         string legalName,
         string? taxId,
         PostalAddress? address,
@@ -60,5 +60,5 @@ public sealed class Customer
     }
 
     /// <summary>The customer's legal identity for an invoice.</summary>
-    public LegalParty ToLegalParty() => new(LegalName, TaxId, BillingAddress.ToAddress());
+    internal LegalParty ToLegalParty() => new(LegalName, TaxId, BillingAddress.ToAddress());
 }

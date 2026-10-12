@@ -7,7 +7,6 @@ using Npgsql;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
-using Raccord.Application.Customers;
 using Raccord.Application.Documents;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
@@ -23,6 +22,7 @@ using Raccord.Infrastructure.Persistence.Repositories;
 using Raccord.Infrastructure.Time;
 using Raccord.Modules.Compliance;
 using Raccord.Modules.Compliance.Contracts;
+using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using ApplicationAuditTrail = Raccord.Application.Auditing.IAuditTrail;
@@ -62,7 +62,12 @@ public static class DependencyInjection
                 provider.GetRequiredService<ParticipatingContexts>()
             );
         });
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IPartyDirectory, CustomerRepository>();
+        services.AddScoped<IPartyWriter>(provider =>
+            provider.GetRequiredService<IPartyDirectory>() as IPartyWriter
+            ?? throw new InvalidOperationException("Contacts persistence must support writes.")
+        );
+        services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Raccord.Domain.Customers;
 using Raccord.Domain.Projects;
 
 namespace Raccord.Infrastructure.Persistence.Configurations;
@@ -12,11 +11,6 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder.ToTable("projects");
         builder.HasKey(project => project.Id);
         builder.Property(project => project.Name).HasMaxLength(200);
-        builder
-            .HasOne<Customer>()
-            .WithMany()
-            .HasForeignKey(project => project.CustomerId)
-            .OnDelete(DeleteBehavior.Restrict);
         builder.HasConcurrencyToken();
 
         builder.OwnsMany(

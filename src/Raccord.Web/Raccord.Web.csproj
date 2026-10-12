@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\modules\Compliance\Raccord.Modules.Compliance\Raccord.Modules.Compliance.csproj" />
+        <ProjectReference Include="..\modules\Contacts\Raccord.Modules.Contacts\Raccord.Modules.Contacts.csproj" />
         <ProjectReference Include="..\Raccord.Application\Raccord.Application.csproj" />
         <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
         <ProjectReference Include="..\Raccord.Infrastructure\Raccord.Infrastructure.csproj" />

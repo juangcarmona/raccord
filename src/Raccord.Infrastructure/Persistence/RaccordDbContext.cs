@@ -1,7 +1,6 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Compliance;
@@ -12,7 +11,7 @@ namespace Raccord.Infrastructure.Persistence;
 public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     : DbContext(options)
 {
-    internal DbSet<Customer> Customers => Set<Customer>();
+    internal DbSet<CustomerRow> Customers => Set<CustomerRow>();
 
     internal DbSet<Project> Projects => Set<Project>();
 

@@ -3,7 +3,7 @@ id: TERM-AUTOMATIC-PROJECT-NOTE
 type: domain-term
 title: "Automatic project note"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

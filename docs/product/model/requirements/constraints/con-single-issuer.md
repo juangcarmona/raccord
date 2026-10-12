@@ -4,7 +4,7 @@ type: constraint
 title: "One issuing organization per installation"
 status: draft
 applies-to:
-  - "BC-PARTIES"
+  - "BC-CONTACTS"
   - "BC-INVOICING"
 uses-terms:
   - "TERM-ISSUER"

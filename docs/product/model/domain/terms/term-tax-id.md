@@ -3,7 +3,7 @@ id: TERM-TAX-ID
 type: domain-term
 title: "Tax identifier"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms:
   - "NIF"
 uses-terms: []

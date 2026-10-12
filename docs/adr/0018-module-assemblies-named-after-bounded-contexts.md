@@ -89,4 +89,4 @@ We will make every module its own assembly, named after the product model's boun
 - Supersedes: ADR-0003
 - Related: ADR-0001, ADR-0019, ADR-0020, ADR-0021, ADR-0022
 - Product model: `docs/product/model/domain/bounded-contexts/`
-- Product Change: CHG-RENAME-PARTIES-TO-CONTACTS-001 (draft), which adds BC-CONTACTS in place of BC-PARTIES: `docs/product/changes/active/chg-rename-parties-to-contacts-001/change.md`
+- Product Change: CHG-RENAME-PARTIES-TO-CONTACTS-001 (applied 2026-10-12), which adds BC-CONTACTS in place of BC-PARTIES: `docs/product/changes/completed/chg-rename-parties-to-contacts-001/change.md`

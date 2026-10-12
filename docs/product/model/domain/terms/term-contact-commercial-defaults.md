@@ -3,7 +3,7 @@ id: TERM-CONTACT-COMMERCIAL-DEFAULTS
 type: domain-term
 title: "Contact commercial defaults"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

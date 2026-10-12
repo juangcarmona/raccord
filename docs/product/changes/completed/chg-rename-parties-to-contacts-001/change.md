@@ -2,7 +2,7 @@
 id: CHG-RENAME-PARTIES-TO-CONTACTS-001
 type: product-change
 title: 'Rename the Parties bounded context to Contacts'
-status: draft
+status: applied
 base-revision: '2c000ec'
 operations:
   add:

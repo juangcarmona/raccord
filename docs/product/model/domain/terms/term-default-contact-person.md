@@ -3,7 +3,7 @@ id: TERM-DEFAULT-CONTACT-PERSON
 type: domain-term
 title: "Default contact person"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT-PERSON"

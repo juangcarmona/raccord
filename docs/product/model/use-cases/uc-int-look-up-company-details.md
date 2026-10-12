@@ -5,7 +5,7 @@ title: "Fill company details from a registry"
 status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by: []
 uses-terms:
   - "TERM-COMPANY-REGISTRY-LOOKUP"

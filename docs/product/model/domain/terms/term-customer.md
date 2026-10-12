@@ -3,7 +3,7 @@ id: TERM-CUSTOMER
 type: domain-term
 title: "Customer"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms: []
 ---

@@ -3,7 +3,7 @@ id: TERM-VENUE
 type: domain-term
 title: "Venue"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms:
   - "Location"
 uses-terms:

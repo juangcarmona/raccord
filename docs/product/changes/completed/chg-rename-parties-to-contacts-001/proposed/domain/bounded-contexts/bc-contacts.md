@@ -1,7 +1,7 @@
 ---
-id: BC-PARTIES
+id: BC-CONTACTS
 type: bounded-context
-title: "Parties"
+title: "Contacts"
 status: draft
 ---
 

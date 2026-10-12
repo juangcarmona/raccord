@@ -3,7 +3,7 @@ id: TERM-TRAVEL-ESTIMATE
 type: domain-term
 title: "Travel estimate"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-VISITING-ADDRESS"

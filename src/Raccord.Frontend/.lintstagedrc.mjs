@@ -13,5 +13,5 @@ export default {
     },
     // Markdown is owned by markdownlint-cli2 (repository-root config), not Prettier. Its ignores
     // already exclude the generated agent folders and the ProductShape-managed product model.
-    "*.md": (files) => [`markdownlint-cli2 --fix ${files.map(quote).join(" ")}`],
+    "*.md": (files) => [`npx -y markdownlint-cli2@0.23.3 --fix ${files.map(quote).join(" ")}`],
 };

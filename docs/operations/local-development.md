@@ -55,7 +55,7 @@ dotnet tool restore
 dotnet csharpier check .
 ```
 
-In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`. From the repository root: `src/Raccord.Frontend/node_modules/.bin/markdownlint-cli2` (add `--fix` to apply the automatic fixes).
+In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`. From the repository root: `npx -y markdownlint-cli2@0.23.3` (add `--fix` to apply the automatic fixes). It runs pinned through `npx`, like `@prodshape/cli` and OpenSpec, rather than from `package.json`.
 
 ### Git hooks (auto-installed on build)
 

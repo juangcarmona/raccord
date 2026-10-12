@@ -4,9 +4,9 @@ type: functional-requirement
 title: Example Functional Requirement
 status: draft
 derived-from:
-  - UC-EXAMPLE-001
+    - UC-EXAMPLE-001
 verification:
-  - scenario: An observable scenario demonstrating the obligation is met
+    - scenario: An observable scenario demonstrating the obligation is met
 uses-terms: []
 ---
 

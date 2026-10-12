@@ -133,7 +133,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-artifacts
-          path: '**/playwright-artifacts/'
+          path: "**/playwright-artifacts/"
           if-no-files-found: ignore
           retention-days: 7
 
@@ -147,11 +147,19 @@ jobs:
           node-version: 24
       - name: Validate baseline and live Product Changes
         run: |
-          npx -y @prodshape/cli@0.20.0 validate
+          npx -y @prodshape/cli@0.22.0 validate
           for change in docs/product/changes/active/*/; do
             id=$(grep -m1 '^id:' "$change/change.md" | awk '{print $2}')
-            npx -y @prodshape/cli@0.20.0 change validate "$id"
+            npx -y @prodshape/cli@0.22.0 change validate "$id"
           done
+      # Every current OpenSpec document must be bound (cites the product model) or exempt (with a
+      # human-approved reason). Stale citations only warn: .product/config.yaml keeps
+      # warnings-as-errors false. Population discovery runs `openspec list`, so the pinned
+      # OpenSpec CLI must be on PATH. This verdict stays separate from the openspec job's.
+      - name: Install the OpenSpec CLI
+        run: npm install -g @fission-ai/openspec@1.12.0
+      - name: OpenSpec documents cite the product model
+        run: npx -y @prodshape/cli@0.22.0 citations verify --provider openspec
 
   frontend:
     name: Frontend lint, types, tests, build, audit, contract drift

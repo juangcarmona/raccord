@@ -4,12 +4,12 @@ type: structured-behaviour
 title: Example Structured Behaviour
 status: draft
 illustrates:
-  - UC-EXAMPLE-001
+    - UC-EXAMPLE-001
 given:
-  - An observable context condition holds
+    - An observable context condition holds
 when: One product-level stimulus occurs
 then:
-  - An observable outcome follows
+    - An observable outcome follows
 uses-terms: []
 ---
 

@@ -1,3 +1,5 @@
+<!-- pdac-scope: none reason="Repository engineering tooling and CI process; implements no product behaviour defined in docs/product/model." -->
+
 ## Why
 
 Raccord enforced its quality gates only server-side (CI). A local `--no-verify` or a stale hook
@@ -51,6 +53,7 @@ expectation that broke. GitHub issue
 ## Capabilities
 
 ### New Capabilities
+
 - `commit-hooks`: local pre-commit and commit-msg hooks, auto-installed on build, with an
   explicit `HUSKY=0` escape.
 - `commit-message-convention`: conventional commits with a restricted type-enum, enforced at
@@ -70,6 +73,7 @@ expectation that broke. GitHub issue
 - `runtime-probing`: post-merge ZAP baseline scans of the booted Compose stack.
 
 ### Modified Capabilities
+
 _(none — no spec'd capability's requirements change; this change is the seed for the
 spec layer itself)_
 

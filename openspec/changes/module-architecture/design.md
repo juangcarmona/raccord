@@ -1,3 +1,5 @@
+<!-- pdac-scope: cited -->
+
 ## Context
 
 The current layout and the reasons for changing it are in ADR-0018 to ADR-0022. This document maps today's code onto the new modules and records the implementation choices those ADRs leave open.
@@ -38,6 +40,16 @@ The current layout and the reasons for changing it are in ADR-0018 to ADR-0022. 
 
 Contract dependencies between modules: Invoicing → Projects, Contacts, Workspace and Compliance contracts. Projects → Contacts (customer existence). This graph is acyclic.
 
+<!-- pdac:cite id="BC-WORKSPACE" digest="sha256:013841dd37789974afef821eb2c071a85acaa72c083abd2285b7c406db95f8a5" -->
+
+<!-- pdac:cite id="BC-PARTIES" digest="sha256:440465d249e5f48c8bf256a2586126bbb97acc061e3c08a3521553d4a0a2a738" -->
+
+<!-- pdac:cite id="BC-PROJECTS" digest="sha256:11cadbc8906365210716689609d66738e29fc576822aa2e8e7a925a8bae0933e" -->
+
+<!-- pdac:cite id="BC-INVOICING" digest="sha256:386343a8a3613a73a2ab60d1b5767cbe7d880fb8ded0d2d1a7c5dee68fa2a567" -->
+
+<!-- pdac:cite id="BC-COMPLIANCE" digest="sha256:92fbac72cbcb8e640f0c87ff7da3629698b6bb3ee7cf5bdf742db249ca898dc0" -->
+
 ### Shared-transaction unit of work
 
 - A scoped `NpgsqlConnection` comes from the Aspire-provided data source. Each module context is configured with `UseNpgsql(connection)`.
@@ -45,11 +57,25 @@ Contract dependencies between modules: Invoicing → Projects, Contacts, Workspa
 - The existing conflict mapping (`DbUpdateConcurrencyException` and unique violation → conflict) is kept.
 - **Rejected:** a `TransactionScope` with ambient enlistment. Npgsql supports it, but it hides the transaction boundary and complicates async flows.
 
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+
+<!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:a29bab7607c529ef8b86f34e32758cf8557927cf7e71812bded9aac01c3ef469" -->
+
+<!-- pdac:cite id="QR-CONCURRENCY-CONSISTENCY" digest="sha256:320945ebf06be10006380b4e183377f48569c75224692b903f3cf093887736a2" -->
+
 ### Schema move
 
 - Each module's first migration in its new history table is generated against an empty schema and then edited into `ALTER TABLE public.<t> SET SCHEMA <module>` statements. It is guarded by `IF EXISTS`, so that new databases created from scratch get the plain `CREATE TABLE` path.
 - **Rejected:** dropping and recreating the tables, because it loses data in installations that already exist.
 - The trigger function `raccord_reject_mutation()` stays in `public` as a shared database utility, created idempotently by the Compliance module's first migration and reused by the Invoicing triggers.
+
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+
+<!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
+
+<!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
 
 ### Sender pipeline
 

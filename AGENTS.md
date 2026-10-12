@@ -5,7 +5,7 @@ Raccord is an open-source, self-hostable operations and invoicing platform for a
 ## Working agreements
 
 - Read the relevant product and architecture documents under `docs/` before changing domain behavior.
-- The product definition is Product Definition as Code (PDaC) under `docs/product/`, managed with ProductShape (`npx @prodshape/cli@0.20.0`). Product semantics change only through Product Changes in `docs/product/changes/active/`, validated with `prodshape change validate`, approved by a human and applied explicitly; never edit `docs/product/model/` directly. Reference artifact IDs (and `prodshape cite` once accepted) instead of restating them.
+- The product definition is Product Definition as Code (PDaC) under `docs/product/`, managed with ProductShape (`npx @prodshape/cli@0.22.0`). Product semantics change only through Product Changes in `docs/product/changes/active/`, validated with `prodshape change validate`, approved by a human and applied explicitly; never edit `docs/product/model/` directly. Reference artifact IDs instead of restating them. Every current OpenSpec document is either bound (declares `pdac-scope: cited` and carries citations emitted by `prodshape cite`) or exempt (`pdac-scope: none` with a reason a human approved); CI enforces this with `prodshape citations verify --provider openspec`.
 - Keep source links and dates when updating `docs/research/`.
 - Keep the core product independent from any external operations platform. Never name third-party products in public docs, UI, vocabulary or code; private research provenance goes to the git-ignored `.private/research/`.
 - Implement capabilities independently with original terminology, UX, and code.

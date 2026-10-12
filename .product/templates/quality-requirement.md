@@ -5,9 +5,9 @@ title: Example Quality Requirement
 status: draft
 quality-attribute: portability
 applies-to:
-  - UC-EXAMPLE-001
+    - UC-EXAMPLE-001
 verification:
-  - scenario: A measurable scenario demonstrating the quality level is met
+    - scenario: A measurable scenario demonstrating the quality level is met
 uses-terms: []
 ---
 

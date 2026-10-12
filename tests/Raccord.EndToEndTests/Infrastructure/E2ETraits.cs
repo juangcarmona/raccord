@@ -51,6 +51,7 @@ public static class E2ETraits
 
     public static class Areas
     {
+        public const string Authentication = "authentication";
         public const string Customers = "customers";
         public const string Projects = "projects";
         public const string Invoicing = "invoicing";

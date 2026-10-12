@@ -20,6 +20,26 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 - Action: Use a worktree-safe merge path and never disturb another agent's checkout.
 - Check: Verify the remote merge result and worktree status after integration.
 
+## 2026-10-12 · Authentication delivery review
+
+- Observation: The authentication change initially protected the test factory and the Aspire health
+  probe through the global fallback policy, so the first CI attempts failed or waited for a host that
+  could not become healthy.
+- Action: Keep production authorization enabled in the real AppHost, make the test bypass explicit,
+  and mark infrastructure health endpoints anonymous. Add a browser journey for the anonymous API
+  boundary so this distinction remains executable.
+- Check: The backend test job and the AppHost E2E job must both pass, including the authentication
+  journey, before merging.
+
+- Observation: UI functionality is difficult to review from a mobile PR view without visual evidence,
+  while reproducing the full AppHost locally is expensive when Docker is unavailable.
+- Action: Capture a representative sign-in screenshot as versioned PR evidence and reuse the shared
+  browser context for E2E journeys. Do not replace required security, acceptance, or contract gates;
+  reduce cost through shared setup and by avoiding redundant local reruns after the same CI head is
+  green.
+- Check: Every PR that adds UI behavior links a screenshot in its description, and the E2E selection
+  manifest names the new journey explicitly.
+
 ## Review rule
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.

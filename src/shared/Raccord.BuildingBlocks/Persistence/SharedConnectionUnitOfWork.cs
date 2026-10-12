@@ -77,6 +77,11 @@ public sealed class SharedConnectionUnitOfWork(
     {
         foreach (var context in participants.Items)
         {
+            if (context.Database.CurrentTransaction is null)
+            {
+                continue;
+            }
+
             await context
                 .Database.UseTransactionAsync(
                     (System.Data.Common.DbTransaction?)null,

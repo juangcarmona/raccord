@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">Raccord mark</title>
-  <desc id="desc">Two linked frame-like paths representing continuity in audiovisual production.</desc>
-  <path fill="#0B1020" d="M108 116h235c29 0 52 23 52 52v38h-50v-25c0-9-7-16-16-16H132v118h109l38-38 36 36-53 53H108c-28 0-50-22-50-50V166c0-28 22-50 50-50Z"/>
-  <path fill="#2DE2E6" d="M404 396H169c-29 0-52-23-52-52v-38h50v25c0 9 7 16 16 16h197V229H271l-38 38-36-36 53-53h205c28 0 50 22 50 50v102c0 36-29 66-66 66Z"/>
-  <path fill="#FF6B5E" d="m327 116 43 43-43 43-43-43 43-43Zm-111 194 43 43-43 43-43-43 43-43Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+<title id="title">Raccord R mark</title>
+<desc id="desc">Three parallel flowing tracks, two white and one cyan, forming an R.</desc>
+<defs><radialGradient id="bg"><stop stop-color="#10172d"/><stop offset="1" stop-color="#0b1020"/></radialGradient><linearGradient id="w" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f7fa"/><stop offset="1" stop-color="#eef0f5"/></linearGradient></defs>
+<rect width="1254" height="1254" fill="url(#bg)"/>
+<path fill="url(#w)" d="M 357 372 L 358 455 L 733 455 L 748 459 L 763 467 L 775 477 L 786 491 L 795 511 L 798 527 L 798 537 L 795 554 L 786 574 L 780 583 L 766 597 L 753 605 L 798 675 L 823 659 L 843 640 L 860 617 L 869 600 L 878 575 L 883 548 L 882 508 L 878 489 L 872 471 L 858 444 L 841 422 L 830 411 L 812 397 L 786 383 L 762 375 L 733 371 Z"/>
+<path fill="url(#w)" d="M 357 631 L 358 711 L 563 711 L 578 715 L 594 724 L 610 741 L 685 858 L 780 858 L 664 673 L 647 655 L 631 644 L 611 635 L 583 630 Z"/>
+<path fill="#0BDDEB" d="M 357 502 L 358 583 L 621 583 L 632 586 L 642 591 L 649 596 L 664 613 L 817 858 L 910 858 L 907 851 L 735 579 L 707 539 L 685 520 L 664 509 L 637 502 Z"/>
 </svg>

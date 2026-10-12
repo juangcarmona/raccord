@@ -33,7 +33,7 @@ From the `deploy/` folder:
 ## Configuration
 
 | Variable | Default | Meaning |
-|---|---|---|
+| --- | --- | --- |
 | `POSTGRES_PASSWORD` | — (required) | Database password |
 | `POSTGRES_DB`, `POSTGRES_USER` | `raccord` | Database and user |
 | `RACCORD_HTTP_PORT` | `8080` | Published port |

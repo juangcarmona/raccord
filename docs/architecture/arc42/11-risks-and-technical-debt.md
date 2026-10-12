@@ -3,7 +3,7 @@
 ## Risks
 
 | ID | Risk | Impact | Mitigation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | R-1 | **No authentication yet** | Anyone with network access can read data and issue invoices | Do not expose installations; MVP slice 2 adds OIDC and roles. Audit actor shows `unauthenticated`. |
 | R-2 | VERI*FACTU legal responsibility for open-source self-hosted software unresolved | Could block the Spanish market | Compliance seam records obligations now; legal review before implementation |
 | R-3 | Tax rules and dates change (announced 2028 postponement not enacted) | Rework | Requirements dated and sourced; adapters isolated |
@@ -16,7 +16,7 @@
 ## Technical debt
 
 | ID | Debt | Plan |
-|---|---|---|
+| --- | --- | --- |
 | D-1 | No editing of customers or billable lines yet | MVP slice 3 |
 | D-2 | Lists are unpaginated; draft list loads projects/customers one by one | Add pagination and projections before measuring QR-RESPONSE-TIME |
 | D-3 | PDF renderer: WinAnsi only, no logo/QR/PDF-A | Revisit with VERI*FACTU QR (ADR-0008) |

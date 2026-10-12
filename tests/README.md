@@ -1,7 +1,7 @@
 # Tests
 
 | Project | Seam | Needs Docker |
-|---|---|---|
+| --- | --- | --- |
 | `Raccord.Domain.Tests` | Domain model (money, VAT, numbering, drafts, finalization, representation, parties) | No |
 | `Raccord.Architecture.Tests` | Dependency rules | No |
 | `Raccord.Infrastructure.Tests` | PDF renderer, file document store | No |

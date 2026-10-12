@@ -31,11 +31,11 @@ We will test at these levels, through public seams only:
 ## Consequences
 
 - **Positive:**
-    - Database behaviour (rules, concurrency, triggers, tamper detection) is proven against real PostgreSQL.
+  - Database behaviour (rules, concurrency, triggers, tamper detection) is proven against real PostgreSQL.
 - **Negative:**
-    - Integration tests need Docker. CI runners provide it.
+  - Integration tests need Docker. CI runners provide it.
 - **Neutral:**
-    - Tests for an ESLint-, analyzer- or format-only change are not required; behavior changes are.
+  - Tests for an ESLint-, analyzer- or format-only change are not required; behavior changes are.
 
 ## Alternatives considered
 

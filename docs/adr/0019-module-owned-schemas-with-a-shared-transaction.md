@@ -29,33 +29,33 @@ We will give every module its own DbContext and PostgreSQL schema in the one Rac
 
 - **One DbContext per module.** Each module has its own context with `HasDefaultSchema("<module>")`: `workspace`, `contacts`, `projects`, `invoicing` and `compliance`. Each has its own migrations history table in its schema, its migrations in `Persistence/Migrations`, and a design-time factory. No context maps another module's tables.
 - **One connection, one transaction:**
-    - All module contexts in a request share one scoped `NpgsqlConnection`.
-    - `IUnitOfWork` (BuildingBlocks) opens one transaction and enlists every context the use case touched (`Database.UseTransactionAsync`). It saves each context, commits once, and maps concurrency and unique violations to conflicts as today.
-    - Isolation stays at PostgreSQL's default.
-    - Numbering keeps its current guarantees: the sequence row is protected by `xmin`, and conflicts surface as 409.
-    - The Npgsql retrying execution strategy, when enabled, wraps the whole unit of work, not single saves.
+  - All module contexts in a request share one scoped `NpgsqlConnection`.
+  - `IUnitOfWork` (BuildingBlocks) opens one transaction and enlists every context the use case touched (`Database.UseTransactionAsync`). It saves each context, commits once, and maps concurrency and unique violations to conflicts as today.
+  - Isolation stays at PostgreSQL's default.
+  - Numbering keeps its current guarantees: the sequence row is protected by `xmin`, and conflicts surface as 409.
+  - The Npgsql retrying execution strategy, when enabled, wraps the whole unit of work, not single saves.
 - **No foreign keys across modules.** Cross-module references are plain identifiers, because EF Core cannot model a foreign key into another context. Where the legal record needs the referenced data, it snapshots it, as issued invoices already snapshot party identities (ADR-0005). The owning module validates references through `.Contracts` at write time (ADR-0020).
 - **Migrations:**
-    - The `migrate` command (ADR-0004) applies every module's migrations in dependency order. Workspace and Compliance come first.
-    - The move from the current public-schema tables is one migration per module that runs `ALTER TABLE … SET SCHEMA` and keeps the data.
-    - The append-only triggers and the shared `raccord_reject_mutation()` function move to the owning schema or stay in `public`. Either way they must keep rejecting `UPDATE`/`DELETE` on `issued_invoices` and `audit_events`. A test proves this after the move.
+  - The `migrate` command (ADR-0004) applies every module's migrations in dependency order. Workspace and Compliance come first.
+  - The move from the current public-schema tables is one migration per module that runs `ALTER TABLE … SET SCHEMA` and keeps the data.
+  - The append-only triggers and the shared `raccord_reject_mutation()` function move to the owning schema or stay in `public`. Either way they must keep rejecting `UPDATE`/`DELETE` on `issued_invoices` and `audit_events`. A test proves this after the move.
 - **Tests:** Testcontainers integration tests run all module migrations into one database per test, as today (ADR-0014).
 
 ## Consequences
 
 - **Positive:**
-    - Modules cannot read each other's tables through EF.
-    - Each module's schema evolves on its own.
-    - Finalizing an invoice stays a single atomic transaction.
-    - The database layout shows the module map.
+  - Modules cannot read each other's tables through EF.
+  - Each module's schema evolves on its own.
+  - Finalizing an invoice stays a single atomic transaction.
+  - The database layout shows the module map.
 - **Negative:**
-    - Losing cross-module foreign keys moves referential integrity from the database to the application. A billable line can, in principle, reference a project id that never existed.
-    - A change that spans two modules needs two migrations.
-    - The shared-connection unit of work is new infrastructure that must be tested, including rollback when one context fails.
-    - Reporting queries across schemas need explicit read models.
+  - Losing cross-module foreign keys moves referential integrity from the database to the application. A billable line can, in principle, reference a project id that never existed.
+  - A change that spans two modules needs two migrations.
+  - The shared-connection unit of work is new infrastructure that must be tested, including rollback when one context fails.
+  - Reporting queries across schemas need explicit read models.
 - **Neutral:**
-    - Existing installations need the schema-move migration. Installations created from scratch get the new layout directly.
-    - Arc42 §5, §6 (R-2, R-4) and §8 must describe the per-module persistence.
+  - Existing installations need the schema-move migration. Installations created from scratch get the new layout directly.
+  - Arc42 §5, §6 (R-2, R-4) and §8 must describe the per-module persistence.
 
 ## Alternatives considered
 

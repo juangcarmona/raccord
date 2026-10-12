@@ -2,8 +2,7 @@
 
 ## Purpose
 
-A commit's staged content already satisfies the formatters and linters, so no unformatted or
-lint-failing code reaches history even when the author never runs them manually.
+A commit's staged content already satisfies the formatters and linters, so no unformatted or lint-failing code reaches history even when the author never runs them manually.
 
 ## ADDED Requirements
 

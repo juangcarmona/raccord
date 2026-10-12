@@ -7,8 +7,11 @@ const quote = (file) => JSON.stringify(file);
 
 export default {
     "*.{ts,tsx}": ["eslint --fix --max-warnings=0", "prettier --write"],
-    "*.{json,md,yml,yaml,css}": (files) => {
+    "*.{json,yml,yaml,css}": (files) => {
         const formatted = files.filter((file) => !generated.test(file));
         return formatted.length ? [`prettier --write ${formatted.map(quote).join(" ")}`] : [];
     },
+    // Markdown is owned by markdownlint-cli2 (repository-root config), not Prettier. Its ignores
+    // already exclude the generated agent folders and the ProductShape-managed product model.
+    "*.md": (files) => [`npx -y markdownlint-cli2@0.23.3 --fix ${files.map(quote).join(" ")}`],
 };

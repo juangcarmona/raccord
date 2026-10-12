@@ -32,11 +32,11 @@ Npgsql EF Core provider and Aspire client integrations (PostgreSQL, Azure Blob) 
 ## Consequences
 
 - **Positive:**
-    - Contributors and CI build with the same SDK and package versions, and style, analyzer, vulnerability, migration and contract-drift problems fail the build.
+  - Contributors and CI build with the same SDK and package versions, and style, analyzer, vulnerability, migration and contract-drift problems fail the build.
 - **Negative:**
-    - Every warning fails the build; a suppression needs a scoped `.editorconfig` entry with a reason.
+  - Every warning fails the build; a suppression needs a scoped `.editorconfig` entry with a reason.
 - **Neutral:**
-    - New production dependencies require an ADR.
+  - New production dependencies require an ADR.
 
 ## Alternatives considered
 

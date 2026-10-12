@@ -26,11 +26,11 @@ We will keep layered projects with module namespaces and enforce the dependency 
 ## Consequences
 
 - **Positive:**
-    - Breaking a rule fails the build pipeline (verified by injecting a forbidden reference).
+  - Breaking a rule fails the build pipeline (verified by injecting a forbidden reference).
 - **Negative:**
-    - Module boundaries inside a project are enforced by review and namespaces, not by assemblies.
+  - Module boundaries inside a project are enforced by review and namespaces, not by assemblies.
 - **Neutral:**
-    - If coupling grows, a module can move to its own assembly without changing the dependency direction.
+  - If coupling grows, a module can move to its own assembly without changing the dependency direction.
 
 ## Alternatives considered
 

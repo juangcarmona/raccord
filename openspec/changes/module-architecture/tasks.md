@@ -37,12 +37,12 @@
 ## 5. Gates
 
 - [ ] 5.1 Run the CI-equivalent gates locally:
-    - `dotnet tool restore && dotnet csharpier check .`
-    - `dotnet build Raccord.slnx`
-    - `dotnet test Raccord.slnx`
-    - pending EF model check per module
-    - in `src/Raccord.Frontend`: `npm run format:check`, `lint`, `test`, `build` and `api:generate`, with no OpenAPI drift
-    - `openspec validate --all`
-    - commitlint over the branch
+  - `dotnet tool restore && dotnet csharpier check .`
+  - `dotnet build Raccord.slnx`
+  - `dotnet test Raccord.slnx`
+  - pending EF model check per module
+  - in `src/Raccord.Frontend`: `npm run format:check`, `lint`, `test`, `build` and `api:generate`, with no OpenAPI drift
+  - `openspec validate --all`
+  - commitlint over the branch
 
     Verify: all green.

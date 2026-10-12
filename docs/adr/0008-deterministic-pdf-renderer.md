@@ -25,11 +25,11 @@ We will render invoice PDFs with a small in-house writer behind a renderer port.
 ## Consequences
 
 - **Positive:**
-    - No new dependency; tests check structure (xref offsets), encoding, determinism and pagination.
+  - No new dependency; tests check structure (xref offsets), encoding, determinism and pagination.
 - **Negative:**
-    - Characters outside WinAnsi print as `?`.
+  - Characters outside WinAnsi print as `?`.
 - **Neutral:**
-    - Configurable templates, logos, QR codes (needed for VERI\*FACTU) and PDF/A-3 (needed for hybrid e-invoices) will justify revisiting this ADR; the port keeps that change local.
+  - Configurable templates, logos, QR codes (needed for VERI\*FACTU) and PDF/A-3 (needed for hybrid e-invoices) will justify revisiting this ADR; the port keeps that change local.
 
 ## Alternatives considered
 

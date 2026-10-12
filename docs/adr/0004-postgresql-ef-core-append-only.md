@@ -27,11 +27,11 @@ We will use PostgreSQL with EF Core and let the database enforce the append-only
 ## Consequences
 
 - **Positive:**
-    - Issued invoices and audit events cannot be changed through manual SQL or an application bug.
+  - Issued invoices and audit events cannot be changed through manual SQL or an application bug.
 - **Negative:**
-    - A database superuser can still disable triggers; tamper detection (ADR-0005) covers that case.
+  - A database superuser can still disable triggers; tamper detection (ADR-0005) covers that case.
 - **Neutral:**
-    - Restores must recreate the schema (pg_restore of a full dump does), so the triggers come back with the data — verified in the restore rehearsal.
+  - Restores must recreate the schema (pg_restore of a full dump does), so the triggers come back with the data — verified in the restore rehearsal.
 
 ## Alternatives considered
 

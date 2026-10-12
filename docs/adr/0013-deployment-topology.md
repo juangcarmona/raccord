@@ -26,11 +26,11 @@ We will build one application image and deploy it through Docker Compose, .NET A
 ## Consequences
 
 - **Positive:**
-    - Starting topology cost is low.
+  - Starting topology cost is low.
 - **Negative:**
-    - Private networking (VNet integration, private endpoints), Entra-only PostgreSQL auth and zone redundancy are documented hardening steps, not defaults.
+  - Private networking (VNet integration, private endpoints), Entra-only PostgreSQL auth and zone redundancy are documented hardening steps, not defaults.
 - **Neutral:**
-    - Upgrades: run the migration job first, then roll the web app.
+  - Upgrades: run the migration job first, then roll the web app.
 
 ## Alternatives considered
 

@@ -1,7 +1,7 @@
 # 12. Glossary
 
 | Term | Meaning in Raccord |
-|---|---|
+| --- | --- |
 | **Organization / issuer** | The legal entity using the installation and issuing invoices (one per deployment, ADR-0012). |
 | **Issuer profile** | The issuer's legal name, tax ID and address used on new invoices. |
 | **Customer** | A company or person Raccord bills. *Invoiceable* when tax ID and address are complete. |

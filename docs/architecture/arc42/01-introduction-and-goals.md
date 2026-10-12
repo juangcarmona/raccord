@@ -12,7 +12,7 @@ Raccord is an independent, open-source, self-hostable operations and invoicing s
 ## Quality goals
 
 | Priority | Goal | Scenario (see §10) | Measure |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Correctness | Q-1, Q-2 | Money, VAT, rounding and numbering are deterministic and covered by tests |
 | 2 | Integrity & auditability | Q-3, Q-4 | Issued records cannot be altered; tampering is detected; actions are audited |
 | 3 | Operability | Q-6, Q-7 | Fresh install < 1 h; health checks; rehearsed backup/restore |
@@ -23,7 +23,7 @@ Raccord is an independent, open-source, self-hostable operations and invoicing s
 ## Stakeholders
 
 | Role | Expectation |
-|---|---|
+| --- | --- |
 | Production/rental companies (actors ACT-OPERATIONS-COORDINATOR, ACT-BILLING-ADMINISTRATOR) | Correct invoices, less re-typing, low cost |
 | External accountants and tax authority | Consistent numbering, verifiable records, exports |
 | Self-hosting administrators | Simple installation, upgrades, backups |

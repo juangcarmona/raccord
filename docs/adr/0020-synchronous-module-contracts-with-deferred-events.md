@@ -31,17 +31,17 @@ Raccord's first asynchronous needs are known but not built yet: e-mail sending (
 We will make modules communicate only through synchronous, in-process interfaces published in their `.Contracts` assemblies, inside the caller's unit of work. Events come later, when a real consumer exists.
 
 - **Contracts are queries and commands, not entities.** A `.Contracts` assembly exposes interfaces and immutable records:
-    - `Projects.Contracts`: `IBillableWork`, to reserve, release and mark lines as invoiced.
-    - `Contacts.Contracts`: `IPartyDirectory`, which returns legal-identity snapshots.
-    - `Compliance.Contracts`: `IComplianceRecorder`.
+  - `Projects.Contracts`: `IBillableWork`, to reserve, release and mark lines as invoiced.
+  - `Contacts.Contracts`: `IPartyDirectory`, which returns legal-identity snapshots.
+  - `Compliance.Contracts`: `IComplianceRecorder`.
 
     The owning module implements each interface internally. Nothing in a contracts assembly references a domain or persistence type.
 
 - **Writes through contracts join the caller's transaction.** The shared connection and unit of work (ADR-0019) make them atomic, so finalizing an invoice remains one commit.
 - **Audit is a shared-kernel port.** `IAuditAppender` is declared in `Raccord.SharedKernel` and implemented by Compliance, because every module audits. Audit events are written in the business transaction (ADR-0004).
 - **No domain-event dispatcher, outbox or messaging library for now.** When the first asynchronous consumer is implemented (e-mail or tax-authority submission), a new ADR will introduce:
-    - a transactional outbox table owned by the producing module and written in the same transaction;
-    - a background dispatcher in the web host.
+  - a transactional outbox table owned by the producing module and written in the same transaction;
+  - a background dispatcher in the web host.
 
     Third-party messaging frameworks need their own justification under AGENTS.md's dependency rule.
 
@@ -50,16 +50,16 @@ We will make modules communicate only through synchronous, in-process interfaces
 ## Consequences
 
 - **Positive:**
-    - Every cross-module interaction can be found by searching the contracts.
-    - Behaviour is strongly consistent and testable without polling.
-    - No new infrastructure or dependency.
+  - Every cross-module interaction can be found by searching the contracts.
+  - Behaviour is strongly consistent and testable without polling.
+  - No new infrastructure or dependency.
 - **Negative:**
-    - The caller depends on the callee being available in process, which is always true in a monolith but makes later extraction harder.
-    - Fan-out ("when an invoice is issued, notify X, Y and Z") must be coded explicitly in the caller until events exist.
-    - The acyclic rule may force a contract to move to the lower module.
+  - The caller depends on the callee being available in process, which is always true in a monolith but makes later extraction harder.
+  - Fan-out ("when an invoice is issued, notify X, Y and Z") must be coded explicitly in the caller until events exist.
+  - The acyclic rule may force a contract to move to the lower module.
 - **Neutral:**
-    - The outbox stays on the roadmap of arc42 §4 and is tied to the first asynchronous consumer.
-    - `architecture-rules.md` must state the contracts-only rule.
+  - The outbox stays on the roadmap of arc42 §4 and is tied to the first asynchronous consumer.
+  - `architecture-rules.md` must state the contracts-only rule.
 
 ## Alternatives considered
 

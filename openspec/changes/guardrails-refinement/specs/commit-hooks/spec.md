@@ -2,8 +2,7 @@
 
 ## Purpose
 
-Local git hooks run the repo's commit-time gates without manual setup, so the cage is active on
-the first commit after a fresh clone — but never block CI or an explicit opt-out.
+Local git hooks run the repo's commit-time gates without manual setup, so the cage is active on the first commit after a fresh clone — but never block CI or an explicit opt-out.
 
 ## ADDED Requirements
 

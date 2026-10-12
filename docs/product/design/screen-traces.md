@@ -1,24 +1,15 @@
 # Screen traces — pen.dev trial
 
-Every screen in `raccord-screens.pen` is generated from Product Definition as
-Code artifacts, never from imagination. This file records which artifact
-decided which design decision, so a reviewer can audit spec fidelity without
-reading the chat that produced the screens.
+Every screen in `raccord-screens.pen` is generated from Product Definition as Code artifacts, never from imagination. This file records which artifact decided which design decision, so a reviewer can audit spec fidelity without reading the chat that produced the screens.
 
-Model root: `docs/product/model/`. Translation keys (QR-MOBILE-WEB-APP) are in
-`docs/product/model/requirements/quality/`. Screen mode split comes from the
-mobile-delivery decision recorded in
-`docs/product/changes/completed/chg-initial/change.md` (decision table:
-"Mobile delivery — one responsive PWA, with a field mode for workday
-check-in/out and read-only assignments, a management mode for operational
-control, and a read-only large-screen board").
+Model root: `docs/product/model/`. Translation keys (QR-MOBILE-WEB-APP) are in `docs/product/model/requirements/quality/`. Screen mode split comes from the mobile-delivery decision recorded in `docs/product/changes/completed/chg-initial/change.md` (decision table: "Mobile delivery — one responsive PWA, with a field mode for workday check-in/out and read-only assignments, a management mode for operational control, and a read-only large-screen board").
 
 ## Screen — Time approvals & reconciliation (management, desktop)
 
 File: `time-approvals.png` / `time-approvals.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Pending time registrations listed per crew member and activity with planned vs registered hours and approval checks | [UC-CRW-APPROVE-TIME-REGISTRATIONS](../model/use-cases/uc-crw-approve-time-registrations.md) steps 1–3, [JRN-CRW-HOURS-TO-PAYROLL](../model/journeys/jrn-crw-hours-to-payroll.md) |
 | Approval check column showing threshold deviation and minimum paid hours signals on the rows that trip them | [BR-CRW-APPROVAL-CHECK-THRESHOLDS](../model/business-rules/br-crw-approval-check-thresholds.md), [BR-CRW-MINIMUM-PAID-HOURS-CHECK](../model/business-rules/br-crw-minimum-paid-hours-check.md) |
 | Overtime signal derived from registered hours against rate factors ("Overtime ×1.25 after 10 h") | [BR-CRW-OVERTIME-FROM-REGISTERED-HOURS](../model/business-rules/br-crw-overtime-from-registered-hours.md) |
@@ -35,7 +26,7 @@ File: `time-approvals.png` / `time-approvals.html`
 File: `payroll-export.png` / `payroll-export.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Screen shows a spreadsheet export of selected time registrations for an external payroll system, not salary calculation | [UC-CRW-EXPORT-PAYROLL-DATA](../model/use-cases/uc-crw-export-payroll-data.md), [BR-CRW-NO-PAYROLL-PROCESSING](../model/business-rules/br-crw-no-payroll-processing.md), [TERM-PAYROLL-EXPORT](../model/domain/terms/term-payroll-export.md) |
 | Export options: registration columns visible/all/manual, plus optional activity columns | [UC-CRW-EXPORT-PAYROLL-DATA](../model/use-cases/uc-crw-export-payroll-data.md) step 2 |
 | Amber warning banner when selected registrations are still pending; export remains possible | [BR-CRW-EXPORT-PENDING-WARNING](../model/business-rules/br-crw-export-pending-warning.md), [SB-CRW-EXPORT-WITH-PENDING](../model/behaviours/sb-crw-export-with-pending.md) |
@@ -50,7 +41,7 @@ File: `payroll-export.png` / `payroll-export.html`
 File: `crew-import.png` / `crew-import.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Import wizard steps: mode → upload → column mapping → folder & match → preview & import | [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) steps 1–7 |
 | All crew imported with login off, invitations "Not sent" until the planner enables login | [UC-CRW-IMPORT-CREW-MEMBERS](../model/use-cases/uc-crw-import-crew-members.md) alternative flow, [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md) |
 | "Enable login and send invitations" bulk action after import | [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md) alternative flow "Bulk enabling login for imported crew" |
@@ -65,7 +56,7 @@ File: `crew-import.png` / `crew-import.html`
 File: `crew-profile.png` / `crew-profile.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Profile header with contact, folder, and login state | [UC-CRW-MANAGE-CREW-LOGIN-ACCESS](../model/use-cases/uc-crw-manage-crew-login-access.md), [JRN-CRW-ONBOARD-CREW](../model/journeys/jrn-crw-onboard-crew.md) |
 | "Active contract · ends 30 Jun 2027" chip derived from a contract document covering today | [BR-CRW-ACTIVE-CONTRACT-DERIVATION](../model/business-rules/br-crw-active-contract-derivation.md), [TERM-ACTIVE-CONTRACT](../model/domain/terms/term-active-contract.md) |
 | Cost rates table: linked global + individual rates, hourly/daily/max-hours, exactly one default | [UC-CRW-LINK-RATES-TO-CREW-MEMBERS](../model/use-cases/uc-crw-link-rates-to-crew-member.md) steps 1–4, [TERM-CREW-RATE](../model/domain/terms/term-crew-rate.md), [BR-CRW-ONE-DEFAULT-RATE](../model/business-rules/br-crw-one-default-rate.md) |
@@ -81,7 +72,7 @@ File: `crew-profile.png` / `crew-profile.html`
 File: `personal-schedule.png` / `personal-schedule.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Week view of final assignments with times, locations and remarks | [UC-CRW-CONSULT-OWN-SCHEDULE](../model/use-cases/uc-crw-consult-own-schedule.md) steps 1–2 |
 | Appointments shown alongside functions; reservations shown with a separate visual treatment | [UC-CRW-CONSULT-OWN-SCHEDULE](../model/use-cases/uc-crw-consult-own-schedule.md) step 2, [TERM-PERSONAL-SCHEDULE](../model/domain/terms/term-personal-schedule.md) |
 | Draft work not visible; subtitle states it | [BR-CRW-DRAFT-INVISIBLE](../model/business-rules/br-crw-draft-invisible.md) |
@@ -95,7 +86,7 @@ File: `personal-schedule.png` / `personal-schedule.html`
 File: `workday-corrections.png` / `workday-corrections.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Corrections queue with employee, day, clocked value, corrected value, requester, reason and status | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) main flow steps 1–3 |
 | Pending / Approved / Rejected statuses (rejected = nothing changes, employee informed) | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) alternative flow |
 | Forgotten clock-out scenario as a row (no clock-out → corrected to 18:30) | [UC-CORRECT-WORKDAY-RECORD](../model/use-cases/uc-correct-workday-record.md) trigger, [SB-WORKDAY-FORGOTTEN-CLOCK-OUT](../model/behaviours/sb-workday-forgotten-clock-out.md) |
@@ -111,7 +102,7 @@ File: `workday-corrections.png` / `workday-corrections.html`
 File: `communications-log.png` / `communications-log.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | E-mail compose card: recipients, subject from template, sender = company mail account, signature appended, document attached | [UC-DOC-EMAIL-DOCUMENT](../model/use-cases/uc-doc-email-document.md) steps 2–5, [BR-DOC-SIGNATURE-APPENDED](../model/business-rules/br-doc-signature-appended.md) |
 | Send button notes the message is logged as pending until the mail account reports | [UC-DOC-EMAIL-DOCUMENT](../model/use-cases/uc-doc-email-document.md) step 5, [BR-DOC-DELIVERY-STATUS-TRANSITIONS](../model/business-rules/br-doc-delivery-status-transitions.md) |
 | Communications list per recipient/contact with subject, message start, date and delivery status | [UC-DOC-REVIEW-RECIPIENT-COMMUNICATIONS](../model/use-cases/uc-doc-review-recipient-communications.md) step 2, [TERM-COMMUNICATION-RECORD](../model/domain/terms/term-communication-record.md) |
@@ -126,7 +117,7 @@ File: `communications-log.png` / `communications-log.html`
 File: `letterhead-branding.png` / `letterhead-branding.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Letterheads table with name, page size, margins, enabled document types | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) steps 1–6, [BR-DOC-LETTERHEAD-TYPE-AVAILABILITY](../model/business-rules/br-doc-letterhead-type-availability.md) |
 | Label-format letterhead at 62×100 mm with small margins | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) trigger "label format", step 3 custom size |
 | Multi-page PDF maps first and following pages | [UC-DOC-ADD-LETTERHEAD](../model/use-cases/uc-doc-add-letterhead.md) alternative flow, [BR-DOC-LETTERHEAD-PAGE-MAPPING](../model/business-rules/br-doc-letterhead-page-mapping.md) |
@@ -140,7 +131,7 @@ File: `letterhead-branding.png` / `letterhead-branding.html`
 File: `equipment-labels.png` / `equipment-labels.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Label-design card: letterhead (defines label size), codes, article details, case label option | [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) steps 1–3 |
 | Test-label generation to check size and position | [UC-DOC-DESIGN-EQUIPMENT-LABEL](../model/use-cases/uc-doc-design-equipment-label.md) step 4 |
 | Label preview showing name, type, serial and scan code block | [TERM-EQUIPMENT-LABEL](../model/domain/terms/term-equipment-label.md), [TERM-SCAN-CODE](../model/domain/terms/term-scan-code.md) |
@@ -154,7 +145,7 @@ File: `equipment-labels.png` / `equipment-labels.html`
 File: `workspace-settings.png` / `workspace-settings.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Company details card: name, address, contact, logo, workspace image for sign-in/signing/payment pages | [UC-WSP-EDIT-COMPANY-DETAILS](../model/use-cases/uc-wsp-edit-company-details.md) steps 2–3, [TERM-WORKSPACE-IMAGE](../model/domain/terms/term-workspace-image.md) |
 | Time zone and language in workspace settings | [UC-WSP-SET-TIME-ZONE](../model/use-cases/uc-wsp-set-time-zone.md), [UC-WSP-SET-LANGUAGE](../model/use-cases/uc-wsp-set-language.md) |
 | Number series table with format and current number per series | [UC-WSP-CONFIGURE-NUMBER-SERIES](../model/use-cases/uc-wsp-configure-number-series.md) step 2, [TERM-NUMBER-SERIES](../model/domain/terms/term-number-series.md) |
@@ -169,7 +160,7 @@ File: `workspace-settings.png` / `workspace-settings.html`
 File: `api-access.png` / `api-access.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Public interface status card within the integrations configuration | [UC-INT-ENABLE-API-ACCESS](../model/use-cases/uc-int-enable-api-access.md) step 1, [TERM-INTEGRATION](../model/domain/terms/term-integration.md) |
 | Token owned by the administrator, valid ten years, shown on demand | [UC-INT-ENABLE-API-ACCESS](../model/use-cases/uc-int-enable-api-access.md) steps 2–3, [TERM-API-TOKEN](../model/domain/terms/term-api-token.md), [BR-INT-TOKEN-VALIDITY-PERIOD](../model/business-rules/br-int-token-validity-period.md) |
 | Token inherits the owner's role; calls beyond it are refused | [BR-INT-TOKEN-INHERITS-OWNER-ROLE](../model/business-rules/br-int-token-inherits-owner-role.md) |
@@ -183,7 +174,7 @@ File: `api-access.png` / `api-access.html`
 File: `my-assignments.png` / `my-assignments.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Phone layout in the field PWA dark theme; "My jobs" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
 | Open invitations answered with Yes/No directly in the mobile web app | [UC-CRW-RESPOND-TO-INVITATION](../model/use-cases/uc-crw-respond-to-invitation.md) steps 1–2 |
 | Invitation card explains what a yes does per type ("plans you visibly", "marks me available") | [TERM-INVITATION-TYPE](../model/domain/terms/term-invitation-type.md) |
@@ -198,7 +189,7 @@ File: `my-assignments.png` / `my-assignments.html`
 File: `hours-registration.png` / `hours-registration.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Phone layout in the field PWA dark theme; "Hours" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
 | "Still to register" list of activities scheduled in the past 24 hours | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) step 1, [BR-CRW-PLANNED-ACTIVITIES-WINDOW](../model/business-rules/br-crw-planned-activities-window.md) |
 | From / until / break prefilled from the planned activity, editable before saving | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) steps 2–4 |
@@ -212,7 +203,7 @@ File: `hours-registration.png` / `hours-registration.html`
 File: `invoice-list.png` / `invoice-list.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Billable lines grouped under a project, invoice draft from selection, validation then finalization | [UC-CREATE-INVOICE-DRAFT](../model/use-cases/uc-create-invoice-draft.md), [UC-BILL-FINISHED-PROJECT](../model/journeys/jrn-bill-finished-project.md) |
 | Status shown as Draft preview / Issued, no back-transition from issued | [TERM-INVOICE-STATUS](../model/domain/terms/term-invoice-status.md) |
 | Payment Unpaid / Partially paid / Paid + Overdue qualifier, shown in lists with totals paid for a selection | [TERM-PAYMENT-STATUS](../model/domain/terms/term-payment-status.md) |
@@ -224,7 +215,7 @@ File: `invoice-list.png` / `invoice-list.html`
 File: `field-check-in.png` / `field-check-in.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Clock in / clock out with server time; double clock-in refused | [UC-CLOCK-WORKDAY](../model/use-cases/uc-clock-workday.md) |
 | Workday record states Not started → Working ↔ On break → Finished, shown as a state chip | [TERM-WORKDAY-RECORD](../model/domain/terms/term-workday-record.md) |
 | Offline: clocking refused, retry when connected (note on screen) | [UC-CLOCK-WORKDAY](../model/use-cases/uc-clock-workday.md) failure conditions |
@@ -237,7 +228,7 @@ File: `field-check-in.png` / `field-check-in.html`
 File: `ops-board.png` / `ops-board.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Read-only large-screen operational board for office display | [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md), mobile-delivery decision |
 | Columns to pack / prepped / on location / expected back / delayed | [UC-WHS-REVIEW-WAREHOUSE-BOARD](../model/use-cases/uc-whs-review-warehouse-board.md) main flow |
 | Cards show name, number, date, shortage indicator, notes | [UC-WHS-REVIEW-WAREHOUSE-BOARD](../model/use-cases/uc-whs-review-warehouse-board.md) step 3 |
@@ -251,7 +242,7 @@ File: `ops-board.png` / `ops-board.html`
 File: `invoice-draft-editor.png` / `invoice-draft-editor.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Two-panel layout: unbilled lines selectable on the left, draft contents on the right | [UC-CREATE-INVOICE-DRAFT](../model/use-cases/uc-create-invoice-draft.md) main flow (select unbilled lines → gathered into one draft) |
 | Draft lines in project order, in the default series, with calculated VAT breakdown and totals | [UC-CREATE-INVOICE-DRAFT](../model/use-cases/uc-create-invoice-draft.md), [TERM-INVOICE-SERIES](../model/domain/terms/term-invoice-series.md) |
 | Status shown as "Draft preview · open"; issuing refused until readiness is met | [TERM-INVOICE-STATUS](../model/domain/terms/term-invoice-status.md), [UC-ISSUE-INVOICE](../model/use-cases/uc-issue-invoice.md) failure conditions (all unmet conditions reported, nothing issued, no number consumed) |
@@ -266,7 +257,7 @@ File: `invoice-draft-editor.png` / `invoice-draft-editor.html`
 File: `online-quote.png` / `online-quote.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Customer-facing page always showing the latest synchronised version | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) goal |
 | Kicker shows quote number + current-version marker; unsynchronised new versions stay hidden | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md), [TERM-ONLINE-QUOTE](../model/domain/terms/term-online-quote.md) |
 | Welcome message to the quote contact (default from configuration) | [UC-FIN-PUBLISH-ONLINE-QUOTE](../model/use-cases/uc-fin-publish-online-quote.md) step 2 |
@@ -281,7 +272,7 @@ File: `online-quote.png` / `online-quote.html`
 File: `shift-planner.png` / `shift-planner.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Shifts are non-project internal work (warehouse, delivery, office) | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) trigger, [BR-CRW-SHIFTS-ARE-NON-PROJECT](../model/business-rules/br-crw-shifts-are-non-project.md) |
 | Shift fields: name, times, break, recurrence, blocking, quantity, crew, vehicles, remarks, tags | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) step 2 |
 | Recurring series; without end date only one shift is created | [UC-CRW-CREATE-SHIFT](../model/use-cases/uc-crw-create-shift.md) step 2, [BR-CRW-RECURRENCE-SERIES](../model/business-rules/br-crw-recurrence-series.md) |
@@ -295,7 +286,7 @@ File: `shift-planner.png` / `shift-planner.html`
 File: `job-board.png` / `job-board.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Planner posts selected functions with details; visible to crew on web and mobile | [UC-CRW-POST-JOB-ON-BOARD](../model/use-cases/uc-crw-post-job-on-board.md) steps 1–2, postconditions |
 | Postings without details needed to sign up (e.g. times) refused | [UC-CRW-POST-JOB-ON-BOARD](../model/use-cases/uc-crw-post-job-on-board.md) failure conditions |
 | Notifications batched at most every six hours; opt-outs not notified | [BR-CRW-JOB-BOARD-NOTIFICATION-CADENCE](../model/business-rules/br-crw-job-board-notification-cadence.md) |
@@ -308,7 +299,7 @@ File: `job-board.png` / `job-board.html`
 File: `function-staffing.png` / `function-staffing.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Crew or vehicles picked per function, possibly from crew lists | [UC-CRW-PLAN-RESOURCE-ON-FUNCTION](../model/use-cases/uc-crw-plan-resource-on-function.md) steps 1–2 |
 | Assignments take the default plan status and the member's default rate | [UC-CRW-PLAN-RESOURCE-ON-FUNCTION](../model/use-cases/uc-crw-plan-resource-on-function.md) step 3, [BR-CRW-DEFAULT-RATE-ON-ASSIGNMENT](../model/business-rules/br-crw-default-rate-on-assignment.md), [BR-CRW-DEFAULT-PLAN-STATUS-NEW-ONLY](../model/business-rules/br-crw-default-plan-status-new-only.md) |
 | Staffing status derives from assignments (open → planned → final) | [BR-CRW-STAFFING-STATUS-DERIVATION](../model/business-rules/br-crw-staffing-status-derivation.md), [TERM-STAFFING-STATUS](../model/domain/terms/term-staffing-status.md) |
@@ -321,7 +312,7 @@ File: `function-staffing.png` / `function-staffing.html`
 File: `crew-availability.png` / `crew-availability.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Availability viewed per function/period with crew rows and day columns | [UC-CRW-VIEW-CREW-AVAILABILITY](../model/use-cases/uc-crw-view-crew-availability.md) steps 1–2 |
 | States: available, unavailable, invited, reserved, unknown | [UC-CRW-VIEW-CREW-AVAILABILITY](../model/use-cases/uc-crw-view-crew-availability.md) step 2, [TERM-AVAILABILITY-STATE](../model/domain/terms/term-availability-state.md) |
 | Any known clash in the period → unavailable, even if free the rest of it | [BR-CRW-PARTIAL-AVAILABILITY](../model/business-rules/br-crw-partial-availability.md) |
@@ -334,7 +325,7 @@ File: `crew-availability.png` / `crew-availability.html`
 File: `contact-detail.png` / `contact-detail.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Company/private individual contact with number, folder, VAT detail | [UC-PRJ-ADD-CONTACT](../model/use-cases/uc-prj-add-contact.md) steps 1–2, [BR-PRJ-CONTACT-NUMBER-ASSIGNMENT](../model/business-rules/br-prj-contact-number-assignment.md) |
 | Visiting / mailing / billing addresses | [UC-PRJ-ADD-CONTACT](../model/use-cases/uc-prj-add-contact.md) step 2, [BR-PRJ-ADDRESS-ROLES](../model/business-rules/br-prj-address-roles.md) |
 | Contact persons with role tags, one per area | [UC-PRJ-ADD-CONTACT](../model/use-cases/uc-prj-add-contact.md) step 2, [BR-PRJ-CONTACT-ROLES-BY-TAG](../model/business-rules/br-prj-contacts-roles-by-tag.md), [BR-PRJ-ONE-CONTACT-PER-AREA](../model/business-rules/br-prj-one-contact-per-area.md) |
@@ -349,7 +340,7 @@ File: `contact-detail.png` / `contact-detail.html`
 File: `contact-import.png` / `contact-import.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Mode: add all as new / update existing / add new and skip existing | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 1, [BR-PRJ-CONTACT-IMPORT-MODES](../model/business-rules/br-prj-contact-import-modes.md) |
 | Contact persons included, imported as person rows under their contact | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 1, [BR-PRJ-CONTACT-PERSON-IMPORT-ROWS](../model/business-rules/br-prj-contact-person-import-rows.md) |
 | Column mapping against contact and contact person fields (incl. custom fields) | [UC-PRJ-IMPORT-CONTACTS](../model/use-cases/uc-prj-import-contacts.md) step 2 |
@@ -363,7 +354,7 @@ File: `contact-import.png` / `contact-import.html`
 File: `kit-builder.png` / `kit-builder.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Physical vs virtual kit toggle with different stock semantics in the hint | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md), [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md), [BR-EQP-VIRTUAL-KIT-STOCK-DERIVED](../model/business-rules/br-eqp-virtual-kit-stock-derived.md) |
 | No scan code offered for virtual kits | [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md) failure conditions |
 | Default content: catalog items with quantity per kit | [UC-EQP-DEFINE-PHYSICAL-KIT](../model/use-cases/uc-eqp-define-physical-kit.md) step 2, [UC-EQP-DEFINE-VIRTUAL-KIT](../model/use-cases/uc-eqp-define-virtual-kit.md) step 2, [BR-EQP-DEFAULT-CONTENT-CATALOG-ONLY](../model/business-rules/br-eqp-default-content-catalog-only.md) |
@@ -377,7 +368,7 @@ File: `kit-builder.png` / `kit-builder.html`
 File: `item-detail.png` / `item-detail.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Tabs: general, prices, physical & logistics, accessories, alternatives, usage, files | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) main flow steps 2–6 |
 | Code, folder, default equipment group, planner visibility on the item | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 2; code generated when left empty (flow 2a) |
 | Location in warehouse, may stay empty | [UC-EQP-CONFIGURE-ITEM-DETAILS](../model/use-cases/uc-eqp-configure-item-details.md) step 3, flow 3a |
@@ -393,7 +384,7 @@ File: `item-detail.png` / `item-detail.html`
 File: `equipment-import.png` / `equipment-import.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Wizard steps: mode → file → mapping → folder → preview | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) main flow steps 1–7 |
 | Import mode choice (update / skip) with match columns | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) steps 2, 6, [BR-EQP-IMPORT-MATCH-UNIQUE](../model/business-rules/br-eqp-import-match-unique.md) |
 | Update mode chooses whether scan codes replace or add | [UC-EQP-IMPORT-EQUIPMENT](../model/use-cases/uc-eqp-import-equipment.md) alternative flow 2a |
@@ -407,7 +398,7 @@ File: `equipment-import.png` / `equipment-import.html`
 File: `stock-movements.png` / `stock-movements.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Movements scheduled from the item's stock history: positive (delivery) / negative (reduction) quantity with date and description | [UC-EQP-SCHEDULE-STOCK-MOVEMENT](../model/use-cases/uc-eqp-schedule-stock-movement.md) steps 1–2 |
 | Availability changes from the movement's date | [UC-EQP-SCHEDULE-STOCK-MOVEMENT](../model/use-cases/uc-eqp-schedule-stock-movement.md) step 3, [BR-EQP-MOVEMENT-EFFECTIVE-DATE](../model/business-rules/br-eqp-movement-effective-date.md) |
 | Selling rented equipment via a separate sale copy, never by flipping the rental item | [UC-EQP-SELL-RENTAL-EQUIPMENT](../model/use-cases/uc-eqp-sell-rental-equipment.md) steps 1–3, [BR-EQP-SELL-RENTAL-VIA-SALE-COPY](../model/business-rules/br-eqp-sell-rental-via-sale-copy.md) |
@@ -421,7 +412,7 @@ File: `stock-movements.png` / `stock-movements.html`
 File: `stock-count.png` / `stock-count.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Count given a name and remark, tasks/notes may be added; subtitle shows who started it | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 1 |
 | Items listed with expected warehouse stock at the moment of creation | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 2, [TERM-EXPECTED-WAREHOUSE-STOCK](../model/domain/terms/term-expected-warehouse-stock.md) |
 | Quantities recorded by entry or by scanning codes with a camera | [UC-EQP-COUNT-SELECTED-EQUIPMENT](../model/use-cases/uc-eqp-count-selected-equipment.md) step 3, [TERM-SCAN-CODE](../model/domain/terms/term-scan-code.md) |
@@ -435,7 +426,7 @@ File: `stock-count.png` / `stock-count.html`
 File: `return-handling.png` / `return-handling.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Scan-return session: for each scanned article pick project and returned quantity; mixed truck from several projects booked back without sorting | [UC-WHS-SCAN-RETURN](../model/use-cases/uc-whs-scan-return.md) steps 1–5 |
 | Optional note per return row (case clasp repaired) | [UC-WHS-SCAN-RETURN](../model/use-cases/uc-whs-scan-return.md) main flow |
 | Lost line with quantity lost, charge decision and remark; recording reduces stock | [UC-WHS-MARK-LOST](../model/use-cases/uc-whs-mark-lost.md) steps 1–3 |
@@ -448,7 +439,7 @@ File: `return-handling.png` / `return-handling.html`
 File: `packing-list.png` / `packing-list.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Hand-over lock: list marked "Ready to pack" from the locked plan, visible on the warehouse board | [UC-WHS-MARK-READY-TO-PACK](../model/use-cases/uc-whs-mark-ready-to-pack.md) steps 1–2, [TERM-READY-TO-PACK](../model/domain/terms/term-ready-to-pack.md) |
 | Scan in/out: each scan books one unit to the target status, live-scanning bar with target | [UC-WHS-BOOK-BY-SCANNING](../model/use-cases/uc-whs-book-by-scanning.md) steps 1–3 |
 | Unplanned codes offer to add additional equipment | [UC-WHS-BOOK-BY-SCANNING](../model/use-cases/uc-whs-book-by-scanning.md) alternative flows, [BR-WHS-UNPLANNED-SCAN-ADDS](../model/business-rules/br-whs-unplanned-scan-adds.md) |
@@ -462,7 +453,7 @@ File: `packing-list.png` / `packing-list.html`
 File: `equipment-plan.png` / `equipment-plan.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Planned lines grouped into named groups with own planning/usage periods, duration option and quotation remark | [UC-WHS-ORGANIZE-GROUPS](../model/use-cases/uc-whs-organize-groups.md) step 1 |
 | Editing group times applies to all its lines | [UC-WHS-ORGANIZE-GROUPS](../model/use-cases/uc-whs-organize-groups.md) step 3, [BR-WHS-LINE-TIMES-LINKED](../model/business-rules/br-whs-line-times-linked.md) |
 | Search by name, catalog tags/folders, plus ranked suggestions | [UC-WHS-PLAN-EQUIPMENT](../model/use-cases/uc-whs-plan-equipment.md) step 1 |
@@ -478,7 +469,7 @@ File: `equipment-plan.png` / `equipment-plan.html`
 File: `task-workflow-settings.png` / `task-workflow-settings.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Company-wide task statuses with name + colour, reorderable | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) step 1, [BR-PRJ-TASK-STATUS-ORDER](../model/business-rules/br-prj-task-status-order.md) |
 | To do and Completed fixed endpoints (renameable, recolourable, not deletable) | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) failure conditions, [BR-PRJ-TASK-STATUS-ENDPOINTS](../model/business-rules/br-prj-task-status-endpoints.md) |
 | Deleting a status asks where its tasks move (migration) | [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) step 2, [BR-PRJ-TASK-STATUS-MIGRATION](../model/business-rules/br-prj-task-status-migration.md) |
@@ -490,7 +481,7 @@ File: `task-workflow-settings.png` / `task-workflow-settings.html`
 File: `service-planned-actual.png` / `service-planned-actual.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Planned vs tracked hours compared per service, with tasks count, cost/h, price, margin | [UC-PRJ-REPORT-TASK-TIME](../model/use-cases/uc-prj-report-task-time.md) step 1, [BR-PRJ-SERVICE-BREAKDOWN](../model/business-rules/br-prj-service-breakdown.md) |
 | Hours tracked on tasks flow to their linked service | [UC-PRJ-TRACK-TASK-TIME](../model/use-cases/uc-prj-track-task-time.md) step 2, [UC-PRJ-MANAGE-SERVICES](../model/use-cases/uc-prj-manage-services.md) step 3 |
 | Export of tracked time (team-board export contains only that team's work) | [UC-PRJ-REPORT-TASK-TIME](../model/use-cases/uc-prj-report-task-time.md) main/alternative flows |
@@ -503,7 +494,7 @@ File: `service-planned-actual.png` / `service-planned-actual.html`
 File: `project-task-board.png` / `project-task-board.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Board (status columns) or list view shared with team and external collaborators | [UC-PRJ-WORK-WITH-TASK-BOARD](../model/use-cases/uc-prj-work-with-task-board.md) main flow, [JRN-PRJ-DELIVER-PRODUCTION-WORK](../model/journeys/jrn-prj-deliver-production-work.md) narrative |
 | Columns are statuses; task statuses configured per workspace | [UC-PRJ-PROGRESS-TASK](../model/use-cases/uc-prj-progress-task.md) step 1, [UC-PRJ-CONFIGURE-TASK-STATUSES](../model/use-cases/uc-prj-configure-task-statuses.md) |
 | Filters, grouping/ordering, extra columns (planned/tracked time) | [UC-PRJ-WORK-WITH-TASK-BOARD](../model/use-cases/uc-prj-work-with-task-board.md) step 2 |
@@ -517,7 +508,7 @@ File: `project-task-board.png` / `project-task-board.html`
 File: `project-detail.png` / `project-detail.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Tabs: overview, equipment plan, planning, crew, finances, files | [JRN-PRJ-RUN-RENTAL-PROJECT](../model/journeys/jrn-prj-run-rental-project.md) |
 | Project number + status chip (Confirmed) + dates and location in header | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 1, [TERM-PROJECT-STATUS](../model/domain/terms/term-project-status.md), [BR-PRJ-PROJECT-NUMBER-ASSIGNMENT](../model/business-rules/br-prj-project-number-assignment.md) |
 | Client + contact person chosen from contact database fill address and automatic note | [UC-PRJ-EDIT-PROJECT-DETAILS](../model/use-cases/uc-prj-edit-project-details.md) step 2, [BR-PRJ-PARTIES-FROM-CONTACTS](../model/business-rules/br-prj-parties-from-contacts.md), [BR-PRJ-CONTACT-SELECTION-EFFECTS](../model/business-rules/br-prj-contact-selection-effects.md) |
@@ -532,7 +523,7 @@ File: `project-detail.png` / `project-detail.html`
 File: `project-creation.png` / `project-creation.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Step flow: type & template → start date → preview of copied content → save | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) main flow |
 | Project type and template selection, with blank-project alternative | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 1, alternative flows ([UC-PRJ-CREATE-PROJECT](../model/use-cases/uc-prj-create-project.md)) |
 | Start date prefilled when started from a calendar day | [UC-PRJ-CREATE-FROM-TEMPLATE](../model/use-cases/uc-prj-create-from-template.md) step 2, [BR-PRJ-CALENDAR-QUICK-CREATE](../model/business-rules/br-prj-calendar-quick-create.md) |
@@ -548,7 +539,7 @@ File: `project-creation.png` / `project-creation.html`
 File: `issuer-profile.png` / `issuer-profile.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Issuer legal details entered once: legal name, tax identifier, complete postal address | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) step 1, [JRN-SET-UP-INVOICING](../model/journeys/jrn-set-up-invoicing.md) |
 | Tax identifier normalized on save | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) step 2, [BR-TAX-ID-NORMALIZATION](../model/business-rules/br-tax-id-normalization.md) |
 | Issued invoices keep their legal-details snapshot; profile edits don't rewrite history | [UC-DEFINE-ISSUER-PROFILE](../model/use-cases/uc-define-issuer-profile.md) alternative flows, [BR-PARTY-SNAPSHOT](../model/business-rules/br-party-snapshot.md) |
@@ -560,7 +551,7 @@ File: `issuer-profile.png` / `issuer-profile.html`
 File: `financial-settings.png` / `financial-settings.html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Hub groups all finance preparation: document settings, price factors, ledgers, VAT, invoice moments, payment terms (tab bar) | [JRN-FIN-PREPARE-FINANCE](../model/journeys/jrn-fin-prepare-finance.md) steps |
 | Default quote/contract validity in days and sign-after-expiry switch | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 1, [BR-FIN-SIGN-AFTER-EXPIRY](../model/business-rules/br-fin-sign-after-expiry.md) |
 | Terms PDF upload with per-document-type "sent with" switches (quotes/contracts/invoices) | [UC-FIN-CONFIGURE-FINANCIAL-SETTINGS](../model/use-cases/uc-fin-configure-financial-settings.md) step 2, [BR-FIN-TERMS-ATTACHMENT](../model/business-rules/br-fin-terms-attachment.md) |
@@ -574,7 +565,7 @@ File: `financial-settings.png` / `financial-settings.html`
 Files: `invoicing-queue.png/html` · `payments-dunning.png/html` · `quote-review.png/html`
 
 | Design decision | Decided by |
-|---|---|
+| --- | --- |
 | Queue lists confirmed projects whose invoice-moment parts fall in a selected period | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md) main flow |
 | Overdue parts highlighted; non-confirmed and already-invoiced projects excluded via eligibility rule | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md), [BR-FIN-QUEUE-ELIGIBILITY](../model/business-rules/br-fin-queue-eligibility.md) |
 | "Invoice externally" as separate tab (externally invoiced items) | [UC-FIN-WORK-INVOICING-QUEUE](../model/use-cases/uc-fin-work-invoicing-queue.md) alternative flow, [UC-FIN-MARK-INVOICED-EXTERNALLY](../model/use-cases/uc-fin-mark-invoiced-externally.md) |

@@ -1,6 +1,7 @@
 # Raccord visual direction
 
-Status: exploratory v1  
+Status: exploratory v1
+
 Last updated: 2026-10-06
 
 ## Brand idea
@@ -16,7 +17,7 @@ This is a concept asset, not yet a final trademark-ready logo. The next design p
 ## Initial palette
 
 | Token | Hex | Use |
-|---|---|---|
+| --- | --- | --- |
 | Ink | `#0B1020` | Primary text, navigation, dark surfaces |
 | Electric cyan | `#2DE2E6` | Primary action, links, active states |
 | Signal coral | `#FF6B5E` | Warnings, highlights, small accents |

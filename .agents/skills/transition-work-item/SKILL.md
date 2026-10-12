@@ -47,7 +47,7 @@ An issue with **no** `status:` label is in the backlog for one purpose only: the
 
 ### 1. Resolve the requested transition
 
-Map the caller's target state or transition name onto one row of the table. A target of `status:blocked`, `status:backlog`, closing as not planned, or reopening is human-only: refuse, and list the four agent transitions.
+Map the caller's target state or transition name onto one row of the table. A target of `status:blocked`, closing as not planned, or reopening is human-only: refuse. A target of `status:backlog` is not a defined transition: refuse. In both cases list the four agent transitions.
 
 _Done when:_ exactly one row is selected, or the refusal is reported with the available transitions.
 
@@ -56,22 +56,24 @@ _Done when:_ exactly one row is selected, or the refusal is reported with the av
 ```bash
 gh issue view <number> -R juangcarmona/raccord --json number,state,labels,url \
   --jq '{number, state, url, status: [.labels[].name | select(startswith("status:"))]}'
-gh api repos/juangcarmona/raccord/issues/<number> --jq '{state, state_reason}'
+gh api repos/juangcarmona/raccord/issues/<number> --jq '{state, state_reason, is_pr: (.pull_request != null)}'
 ```
 
 Decide from what was just read, in this order:
 
-| Found                                          | Outcome                                                                                                      |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Number does not resolve                        | Report not found. Stop                                                                                       |
-| `status:blocked` present                       | Report it as a human signal. Do not remove it. Stop                                                          |
-| `state_reason` is `not_planned`                | Report the human closure. Do not reopen. Stop                                                                |
-| `state_reason` is `reopened`                   | Report the human reopening as a signal; continue only if the human confirms in step 3                        |
-| More than one `status:` label                  | Report every label as a mismatch. Stop                                                                       |
-| No `status:` label, target `status:ready`      | Treat as `status:backlog`. Continue, adding only                                                             |
-| No `status:` label, any other target           | Report the mismatch. Stop                                                                                    |
-| One label, equal to the row's from-label       | Continue                                                                                                     |
-| One label, different from the row's from-label | Report the current label and the transition available from it (the row whose from-label it is, if any). Stop |
+| Found                                          | Outcome                                                                                                                                            |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Number does not resolve                        | Report not found. Stop                                                                                                                             |
+| `is_pr` is true                                | Report that the number is a pull request, not an issue. Stop                                                                                       |
+| `status:blocked` present                       | Report it as a human signal. Do not remove it. Stop                                                                                                |
+| `state_reason` is `not_planned`                | Report the human closure. Do not reopen. Stop                                                                                                      |
+| `state` is `closed`, any other reason          | Report a closed issue as a mismatch (only `in-review → done` may meet a closed issue, when the merge closed it first). Stop unless that is the row |
+| `state_reason` is `reopened`                   | Report the human reopening as a signal; continue only if the human confirms in step 3                                                              |
+| More than one `status:` label                  | Report every label as a mismatch. Stop                                                                                                             |
+| No `status:` label, target `status:ready`      | Treat as `status:backlog`. Continue, adding only                                                                                                   |
+| No `status:` label, any other target           | Report the mismatch. Stop                                                                                                                          |
+| One label, equal to the row's from-label       | Continue                                                                                                                                           |
+| One label, different from the row's from-label | Report the current label and the transition available from it (the row whose from-label it is, if any). Stop                                       |
 
 _Done when:_ the labels were read in this invocation and exactly one outcome from the table is named.
 
@@ -80,6 +82,12 @@ _Done when:_ the labels were read in this invocation and exactly one outcome fro
 Show the issue, its current label, the target label, and the exact command for step 4.
 
 _Done when:_ the human has confirmed this one transition.
+
+### 3a. Re-read after confirmation
+
+Confirmation can take any amount of time. Run both commands of step 2 again and compare with what was confirmed. If anything changed (labels, state, `state_reason`), report the difference and stop without applying.
+
+_Done when:_ the state read after confirmation equals the state that was confirmed.
 
 ### 4. Apply
 
@@ -98,5 +106,7 @@ _Done when:_ the command exited zero.
 ### 5. Verify and report
 
 Repeat the first command of step 2.
+
+If the issue now carries two `status:` labels (GitHub applies the add and the remove as separate writes, so one can succeed without the other), report a partial transition with both labels and stop; never repair it automatically.
 
 _Done when:_ the issue carries exactly one `status:` label, equal to the target, and the output reports the new state, the transition applied (from-label → to-label), and GitHub's open/closed state.

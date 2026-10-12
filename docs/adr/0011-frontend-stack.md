@@ -37,7 +37,7 @@ We will build the frontend with React, TypeScript and Vite, and type the API cli
 ## Alternatives considered
 
 - **Hand-written API types or imports from the backend:** rejected; the client is typed from the generated OpenAPI contract, CI fails if the committed contract drifts, and the frontend imports nothing else from the backend.
-- **A UI component library:** rejected in favour of semantic HTML and a small CSS file with light/dark tokens, keeping the runtime dependencies to those listed above.
+- **A UI component library:** rejected in favour of semantic HTML and a small CSS file with light/dark tokens.
 - **TypeScript 7 / ESLint 10:** rejected for now because typescript-eslint and jsx-a11y do not yet support them.
 
 ## References

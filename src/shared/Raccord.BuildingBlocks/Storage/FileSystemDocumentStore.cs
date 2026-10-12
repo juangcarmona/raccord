@@ -1,5 +1,3 @@
-using Raccord.Application.Documents;
-
 namespace Raccord.BuildingBlocks.Storage;
 
 /// <summary>Stores documents as files under a root directory; suited to single-server self-hosting with a mounted volume.</summary>

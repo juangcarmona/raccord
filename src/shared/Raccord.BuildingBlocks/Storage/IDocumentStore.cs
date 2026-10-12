@@ -1,4 +1,4 @@
-namespace Raccord.Application.Documents;
+namespace Raccord.BuildingBlocks.Storage;
 
 /// <summary>Binary document storage (object storage), addressed by key.</summary>
 public interface IDocumentStore

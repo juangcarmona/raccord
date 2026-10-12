@@ -7,7 +7,7 @@
 
 ## 2. Extract pure shared types and ports
 
-- [ ] 2.1 Add Raccord.SharedKernel to Raccord.slnx with a BCL-only csproj; move Common, Parties and Pricing using the exact design table. Adjust existing consumers, test usings and direct references. In the same checkpoint update only the interim architecture reference expectations and SharedKernel BCL rule. Verify: Release build plus Domain/Infrastructure/Architecture tests pass with identical financial assertions and no duplicate moved types.
+- [x] 2.1 Add Raccord.SharedKernel to Raccord.slnx with a BCL-only csproj; move Common, Parties and Pricing using the exact design table. Adjust existing consumers, test usings and direct references. In the same checkpoint update only the interim architecture reference expectations and SharedKernel BCL rule. Verify: Release build plus Domain/Infrastructure/Architecture tests pass with identical financial assertions and no duplicate moved types.
 - [ ] 2.2 Move IClock; rename ICurrentActor to ICurrentUser with the same Name property; update SystemClock, HttpCurrentActor, use-case constructor parameters and registration. Add a host-side test of default audit identity. Verify: existing web audit assertions and the new unauthenticated-identity test pass.
 - [ ] 2.3 Write failing tests for append through IAuditAppender, including one persisted event and copied detail values. Add AuditEntry/IAuditAppender in SharedKernel; make the current IAuditTrail inherit the port and add AuditTrail's overload/alias registration as designed. Verify: append/read and actor/timestamp/action tests pass with one event, and SharedKernel references no Domain assembly.
 
@@ -60,7 +60,7 @@
 
 ## 6. Close compatibility and documentation
 
-- [ ] 6.1 Check new shared project reference directions and all test naming; update architecture-rules.md and arc42 sections 5/8 with the exact interim graph and port/adapter ownership. Verify: documents do not claim module/schema migration is complete and architecture tests still detect forbidden dependencies.
+- [x] 6.1 Check new shared project reference directions and all test naming; update architecture-rules.md and arc42 sections 5/8 with the exact interim graph and port/adapter ownership. Verify: documents do not claim module/schema migration is complete and architecture tests still detect forbidden dependencies.
 - [ ] 6.2 Regenerate OpenAPI/client types and inspect the diff; verify unchanged routes, schemas and existing problem responses. Verify: contract-drift check and existing web tests pass; explain any operation-id/tag-only difference in the PR rather than changing schemas.
 - [ ] 6.3 Build Release, run the four existing E2E journeys and the selection guard; leave per-pr-selection.txt unchanged. Verify: all four journeys pass with no quarantine or narrowed filter.
 - [ ] 6.4 Mark parent module-architecture tasks 1.1/1.2 complete only when their checks have passed; leave all later tasks untouched. Record acceptance/test mapping and actual results in the PR. Verify: each issue criterion AC1–AC8 has evidence from test-plan.md.

@@ -113,7 +113,13 @@ public sealed class DependencyRulesTests
     [InlineData("Raccord.Contracts", new string[0])]
     [InlineData(
         "Raccord.Application",
-        new[] { "Raccord.Contracts", "Raccord.Domain", "Raccord.SharedKernel" }
+        new[]
+        {
+            "Raccord.BuildingBlocks",
+            "Raccord.Contracts",
+            "Raccord.Domain",
+            "Raccord.SharedKernel",
+        }
     )]
     [InlineData(
         "Raccord.Infrastructure",

@@ -15,7 +15,7 @@ Guardrails for contributors and coding agents. Rules marked **(enforced)** fail 
 ```text
 Web/API -> Application -> Domain -> SharedKernel
 Web/API -> Contracts
-Application -> Contracts + SharedKernel
+Application -> Contracts + SharedKernel + BuildingBlocks (storage port compatibility seam)
 Infrastructure -> Application + Domain + Contracts + SharedKernel + BuildingBlocks
 BuildingBlocks -> SharedKernel (with the current document-storage compatibility adapter referencing Application)
 AppHost -> deployable projects only

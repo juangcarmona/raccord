@@ -7,6 +7,7 @@ using Raccord.Application.Customers;
 using Raccord.Application.Documents;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
+using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Auditing;
 using Raccord.Domain.Billing;

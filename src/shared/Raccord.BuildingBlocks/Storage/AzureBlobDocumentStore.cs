@@ -1,7 +1,6 @@
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Raccord.Application.Documents;
 
 namespace Raccord.BuildingBlocks.Storage;
 

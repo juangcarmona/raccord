@@ -1,6 +1,5 @@
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.DependencyInjection;
-using Raccord.Application.Documents;
 
 namespace Raccord.BuildingBlocks.Storage;
 

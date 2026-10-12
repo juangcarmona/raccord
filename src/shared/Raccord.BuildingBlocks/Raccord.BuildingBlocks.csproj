@@ -12,7 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Raccord.Application\Raccord.Application.csproj" />
         <ProjectReference Include="..\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
         <InternalsVisibleTo Include="Raccord.Infrastructure" />
         <InternalsVisibleTo Include="Raccord.Infrastructure.Tests" />

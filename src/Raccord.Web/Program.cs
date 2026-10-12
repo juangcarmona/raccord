@@ -2,11 +2,11 @@ using System.Text.Json.Serialization;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Invoicing;
-using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.Infrastructure;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
+using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
 

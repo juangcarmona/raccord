@@ -2,5 +2,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\Raccord.Domain\Raccord.Domain.csproj" />
         <ProjectReference Include="..\..\src\modules\Contacts\Raccord.Modules.Contacts\Raccord.Modules.Contacts.csproj" />
+        <ProjectReference Include="..\..\src\modules\Workspace\Raccord.Modules.Workspace\Raccord.Modules.Workspace.csproj" />
     </ItemGroup>
 </Project>

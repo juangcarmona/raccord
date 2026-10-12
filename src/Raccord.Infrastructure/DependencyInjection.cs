@@ -9,7 +9,6 @@ using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
 using Raccord.Application.Invoicing;
-using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Messaging;
 using Raccord.BuildingBlocks.Persistence;
@@ -23,6 +22,7 @@ using Raccord.Infrastructure.Time;
 using Raccord.Modules.Compliance;
 using Raccord.Modules.Compliance.Contracts;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using ApplicationAuditTrail = Raccord.Application.Auditing.IAuditTrail;
@@ -71,8 +71,7 @@ public static class DependencyInjection
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
-        services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
-        services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
+        RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<IAuditAppender>(provider =>
             provider.GetRequiredService<ApplicationAuditTrail>()
@@ -98,5 +97,20 @@ public static class DependencyInjection
         services.AddDocumentStorage(storage);
 
         return builder;
+    }
+
+    private static void RegisterWorkspaceServices(IServiceCollection services)
+    {
+        services.AddScoped<WorkspaceRepository>();
+        services.AddScoped<IWorkspaceStore>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IInvoiceSeriesCatalog>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IInvoiceNumberSequenceRepository>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IWorkspaceUnitOfWork, WorkspaceUnitOfWork>();
     }
 }

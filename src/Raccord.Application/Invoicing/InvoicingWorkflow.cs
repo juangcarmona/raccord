@@ -4,13 +4,13 @@ using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
-using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
@@ -21,10 +21,11 @@ namespace Raccord.Application.Invoicing;
 public sealed class InvoicingWorkflow(
     IInvoiceDraftRepository drafts,
     IIssuedInvoiceRepository invoices,
-    IInvoiceSeriesRepository series,
+    IInvoiceSeriesCatalog series,
+    IInvoiceNumberSequenceRepository sequences,
     IProjectRepository projects,
     IPartyDirectory parties,
-    IIssuerProfileRepository issuers,
+    IWorkspaceStore workspace,
     IAuditTrail audit,
     IComplianceRecorder compliance,
     IInvoiceDocumentRenderer renderer,
@@ -198,10 +199,10 @@ public sealed class InvoicingWorkflow(
             .FindAsync(draft.CustomerId, cancellationToken)
             .ConfigureAwait(false);
         var issuer = (
-            await issuers.FindAsync(cancellationToken).ConfigureAwait(false)
+            await workspace.FindIssuerAsync(cancellationToken).ConfigureAwait(false)
         )?.ToLegalParty();
         var recipient = customer?.ToLegalParty();
-        var sequence = await series
+        var sequence = await sequences
             .GetOrStartSequenceAsync(draft.SeriesCode, issueDate.Year, cancellationToken)
             .ConfigureAwait(false);
 
@@ -338,12 +339,12 @@ public sealed class InvoicingWorkflow(
         {
             var today = clock.Today;
             var sequence =
-                await series
+                await sequences
                     .FindSequenceAsync(draft.SeriesCode, today.Year, cancellationToken)
                     .ConfigureAwait(false)
                 ?? InvoiceNumberSequence.Start(draft.SeriesCode, today.Year);
             var issuer = (
-                await issuers.FindAsync(cancellationToken).ConfigureAwait(false)
+                await workspace.FindIssuerAsync(cancellationToken).ConfigureAwait(false)
             )?.ToLegalParty();
             issues = draft.Validate(issuer, customer?.ToLegalParty(), today, sequence);
         }

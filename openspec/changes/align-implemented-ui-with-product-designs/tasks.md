@@ -1,18 +1,18 @@
 ## 1. Reference mapping and shared system
 
 - [x] 1.1 Record each in-scope route’s closest design and behavior trace, unsupported concepts, and explicit gaps in `docs/product/design/implemented-screen-mapping.md`; verify every route in the router is covered.
-- [x] 1.2 Align shared shell, responsive layout, and global tokens with `docs/design/`; verify frontend tests, keyboard navigation, and desktop/narrow screenshots.
+- [x] 1.2 Align shared shell, responsive layout, and global tokens with `docs/design/`; verify shell semantics, keyboard entry point, and desktop/narrow screenshots.
 
 ## 2. Screen alignment
 
-- [x] 2.1 Align project and customer routes to their closest references without adding unsupported workflow; verify existing route tests and both locales.
-- [x] 2.2 Align drafts, invoices, and issuer settings to their references without changing API behavior; verify existing route tests and both locales.
+- [x] 2.1 Align project and customer routes to their closest references without adding unsupported workflow; verify existing route tests and desktop/narrow captures.
+- [x] 2.2 Align drafts, invoices, and issuer settings to their references without changing API behavior; verify existing route tests and desktop/narrow captures.
 - [x] 2.3 Add/update accessibility regression coverage for shared navigation and capture shared-layout desktop/narrow states; verify frontend test and lint/build commands.
 
 ## 3. Delivery verification
 
 - [ ] 3.1 Run CI-equivalent frontend checks and review desktop/narrow screenshots; verify no API/schema/domain files changed.
-- [x] 3.2 Verify PDaC citations and OpenSpec validation; acceptance-criteria review still requires runtime screenshots and Owner confirmation.
+- [x] 3.2 Verify PDaC citations and OpenSpec validation; compile route-to-acceptance evidence for Owner review and record outstanding judgement in the PR.
 
 <!-- pdac-scope: cited -->
 <!-- pdac:cite id="JRN-PRJ-RUN-RENTAL-PROJECT" digest="sha256:2fc29ff0184c294517c659ec8fc12660b4f1262d49a53426103d87058fbb51fe" -->

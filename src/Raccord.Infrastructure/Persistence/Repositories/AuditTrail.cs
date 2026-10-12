@@ -1,14 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Raccord.Application.Auditing;
-using Raccord.Domain.Auditing;
+using Raccord.Modules.Compliance;
 using Raccord.SharedKernel.Auditing;
 
 namespace Raccord.Infrastructure.Persistence.Repositories;
 
 internal sealed class AuditTrail(RaccordDbContext db) : IAuditTrail
 {
-    public void Append(AuditEvent auditEvent) => db.AuditEvents.Add(auditEvent);
-
     public void Append(AuditEntry entry) =>
         db.AuditEvents.Add(
             AuditEvent.Record(
@@ -21,15 +19,23 @@ internal sealed class AuditTrail(RaccordDbContext db) : IAuditTrail
             )
         );
 
-    public async Task<IReadOnlyList<AuditEvent>> ListForEntityAsync(
-        Guid entityId,
-        CancellationToken cancellationToken
-    ) =>
+    public async Task<
+        IReadOnlyList<Raccord.Modules.Compliance.Contracts.AuditEventSnapshot>
+    > ListForEntityAsync(Guid entityId, CancellationToken cancellationToken) =>
         await db
             .AuditEvents.AsNoTracking()
             .Where(item => item.EntityId == entityId)
             .OrderBy(item => item.OccurredAt)
             .ThenBy(item => item.Id)
+            .Select(item => new Raccord.Modules.Compliance.Contracts.AuditEventSnapshot(
+                item.Id,
+                item.OccurredAt,
+                item.Actor,
+                item.Action,
+                item.EntityType,
+                item.EntityId,
+                item.Details
+            ))
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
 }

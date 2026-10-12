@@ -21,8 +21,12 @@ using Raccord.Infrastructure.Messaging;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Infrastructure.Persistence.Repositories;
 using Raccord.Infrastructure.Time;
+using Raccord.Modules.Compliance;
+using Raccord.Modules.Compliance.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
+using ApplicationAuditTrail = Raccord.Application.Auditing.IAuditTrail;
+using ApplicationComplianceRecorder = Raccord.Application.Compliance.IComplianceRecorder;
 using ApplicationUnitOfWork = Raccord.Application.Abstractions.IUnitOfWork;
 
 namespace Raccord.Infrastructure;
@@ -64,9 +68,11 @@ public static class DependencyInjection
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
-        services.AddScoped<IAuditTrail, AuditTrail>();
-        services.AddScoped<IAuditAppender>(provider => provider.GetRequiredService<IAuditTrail>());
-        services.AddScoped<IComplianceRecorder, PendingComplianceRecorder>();
+        services.AddScoped<ApplicationAuditTrail, AuditTrail>();
+        services.AddScoped<IAuditAppender>(provider =>
+            provider.GetRequiredService<ApplicationAuditTrail>()
+        );
+        services.AddScoped<ApplicationComplianceRecorder, PendingComplianceRecorder>();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
 

@@ -9,11 +9,11 @@ using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
-using Raccord.Domain.Auditing;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Customers;
 using Raccord.Domain.Projects;
 using Raccord.SharedKernel.Abstractions;
+using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
 
 namespace Raccord.Application.Invoicing;
@@ -407,7 +407,7 @@ public sealed class InvoicingWorkflow(
         params (string Key, string Value)[] details
     ) =>
         audit.Append(
-            AuditEvent.Record(
+            new AuditEntry(
                 clock.UtcNow,
                 actor.Name,
                 action,

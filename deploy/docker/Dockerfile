@@ -19,6 +19,10 @@ COPY src/Raccord.ServiceDefaults/Raccord.ServiceDefaults.csproj src/Raccord.Serv
 COPY src/Raccord.Web/Raccord.Web.csproj src/Raccord.Web/
 COPY src/shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj src/shared/Raccord.SharedKernel/
 COPY src/shared/Raccord.BuildingBlocks/Raccord.BuildingBlocks.csproj src/shared/Raccord.BuildingBlocks/
+COPY src/shared/Raccord.ArchitectureAnalyzers/Raccord.ArchitectureAnalyzers.csproj src/shared/Raccord.ArchitectureAnalyzers/
+COPY src/modules/Directory.Build.props src/modules/
+COPY src/modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj src/modules/Compliance/Raccord.Modules.Compliance.Contracts/
+COPY src/modules/Compliance/Raccord.Modules.Compliance/Raccord.Modules.Compliance.csproj src/modules/Compliance/Raccord.Modules.Compliance/
 RUN dotnet restore src/Raccord.Web/Raccord.Web.csproj
 COPY src/ src/
 RUN dotnet publish src/Raccord.Web/Raccord.Web.csproj -c Release -o /app --no-restore

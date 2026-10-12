@@ -23,52 +23,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Raccord.Domain.Auditing.AuditEvent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Action")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("action");
-
-                    b.Property<string>("Actor")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("actor");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("jsonb")
-                        .HasColumnName("details");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("entity_id");
-
-                    b.Property<string>("EntityType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("entity_type");
-
-                    b.Property<DateTimeOffset>("OccurredAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("occurred_at");
-
-                    b.HasKey("Id")
-                        .HasName("pk_audit_events");
-
-                    b.HasIndex("EntityId", "OccurredAt")
-                        .HasDatabaseName("ix_audit_events_entity_id_occurred_at");
-
-                    b.ToTable("audit_events", (string)null);
-                });
-
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceDraft", b =>
                 {
                     b.Property<Guid>("Id")
@@ -343,72 +297,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("projects", (string)null);
                 });
 
-            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ComplianceRecordRow", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<int>("Attempts")
-                        .HasColumnType("integer")
-                        .HasColumnName("attempts");
-
-                    b.Property<string>("ContentHash")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character(64)")
-                        .HasColumnName("content_hash")
-                        .IsFixedLength();
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("InvoiceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("invoice_id");
-
-                    b.Property<string>("InvoiceNumber")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasColumnName("invoice_number");
-
-                    b.Property<string>("Kind")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("kind");
-
-                    b.Property<DateTimeOffset?>("LastAttemptAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_attempt_at");
-
-                    b.Property<string>("LastError")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("last_error");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("status");
-
-                    b.HasKey("Id")
-                        .HasName("pk_compliance_records");
-
-                    b.HasIndex("InvoiceId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_compliance_records_invoice_id");
-
-                    b.HasIndex("Status")
-                        .HasDatabaseName("ix_compliance_records_status");
-
-                    b.ToTable("compliance_records", (string)null);
-                });
-
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -509,6 +397,118 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_issued_invoices_series_code_year_sequence");
 
                     b.ToTable("issued_invoices", (string)null);
+                });
+
+            modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("action");
+
+                    b.Property<string>("Actor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("actor");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("details");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("entity_id");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("entity_type");
+
+                    b.Property<DateTimeOffset>("OccurredAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("occurred_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_audit_events");
+
+                    b.HasIndex("EntityId", "OccurredAt")
+                        .HasDatabaseName("ix_audit_events_entity_id_occurred_at");
+
+                    b.ToTable("audit_events", "compliance");
+                });
+
+            modelBuilder.Entity("Raccord.Modules.Compliance.ComplianceRecordRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer")
+                        .HasColumnName("attempts");
+
+                    b.Property<string>("ContentHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character(64)")
+                        .HasColumnName("content_hash")
+                        .IsFixedLength();
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("invoice_id");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("invoice_number");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("kind");
+
+                    b.Property<DateTimeOffset?>("LastAttemptAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_attempt_at");
+
+                    b.Property<string>("LastError")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("last_error");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id")
+                        .HasName("pk_compliance_records");
+
+                    b.HasIndex("InvoiceId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_compliance_records_invoice_id");
+
+                    b.HasIndex("Status")
+                        .HasDatabaseName("ix_compliance_records_status");
+
+                    b.ToTable("compliance_records", "compliance");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceDraft", b =>
@@ -697,7 +697,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.Navigation("BillableLines");
                 });
 
-            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ComplianceRecordRow", b =>
+            modelBuilder.Entity("Raccord.Modules.Compliance.ComplianceRecordRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", null)
                         .WithMany()

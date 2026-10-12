@@ -10,6 +10,11 @@
         <Project Path="src/shared/Raccord.BuildingBlocks/Raccord.BuildingBlocks.csproj" />
         <Project Path="src/shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
     </Folder>
+    <Folder Name="/src/modules/" />
+    <Folder Name="/src/modules/Compliance/">
+        <Project Path="src/modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj" />
+        <Project Path="src/modules/Compliance/Raccord.Modules.Compliance/Raccord.Modules.Compliance.csproj" />
+    </Folder>
     <Folder Name="/src/shared/">
         <Project Path="src/shared/Raccord.ArchitectureAnalyzers/Raccord.ArchitectureAnalyzers.csproj" />
     </Folder>

@@ -1,4 +1,5 @@
 using Raccord.Contracts.Auditing;
+using Raccord.Modules.Compliance.Contracts;
 
 namespace Raccord.Application.Auditing;
 

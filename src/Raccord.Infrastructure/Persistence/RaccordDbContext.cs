@@ -1,10 +1,10 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Raccord.Domain.Auditing;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
+using Raccord.Modules.Compliance;
 
 namespace Raccord.Infrastructure.Persistence;
 

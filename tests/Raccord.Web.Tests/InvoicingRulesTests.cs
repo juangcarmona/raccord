@@ -169,13 +169,13 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
             api.ExecuteAsync("UPDATE issued_invoices SET total = 1")
         );
         var delete = await Should.ThrowAsync<PostgresException>(() =>
-            api.ExecuteAsync("DELETE FROM audit_events")
+            api.ExecuteAsync("DELETE FROM compliance.audit_events")
         );
         var truncate = await Should.ThrowAsync<PostgresException>(() =>
             api.ExecuteAsync("TRUNCATE issued_invoices CASCADE")
         );
         var compliance = await Should.ThrowAsync<PostgresException>(() =>
-            api.ExecuteAsync("DELETE FROM compliance_records")
+            api.ExecuteAsync("DELETE FROM compliance.compliance_records")
         );
 
         foreach (var error in new[] { update, delete, truncate, compliance })

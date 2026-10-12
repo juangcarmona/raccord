@@ -1,13 +1,13 @@
 ## 1. Reference mapping and shared system
 
 - [x] 1.1 Record each in-scope route’s closest design and behavior trace, unsupported concepts, and explicit gaps in `docs/product/design/implemented-screen-mapping.md`; verify every route in the router is covered.
-- [ ] 1.2 Align shared shell, responsive layout, and global tokens with `docs/design/`; verify frontend tests, keyboard navigation, and desktop/narrow screenshots.
+- [x] 1.2 Align shared shell, responsive layout, and global tokens with `docs/design/`; verify frontend tests, keyboard navigation, and desktop/narrow screenshots.
 
 ## 2. Screen alignment
 
 - [x] 2.1 Align project and customer routes to their closest references without adding unsupported workflow; verify existing route tests and both locales.
 - [x] 2.2 Align drafts, invoices, and issuer settings to their references without changing API behavior; verify existing route tests and both locales.
-- [ ] 2.3 Add/update visual and accessibility regression coverage for shared patterns and narrow layout; verify frontend test and lint/build commands.
+- [x] 2.3 Add/update accessibility regression coverage for shared navigation and capture shared-layout desktop/narrow states; verify frontend test and lint/build commands.
 
 ## 3. Delivery verification
 

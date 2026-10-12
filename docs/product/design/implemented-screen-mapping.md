@@ -2,17 +2,17 @@
 
 This maps current frontend routes to the closest documented screen and trace. The portfolio is a design reference, not evidence that every depicted workflow exists. Keep rendered controls within current frontend/API behavior.
 
-| Implemented route | Closest reference | Current implementation boundary / gap |
-| --- | --- | --- |
-| `/projects` | `project-detail` shared project/table patterns | Use existing project list data and actions only; no schedule, tabs, or template flows. |
-| `/projects/new` | `project-creation` | Current API-backed name/customer/date fields only; omit template selection and preview. |
-| `/projects/:id` | `project-detail` | Existing project and billable-work behavior only; no unsupported schedule or document tabs. |
-| `/customers` | `contact-detail` shared identity/metadata patterns | No exact customer-list screen in the portfolio; retain the existing list and record this as a portfolio gap. |
-| `/customers/new` | `contact-detail` form patterns | Current customer fields only; no extra commercial profile or contact workflows. |
-| `/drafts` | `invoicing-queue` | Drafts supported by existing endpoints; omit unsupported filters and queue actions. |
-| `/drafts/:id` | `invoice-draft-editor` | Existing editable draft fields and lines only; no payment or issue workflow beyond supported actions. |
-| `/invoices` | `invoice-list` | Existing invoice list/status only; do not imply unsupported KPI, bulk-selection, or filtering behavior. |
-| `/invoices/:id` | `invoice-list` detail/table/status patterns | Existing invoice detail and audit data; no new actions. |
-| `/settings/issuer` | `issuer-profile` | Current issuer fields only; omit unsupported company profile and branding controls. |
+| Implemented route | Closest reference | Behavior trace | Current implementation boundary / gap |
+| --- | --- | --- | --- |
+| `/projects` | [`project-detail`](project-detail.html) shared project/table patterns | [`Project detail & schedule`](screen-traces.md#screen--project-detail--schedule-management-desktop); journey `JRN-PRJ-RUN-RENTAL-PROJECT` | No exact project-list screen; use existing project list data/actions only, no schedule, tabs, or template flows. |
+| `/projects/new` | [`project-creation`](project-creation.html) | [`Project creation`](screen-traces.md#screen--project-creation-management-desktop); journey `JRN-PRJ-RUN-RENTAL-PROJECT` | Current API-backed name/customer/date fields only; omit template selection and preview. |
+| `/projects/:id` | [`project-detail`](project-detail.html) | [`Project detail & schedule`](screen-traces.md#screen--project-detail--schedule-management-desktop); journey `JRN-PRJ-RUN-RENTAL-PROJECT` | Existing project and billable-work behavior only; no unsupported schedule or document tabs. |
+| `/customers` | [`contact-detail`](contact-detail.html) shared identity/metadata patterns | [`Contact detail & commercial defaults`](screen-traces.md#screen--contact-detail--commercial-defaults-management-desktop); journey `JRN-PRJ-SET-UP-CONTACT-DATABASE` | No exact customer-list screen; retain the existing list and record this as a portfolio gap. |
+| `/customers/new` | [`contact-detail`](contact-detail.html) form patterns | [`Contact detail & commercial defaults`](screen-traces.md#screen--contact-detail--commercial-defaults-management-desktop); journey `JRN-PRJ-SET-UP-CONTACT-DATABASE` | Current customer fields only; no extra commercial profile or contact workflows. |
+| `/drafts` | [`invoicing-queue`](invoicing-queue.html) | [`Invoicing queue`](screen-traces.md#screens-5-7--invoicing-queue--payments--dunning--quote-review-management-desktop); journey `JRN-BILL-FINISHED-PROJECT` | Drafts supported by existing endpoints; omit unsupported filters and queue actions. |
+| `/drafts/:id` | [`invoice-draft-editor`](invoice-draft-editor.html) | [`Invoice draft editor`](screen-traces.md#screen-4--invoice-draft-editor-management-desktop); journey `JRN-BILL-FINISHED-PROJECT` | Existing editable draft fields and lines only; no payment or issue workflow beyond supported actions. |
+| `/invoices` | [`invoice-list`](invoice-list.html) | [`Invoice list`](screen-traces.md#screen-1--invoice-list-management-desktop); journey `JRN-BILL-FINISHED-PROJECT` | Existing invoice list/status only; do not imply unsupported KPI, bulk-selection, or filtering behavior. |
+| `/invoices/:id` | [`invoice-list`](invoice-list.html) detail/table/status patterns | [`Invoice list`](screen-traces.md#screen-1--invoice-list-management-desktop); journey `JRN-BILL-FINISHED-PROJECT` | No exact invoice-detail reference; existing invoice detail and audit data only, no new actions. |
+| `/settings/issuer` | [`issuer-profile`](issuer-profile.html) | [`Issuer profile settings`](screen-traces.md#screen--issuer-profile-settings-management-desktop); journey `JRN-SET-UP-INVOICING` | Current issuer fields only; omit unsupported company profile and branding controls. |
 
 Shared shell: follow `docs/design/visual-direction.md`, `color-tokens.md`, and `logo-usage.md`. For behavior provenance consult `docs/product/design/screen-traces.md`; for the larger route portfolio consult `screen-backlog.md` and `raccord-screens.pen`.

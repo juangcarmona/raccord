@@ -32,7 +32,7 @@ var web = builder
     .WithHttpHealthCheck("/health/ready", endpointName: "http");
 
 builder
-    .AddViteApp("frontend", "../Raccord.Frontend")
+    .AddViteApp("frontend", "../../Raccord.Frontend")
     .WithNpm(install: true, installCommand: "ci")
     .WithReference(web)
     .WaitFor(web);

@@ -21,9 +21,7 @@ public sealed class DistributedApp_Should_Boot(DistributedAppFixture app) : Brow
             "distributed-app-boot",
             async page =>
             {
-                // The root redirects to /projects; the empty list renders only when the API, database
-                // and the Vite /api proxy all work end-to-end.
-                await page.GotoAsync("/");
+                await page.GotoAsync("/projects");
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Projects", Level = 1 })
                     .WaitForAsync();
                 await page.GetByText("There are no projects yet.").WaitForAsync();

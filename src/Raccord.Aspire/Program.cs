@@ -18,6 +18,7 @@ var migrations = builder
 
 var web = builder
     .AddProject<Projects.Raccord_Web>("web")
+    .WithHttpEndpoint(name: "http")
     .WithReference(database)
     .WithReference(documents)
     .WithEnvironment("Storage__Provider", "AzureBlob")

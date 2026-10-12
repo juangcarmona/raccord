@@ -12,7 +12,7 @@
 
 ## 3. Delivery verification
 
-- [ ] 3.1 Run CI-equivalent frontend checks and review desktop/narrow screenshots; verify no API/schema/domain files changed.
+- [x] 3.1 Run CI-equivalent frontend checks and review desktop/narrow screenshots; verify no API/schema/domain files changed.
 - [x] 3.2 Verify PDaC citations and OpenSpec validation; compile route-to-acceptance evidence for Owner review and record outstanding judgement in the PR.
 
 <!-- pdac-scope: cited -->

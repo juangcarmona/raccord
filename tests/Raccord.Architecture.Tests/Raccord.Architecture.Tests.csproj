@@ -10,5 +10,6 @@
         <ProjectReference Include="..\Raccord.EndToEndTests\Raccord.EndToEndTests.csproj" />
         <ProjectReference Include="..\Raccord.Infrastructure.Tests\Raccord.Infrastructure.Tests.csproj" />
         <ProjectReference Include="..\Raccord.Web.Tests\Raccord.Web.Tests.csproj" />
+        <ProjectReference Include="..\Raccord.BuildingBlocks.Tests\Raccord.BuildingBlocks.Tests.csproj" />
     </ItemGroup>
 </Project>

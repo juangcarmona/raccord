@@ -1,7 +1,7 @@
-using Raccord.Application.Abstractions;
 using Raccord.Application.Compliance;
 using Raccord.Domain.Billing;
 using Raccord.Infrastructure.Persistence;
+using Raccord.SharedKernel.Abstractions;
 
 namespace Raccord.Infrastructure.Compliance;
 

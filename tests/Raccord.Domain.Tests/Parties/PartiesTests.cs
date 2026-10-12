@@ -1,7 +1,7 @@
-using Raccord.Domain.Common;
 using Raccord.Domain.Customers;
 using Raccord.Domain.Organization;
-using Raccord.Domain.Parties;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Domain.Tests.Parties;
 

@@ -7,6 +7,7 @@ using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.Infrastructure;
 using Raccord.Infrastructure.Persistence;
+using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddOpenApi();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ICurrentActor, HttpCurrentActor>();
+builder.Services.AddScoped<ICurrentUser, HttpCurrentActor>();
 builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<InvoicingWorkflow>();

@@ -1,8 +1,9 @@
 using System.Globalization;
 using Raccord.Application.Documents;
+using Raccord.BuildingBlocks.Storage;
 using Raccord.Domain.Billing;
-using Raccord.Domain.Parties;
 using Raccord.Infrastructure.Documents.Pdf;
+using Raccord.SharedKernel.Parties;
 using Format = Raccord.Infrastructure.Documents.SpanishInvoiceFormat;
 
 namespace Raccord.Infrastructure.Documents;

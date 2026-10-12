@@ -13,16 +13,17 @@ Guardrails for contributors and coding agents. Rules marked **(enforced)** fail 
 ## Dependency rules
 
 ```text
-Web/API -> Application -> Domain
+Web/API -> Application -> Domain -> SharedKernel
 Web/API -> Contracts
-Application -> Contracts
-Infrastructure -> Application + Domain + Contracts
+Application -> Contracts + SharedKernel + BuildingBlocks (storage port compatibility seam)
+Infrastructure -> Application + Domain + Contracts + SharedKernel + BuildingBlocks
+BuildingBlocks -> SharedKernel (with the current document-storage compatibility adapter referencing Application)
 AppHost -> deployable projects only
 Domain, Contracts -> base class library only
 ```
 
 - Project references follow this graph **(enforced: `DependencyRulesTests`)**.
-- Domain and Contracts reference only the BCL; Application references no ASP.NET, EF Core, Npgsql, Azure, Aspire or HTTP assemblies; Domain, Contracts and Application add no packages **(enforced)**.
+- SharedKernel and Contracts reference only the BCL; Domain may reference SharedKernel; Application references no ASP.NET, EF Core, Npgsql, Azure, Aspire or HTTP assemblies; Domain, Contracts and Application add no packages **(enforced)**.
 - Adapters sit at ports defined in Application; external vocabularies (database, AEAT XSD, e-invoice syntaxes) never enter the domain.
 - Cross-module writes go through application use cases in one unit of work.
 - Persistence models do not become API contracts; contracts live in `Raccord.Contracts`.

@@ -1,9 +1,9 @@
 using Raccord.Application.Abstractions;
 using Raccord.Application.Customers;
 using Raccord.Contracts.Projects;
-using Raccord.Domain.Common;
-using Raccord.Domain.Pricing;
 using Raccord.Domain.Projects;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Application.Projects;
 

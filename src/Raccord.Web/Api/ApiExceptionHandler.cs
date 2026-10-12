@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Invoicing;
 using Raccord.Contracts.Common;
-using Raccord.Domain.Common;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Web.Api;
 
@@ -58,6 +58,7 @@ internal sealed partial class ApiExceptionHandler(
 
         if (problem is null)
         {
+            LogUnhandledException(logger, exception);
             return false;
         }
 
@@ -91,6 +92,12 @@ internal sealed partial class ApiExceptionHandler(
         Message = "Integrity check failed for a stored record"
     )]
     private static partial void LogIntegrityFailure(ILogger logger, Exception exception);
+
+    [LoggerMessage(
+        Level = LogLevel.Error,
+        Message = "Unhandled exception while processing an HTTP request"
+    )]
+    private static partial void LogUnhandledException(ILogger logger, Exception exception);
 
     private static ProblemDetails Problem(
         int status,

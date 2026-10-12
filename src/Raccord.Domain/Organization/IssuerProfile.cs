@@ -1,5 +1,5 @@
-using Raccord.Domain.Common;
-using Raccord.Domain.Parties;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Domain.Organization;
 
@@ -44,7 +44,7 @@ public sealed class IssuerProfile
         }
 
         var normalizedTaxId =
-            Parties.TaxId.Normalize(taxId)
+            Raccord.SharedKernel.Parties.TaxId.Normalize(taxId)
             ?? throw new BusinessRuleViolationException(
                 "issuer.tax-id-missing",
                 "The issuer tax ID is required."

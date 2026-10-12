@@ -1,8 +1,8 @@
 using Raccord.Domain.Billing;
-using Raccord.Domain.Common;
-using Raccord.Domain.Parties;
-using Raccord.Domain.Pricing;
 using Raccord.Domain.Projects;
+using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Parties;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Domain.Tests.Billing;
 

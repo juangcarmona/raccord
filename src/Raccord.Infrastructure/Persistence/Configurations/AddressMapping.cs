@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Raccord.Domain.Parties;
+using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Infrastructure.Persistence.Configurations;
 

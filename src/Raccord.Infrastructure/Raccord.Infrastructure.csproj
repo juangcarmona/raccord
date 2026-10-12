@@ -10,6 +10,8 @@
         <ProjectReference Include="..\Raccord.Application\Raccord.Application.csproj" />
         <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
         <ProjectReference Include="..\Raccord.Domain\Raccord.Domain.csproj" />
+        <ProjectReference Include="..\shared\Raccord.BuildingBlocks\Raccord.BuildingBlocks.csproj" />
+        <ProjectReference Include="..\shared\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />
     </ItemGroup>
 
     <ItemGroup>

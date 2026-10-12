@@ -1,4 +1,4 @@
-using Raccord.Domain.Pricing;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Domain.Billing;
 

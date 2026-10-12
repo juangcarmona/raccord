@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
@@ -11,11 +12,18 @@ using Raccord.Application.Documents;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
+using Raccord.BuildingBlocks.Messaging;
+using Raccord.BuildingBlocks.Persistence;
+using Raccord.BuildingBlocks.Storage;
 using Raccord.Infrastructure.Compliance;
 using Raccord.Infrastructure.Documents;
+using Raccord.Infrastructure.Messaging;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Infrastructure.Persistence.Repositories;
 using Raccord.Infrastructure.Time;
+using Raccord.SharedKernel.Abstractions;
+using Raccord.SharedKernel.Auditing;
+using ApplicationUnitOfWork = Raccord.Application.Abstractions.IUnitOfWork;
 
 namespace Raccord.Infrastructure;
 
@@ -38,7 +46,18 @@ public static class DependencyInjection
         builder.AddNpgsqlDbContext<RaccordDbContext>(DatabaseConnectionName);
 
         var services = builder.Services;
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ApplicationUnitOfWork, UnitOfWork>();
+        services.AddSender();
+        services.AddSingleton<IExpectedExceptionMapper, ApplicationExceptionMapper>();
+        services.AddScoped<ParticipatingContexts>();
+        services.AddScoped<SharedConnectionUnitOfWork>(provider =>
+        {
+            var db = provider.GetRequiredService<RaccordDbContext>();
+            return new SharedConnectionUnitOfWork(
+                (NpgsqlConnection)db.Database.GetDbConnection(),
+                provider.GetRequiredService<ParticipatingContexts>()
+            );
+        });
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
@@ -46,6 +65,7 @@ public static class DependencyInjection
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
         services.AddScoped<IAuditTrail, AuditTrail>();
+        services.AddScoped<IAuditAppender>(provider => provider.GetRequiredService<IAuditTrail>());
         services.AddScoped<IComplianceRecorder, PendingComplianceRecorder>();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
@@ -63,17 +83,8 @@ public static class DependencyInjection
         if (string.Equals(storage.Provider, "AzureBlob", StringComparison.OrdinalIgnoreCase))
         {
             builder.AddAzureBlobServiceClient(DocumentsConnectionName);
-            services.AddSingleton<IDocumentStore>(provider => new AzureBlobDocumentStore(
-                provider.GetRequiredService<BlobServiceClient>(),
-                storage.ContainerName
-            ));
         }
-        else
-        {
-            services.AddSingleton<IDocumentStore>(
-                new FileSystemDocumentStore(storage.FileSystemRoot)
-            );
-        }
+        services.AddDocumentStorage(storage);
 
         return builder;
     }

@@ -1,5 +1,5 @@
 using Raccord.Domain.Billing;
-using Raccord.Domain.Common;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Domain.Tests.Billing;
 

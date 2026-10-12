@@ -12,13 +12,15 @@ import { ProjectsPage } from "../features/projects/ProjectsPage";
 import { AppShell } from "./AppShell";
 import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
+import { SetupPage } from "../features/auth/SetupPage";
 
 export const routes: RouteObject[] = [
+    { index: true, element: <Navigate to="/setup" replace /> },
+    { path: "setup", element: <SetupPage /> },
     { path: "sign-in", element: <SignInPage /> },
     {
         element: <AppShell />,
         children: [
-            { index: true, element: <Navigate to="/projects" replace /> },
             { path: "projects", element: <ProjectsPage /> },
             { path: "projects/new", element: <NewProjectPage /> },
             { path: "projects/:id", element: <ProjectDetailPage /> },

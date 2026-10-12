@@ -41,6 +41,17 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         try
         {
+            await page.GotoAsync("/setup");
+            if (page.Url.EndsWith("/setup", StringComparison.Ordinal))
+            {
+                await page.GetByLabel("Email").FillAsync("admin@example.com");
+                await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Create administrator" })
+                    .ClickAsync();
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/sign-in", StringComparison.Ordinal)
+                );
+            }
             if (signIn)
             {
                 await page.GotoAsync("/sign-in");

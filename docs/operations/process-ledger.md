@@ -43,3 +43,7 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Seeded demo data made it impossible for an AppHost journey to prove first-run setup.
 - Action: Keep demo seeding explicit and make the E2E AppHost boot empty; let the shared browser harness create the first administrator once and reuse that setup for later journeys.
 - Check: The E2E selection includes a first-run setup path and the boot journey asserts an empty installation rather than a seeded user or project.
+
+- Observation: Npgsql's retrying execution strategy rejects a manually opened EF transaction unless the complete setup unit is executed through that strategy.
+- Action: Wrap transactional first-run setup in `CreateExecutionStrategy().ExecuteAsync(...)` so retries preserve the atomic role/user operation.
+- Check: The web setup test and the empty-AppHost E2E run must create the first administrator successfully against PostgreSQL.

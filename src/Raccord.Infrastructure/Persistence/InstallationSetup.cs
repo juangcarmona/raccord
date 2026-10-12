@@ -24,6 +24,18 @@ public sealed class InstallationSetup(
         CancellationToken cancellationToken
     )
     {
+        var strategy = db.Database.CreateExecutionStrategy();
+        return await strategy
+            .ExecuteAsync(() => CreateWithinTransactionAsync(email, password, cancellationToken))
+            .ConfigureAwait(false);
+    }
+
+    private async Task<SetupResult> CreateWithinTransactionAsync(
+        string email,
+        string password,
+        CancellationToken cancellationToken
+    )
+    {
         using var transaction = await db
             .Database.BeginTransactionAsync(cancellationToken)
             .ConfigureAwait(false);

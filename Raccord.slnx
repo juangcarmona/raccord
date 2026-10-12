@@ -23,6 +23,10 @@
         <Project Path="src/modules/Projects/Raccord.Modules.Projects.Contracts/Raccord.Modules.Projects.Contracts.csproj" />
         <Project Path="src/modules/Projects/Raccord.Modules.Projects/Raccord.Modules.Projects.csproj" />
     </Folder>
+    <Folder Name="/src/modules/Invoicing/">
+        <Project Path="src/modules/Invoicing/Raccord.Modules.Invoicing.Contracts/Raccord.Modules.Invoicing.Contracts.csproj" />
+        <Project Path="src/modules/Invoicing/Raccord.Modules.Invoicing/Raccord.Modules.Invoicing.csproj" />
+    </Folder>
     <Folder Name="/src/modules/Compliance/">
         <Project Path="src/modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj" />
         <Project Path="src/modules/Compliance/Raccord.Modules.Compliance/Raccord.Modules.Compliance.csproj" />

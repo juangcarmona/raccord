@@ -4,6 +4,7 @@ using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
+using Raccord.Application.Invoicing;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Billing;
@@ -15,7 +16,7 @@ using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
 
-namespace Raccord.Application.Invoicing;
+namespace Raccord.Modules.Invoicing;
 
 /// <summary>Use cases from project billable lines to issued invoices and their documents.</summary>
 public sealed class InvoicingWorkflow(

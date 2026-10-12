@@ -8,7 +8,7 @@ public sealed class DependencyRulesTests
 {
     private static readonly Assembly Domain = typeof(Raccord.Domain.Billing.InvoiceDraft).Assembly;
     private static readonly Assembly Application =
-        typeof(Raccord.Application.Invoicing.InvoicingWorkflow).Assembly;
+        typeof(Raccord.Application.Invoicing.IInvoiceDraftRepository).Assembly;
     private static readonly Assembly Contracts =
         typeof(Raccord.Contracts.Invoicing.IssuedInvoiceResponse).Assembly;
     private static readonly Assembly Infrastructure =
@@ -136,6 +136,7 @@ public sealed class DependencyRulesTests
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Invoicing.Contracts",
             "Raccord.Modules.Projects.Contracts",
             "Raccord.Modules.Workspace.Contracts",
             "Raccord.SharedKernel",
@@ -150,6 +151,7 @@ public sealed class DependencyRulesTests
             "Raccord.Infrastructure",
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Contacts",
+            "Raccord.Modules.Invoicing",
             "Raccord.Modules.Projects",
             "Raccord.Modules.Workspace",
             "Raccord.BuildingBlocks",

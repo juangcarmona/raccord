@@ -10,6 +10,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
      │   └───────────► Raccord.Contracts ◄────┘ (Application returns contracts)
      ├───────────────► Workspace module (settings and series)
      ├───────────────► Projects module (projects and billable work)
+     ├───────────────► Invoicing module (drafts, numbering and issued invoices)
      ├───────────────► Raccord.Infrastructure ─► Application, Domain, Contracts, BuildingBlocks
      └───────────────► Raccord.BuildingBlocks ─► Raccord.SharedKernel
      └───────────────► Raccord.ServiceDefaults (health, telemetry, resilience)
@@ -23,6 +24,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 | `Raccord.Application` | Use cases and ports | `InvoicingWorkflow`, `AuditLog`; port interfaces |
 | `Raccord.Modules.Workspace` | Workspace settings and invoice series | `OrganizationSettings`; Workspace contracts and domain rules |
 | `Raccord.Modules.Projects` | Projects and billable work | `ProjectWorkspace`; Projects contracts and project rules |
+| `Raccord.Modules.Invoicing` | Drafts, numbering, issued invoices and documents | `InvoicingWorkflow`; Invoicing contracts and finalization rules |
 | `Raccord.BuildingBlocks` | Shared technical seams | Sender, problem mapping, storage adapters and shared transaction coordinator |
 | `Raccord.Infrastructure` | Adapters | `AddRaccordInfrastructure`, `DatabaseMaintenance`, `RaccordDbContext` |
 | `Raccord.Web` | HTTP endpoints, error mapping, SPA hosting, `migrate` command | `/api/*`, `/health/*`, `/openapi/v1.json` |

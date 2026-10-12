@@ -15,6 +15,7 @@ using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
 
 var builder = WebApplication.CreateBuilder(args);
+var requireAuthentication = !builder.Configuration.GetValue<bool>("Raccord:TestingBypassAuth");
 
 builder.AddServiceDefaults();
 builder.AddRaccordInfrastructure();
@@ -50,9 +51,16 @@ builder.Services.Configure<CookieAuthenticationOptions>(
         };
     }
 );
-builder
-    .Services.AddAuthorizationBuilder()
-    .SetFallbackPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
+if (requireAuthentication)
+{
+    builder
+        .Services.AddAuthorizationBuilder()
+        .SetFallbackPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
+}
+else
+{
+    builder.Services.AddAuthorization();
+}
 
 builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.NumberHandling = JsonNumberHandling.Strict
@@ -97,7 +105,7 @@ app.UseAuthorization();
 app.MapOpenApi();
 app.MapDefaultEndpoints();
 app.MapRaccordAuthentication();
-app.MapRaccordApi(!app.Configuration.GetValue<bool>("Raccord:TestingBypassAuth"));
+app.MapRaccordApi(requireAuthentication);
 
 // Client-side routes fall back to the SPA; paths that look like files (assets) and server prefixes never do.
 app.MapFallbackToFile("{*path:regex(^(?!api/|health/|openapi/).*$):nonfile}", "index.html");

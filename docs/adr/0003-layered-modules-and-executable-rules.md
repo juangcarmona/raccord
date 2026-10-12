@@ -41,3 +41,4 @@ We will keep layered projects with module namespaces and enforce the dependency 
 
 - Related: ADR-0001
 - Superseded by: ADR-0018
+- Accepted 2026-10-06 and superseded 2026-10-12; the frontmatter date records the latest status change.

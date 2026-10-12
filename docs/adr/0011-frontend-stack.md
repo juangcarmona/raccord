@@ -28,11 +28,11 @@ We will build the frontend with React, TypeScript and Vite, and type the API cli
 ## Consequences
 
 - **Positive:**
-    - Business rules live only in the backend; the UI disables actions based on server-reported issues.
+  - Business rules live only in the backend; the UI disables actions based on server-reported issues.
 - **Negative:**
-    - Tooling stays on TypeScript 5.9 and ESLint 9 until typescript-eslint and jsx-a11y support TypeScript 7 / ESLint 10.
+  - Tooling stays on TypeScript 5.9 and ESLint 9 until typescript-eslint and jsx-a11y support TypeScript 7 / ESLint 10.
 - **Neutral:**
-    - New dependencies: `react`, `react-dom`, `react-router`, `openapi-fetch` (runtime); test/lint/build tools (dev).
+  - New dependencies: `react`, `react-dom`, `react-router`, `openapi-fetch` (runtime); test/lint/build tools (dev).
 
 ## Alternatives considered
 

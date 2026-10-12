@@ -27,12 +27,12 @@ We will round each line net amount once and compute VAT per rate on the rounded 
 ## Consequences
 
 - **Positive:**
-    - Printed numbers always reconcile: lines add up to bases, bases × rate give quotas, bases + quotas give the total.
+  - Printed numbers always reconcile: lines add up to bases, bases × rate give quotas, bases + quotas give the total.
 - **Negative:**
-    - Splitting the same work into more lines can change the total by at most the line rounding, never by the VAT rounding.
+  - Splitting the same work into more lines can change the total by at most the line rounding, never by the VAT rounding.
 - **Neutral:**
-    - If per-line tax becomes necessary for a record type, it is a separate, tested calculation.
-    - The policy is accepted subject to accountant review (see BR-VAT-PER-RATE and the open questions of `CHG-INITIAL`).
+  - If per-line tax becomes necessary for a record type, it is a separate, tested calculation.
+  - The policy is accepted subject to accountant review (see BR-VAT-PER-RATE and the open questions of `CHG-INITIAL`).
 
 ## Alternatives considered
 

@@ -67,7 +67,7 @@ Quotes and contracts are versioned snapshots of the plan; customer acceptance co
 ## 8. Implications already applied in the first slice
 
 | Finding | Raccord decision |
-|---|---|
+| --- | --- |
 | Rounding gaps | Single policy: line rounded once, VAT per rate on the summed base (ADR-0006). |
 | Double billing risk | Billing state per billable line with optimistic concurrency. |
 | Issued documents changing | Immutable representation, fingerprint, append-only tables (ADR-0004, ADR-0005). |

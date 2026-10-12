@@ -1,6 +1,7 @@
 # Raccord design system
 
-Status: exploratory v1  
+Status: exploratory v1
+
 Last updated: 2026-10-06
 
 Raccord should feel like a calm, precise control surface for audiovisual production operations: clear at a glance, robust under pressure, and distinctive without relying on film clichés.

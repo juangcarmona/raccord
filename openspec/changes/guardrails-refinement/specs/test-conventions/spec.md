@@ -2,9 +2,7 @@
 
 ## Purpose
 
-Test code follows one assertion library and one naming shape, so any test failure is
-immediately readable: the name states the expectation that broke, and the assertion message
-comes from Shouldly.
+Test code follows one assertion library and one naming shape, so any test failure is immediately readable: the name states the expectation that broke, and the assertion message comes from Shouldly.
 
 ## ADDED Requirements
 

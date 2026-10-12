@@ -48,20 +48,20 @@ dotnet test Raccord.slnx
 
 Integration tests start a PostgreSQL container through Testcontainers and create one database per test.
 
-Formatting is enforced by CSharpier (C#) and Prettier (frontend) — no `dotnet format`:
+Formatting is enforced by CSharpier (C#) and Prettier (frontend code and configuration) — no `dotnet format`. Markdown is linted, not reformatted, by markdownlint-cli2 with the repository-root `.markdownlint-cli2.jsonc`: write each prose paragraph and list item on one source line, never hard-wrapped (custom rule `no-hard-wrapped-prose` in `.markdownlint-rules.cjs`).
 
 ```bash
 dotnet tool restore
 dotnet csharpier check .
 ```
 
-In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`.
+In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`. From the repository root: `src/Raccord.Frontend/node_modules/.bin/markdownlint-cli2` (add `--fix` to apply the automatic fixes).
 
 ### Git hooks (auto-installed on build)
 
 The first `dotnet build` after cloning installs husky hooks (`git config core.hooksPath .husky`):
 
-- **pre-commit**: CSharpier on staged `.cs` files, then lint-staged (ESLint `--fix` + Prettier).
+- **pre-commit**: CSharpier on staged `.cs` files, then lint-staged (ESLint `--fix` + Prettier for code and configuration, `markdownlint-cli2 --fix` for Markdown).
 - **commit-msg**: [conventional commits](https://www.conventionalcommits.org/) with types `feat, fix, chore, docs, refactor, test, ci`.
 
 Every commit-time gate is mirrored in CI's `lint` job, so bypassing locally (`HUSKY=0 git commit ...` or `--no-verify`) still produces a red build before merge.

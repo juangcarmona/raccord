@@ -25,11 +25,11 @@ We will store every issued invoice as a canonical representation and verify its 
 ## Consequences
 
 - **Positive:**
-    - An issued invoice is reproducible exactly, and a changed representation is detected before the invoice is served.
+  - An issued invoice is reproducible exactly, and a changed representation is detected before the invoice is served.
 - **Negative:**
-    - The schema identifier must be bumped if the representation ever changes; old representations remain readable by version.
+  - The schema identifier must be bumped if the representation ever changes; old representations remain readable by version.
 - **Neutral:**
-    - This fingerprint is Raccord's integrity mechanism. It is **not** the VERI\*FACTU `Huella`, which has its own field list and chaining (see the compliance seam).
+  - This fingerprint is Raccord's integrity mechanism. It is **not** the VERI\*FACTU `Huella`, which has its own field list and chaining (see the compliance seam).
 
 ## Alternatives considered
 

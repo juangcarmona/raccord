@@ -1,7 +1,7 @@
 # 4. Solution strategy
 
 | Goal | Approach | Decision |
-|---|---|---|
+| --- | --- | --- |
 | Correct money and numbering | Rich domain model with value objects (`Money`, `VatRate`, `LinePricing`, `InvoiceTotals`, `InvoiceNumberSequence`); one rounding policy; TDD | ADR-0006, ADR-0007 |
 | Integrity | Canonical issued representation + SHA-256; append-only tables via triggers; optimistic concurrency | ADR-0004, ADR-0005 |
 | Maintainable boundaries | Modular monolith, layered projects, module namespaces, executable rules | ADR-0001, ADR-0003 |

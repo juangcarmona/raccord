@@ -21,29 +21,29 @@ The product model defines ten bounded contexts (`docs/product/model/domain/bound
 ## What Changes
 
 - **Module assemblies** (ADR-0018). Five modules, each under `src/modules/<Module>/Raccord.Modules.<Module>`, with a `.Contracts` assembly only when another module consumes it:
-    - Workspace
-    - Contacts
-    - Projects
-    - Invoicing
-    - Compliance
+  - Workspace
+  - Contacts
+  - Projects
+  - Invoicing
+  - Compliance
 
     Shared code moves to `src/shared/Raccord.SharedKernel` and `src/shared/Raccord.BuildingBlocks`. The hosts move to `src/root/`. `Raccord.Domain`, `Raccord.Application`, `Raccord.Contracts` and `Raccord.Infrastructure` are removed.
 
 - **Boundary enforcement** (ADR-0018). A new `src/shared/Raccord.ArchitectureAnalyzers` project with analyzer tests, an MSBuild reference guard, and architecture tests rewritten for the module graph.
 - **Persistence per module** (ADR-0019):
-    - one DbContext, schema and migrations history per module;
-    - a unit of work that enlists every participating context in one transaction on one shared connection;
-    - schema-move migrations that keep existing data and the append-only triggers.
+  - one DbContext, schema and migrations history per module;
+  - a unit of work that enlists every participating context in one transaction on one shared connection;
+  - schema-move migrations that keep existing data and the append-only triggers.
 - **Communication between modules** (ADR-0020): only through `.Contracts` interfaces in the caller's transaction. Audit goes through `IAuditAppender` in the SharedKernel. There are no events and no outbox.
 - **Single-file slices** (ADR-0022):
-    - an in-house `ISender` with validation and domain-exception bridging;
-    - `ErrorOr` results, FluentValidation, and endpoints registered per module;
-    - **two new production dependencies**, ErrorOr and FluentValidation, justified in ADR-0022.
+  - an in-house `ISender` with validation and domain-exception bridging;
+  - `ErrorOr` results, FluentValidation, and endpoints registered per module;
+  - **two new production dependencies**, ErrorOr and FluentValidation, justified in ADR-0022.
 - **Docs:**
-    - ADR-0003 marked superseded by ADR-0018;
-    - ADR-0018 to ADR-0020 and ADR-0022 accepted;
-    - `docs/architecture/architecture-rules.md` and arc42 §4, §5, §6, §8, §9 and §11 updated;
-    - `openspec/config.yaml` context updated to the new layout.
+  - ADR-0003 marked superseded by ADR-0018;
+  - ADR-0018 to ADR-0020 and ADR-0022 accepted;
+  - `docs/architecture/architecture-rules.md` and arc42 §4, §5, §6, §8, §9 and §11 updated;
+  - `openspec/config.yaml` context updated to the new layout.
 
 Behaviour is preserved:
 
@@ -70,6 +70,6 @@ None. `openspec/specs/` has no archived capabilities yet.
 - **Product model:** no new product scope. The module name "Contacts" follows Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001 (BC-PARTIES → BC-CONTACTS, `docs/product/changes/active/chg-rename-parties-to-contacts-001/change.md`), which must be applied before this change is archived.
 - **Code:** every production C# file moves or is rewritten into slices. Domain logic, money rounding, numbering and the canonical invoice representation are moved without semantic changes.
 - **Tests:**
-    - Existing domain, web and end-to-end tests must pass unchanged apart from namespaces.
-    - Web tests are the behavioural safety net and are not weakened.
+  - Existing domain, web and end-to-end tests must pass unchanged apart from namespaces.
+  - Web tests are the behavioural safety net and are not weakened.
 - **Depends on:** ADR-0018, ADR-0019, ADR-0020 and ADR-0022 (accepted) and the Contacts Product Change above.

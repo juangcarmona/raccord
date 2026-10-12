@@ -7,7 +7,7 @@ It complements the [audiovisual operations domain note](audiovisual-operations-d
 ## Sources
 
 | Short name | Document | Version / status checked |
-|---|---|---|
+| --- | --- | --- |
 | RRSIF | [Real Decreto 1007/2023, Reglamento de requisitos de los sistemas informáticos de facturación (consolidated)](https://www.boe.es/buscar/act.php?id=BOE-A-2023-24840) | Consolidated text last updated 2025-12-03 (in force 2025-12-04) |
 | RD 254/2025 | [Real Decreto 254/2025 (amends RRSIF)](https://www.boe.es/buscar/act.php?id=BOE-A-2025-6600) | In force 2025-04-03 |
 | RDL 15/2025 | [Real Decreto-ley 15/2025, final provision 1](https://www.boe.es/buscar/doc.php?id=BOE-A-2025-24446) | In force 2025-12-04; ratified by Congress (Resolution of 2025-12-11, [BOE-A-2025-25695](https://www.boe.es/buscar/doc.php?id=BOE-A-2025-25695)) |
@@ -55,7 +55,7 @@ The RRSIF (art. 1.2) defines a *sistema informático de facturación* (SIF) as t
 The RRSIF arts. 15–16 and the OM SIF set out two modes, which AEAT calls modalities:
 
 | | VERI*FACTU ("sistema de emisión de facturas verificables") | NO VERI*FACTU |
-|---|---|---|
+| --- | --- | --- |
 | Sending to AEAT | Every billing record is sent automatically and immediately to the AEAT | Records are kept locally and sent only when the AEAT requests them (*requerimiento*) |
 | Signature | Not required; the hash is enough (RRSIF art. 16.3) | XAdES electronic signature on every billing and event record (OM SIF art. 14) |
 | Event log | Not required. FAQ-Dev no. 15 says a VERI*FACTU-only product need not implement one, but a dual-mode product must | Mandatory (OM SIF art. 9) |
@@ -68,7 +68,7 @@ Every SIF must be *capable* of sending its records to the AEAT, whatever the mod
 ### Deadlines: enacted vs announced (status at 2026-10-06)
 
 | Item | Date | Status |
-|---|---|---|
+| --- | --- | --- |
 | RRSIF in force | 2023-12-07 | Enacted |
 | OM SIF published / in force | 2024-10-28 / 2024-10-29 | Enacted |
 | Producers must offer adapted products | Nine months after the OM SIF entered into force (late July 2025) | Enacted (RRSIF final provision 4) |
@@ -163,7 +163,7 @@ When a business recipient asks, the invoice must also show the recipient's NIF a
 ### Rectifying invoice codes (OM SIF list L2, `TipoFactura`)
 
 | Code | Meaning (paraphrased) |
-|---|---|
+| --- | --- |
 | R1 | Error grounded in law, and VAT law art. 80 One, Two and Six (for example price changes, returned goods, cancelled operations) |
 | R2 | VAT law art. 80.3: recipient in insolvency proceedings |
 | R3 | VAT law art. 80.4: uncollectable debts |
@@ -265,7 +265,7 @@ Code lists come from the OM SIF annex, section 6, cross-checked against the prod
 **`TipoFactura` (L2)**
 
 | Code | Meaning |
-|---|---|
+| --- | --- |
 | F1 | Full invoice (ROF arts. 6, 7.2, 7.3) |
 | F2 | Simplified invoice, or invoice without recipient identification (ROF art. 6.1.d) |
 | F3 | Invoice issued to replace simplified invoices already issued and declared |
@@ -274,7 +274,7 @@ Code lists come from the OM SIF annex, section 6, cross-checked against the prod
 **`ClaveRegimen` for VAT (L8A)**
 
 | Key | Regime |
-|---|---|
+| --- | --- |
 | 01 | General regime |
 | 02 | Export |
 | 03 | Used goods, art and antiques |
@@ -298,7 +298,7 @@ L8B is the parallel list for IGIC. The production XSD also accepts key **21**, w
 **`CalificacionOperacion` (L9)**
 
 | Code | Meaning |
-|---|---|
+| --- | --- |
 | S1 | Subject and not exempt, no reverse charge |
 | S2 | Subject and not exempt, **with reverse charge** |
 | N1 | Not subject under VAT law arts. 7, 14 and others |
@@ -307,7 +307,7 @@ L8B is the parallel list for IGIC. The production XSD also accepts key **21**, w
 **`OperacionExenta` (L10)**
 
 | Code | Exempt under VAT law |
-|---|---|
+| --- | --- |
 | E1 | Art. 20 |
 | E2 | Art. 21 |
 | E3 | Art. 22 |
@@ -317,10 +317,10 @@ L8B is the parallel list for IGIC. The production XSD also accepts key **21**, w
 
 The production XSD also accepts **E7** and **E8**, which the BOE annex does not list. Their meanings are *unverified* here.
 
-**Event types (L2E, NO VERI*FACTU)**
+#### Event types (L2E, NO VERI\*FACTU)
 
 | Code | Event |
-|---|---|
+| --- | --- |
 | 01 | Start of operation as NO VERI*FACTU |
 | 02 | End of operation as NO VERI*FACTU |
 | 03 | Billing-record anomaly check launched |
@@ -333,7 +333,7 @@ The production XSD also accepts **E7** and **E8**, which the BOE annex does not 
 | 10 | Event summary |
 | 90 | Other, producer-defined |
 
-**Anomaly types (L1E)**
+#### Anomaly types (L1E)
 
 Codes 01–15 and 90 cover hash, signature, chain-link and date-order anomalies.
 
@@ -347,10 +347,8 @@ Sources: OM SIF art. 13; AEAT hash specification v0.1.2.
 - **Input:** the fields below are concatenated in the order given, as `name=value` pairs joined by `&`. Field names are the literal XML element names. Values match the XML content after these rules:
   - leading and trailing spaces are trimmed;
   - numeric values with one or two decimals, or trailing zeros, are equivalent (`123.1` = `123.10`).
-- **Alta record order:**
-  `IDEmisorFactura`, `NumSerieFactura`, `FechaExpedicionFactura`, `TipoFactura`, `CuotaTotal`, `ImporteTotal`, `Huella` (the previous record's hash), `FechaHoraHusoGenRegistro`.
-- **Anulación record order:**
-  `IDEmisorFacturaAnulada`, `NumSerieFacturaAnulada`, `FechaExpedicionFacturaAnulada`, `Huella` (previous), `FechaHoraHusoGenRegistro`.
+- **Alta record order:** `IDEmisorFactura`, `NumSerieFactura`, `FechaExpedicionFactura`, `TipoFactura`, `CuotaTotal`, `ImporteTotal`, `Huella` (the previous record's hash), `FechaHoraHusoGenRegistro`.
+- **Anulación record order:** `IDEmisorFacturaAnulada`, `NumSerieFacturaAnulada`, `FechaExpedicionFacturaAnulada`, `Huella` (previous), `FechaHoraHusoGenRegistro`.
 - **Event record order (NO VERI*FACTU):** producer `NIF`, producer `ID` (only one of the two is filled; the other appears as `ID=`), `IdSistemaInformatico`, `Version`, `NumeroInstalacion`, obligated party `NIF`, `TipoEvento`, `HuellaEvento` (previous), `FechaHoraHusoGenEvento`.
 - **Missing or empty fields** still appear, with nothing after the `=`.
 - **First record:** the previous-hash value is empty (`...&Huella=&...`). The record carries `PrimerRegistro`=S and no `RegistroAnterior` block, but **its own hash must still be computed and stored**.
@@ -395,7 +393,7 @@ Sources: OM SIF arts. 20–21; ROF art. 6.5; AEAT QR specification v0.5.0.
 The QR encodes a URL to the AEAT verification service. The parameters are, in this order:
 
 | Parameter | Content |
-|---|---|
+| --- | --- |
 | `nif` | Issuer NIF, 9 characters |
 | `numserie` | Series and number, at most 60 characters, printable ASCII 32–126 only |
 | `fecha` | Issue date, `DD-MM-AAAA` |
@@ -409,7 +407,7 @@ Encoding rules:
 Base URLs:
 
 | Mode | Production | Test (Portal de Pruebas Externas) |
-|---|---|---|
+| --- | --- | --- |
 | VERI*FACTU | `https://www2.agenciatributaria.gob.es/wlpl/TIKE-CONT/ValidarQR?...` | `https://prewww2.aeat.es/wlpl/TIKE-CONT/ValidarQR?...` |
 | NO VERI*FACTU | `https://www2.agenciatributaria.gob.es/wlpl/TIKE-CONT/ValidarQRNoVerifactu?...` | `https://prewww2.aeat.es/wlpl/TIKE-CONT/ValidarQRNoVerifactu?...` |
 
@@ -480,7 +478,7 @@ Sources: OM SIF arts. 4, 5, 16–18; AEAT WS v1.0.3; WSDL.
 AEAT WS §9 and FAQ-Dev no. 17 describe the cases below. For each one, the original record stays unchanged and a **new** chained record is generated.
 
 | Case | Action |
-|---|---|
+| --- | --- |
 | Error that the ROF says requires rectification (amounts, rates, parties and so on) | Issue a rectifying invoice, which produces new alta records (R1–R5). Do **not** change the original record, even if the AEAT rejected it or accepted it with errors. |
 | Error only in record-level "internal" data (for example a tax code) with no ROF rectification needed; original accepted, or accepted with errors | New alta record with `Subsanacion`=S |
 | Same, but the original alta was **rejected** and never existed at the AEAT | New alta record with `Subsanacion`=S and `RechazoPrevio`=X ("alta por rechazo") |
@@ -646,7 +644,7 @@ Further rules:
 The clocks started when the OM e-invoice entered into force on **2026-10-06** (OM e-invoice final provision; RD 238/2026 final provision 4).
 
 | Obligation | Nominal date | Status |
-|---|---|---|
+| --- | --- | --- |
 | Businesses with turnover above €8m | ~**2027-10-06** (12 months) | Enacted |
 | All other businesses and professionals | ~**2028-10-06** (24 months) | Enacted |
 | Private platforms: fiel copy, interconnection and operating requirements | ~2027-10-06 (12 months) | Enacted |
@@ -694,16 +692,16 @@ Raccord's architecture already separates the invoice domain, the compliance adap
 
 ### Chain, time and numbering
 
-5. **One chain per (taxpayer, SIF installation).** Generating a record is a serialised, single-writer critical section per chain. It reads the last record, checks its link and time order, computes the hash, and appends. Use a database-level uniqueness or ordering guarantee, not only application locks.
-6. **Golden tests.** The hash function is a pure function tested against the three AEAT examples (section 4), including the empty-previous-hash case, whitespace trimming and decimal equivalence. Add a chain verifier usable on demand, for the whole chain or part of it.
-7. **Timestamps:**
+1. **One chain per (taxpayer, SIF installation).** Generating a record is a serialised, single-writer critical section per chain. It reads the last record, checks its link and time order, computes the hash, and appends. Use a database-level uniqueness or ordering guarantee, not only application locks.
+2. **Golden tests.** The hash function is a pure function tested against the three AEAT examples (section 4), including the empty-previous-hash case, whitespace trimming and decimal equivalence. Add a chain verifier usable on demand, for the whole chain or part of it.
+3. **Timestamps:**
    - come from a single trusted clock source (NTP-synchronised, with alerting if it drifts by 1 minute or more);
    - are stored as an instant **plus** the issuing territory's offset (Europe/Madrid or Atlantic/Canary, depending on where the invoice is issued);
    - never go backwards within a chain;
    - are generated by the server, never taken from client input.
 
    Issue dates (`dd-mm-yyyy`) are derived in the issuer's local time zone, not UTC.
-8. **Numbering:**
+4. **Numbering:**
    - correlative and gap-free per series;
    - assigned only at finalisation;
    - mandatory separate series for rectifying invoices, for self-billed or third-party invoices, and for simplified versus full invoices in the same year;
@@ -712,47 +710,47 @@ Raccord's architecture already separates the invoice domain, the compliance adap
 
 ### Submission behaviour
 
-9. **Queue and transport:**
+1. **Queue and transport:**
    - an outbox queue per taxpayer;
    - batches of at most 1,000 records;
    - respects `TiempoEsperaEnvio` (60 seconds at first), or sends early once 1,000 records are waiting;
    - sends in order of generation;
    - per-taxpayer certificate or representation selection.
-10. **Idempotency:**
+2. **Idempotency:**
     - a retry resends the **same** record XML, with the same hash and timestamp; it never generates a new record;
     - a duplicate rejection whose stored record matches ours (check `EstadoRegistroDuplicado`) counts as already registered;
     - a transport timeout counts as "unknown" and is reconciled through the AEAT query service before any resend, if applicable.
-11. **Outages:**
+3. **Outages:**
     - keep issuing invoices;
     - set `Incidencia`=S on delayed records;
     - retry at least every hour;
     - show a persistent banner with the number of pending records;
     - log the incident for later justification.
-12. **Error routing:**
+4. **Error routing:**
     - SOAP `Client` faults and per-record `Incorrecto` go to a human work queue that suggests a subsanación, an "alta por rechazo" or a rectifying invoice;
     - Raccord never edits the original record in place;
     - `AceptadoConErrores` also needs a decision, because the AEAT keeps that record permanently.
 
 ### Immutability and corrections
 
-13. **Corrections:**
+ 1. **Corrections:**
     - an issued invoice is corrected only by a rectifying invoice (new number in a rectifying series, R-code, method S or I, reference to the original);
     - record-only data errors are corrected by a subsanación alta;
     - an invoice issued in error is cancelled by an anulación record;
     - each path produces a new chained record and an audit event.
-14. **Draft history:** drafts may be edited, but their history should be append-only (FAQ-Dev no. 11). Finalisation is the single point where the number, record, hash and QR are produced.
-15. **Conservation and export:**
+ 2. **Draft history:** drafts may be edited, but their history should be append-only (FAQ-Dev no. 11). Finalisation is the single point where the number, record, hash and QR are produced.
+ 3. **Conservation and export:**
     - records, events and evidence are kept for the legal retention period, including across migrations;
     - export of all records for a period produces readable XML matching the OM SIF annex structure;
     - restore operations are logged.
-16. **Multi-tenant self-hosting:**
+ 4. **Multi-tenant self-hosting:**
     - each tenant is a separate taxpayer with its own chain, series and certificate;
     - the active taxpayer is always visible;
     - the system indicates when several taxpayers are served;
     - the identity fields (`IdSistemaInformatico`, `Version`, `NumeroInstalacion`, `IndicadorMultiplesOT`) are configured per installation.
-17. **Mode as configuration:** choose VERI*FACTU-only (simplest; no signature or event log) or dual-mode (NO VERI*FACTU requires XAdES signing, the event log with 6-hourly summaries, and anomaly checks). A per-taxpayer switch must respect the rule that VERI*FACTU continues until the end of the calendar year, and the opt-out must be signalled.
-18. **Declaración responsable:** ship one per released version, readable inside the product. Any fork or customisation that changes how a requirement is implemented needs its own.
-19. **B2B adapter boundary:** keep it separate from the SIF seam. It handles:
+ 5. **Mode as configuration:** choose VERI*FACTU-only (simplest; no signature or event log) or dual-mode (NO VERI*FACTU requires XAdES signing, the event log with 6-hourly summaries, and anomaly checks). A per-taxpayer switch must respect the rule that VERI*FACTU continues until the end of the calendar year, and the opt-out must be signalled.
+ 6. **Declaración responsable:** ship one per released version, readable inside the product. Any fork or customisation that changes how a requirement is implemented needs its own.
+ 7. **B2B adapter boundary:** keep it separate from the SIF seam. It handles:
     - EN 16931/UBL mapping;
     - the unique invoice ID;
     - platform or public-solution delivery, plus the fiel copy when using a private platform;

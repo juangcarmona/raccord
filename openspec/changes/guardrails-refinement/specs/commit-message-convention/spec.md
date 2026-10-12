@@ -2,8 +2,7 @@
 
 ## Purpose
 
-Every commit message follows the conventional-commits shape with a restricted type enum, so
-history reads as a changelog and tooling can rely on the type prefix.
+Every commit message follows the conventional-commits shape with a restricted type enum, so history reads as a changelog and tooling can rely on the type prefix.
 
 ## ADDED Requirements
 

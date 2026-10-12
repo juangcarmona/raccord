@@ -20,12 +20,12 @@ We will start with one deployable application organized into explicit domain mod
 ## Consequences
 
 - **Positive:**
-    - Local and self-hosted deployment stay simple.
-    - End-to-end workflows remain cheap to test.
+  - Local and self-hosted deployment stay simple.
+  - End-to-end workflows remain cheap to test.
 - **Negative:**
-    - Module boundaries must be enforced in code review and tests.
+  - Module boundaries must be enforced in code review and tests.
 - **Neutral:**
-    - Service extraction stays possible, but only with a measured operational or ownership need.
+  - Service extraction stays possible, but only with a measured operational or ownership need.
 
 ## Alternatives considered
 

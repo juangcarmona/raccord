@@ -3,7 +3,7 @@
 These are the exploratory v1 tokens. They should become CSS variables and, later, design-token source files shared by React components.
 
 | Token | Value | Intended use |
-|---|---|---|
+| --- | --- | --- |
 | `--raccord-ink` | `#0B1020` | Primary text, navigation, dark surfaces |
 | `--raccord-cyan` | `#2DE2E6` | Primary action, links, active states |
 | `--raccord-coral` | `#FF6B5E` | Warnings, highlights, small signal accents |
@@ -19,7 +19,7 @@ Selection tints (from the invoice-list screen): row fill `#EDF6FC`, badge fill `
 Statuses pair a text color with a pale background; both are shown so status remains readable in grayscale:
 
 | Status kind | Text | Background |
-|---|---|---|
+| --- | --- | --- |
 | Paid / success | `#1D7A4F` | `#E3F5EE` |
 | Warning / pending | `#8A5A00` | `#FFF3D6` |
 | Error / delayed | `#B3261E` | `#FDE3E0` |

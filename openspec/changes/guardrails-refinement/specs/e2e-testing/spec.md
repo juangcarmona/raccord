@@ -2,17 +2,13 @@
 
 ## Purpose
 
-End-to-end journeys prove the assembled application — the real Aspire AppHost, the real browser —
-works the way a person experiences it, so "it compiles and the units pass" is never the whole
-story. They are the top of the testing pyramid Raccord's other suites build toward.
+End-to-end journeys prove the assembled application — the real Aspire AppHost, the real browser — works the way a person experiences it, so "it compiles and the units pass" is never the whole story. They are the top of the testing pyramid Raccord's other suites build toward.
 
 ## ADDED Requirements
 
 ### Requirement: Journeys drive the real SPA over the booted Aspire AppHost
 
-Every E2E journey SHALL run Playwright against the Vite frontend resource of the unmodified
-AppHost, booted once per run via `DistributedApplicationTestingBuilder` and shared by the whole
-suite through the `E2ECollection` fixture.
+Every E2E journey SHALL run Playwright against the Vite frontend resource of the unmodified AppHost, booted once per run via `DistributedApplicationTestingBuilder` and shared by the whole suite through the `E2ECollection` fixture.
 
 #### Scenario: AppHost boot
 
@@ -26,9 +22,7 @@ suite through the `E2ECollection` fixture.
 
 ### Requirement: The per-PR selection is pinned by a committed manifest
 
-The blocking E2E selection (filter `Quarantine!=true`) SHALL match the committed
-`tests/Raccord.EndToEndTests/per-pr-selection.txt` manifest, verified by
-`.github/scripts/check-e2e-selection.sh` in CI before the journeys run.
+The blocking E2E selection (filter `Quarantine!=true`) SHALL match the committed `tests/Raccord.EndToEndTests/per-pr-selection.txt` manifest, verified by `.github/scripts/check-e2e-selection.sh` in CI before the journeys run.
 
 #### Scenario: Journey added
 
@@ -47,8 +41,7 @@ The blocking E2E selection (filter `Quarantine!=true`) SHALL match the committed
 
 ### Requirement: Failed journeys leave evidence
 
-A failed journey SHALL leave a Playwright trace and a full-page screenshot under
-`playwright-artifacts/` (gitignored), uploaded as a CI artifact on failure.
+A failed journey SHALL leave a Playwright trace and a full-page screenshot under `playwright-artifacts/` (gitignored), uploaded as a CI artifact on failure.
 
 #### Scenario: Journey fails in CI
 

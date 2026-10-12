@@ -4,3 +4,5 @@ coverage/
 package-lock.json
 /openapi/
 src/shared/api/schema.d.ts
+# Markdown is linted by markdownlint-cli2 from the repository root, not formatted by Prettier.
+*.md

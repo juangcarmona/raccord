@@ -13,7 +13,7 @@
 ```
 
 | Partner | Exchange | Status |
-|---|---|---|
+| --- | --- | --- |
 | Users (browser) | HTTPS, React UI over the JSON API | Implemented |
 | Accountant | Export files | MVP |
 | AEAT | Billing records over SOAP/XML web services with certificate | Seam only (see [compliance seam](../compliance-seam.md)) |

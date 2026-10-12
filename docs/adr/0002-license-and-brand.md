@@ -22,13 +22,13 @@ Rationale: this supports self-hosting and community contributions while keeping 
 ## Consequences
 
 - **Positive:**
-    - Self-hosting and community contributions are supported.
-    - Hosted modifications stay available under the reciprocal license.
-    - Official releases are distinguishable from forks.
+  - Self-hosting and community contributions are supported.
+  - Hosted modifications stay available under the reciprocal license.
+  - Official releases are distinguishable from forks.
 - **Negative:**
-    - Anyone hosting a modified version must make the modifications available under the reciprocal license.
+  - Anyone hosting a modified version must make the modifications available under the reciprocal license.
 - **Neutral:**
-    - The code license grants no trademark license to Raccord's name, logo or official product identity.
+  - The code license grants no trademark license to Raccord's name, logo or official product identity.
 
 ## Alternatives considered
 

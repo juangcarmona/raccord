@@ -25,11 +25,11 @@ We will store binary documents only through a document-store port, with a file-s
 ## Consequences
 
 - **Positive:**
-    - Further adapters can be added behind the same port without changing callers.
+  - Further adapters can be added behind the same port without changing callers.
 - **Negative:**
-    - Backups must include the document volume or container; the scripts do.
+  - Backups must include the document volume or container; the scripts do.
 - **Neutral:**
-    - The adapter is selected by configuration (`Storage:Provider`).
+  - The adapter is selected by configuration (`Storage:Provider`).
 
 ## Alternatives considered
 

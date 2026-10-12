@@ -25,57 +25,57 @@ We will make every module its own assembly, named after the product model's boun
 
 - **Projects:** `src/modules/<Module>/Raccord.Modules.<Module>`, plus `Raccord.Modules.<Module>.Contracts` only when another module actually consumes something.
 - **Initial modules:**
-    - **Workspace** (BC-WORKSPACE): users, roles, settings, number series.
-    - **Contacts** (BC-CONTACTS, which replaces BC-PARTIES through Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001): customers, the issuer's legal identity, later suppliers and venues.
-    - **Projects** (BC-PROJECTS).
-    - **Invoicing** (BC-INVOICING).
-    - **Compliance** (BC-COMPLIANCE): audit events and compliance records.
+  - **Workspace** (BC-WORKSPACE): users, roles, settings, number series.
+  - **Contacts** (BC-CONTACTS, which replaces BC-PARTIES through Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001): customers, the issuer's legal identity, later suppliers and venues.
+  - **Projects** (BC-PROJECTS).
+  - **Invoicing** (BC-INVOICING).
+  - **Compliance** (BC-COMPLIANCE): audit events and compliance records.
 
     Commercial, Equipment, Warehouse, Crew and Documents become modules when their first journey is implemented.
 
 - **Seam test.** A capability becomes a module only if it maps to a product-model bounded context and has an independent lifecycle, its own data ownership, or an event-driven boundary. Anything else is a feature slice inside an existing module. A new module requires an ADR.
 - **Module interior:**
-    - `Domain/` holds aggregates and value objects. They stay free of frameworks: no EF Core, ASP.NET, ErrorOr or FluentValidation references.
-    - `Features/<Feature>/<UseCase>.cs` holds the use cases, in the shape set by ADR-0022.
-    - `Persistence/` holds the DbContext, configurations and migrations (see ADR-0019).
-    - `<Module>Module.cs` holds registration.
+  - `Domain/` holds aggregates and value objects. They stay free of frameworks: no EF Core, ASP.NET, ErrorOr or FluentValidation references.
+  - `Features/<Feature>/<UseCase>.cs` holds the use cases, in the shape set by ADR-0022.
+  - `Persistence/` holds the DbContext, configurations and migrations (see ADR-0019).
+  - `<Module>Module.cs` holds registration.
 
     Calculations stay in the domain, as `architecture-rules.md` requires.
 
 - **Shared code:**
-    - `src/shared/Raccord.SharedKernel` references no other Raccord assembly. It holds the value objects several contexts use: `Money`, `Currency`, `TaxId`, `PostalAddress`, `LegalParty`. It also holds the cross-cutting ports `IClock`, `ICurrentUser` and `IAuditAppender`.
-    - `src/shared/Raccord.BuildingBlocks` holds the CQS sender, result mapping, permission policies and the unit of work. It references only the SharedKernel.
+  - `src/shared/Raccord.SharedKernel` references no other Raccord assembly. It holds the value objects several contexts use: `Money`, `Currency`, `TaxId`, `PostalAddress`, `LegalParty`. It also holds the cross-cutting ports `IClock`, `ICurrentUser` and `IAuditAppender`.
+  - `src/shared/Raccord.BuildingBlocks` holds the CQS sender, result mapping, permission policies and the unit of work. It references only the SharedKernel.
 - **Hosts:**
-    - `src/root/Raccord.Web` is the only composition root. It registers each module explicitly with `builder.Add<Module>Module()` and `api.Map<Module>Endpoints()`. There is no assembly scanning, so the composition stays readable in one file.
-    - `Raccord.Aspire` and `Raccord.ServiceDefaults` keep their roles.
+  - `src/root/Raccord.Web` is the only composition root. It registers each module explicitly with `builder.Add<Module>Module()` and `api.Map<Module>Endpoints()`. There is no assembly scanning, so the composition stays readable in one file.
+  - `Raccord.Aspire` and `Raccord.ServiceDefaults` keep their roles.
 - **Wire contracts.** The current `Raccord.Contracts` project holds HTTP DTOs. It is dissolved: request and response types live with their slice. The OpenAPI document generated from the endpoints stays the frontend contract (ADR-0011), and the contract-drift gate stays.
 - **Enforcement at compile time.** We will add `src/shared/Raccord.ArchitectureAnalyzers`, attached to every module project, with rules at `error`:
-    - a module may reference another module only through its `.Contracts` assembly;
-    - commands and queries are `internal`;
-    - handlers are `internal sealed`;
-    - persistence entities are `internal`;
-    - public members do not expose domain or persistence types;
-    - no MVC controllers.
+  - a module may reference another module only through its `.Contracts` assembly;
+  - commands and queries are `internal`;
+  - handlers are `internal sealed`;
+  - persistence entities are `internal`;
+  - public members do not expose domain or persistence types;
+  - no MVC controllers.
 
     The module list comes from MSBuild properties (`CompilerVisibleProperty`), not from code. A `BeforeBuild` target fails on any `ProjectReference` to another module's implementation or to a host. `Raccord.Architecture.Tests` keeps the dependency-direction rules, rewritten for the new graph. The analyzers get their own test project.
 
 ## Consequences
 
 - **Positive:**
-    - Module boundaries become compile errors instead of review comments.
-    - Each new context has an obvious home and template.
-    - Module names match the product model, so the language in the model, the code and the UI lines up.
-    - The billing slice is the only code that has to move.
+  - Module boundaries become compile errors instead of review comments.
+  - Each new context has an obvious home and template.
+  - Module names match the product model, so the language in the model, the code and the UI lines up.
+  - The billing slice is the only code that has to move.
 - **Negative:**
-    - More projects in the solution.
-    - Deciding whether something is a module or a slice needs judgement.
-    - A wrong module boundary is costlier to undo than a wrong namespace.
-    - Moving the billing slice touches almost every production file once.
-    - Project-level rules such as "Domain references only the BCL" become namespace-level architecture tests inside each module.
+  - More projects in the solution.
+  - Deciding whether something is a module or a slice needs judgement.
+  - A wrong module boundary is costlier to undo than a wrong namespace.
+  - Moving the billing slice touches almost every production file once.
+  - Project-level rules such as "Domain references only the BCL" become namespace-level architecture tests inside each module.
 - **Neutral:**
-    - This record supersedes ADR-0003.
-    - `docs/architecture/architecture-rules.md` and arc42 §4, §5 and §8 must be updated with the restructure.
-    - The `Raccord.Domain.Parties` namespace becomes part of the SharedKernel and the Contacts module, following Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001 (BC-CONTACTS).
+  - This record supersedes ADR-0003.
+  - `docs/architecture/architecture-rules.md` and arc42 §4, §5 and §8 must be updated with the restructure.
+  - The `Raccord.Domain.Parties` namespace becomes part of the SharedKernel and the Contacts module, following Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001 (BC-CONTACTS).
 
 ## Alternatives considered
 

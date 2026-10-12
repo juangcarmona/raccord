@@ -13,7 +13,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 ```
 
 | Block | Responsibility | Public surface |
-|---|---|---|
+| --- | --- | --- |
 | `Raccord.Domain` | Business rules; no framework dependencies | Aggregates and value objects per module |
 | `Raccord.Contracts` | Public HTTP contracts (records) | Request/response records |
 | `Raccord.Application` | Use cases and ports | `CustomerDirectory`, `ProjectWorkspace`, `InvoicingWorkflow`, `OrganizationSettings`, `AuditLog`; port interfaces |
@@ -24,7 +24,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 ## Level 2 — domain modules
 
 | Module (namespace) | Key types | Rules |
-|---|---|---|
+| --- | --- | --- |
 | `Common` | `Money`, `Currency`, `BusinessRuleViolationException` | Rounding, currency consistency, stable rule codes |
 | `Pricing` | `LinePricing`, `VatRate`, `InvoiceTotals`, `VatGroup` | Line amounts, VAT per rate, totals |
 | `Parties` | `LegalParty`, `PostalAddress`, `TaxId`, `AddressFields` | Normalization, completeness |
@@ -37,7 +37,7 @@ Raccord.Web ─────────► Raccord.Application ─► Raccord.Do
 ## Level 2 — application ports and adapters
 
 | Port | Adapter | Notes |
-|---|---|---|
+| --- | --- | --- |
 | `ICustomerRepository`, `IProjectRepository`, `IInvoiceDraftRepository`, `IIssuedInvoiceRepository`, `IInvoiceSeriesRepository`, `IIssuerProfileRepository`, `IAuditTrail`, `IUnitOfWork` | EF Core repositories over `RaccordDbContext` | Unit of work maps concurrency/unique violations to `ConcurrencyConflictException` |
 | `IInvoiceDocumentRenderer` | `PdfInvoiceRenderer` | Deterministic PDF |
 | `IDocumentStore` | `FileSystemDocumentStore`, `AzureBlobDocumentStore` | `Storage:Provider` |

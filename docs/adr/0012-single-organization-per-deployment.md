@@ -23,11 +23,11 @@ We will serve one issuing organization per deployment for the MVP.
 ## Consequences
 
 - **Positive:**
-    - Queries need no tenant filter, avoiding that class of severe bugs.
+  - Queries need no tenant filter, avoiding that class of severe bugs.
 - **Negative:**
-    - A hosted multi-tenant offering or multiple legal entities would require a migration (tenant/entity key, row-level security or query filters). That is recorded as assumption A-1 and roadmap wave 5.
+  - A hosted multi-tenant offering or multiple legal entities would require a migration (tenant/entity key, row-level security or query filters). That is recorded as assumption A-1 and roadmap wave 5.
 - **Neutral:**
-    - Authentication and roles (MVP slice 2) are still required inside the single organization.
+  - Authentication and roles (MVP slice 2) are still required inside the single organization.
 
 ## Alternatives considered
 

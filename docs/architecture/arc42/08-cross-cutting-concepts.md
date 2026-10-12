@@ -42,7 +42,7 @@ Typed message catalogs (es, en); `Intl` formatting; semantic HTML, labelled cont
 ## Configuration
 
 | Key | Default | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | `ConnectionStrings__raccord` | — | PostgreSQL |
 | `Storage__Provider` | `FileSystem` | `FileSystem` or `AzureBlob` |
 | `Storage__FileSystemRoot` | `data/documents` (`/var/lib/raccord/documents` in the image) | Document folder |

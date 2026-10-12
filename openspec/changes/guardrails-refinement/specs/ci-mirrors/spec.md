@@ -2,9 +2,7 @@
 
 ## Purpose
 
-Every check the commit-time hooks perform is re-run by CI in check mode, so a local hook
-bypass (`--no-verify`, `HUSKY=0`) is still caught before merge — the hooks and the mirror are
-two detections of one rule, not two rules.
+Every check the commit-time hooks perform is re-run by CI in check mode, so a local hook bypass (`--no-verify`, `HUSKY=0`) is still caught before merge — the hooks and the mirror are two detections of one rule, not two rules.
 
 ## ADDED Requirements
 

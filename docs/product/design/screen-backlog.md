@@ -1,16 +1,13 @@
 # Screen backlog — journeys that deserve screens
 
-Triage of all 27 journeys in `docs/product/model/journeys/` into screens,
-driven by the mobile-delivery decision (CHG-INITIAL: one responsive PWA with
-field mode, management mode, and a read-only large-screen board).
+Triage of all 27 journeys in `docs/product/model/journeys/` into screens, driven by the mobile-delivery decision (CHG-INITIAL: one responsive PWA with field mode, management mode, and a read-only large-screen board).
 
-Built screens live in `raccord-screens.pen`; per-screen PDaC citations live in
-[screen-traces.md](screen-traces.md).
+Built screens live in `raccord-screens.pen`; per-screen PDaC citations live in [screen-traces.md](screen-traces.md).
 
 ## Already built (3 + 37 + 2)
 
 | Screen | Mode | Journey |
-|---|---|---|
+| --- | --- | --- |
 | Invoice list | management | JRN-BILL-FINISHED-PROJECT |
 | Field check-in | field | JRN-RECORD-WORKING-DAY |
 | Operations board | board | JRN-WHS-DISPATCH-EQUIPMENT / JRN-WHS-RECEIVE-RETURNS |
@@ -52,16 +49,14 @@ Built screens live in `raccord-screens.pen`; per-screen PDaC citations live in
 | Workspace settings & roles | management | JRN-WSP-SET-UP-WORKSPACE |
 | API access & tokens | management | JRN-INT-BUILD-API-INTEGRATION |
 
-All 37 management screens plus the two field candidates have been generated
-and committed on `trial/pen-dev-design-canvas`; exports live alongside this
-file, citations in [screen-traces.md](screen-traces.md).
+All 37 management screens plus the two field candidates have been generated and committed on `trial/pen-dev-design-canvas`; exports live alongside this file, citations in [screen-traces.md](screen-traces.md).
 
 ## Generated — management (37, all landed)
 
 Low-visual-interest setup screens are marked *(setup)*.
 
 | # | Screen | Job | Journey |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Invoice draft editor | select unbilled work, review totals, remove lines, fix blockers, issue | JRN-BILL-FINISHED-PROJECT |
 | 2 | Invoicing queue | work items due per invoice moment, generate partial/final invoices | JRN-FIN-STAGED-BILLING |
 | 3 | Payments & dunning | record payments, chase overdue, accounting export | JRN-FIN-STAGED-BILLING |
@@ -102,18 +97,13 @@ Low-visual-interest setup screens are marked *(setup)*.
 
 ## Field candidates (2) — built
 
-Field mode is defined as check-in/out plus read-only assignments; these two
-are interactive on the crew side and were triaged as candidates that need an
-explicit scope decision before they count:
+Field mode is defined as check-in/out plus read-only assignments; these two are interactive on the crew side and were triaged as candidates that need an explicit scope decision before they count:
 
 | Screen | Job | Governing artifacts |
-|---|---|---|
+| --- | --- | --- |
 | My assignments & responses | view posted functions/invitations, respond/sign up | UC-CRW-SIGN-UP-FOR-POSTED-JOB, UC-CRW-RESPOND-TO-INVITATION |
 | Hours registration | log hours against planned activities/shifts | UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES |
 
 ## No UI (4 journeys)
 
-JRN-OPERATE-INSTALLATION (infrastructure), JRN-INT-SYNC-PERSONAL-CALENDAR
-(feed URLs, served inside screen 31), JRN-DOC-SERVE-FOREIGN-CUSTOMER
-(language/country rides screen 34 + reuse), JRN-INT-BUILD-API-INTEGRATION
-(seam; settings surface counted as screen 37).
+JRN-OPERATE-INSTALLATION (infrastructure), JRN-INT-SYNC-PERSONAL-CALENDAR (feed URLs, served inside screen 31), JRN-DOC-SERVE-FOREIGN-CUSTOMER (language/country rides screen 34 + reuse), JRN-INT-BUILD-API-INTEGRATION (seam; settings surface counted as screen 37).

@@ -8,7 +8,7 @@ Licensed under AGPLv3 (see [COPYRIGHT.md](COPYRIGHT.md) for the brand boundary).
 
 Greenfield, first vertical slice implemented:
 
-**project → billable lines → invoice draft → validation → finalization → immutable issued representation → PDF → audit event → compliance record**
+The slice runs: project → billable lines → invoice draft → validation → finalization → immutable issued representation → PDF → audit event → compliance record.
 
 Not yet implemented: authentication (do not expose installations publicly), rectifying invoices, payments, VERI*FACTU submission (a seam exists; see [compliance seam](docs/architecture/compliance-seam.md)). Raccord makes **no legal compliance claim**.
 

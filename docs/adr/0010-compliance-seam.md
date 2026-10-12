@@ -25,11 +25,11 @@ We will record a compliance obligation for every issued invoice through a seam, 
 ## Consequences
 
 - **Positive:**
-    - No invoice can exist without its compliance obligation being recorded, so the future adapter can process history.
+  - No invoice can exist without its compliance obligation being recorded, so the future adapter can process history.
 - **Negative:**
-    - No submission, hashing chain or QR exists until the adapter is implemented.
+  - No submission, hashing chain or QR exists until the adapter is implemented.
 - **Neutral:**
-    - The VERI\*FACTU record must be generated before the document is released; when the adapter lands, record generation moves before PDF rendering inside finalization.
+  - The VERI\*FACTU record must be generated before the document is released; when the adapter lands, record generation moves before PDF rendering inside finalization.
 
 ## Alternatives considered
 

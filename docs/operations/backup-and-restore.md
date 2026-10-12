@@ -5,7 +5,7 @@ Invoices are legal records: back up the database **and** the documents, and rehe
 ## What is backed up
 
 | Data | Where | Tool |
-|---|---|---|
+| --- | --- | --- |
 | Database (all records, issued representations, audit, compliance records) | `postgres` service | `pg_dump --format=custom` |
 | Documents (PDFs) | `documents` volume | `tar` |
 

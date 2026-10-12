@@ -1,7 +1,6 @@
 # Compliance seam: VERI*FACTU and e-invoicing
 
-Status: seam implemented, submission **not** implemented. Last updated: 2026-10-06.
-Requirements source: [Spanish invoicing compliance requirements](../research/spanish-invoicing-compliance-requirements.md). Nothing here is a claim of legal compliance; it is the engineering contract that a reviewed implementation must satisfy.
+Status: seam implemented, submission **not** implemented. Last updated: 2026-10-06. Requirements source: [Spanish invoicing compliance requirements](../research/spanish-invoicing-compliance-requirements.md). Nothing here is a claim of legal compliance; it is the engineering contract that a reviewed implementation must satisfy.
 
 ## 1. Where the seam is
 
@@ -18,7 +17,7 @@ InvoicingWorkflow.FinalizeAsync  (one unit of work)
 Today `PendingComplianceRecorder` writes one `compliance_records` row per invoice:
 
 | Column | Meaning |
-|---|---|
+| --- | --- |
 | `id` | Record id (UUIDv7, time-ordered) |
 | `invoice_id`, `invoice_number`, `content_hash` | Link to the immutable issued representation |
 | `kind` | `invoice-issued` (future: `invoice-cancelled`, `correction`) |

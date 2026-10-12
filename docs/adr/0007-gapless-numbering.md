@@ -26,11 +26,11 @@ We will allocate invoice numbers per series and year in the domain, inside the t
 ## Consequences
 
 - **Positive:**
-    - Numbering has no gaps, because a rollback discards the allocation.
+  - Numbering has no gaps, because a rollback discards the allocation.
 - **Negative:**
-    - Concurrent finalizations conflict on the sequence row; the loser gets 409 and retries (tested with six parallel requests: numbers 1–6, no gaps).
+  - Concurrent finalizations conflict on the sequence row; the loser gets 409 and retries (tested with six parallel requests: numbers 1–6, no gaps).
 - **Neutral:**
-    - One web replica is the default in Azure; scaling out needs load testing of this contention point.
+  - One web replica is the default in Azure; scaling out needs load testing of this contention point.
 
 ## Alternatives considered
 

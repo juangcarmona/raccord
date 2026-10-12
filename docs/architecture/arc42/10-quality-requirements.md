@@ -15,7 +15,7 @@ Quality
 ## Scenarios
 
 | ID | Scenario | Expected response | Verified by |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Q-1 | Three lines of 0,15 € at 10 % VAT are invoiced | VAT 0,05 € (base-level), total consistent on screen and PDF | `InvoiceTotalsTests` |
 | Q-2 | Six invoices are finalized concurrently | Numbers 1–6, no duplicates, no gaps | `Concurrent_finalizations_never_duplicate_or_skip_numbers` |
 | Q-3 | An operator runs `UPDATE issued_invoices …` | The database refuses | `The_database_rejects_changes…` |

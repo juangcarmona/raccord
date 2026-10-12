@@ -1,8 +1,13 @@
 import { useState, type SyntheticEvent } from "react";
+<<<<<<< HEAD
 import { useLocation, useNavigate } from "react-router";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { ApiError } from "../../shared/api/client";
 import { useAuth } from "./AuthProvider";
+=======
+import { useNavigate } from "react-router";
+import { useI18n } from "../../shared/i18n/I18nProvider";
+>>>>>>> 9934aac (feat(auth): add local cookie authentication)
 
 export function SignInPage() {
     const { t } = useI18n();
@@ -10,6 +15,7 @@ export function SignInPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+<<<<<<< HEAD
     const [error, setError] = useState<"invalid" | "network" | null>(null);
     const [pending, setPending] = useState(false);
     const auth = useAuth();
@@ -28,6 +34,23 @@ export function SignInPage() {
         } finally {
             setPending(false);
         }
+=======
+    const [invalid, setInvalid] = useState(false);
+
+    async function submit(event: SyntheticEvent<HTMLFormElement>) {
+        event.preventDefault();
+        setInvalid(false);
+        const response = await fetch("/api/auth/sign-in", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password, rememberMe }),
+        });
+        if (!response.ok) {
+            setInvalid(true);
+            return;
+        }
+        await navigate("/projects", { replace: true });
+>>>>>>> 9934aac (feat(auth): add local cookie authentication)
     }
 
     return (
@@ -38,7 +61,10 @@ export function SignInPage() {
                     void submit(event);
                 }}
             >
+<<<<<<< HEAD
                 <img className="auth-form__mark" src="/raccord-mark.svg" alt="Raccord" />
+=======
+>>>>>>> 9934aac (feat(auth): add local cookie authentication)
                 <h1 data-page-heading tabIndex={-1}>
                     {t("auth.title")}
                 </h1>
@@ -74,9 +100,15 @@ export function SignInPage() {
                     />
                     {t("auth.remember")}
                 </label>
+<<<<<<< HEAD
                 {error && <p role="alert">{t(error === "invalid" ? "auth.invalid" : "auth.unavailable")}</p>}
                 <button className="button button--primary" type="submit" disabled={pending}>
                     {pending ? t("auth.pending") : t("auth.submit")}
+=======
+                {invalid && <p role="alert">{t("auth.invalid")}</p>}
+                <button className="button button--primary" type="submit">
+                    {t("auth.submit")}
+>>>>>>> 9934aac (feat(auth): add local cookie authentication)
                 </button>
             </form>
         </main>

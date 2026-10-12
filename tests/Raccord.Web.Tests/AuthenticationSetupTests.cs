@@ -22,7 +22,7 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     }
 
     [Fact]
-    public async Task First_setup_creates_admin_and_refuses_a_second_setup()
+    public async Task First_setup_Should_CreateAdminAndRefuseASecondSetup()
     {
         var before = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");
         before!.Required.ShouldBeTrue();
@@ -31,7 +31,7 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
             "/api/setup",
             new SetupRequest("first-admin@example.com", "FirstAdmin123!@#")
         );
-        created.StatusCode.ShouldBe(HttpStatusCode.OK);
+        created.IsSuccessStatusCode.ShouldBeTrue(await created.Content.ReadAsStringAsync());
 
         var after = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");
         after!.Required.ShouldBeFalse();

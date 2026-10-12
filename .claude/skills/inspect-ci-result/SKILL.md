@@ -71,7 +71,7 @@ gh run list -R juangcarmona/raccord --workflow CI --commit <head-sha> --json dat
 gh pr checks <number> -R juangcarmona/raccord
 ```
 
-Reject any run whose `headSha` is not the head SHA. Never select by branch alone: `gh run list --branch <branch>` returns the latest runs on the branch whatever their commit, so an older green run can stand in for a revision that never ran. Classify each expected job:
+Reject any run whose `headSha` is not the head SHA. When a job was re-run at the same head, take only the latest attempt of each job (the highest `databaseId` for that job name); an earlier failed attempt superseded by a passing re-run does not count, and the reverse does. Never select by branch alone: `gh run list --branch <branch>` returns the latest runs on the branch whatever their commit, so an older green run can stand in for a revision that never ran. Classify each expected job:
 
 | Seen                                                                           | State                                    |
 | ------------------------------------------------------------------------------ | ---------------------------------------- |

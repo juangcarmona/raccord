@@ -127,7 +127,7 @@ GitHub issues have no transition screens. Stages write to these fields:
 
 ## Installed roles
 
-Role capabilities that `adopt` installed into `.agents/skills/`, which is the source this project owns. The copies in `.claude/skills/` are byte-identical and committed. Edit the source, then re-copy; never edit a copy. Every role was adapted from the template reference named below. Its workflow steps were written for this project around that reference's commands, and `merge-pull-request` departs from its squash-only reference by using merge commits.
+Role capabilities that `adopt` installed into `.agents/skills/`, which is the source this project owns. The role skills' copies in `.claude/skills/` are byte-identical and committed. Edit the source, then re-copy; never edit a copy. Every role was adapted from the template reference named below. Its workflow steps were written for this project around that reference's commands, and `merge-pull-request` departs from its squash-only reference by using merge commits.
 
 | Role skill             | Adapted from                                            | Installed  | Projected to       |
 | ---------------------- | ------------------------------------------------------- | ---------- | ------------------ |
@@ -152,9 +152,7 @@ Not installed, by decision:
 - `commit-to-sprint` and `wip-query`: sprints and WIP limits are not used.
 - The plan-artifact contracts are provided by OpenSpec (see **Provided roles**).
 
-Known gap: `integrate` calls the shared `rebase-safely` skill and the `done-gate-auditor` agent. APM did not deploy either, because of a packaging gap in agent-toolkit (its package declares no commands or agents, and its shared skills target only `agent-skills`). Until that is fixed, the Owner rebases by hand and performs the Done-gate audit in review, and `integrate` must report the missing auditor instead of skipping it.
-
-The lifecycle package itself is installed with APM from `apm.yml` (`juangcarmona/agent-toolkit/packages/agentic-sdlc`, pinned to a commit in `apm.lock.yaml`), targeting Claude Code and Codex. `apm_modules/` is gitignored, and the projected skills are committed.
+The lifecycle package itself is not vendored for Claude Code: `.claude/settings.json` registers the `agent-toolkit` marketplace (`juangcarmona/agent-toolkit`) and enables the `agentic-sdlc` plugin, so Claude Code offers to install it when the project is opened. The plugin brings the seven stage commands (for example `/agentic-sdlc:refine`), the `done-gate-auditor` and `flow-reporter` agents, the stage skills, and the `adr`, `rebase-safely` and `git-worktrees` skills `integrate` and `propose` call. Codex has no plugin mechanism, so the same skills are committed under `.agents/skills/`, installed with the skills CLI and locked in `skills-lock.json`: `npx skills add juangcarmona/agent-toolkit/packages/agentic-sdlc -a codex --copy`, and `npx skills add juangcarmona/agent-toolkit --skill adr --skill rebase-safely --skill git-worktrees -a codex --copy`. Agents are a Claude Code feature: with Codex, run `done-gate-auditor`'s instructions as a prompt in a fresh session, since the Done gate depends on the audit not being done by the session that wrote the change.
 
 ## Provided roles
 
@@ -169,7 +167,8 @@ OpenSpec 1.12.0 generates these skills; `openspec init --tools claude,codex` was
 
 ## Amendment log
 
-| Date       | Section                                      | Change                                                            | Why                                                                                          |
-| ---------- | -------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| 2026-10-12 | All                                          | Bootstrapped by `adopt`                                           | Onboarding onto agentic-sdlc                                                                 |
-| 2026-10-12 | Definition of Done (8), Deterministic checks | Added the OpenSpec citation gate and moved ProductShape to 0.22.0 | ProductShape's OpenSpec integration was adopted, so product grounding became checkable in CI |
+| Date       | Section                                      | Change                                                                                                                                                                                                   | Why                                                                                              |
+| ---------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| 2026-10-12 | All                                          | Bootstrapped by `adopt`                                                                                                                                                                                  | Onboarding onto agentic-sdlc                                                                     |
+| 2026-10-12 | Definition of Done (8), Deterministic checks | Added the OpenSpec citation gate and moved ProductShape to 0.22.0                                                                                                                                        | ProductShape's OpenSpec integration was adopted, so product grounding became checkable in CI     |
+| 2026-10-12 | Installed roles                              | Replaced the APM install of agentic-sdlc with the Claude Code plugin (project settings) plus the skills CLI for Codex; the missing `rebase-safely` skill and `done-gate-auditor` agent are now delivered | The package could not be used without APM; agent-toolkit now publishes a Claude Code marketplace |

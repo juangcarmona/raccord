@@ -60,6 +60,10 @@ Lane is `deterministic` (an agent or CI settles it), `judgement` (a named role d
 | --------- | ------------------------- | ---- | ---- |
 | None      | No additions at adoption. | -    | -    |
 
+### Process improvement
+
+Each completed integration loop includes a review of `docs/operations/process-ledger.md`. Durable lessons are recorded there before the loop is closed, and the next loop uses the ledger as an input to its plan.
+
 ### Deterministic checks
 
 `verify-like-ci` derives the commands from `.github/workflows/ci.yml`. This list records what the team expects to see, so that a check disappearing silently gets noticed.

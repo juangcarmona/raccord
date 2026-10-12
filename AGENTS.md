@@ -23,6 +23,7 @@ Raccord is an open-source, self-hostable operations and invoicing platform for a
 - Do not commit secrets, API tokens, customer data, generated PDFs, or local state.
 - Follow the enforced conventions: CSharpier/Prettier formatting, Markdown linted by markdownlint-cli2 with one prose paragraph per source line (never hard-wrapped), conventional commits, `Thing_Should_Outcome` test naming, a validated OpenSpec change per meaningful change (see `docs/architecture/architecture-rules.md` and ADR-0016).
 - Report assumptions, unresolved questions, and verification performed.
+- At the end of each feature loop, review `docs/operations/process-ledger.md`, record durable process lessons there, and verify the resulting actions before integration.
 
 ## Red lines — stop and ask a person first
 

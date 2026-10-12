@@ -5,7 +5,7 @@ title: "Maintain a record folder structure"
 status: draft
 primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-PRJ-FOLDER-DELETE-NONEMPTY"
   - "BR-PRJ-FOLDER-PER-MODULE"

@@ -3,7 +3,7 @@ id: TERM-ISSUER
 type: domain-term
 title: "Issuer"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms: []
 ---

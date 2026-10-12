@@ -5,7 +5,7 @@ title: "Define the issuer profile"
 status: draft
 primary-actor: "ACT-BILLING-ADMINISTRATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-TAX-ID-NORMALIZATION"
   - "BR-PARTY-SNAPSHOT"

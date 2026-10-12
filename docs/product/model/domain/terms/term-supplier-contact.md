@@ -3,7 +3,7 @@ id: TERM-SUPPLIER-CONTACT
 type: domain-term
 title: "Supplier contact"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

@@ -3,7 +3,7 @@ id: TERM-ADMINISTRATIVE-CONTACT-PERSON
 type: domain-term
 title: "Administrative contact person"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT-PERSON"

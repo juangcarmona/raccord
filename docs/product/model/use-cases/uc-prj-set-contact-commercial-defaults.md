@@ -6,7 +6,7 @@ status: draft
 primary-actor: "ACT-BILLING-ADMINISTRATOR"
 supporting-actors:
   - "ACT-OPERATIONS-COORDINATOR"
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-PRJ-CLIENT-COMMERCIAL-OVERRIDE"
 uses-terms:

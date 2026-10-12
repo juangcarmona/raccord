@@ -5,7 +5,7 @@ title: "Edit several contacts at once"
 status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by: []
 uses-terms:
   - "TERM-CONTACT"

@@ -3,7 +3,7 @@ id: TERM-CONTACT-NUMBER
 type: domain-term
 title: "Contact number"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms:
   - "Database number"
 uses-terms:

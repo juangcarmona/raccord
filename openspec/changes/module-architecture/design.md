@@ -42,7 +42,7 @@ Contract dependencies between modules: Invoicing → Projects, Contacts, Workspa
 
 <!-- pdac:cite id="BC-WORKSPACE" digest="sha256:013841dd37789974afef821eb2c071a85acaa72c083abd2285b7c406db95f8a5" -->
 
-<!-- pdac:cite id="BC-PARTIES" digest="sha256:440465d249e5f48c8bf256a2586126bbb97acc061e3c08a3521553d4a0a2a738" -->
+<!-- pdac:cite id="BC-CONTACTS" digest="sha256:c9c5f006e7a0904b8ac8303a008358ba52bc1203747dba3e03340500cd2f86d7" -->
 
 <!-- pdac:cite id="BC-PROJECTS" digest="sha256:11cadbc8906365210716689609d66738e29fc576822aa2e8e7a925a8bae0933e" -->
 

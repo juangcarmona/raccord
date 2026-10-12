@@ -3,7 +3,7 @@ id: TERM-VISITING-ADDRESS
 type: domain-term
 title: "Visiting address"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

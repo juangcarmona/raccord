@@ -5,7 +5,7 @@ title: "Add a contact person"
 status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-PRJ-CONTACT-PERSON-NOT-MOVABLE"
   - "BR-PRJ-INVOICE-RECIPIENT"

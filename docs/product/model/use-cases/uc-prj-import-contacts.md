@@ -6,7 +6,7 @@ status: draft
 primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
 supporting-actors:
   - "ACT-OPERATIONS-COORDINATOR"
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-PRJ-CONTACT-IMPORT-MODES"
   - "BR-PRJ-CONTACT-PERSON-IMPORT-ROWS"

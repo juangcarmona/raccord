@@ -5,7 +5,7 @@ title: "Add a contact"
 status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
-bounded-context: "BC-PARTIES"
+bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-PRJ-CONTACT-NUMBER-ASSIGNMENT"
   - "BR-PRJ-ADDRESS-ROLES"

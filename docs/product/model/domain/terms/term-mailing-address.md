@@ -3,7 +3,7 @@ id: TERM-MAILING-ADDRESS
 type: domain-term
 title: "Mailing address"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

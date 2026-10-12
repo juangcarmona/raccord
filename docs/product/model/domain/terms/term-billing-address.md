@@ -3,7 +3,7 @@ id: TERM-BILLING-ADDRESS
 type: domain-term
 title: "Billing address"
 status: draft
-defined-in: "BC-PARTIES"
+defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
   - "TERM-CONTACT"

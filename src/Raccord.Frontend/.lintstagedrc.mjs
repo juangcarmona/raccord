@@ -6,10 +6,8 @@ const generated = /(^|[\\/])\.(agents|claude)[\\/]/;
 const quote = (file) => JSON.stringify(file);
 
 export default {
-    "*.{ts,tsx}": (files) => {
-        const formatted = files.filter(
-            (file) => !file.endsWith("src/shared/api/schema.d.ts") && !generated.test(file)
-        );
+    "*.{ts,tsx,mjs}": (files) => {
+        const formatted = files.filter((file) => !file.endsWith("src/shared/api/schema.d.ts") && !generated.test(file));
         return formatted.length
             ? [
                   `eslint --fix --max-warnings=0 ${formatted.map(quote).join(" ")}`,

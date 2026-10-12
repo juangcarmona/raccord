@@ -36,36 +36,42 @@ export function AppShell() {
             <a className="skip-link" href="#main">
                 {t("app.skipToContent")}
             </a>
-            <header className="shell__header">
-                <span className="brand">{t("app.name")}</span>
-                <nav aria-label={t("nav.main")}>
-                    <ul>
-                        {navigation.map((item) => (
-                            <li key={item.to}>
-                                <NavLink to={item.to}>{t(item.key)}</NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-                <label className="locale">
-                    <span className="visually-hidden">{t("app.language")}</span>
-                    <select
-                        value={locale}
-                        onChange={(event) => {
-                            setLocale(event.target.value as Locale);
-                        }}
-                    >
-                        {locales.map((option) => (
-                            <option key={option} value={option}>
-                                {option.toUpperCase()}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-            </header>
-            <main id="main" ref={main} className="shell__main">
-                <Outlet />
-            </main>
+            <div className="shell__layout">
+                <aside className="shell__sidebar">
+                    <span className="brand">{t("app.name")}</span>
+                    <nav aria-label={t("nav.main")}>
+                        <ul>
+                            {navigation.map((item) => (
+                                <li key={item.to}>
+                                    <NavLink to={item.to}>{t(item.key)}</NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </aside>
+                <div className="shell__content">
+                    <header className="shell__toolbar">
+                        <label className="locale">
+                            <span className="visually-hidden">{t("app.language")}</span>
+                            <select
+                                value={locale}
+                                onChange={(event) => {
+                                    setLocale(event.target.value as Locale);
+                                }}
+                            >
+                                {locales.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option.toUpperCase()}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    </header>
+                    <main id="main" ref={main} className="shell__main">
+                        <Outlet />
+                    </main>
+                </div>
+            </div>
         </div>
     );
 }

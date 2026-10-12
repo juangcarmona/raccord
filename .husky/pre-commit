@@ -13,5 +13,9 @@ if [ -n "$STAGED_CS" ]; then
   git -C "$REPO_ROOT" add $STAGED_CS
 fi
 
+if git -C "$REPO_ROOT" diff --cached --name-only --diff-filter=ACM | grep -qx 'docs/operations/process-ledger.md'; then
+  (cd "$REPO_ROOT" && npx -y markdownlint-cli2@0.23.3 docs/operations/process-ledger.md)
+fi
+
 # npm/node_modules live only under src/Raccord.Frontend.
 (cd "$REPO_ROOT/src/Raccord.Frontend" && npm exec lint-staged)

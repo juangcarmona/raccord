@@ -22,7 +22,11 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     /// assert on localized labels — leaving it to the runner's default would make the suite's
     /// meaning depend on where it runs.
     /// </summary>
-    protected async Task RunJourneyAsync(string artifactName, Func<IPage, Task> journey)
+    protected async Task RunJourneyAsync(
+        string artifactName,
+        Func<IPage, Task> journey,
+        bool signIn = true
+    )
     {
         await using var context = await App.NewContextAsync();
         await context.Tracing.StartAsync(
@@ -37,6 +41,16 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         try
         {
+            if (signIn)
+            {
+                await page.GotoAsync("/sign-in");
+                await page.GetByLabel("Email").FillAsync("admin@example.com");
+                await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/projects", StringComparison.Ordinal)
+                );
+            }
             await journey(page);
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
         }

@@ -11,8 +11,10 @@ import { ProjectDetailPage } from "../features/projects/ProjectDetailPage";
 import { ProjectsPage } from "../features/projects/ProjectsPage";
 import { AppShell } from "./AppShell";
 import { NotFoundPage } from "./NotFoundPage";
+import { SignInPage } from "../features/auth/SignInPage";
 
 export const routes: RouteObject[] = [
+    { path: "sign-in", element: <SignInPage /> },
     {
         element: <AppShell />,
         children: [

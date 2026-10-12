@@ -118,6 +118,7 @@ public sealed class DependencyRulesTests
             "Raccord.BuildingBlocks",
             "Raccord.Contracts",
             "Raccord.Domain",
+            "Raccord.Modules.Compliance.Contracts",
             "Raccord.SharedKernel",
         }
     )]
@@ -129,6 +130,8 @@ public sealed class DependencyRulesTests
             "Raccord.BuildingBlocks",
             "Raccord.Contracts",
             "Raccord.Domain",
+            "Raccord.Modules.Compliance",
+            "Raccord.Modules.Compliance.Contracts",
             "Raccord.SharedKernel",
         }
     )]
@@ -139,6 +142,7 @@ public sealed class DependencyRulesTests
             "Raccord.Application",
             "Raccord.Contracts",
             "Raccord.Infrastructure",
+            "Raccord.Modules.Compliance",
             "Raccord.BuildingBlocks",
             "Raccord.SharedKernel",
             "Raccord.ServiceDefaults",

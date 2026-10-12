@@ -94,7 +94,7 @@ dotnet test tests/Raccord.Architecture.Tests -c Release --no-build
 dotnet test tests/Raccord.Web.Tests -c Release --no-build
 ```
 
-After adding the new test project, also run `dotnet test tests/Raccord.BuildingBlocks.Tests -c Release --no-build` at every messaging/persistence checkpoint. Docker must be available for PostgreSQL tests. Record baseline environmental failures; do not claim a failed/unavailable suite is green.
+Baseline recorded on 2026-10-12 at plan commit `69f5656`: tool restore, solution restore, Release build, Domain tests (59), Infrastructure tests (11), and Architecture tests (14) passed. Web tests were attempted and could not run because Testcontainers was denied access to `/var/run/docker.sock`; this is an environment failure, not a green test result. After adding the new test project, also run `dotnet test tests/Raccord.BuildingBlocks.Tests -c Release --no-build` at every messaging/persistence checkpoint. Docker must be available for PostgreSQL tests. Record baseline environmental failures; do not claim a failed/unavailable suite is green.
 
 ## Checkpoint B: compatibility
 

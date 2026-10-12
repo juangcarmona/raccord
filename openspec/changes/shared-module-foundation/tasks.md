@@ -2,8 +2,8 @@
 
 ## 1. Establish the safe execution checkpoint
 
-- [ ] 1.1 Read this change's proposal/design/spec/test plan and issue #30; record the approved plan commit and current main SHA in the PR. Execute only this task list, not the parent epic's. Verify: the work queue names #30 and excludes parent tasks 1.3 onward.
-- [ ] 1.2 Restore tools/packages, build Release and run existing domain, infrastructure, architecture and web tests before edits. Record any baseline failure separately. Verify: commands in test-plan.md checkpoint A have an attributable baseline.
+- [x] 1.1 Read this change's proposal/design/spec/test plan and issue #30; record the approved plan commit and current main SHA in the PR. Execute only this task list, not the parent epic's. Verify: the work queue names #30 and excludes parent tasks 1.3 onward.
+- [x] 1.2 Restore tools/packages, build Release and run existing domain, infrastructure, architecture and web tests before edits. Record any baseline failure separately. Verify: commands in test-plan.md checkpoint A have an attributable baseline.
 
 ## 2. Extract pure shared types and ports
 

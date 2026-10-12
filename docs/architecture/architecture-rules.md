@@ -5,7 +5,7 @@ Guardrails for contributors and coding agents. Rules marked **(enforced)** fail 
 ## Application shape
 
 - .NET Aspire for local orchestration and service discovery.
-- C# Minimal APIs for HTTP endpoints; endpoints only translate HTTP to application use cases (`src/Raccord.Web/Api/Endpoints.cs`).
+- C# Minimal APIs for HTTP endpoints; the root host exposes module endpoints and maps errors at the module boundary (`src/root/Raccord.Web`).
 - React for the user interface; it consumes only the generated OpenAPI contract **(enforced: contract drift check)**.
 - Modular monolith. No distributed services without an ADR and a measured reason.
 - Feature/domain modules with explicit, small public interfaces. Endpoints never reach persistence directly.
@@ -13,20 +13,19 @@ Guardrails for contributors and coding agents. Rules marked **(enforced)** fail 
 ## Dependency rules
 
 ```text
-Web/API -> Application -> Domain -> SharedKernel
-Web/API -> Contracts
-Application -> Contracts + SharedKernel + BuildingBlocks (storage port compatibility seam)
-Infrastructure -> Application + Domain + Contracts + SharedKernel + BuildingBlocks
-BuildingBlocks -> SharedKernel (with the current document-storage compatibility adapter referencing Application)
+Root host -> module implementations -> module contracts -> SharedKernel
+Root host -> BuildingBlocks + ServiceDefaults
+Module implementations -> their contracts + SharedKernel + BuildingBlocks
+BuildingBlocks -> SharedKernel
 AppHost -> deployable projects only
-Domain, Contracts -> base class library only
+Module contracts -> SharedKernel and other module contracts only
 ```
 
 - Project references follow this graph **(enforced: `DependencyRulesTests`)**.
-- SharedKernel and Contracts reference only the BCL; Domain may reference SharedKernel; Application references no ASP.NET, EF Core, Npgsql, Azure, Aspire or HTTP assemblies; Domain, Contracts and Application add no packages **(enforced)**.
-- Adapters sit at ports defined in Application; external vocabularies (database, AEAT XSD, e-invoice syntaxes) never enter the domain.
+- SharedKernel and module contracts reference only approved base libraries; module implementations do not reference the root host or unrelated persistence adapters **(enforced)**.
+- Adapters sit at ports defined by module contracts; external vocabularies (database, AEAT XSD, e-invoice syntaxes) never enter the domain.
 - Cross-module writes go through application use cases in one unit of work.
-- Persistence models do not become API contracts; contracts live in `Raccord.Contracts`.
+- Persistence models do not become API contracts; contracts live beside their module.
 
 ## Financial rules
 

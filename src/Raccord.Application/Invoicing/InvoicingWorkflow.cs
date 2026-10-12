@@ -4,18 +4,19 @@ using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
-using Raccord.Application.Projects;
+using Raccord.Application.Invoicing;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Contracts.Invoicing;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Projects.Contracts;
 using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
 
-namespace Raccord.Application.Invoicing;
+namespace Raccord.Modules.Invoicing;
 
 /// <summary>Use cases from project billable lines to issued invoices and their documents.</summary>
 public sealed class InvoicingWorkflow(
@@ -23,7 +24,7 @@ public sealed class InvoicingWorkflow(
     IIssuedInvoiceRepository invoices,
     IInvoiceSeriesCatalog series,
     IInvoiceNumberSequenceRepository sequences,
-    IProjectRepository projects,
+    IBillableWork projects,
     IPartyDirectory parties,
     IWorkspaceStore workspace,
     IAuditTrail audit,

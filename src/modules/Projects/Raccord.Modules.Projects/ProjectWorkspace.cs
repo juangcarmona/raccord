@@ -1,17 +1,17 @@
-using Raccord.Application.Abstractions;
 using Raccord.Contracts.Projects;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Projects.Contracts;
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Pricing;
 
-namespace Raccord.Application.Projects;
+namespace Raccord.Modules.Projects;
 
 /// <summary>Use cases for projects and their billable work.</summary>
 public sealed class ProjectWorkspace(
-    IProjectRepository projects,
+    IBillableWork projects,
     IPartyDirectory parties,
-    IUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork
 )
 {
     /// <summary>Creates a project for an existing customer.</summary>
@@ -127,7 +127,7 @@ public sealed class ProjectWorkspace(
         );
         var line = project.AddBillableLine(kind, request.Description ?? string.Empty, pricing);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return line.ToResponse();
+        return ToResponse(line);
     }
 
     private static ProjectResponse ToResponse(Project project, string customerName) =>
@@ -139,6 +139,26 @@ public sealed class ProjectWorkspace(
             project.StartDate,
             project.EndDate,
             Currency.Eur.Code,
-            [.. project.BillableLines.Select(line => line.ToResponse())]
+            [.. project.BillableLines.Select(ToResponse)]
+        );
+
+    private static BillableLineResponse ToResponse(BillableLine line) =>
+        new(
+            line.Id,
+            line.Kind.ToString().ToLowerInvariant(),
+            line.Description,
+            line.Quantity,
+            line.UnitPrice,
+            line.DiscountPercent,
+            line.VatPercentage,
+            line.Pricing.NetAmount.Amount,
+            line.State switch
+            {
+                BillingState.Unbilled => "unbilled",
+                BillingState.InDraft => "in-draft",
+                _ => "invoiced",
+            },
+            line.DraftId,
+            line.InvoiceId
         );
 }

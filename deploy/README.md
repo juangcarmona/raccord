@@ -4,6 +4,6 @@
 - `docker-compose.yml` + `.env.example` — self-hosted installation: PostgreSQL, one-shot `migrate` job, `web`. See [self-hosting](../docs/operations/self-hosting.md).
 - `scripts/backup.sh`, `scripts/restore.sh` — database dump + document archive with checksums. See [backup and restore](../docs/operations/backup-and-restore.md).
 - `azure/bicep/` — Azure Container Apps, PostgreSQL Flexible Server, Storage, Key Vault, managed identity. See [Azure deployment](../docs/operations/azure-deployment.md).
-- .NET Aspire development orchestration lives in `src/Raccord.Aspire`.
+- .NET Aspire development orchestration lives in `src/root/Raccord.Aspire`.
 
 Templates never contain secrets or customer-specific identifiers. `deploy/.env` and `deploy/backups*/` are git-ignored.

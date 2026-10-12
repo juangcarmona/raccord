@@ -9,7 +9,7 @@
 ## Run everything with .NET Aspire
 
 ```bash
-dotnet run --project src/Raccord.Aspire --launch-profile http
+dotnet run --project src/root/Raccord.Aspire --launch-profile http
 ```
 
 The AppHost starts PostgreSQL and Azurite (with volumes), runs the `migrations` resource (`migrate --seed-demo`, fictional demo data), then the API and the Vite dev server. Open the dashboard link printed in the console to reach the frontend, logs and traces. The `http` profile sets `ASPIRE_ALLOW_UNSECURED_TRANSPORT` for local use only.
@@ -21,11 +21,11 @@ See [self-hosting](self-hosting.md). Useful to test the production image locally
 ## Run pieces individually
 
 ```bash
-dotnet run --project src/Raccord.Web -- migrate --seed-demo
+dotnet run --project src/root/Raccord.Web -- migrate --seed-demo
 ```
 
 ```bash
-dotnet run --project src/Raccord.Web
+dotnet run --project src/root/Raccord.Web
 ```
 
 Both need `ConnectionStrings__raccord` (for example via `dotnet user-secrets` or an environment variable). Then, in `src/Raccord.Frontend`:
@@ -111,7 +111,7 @@ dotnet tool restore
 ```
 
 ```bash
-dotnet ef migrations add <Name> --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --output-dir Persistence/Migrations
+dotnet ef migrations add <Name> --project src/modules/Invoicing/Raccord.Modules.Invoicing --startup-project src/root/Raccord.Web --output-dir Persistence/Migrations
 ```
 
 Review the generated migration; keep the append-only triggers intact; add data backfills when adding constraints to existing tables.

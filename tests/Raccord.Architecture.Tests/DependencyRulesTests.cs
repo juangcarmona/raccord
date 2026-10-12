@@ -8,7 +8,7 @@ public sealed class DependencyRulesTests
 {
     private static readonly Assembly Domain = typeof(Raccord.Domain.Billing.InvoiceDraft).Assembly;
     private static readonly Assembly Application =
-        typeof(Raccord.Application.Invoicing.InvoicingWorkflow).Assembly;
+        typeof(Raccord.Application.Invoicing.IInvoiceDraftRepository).Assembly;
     private static readonly Assembly Contracts =
         typeof(Raccord.Contracts.Invoicing.IssuedInvoiceResponse).Assembly;
     private static readonly Assembly Infrastructure =
@@ -108,6 +108,21 @@ public sealed class DependencyRulesTests
             .ShouldNotContain(name => name.StartsWith("Raccord.Web", StringComparison.Ordinal));
     }
 
+    [Fact]
+    public void Solution_Should_expose_only_root_hosts_and_modules()
+    {
+        var solution = SolutionFile();
+
+        solution.ShouldNotContain("src/Raccord.Domain/Raccord.Domain.csproj");
+        solution.ShouldNotContain("src/Raccord.Application/Raccord.Application.csproj");
+        solution.ShouldNotContain("src/Raccord.Contracts/Raccord.Contracts.csproj");
+        solution.ShouldNotContain("src/Raccord.Infrastructure/Raccord.Infrastructure.csproj");
+        solution.ShouldNotContain("src/Raccord.Web/Raccord.Web.csproj");
+        solution.ShouldNotContain("src/Raccord.Aspire/Raccord.Aspire.csproj");
+        solution.ShouldContain("src/root/Raccord.Web/Raccord.Web.csproj");
+        solution.ShouldContain("src/root/Raccord.Aspire/Raccord.Aspire.csproj");
+    }
+
     [Theory]
     [InlineData("Raccord.Domain", new[] { "Raccord.SharedKernel" })]
     [InlineData("Raccord.Contracts", new string[0])]
@@ -120,6 +135,7 @@ public sealed class DependencyRulesTests
             "Raccord.Domain",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Projects.Contracts",
             "Raccord.Modules.Workspace.Contracts",
             "Raccord.SharedKernel",
         }
@@ -135,6 +151,8 @@ public sealed class DependencyRulesTests
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Invoicing.Contracts",
+            "Raccord.Modules.Projects.Contracts",
             "Raccord.Modules.Workspace.Contracts",
             "Raccord.SharedKernel",
         }
@@ -148,6 +166,8 @@ public sealed class DependencyRulesTests
             "Raccord.Infrastructure",
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Contacts",
+            "Raccord.Modules.Invoicing",
+            "Raccord.Modules.Projects",
             "Raccord.Modules.Workspace",
             "Raccord.BuildingBlocks",
             "Raccord.SharedKernel",
@@ -200,5 +220,19 @@ public sealed class DependencyRulesTests
         return XDocument.Load(
             Path.Combine(directory.FullName, "src", project, project + ".csproj")
         );
+    }
+
+    private static string SolutionFile()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (
+            directory is not null && !File.Exists(Path.Combine(directory.FullName, "Raccord.slnx"))
+        )
+        {
+            directory = directory.Parent;
+        }
+
+        directory.ShouldNotBeNull();
+        return File.ReadAllText(Path.Combine(directory.FullName, "Raccord.slnx"));
     }
 }

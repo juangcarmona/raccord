@@ -61,9 +61,13 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
             .EnumerateArray()
             .Select(issue => issue.GetProperty("code").GetString())
             .ShouldContain("recipient.tax-id-missing");
-        (await api.QueryScalarAsync<long>("SELECT count(*) FROM issued_invoices")).ShouldBe(0L);
         (
-            await api.QueryScalarAsync<long>("SELECT count(*) FROM invoice_number_sequences")
+            await api.QueryScalarAsync<long>("SELECT count(*) FROM invoicing.issued_invoices")
+        ).ShouldBe(0L);
+        (
+            await api.QueryScalarAsync<long>(
+                "SELECT count(*) FROM invoicing.invoice_number_sequences"
+            )
         ).ShouldBe(0L);
     }
 
@@ -166,13 +170,13 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
         await FinalizeAsync(draft.Id, new DateOnly(2026, 5, 11));
 
         var update = await Should.ThrowAsync<PostgresException>(() =>
-            api.ExecuteAsync("UPDATE issued_invoices SET total = 1")
+            api.ExecuteAsync("UPDATE invoicing.issued_invoices SET total = 1")
         );
         var delete = await Should.ThrowAsync<PostgresException>(() =>
             api.ExecuteAsync("DELETE FROM compliance.audit_events")
         );
         var truncate = await Should.ThrowAsync<PostgresException>(() =>
-            api.ExecuteAsync("TRUNCATE issued_invoices CASCADE")
+            api.ExecuteAsync("TRUNCATE invoicing.issued_invoices CASCADE")
         );
         var compliance = await Should.ThrowAsync<PostgresException>(() =>
             api.ExecuteAsync("DELETE FROM compliance.compliance_records")
@@ -214,9 +218,9 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
             await FinalizeAsync(draft.Id, new DateOnly(2026, 5, 11))
         ).Content.ReadFromJsonAsync<IssuedInvoiceResponse>();
         await api.ExecuteAsync(
-            "ALTER TABLE issued_invoices DISABLE TRIGGER issued_invoices_append_only;"
-                + "UPDATE issued_invoices SET representation = replace(representation, '900.00', '9.00');"
-                + "ALTER TABLE issued_invoices ENABLE TRIGGER issued_invoices_append_only;"
+            "ALTER TABLE invoicing.issued_invoices DISABLE TRIGGER issued_invoices_append_only;"
+                + "UPDATE invoicing.issued_invoices SET representation = replace(representation, '900.00', '9.00');"
+                + "ALTER TABLE invoicing.issued_invoices ENABLE TRIGGER issued_invoices_append_only;"
         );
 
         var response = await client.GetAsync($"/api/invoices/{invoice!.Id}");

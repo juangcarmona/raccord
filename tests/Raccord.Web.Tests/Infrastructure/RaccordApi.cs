@@ -122,6 +122,7 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
+        builder.UseSetting("Raccord:TestingBypassAuth", "true");
         builder.UseSetting("ConnectionStrings:raccord", ConnectionString);
         builder.UseSetting("Storage:Provider", "FileSystem");
         builder.UseSetting("Storage:FileSystemRoot", DocumentRoot);

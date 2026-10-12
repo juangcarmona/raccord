@@ -37,6 +37,11 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         try
         {
+            await page.GotoAsync("/sign-in");
+            await page.GetByLabel("Email").FillAsync("admin@example.com");
+            await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+            await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+            await page.WaitForURLAsync(url => url.EndsWith("/projects", StringComparison.Ordinal));
             await journey(page);
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
         }

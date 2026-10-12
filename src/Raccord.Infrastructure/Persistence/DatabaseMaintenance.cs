@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Projects;
@@ -13,7 +14,8 @@ public sealed class DatabaseMaintenance(
     RaccordDbContext db,
     IPartyDirectory parties,
     IPartyWriter partyWriter,
-    IWorkspaceStore workspace
+    IWorkspaceStore workspace,
+    UserManager<RaccordUser> users
 )
 {
     /// <summary>
@@ -22,6 +24,23 @@ public sealed class DatabaseMaintenance(
     /// </summary>
     public async Task SeedDemoDataAsync(CancellationToken cancellationToken)
     {
+        if (!await users.Users.AnyAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var demo = new RaccordUser
+            {
+                UserName = "admin@example.com",
+                Email = "admin@example.com",
+                EmailConfirmed = true,
+            };
+            var result = await users.CreateAsync(demo, "DemoPassword123!").ConfigureAwait(false);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    string.Join("; ", result.Errors.Select(error => error.Description))
+                );
+            }
+        }
+
         if ((await parties.ListAsync(cancellationToken).ConfigureAwait(false)).Count > 0)
         {
             return;

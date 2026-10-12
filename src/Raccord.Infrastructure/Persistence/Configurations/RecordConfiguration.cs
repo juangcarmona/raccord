@@ -14,7 +14,7 @@ internal sealed class RecordConfiguration
 {
     public void Configure(EntityTypeBuilder<IssuedInvoiceRow> builder)
     {
-        builder.ToTable("issued_invoices");
+        builder.ToTable("issued_invoices", "invoicing");
         builder.HasKey(row => row.Id);
         builder.Property(row => row.SeriesCode).HasMaxLength(10);
         builder.Property(row => row.Number).HasMaxLength(32);
@@ -83,10 +83,5 @@ internal sealed class RecordConfiguration
         builder.Property(row => row.LastError).HasMaxLength(2000);
         builder.HasIndex(row => row.InvoiceId).IsUnique();
         builder.HasIndex(row => row.Status);
-        builder
-            .HasOne<IssuedInvoiceRow>()
-            .WithMany()
-            .HasForeignKey(row => row.InvoiceId)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

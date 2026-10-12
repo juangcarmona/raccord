@@ -9,7 +9,7 @@ internal sealed class NumberingConfiguration : IEntityTypeConfiguration<InvoiceN
 {
     public void Configure(EntityTypeBuilder<InvoiceNumberSequence> builder)
     {
-        builder.ToTable("invoice_number_sequences");
+        builder.ToTable("invoice_number_sequences", "invoicing");
         builder.HasKey(sequence => new { sequence.SeriesCode, sequence.Year });
         builder.Property(sequence => sequence.SeriesCode).HasMaxLength(10);
         builder.HasConcurrencyToken();

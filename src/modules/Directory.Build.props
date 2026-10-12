@@ -1,4 +1,6 @@
 <Project>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
     <PropertyGroup>
         <RaccordModule>true</RaccordModule>
         <RaccordArchitectureAnalyzerProject>$(MSBuildThisFileDirectory)..\shared\Raccord.ArchitectureAnalyzers\Raccord.ArchitectureAnalyzers.csproj</RaccordArchitectureAnalyzerProject>

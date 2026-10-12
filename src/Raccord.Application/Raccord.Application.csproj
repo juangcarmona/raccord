@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
+        <ProjectReference Include="..\modules\Compliance\Raccord.Modules.Compliance.Contracts\Raccord.Modules.Compliance.Contracts.csproj" />
         <ProjectReference Include="..\Raccord.Domain\Raccord.Domain.csproj" />
         <ProjectReference Include="..\Raccord.Contracts\Raccord.Contracts.csproj" />
         <ProjectReference Include="..\shared\Raccord.SharedKernel\Raccord.SharedKernel.csproj" />

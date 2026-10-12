@@ -1,17 +1,6 @@
-using Raccord.Domain.Auditing;
-using Raccord.SharedKernel.Auditing;
+using Raccord.Modules.Compliance.Contracts;
 
 namespace Raccord.Application.Auditing;
 
 /// <summary>Append-only storage of audit events.</summary>
-public interface IAuditTrail : IAuditAppender
-{
-    /// <summary>Appends an event; it is committed with the use case's unit of work.</summary>
-    void Append(AuditEvent auditEvent);
-
-    /// <summary>Lists events for an entity in chronological order.</summary>
-    Task<IReadOnlyList<AuditEvent>> ListForEntityAsync(
-        Guid entityId,
-        CancellationToken cancellationToken
-    );
-}
+public interface IAuditTrail : Raccord.Modules.Compliance.Contracts.IAuditTrail { }

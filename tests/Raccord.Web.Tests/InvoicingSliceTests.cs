@@ -92,7 +92,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         billed!.BillableLines.ShouldAllBe(line => line.BillingState == "invoiced");
         (
             await api.QueryScalarAsync<long>(
-                $"SELECT count(*) FROM compliance_records WHERE invoice_id = '{invoice.Id}' AND status = 'pending'"
+                $"SELECT count(*) FROM compliance.compliance_records WHERE invoice_id = '{invoice.Id}' AND status = 'pending'"
             )
         ).ShouldBe(1L);
     }

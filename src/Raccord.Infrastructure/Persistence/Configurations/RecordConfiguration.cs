@@ -2,7 +2,7 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Raccord.Domain.Auditing;
+using Raccord.Modules.Compliance;
 
 namespace Raccord.Infrastructure.Persistence.Configurations;
 
@@ -39,7 +39,7 @@ internal sealed class RecordConfiguration
 
     public void Configure(EntityTypeBuilder<AuditEvent> builder)
     {
-        builder.ToTable("audit_events");
+        builder.ToTable("audit_events", "compliance");
         builder.HasKey(item => item.Id);
         builder.Property(item => item.Id).ValueGeneratedNever();
         builder.Property(item => item.Actor).HasMaxLength(200);
@@ -74,7 +74,7 @@ internal sealed class RecordConfiguration
 
     public void Configure(EntityTypeBuilder<ComplianceRecordRow> builder)
     {
-        builder.ToTable("compliance_records");
+        builder.ToTable("compliance_records", "compliance");
         builder.HasKey(row => row.Id);
         builder.Property(row => row.InvoiceNumber).HasMaxLength(32);
         builder.Property(row => row.ContentHash).HasMaxLength(64).IsFixedLength();

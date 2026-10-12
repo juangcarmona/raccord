@@ -3,9 +3,9 @@ using Raccord.Application.Auditing;
 using Raccord.Application.Invoicing;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
-using Raccord.Domain.Auditing;
 using Raccord.Domain.Organization;
 using Raccord.SharedKernel.Abstractions;
+using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
 
 namespace Raccord.Application.Organization;
@@ -56,7 +56,7 @@ public sealed class OrganizationSettings(
         }
 
         audit.Append(
-            AuditEvent.Record(
+            new AuditEntry(
                 clock.UtcNow,
                 actor.Name,
                 "issuer-profile.updated",

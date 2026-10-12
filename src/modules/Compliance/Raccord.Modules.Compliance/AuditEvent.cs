@@ -1,4 +1,4 @@
-namespace Raccord.Domain.Auditing;
+namespace Raccord.Modules.Compliance;
 
 /// <summary>An append-only record of a sensitive or financial action.</summary>
 public sealed class AuditEvent
@@ -11,19 +11,19 @@ public sealed class AuditEvent
         Details = new Dictionary<string, string>(StringComparer.Ordinal);
     }
 
-    /// <summary>Event identifier (time-ordered).</summary>
+    /// <summary>Event identifier.</summary>
     public Guid Id { get; private set; }
 
-    /// <summary>Moment of the action (UTC).</summary>
+    /// <summary>Moment of the action.</summary>
     public DateTimeOffset OccurredAt { get; private set; }
 
     /// <summary>Who performed the action.</summary>
     public string Actor { get; private set; }
 
-    /// <summary>Stable action code, for example <c>invoice.issued</c>.</summary>
+    /// <summary>Stable action code.</summary>
     public string Action { get; private set; }
 
-    /// <summary>Affected entity type, for example <c>invoice</c>.</summary>
+    /// <summary>Affected entity type.</summary>
     public string EntityType { get; private set; }
 
     /// <summary>Affected entity.</summary>

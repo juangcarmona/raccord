@@ -1,7 +1,7 @@
 ---
 name: module-assemblies-named-after-bounded-contexts
 description: Each bounded context that has a real seam becomes its own module assembly, with a contracts assembly only when another module consumes it and boundaries enforced at compile time.
-status: Proposed
+status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
 tags: ["modular-monolith", "modules", "boundaries", "analyzers"]
@@ -26,7 +26,7 @@ We will make every module its own assembly, named after the product model's boun
 - **Projects:** `src/modules/<Module>/Raccord.Modules.<Module>`, plus `Raccord.Modules.<Module>.Contracts` only when another module actually consumes something.
 - **Initial modules:**
     - **Workspace** (BC-WORKSPACE): users, roles, settings, number series.
-    - **Contacts** (BC-PARTIES, being renamed to Contacts in a Product Change, issue #8): customers, the issuer's legal identity, later suppliers and venues.
+    - **Contacts** (BC-CONTACTS, which replaces BC-PARTIES through Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001): customers, the issuer's legal identity, later suppliers and venues.
     - **Projects** (BC-PROJECTS).
     - **Invoicing** (BC-INVOICING).
     - **Compliance** (BC-COMPLIANCE): audit events and compliance records.
@@ -73,9 +73,9 @@ We will make every module its own assembly, named after the product model's boun
     - Moving the billing slice touches almost every production file once.
     - Project-level rules such as "Domain references only the BCL" become namespace-level architecture tests inside each module.
 - **Neutral:**
-    - ADR-0003 is superseded when this record is accepted.
+    - This record supersedes ADR-0003.
     - `docs/architecture/architecture-rules.md` and arc42 §4, §5 and §8 must be updated with the restructure.
-    - The `Raccord.Domain.Parties` namespace becomes part of the SharedKernel and the Contacts module, following issue #8.
+    - The `Raccord.Domain.Parties` namespace becomes part of the SharedKernel and the Contacts module, following Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001 (BC-CONTACTS).
 
 ## Alternatives considered
 
@@ -86,7 +86,7 @@ We will make every module its own assembly, named after the product model's boun
 
 ## References
 
-- Supersedes: ADR-0003 (on acceptance)
+- Supersedes: ADR-0003
 - Related: ADR-0001, ADR-0019, ADR-0020, ADR-0021, ADR-0022
 - Product model: `docs/product/model/domain/bounded-contexts/`
-- Issue #8: rename the Parties bounded context to Contacts
+- Product Change: CHG-RENAME-PARTIES-TO-CONTACTS-001 (draft), which adds BC-CONTACTS in place of BC-PARTIES: `docs/product/changes/active/chg-rename-parties-to-contacts-001/change.md`

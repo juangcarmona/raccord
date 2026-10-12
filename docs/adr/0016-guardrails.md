@@ -1,8 +1,13 @@
-# ADR-0016: Guardrails — commit-time hooks, CI mirrors, security gates, spec tooling
+---
+name: guardrails
+description: Raccord adds auto-installed commit-time hooks mirrored in CI, test conventions, result-checking security and license gates, nightly mutation testing, post-merge runtime probing and an OpenSpec spec layer.
+status: Accepted
+date: 2026-10-10
+deciders: ["Juan G. Carmona"]
+tags: ["guardrails", "ci", "security", "testing", "conventions", "spec"]
+---
 
-- Status: accepted
-- Date: 2026-10-10
-- Extends: ADR-0015 (build and quality gates)
+# ADR-0016: Add commit-time hooks, CI mirrors, security gates and spec tooling as guardrails
 
 ## Context
 
@@ -15,6 +20,8 @@ of guardrails: the cage, not line-reading — hard, automated gates that check r
 and each gate has to earn its place by catching something real.
 
 ## Decision
+
+We will add the following guardrails on top of ADR-0015's build and quality gates.
 
 ### Commit-time gates (auto-installed, with an escape)
 
@@ -109,12 +116,33 @@ OpenSpec (`openspec/`) is the behavioral spec layer: each change ships
 implementation behavior per change; product decisions go through Product Changes, not
 specs.
 
-### Consequences
+## Consequences
 
-- Direct pushes to main skip the commitlint mirror (it runs on `pull_request` only);
-  branch protection is the policy answer.
-- Hookless machines (no node on PATH) get a failing pre-commit — the documented
-  escape is `HUSKY=0`.
-- Each gate included here was verified to catch a planted violation before being
-  merged; per ADR-0015's principle, a gate that stops catching gets removed rather than
-  muted.
+- **Positive:**
+    - A `HUSKY=0` or `--no-verify` bypass still produces a red build before merge.
+    - Each gate included here was verified to catch a planted violation before being
+      merged; per ADR-0015's principle, a gate that stops catching gets removed rather than
+      muted.
+- **Negative:**
+    - Direct pushes to main skip the commitlint mirror (it runs on `pull_request` only);
+      branch protection is the policy answer.
+    - Hookless machines (no node on PATH) get a failing pre-commit — the documented
+      escape is `HUSKY=0`.
+- **Neutral:**
+    - Mutation testing moves per-PR when the suite sustains a stable score.
+
+## Alternatives considered
+
+- **Keep every gate server-side only (ADR-0015 as it was):** rejected because a local `--no-verify` or a stale hook install silently skipped the gates until PR time.
+- **Keep `dotnet format` alongside CSharpier:** rejected — one formatter per language, not two that disagree.
+- **Duplicate ESLint in the `lint` job:** rejected because the frontend job already fails on it.
+- **Enforce the license policy from an image-only SBOM:** rejected because NuGet licenses live in nuspec metadata, not in the compiled DLLs, so an image-only SBOM cannot carry them.
+- **Mutation testing per PR:** rejected for now because the score is as much a test-gap inventory as a grade, and a flaky per-PR gate trains people to ignore it.
+- **Stryker's default VsTest runner:** rejected because xunit.v3 per-mutant outcomes don't propagate through it, so every mutant reports Survived.
+
+## References
+
+- Extends: ADR-0015 (build and quality gates)
+- Related: ADR-0002, ADR-0017
+- Operations checklist: `docs/operations/ops-checklist.md`
+- Issue #5: backup-restore drill

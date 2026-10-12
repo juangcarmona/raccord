@@ -1,18 +1,25 @@
-# ADR-0017: End-to-end testing strategy — real AppHost, real browser, pinned selection
+---
+name: end-to-end-testing
+description: End-to-end journeys boot the real Aspire AppHost, drive the SPA in a real headless browser, and run a pinned PR-blocking selection.
+status: Accepted
+date: 2026-10-10
+deciders: ["Juan G. Carmona"]
+tags: ["testing", "e2e", "playwright", "aspire", "ci"]
+---
 
-- Status: accepted
-- Date: 2026-10-10
-- Extends: ADR-0014 (testing strategy)
+# ADR-0017: Run end-to-end journeys against the real AppHost in a real browser with a pinned selection
 
 ## Context
 
 ADR-0014 established the testing pyramid: domain units, Testcontainers-backed
 integration tests, architecture rules. The missing top of the pyramid was journeys that
-prove the *assembled* application — the money path a person actually experiences.
+prove the _assembled_ application — the money path a person actually experiences.
 Integration tests exercise handlers against a database; they never catch the SPA's
 routing, the Vite proxy wiring, the locale switch or a broken label.
 
 ## Decision
+
+We will run end-to-end journeys against the real AppHost in a real browser, with a pinned PR-blocking selection.
 
 - **Real AppHost, not mocks.** `Raccord.EndToEndTests` boots the unmodified Aspire
   AppHost via `DistributedApplicationTestingBuilder<Projects.Raccord_Aspire>()`
@@ -45,11 +52,31 @@ routing, the Vite proxy wiring, the locale switch or a broken label.
 
 ## Consequences
 
-- The e2e job is the slowest CI leg (a cold AppHost boot runs the frontend's
-  `npm ci`); accepted — PR-gated smoke selection keeps it bounded, and the manifest
-  makes any attempt to shrink the selection loud.
-- Journeys are order-coupled to the seeded demo data and issuer profile; that's the
-  point (they run the real stack), and the session-lifetime database keeps it
-  deterministic per run.
-- Label matching in the step helpers is deliberately substring-based: optional fields
-  render their label as "X (optional)", so exact matching would miss them.
+- **Positive:**
+    - Journeys prove the assembled application, including the SPA's routing, the Vite
+      proxy wiring, the locale switch and labels.
+    - The manifest makes any attempt to shrink the selection loud.
+- **Negative:**
+    - The e2e job is the slowest CI leg (a cold AppHost boot runs the frontend's
+      `npm ci`); accepted — PR-gated smoke selection keeps it bounded, and the manifest
+      makes any attempt to shrink the selection loud.
+    - Journeys are order-coupled to the seeded demo data and issuer profile; that's the
+      point (they run the real stack), and the session-lifetime database keeps it
+      deterministic per run.
+- **Neutral:**
+    - Label matching in the step helpers is deliberately substring-based: optional fields
+      render their label as "X (optional)", so exact matching would miss them.
+
+## Alternatives considered
+
+- **Mocked backend instead of the real AppHost:** rejected because it would not prove the assembled application.
+- **The dev persistent volume:** deliberately not used; a fresh, migrated-and-seeded session database per run keeps journeys deterministic.
+- **Leaving the browser locale to the runner:** rejected because it would make the suite's meaning depend on where it runs.
+- **A fresh ticks value per read for run stamps:** rejected because it made a journey search for a name it never created.
+- **Exact label matching:** rejected because optional fields render their label as "X (optional)".
+
+## References
+
+- Extends: ADR-0014 (testing strategy)
+- Related: ADR-0013, ADR-0016
+- Selection check: `.github/scripts/check-e2e-selection.sh`

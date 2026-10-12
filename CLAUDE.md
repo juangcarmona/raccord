@@ -11,7 +11,7 @@ Before implementation, inspect:
 1. `docs/product/` (PDaC model and Product Changes)
 2. `docs/architecture/arc42/`
 3. `docs/research/`
-4. `docs/architecture/decisions/`
+4. `docs/adr/`
 
 Use the smallest vertical slice that proves a real audiovisual production workflow. Keep all external imports outside the core domain and implement original terminology, UX, and code.
 

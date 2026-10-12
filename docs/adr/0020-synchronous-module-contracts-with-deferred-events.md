@@ -1,7 +1,7 @@
 ---
 name: synchronous-module-contracts-with-deferred-events
 description: Modules talk to each other only through synchronous in-process interfaces in their contracts assemblies; domain events and an outbox are deferred until a real asynchronous consumer exists.
-status: Proposed
+status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
 tags: ["modules", "integration", "events", "outbox"]

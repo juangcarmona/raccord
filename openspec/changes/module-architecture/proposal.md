@@ -2,7 +2,7 @@
 
 Raccord's modular monolith exists only as namespaces inside six layered projects (ADR-0003). Nothing enforces boundaries between modules: one `RaccordDbContext` maps every table, use cases are registered by hand in `src/Raccord.Web/Program.cs`, and every route lives in `src/Raccord.Web/Api/Endpoints.cs`.
 
-The product model defines ten bounded contexts (`docs/product/model/domain/bounded-contexts/`), and the next journey (`jrn-wsp-set-up-workspace`) adds identity and roles. Restructuring is cheapest now, while billing is the only implemented slice. The decisions are recorded as Proposed in ADR-0018 to ADR-0022. This change implements ADR-0018, ADR-0019, ADR-0020 and ADR-0022. Authentication (ADR-0021) ships with the workspace journey in its own change.
+The product model defines ten bounded contexts (`docs/product/model/domain/bounded-contexts/`), and the next journey (`jrn-wsp-set-up-workspace`) adds identity and roles. Restructuring is cheapest now, while billing is the only implemented slice. The decisions are accepted in ADR-0018 to ADR-0022 (`docs/adr/`). This change implements ADR-0018, ADR-0019, ADR-0020 and ADR-0022. Authentication (ADR-0021) ships with the workspace journey in its own change.
 
 ## What Changes
 
@@ -53,9 +53,9 @@ None. `openspec/specs/` has no archived capabilities yet.
 
 ## Impact
 
-- **Product model:** no new product scope. The module name "Contacts" assumes the Product Change from issue #8 (BC-PARTIES renamed to Contacts). If that change is rejected, the module is named Parties instead and nothing else changes.
+- **Product model:** no new product scope. The module name "Contacts" follows Product Change CHG-RENAME-PARTIES-TO-CONTACTS-001 (BC-PARTIES → BC-CONTACTS, `docs/product/changes/active/chg-rename-parties-to-contacts-001/change.md`), which must be applied before this change is archived.
 - **Code:** every production C# file moves or is rewritten into slices. Domain logic, money rounding, numbering and the canonical invoice representation are moved without semantic changes.
 - **Tests:**
     - Existing domain, web and end-to-end tests must pass unchanged apart from namespaces.
     - Web tests are the behavioural safety net and are not weakened.
-- **Depends on:** the acceptance of ADR-0018, ADR-0019, ADR-0020 and ADR-0022.
+- **Depends on:** ADR-0018, ADR-0019, ADR-0020 and ADR-0022 (accepted) and the Contacts Product Change above.

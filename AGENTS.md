@@ -12,14 +12,14 @@ Raccord is an open-source, self-hostable operations and invoicing platform for a
 - Preserve tenant isolation, auditability, invoice numbering, immutable finalized invoices, and data exportability.
 - Prefer small vertical slices with tests over speculative framework code.
 - Keep deployment paths documented for Docker Compose, .NET Aspire, and Azure/Bicep.
-- New production dependencies require a short decision record under `docs/architecture/decisions/`.
+- New production dependencies require a short decision record under `docs/adr/`.
 - The required stack and executable guardrails are in `docs/architecture/architecture-rules.md`.
 - Use `docs/operations/claude-execution-brief.md` as the handoff contract for large Claude implementation passes.
 - Local development, tests and contract regeneration: `docs/operations/local-development.md`.
 
 ## Quality bar
 
-- Do not claim legal or VERI*FACTU compliance without verified implementation and review.
+- Do not claim legal or VERI\*FACTU compliance without verified implementation and review.
 - Do not commit secrets, API tokens, customer data, generated PDFs, or local state.
 - Follow the enforced conventions: CSharpier/Prettier formatting, conventional commits,
   `Thing_Should_Outcome` test naming, a validated OpenSpec change per meaningful change
@@ -34,11 +34,11 @@ is phrased, and asks before:
 
 1. **Issuing, rotating or revoking any credential or key** — database passwords,
    storage keys, API tokens, deploy credentials, signing keys. The agent may write code
-   that *consumes* secrets; acting on a real secret itself is a human decision.
+   that _consumes_ secrets; acting on a real secret itself is a human decision.
 2. **Rewriting or force-pushing shared git history** — anything that changes commits
    other agents or people may already have fetched (rebase of shared branches, history
    filters, `--force` pushes). Rewriting your own unpushed branch is fine.
-3. **Touching anything production-facing** — deployment execution (real `az`/`docker
-   deploy` against live infrastructure), production data, production configuration, or
+3. **Touching anything production-facing** — deployment execution (real `az`/`docker deploy`
+   against live infrastructure), production data, production configuration, or
    anything under an incident. Proposing changes to deployment artifacts in the repo is
    normal work; executing against a live environment is not.

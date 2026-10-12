@@ -1,7 +1,7 @@
 ---
 name: module-owned-schemas-with-a-shared-transaction
 description: Each module owns a DbContext, a PostgreSQL schema and its migrations, and a unit of work enlists every participating context in one transaction on one connection.
-status: Proposed
+status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
 tags: ["persistence", "postgresql", "ef-core", "transactions", "modules"]

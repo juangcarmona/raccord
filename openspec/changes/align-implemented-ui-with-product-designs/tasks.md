@@ -2,6 +2,7 @@
 
 - [x] 1.1 Record each in-scope route’s closest design and behavior trace, unsupported concepts, and explicit gaps in `docs/product/design/implemented-screen-mapping.md`; verify every route in the router is covered.
 - [x] 1.2 Align shared shell, responsive layout, and global tokens with `docs/design/`; verify shell semantics, keyboard entry point, and desktop/narrow screenshots.
+- [x] 1.3 Record frontend ownership and dependency direction for the existing `app/`, `features/`, and `shared/` structure in ADR-0023 and the architecture index; verify the record does not imply unimplemented automated enforcement or a folder migration.
 
 ## 2. Screen alignment
 

@@ -1,6 +1,6 @@
 ---
 name: money-rounding-and-vat
-description: Money is rounded once per line to the currency's minor units, and VAT is computed per rate on the sum of the rounded line net amounts.
+description: Money is rounded once per line to the currency's minor units, and VAT is computed per rate on the sum of the rounded line net amounts; the policy is subject to accountant review.
 status: Accepted
 date: 2026-10-06
 deciders: ["Juan G. Carmona"]

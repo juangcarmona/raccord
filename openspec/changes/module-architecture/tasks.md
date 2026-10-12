@@ -1,6 +1,6 @@
 ## 0. Decisions
 
-- [ ] 0.1 Accept ADR-0018, ADR-0019, ADR-0020 and ADR-0022 (human decision). Mark ADR-0003 `Superseded by ADR-0018`. Add the accepted ADRs, plus the missing ADR-0016 and ADR-0017, to `docs/architecture/arc42/09-architecture-decisions.md`. Verify: section 09 lists 0001–0022, with 0003 pointing to 0018.
+- [x] 0.1 Accept ADR-0018 to ADR-0022 (accepted 2026-10-12). Mark ADR-0003 `Superseded by ADR-0018`. Move all ADRs to `docs/adr/` with an index, and list the current decisions in `docs/architecture/arc42/09-architecture-decisions.md`. Verify: section 09 lists 0001, 0002 and 0004–0022, and 0018 represents the superseded 0003.
 
 ## 1. Shared building blocks
 

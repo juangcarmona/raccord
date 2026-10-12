@@ -1,7 +1,7 @@
 ---
 name: single-file-use-case-slices-with-result-errors
 description: Each use case is one file holding its endpoint, request, validator and handler, dispatched through an in-house CQS sender that returns ErrorOr results and validates with FluentValidation.
-status: Proposed
+status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
 tags: ["application", "api", "validation", "errors", "conventions"]

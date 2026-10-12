@@ -1,7 +1,7 @@
 ---
 name: local-identity-with-cookie-sessions-and-scoped-permissions
 description: Raccord authenticates users with ASP.NET Core Identity and a same-origin cookie, optionally through an external OpenID Connect provider, and authorizes with editable roles made of module permissions with scopes.
-status: Proposed
+status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
 tags: ["security", "authentication", "authorization", "workspace"]

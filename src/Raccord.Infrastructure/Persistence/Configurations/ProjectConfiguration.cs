@@ -8,7 +8,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 {
     public void Configure(EntityTypeBuilder<Project> builder)
     {
-        builder.ToTable("projects");
+        builder.ToTable("projects", "projects");
         builder.HasKey(project => project.Id);
         builder.Property(project => project.Name).HasMaxLength(200);
         builder.HasConcurrencyToken();
@@ -17,7 +17,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
             project => project.BillableLines,
             line =>
             {
-                line.ToTable("billable_lines");
+                line.ToTable("billable_lines", "projects");
                 line.WithOwner().HasForeignKey("ProjectId");
                 line.HasKey(billable => billable.Id);
                 line.Property(billable => billable.Id).ValueGeneratedNever();

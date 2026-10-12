@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Raccord.Application.Projects;
 using Raccord.Domain.Projects;
+using Raccord.Modules.Projects.Contracts;
 
 namespace Raccord.Infrastructure.Persistence.Repositories;
 
-internal sealed class ProjectRepository(RaccordDbContext db) : IProjectRepository
+internal sealed class ProjectRepository(RaccordDbContext db) : IBillableWork
 {
     public Task<Project?> FindAsync(Guid id, CancellationToken cancellationToken) =>
         db.Projects.FirstOrDefaultAsync(project => project.Id == id, cancellationToken);

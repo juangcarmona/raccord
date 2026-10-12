@@ -145,7 +145,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_projects");
 
-                    b.ToTable("projects", (string)null);
+                    b.ToTable("projects", "projects");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
@@ -667,7 +667,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .IsUnique()
                                 .HasDatabaseName("ix_billable_lines_project_id_position");
 
-                            b1.ToTable("billable_lines", (string)null);
+                            b1.ToTable("billable_lines", "projects");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProjectId")

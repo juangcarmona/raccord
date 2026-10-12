@@ -3,13 +3,13 @@ id: CHG-EXAMPLE-001
 type: product-change
 title: Example product change
 status: draft
-base-revision: '3f2a91c'
+base-revision: "3f2a91c"
 operations:
-  add:
-    - FR-EXAMPLE-001
-  modify:
-    - UC-EXAMPLE-001
-  remove: []
+    add:
+        - FR-EXAMPLE-001
+    modify:
+        - UC-EXAMPLE-001
+    remove: []
 ---
 
 Schema reference: docs/specification/frontmatter-reference.md#product-change

@@ -1,8 +1,22 @@
+<!-- pdac-scope: cited -->
+
 ## Why
 
 Raccord's modular monolith exists only as namespaces inside six layered projects (ADR-0003). Nothing enforces boundaries between modules: one `RaccordDbContext` maps every table, use cases are registered by hand in `src/Raccord.Web/Program.cs`, and every route lives in `src/Raccord.Web/Api/Endpoints.cs`.
 
 The product model defines ten bounded contexts (`docs/product/model/domain/bounded-contexts/`), and the next journey (`jrn-wsp-set-up-workspace`) adds identity and roles. Restructuring is cheapest now, while billing is the only implemented slice. The decisions are accepted in ADR-0018 to ADR-0022 (`docs/adr/`). This change implements ADR-0018, ADR-0019, ADR-0020 and ADR-0022. Authentication (ADR-0021) ships with the workspace journey in its own change.
+
+<!-- pdac:cite id="BC-WORKSPACE" digest="sha256:013841dd37789974afef821eb2c071a85acaa72c083abd2285b7c406db95f8a5" -->
+
+<!-- pdac:cite id="BC-PARTIES" digest="sha256:440465d249e5f48c8bf256a2586126bbb97acc061e3c08a3521553d4a0a2a738" -->
+
+<!-- pdac:cite id="BC-PROJECTS" digest="sha256:11cadbc8906365210716689609d66738e29fc576822aa2e8e7a925a8bae0933e" -->
+
+<!-- pdac:cite id="BC-INVOICING" digest="sha256:386343a8a3613a73a2ab60d1b5767cbe7d880fb8ded0d2d1a7c5dee68fa2a567" -->
+
+<!-- pdac:cite id="BC-COMPLIANCE" digest="sha256:92fbac72cbcb8e640f0c87ff7da3629698b6bb3ee7cf5bdf742db249ca898dc0" -->
+
+<!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
 
 ## What Changes
 

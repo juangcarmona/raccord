@@ -1,3 +1,5 @@
+<!-- pdac-scope: cited -->
+
 ## 0. Decisions
 
 - [x] 0.1 Accept ADR-0018 to ADR-0022 (accepted 2026-10-12). Mark ADR-0003 `Superseded by ADR-0018`. Move all ADRs to `docs/adr/` with an index, and list the current decisions in `docs/architecture/arc42/09-architecture-decisions.md`. Verify: section 09 lists 0001, 0002 and 0004–0022, and 0018 represents the superseded 0003.
@@ -16,6 +18,12 @@
 - [ ] 2.4 Projects module: projects, billable lines, `Projects.Contracts.IBillableWork`, `projects` schema. Verify: project web tests green; unknown-customer path unchanged.
 - [ ] 2.5 Invoicing module: drafts, number sequences, issued invoices, PDF renderer, document retrieval, `invoicing` schema. Verify: `InvoicingSliceTests`, `InvoicingRulesTests` and the finalize end-to-end journey green; the atomicity and rollback scenarios from `specs/module-persistence` pass.
 - [ ] 2.6 Remove `Raccord.Domain`, `Raccord.Application`, `Raccord.Contracts` and `Raccord.Infrastructure`, `Api/Endpoints.cs` and `ApiExceptionHandler.cs`. Move the hosts to `src/root/` and update the Aspire and end-to-end project references, the Dockerfile and `deploy/` paths. Verify: `docker compose -f deploy/docker-compose.yml config`, the image build and the full suite are green.
+
+<!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
+
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
 
 ## 3. Rules and tests
 

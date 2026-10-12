@@ -1,3 +1,5 @@
+<!-- pdac-scope: cited -->
+
 ## Purpose
 
 Every use case reads the same way: one file from route to handler, one result type, and one mapping to problem details, matching the sibling repositories' house style.
@@ -7,6 +9,8 @@ Every use case reads the same way: one file from route to handler, one result ty
 ### Requirement: One file per use case
 
 Each use case SHALL live in `src/modules/<Module>/Raccord.Modules.<Module>/Features/<Feature>/<UseCase>.cs` and contain its route mapping, request and response types, command or query, validator and `internal sealed` handler. Each module SHALL list its slices explicitly in `Map<Module>Endpoints()`.
+
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
 
 #### Scenario: Locating a use case
 
@@ -30,6 +34,8 @@ Handlers SHALL return `ErrorOr<T>` and be invoked through `ISender` from `Raccor
 ### Requirement: Problem details keep their shape
 
 Every error response SHALL be RFC 9457 problem details with `type` `urn:raccord:problem:<code>` and a `code` extension. Status codes SHALL be unchanged for every existing error code. Only defects and `issued-invoice.integrity-violation` SHALL reach the global exception handler as 500.
+
+<!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
 
 #### Scenario: Unchanged error contract
 

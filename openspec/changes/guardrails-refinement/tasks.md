@@ -1,3 +1,5 @@
+<!-- pdac-scope: none reason="Repository engineering tooling and CI process; implements no product behaviour defined in docs/product/model." -->
+
 ## 1. Tooling
 
 - [x] 1.1 Add husky 0.9.1 and csharpier 1.3.0 to the root dotnet-tools.json; add a
@@ -33,7 +35,7 @@
       `dotnet test Raccord.slnx` green with the same test count.
 - [x] 4.2 Rename every test to Thing_Should_Outcome and add
       tests/Raccord.Architecture.Tests/TestNaming_Should_Constraint.cs reflecting over all
-      Raccord.*.Tests assemblies. Verify: a planted badly-named test fails the rule naming the
+      Raccord.\*.Tests assemblies. Verify: a planted badly-named test fails the rule naming the
       offender.
 
 ## 5. Spec layer

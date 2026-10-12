@@ -1,3 +1,5 @@
+<!-- pdac-scope: cited -->
+
 ## Purpose
 
 Each module owns its tables, and an operation that spans several modules still commits or rolls back as a whole, so the legal guarantees of invoicing survive the split.
@@ -16,6 +18,18 @@ Each module SHALL have one DbContext mapping only its own tables, in a PostgreSQ
 ### Requirement: Cross-module writes share one transaction
 
 `IUnitOfWork` SHALL run the use case's writes to every participating module context on one connection, in one transaction, and commit once. A failure in any context SHALL roll back all of them.
+
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+
+<!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:a29bab7607c529ef8b86f34e32758cf8557927cf7e71812bded9aac01c3ef469" -->
+
+<!-- pdac:cite id="QR-CONCURRENCY-CONSISTENCY" digest="sha256:320945ebf06be10006380b4e183377f48569c75224692b903f3cf093887736a2" -->
+
+<!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
+
+<!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 
 #### Scenario: Finalization is atomic
 
@@ -36,6 +50,8 @@ Each module SHALL have one DbContext mapping only its own tables, in a PostgreSQ
 
 Migrating a database created by the pre-change migrations SHALL move every table into its module schema, preserving all rows.
 
+<!-- pdac:cite id="FR-INVOICE-007" digest="sha256:a385379cb621363063c9a6659eb650b01e228846b5e8bbdd17ed53b0901784f1" -->
+
 #### Scenario: Upgrade with data
 
 - **WHEN** a database with customers, projects, drafts, issued invoices, audit events and compliance records is migrated
@@ -45,6 +61,14 @@ Migrating a database created by the pre-change migrations SHALL move every table
 
 `UPDATE` and `DELETE` on issued invoices and audit events, and `DELETE` on compliance records, SHALL still be rejected by database triggers after the move.
 
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+
+<!-- pdac:cite id="FR-INVOICE-006" digest="sha256:fee328e3745e8275c00914dd830f3c7cbd3a1aec267f18ed117ef24ddb8e2466" -->
+
+<!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
+
+<!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
+
 #### Scenario: Mutation attempt after upgrade
 
 - **WHEN** a raw `UPDATE` targets a row of `invoicing.issued_invoices`
@@ -53,6 +77,8 @@ Migrating a database created by the pre-change migrations SHALL move every table
 ### Requirement: No cross-module foreign keys
 
 A module SHALL reference another module's records only by identifier, and SHALL validate the identifier through the owning module's contract at write time.
+
+<!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:b8bbb65b0f50ceeb882d7f30ec3219623b5f1242292f19240785f442960b755f" -->
 
 #### Scenario: Unknown customer
 

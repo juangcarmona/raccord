@@ -1,3 +1,5 @@
+<!-- pdac-scope: none reason="Repository engineering tooling and CI process; implements no product behaviour defined in docs/product/model." -->
+
 # license-policy Specification
 
 ## Purpose

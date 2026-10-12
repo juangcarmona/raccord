@@ -148,9 +148,11 @@ Role capabilities that `adopt` installed into `.agents/skills/`, which is the so
 Not installed, by decision:
 
 - `read-work-item-attachments`: issues carry their content inline.
-- `discover-related-docs`, `read-kb-page`, `sync-doc-to-kb` and `classify-doc-drift`: documentation lives in the repository, with no separate wiki or knowledge base.
+- `discover-related-docs`, `read-kb-page`, `search-kb`, `sync-doc-to-kb` and `classify-doc-drift`: documentation lives in the repository, with no separate wiki or knowledge base.
 - `commit-to-sprint` and `wip-query`: sprints and WIP limits are not used.
 - The plan-artifact contracts are provided by OpenSpec (see **Provided roles**).
+
+Known gap: `integrate` calls the shared `rebase-safely` skill and the `done-gate-auditor` agent. APM did not deploy either, because of a packaging gap in agent-toolkit (its package declares no commands or agents, and its shared skills target only `agent-skills`). Until that is fixed, the Owner rebases by hand and performs the Done-gate audit in review, and `integrate` must report the missing auditor instead of skipping it.
 
 The lifecycle package itself is installed with APM from `apm.yml` (`juangcarmona/agent-toolkit/packages/agentic-sdlc`, pinned to a commit in `apm.lock.yaml`), targeting Claude Code and Codex. `apm_modules/` is gitignored, and the projected skills are committed.
 

@@ -1,4 +1,7 @@
 using System.Text;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Commercial;
@@ -10,8 +13,12 @@ namespace Raccord.Infrastructure.Persistence;
 
 /// <summary>The PostgreSQL system of record.</summary>
 public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
-    : DbContext(options)
+    : IdentityDbContext<RaccordUser, IdentityRole<Guid>, Guid>(options),
+        IDataProtectionKeyContext
 {
+    /// <summary>Database-backed data-protection keys used to keep sessions across restarts.</summary>
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
+
     internal DbSet<CustomerRow> Customers => Set<CustomerRow>();
     internal DbSet<ContactPersonRow> ContactPersons => Set<ContactPersonRow>();
 
@@ -53,11 +60,21 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     internal DbSet<WorkdayEventRow> WorkdayEvents => Set<WorkdayEventRow>();
 
     /// <inheritdoc />
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        ArgumentNullException.ThrowIfNull(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaccordDbContext).Assembly);
-        ApplySnakeCaseNames(modelBuilder);
+        ArgumentNullException.ThrowIfNull(builder);
+        base.OnModelCreating(builder);
+        builder.HasDefaultSchema("workspace");
+        builder.Entity<RaccordUser>().ToTable("users");
+        builder.Entity<IdentityRole<Guid>>().ToTable("roles");
+        builder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
+        builder.Entity<IdentityUserRole<Guid>>().ToTable("user_roles");
+        builder.Entity<IdentityUserLogin<Guid>>().ToTable("user_logins");
+        builder.Entity<IdentityUserToken<Guid>>().ToTable("user_tokens");
+        builder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
+        builder.Entity<DataProtectionKey>().ToTable("data_protection_keys");
+        builder.ApplyConfigurationsFromAssembly(typeof(RaccordDbContext).Assembly);
+        ApplySnakeCaseNames(builder);
     }
 
     private static void ApplySnakeCaseNames(ModelBuilder modelBuilder)

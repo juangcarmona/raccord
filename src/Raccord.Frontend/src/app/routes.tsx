@@ -16,6 +16,7 @@ import { ContactPage } from "../features/contacts/ContactPage";
 import { NewContactPage } from "../features/contacts/NewContactPage";
 
 export const routes: RouteObject[] = [
+    { path: "sign-in", element: <SignInPage /> },
     {
         element: <AppShell />,
         children: [

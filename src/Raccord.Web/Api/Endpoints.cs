@@ -26,9 +26,16 @@ namespace Raccord.Web.Api;
 /// <summary>The public HTTP API. Endpoints only translate HTTP to use cases; they hold no business logic.</summary>
 internal static class Endpoints
 {
-    public static IEndpointRouteBuilder MapRaccordApi(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapRaccordApi(
+        this IEndpointRouteBuilder app,
+        bool requireAuthorization = true
+    )
     {
         var api = app.MapGroup("/api");
+        if (requireAuthorization)
+        {
+            api.RequireAuthorization();
+        }
         MapOrganization(api);
         MapCustomers(api);
         MapContacts(api);

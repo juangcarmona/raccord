@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="../Raccord.Modules.Workspace.Contracts/Raccord.Modules.Workspace.Contracts.csproj" />
+        <ProjectReference Include="../../../Raccord.Contracts/Raccord.Contracts.csproj" />
+        <ProjectReference Include="../../../shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="Raccord.Domain.Tests" />
+    </ItemGroup>
+</Project>

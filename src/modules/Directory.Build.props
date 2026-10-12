@@ -1,0 +1,31 @@
+<Project>
+    <PropertyGroup>
+        <RaccordModule>true</RaccordModule>
+        <RaccordArchitectureAnalyzerProject>$(MSBuildThisFileDirectory)..\shared\Raccord.ArchitectureAnalyzers\Raccord.ArchitectureAnalyzers.csproj</RaccordArchitectureAnalyzerProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference
+            Include="$(RaccordArchitectureAnalyzerProject)"
+            OutputItemType="Analyzer"
+            ReferenceOutputAssembly="false"
+            PrivateAssets="all"
+        />
+    </ItemGroup>
+
+    <Target Name="ValidateModuleReferences" BeforeTargets="BeforeBuild">
+        <ItemGroup>
+            <ForbiddenModuleReference
+                Include="@(ProjectReference)"
+                Condition="
+                    $([System.String]::Copy('%(ProjectReference.Identity)').Contains('Raccord.Modules.'))
+                    and !$([System.String]::Copy('%(ProjectReference.Identity)').Contains('.Contracts'))
+                "
+            />
+        </ItemGroup>
+        <Error
+            Condition="'@(ForbiddenModuleReference)' != ''"
+            Text="RACC100: module '$(MSBuildProjectName)' cannot reference module implementation '%(ForbiddenModuleReference.Identity)'; reference its .Contracts project instead."
+        />
+    </Target>
+</Project>

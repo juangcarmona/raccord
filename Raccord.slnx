@@ -10,12 +10,16 @@
         <Project Path="src/shared/Raccord.BuildingBlocks/Raccord.BuildingBlocks.csproj" />
         <Project Path="src/shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
     </Folder>
+    <Folder Name="/src/shared/">
+        <Project Path="src/shared/Raccord.ArchitectureAnalyzers/Raccord.ArchitectureAnalyzers.csproj" />
+    </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/Raccord.Architecture.Tests/Raccord.Architecture.Tests.csproj" />
         <Project Path="tests/Raccord.Domain.Tests/Raccord.Domain.Tests.csproj" />
         <Project Path="tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj" />
         <Project Path="tests/Raccord.Infrastructure.Tests/Raccord.Infrastructure.Tests.csproj" />
         <Project Path="tests/Raccord.Web.Tests/Raccord.Web.Tests.csproj" />
+        <Project Path="tests/Raccord.ArchitectureAnalyzers.Tests/Raccord.ArchitectureAnalyzers.Tests.csproj" />
         <Project Path="tests/Raccord.BuildingBlocks.Tests/Raccord.BuildingBlocks.Tests.csproj" />
     </Folder>
 </Solution>

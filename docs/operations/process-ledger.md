@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Organization-authoritative invoice dates
+
+- Observation: The draft screen derived a legal invoice date from the browser clock even though the API owns the organization-timezone default.
+- Action: Keep the date field blank until the user chooses a value and send `null` otherwise, allowing the server to apply its authoritative default.
+- Check: Test an explicit date and a browser/org midnight boundary; retain server-side numbering and date-order validation as the final authority.
+
 ## 2026-10-13 · Focused route behavior tests
 
 - Observation: Untested route components left loading, empty and mutation regressions invisible despite broad end-to-end coverage.

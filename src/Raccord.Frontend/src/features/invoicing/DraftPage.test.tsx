@@ -46,6 +46,7 @@ const routes = [
 describe("DraftPage", () => {
     afterEach(() => {
         vi.unstubAllGlobals();
+        vi.useRealTimers();
     });
 
     it("shows server totals and explains, in the user language, why the draft cannot be issued", async () => {
@@ -84,6 +85,24 @@ describe("DraftPage", () => {
             expect(router.state.location.pathname).toBe("/invoices/i1");
         });
         expect(requests.find((request) => request.method === "POST")?.body).toEqual({ issueDate: "2026-10-06" });
+    });
+
+    it("leaves the issue date to the organization clock when the browser is on the other side of midnight", async () => {
+        vi.setSystemTime(new Date("2026-10-07T00:30:00+14:00"));
+        const requests = stubApi({
+            "GET /api/invoice-drafts/d1": () => json(draft),
+            "POST /api/invoice-drafts/d1/finalize": () => json({ id: "i1", number: "F2026-00001" }, 201),
+        });
+        const router = renderAt("/drafts/d1", routes);
+        const user = userEvent.setup();
+
+        await screen.findByLabelText("Fecha de expedición");
+        await user.click(screen.getByRole("button", { name: "Emitir factura" }));
+
+        await waitFor(() => {
+            expect(router.state.location.pathname).toBe("/invoices/i1");
+        });
+        expect(requests.find((request) => request.method === "POST")?.body).toEqual({ issueDate: null });
     });
 
     it("shows every issue returned when finalization is refused", async () => {

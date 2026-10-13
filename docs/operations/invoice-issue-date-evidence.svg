@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Organization-authoritative invoice issue date</title>
+  <desc id="desc">The untouched date delegates to the organization clock, while an explicit date is preserved.</desc>
+  <rect width="960" height="420" rx="24" fill="#f7f5ef"/>
+  <text x="48" y="64" fill="#17211b" font-family="system-ui, sans-serif" font-size="30" font-weight="700">Invoice issue date</text>
+  <text x="48" y="98" fill="#526057" font-family="system-ui, sans-serif" font-size="17">The browser no longer decides the legal default.</text>
+  <rect x="48" y="142" width="408" height="210" rx="18" fill="#e5f2e8" stroke="#91b79c" stroke-width="2"/>
+  <text x="78" y="188" fill="#1d5b35" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Untouched field</text>
+  <text x="78" y="236" fill="#17211b" font-family="ui-monospace, monospace" font-size="19">issueDate: null</text>
+  <text x="78" y="278" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Server applies organization today</text>
+  <text x="78" y="308" fill="#526057" font-family="system-ui, sans-serif" font-size="17">across timezone boundaries</text>
+  <rect x="504" y="142" width="408" height="210" rx="18" fill="#fff0d5" stroke="#d8ad62" stroke-width="2"/>
+  <text x="534" y="188" fill="#805817" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Explicit selection</text>
+  <text x="534" y="236" fill="#17211b" font-family="ui-monospace, monospace" font-size="19">issueDate: 2026-10-06</text>
+  <text x="534" y="278" fill="#526057" font-family="system-ui, sans-serif" font-size="17">User choice is preserved</text>
+  <text x="534" y="308" fill="#526057" font-family="system-ui, sans-serif" font-size="17">and validated by the server</text>
+</svg>

@@ -6,11 +6,13 @@ Licensed under AGPLv3 (see [COPYRIGHT.md](COPYRIGHT.md) for the brand boundary).
 
 ## Status
 
-Greenfield, first vertical slice implemented:
+Active MVP delivery, with the first operational and commercial slices implemented:
 
-The slice runs: project → billable lines → invoice draft → validation → finalization → immutable issued representation → PDF → audit event → compliance record.
+The delivered path runs from workspace setup and authenticated users through customers, projects, priced work, quote generation/review/acceptance/download, invoice drafts, validation, finalization, immutable issued representations, PDF, audit events and the compliance record seam.
 
-Not yet implemented: authentication (do not expose installations publicly), rectifying invoices, payments, VERI*FACTU submission (a seam exists; see [compliance seam](docs/architecture/compliance-seam.md)). Raccord makes **no legal compliance claim**.
+Authentication and authorization are implemented on the current `main` line with local ASP.NET Core Identity cookie sessions, first-administrator setup, role permissions and invitations; optional external identity sign-in is also available. Remaining product epics include quote document delivery/templates, payments, warehouse operations, staffing, backups/export, external integrations and VERI*FACTU submission (a seam exists; see [compliance seam](docs/architecture/compliance-seam.md)). Raccord makes **no legal compliance claim**.
+
+Built in roughly one week with Codex, Git worktrees and the GitHub CLI, using OpenSpec/ProductShape traceability, .NET/Aspire, EF Core/PostgreSQL, React/TypeScript, Playwright, Docker and GitHub Actions—turning each small, evidenced change into a green, merged vertical slice.
 
 ## Quick start (Docker Compose)
 

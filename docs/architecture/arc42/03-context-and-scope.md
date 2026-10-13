@@ -34,4 +34,4 @@ Raccord.Web migrate ───────► PostgreSQL (one-shot job)
 
 **In scope now:** issuer profile, customers, projects and billable lines, drafts, validation, finalization, numbering, issued representation, PDF, audit, compliance record, deployment (Compose, Aspire, Azure), CI.
 
-**Out of scope now:** authentication, warehouse, crew, quotes, payments, e-mail, VERI*FACTU submission, B2B exchange, general-ledger accounting.
+**Out of scope now:** role-based authorization, warehouse, crew, quotes, payments, e-mail, VERI*FACTU submission, B2B exchange, general-ledger accounting.

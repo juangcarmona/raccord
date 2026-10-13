@@ -7,6 +7,7 @@ Guardrails for contributors and coding agents. Rules marked **(enforced)** fail 
 - .NET Aspire for local orchestration and service discovery.
 - C# Minimal APIs for HTTP endpoints; the root host exposes module endpoints and maps errors at the module boundary (`src/root/Raccord.Web`).
 - React for the user interface; it consumes only the generated OpenAPI contract **(enforced: contract drift check)**.
+- The frontend composes `AuthProvider` and `RequireAuth` in `src/main.tsx` and `src/app/routes.tsx`; feature routes must not bypass the authenticated application boundary.
 - Modular monolith. No distributed services without an ADR and a measured reason.
 - Feature/domain modules with explicit, small public interfaces. Endpoints never reach persistence directly.
 

@@ -26,5 +26,6 @@ Quality
 | Q-8 | A developer references EF Core from Domain | Architecture tests fail | `DependencyRulesTests` (verified by injection) |
 | Q-9 | An installation moves from local files to Azure Blob | Configuration change only (`Storage:Provider`) | Aspire run with Azurite |
 | Q-10 | Repository is scanned for secrets | No credentials; `.env` ignored; Azure secrets in Key Vault | Review; CI vulnerability checks |
+| Q-11 | An anonymous request reaches a protected API | 401 without a session; sign-in establishes a cookie session; health remains probeable | `AuthenticationJourney` and web authorization tests |
 
 Also tenant-related scenarios from the initial draft are reframed by ADR-0012: isolation between companies is per deployment.

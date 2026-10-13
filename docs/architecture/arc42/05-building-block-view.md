@@ -48,12 +48,14 @@ Raccord.Web ─────────► module implementations ─► module 
 | `IDocumentStore` | `FileSystemDocumentStore`, `AzureBlobDocumentStore` | `Storage:Provider` |
 | `IComplianceRecorder` | `PendingComplianceRecorder` | See compliance seam |
 | `IClock` | `SystemClock` | UTC now; "today" in `Raccord:TimeZone` |
-| `ICurrentUser` | `HttpCurrentActor` (Web) | `unauthenticated` until sign-in exists |
+| `ICurrentUser` | `HttpCurrentActor` (Web) | Authenticated cookie identity, or `unauthenticated` in the explicit test bypass |
 
 ## Level 2 — frontend
 
 ```text
-src/app        shell, routes, not-found
-src/features   projects | customers | invoicing | organization
+src/app        shell, routes, not-found, authenticated route boundary
+src/features   auth | projects | customers | invoicing | organization
 src/shared     api (generated schema + typed client) | i18n | format | hooks | ui
 ```
+
+The frontend entry point (`src/main.tsx`) composes `AuthProvider` around the router. `RequireAuth` protects the application shell and feature routes; the sign-in feature remains public.

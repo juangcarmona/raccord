@@ -1,6 +1,6 @@
 # arc42 architecture
 
-This folder follows the arc42 structure and describes the system as implemented on 2026-10-06 (first vertical slice) plus the planned direction.
+This folder follows the arc42 structure and describes the system as implemented on 2026-10-13 plus the planned direction.
 
 - [01 Introduction and goals](01-introduction-and-goals.md)
 - [02 Constraints](02-constraints.md)

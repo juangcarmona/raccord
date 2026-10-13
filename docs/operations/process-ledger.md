@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Architecture documentation evidence
+
+- Observation: Authentication and frontend route protection had shipped, but arc42 still described the system as unauthenticated and omitted the auth feature slice.
+- Action: Review architecture sections against source/configuration before each epic handoff; document only implemented boundaries and leave future role permissions as explicit risk/debt.
+- Check: Architecture documentation review verifies source paths, runtime authorization behavior, ADR links, Markdown lint and CI evidence before merge.
+
 ## 2026-10-13 · Organization-authoritative invoice dates
 
 - Observation: The draft screen derived a legal invoice date from the browser clock even though the API owns the organization-timezone default.

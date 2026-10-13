@@ -58,6 +58,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Keep IDocumentStore provider-agnostic, cap image size/type at the API boundary, and persist only the object key.
 - Check: Web/OpenAPI and storage-backed tests plus CI validate the upload path.
 
+## 2026-10-13 · Equipment kits
+
+- Observation: Kit content is a relationship slice that can be useful before stock derivation and planning rules exist.
+- Action: Persist explicit kind/content lines, validate positive quantities and existing non-self references, and defer stock calculations to the planning slice.
+- Check: Kit migration, API contract generation, and CI architecture tests pass before adding import behavior.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

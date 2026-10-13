@@ -100,6 +100,18 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         equipment.MapPost("/items/{id:guid}/image", SaveEquipmentImageAsync);
+        equipment.MapPut(
+            "/items/{id:guid}/kit",
+            async Task<Results<Ok<EquipmentItemSnapshot>, NotFound>> (
+                Guid id,
+                ConfigureEquipmentKitRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.ConfigureKitAsync(id, request, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static async Task<

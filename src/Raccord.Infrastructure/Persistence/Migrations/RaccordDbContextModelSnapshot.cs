@@ -414,6 +414,15 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_planned");
 
+                    b.Property<string>("KitContent")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("kit_content");
+
+                    b.Property<int>("KitKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("kit_kind");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)

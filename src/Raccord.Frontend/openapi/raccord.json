@@ -191,6 +191,43 @@
         }
       }
     },
+    "/api/customers/import": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactImportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/customers/{id}/contact-persons": {
       "get": {
         "tags": [
@@ -893,6 +930,64 @@
         },
         "description": "A billable line."
       },
+      "ContactImportResponse": {
+        "required": [
+          "importedCount",
+          "rejectedCount",
+          "rows"
+        ],
+        "type": "object",
+        "properties": {
+          "importedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactImportRowResponse"
+            }
+          }
+        }
+      },
+      "ContactImportRowResponse": {
+        "required": [
+          "row",
+          "imported",
+          "error",
+          "contact"
+        ],
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imported": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contact": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CustomerResponse"
+              }
+            ]
+          }
+        }
+      },
       "ContactPersonResponse": {
         "required": [
           "id",
@@ -1113,6 +1208,10 @@
           }
         },
         "description": "Finalizes a draft."
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
       },
       "InvoiceDraftResponse": {
         "required": [

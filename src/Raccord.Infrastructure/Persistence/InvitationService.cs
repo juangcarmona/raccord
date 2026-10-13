@@ -62,6 +62,18 @@ public sealed class InvitationService(
             return JoinResult.ExistingUser;
         }
 
+        var strategy = db.Database.CreateExecutionStrategy();
+        return await strategy
+            .ExecuteAsync(() => JoinWithinTransactionAsync(invitation, password, cancellationToken))
+            .ConfigureAwait(false);
+    }
+
+    private async Task<JoinResult> JoinWithinTransactionAsync(
+        Invitation invitation,
+        string password,
+        CancellationToken cancellationToken
+    )
+    {
         await using var transaction = await db
             .Database.BeginTransactionAsync(cancellationToken)
             .ConfigureAwait(false);

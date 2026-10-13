@@ -22,4 +22,3 @@ The system MUST keep at most one default contact person for each contact.
 
 - **WHEN** a new person is created as default
 - **THEN** the previous default is cleared
-

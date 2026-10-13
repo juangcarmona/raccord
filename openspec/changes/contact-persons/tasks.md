@@ -4,4 +4,3 @@
 - [x] Add contact-person persistence and one-default enforcement.
 - [x] Add list and create API endpoints.
 - [x] Add migration and web build coverage.
-

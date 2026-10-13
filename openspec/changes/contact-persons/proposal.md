@@ -5,4 +5,3 @@
 # Contact persons
 
 Add named contact persons to contacts, including a designation and optional communication details. A contact can have at most one default person; selecting a new default clears the previous one.
-

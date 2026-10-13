@@ -4,4 +4,3 @@
 # Design
 
 Contact persons are stored in a dedicated Contacts-owned table keyed by the contact identifier. A filtered unique index enforces one default person, while the service clears the previous default before saving a replacement.
-

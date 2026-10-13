@@ -18,6 +18,7 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
     internal DbSet<CustomerRow> Customers => Set<CustomerRow>();
+    internal DbSet<ContactPersonRow> ContactPersons => Set<ContactPersonRow>();
 
     internal DbSet<Project> Projects => Set<Project>();
 

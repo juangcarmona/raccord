@@ -9,7 +9,11 @@ public sealed record PartySnapshot(
     string? TaxId,
     PostalAddress? Address,
     string? Email,
-    Raccord.Contracts.Contacts.ContactType Type = Raccord.Contracts.Contacts.ContactType.Customer
+    Raccord.Contracts.Contacts.ContactType Type = Raccord.Contracts.Contacts.ContactType.Customer,
+    decimal DefaultDiscountPercent = 0,
+    string? DefaultPaymentTerms = null,
+    IReadOnlyList<string>? Tags = null,
+    string? Folder = null
 )
 {
     /// <summary>The party data required by an invoice.</summary>

@@ -329,7 +329,10 @@ export interface paths {
         };
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    tag?: string;
+                    folder?: string;
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -415,6 +418,201 @@ export interface paths {
             };
         };
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/customers/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": {
+                        file: components["schemas"]["IFormFile"];
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactImportResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/customers/{id}/contact-persons": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactPersonResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateContactPersonRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactPersonResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/customers/{id}/taxonomy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactTaxonomyResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ContactTaxonomyRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactTaxonomyResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
         post?: never;
         delete?: never;
         options?: never;
@@ -1183,6 +1381,20 @@ export interface components {
              */
             invoiceId: null | string;
         };
+        ContactImportResponse: {
+            /** Format: int32 */
+            importedCount: number;
+            /** Format: int32 */
+            rejectedCount: number;
+            rows: components["schemas"]["ContactImportRowResponse"][];
+        };
+        ContactImportRowResponse: {
+            /** Format: int32 */
+            row: number;
+            imported: boolean;
+            error: null | string;
+            contact: null | components["schemas"]["CustomerResponse"];
+        };
         /** @description A page of contacts. */
         ContactPage: {
             /** @description Contacts in this page. */
@@ -1203,6 +1415,17 @@ export interface components {
              */
             totalCount: number;
         };
+        ContactPersonResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            customerId: string;
+            name: string;
+            role: string;
+            email: null | string;
+            phone: null | string;
+            isDefault: boolean;
+        };
         /** @description A contact in the contact database. */
         ContactResponse: {
             /**
@@ -1222,8 +1445,26 @@ export interface components {
             /** @description Whether legal details are complete. */
             isInvoiceable: boolean;
         };
+        ContactTaxonomyRequest: {
+            tags: string[];
+            folder: null | string;
+        };
+        ContactTaxonomyResponse: {
+            /** Format: uuid */
+            contactId: string;
+            tags: string[];
+            folder: null | string;
+        };
         /** @description Operational role of a contact. */
         ContactType: number;
+        CreateContactPersonRequest: {
+            name: string;
+            role: string;
+            email: null | string;
+            phone: null | string;
+            /** @default false */
+            isDefault: boolean;
+        };
         /** @description Creates an invoice draft from unbilled project lines. */
         CreateInvoiceDraftRequest: {
             /**
@@ -1275,6 +1516,13 @@ export interface components {
             email: null | string;
             /** @description Whether the legal details required on an invoice are complete. */
             isInvoiceable: boolean;
+            /**
+             * Format: double
+             * @description Discount copied into new projects.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied into new projects. */
+            defaultPaymentTerms: null | string;
         };
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
@@ -1284,6 +1532,8 @@ export interface components {
              */
             issueDate: null | string;
         };
+        /** Format: binary */
+        IFormFile: string;
         /** @description An invoice draft. */
         InvoiceDraftResponse: {
             /**
@@ -1568,6 +1818,13 @@ export interface components {
              * @description Last day of the job.
              */
             endDate: string;
+            /**
+             * Format: double
+             * @description Discount copied from the contact.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied from the contact. */
+            paymentTerms: null | string;
             /** @description ISO currency code. */
             currency: string;
             /** @description Billable work. */
@@ -1599,6 +1856,13 @@ export interface components {
              * @description Last day of the job.
              */
             endDate: string;
+            /**
+             * Format: double
+             * @description Discount copied from the contact.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied from the contact. */
+            paymentTerms: null | string;
             /**
              * Format: int32
              * @description Lines not yet in a draft or invoice.
@@ -1633,6 +1897,14 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+            /**
+             * Format: double
+             * @description Discount copied into new projects.
+             * @default 0
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied into new projects. */
+            defaultPaymentTerms?: null | string;
         };
         SetupRequest: {
             email: string;

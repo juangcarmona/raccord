@@ -54,7 +54,9 @@ public sealed class CustomerDirectory
             customer.TaxId,
             customer.BillingAddress.ToAddress(),
             customer.Email,
-            customer.Type
+            customer.Type,
+            request.DefaultDiscountPercent,
+            request.DefaultPaymentTerms
         );
         writer.Add(party);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
@@ -129,6 +131,84 @@ public sealed class CustomerDirectory
         );
     }
 
+    /// <summary>Imports valid CSV contact rows atomically and reports rejected rows.</summary>
+    public async Task<ContactImportResponse> ImportCsvAsync(
+        Stream content,
+        CancellationToken cancellationToken
+    )
+    {
+        using var reader = new StreamReader(content);
+        var header = await reader.ReadLineAsync(cancellationToken).ConfigureAwait(false);
+        if (!string.Equals(header, "legalName,taxId,email", StringComparison.OrdinalIgnoreCase))
+            return InvalidImport("Expected header legalName,taxId,email.");
+
+        var rows = await ReadImportRowsAsync(reader, cancellationToken).ConfigureAwait(false);
+
+        if (rows.Any(row => row.Error is not null))
+            return new ContactImportResponse(
+                0,
+                rows.Count,
+                rows.Select(row => new ContactImportRowResponse(row.Number, false, row.Error, null))
+                    .ToArray()
+            );
+
+        var imported = new List<ContactImportRowResponse>();
+        foreach (var row in rows)
+        {
+            var request = row.Request!;
+            var customer = Customer.Register(
+                request.LegalName,
+                ContactType.Customer,
+                request.TaxId,
+                null,
+                request.Email
+            );
+            var party = new PartySnapshot(
+                customer.Id,
+                customer.LegalName,
+                customer.TaxId,
+                null,
+                customer.Email,
+                customer.Type
+            );
+            writer.Add(party);
+            imported.Add(new ContactImportRowResponse(row.Number, true, null, ToResponse(party)));
+        }
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return new ContactImportResponse(imported.Count, 0, imported);
+    }
+
+    private static ContactImportResponse InvalidImport(string error) =>
+        new(0, 1, [new ContactImportRowResponse(1, false, error, null)]);
+
+    private static async Task<
+        List<(int Number, RegisterCustomerRequest? Request, string? Error)>
+    > ReadImportRowsAsync(StreamReader reader, CancellationToken cancellationToken)
+    {
+        var rows = new List<(int Number, RegisterCustomerRequest? Request, string? Error)>();
+        var number = 1;
+        while (await reader.ReadLineAsync(cancellationToken).ConfigureAwait(false) is { } line)
+        {
+            number++;
+            var fields = line.Split(',', StringSplitOptions.None);
+            rows.Add(
+                fields.Length != 3 || string.IsNullOrWhiteSpace(fields[0])
+                    ? (number, null, "Legal name is required and rows must have three columns.")
+                    : (
+                        number,
+                        new RegisterCustomerRequest(
+                            fields[0].Trim(),
+                            string.IsNullOrWhiteSpace(fields[1]) ? null : fields[1].Trim(),
+                            null,
+                            string.IsNullOrWhiteSpace(fields[2]) ? null : fields[2].Trim()
+                        ),
+                        null
+                    )
+            );
+        }
+        return rows;
+    }
+
     /// <summary>Reads a contact.</summary>
     public async Task<ContactResponse?> GetContactAsync(
         Guid id,
@@ -177,8 +257,32 @@ public sealed class CustomerDirectory
 
     /// <summary>Lists customers.</summary>
     public async Task<IReadOnlyList<CustomerResponse>> ListAsync(
-        CancellationToken cancellationToken
-    ) => [.. (await parties.ListAsync(cancellationToken).ConfigureAwait(false)).Select(ToResponse)];
+        CancellationToken cancellationToken,
+        string? tag = null,
+        string? folder = null
+    )
+    {
+        var customers = await parties.ListAsync(cancellationToken).ConfigureAwait(false);
+        return
+        [
+            .. customers
+                .Where(customer =>
+                    (
+                        tag is null
+                        || customer.Tags?.Contains(tag, StringComparer.OrdinalIgnoreCase) == true
+                    )
+                    && (
+                        folder is null
+                        || string.Equals(
+                            customer.Folder,
+                            folder,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                .Select(ToResponse),
+        ];
+    }
 
     /// <summary>Reads a customer.</summary>
     public async Task<CustomerResponse?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -202,7 +306,9 @@ public sealed class CustomerDirectory
                     party.Address.CountryCode
                 ),
             party.Email,
-            party.IsInvoiceable
+            party.IsInvoiceable,
+            party.DefaultDiscountPercent,
+            party.DefaultPaymentTerms
         );
 
     private static ContactResponse ToContactResponse(PartySnapshot party) =>

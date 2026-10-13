@@ -6,6 +6,7 @@ using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
@@ -76,8 +77,12 @@ internal static class Endpoints
         var customers = api.MapGroup("/customers").WithTags("Customers");
         customers.MapGet(
             "/",
-            async (CustomerDirectory directory, CancellationToken ct) =>
-                TypedResults.Ok(await directory.ListAsync(ct))
+            async (
+                string? tag,
+                string? folder,
+                CustomerDirectory directory,
+                CancellationToken ct
+            ) => TypedResults.Ok(await directory.ListAsync(ct, tag, folder))
         );
         customers.MapGet(
             "/{id:guid}",
@@ -100,6 +105,75 @@ internal static class Endpoints
             {
                 var customer = await directory.RegisterAsync(request, ct);
                 return TypedResults.Created($"/api/customers/{customer.Id}", customer);
+            }
+        );
+        MapCustomerImport(customers);
+        MapContactPersons(customers);
+        customers.MapGet("/{id:guid}/taxonomy", GetTaxonomyAsync);
+        customers.MapPut("/{id:guid}/taxonomy", SetTaxonomyAsync);
+    }
+
+    private static async Task<Results<Ok<ContactTaxonomyResponse>, NotFound>> GetTaxonomyAsync(
+        Guid id,
+        ContactTaxonomyService taxonomy,
+        CancellationToken ct
+    ) =>
+        await taxonomy.GetAsync(id, ct) is { } result
+            ? TypedResults.Ok(result)
+            : TypedResults.NotFound();
+
+    private static async Task<Results<Ok<ContactTaxonomyResponse>, NotFound>> SetTaxonomyAsync(
+        Guid id,
+        ContactTaxonomyRequest request,
+        ContactTaxonomyService taxonomy,
+        CancellationToken ct
+    ) =>
+        await taxonomy.SetAsync(id, request, ct) is { } result
+            ? TypedResults.Ok(result)
+            : TypedResults.NotFound();
+
+    private static void MapContactPersons(RouteGroupBuilder customers)
+    {
+        customers.MapGet(
+            "/{id:guid}/contact-persons",
+            async (Guid id, ContactPersonService persons, CancellationToken ct) =>
+                TypedResults.Ok(await persons.ListAsync(id, ct))
+        );
+        customers.MapPost(
+            "/{id:guid}/contact-persons",
+            async Task<Results<Created<ContactPersonResponse>, NotFound, BadRequest<string>>> (
+                Guid id,
+                CreateContactPersonRequest request,
+                ContactPersonService persons,
+                CancellationToken ct
+            ) =>
+            {
+                try
+                {
+                    var person = await persons.AddAsync(id, request, ct);
+                    return person is null
+                        ? TypedResults.NotFound()
+                        : TypedResults.Created(
+                            $"/api/customers/{id}/contact-persons/{person.Id}",
+                            person
+                        );
+                }
+                catch (ArgumentException exception)
+                {
+                    return TypedResults.BadRequest(exception.Message);
+                }
+            }
+        );
+    }
+
+    private static void MapCustomerImport(RouteGroupBuilder customers)
+    {
+        customers.MapPost(
+            "/import",
+            async (IFormFile file, CustomerDirectory directory, CancellationToken ct) =>
+            {
+                await using var stream = file.OpenReadStream();
+                return TypedResults.Ok(await directory.ImportCsvAsync(stream, ct));
             }
         );
     }

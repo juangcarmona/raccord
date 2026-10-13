@@ -215,6 +215,22 @@
         "tags": [
           "Customers"
         ],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -282,6 +298,201 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/customers/import": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactImportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/{id}/contact-persons": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactPersonResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactPersonRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactPersonResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/{id}/taxonomy": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactTaxonomyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactTaxonomyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactTaxonomyResponse"
                 }
               }
             }
@@ -1048,6 +1259,64 @@
         },
         "description": "A billable line."
       },
+      "ContactImportResponse": {
+        "required": [
+          "importedCount",
+          "rejectedCount",
+          "rows"
+        ],
+        "type": "object",
+        "properties": {
+          "importedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactImportRowResponse"
+            }
+          }
+        }
+      },
+      "ContactImportRowResponse": {
+        "required": [
+          "row",
+          "imported",
+          "error",
+          "contact"
+        ],
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imported": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contact": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CustomerResponse"
+              }
+            ]
+          }
+        }
+      },
       "ContactPage": {
         "required": [
           "items",
@@ -1081,6 +1350,49 @@
           }
         },
         "description": "A page of contacts."
+      },
+      "ContactPersonResponse": {
+        "required": [
+          "id",
+          "customerId",
+          "name",
+          "role",
+          "email",
+          "phone",
+          "isDefault"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
       },
       "ContactResponse": {
         "required": [
@@ -1139,9 +1451,89 @@
         },
         "description": "A contact in the contact database."
       },
+      "ContactTaxonomyRequest": {
+        "required": [
+          "tags",
+          "folder"
+        ],
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ContactTaxonomyResponse": {
+        "required": [
+          "contactId",
+          "tags",
+          "folder"
+        ],
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ContactType": {
         "type": "integer",
         "description": "Operational role of a contact."
+      },
+      "CreateContactPersonRequest": {
+        "required": [
+          "name",
+          "role",
+          "email",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean",
+            "default": false
+          }
+        }
       },
       "CreateInvoiceDraftRequest": {
         "required": [
@@ -1223,7 +1615,9 @@
           "taxId",
           "address",
           "email",
-          "isInvoiceable"
+          "isInvoiceable",
+          "defaultDiscountPercent",
+          "defaultPaymentTerms"
         ],
         "type": "object",
         "properties": {
@@ -1264,6 +1658,18 @@
           "isInvoiceable": {
             "type": "boolean",
             "description": "Whether the legal details required on an invoice are complete."
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied into new projects.",
+            "format": "double"
+          },
+          "defaultPaymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied into new projects."
           }
         },
         "description": "A customer."
@@ -1284,6 +1690,10 @@
           }
         },
         "description": "Finalizes a draft."
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
       },
       "InvoiceDraftResponse": {
         "required": [
@@ -1784,6 +2194,8 @@
           "customerName",
           "startDate",
           "endDate",
+          "defaultDiscountPercent",
+          "paymentTerms",
           "currency",
           "billableLines"
         ],
@@ -1817,6 +2229,18 @@
             "description": "Last day of the job.",
             "format": "date"
           },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied from the contact.",
+            "format": "double"
+          },
+          "paymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied from the contact."
+          },
           "currency": {
             "type": "string",
             "description": "ISO currency code."
@@ -1839,6 +2263,8 @@
           "customerName",
           "startDate",
           "endDate",
+          "defaultDiscountPercent",
+          "paymentTerms",
           "unbilledLineCount",
           "unbilledNetAmount",
           "currency"
@@ -1872,6 +2298,18 @@
             "type": "string",
             "description": "Last day of the job.",
             "format": "date"
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied from the contact.",
+            "format": "double"
+          },
+          "paymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied from the contact."
           },
           "unbilledLineCount": {
             "type": "integer",
@@ -1973,6 +2411,19 @@
               "string"
             ],
             "description": "Billing e-mail."
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied into new projects.",
+            "format": "double",
+            "default": 0
+          },
+          "defaultPaymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied into new projects."
           }
         },
         "description": "Registers a customer."

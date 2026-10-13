@@ -17,4 +17,8 @@ internal sealed class CustomerRow
     public AddressFields BillingAddress { get; set; } = new();
 
     public string? Email { get; set; }
+    public decimal DefaultDiscountPercent { get; set; }
+    public string? DefaultPaymentTerms { get; set; }
+    public string? Tags { get; set; }
+    public string? Folder { get; set; }
 }

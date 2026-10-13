@@ -35,6 +35,8 @@ public sealed record AddBillableLineRequest(
 /// <param name="CustomerName">Customer legal name.</param>
 /// <param name="StartDate">First day of the job.</param>
 /// <param name="EndDate">Last day of the job.</param>
+/// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
+/// <param name="PaymentTerms">Payment terms copied from the contact.</param>
 /// <param name="UnbilledLineCount">Lines not yet in a draft or invoice.</param>
 /// <param name="UnbilledNetAmount">Net amount of the unbilled lines.</param>
 /// <param name="Currency">ISO currency code.</param>
@@ -45,6 +47,8 @@ public sealed record ProjectSummaryResponse(
     string CustomerName,
     DateOnly StartDate,
     DateOnly EndDate,
+    decimal DefaultDiscountPercent,
+    string? PaymentTerms,
     int UnbilledLineCount,
     decimal UnbilledNetAmount,
     string Currency
@@ -57,6 +61,8 @@ public sealed record ProjectSummaryResponse(
 /// <param name="CustomerName">Customer legal name.</param>
 /// <param name="StartDate">First day of the job.</param>
 /// <param name="EndDate">Last day of the job.</param>
+/// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
+/// <param name="PaymentTerms">Payment terms copied from the contact.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
 public sealed record ProjectResponse(
@@ -66,6 +72,8 @@ public sealed record ProjectResponse(
     string CustomerName,
     DateOnly StartDate,
     DateOnly EndDate,
+    decimal DefaultDiscountPercent,
+    string? PaymentTerms,
     string Currency,
     IReadOnlyList<BillableLineResponse> BillableLines
 );

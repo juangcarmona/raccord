@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Modules.Contacts.Contracts;
 
@@ -33,6 +34,8 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             TaxId = party.TaxId,
             Type = party.Type,
             Email = party.Email,
+            DefaultDiscountPercent = party.DefaultDiscountPercent,
+            DefaultPaymentTerms = party.DefaultPaymentTerms,
         };
         row.BillingAddress.Set(party.Address);
         db.Customers.Add(row);
@@ -50,6 +53,8 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
         row.Type = party.Type;
         row.TaxId = party.TaxId;
         row.Email = party.Email;
+        row.DefaultDiscountPercent = party.DefaultDiscountPercent;
+        row.DefaultPaymentTerms = party.DefaultPaymentTerms;
         row.BillingAddress.Set(party.Address);
     }
 
@@ -66,7 +71,14 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             customer.TaxId,
             customer.BillingAddress.ToAddress(),
             customer.Email,
-            customer.Type
+            customer.Type,
+            customer.DefaultDiscountPercent,
+            customer.DefaultPaymentTerms,
+            ParseTags(customer.Tags),
+            customer.Folder
         );
     }
+
+    private static string[] ParseTags(string? tags) =>
+        string.IsNullOrWhiteSpace(tags) ? [] : JsonSerializer.Deserialize<string[]>(tags) ?? [];
 }

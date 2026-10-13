@@ -305,6 +305,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("customer_id");
 
+                    b.Property<decimal>("DefaultDiscountPercent")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)")
+                        .HasColumnName("default_discount_percent");
+
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date")
                         .HasColumnName("end_date");
@@ -314,6 +319,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("name");
+
+                    b.Property<string>("PaymentTerms")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("payment_terms");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date")
@@ -331,6 +341,54 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("projects", "projects");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("customer_id");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("phone");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("role");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_persons");
+
+                    b.HasIndex("CustomerId", "IsDefault")
+                        .IsUnique()
+                        .HasDatabaseName("ix_contact_persons_customer_id_is_default")
+                        .HasFilter("is_default");
+
+                    b.ToTable("contact_persons", (string)null);
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -338,16 +396,35 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<decimal>("DefaultDiscountPercent")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)")
+                        .HasColumnName("default_discount_percent");
+
+                    b.Property<string>("DefaultPaymentTerms")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("default_payment_terms");
+
                     b.Property<string>("Email")
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)")
                         .HasColumnName("email");
+
+                    b.Property<string>("Folder")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("folder");
 
                     b.Property<string>("LegalName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("legal_name");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("jsonb")
+                        .HasColumnName("tags");
 
                     b.Property<string>("TaxId")
                         .HasMaxLength(32)

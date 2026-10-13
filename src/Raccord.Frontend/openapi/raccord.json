@@ -2666,6 +2666,18 @@
             "type": "number",
             "description": "Net amount.",
             "format": "double"
+          },
+          "vatRegime": {
+            "type": "string",
+            "description": "Tax authority VAT regime key.",
+            "default": "standard"
+          },
+          "exemptionCause": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "VAT exemption cause, when applicable."
           }
         },
         "description": "A line of a draft or issued invoice."
@@ -3454,7 +3466,9 @@
         "required": [
           "rate",
           "taxableBase",
-          "vatAmount"
+          "vatAmount",
+          "vatRegime",
+          "exemptionCause"
         ],
         "type": "object",
         "properties": {
@@ -3472,9 +3486,20 @@
             "type": "number",
             "description": "VAT at this rate.",
             "format": "double"
+          },
+          "vatRegime": {
+            "type": "string",
+            "description": "Tax authority VAT regime key."
+          },
+          "exemptionCause": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "VAT exemption cause, when applicable."
           }
         },
-        "description": "Taxable base and VAT for one rate."
+        "description": "Taxable base and VAT for one regime and rate."
       }
     }
   },

@@ -46,6 +46,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Record the deployment boundary in ADR-0023 and retain an explicit no-compliance-claim guard until tax/legal review and official-specification verification are complete.
 - Check: Risk R-2, the compliance seam, and future VERI*FACTU PR descriptions link the ADR and preserve the legal-review gate.
 
+## 2026-10-13 · VAT treatment preservation
+
+- Observation: A VAT percentage alone cannot distinguish tax regimes or exemption causes required by a future authority record.
+- Action: Carry regime and cause through pricing, grouped totals, public contracts, and versioned issued representations; retain a legacy restore path for existing invoices.
+- Check: Domain tests keep equal-rate exemptions separate, representation tests cover the new schema, and CI checks generated contracts.
+
 ## 2026-10-13 · Contact CRUD and pagination
 
 - Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.

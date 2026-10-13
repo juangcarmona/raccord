@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">Frontend route behavior evidence</title>
+  <desc id="desc">A test evidence board showing customer, invoice and issuer route states covered by focused tests.</desc>
+  <rect width="1100" height="520" fill="#f5f7fa"/>
+  <text x="60" y="72" fill="#0b1020" font-family="system-ui" font-size="36" font-weight="700">Frontend route behavior</text>
+  <text x="60" y="108" fill="#667085" font-family="system-ui" font-size="18">Rendered UI tests keep high-value route states executable</text>
+  <g font-family="system-ui">
+    <rect x="60" y="150" width="300" height="270" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="88" y="198" fill="#0b1020" font-size="24" font-weight="700">Customers</text>
+    <text x="88" y="242" fill="#1d7a4f" font-size="18">✓ empty state</text>
+    <text x="88" y="278" fill="#1d7a4f" font-size="18">✓ create payload</text>
+    <text x="88" y="314" fill="#1d7a4f" font-size="18">✓ accessible action</text>
+    <rect x="400" y="150" width="300" height="270" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="428" y="198" fill="#0b1020" font-size="24" font-weight="700">Invoices</text>
+    <text x="428" y="242" fill="#1d7a4f" font-size="18">✓ populated row</text>
+    <text x="428" y="278" fill="#1d7a4f" font-size="18">✓ detail link</text>
+    <text x="428" y="314" fill="#1d7a4f" font-size="18">✓ empty state</text>
+    <rect x="740" y="150" width="300" height="270" rx="12" fill="#fff" stroke="#d0d5dd"/>
+    <text x="768" y="198" fill="#0b1020" font-size="24" font-weight="700">Issuer</text>
+    <text x="768" y="242" fill="#1d7a4f" font-size="18">✓ missing guidance</text>
+    <text x="768" y="278" fill="#1d7a4f" font-size="18">✓ accessible fields</text>
+    <text x="768" y="314" fill="#1d7a4f" font-size="18">✓ saved feedback</text>
+  </g>
+</svg>

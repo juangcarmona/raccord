@@ -8,6 +8,7 @@ using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 
 namespace Raccord.Web.Api;
@@ -91,6 +92,36 @@ internal static class Endpoints
             {
                 var customer = await directory.RegisterAsync(request, ct);
                 return TypedResults.Created($"/api/customers/{customer.Id}", customer);
+            }
+        );
+        customers.MapGet(
+            "/{id:guid}/contact-persons",
+            async (Guid id, ContactPersonService persons, CancellationToken ct) =>
+                TypedResults.Ok(await persons.ListAsync(id, ct))
+        );
+        customers.MapPost(
+            "/{id:guid}/contact-persons",
+            async Task<Results<Created<ContactPersonResponse>, NotFound, BadRequest<string>>> (
+                Guid id,
+                CreateContactPersonRequest request,
+                ContactPersonService persons,
+                CancellationToken ct
+            ) =>
+            {
+                try
+                {
+                    var person = await persons.AddAsync(id, request, ct);
+                    return person is null
+                        ? TypedResults.NotFound()
+                        : TypedResults.Created(
+                            $"/api/customers/{id}/contact-persons/{person.Id}",
+                            person
+                        );
+                }
+                catch (ArgumentException exception)
+                {
+                    return TypedResults.BadRequest(exception.Message);
+                }
             }
         );
     }

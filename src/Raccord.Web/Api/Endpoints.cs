@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Contracts.Auditing;
+using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
@@ -27,6 +28,7 @@ internal static class Endpoints
         }
         MapOrganization(api);
         MapCustomers(api);
+        MapContacts(api);
         MapProjects(api);
         MapInvoicing(api);
         api.MapGet(
@@ -99,6 +101,51 @@ internal static class Endpoints
                 var customer = await directory.RegisterAsync(request, ct);
                 return TypedResults.Created($"/api/customers/{customer.Id}", customer);
             }
+        );
+    }
+
+    private static void MapContacts(RouteGroupBuilder api)
+    {
+        var contacts = api.MapGroup("/contacts").WithTags("Contacts");
+        contacts.MapGet(
+            "/{id:guid}",
+            async Task<Results<Ok<ContactResponse>, NotFound>> (
+                Guid id,
+                CustomerDirectory directory,
+                CancellationToken ct
+            ) =>
+                await directory.GetContactAsync(id, ct) is { } contact
+                    ? TypedResults.Ok(contact)
+                    : TypedResults.NotFound()
+        );
+        contacts.MapGet(
+            "/",
+            async (int? page, int? pageSize, CustomerDirectory directory, CancellationToken ct) =>
+                TypedResults.Ok(await directory.ListContactsAsync(page ?? 1, pageSize ?? 20, ct))
+        );
+        contacts.MapPost(
+            "/",
+            async (
+                RegisterContactRequest request,
+                CustomerDirectory directory,
+                CancellationToken ct
+            ) =>
+            {
+                var contact = await directory.RegisterContactAsync(request, ct);
+                return TypedResults.Created($"/api/contacts/{contact.Id}", contact);
+            }
+        );
+        contacts.MapPut(
+            "/{id:guid}",
+            async Task<Results<Ok<ContactResponse>, NotFound>> (
+                Guid id,
+                UpdateContactRequest request,
+                CustomerDirectory directory,
+                CancellationToken ct
+            ) =>
+                await directory.UpdateContactAsync(id, request, ct) is { } contact
+                    ? TypedResults.Ok(contact)
+                    : TypedResults.NotFound()
         );
     }
 

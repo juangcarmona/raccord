@@ -34,6 +34,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-13 · Contact CRUD and pagination
+
+- Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.
+- Action: Reconcile issue state against child PRs and executable acceptance tests before closing an epic.
+- Check: Contact CRUD, pagination, generated contracts, and web coverage are present before the feature branch is promoted.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

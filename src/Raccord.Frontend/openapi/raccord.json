@@ -292,6 +292,144 @@
         }
       }
     },
+    "/api/contacts/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactPage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterContactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -909,6 +1047,101 @@
           }
         },
         "description": "A billable line."
+      },
+      "ContactPage": {
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactResponse"
+            },
+            "description": "Contacts in this page."
+          },
+          "page": {
+            "type": "integer",
+            "description": "One-based page number.",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Requested page size.",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total contacts.",
+            "format": "int32"
+          }
+        },
+        "description": "A page of contacts."
+      },
+      "ContactResponse": {
+        "required": [
+          "id",
+          "legalName",
+          "type",
+          "taxId",
+          "address",
+          "email",
+          "isInvoiceable"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Contact identifier.",
+            "format": "uuid"
+          },
+          "legalName": {
+            "type": "string",
+            "description": "Display or registered name."
+          },
+          "type": {
+            "description": "Operational role.",
+            "$ref": "#/components/schemas/ContactType"
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Tax identifier."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Postal address.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Contact e-mail."
+          },
+          "isInvoiceable": {
+            "type": "boolean",
+            "description": "Whether legal details are complete."
+          }
+        },
+        "description": "A contact in the contact database."
+      },
+      "ContactType": {
+        "type": "integer",
+        "description": "Operational role of a contact."
       },
       "CreateInvoiceDraftRequest": {
         "required": [
@@ -1657,6 +1890,52 @@
         },
         "description": "A project in a list."
       },
+      "RegisterContactRequest": {
+        "required": [
+          "legalName",
+          "type",
+          "taxId",
+          "address",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Display or registered name."
+          },
+          "type": {
+            "description": "Operational role.",
+            "$ref": "#/components/schemas/ContactType"
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Tax identifier."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Postal address.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Contact e-mail."
+          }
+        },
+        "description": "Creates a contact."
+      },
       "RegisterCustomerRequest": {
         "required": [
           "legalName",
@@ -1743,6 +2022,52 @@
           }
         }
       },
+      "UpdateContactRequest": {
+        "required": [
+          "legalName",
+          "type",
+          "taxId",
+          "address",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Display or registered name."
+          },
+          "type": {
+            "description": "Operational role.",
+            "$ref": "#/components/schemas/ContactType"
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Tax identifier."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Postal address.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Contact e-mail."
+          }
+        },
+        "description": "Changes a contact."
+      },
       "UpdateIssuerProfileRequest": {
         "required": [
           "legalName",
@@ -1827,6 +2152,9 @@
     },
     {
       "name": "Customers"
+    },
+    {
+      "name": "Contacts"
     },
     {
       "name": "Projects"

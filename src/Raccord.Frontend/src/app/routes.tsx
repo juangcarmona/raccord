@@ -13,6 +13,9 @@ import { AppShell } from "./AppShell";
 import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
 import { SetupPage } from "../features/auth/SetupPage";
+import { ContactsPage } from "../features/contacts/ContactsPage";
+import { ContactPage } from "../features/contacts/ContactPage";
+import { NewContactPage } from "../features/contacts/NewContactPage";
 
 export const routes: RouteObject[] = [
     { index: true, element: <Navigate to="/setup" replace /> },
@@ -26,6 +29,9 @@ export const routes: RouteObject[] = [
             { path: "projects/:id", element: <ProjectDetailPage /> },
             { path: "customers", element: <CustomersPage /> },
             { path: "customers/new", element: <NewCustomerPage /> },
+            { path: "contacts", element: <ContactsPage /> },
+            { path: "contacts/new", element: <NewContactPage /> },
+            { path: "contacts/:id", element: <ContactPage /> },
             { path: "drafts", element: <DraftsPage /> },
             { path: "drafts/:id", element: <DraftPage /> },
             { path: "invoices", element: <InvoicesPage /> },

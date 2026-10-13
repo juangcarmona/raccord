@@ -8,7 +8,8 @@ public sealed record PartySnapshot(
     string LegalName,
     string? TaxId,
     PostalAddress? Address,
-    string? Email
+    string? Email,
+    Raccord.Contracts.Contacts.ContactType Type = Raccord.Contracts.Contacts.ContactType.Customer
 )
 {
     /// <summary>The party data required by an invoice.</summary>

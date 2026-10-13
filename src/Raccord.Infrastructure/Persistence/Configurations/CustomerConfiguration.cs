@@ -11,6 +11,7 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<CustomerR
         builder.ToTable("customers", "contacts");
         builder.HasKey(customer => customer.Id);
         builder.Property(customer => customer.LegalName).HasMaxLength(200);
+        builder.Property(customer => customer.Type).HasConversion<string>().HasMaxLength(32);
         builder.Property(customer => customer.TaxId).HasMaxLength(32);
         builder.Property(customer => customer.Email).HasMaxLength(320);
         builder.ComplexProperty(customer => customer.BillingAddress, AddressMapping.Configure);

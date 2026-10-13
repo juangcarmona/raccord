@@ -1,3 +1,4 @@
+using Raccord.Contracts.Contacts;
 using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Infrastructure.Persistence;
@@ -8,6 +9,8 @@ internal sealed class CustomerRow
     public Guid Id { get; set; }
 
     public string LegalName { get; set; } = string.Empty;
+
+    public ContactType Type { get; set; } = ContactType.Customer;
 
     public string? TaxId { get; set; }
 

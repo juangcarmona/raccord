@@ -9,10 +9,10 @@ var documents = builder
     .RunAsEmulator(emulator => emulator.WithDataVolume("raccord-azurite-data"))
     .AddBlobs("documents");
 
-// One-shot schema migration plus fictional demo data; the API starts only after it completes.
+// One-shot schema migration; the API starts only after it completes.
 var migrations = builder
     .AddProject<Projects.Raccord_Web>("migrations")
-    .WithArgs("migrate", "--seed-demo")
+    .WithArgs("migrate")
     .WithReference(database)
     .WaitFor(database);
 

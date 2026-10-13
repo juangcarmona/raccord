@@ -33,3 +33,21 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 ## Review rule
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
+
+## 2026-10-12 · First-administrator setup
+
+- Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.
+- Action: Run a restore/build preflight in every newly-created worktree before diagnosing implementation failures.
+- Check: The first local verification command for a new worktree is `dotnet restore Raccord.slnx`, followed by the normal no-restore build.
+
+- Observation: Seeded demo data made it impossible for an AppHost journey to prove first-run setup.
+- Action: Keep demo seeding explicit and make the E2E AppHost boot empty; let the shared browser harness create the first administrator once and reuse that setup for later journeys.
+- Check: The E2E selection includes a first-run setup path and the boot journey asserts an empty installation rather than a seeded user or project.
+
+- Observation: Npgsql's retrying execution strategy rejects a manually opened EF transaction unless the complete setup unit is executed through that strategy.
+- Action: Wrap transactional first-run setup in `CreateExecutionStrategy().ExecuteAsync(...)` so retries preserve the atomic role/user operation.
+- Check: The web setup test and the empty-AppHost E2E run must create the first administrator successfully against PostgreSQL.
+
+- Observation: AppHost journeys share a database, so a boot journey cannot safely assert an empty global collection after another journey creates data.
+- Action: Assert that the boot page and its API-backed rendering work; reserve empty-state assertions for isolated fixtures.
+- Check: E2E journeys remain order-independent and the boot journey does not depend on another journey's database state.

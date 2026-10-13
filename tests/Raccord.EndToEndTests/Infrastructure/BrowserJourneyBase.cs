@@ -41,6 +41,20 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         try
         {
+            await page.GotoAsync("/setup");
+            await page.WaitForFunctionAsync(
+                "() => location.pathname === '/sign-in' || document.querySelector('button[type=submit]') !== null"
+            );
+            if (page.Url.EndsWith("/setup", StringComparison.Ordinal))
+            {
+                await page.GetByLabel("Email").FillAsync("admin@example.com");
+                await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Create administrator" })
+                    .ClickAsync();
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/sign-in", StringComparison.Ordinal)
+                );
+            }
             if (signIn)
             {
                 await page.GotoAsync("/sign-in");
@@ -85,6 +99,33 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         await page.WaitForURLAsync(url => url.EndsWith("/customers", StringComparison.Ordinal));
         await page.GetByText($"Productora E2E {RunStamp}").First.WaitForAsync();
+    }
+
+    protected static async Task EnsureInvoiceIssuerAsync(IPage page)
+    {
+        var response = await page.APIRequest.PutAsync(
+            "/api/organization/issuer",
+            new APIRequestContextOptions
+            {
+                DataObject = new
+                {
+                    legalName = "Raccord E2E S.L.",
+                    taxId = "B00000000",
+                    address = new
+                    {
+                        street = "Calle de pruebas 1",
+                        postalCode = "28001",
+                        city = "Madrid",
+                        province = "Madrid",
+                        countryCode = "ES",
+                    },
+                },
+            }
+        );
+        if (!response.Ok)
+        {
+            throw new InvalidOperationException(await response.TextAsync());
+        }
     }
 
     /// <summary>

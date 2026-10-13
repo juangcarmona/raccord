@@ -705,13 +705,7 @@ export interface paths {
                 };
                 cookie?: never;
             };
-            requestBody: {
-                content: {
-                    "multipart/form-data": {
-                        file: components["schemas"]["IFormFile"];
-                    };
-                };
-            };
+            requestBody?: never;
             responses: {
                 /** @description OK */
                 200: {
@@ -720,6 +714,15 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["EquipmentItemSnapshot"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
                     };
                 };
                 /** @description Not Found */

@@ -263,6 +263,77 @@
         }
       }
     },
+    "/api/invitations": {
+      "post": {
+        "tags": [
+          "Invitations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationCreated"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invitations/{token}/accept": {
+      "post": {
+        "tags": [
+          "Invitations"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JoinRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/organization/issuer": {
       "get": {
         "tags": [
@@ -1220,6 +1291,37 @@
         },
         "description": "Finalizes a draft."
       },
+      "InvitationCreated": {
+        "required": [
+          "token",
+          "expiresAt"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InvitationRequest": {
+        "required": [
+          "email",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
       "InvoiceDraftResponse": {
         "required": [
           "id",
@@ -1642,6 +1744,17 @@
         },
         "description": "The legal issuer of invoices."
       },
+      "JoinRequest": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        }
+      },
       "PartyResponse": {
         "required": [
           "legalName",
@@ -2034,6 +2147,9 @@
     },
     {
       "name": "Roles"
+    },
+    {
+      "name": "Invitations"
     },
     {
       "name": "Organization"

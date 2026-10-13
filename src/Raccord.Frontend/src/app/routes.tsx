@@ -14,11 +14,14 @@ import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
 import { SetupPage } from "../features/auth/SetupPage";
 import { RolesPage } from "../features/organization/RolesPage";
+import { InvitationsPage } from "../features/organization/InvitationsPage";
+import { JoinPage } from "../features/auth/JoinPage";
 
 export const routes: RouteObject[] = [
     { index: true, element: <Navigate to="/setup" replace /> },
     { path: "setup", element: <SetupPage /> },
     { path: "sign-in", element: <SignInPage /> },
+    { path: "join/:token", element: <JoinPage /> },
     {
         element: <AppShell />,
         children: [
@@ -33,6 +36,7 @@ export const routes: RouteObject[] = [
             { path: "invoices/:id", element: <InvoicePage /> },
             { path: "settings/issuer", element: <IssuerSettingsPage /> },
             { path: "settings/roles", element: <RolesPage /> },
+            { path: "settings/invitations", element: <InvitationsPage /> },
             { path: "*", element: <NotFoundPage /> },
         ],
     },

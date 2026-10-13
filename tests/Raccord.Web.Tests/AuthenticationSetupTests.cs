@@ -53,12 +53,36 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         );
         custom.StatusCode.ShouldBe(HttpStatusCode.Created);
 
+        var invitation = await client.PostAsJsonAsync(
+            "/api/invitations",
+            new InvitationRequest("crew@example.com", "Crew")
+        );
+        invitation.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var invitationDetails = (await invitation.Content.ReadFromJsonAsync<InvitationResponse>())!;
+        var joined = await client.PostAsJsonAsync(
+            $"/api/invitations/{invitationDetails.Token}/accept",
+            new JoinRequest("CrewMember123!@#")
+        );
+        joined.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+        var replay = await client.PostAsJsonAsync(
+            $"/api/invitations/{invitationDetails.Token}/accept",
+            new JoinRequest("CrewMember123!@#")
+        );
+        replay.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
+        (
+            await api.QueryScalarAsync<long>(
+                "select count(*) from workspace.user_roles ur join workspace.roles r on r.id = ur.role_id where r.name = 'Crew'"
+            )
+        ).ShouldBe(1);
+
         var second = await client.PostAsJsonAsync(
             "/api/setup",
             new SetupRequest("second-admin@example.com", "SecondAdmin123!@#")
         );
         second.StatusCode.ShouldBe(HttpStatusCode.Conflict);
-        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
     }
 
     private sealed record SetupRequest(string Email, string Password);
@@ -73,4 +97,10 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     );
 
     private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
+
+    private sealed record InvitationRequest(string Email, string Role);
+
+    private sealed record InvitationResponse(string Token, DateTimeOffset ExpiresAt);
+
+    private sealed record JoinRequest(string Password);
 }

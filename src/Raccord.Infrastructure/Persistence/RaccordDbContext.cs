@@ -35,6 +35,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<ComplianceRecordRow> ComplianceRecords => Set<ComplianceRecordRow>();
 
+    internal DbSet<Invitation> Invitations => Set<Invitation>();
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)
     {

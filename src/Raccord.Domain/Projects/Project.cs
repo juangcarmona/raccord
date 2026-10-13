@@ -112,6 +112,19 @@ public sealed class Project
         return line;
     }
 
+    /// <summary>Books a packed line out of the warehouse.</summary>
+    public PackingLine BookOut(Guid lineId, string actor, DateTimeOffset bookedOutAt)
+    {
+        var line =
+            packingLines.Find(candidate => candidate.Id == lineId)
+            ?? throw new BusinessRuleViolationException(
+                "projects.packing-line-not-found",
+                "The packing line does not belong to this project."
+            );
+        line.BookOut(actor, bookedOutAt);
+        return line;
+    }
+
     /// <summary>Plans equipment for a period within the project period.</summary>
     public PlannedEquipmentLine PlanEquipment(
         Guid equipmentId,

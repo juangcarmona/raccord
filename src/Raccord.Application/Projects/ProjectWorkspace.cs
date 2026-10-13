@@ -242,6 +242,22 @@ public sealed class ProjectWorkspace(
         return ToPackingResponse(line);
     }
 
+    /// <summary>Books a packed line out of the warehouse.</summary>
+    public async Task<PackingLineResponse?> BookOutAsync(
+        Guid projectId,
+        Guid lineId,
+        BookOutLineRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.BookOut(lineId, request.BookedOutBy, clock.UtcNow);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToPackingResponse(line);
+    }
+
     /// <summary>Changes a project's planning lifecycle status.</summary>
     public async Task<ProjectResponse?> SetStatusAsync(
         Guid id,
@@ -284,7 +300,17 @@ public sealed class ProjectWorkspace(
         );
 
     private static PackingLineResponse ToPackingResponse(PackingLine line) =>
-        new(line.Id, line.EquipmentId, line.Quantity, line.IsPacked, line.PackedBy, line.PackedAt);
+        new(
+            line.Id,
+            line.EquipmentId,
+            line.Quantity,
+            line.IsPacked,
+            line.PackedBy,
+            line.PackedAt,
+            line.IsBookedOut,
+            line.BookedOutBy,
+            line.BookedOutAt
+        );
 
     private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(
         Raccord.Domain.Projects.ProjectStatus status

@@ -1312,6 +1312,58 @@
         }
       }
     },
+    "/api/projects/{id}/packing-list/{lineId}/book-out": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookOutLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/status": {
       "put": {
         "tags": [
@@ -2098,6 +2150,17 @@
           }
         },
         "description": "A billable line."
+      },
+      "BookOutLineRequest": {
+        "required": [
+          "bookedOutBy"
+        ],
+        "type": "object",
+        "properties": {
+          "bookedOutBy": {
+            "type": "string"
+          }
+        }
       },
       "ConfigureEquipmentKitRequest": {
         "required": [
@@ -3409,6 +3472,23 @@
             ]
           },
           "packedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "isBookedOut": {
+            "type": "boolean",
+            "default": false
+          },
+          "bookedOutBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bookedOutAt": {
             "type": [
               "null",
               "string"

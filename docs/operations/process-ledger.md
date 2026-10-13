@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Warehouse booking-out slice
+
+- Observation: Dispatch must not be inferred from packing; it is a separate irreversible operational transition.
+- Action: Require packed state before booking out and retain independent actor/time metadata so later returns can reconcile against the dispatch event.
+- Check: Domain transition coverage, generated contracts, schema review, OpenSpec validation and the full CI/E2E matrix are required before merge.
+
 ## 2026-10-13 · Warehouse packing slice
 
 - Observation: Warehouse fulfillment needs an explicit preparation state before dispatch or stock movement, otherwise packing would silently mutate inventory.

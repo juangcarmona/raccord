@@ -49,10 +49,15 @@ public sealed record PackingLineResponse(
     int Quantity,
     bool IsPacked,
     string? PackedBy,
-    DateTimeOffset? PackedAt
+    DateTimeOffset? PackedAt,
+    bool IsBookedOut = false,
+    string? BookedOutBy = null,
+    DateTimeOffset? BookedOutAt = null
 );
 
 public sealed record PackLineRequest(string PackedBy);
+
+public sealed record BookOutLineRequest(string BookedOutBy);
 
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>

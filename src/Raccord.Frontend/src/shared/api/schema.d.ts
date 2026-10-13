@@ -35,6 +35,15 @@ export interface paths {
                         "application/json": components["schemas"]["CurrentUserResponse"];
                     };
                 };
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["UnauthorizedHttpResult"];
+                    };
+                };
             };
         };
         delete?: never;
@@ -1377,6 +1386,10 @@ export interface components {
             password: string;
             /** @default false */
             rememberMe: boolean;
+        };
+        UnauthorizedHttpResult: {
+            /** Format: int32 */
+            statusCode?: number;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

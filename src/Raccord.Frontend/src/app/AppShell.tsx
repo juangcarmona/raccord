@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useI18n } from "../shared/i18n/I18nProvider";
 import { locales, type Locale } from "../shared/i18n/messages";
+import { useAuth } from "../features/auth/AuthProvider";
+import { useNavigate } from "react-router";
 
 const navigation = [
     { to: "/projects", key: "nav.projects" },
@@ -16,6 +18,8 @@ export function AppShell() {
     const location = useLocation();
     const main = useRef<HTMLElement>(null);
     const firstRender = useRef(true);
+    const auth = useAuth();
+    const navigate = useNavigate();
 
     // Move focus to the new page heading after client-side navigation, as a full page load would.
     useEffect(() => {
@@ -66,6 +70,13 @@ export function AppShell() {
                                 ))}
                             </select>
                         </label>
+                        <span>{auth.user?.email}</span>
+                        <button
+                            type="button"
+                            onClick={() => void auth.signOut().then(() => navigate("/sign-in", { replace: true }))}
+                        >
+                            {t("auth.signOut")}
+                        </button>
                     </header>
                     <main id="main" ref={main} className="shell__main">
                         <Outlet />

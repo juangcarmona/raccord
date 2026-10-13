@@ -28,8 +28,23 @@ public sealed class AuthenticationJourney_Should_ProtectApi(DistributedAppFixtur
                     url.EndsWith("/projects", StringComparison.Ordinal)
                 );
 
+                Assert.Contains(
+                    "admin@example.com",
+                    await page.Locator("header").InnerTextAsync(),
+                    StringComparison.Ordinal
+                );
+
                 var authenticatedResponse = await page.GotoAsync("/api/projects");
                 Assert.Equal(200, authenticatedResponse!.Status);
+
+                await page.GetByRole(AriaRole.Button, new() { Name = "Sign out" }).ClickAsync();
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/sign-in", StringComparison.Ordinal)
+                );
+                await page.GotoAsync("/projects");
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/sign-in", StringComparison.Ordinal)
+                );
             },
             signIn: false
         );

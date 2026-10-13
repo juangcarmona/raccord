@@ -4,6 +4,7 @@ import { createMemoryRouter, RouterProvider } from "react-router";
 import { describe, expect, it } from "vitest";
 import { I18nProvider } from "../shared/i18n/I18nProvider";
 import { AppShell } from "./AppShell";
+import { AuthProvider } from "../features/auth/AuthProvider";
 
 describe("AppShell", () => {
     it("exposes the current section, skip link, and named locale selector", async () => {
@@ -19,7 +20,9 @@ describe("AppShell", () => {
 
         render(
             <I18nProvider locale="en">
-                <RouterProvider router={router} />
+                <AuthProvider>
+                    <RouterProvider router={router} />
+                </AuthProvider>
             </I18nProvider>,
         );
 

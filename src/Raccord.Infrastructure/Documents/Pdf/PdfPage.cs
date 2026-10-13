@@ -47,6 +47,15 @@ internal sealed class PdfPage
             )
         );
 
+    /// <summary>Fills a rectangle in the current fill colour.</summary>
+    public void FillRectangle(double x, double y, double width, double height, double gray = 0) =>
+        Write(
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"{Number(gray)} g {Number(x)} {Number(y)} {Number(width)} {Number(height)} re f 0 g\n"
+            )
+        );
+
     /// <summary>The content stream bytes.</summary>
     public byte[] ToArray() => content.WrittenSpan.ToArray();
 

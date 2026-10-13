@@ -52,6 +52,19 @@ public sealed class PdfInvoiceRendererTests
         text.Replace("\u0080", "€", StringComparison.Ordinal)
             .ShouldContain("(1.548,80 €)", Case.Sensitive);
         text.ShouldContain("(11/05/2026)", Case.Sensitive);
+        text.ShouldContain("(QR tributario:)", Case.Sensitive);
+        text.ShouldContain("(VERI*FACTU)", Case.Sensitive);
+    }
+
+    [Fact]
+    public void The_AEAT_payload_Should_use_the_required_parameter_order_and_encoding()
+    {
+        AeatQrPayload
+            .Build(SampleInvoices.Issue())
+            .ShouldBe(
+                "https://www2.agenciatributaria.gob.es/wlpl/TIKE-CONT/ValidarQR?"
+                    + "nif=B00000000&numserie=F2026-00001&fecha=11-05-2026&importe=1548.80"
+            );
     }
 
     [Fact]

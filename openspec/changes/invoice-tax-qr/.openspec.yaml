@@ -1,0 +1,3 @@
+name: invoice-tax-qr
+description: Add a deterministic AEAT tax QR and VERI*FACTU legend to issued invoice PDFs.
+status: proposed

@@ -1,4 +1,5 @@
 using System.Globalization;
+using QRCoder;
 using Raccord.Application.Documents;
 using Raccord.BuildingBlocks.Storage;
 using Raccord.Domain.Billing;
@@ -41,6 +42,7 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         var pages = new List<PdfPage>();
         var page = NewPage(pages);
         var y = DrawHeader(page, invoice);
+        DrawTaxQr(page, invoice);
         y = DrawTableHeader(page, y);
 
         foreach (var line in invoice.Lines)
@@ -118,6 +120,42 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         y = Math.Min(y, metaY) - 24;
         page.Text(Left, y, "Facturar a", 8, bold: true);
         return DrawParty(page, Left, y - 14, invoice.Recipient, 11) - 20;
+    }
+
+    private static void DrawTaxQr(PdfPage page, IssuedInvoice invoice)
+    {
+        const double size = 85;
+        const double left = 450;
+        const double bottom = 585;
+        const double module = 2.5;
+        const double quiet = 4;
+        page.Text(left, bottom + size + 13, "QR tributario:", BodySize, bold: true);
+        using var generator = new QRCodeGenerator();
+        using var data = generator.CreateQrCode(
+            AeatQrPayload.Build(invoice),
+            QRCodeGenerator.ECCLevel.M
+        );
+        var matrix = data.ModuleMatrix;
+        var scale = Math.Min((size - (quiet * 2)) / matrix.Count, module);
+        var actual = matrix.Count * scale;
+        var originX = left + ((size - actual) / 2);
+        var originY = bottom + ((size - actual) / 2);
+        page.FillRectangle(left, bottom, size, size, gray: 1);
+        page.FillRectangle(left + quiet, bottom + quiet, size - (quiet * 2), size - (quiet * 2));
+        for (var row = 0; row < matrix.Count; row++)
+        {
+            for (var column = 0; column < matrix[row].Count; column++)
+            {
+                if (matrix[row][column])
+                    page.FillRectangle(
+                        originX + (column * scale),
+                        originY + ((matrix.Count - row - 1) * scale),
+                        scale,
+                        scale
+                    );
+            }
+        }
+        page.Text(left, bottom - 12, "VERI*FACTU", BodySize, bold: true);
     }
 
     private static void DrawMeta(PdfPage page, ref double y, string label, string value)

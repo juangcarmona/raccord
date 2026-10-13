@@ -51,6 +51,12 @@ body {
     background: var(--surface);
     border: 1px solid var(--border);
 }
+.auth-form__mark {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+    border-radius: 0.75rem;
+}
 .auth-form label {
     display: grid;
     gap: 0.35rem;
@@ -99,11 +105,19 @@ body {
     color: var(--raccord-white);
 }
 .brand {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
     padding: 0 0.75rem 1.75rem;
     font-weight: 700;
     letter-spacing: 0.02em;
     font-size: 1.25rem;
+}
+.brand img {
+    width: 2.25rem;
+    height: 2.25rem;
+    object-fit: contain;
+    border-radius: 0.4rem;
 }
 .shell__sidebar nav ul {
     display: grid;

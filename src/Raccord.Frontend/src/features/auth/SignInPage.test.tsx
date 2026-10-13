@@ -24,6 +24,7 @@ describe("SignInPage", () => {
                 ),
             },
         ]);
+        expect(screen.getByRole("img", { name: "Raccord" })).toHaveAttribute("src", "/raccord-mark.svg");
         await userEvent.type(screen.getByLabelText("Correo electrónico"), "person@example.test");
         await userEvent.type(screen.getByLabelText("Contraseña"), "bad");
         const submit = screen.getByRole("button", { name: "Iniciar sesión" });

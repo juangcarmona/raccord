@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Raccord mark identity evidence</title>
+  <desc id="desc">A responsive identity preview showing the R mark beside Raccord in the dark shell and above the sign-in form on a light surface.</desc>
+  <rect width="1200" height="720" fill="#f5f7fa"/>
+  <rect x="40" y="40" width="1120" height="300" rx="16" fill="#fff" stroke="#d0d5dd"/>
+  <rect x="40" y="40" width="270" height="300" rx="16" fill="#0b1020"/>
+  <rect x="76" y="78" width="62" height="62" rx="10" fill="#10172d"/>
+  <path fill="#f6f7fa" d="M93 96h22c11 0 16 16 5 22l18 28h-13l-15-24h-5v24H93z"/>
+  <path fill="#0bddeb" d="M93 116h16l21 30h-13l-18-24h-6z"/>
+  <text x="154" y="118" fill="#fff" font-family="system-ui" font-size="28" font-weight="700">Raccord</text>
+  <text x="370" y="100" fill="#667085" font-family="system-ui" font-size="18">Authenticated shell · dark rail</text>
+  <text x="370" y="150" fill="#0b1020" font-family="system-ui" font-size="34" font-weight="700">Mark and word remain clear at desktop scale</text>
+  <rect x="40" y="380" width="1120" height="300" rx="16" fill="#fff" stroke="#d0d5dd"/>
+  <rect x="430" y="414" width="340" height="220" rx="8" fill="#f5f7fa" stroke="#d0d5dd"/>
+  <rect x="574" y="438" width="52" height="52" rx="8" fill="#10172d"/>
+  <path fill="#f6f7fa" d="M586 448h18c9 0 13 13 4 19l15 23h-11l-13-19h-4v19h-9z"/>
+  <path fill="#0bddeb" d="M586 465h13l18 25h-11l-15-20h-5z"/>
+  <text x="490" y="530" fill="#0b1020" font-family="system-ui" font-size="24" font-weight="700">Sign in to Raccord</text>
+  <text x="500" y="570" fill="#667085" font-family="system-ui" font-size="16">Informative mark, responsive card</text>
+</svg>

@@ -8,12 +8,6 @@ import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async } from "../../shared/ui/States";
 import { LinesTable, Totals } from "../../shared/ui/Totals";
 
-function localToday(): string {
-    const now = new Date();
-    const pad = (value: number) => String(value).padStart(2, "0");
-    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-}
-
 export function DraftPage() {
     const { id = "" } = useParams();
     const query = useQuery(`draft:${id}`, () =>
@@ -25,7 +19,7 @@ export function DraftPage() {
 function DraftView({ draft, onChanged }: { draft: Schemas["InvoiceDraftResponse"]; onChanged: () => void }) {
     const { t, format, describe } = useI18n();
     const navigate = useNavigate();
-    const [issueDate, setIssueDate] = useState(localToday);
+    const [issueDate, setIssueDate] = useState("");
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState<unknown>(null);
     const open = draft.status === "open";
@@ -48,7 +42,7 @@ function DraftView({ draft, onChanged }: { draft: Schemas["InvoiceDraftResponse"
             const invoice = await unwrap(
                 api.POST("/api/invoice-drafts/{id}/finalize", {
                     params: { path: { id: draft.id } },
-                    body: { issueDate },
+                    body: { issueDate: issueDate || null },
                 }),
             );
             await navigate(`/invoices/${invoice.id}`);
@@ -125,7 +119,6 @@ function DraftView({ draft, onChanged }: { draft: Schemas["InvoiceDraftResponse"
                             <input
                                 id="issue-date"
                                 type="date"
-                                required
                                 value={issueDate}
                                 onChange={(event) => {
                                     setIssueDate(event.target.value);

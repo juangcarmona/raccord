@@ -12,6 +12,7 @@ public sealed record QuoteResponse(
     DateOnly ValidUntil,
     string? PaymentTerms,
     string ReviewStatus,
+    DateTimeOffset? AcceptedAt,
     IReadOnlyList<QuoteLineResponse> Lines
 );
 

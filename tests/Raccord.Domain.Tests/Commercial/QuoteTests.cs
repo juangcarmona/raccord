@@ -64,4 +64,30 @@ public sealed class QuoteTests
         var error = Should.Throw<BusinessRuleViolationException>(quote.MarkReadyForSignature);
         error.Code.ShouldBe("quotes.review-transition-invalid");
     }
+
+    [Fact]
+    public void Acceptance_Should_require_signature_readiness_and_capture_timestamp()
+    {
+        var quote = Quote.Generate(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "Customer",
+            "Project",
+            QuoteNumberSequence.Start("Q", 2026).Allocate(),
+            new DateOnly(2026, 10, 13),
+            14,
+            null,
+            [QuoteLine.FromProjectLine(1, "Camera", 1, 100, 0, 21, "EUR")]
+        );
+        var timestamp = new DateTimeOffset(2026, 10, 13, 12, 30, 0, TimeSpan.Zero);
+
+        Should
+            .Throw<BusinessRuleViolationException>(() => quote.Accept(timestamp))
+            .Code.ShouldBe("quotes.acceptance-invalid");
+        quote.MarkReadyForSignature();
+        quote.Accept(timestamp);
+
+        quote.ReviewStatus.ShouldBe(QuoteReviewStatus.Accepted);
+        quote.AcceptedAt.ShouldBe(timestamp);
+    }
 }

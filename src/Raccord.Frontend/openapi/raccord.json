@@ -1679,6 +1679,39 @@
           }
         }
       }
+    },
+    "/api/quotes/{id}/accept": {
+      "post": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3511,6 +3544,7 @@
           "validUntil",
           "paymentTerms",
           "reviewStatus",
+          "acceptedAt",
           "lines"
         ],
         "type": "object",
@@ -3552,6 +3586,13 @@
           },
           "reviewStatus": {
             "type": "string"
+          },
+          "acceptedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           },
           "lines": {
             "type": "array",

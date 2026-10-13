@@ -81,6 +81,9 @@ public sealed class Quote
     /// <summary>Current review state.</summary>
     public QuoteReviewStatus ReviewStatus { get; private set; }
 
+    /// <summary>Trusted timestamp at which customer acceptance was recorded.</summary>
+    public DateTimeOffset? AcceptedAt { get; private set; }
+
     /// <summary>Immutable planned lines.</summary>
     public IReadOnlyList<QuoteLine> Lines => [.. lines.OrderBy(line => line.Position)];
 
@@ -93,6 +96,18 @@ public sealed class Quote
                 "Only draft quotes can be marked ready for signature."
             );
         ReviewStatus = QuoteReviewStatus.ReadyForSignature;
+    }
+
+    /// <summary>Records customer acceptance of a quote ready for signature.</summary>
+    public void Accept(DateTimeOffset acceptedAt)
+    {
+        if (ReviewStatus != QuoteReviewStatus.ReadyForSignature)
+            throw new BusinessRuleViolationException(
+                "quotes.acceptance-invalid",
+                "Only quotes ready for signature can be accepted."
+            );
+        ReviewStatus = QuoteReviewStatus.Accepted;
+        AcceptedAt = acceptedAt;
     }
 
     /// <summary>Creates an immutable snapshot of the current project plan.</summary>

@@ -22,6 +22,7 @@ internal sealed class QuoteConfiguration
             .HasConversion<string>()
             .HasMaxLength(30)
             .IsRequired();
+        builder.Property(quote => quote.AcceptedAt);
         builder.HasIndex(quote => quote.Number).IsUnique();
         builder.OwnsMany(
             quote => quote.Lines,

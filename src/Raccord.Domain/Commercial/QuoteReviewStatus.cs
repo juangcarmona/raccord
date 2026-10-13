@@ -8,4 +8,7 @@ public enum QuoteReviewStatus
 
     /// <summary>Quote can be sent for signing.</summary>
     ReadyForSignature,
+
+    /// <summary>Customer acceptance has been recorded.</summary>
+    Accepted,
 }

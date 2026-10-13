@@ -28,3 +28,4 @@ Records are immutable in spirit. To reverse or replace a decision, write a new r
 | ADR-0020 | [Communicate between modules through synchronous contracts and defer events](0020-synchronous-module-contracts-with-deferred-events.md)                            | Accepted               | 2026-10-12 |
 | ADR-0021 | [Authenticate with local Identity and cookie sessions, authorize with scoped role permissions](0021-local-identity-with-cookie-sessions-and-scoped-permissions.md) | Accepted               | 2026-10-12 |
 | ADR-0022 | [Write each use case as a single-file slice returning result errors](0022-single-file-use-case-slices-with-result-errors.md)                                       | Accepted               | 2026-10-12 |
+| ADR-0023 | [Make the self-hosted operator responsible for its installation](0023-self-hosted-verifactu-responsibility.md)                                                     | Accepted               | 2026-10-13 |

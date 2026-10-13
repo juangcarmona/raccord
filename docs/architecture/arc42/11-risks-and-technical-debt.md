@@ -5,7 +5,7 @@
 | ID | Risk | Impact | Mitigation |
 | --- | --- | --- | --- |
 | R-1 | **No authentication yet** | Anyone with network access can read data and issue invoices | Do not expose installations; MVP slice 2 adds OIDC and roles. Audit actor shows `unauthenticated`. |
-| R-2 | VERI*FACTU legal responsibility for open-source self-hosted software unresolved | Could block the Spanish market | Compliance seam records obligations now; legal review before implementation |
+| R-2 | VERI*FACTU legal responsibility for open-source self-hosted software requires independent legal confirmation | Could block the Spanish market | ADR-0023 sets the product boundary: the operator owns its installation; legal review remains required before any compliance claim |
 | R-3 | Tax rules and dates change (announced 2028 postponement not enacted) | Rework | Requirements dated and sourced; adapters isolated |
 | R-4 | Rounding policy not yet confirmed by an accountant | Possible disagreement on VAT breakdown | ADR-0006 explicit and tested; easy to change in one place |
 | R-5 | Scope creep toward full operations parity | Delays a trustworthy billing core | Roadmap orders billing before planning |

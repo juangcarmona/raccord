@@ -1,6 +1,6 @@
 # Compliance seam: VERI*FACTU and e-invoicing
 
-Status: seam implemented, submission **not** implemented. Last updated: 2026-10-06. Requirements source: [Spanish invoicing compliance requirements](../research/spanish-invoicing-compliance-requirements.md). Nothing here is a claim of legal compliance; it is the engineering contract that a reviewed implementation must satisfy.
+Status: seam implemented, submission **not** implemented. Last updated: 2026-10-13. Requirements source: [Spanish invoicing compliance requirements](../research/spanish-invoicing-compliance-requirements.md). The self-hosted responsibility boundary is recorded in [ADR-0023](../adr/0023-self-hosted-verifactu-responsibility.md). Nothing here is a claim of legal compliance; it is the engineering contract that a reviewed implementation must satisfy.
 
 ## 1. Where the seam is
 

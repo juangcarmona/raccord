@@ -15,4 +15,5 @@ public sealed class ComplianceRecordRow
     public int Attempts { get; set; }
     public DateTimeOffset? LastAttemptAt { get; set; }
     public string? LastError { get; set; }
+    public string? AuthorityReference { get; set; }
 }

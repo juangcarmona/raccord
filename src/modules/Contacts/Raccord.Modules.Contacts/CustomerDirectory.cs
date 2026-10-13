@@ -64,8 +64,32 @@ public sealed class CustomerDirectory
 
     /// <summary>Lists customers.</summary>
     public async Task<IReadOnlyList<CustomerResponse>> ListAsync(
-        CancellationToken cancellationToken
-    ) => [.. (await parties.ListAsync(cancellationToken).ConfigureAwait(false)).Select(ToResponse)];
+        CancellationToken cancellationToken,
+        string? tag = null,
+        string? folder = null
+    )
+    {
+        var customers = await parties.ListAsync(cancellationToken).ConfigureAwait(false);
+        return
+        [
+            .. customers
+                .Where(customer =>
+                    (
+                        tag is null
+                        || customer.Tags?.Contains(tag, StringComparer.OrdinalIgnoreCase) == true
+                    )
+                    && (
+                        folder is null
+                        || string.Equals(
+                            customer.Folder,
+                            folder,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                .Select(ToResponse),
+        ];
+    }
 
     /// <summary>Imports valid CSV contact rows atomically and reports rejected rows.</summary>
     public async Task<ContactImportResponse> ImportCsvAsync(

@@ -25,6 +25,8 @@ COPY src/modules/Contacts/Raccord.Modules.Contacts.Contracts/Raccord.Modules.Con
 COPY src/modules/Contacts/Raccord.Modules.Contacts/Raccord.Modules.Contacts.csproj src/modules/Contacts/Raccord.Modules.Contacts/
 COPY src/modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj src/modules/Compliance/Raccord.Modules.Compliance.Contracts/
 COPY src/modules/Compliance/Raccord.Modules.Compliance/Raccord.Modules.Compliance.csproj src/modules/Compliance/Raccord.Modules.Compliance/
+COPY src/modules/Equipment/Raccord.Modules.Equipment.Contracts/Raccord.Modules.Equipment.Contracts.csproj src/modules/Equipment/Raccord.Modules.Equipment.Contracts/
+COPY src/modules/Equipment/Raccord.Modules.Equipment/Raccord.Modules.Equipment.csproj src/modules/Equipment/Raccord.Modules.Equipment/
 RUN dotnet restore src/Raccord.Web/Raccord.Web.csproj
 COPY src/ src/
 RUN dotnet publish src/Raccord.Web/Raccord.Web.csproj -c Release -o /app --no-restore

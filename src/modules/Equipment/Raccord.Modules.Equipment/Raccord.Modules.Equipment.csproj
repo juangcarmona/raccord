@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../Raccord.Modules.Equipment.Contracts/Raccord.Modules.Equipment.Contracts.csproj" />
+        <ProjectReference Include="../../../shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
+    </ItemGroup>
+</Project>

@@ -7,6 +7,7 @@ using Raccord.Application.Projects;
 using Raccord.Infrastructure;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
+using Raccord.Modules.Equipment;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
 
@@ -26,6 +27,7 @@ builder.Services.AddScoped<ICurrentUser, HttpCurrentActor>();
 builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ContactPersonService>();
 builder.Services.AddScoped<ContactTaxonomyService>();
+builder.Services.AddEquipmentModule();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();

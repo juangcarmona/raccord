@@ -9,6 +9,7 @@ const navigation = [
     { to: "/invoices", key: "nav.invoices" },
     { to: "/customers", key: "nav.customers" },
     { to: "/settings/issuer", key: "nav.settings" },
+    { to: "/settings/roles", key: "nav.roles" },
 ] as const;
 
 export function AppShell() {

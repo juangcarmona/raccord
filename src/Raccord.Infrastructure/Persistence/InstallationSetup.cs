@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,6 +55,25 @@ public sealed class InstallationSetup(
                 if (!roleResult.Succeeded)
                 {
                     return SetupResult.Failed(roleResult.Errors.Select(error => error.Description));
+                }
+            }
+
+            var role = await roles.FindByNameAsync(roleName).ConfigureAwait(false);
+            if (role is not null)
+            {
+                var existingClaims = await roles.GetClaimsAsync(role).ConfigureAwait(false);
+                var permissions = PermissionCatalog.PredefinedRoles[roleName];
+                foreach (
+                    var permission in permissions.Where(permission =>
+                        existingClaims.All(claim =>
+                            !string.Equals(claim.Value, permission, StringComparison.Ordinal)
+                        )
+                    )
+                )
+                {
+                    await roles
+                        .AddClaimAsync(role, new Claim(PermissionCatalog.ClaimType, permission))
+                        .ConfigureAwait(false);
                 }
             }
         }

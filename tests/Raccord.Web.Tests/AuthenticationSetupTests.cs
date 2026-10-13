@@ -39,6 +39,20 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         (await api.QueryScalarAsync<long>("select count(*) from workspace.roles")).ShouldBe(4);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.user_roles")).ShouldBe(1);
 
+        var roles =
+            await client.GetFromJsonAsync<List<RoleResponse>>("/api/roles")
+            ?? throw new InvalidOperationException("The role list was empty.");
+        roles.Select(role => role.Name).ShouldBe(["Admin", "Crew", "Office", "Warehouse"]);
+        roles
+            .Single(role => string.Equals(role.Name, "Admin", StringComparison.Ordinal))
+            .Permissions.ShouldContain("projects:read");
+
+        var custom = await client.PostAsJsonAsync(
+            "/api/roles",
+            new RoleRequest("Read-only", ["projects:read"])
+        );
+        custom.StatusCode.ShouldBe(HttpStatusCode.Created);
+
         var second = await client.PostAsJsonAsync(
             "/api/setup",
             new SetupRequest("second-admin@example.com", "SecondAdmin123!@#")
@@ -50,4 +64,13 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     private sealed record SetupRequest(string Email, string Password);
 
     private sealed record SetupStatusResponse(bool Required);
+
+    private sealed record RoleResponse(
+        string Name,
+        bool Predefined,
+        IReadOnlyList<string> Permissions,
+        int UserCount
+    );
+
+    private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
 }

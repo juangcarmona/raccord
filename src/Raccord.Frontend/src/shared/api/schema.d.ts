@@ -1012,6 +1012,13 @@ export interface components {
             email: null | string;
             /** @description Whether the legal details required on an invoice are complete. */
             isInvoiceable: boolean;
+            /**
+             * Format: double
+             * @description Discount copied into new projects.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied into new projects. */
+            defaultPaymentTerms: null | string;
         };
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
@@ -1305,6 +1312,13 @@ export interface components {
              * @description Last day of the job.
              */
             endDate: string;
+            /**
+             * Format: double
+             * @description Discount copied from the contact.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied from the contact. */
+            paymentTerms: null | string;
             /** @description ISO currency code. */
             currency: string;
             /** @description Billable work. */
@@ -1337,6 +1351,13 @@ export interface components {
              */
             endDate: string;
             /**
+             * Format: double
+             * @description Discount copied from the contact.
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied from the contact. */
+            paymentTerms: null | string;
+            /**
              * Format: int32
              * @description Lines not yet in a draft or invoice.
              */
@@ -1358,6 +1379,14 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+            /**
+             * Format: double
+             * @description Discount copied into new projects.
+             * @default 0
+             */
+            defaultDiscountPercent: number;
+            /** @description Payment terms copied into new projects. */
+            defaultPaymentTerms?: null | string;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

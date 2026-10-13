@@ -7,3 +7,9 @@ This ledger records repeatable delivery improvements for future agents.
 - Observation: A feature branch can be a moving integration target when another agent owns the prerequisite child.
 - Action: Stack the next child on the prerequisite branch in a separate worktree, and keep the prerequisite checkout untouched.
 - Check: The PR base is the prerequisite feature branch and the source worktree remains agent-owned.
+
+## 2026-10-13 · Contact commercial defaults
+
+- Observation: Contact defaults must not remain a live read through project views, or later edits silently change an existing project.
+- Action: Copy defaults at project creation and persist them as project-owned values.
+- Check: The project contract exposes copied values and migration-backed tests cover creation after a contact default is set.

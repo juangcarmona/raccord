@@ -26,6 +26,8 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     customerName: "Productora Ejemplo S.A.",
     startDate: "2026-09-14",
     endDate: "2026-09-18",
+    defaultDiscountPercent: 0,
+    paymentTerms: null,
     currency: "EUR",
     billableLines,
 });

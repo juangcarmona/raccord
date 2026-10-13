@@ -8,7 +8,9 @@ public sealed record PartySnapshot(
     string LegalName,
     string? TaxId,
     PostalAddress? Address,
-    string? Email
+    string? Email,
+    decimal DefaultDiscountPercent = 0,
+    string? DefaultPaymentTerms = null
 )
 {
     /// <summary>The party data required by an invoice.</summary>

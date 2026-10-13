@@ -51,7 +51,9 @@ public sealed class CustomerDirectory
             customer.LegalName,
             customer.TaxId,
             customer.BillingAddress.ToAddress(),
-            customer.Email
+            customer.Email,
+            request.DefaultDiscountPercent,
+            request.DefaultPaymentTerms
         );
         writer.Add(party);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
@@ -85,6 +87,8 @@ public sealed class CustomerDirectory
                     party.Address.CountryCode
                 ),
             party.Email,
-            party.IsInvoiceable
+            party.IsInvoiceable,
+            party.DefaultDiscountPercent,
+            party.DefaultPaymentTerms
         );
 }

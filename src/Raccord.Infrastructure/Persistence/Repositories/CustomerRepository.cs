@@ -32,6 +32,8 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             LegalName = party.LegalName,
             TaxId = party.TaxId,
             Email = party.Email,
+            DefaultDiscountPercent = party.DefaultDiscountPercent,
+            DefaultPaymentTerms = party.DefaultPaymentTerms,
         };
         row.BillingAddress.Set(party.Address);
         db.Customers.Add(row);
@@ -49,7 +51,9 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             customer.LegalName,
             customer.TaxId,
             customer.BillingAddress.ToAddress(),
-            customer.Email
+            customer.Email,
+            customer.DefaultDiscountPercent,
+            customer.DefaultPaymentTerms
         );
     }
 }

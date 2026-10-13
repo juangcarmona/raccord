@@ -60,6 +60,15 @@ public sealed class Project
     /// <summary>Changes the project planning lifecycle status.</summary>
     public void SetStatus(ProjectStatus status) => Status = status;
 
+    /// <summary>Moves the project and all planned equipment by the same number of days.</summary>
+    public void ShiftDates(int days)
+    {
+        StartDate = StartDate.AddDays(days);
+        EndDate = EndDate.AddDays(days);
+        foreach (var line in plannedEquipmentLines)
+            line.ShiftDays(days);
+    }
+
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];

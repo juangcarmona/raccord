@@ -248,6 +248,33 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("projects", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Projects.ProjectTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("customer_id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_templates");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_project_templates_name");
+
+                    b.ToTable("project_templates", (string)null);
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
                 {
                     b.Property<Guid>("Id")

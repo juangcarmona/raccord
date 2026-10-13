@@ -1057,6 +1057,139 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTemplateResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/from-template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectFromTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/shift": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ShiftProjectRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/billable-lines": {
         parameters: {
             query?: never;
@@ -1783,6 +1916,15 @@ export interface components {
             /** @description Series that will number the invoice; the default series when omitted. */
             seriesCode: null | string;
         };
+        CreateProjectFromTemplateRequest: {
+            /** Format: uuid */
+            templateId: string;
+            name: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+        };
         /** @description Creates a project. */
         CreateProjectRequest: {
             /** @description Project name. */
@@ -1802,6 +1944,11 @@ export interface components {
              * @description Last day of the job.
              */
             endDate: string;
+        };
+        CreateProjectTemplateRequest: {
+            name: string;
+            /** Format: uuid */
+            customerId: string;
         };
         /** @description A customer. */
         CustomerResponse: {
@@ -2287,6 +2434,13 @@ export interface components {
             /** @description ISO currency code. */
             currency: string;
         };
+        ProjectTemplateResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** Format: uuid */
+            customerId: string;
+        };
         /** @description Creates a contact. */
         RegisterContactRequest: {
             /** @description Display or registered name. */
@@ -2316,6 +2470,10 @@ export interface components {
             defaultDiscountPercent: number;
             /** @description Payment terms copied into new projects. */
             defaultPaymentTerms?: null | string;
+        };
+        ShiftProjectRequest: {
+            /** Format: int32 */
+            days: number;
         };
         /** @description Changes a contact. */
         UpdateContactRequest: {

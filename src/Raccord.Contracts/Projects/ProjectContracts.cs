@@ -13,6 +13,19 @@ public enum ProjectStatus
 
 public sealed record UpdateProjectStatusRequest(ProjectStatus Status);
 
+public sealed record CreateProjectTemplateRequest(string Name, Guid CustomerId);
+
+public sealed record ProjectTemplateResponse(Guid Id, string Name, Guid CustomerId);
+
+public sealed record CreateProjectFromTemplateRequest(
+    Guid TemplateId,
+    string Name,
+    DateOnly StartDate,
+    DateOnly EndDate
+);
+
+public sealed record ShiftProjectRequest(int Days);
+
 public sealed record PlanEquipmentRequest(
     Guid EquipmentId,
     int Quantity,

@@ -52,12 +52,17 @@ public sealed record PackingLineResponse(
     DateTimeOffset? PackedAt,
     bool IsBookedOut = false,
     string? BookedOutBy = null,
-    DateTimeOffset? BookedOutAt = null
+    DateTimeOffset? BookedOutAt = null,
+    bool IsReceived = false,
+    string? ReceivedBy = null,
+    DateTimeOffset? ReceivedAt = null
 );
 
 public sealed record PackLineRequest(string PackedBy);
 
 public sealed record BookOutLineRequest(string BookedOutBy);
+
+public sealed record ReceiveLineRequest(string ReceivedBy);
 
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>

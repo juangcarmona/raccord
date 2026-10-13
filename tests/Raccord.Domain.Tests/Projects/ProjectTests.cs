@@ -221,6 +221,34 @@ public sealed class ProjectTests
             .Code.ShouldBe("projects.book-out-already-complete");
     }
 
+    [Fact]
+    public void Only_a_booked_out_line_Should_be_received_once()
+    {
+        var project = NewProject();
+        project.PlanEquipment(
+            Guid.CreateVersion7(),
+            1,
+            new DateOnly(2026, 5, 5),
+            new DateOnly(2026, 5, 7)
+        );
+        var line = project.CreatePackingList()[0];
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.Receive(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.receive-not-booked-out");
+        project.Pack(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow);
+        project.BookOut(line.Id, "driver@example.test", DateTimeOffset.UtcNow);
+        project
+            .Receive(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow)
+            .IsReceived.ShouldBeTrue();
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.Receive(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.receive-already-complete");
+    }
+
     private static Project NewProject() =>
         Project.Create(
             "Spring campaign shoot",

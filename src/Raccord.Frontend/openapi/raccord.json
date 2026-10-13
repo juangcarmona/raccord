@@ -1,1604 +1,1787 @@
 {
-    "openapi": "3.1.1",
-    "info": {
-        "title": "Raccord.Web | v1",
-        "version": "1.0.0"
-    },
-    "paths": {
-        "/api/auth/sign-in": {
-            "post": {
-                "tags": ["Authentication"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/SignInRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CurrentUserResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedHttpResult"
-                                }
-                            }
-                        }
-                    }
-                }
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Raccord.Web | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/auth/sign-in": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInRequest"
+              }
             }
+          },
+          "required": true
         },
-        "/api/auth/sign-out": {
-            "post": {
-                "tags": ["Authentication"],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
                 }
+              }
             }
-        },
-        "/api/auth/me": {
-            "get": {
-                "tags": ["Authentication"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CurrentUserResponse"
-                                }
-                            }
-                        }
-                    }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedHttpResult"
                 }
+              }
             }
-        },
-        "/api/organization/issuer": {
-            "get": {
-                "tags": ["Organization"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/IssuerProfileResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            },
-            "put": {
-                "tags": ["Organization"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateIssuerProfileRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/IssuerProfileResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/invoice-series": {
-            "get": {
-                "tags": ["Organization"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/InvoiceSeriesResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/audit-events": {
-            "get": {
-                "tags": ["Audit"],
-                "parameters": [
-                    {
-                        "name": "entityId",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/AuditEventResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/customers": {
-            "get": {
-                "tags": ["Customers"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/CustomerResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": ["Customers"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RegisterCustomerRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomerResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/customers/{id}": {
-            "get": {
-                "tags": ["Customers"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomerResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/projects": {
-            "get": {
-                "tags": ["Projects"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ProjectSummaryResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": ["Projects"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateProjectRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProjectResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/projects/{id}": {
-            "get": {
-                "tags": ["Projects"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProjectResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/projects/{id}/billable-lines": {
-            "post": {
-                "tags": ["Projects"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AddBillableLineRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BillableLineResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/invoice-drafts": {
-            "get": {
-                "tags": ["Invoicing"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/InvoiceDraftSummaryResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": ["Invoicing"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateInvoiceDraftRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/InvoiceDraftResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/invoice-drafts/{id}": {
-            "get": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/InvoiceDraftResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/invoice-drafts/{id}/lines/{lineId}": {
-            "delete": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    },
-                    {
-                        "name": "lineId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/InvoiceDraftResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/invoice-drafts/{id}/finalize": {
-            "post": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/FinalizeInvoiceDraftRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/IssuedInvoiceResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProblemDetails"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Conflict",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProblemDetails"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/invoices": {
-            "get": {
-                "tags": ["Invoicing"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/IssuedInvoiceSummaryResponse"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/invoices/{id}": {
-            "get": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/IssuedInvoiceResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/invoices/{id}/document": {
-            "get": {
-                "tags": ["Invoicing"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
+          }
         }
+      }
     },
-    "components": {
-        "schemas": {
-            "AddBillableLineRequest": {
-                "required": ["kind", "description", "quantity", "unitPrice", "discountPercent", "vatRate"],
-                "type": "object",
-                "properties": {
-                    "kind": {
-                        "type": "string",
-                        "description": "One of `equipment`, `labour`, `transport`, `consumable`, `service`, `other`."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Text printed on the invoice."
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "description": "Units, days or hours; greater than zero.",
-                        "format": "double"
-                    },
-                    "unitPrice": {
-                        "type": "number",
-                        "description": "Net unit price with up to four decimals.",
-                        "format": "double"
-                    },
-                    "discountPercent": {
-                        "type": "number",
-                        "description": "Line discount, 0–100.",
-                        "format": "double"
-                    },
-                    "vatRate": {
-                        "type": "number",
-                        "description": "VAT percentage, 0–100.",
-                        "format": "double"
-                    }
-                },
-                "description": "Adds billable work to a project."
-            },
-            "AddressDto": {
-                "required": ["street", "postalCode", "city", "province", "countryCode"],
-                "type": "object",
-                "properties": {
-                    "street": {
-                        "type": "string",
-                        "description": "Street, number and unit."
-                    },
-                    "postalCode": {
-                        "type": "string",
-                        "description": "Postal code."
-                    },
-                    "city": {
-                        "type": "string",
-                        "description": "City or municipality."
-                    },
-                    "province": {
-                        "type": "string",
-                        "description": "Province, region or state."
-                    },
-                    "countryCode": {
-                        "type": "string",
-                        "description": "ISO 3166-1 alpha-2 country code."
-                    }
-                },
-                "description": "A postal address."
-            },
-            "AuditEventResponse": {
-                "required": ["id", "occurredAt", "actor", "action", "entityType", "entityId", "details"],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Event identifier.",
-                        "format": "uuid"
-                    },
-                    "occurredAt": {
-                        "type": "string",
-                        "description": "Moment of the event (UTC).",
-                        "format": "date-time"
-                    },
-                    "actor": {
-                        "type": "string",
-                        "description": "Who performed the action."
-                    },
-                    "action": {
-                        "type": "string",
-                        "description": "Stable action code, for example `invoice.issued`."
-                    },
-                    "entityType": {
-                        "type": "string",
-                        "description": "Affected entity type."
-                    },
-                    "entityId": {
-                        "type": "string",
-                        "description": "Affected entity.",
-                        "format": "uuid"
-                    },
-                    "details": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        },
-                        "description": "Action-specific facts."
-                    }
-                },
-                "description": "An append-only audit event."
-            },
-            "BillableLineResponse": {
-                "required": [
-                    "id",
-                    "kind",
-                    "description",
-                    "quantity",
-                    "unitPrice",
-                    "discountPercent",
-                    "vatRate",
-                    "netAmount",
-                    "billingState",
-                    "draftId",
-                    "invoiceId"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Line identifier.",
-                        "format": "uuid"
-                    },
-                    "kind": {
-                        "type": "string",
-                        "description": "Line kind."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Text printed on the invoice."
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "description": "Units, days or hours.",
-                        "format": "double"
-                    },
-                    "unitPrice": {
-                        "type": "number",
-                        "description": "Net unit price.",
-                        "format": "double"
-                    },
-                    "discountPercent": {
-                        "type": "number",
-                        "description": "Line discount percentage.",
-                        "format": "double"
-                    },
-                    "vatRate": {
-                        "type": "number",
-                        "description": "VAT percentage.",
-                        "format": "double"
-                    },
-                    "netAmount": {
-                        "type": "number",
-                        "description": "Net amount calculated by the server.",
-                        "format": "double"
-                    },
-                    "billingState": {
-                        "type": "string",
-                        "description": "One of `unbilled`, `in-draft`, `invoiced`."
-                    },
-                    "draftId": {
-                        "type": ["null", "string"],
-                        "description": "Draft holding the line.",
-                        "format": "uuid"
-                    },
-                    "invoiceId": {
-                        "type": ["null", "string"],
-                        "description": "Invoice that billed the line.",
-                        "format": "uuid"
-                    }
-                },
-                "description": "A billable line."
-            },
-            "CreateInvoiceDraftRequest": {
-                "required": ["projectId", "billableLineIds", "seriesCode"],
-                "type": "object",
-                "properties": {
-                    "projectId": {
-                        "type": "string",
-                        "description": "The project to bill.",
-                        "format": "uuid"
-                    },
-                    "billableLineIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Unbilled lines to include."
-                    },
-                    "seriesCode": {
-                        "type": ["null", "string"],
-                        "description": "Series that will number the invoice; the default series when omitted."
-                    }
-                },
-                "description": "Creates an invoice draft from unbilled project lines."
-            },
-            "CreateProjectRequest": {
-                "required": ["name", "customerId", "startDate", "endDate"],
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Project name."
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Customer billed for the project.",
-                        "format": "uuid"
-                    },
-                    "startDate": {
-                        "type": "string",
-                        "description": "First day of the job.",
-                        "format": "date"
-                    },
-                    "endDate": {
-                        "type": "string",
-                        "description": "Last day of the job.",
-                        "format": "date"
-                    }
-                },
-                "description": "Creates a project."
-            },
-            "CurrentUserResponse": {
-                "required": ["email"],
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    }
+    "/api/auth/sign-out": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
                 }
-            },
-            "CustomerResponse": {
-                "required": ["id", "legalName", "taxId", "address", "email", "isInvoiceable"],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Customer identifier.",
-                        "format": "uuid"
-                    },
-                    "legalName": {
-                        "type": "string",
-                        "description": "Registered legal name."
-                    },
-                    "taxId": {
-                        "type": ["null", "string"],
-                        "description": "Normalized tax ID."
-                    },
-                    "address": {
-                        "oneOf": [
-                            {
-                                "type": "null"
-                            },
-                            {
-                                "description": "Billing address.",
-                                "$ref": "#/components/schemas/AddressDto"
-                            }
-                        ]
-                    },
-                    "email": {
-                        "type": ["null", "string"],
-                        "description": "Billing e-mail."
-                    },
-                    "isInvoiceable": {
-                        "type": "boolean",
-                        "description": "Whether the legal details required on an invoice are complete."
-                    }
-                },
-                "description": "A customer."
-            },
-            "FinalizeInvoiceDraftRequest": {
-                "required": ["issueDate"],
-                "type": "object",
-                "properties": {
-                    "issueDate": {
-                        "type": ["null", "string"],
-                        "description": "Legal issue date; today in the organization's time zone when omitted.",
-                        "format": "date"
-                    }
-                },
-                "description": "Finalizes a draft."
-            },
-            "InvoiceDraftResponse": {
-                "required": [
-                    "id",
-                    "status",
-                    "projectId",
-                    "projectName",
-                    "customerId",
-                    "customerName",
-                    "seriesCode",
-                    "operationDate",
-                    "createdAt",
-                    "lines",
-                    "totals",
-                    "validationIssues",
-                    "issuedInvoiceId"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Draft identifier.",
-                        "format": "uuid"
-                    },
-                    "status": {
-                        "type": "string",
-                        "description": "Either `open` or `issued`."
-                    },
-                    "projectId": {
-                        "type": "string",
-                        "description": "Billed project.",
-                        "format": "uuid"
-                    },
-                    "projectName": {
-                        "type": "string",
-                        "description": "Project name."
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Billed customer.",
-                        "format": "uuid"
-                    },
-                    "customerName": {
-                        "type": "string",
-                        "description": "Customer legal name."
-                    },
-                    "seriesCode": {
-                        "type": "string",
-                        "description": "Numbering series."
-                    },
-                    "operationDate": {
-                        "type": "string",
-                        "description": "Date the work was delivered.",
-                        "format": "date"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "description": "Creation moment (UTC).",
-                        "format": "date-time"
-                    },
-                    "lines": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/InvoiceLineResponse"
-                        },
-                        "description": "Draft lines."
-                    },
-                    "totals": {
-                        "description": "Server-calculated totals.",
-                        "$ref": "#/components/schemas/InvoiceTotalsResponse"
-                    },
-                    "validationIssues": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ValidationIssueResponse"
-                        },
-                        "description": "What prevents issuing it today; empty when it can be finalized."
-                    },
-                    "issuedInvoiceId": {
-                        "type": ["null", "string"],
-                        "description": "The issued invoice, once finalized.",
-                        "format": "uuid"
-                    }
-                },
-                "description": "An invoice draft."
-            },
-            "InvoiceDraftSummaryResponse": {
-                "required": [
-                    "id",
-                    "projectId",
-                    "projectName",
-                    "customerName",
-                    "lineCount",
-                    "total",
-                    "currency",
-                    "createdAt"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Draft identifier.",
-                        "format": "uuid"
-                    },
-                    "projectId": {
-                        "type": "string",
-                        "description": "Billed project.",
-                        "format": "uuid"
-                    },
-                    "projectName": {
-                        "type": "string",
-                        "description": "Project name."
-                    },
-                    "customerName": {
-                        "type": "string",
-                        "description": "Customer legal name."
-                    },
-                    "lineCount": {
-                        "type": "integer",
-                        "description": "Number of lines.",
-                        "format": "int32"
-                    },
-                    "total": {
-                        "type": "number",
-                        "description": "Current total.",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "string",
-                        "description": "ISO currency code."
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "description": "Creation moment (UTC).",
-                        "format": "date-time"
-                    }
-                },
-                "description": "A draft in a list."
-            },
-            "InvoiceLineResponse": {
-                "required": [
-                    "id",
-                    "position",
-                    "description",
-                    "quantity",
-                    "unitPrice",
-                    "discountPercent",
-                    "vatRate",
-                    "netAmount"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": ["null", "string"],
-                        "description": "Draft line identifier; null on issued invoices.",
-                        "format": "uuid"
-                    },
-                    "position": {
-                        "type": "integer",
-                        "description": "One-based order.",
-                        "format": "int32"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Printed text."
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "description": "Units, days or hours.",
-                        "format": "double"
-                    },
-                    "unitPrice": {
-                        "type": "number",
-                        "description": "Net unit price.",
-                        "format": "double"
-                    },
-                    "discountPercent": {
-                        "type": "number",
-                        "description": "Line discount percentage.",
-                        "format": "double"
-                    },
-                    "vatRate": {
-                        "type": "number",
-                        "description": "VAT percentage.",
-                        "format": "double"
-                    },
-                    "netAmount": {
-                        "type": "number",
-                        "description": "Net amount.",
-                        "format": "double"
-                    }
-                },
-                "description": "A line of a draft or issued invoice."
-            },
-            "InvoiceSeriesResponse": {
-                "required": ["code", "description", "isDefault"],
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "type": "string",
-                        "description": "Series code."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "What the series is used for."
-                    },
-                    "isDefault": {
-                        "type": "boolean",
-                        "description": "Whether new drafts use it by default."
-                    }
-                },
-                "description": "An invoice numbering series."
-            },
-            "InvoiceTotalsResponse": {
-                "required": ["currency", "taxableBase", "vatAmount", "total", "vatBreakdown"],
-                "type": "object",
-                "properties": {
-                    "currency": {
-                        "type": "string",
-                        "description": "ISO currency code."
-                    },
-                    "taxableBase": {
-                        "type": "number",
-                        "description": "Sum of taxable bases.",
-                        "format": "double"
-                    },
-                    "vatAmount": {
-                        "type": "number",
-                        "description": "Sum of VAT.",
-                        "format": "double"
-                    },
-                    "total": {
-                        "type": "number",
-                        "description": "Amount payable.",
-                        "format": "double"
-                    },
-                    "vatBreakdown": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/VatGroupResponse"
-                        },
-                        "description": "One entry per VAT rate."
-                    }
-                },
-                "description": "Server-calculated totals."
-            },
-            "IssuedInvoiceResponse": {
-                "required": [
-                    "id",
-                    "number",
-                    "seriesCode",
-                    "issueDate",
-                    "operationDate",
-                    "issuedAt",
-                    "issuer",
-                    "recipient",
-                    "lines",
-                    "totals",
-                    "contentHash",
-                    "projectId",
-                    "customerId",
-                    "draftId"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Invoice identifier.",
-                        "format": "uuid"
-                    },
-                    "number": {
-                        "type": "string",
-                        "description": "Printed number."
-                    },
-                    "seriesCode": {
-                        "type": "string",
-                        "description": "Numbering series."
-                    },
-                    "issueDate": {
-                        "type": "string",
-                        "description": "Legal issue date.",
-                        "format": "date"
-                    },
-                    "operationDate": {
-                        "type": ["null", "string"],
-                        "description": "Operation date when different from the issue date.",
-                        "format": "date"
-                    },
-                    "issuedAt": {
-                        "type": "string",
-                        "description": "Finalization moment (UTC).",
-                        "format": "date-time"
-                    },
-                    "issuer": {
-                        "description": "Issuer snapshot.",
-                        "$ref": "#/components/schemas/PartyResponse"
-                    },
-                    "recipient": {
-                        "description": "Recipient snapshot.",
-                        "$ref": "#/components/schemas/PartyResponse"
-                    },
-                    "lines": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/InvoiceLineResponse"
-                        },
-                        "description": "Invoice lines."
-                    },
-                    "totals": {
-                        "description": "Totals.",
-                        "$ref": "#/components/schemas/InvoiceTotalsResponse"
-                    },
-                    "contentHash": {
-                        "type": "string",
-                        "description": "SHA-256 of the canonical issued representation."
-                    },
-                    "projectId": {
-                        "type": "string",
-                        "description": "Billed project.",
-                        "format": "uuid"
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Billed customer.",
-                        "format": "uuid"
-                    },
-                    "draftId": {
-                        "type": "string",
-                        "description": "Finalized draft.",
-                        "format": "uuid"
-                    }
-                },
-                "description": "An issued, immutable invoice."
-            },
-            "IssuedInvoiceSummaryResponse": {
-                "required": ["id", "number", "issueDate", "recipientName", "total", "currency", "projectId"],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Invoice identifier.",
-                        "format": "uuid"
-                    },
-                    "number": {
-                        "type": "string",
-                        "description": "Printed number."
-                    },
-                    "issueDate": {
-                        "type": "string",
-                        "description": "Legal issue date.",
-                        "format": "date"
-                    },
-                    "recipientName": {
-                        "type": "string",
-                        "description": "Recipient legal name."
-                    },
-                    "total": {
-                        "type": "number",
-                        "description": "Amount payable.",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "string",
-                        "description": "ISO currency code."
-                    },
-                    "projectId": {
-                        "type": "string",
-                        "description": "Billed project.",
-                        "format": "uuid"
-                    }
-                },
-                "description": "An issued invoice in a list."
-            },
-            "IssuerProfileResponse": {
-                "required": ["legalName", "taxId", "address"],
-                "type": "object",
-                "properties": {
-                    "legalName": {
-                        "type": "string",
-                        "description": "Registered legal name."
-                    },
-                    "taxId": {
-                        "type": "string",
-                        "description": "Normalized tax ID."
-                    },
-                    "address": {
-                        "description": "Registered address.",
-                        "$ref": "#/components/schemas/AddressDto"
-                    }
-                },
-                "description": "The legal issuer of invoices."
-            },
-            "PartyResponse": {
-                "required": ["legalName", "taxId", "address"],
-                "type": "object",
-                "properties": {
-                    "legalName": {
-                        "type": "string",
-                        "description": "Registered legal name."
-                    },
-                    "taxId": {
-                        "type": ["null", "string"],
-                        "description": "Tax identification number."
-                    },
-                    "address": {
-                        "oneOf": [
-                            {
-                                "type": "null"
-                            },
-                            {
-                                "description": "Address, if known.",
-                                "$ref": "#/components/schemas/AddressDto"
-                            }
-                        ]
-                    }
-                },
-                "description": "A legal party as printed on an invoice."
-            },
-            "ProblemDetails": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": ["null", "string"]
-                    },
-                    "title": {
-                        "type": ["null", "string"]
-                    },
-                    "status": {
-                        "type": ["null", "integer"],
-                        "format": "int32"
-                    },
-                    "detail": {
-                        "type": ["null", "string"]
-                    },
-                    "instance": {
-                        "type": ["null", "string"]
-                    }
-                }
-            },
-            "ProjectResponse": {
-                "required": [
-                    "id",
-                    "name",
-                    "customerId",
-                    "customerName",
-                    "startDate",
-                    "endDate",
-                    "currency",
-                    "billableLines"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Project identifier.",
-                        "format": "uuid"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Project name."
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Customer identifier.",
-                        "format": "uuid"
-                    },
-                    "customerName": {
-                        "type": "string",
-                        "description": "Customer legal name."
-                    },
-                    "startDate": {
-                        "type": "string",
-                        "description": "First day of the job.",
-                        "format": "date"
-                    },
-                    "endDate": {
-                        "type": "string",
-                        "description": "Last day of the job.",
-                        "format": "date"
-                    },
-                    "currency": {
-                        "type": "string",
-                        "description": "ISO currency code."
-                    },
-                    "billableLines": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/BillableLineResponse"
-                        },
-                        "description": "Billable work."
-                    }
-                },
-                "description": "A project with its billable lines."
-            },
-            "ProjectSummaryResponse": {
-                "required": [
-                    "id",
-                    "name",
-                    "customerId",
-                    "customerName",
-                    "startDate",
-                    "endDate",
-                    "unbilledLineCount",
-                    "unbilledNetAmount",
-                    "currency"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Project identifier.",
-                        "format": "uuid"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Project name."
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Customer identifier.",
-                        "format": "uuid"
-                    },
-                    "customerName": {
-                        "type": "string",
-                        "description": "Customer legal name."
-                    },
-                    "startDate": {
-                        "type": "string",
-                        "description": "First day of the job.",
-                        "format": "date"
-                    },
-                    "endDate": {
-                        "type": "string",
-                        "description": "Last day of the job.",
-                        "format": "date"
-                    },
-                    "unbilledLineCount": {
-                        "type": "integer",
-                        "description": "Lines not yet in a draft or invoice.",
-                        "format": "int32"
-                    },
-                    "unbilledNetAmount": {
-                        "type": "number",
-                        "description": "Net amount of the unbilled lines.",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "string",
-                        "description": "ISO currency code."
-                    }
-                },
-                "description": "A project in a list."
-            },
-            "RegisterCustomerRequest": {
-                "required": ["legalName", "taxId", "address", "email"],
-                "type": "object",
-                "properties": {
-                    "legalName": {
-                        "type": "string",
-                        "description": "Registered legal name."
-                    },
-                    "taxId": {
-                        "type": ["null", "string"],
-                        "description": "Tax ID; required before the customer can be invoiced."
-                    },
-                    "address": {
-                        "oneOf": [
-                            {
-                                "type": "null"
-                            },
-                            {
-                                "description": "Billing address; required before the customer can be invoiced.",
-                                "$ref": "#/components/schemas/AddressDto"
-                            }
-                        ]
-                    },
-                    "email": {
-                        "type": ["null", "string"],
-                        "description": "Billing e-mail."
-                    }
-                },
-                "description": "Registers a customer."
-            },
-            "SignInRequest": {
-                "required": ["email", "password"],
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "rememberMe": {
-                        "type": "boolean",
-                        "default": false
-                    }
-                }
-            },
-            "UnauthorizedHttpResult": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "UpdateIssuerProfileRequest": {
-                "required": ["legalName", "taxId", "address"],
-                "type": "object",
-                "properties": {
-                    "legalName": {
-                        "type": "string",
-                        "description": "Registered legal name."
-                    },
-                    "taxId": {
-                        "type": "string",
-                        "description": "Tax ID."
-                    },
-                    "address": {
-                        "description": "Registered address.",
-                        "$ref": "#/components/schemas/AddressDto"
-                    }
-                },
-                "description": "Sets the legal issuer details used on future invoices."
-            },
-            "ValidationIssueResponse": {
-                "required": ["code", "message"],
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "type": "string",
-                        "description": "Stable rule code."
-                    },
-                    "message": {
-                        "type": "string",
-                        "description": "English explanation."
-                    }
-                },
-                "description": "A reason an operation cannot proceed, identified by a stable code the UI can localize."
-            },
-            "VatGroupResponse": {
-                "required": ["rate", "taxableBase", "vatAmount"],
-                "type": "object",
-                "properties": {
-                    "rate": {
-                        "type": "number",
-                        "description": "VAT percentage.",
-                        "format": "double"
-                    },
-                    "taxableBase": {
-                        "type": "number",
-                        "description": "Sum of net amounts at this rate.",
-                        "format": "double"
-                    },
-                    "vatAmount": {
-                        "type": "number",
-                        "description": "VAT at this rate.",
-                        "format": "double"
-                    }
-                },
-                "description": "Taxable base and VAT for one rate."
+              }
             }
+          }
         }
+      }
     },
-    "tags": [
-        {
-            "name": "Authentication"
-        },
-        {
-            "name": "Organization"
-        },
-        {
-            "name": "Audit"
-        },
-        {
-            "name": "Customers"
-        },
-        {
-            "name": "Projects"
-        },
-        {
-            "name": "Invoicing"
+    "/api/organization/issuer": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerProfileResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
         }
-    ]
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIssuerProfileRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerProfileResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoice-series": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceSeriesResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/audit-events": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "entityId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuditEventResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/{id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectSummaryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/{id}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/billable-lines": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillableLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillableLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoice-drafts": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceDraftSummaryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceDraftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoice-drafts/{id}": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoice-drafts/{id}/lines/{lineId}": {
+      "delete": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoice-drafts/{id}/finalize": {
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinalizeInvoiceDraftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuedInvoiceResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoices": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IssuedInvoiceSummaryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuedInvoiceResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}/document": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddBillableLineRequest": {
+        "required": [
+          "kind",
+          "description",
+          "quantity",
+          "unitPrice",
+          "discountPercent",
+          "vatRate"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "One of `equipment`, `labour`, `transport`, `consumable`, `service`, `other`."
+          },
+          "description": {
+            "type": "string",
+            "description": "Text printed on the invoice."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Units, days or hours; greater than zero.",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "Net unit price with up to four decimals.",
+            "format": "double"
+          },
+          "discountPercent": {
+            "type": "number",
+            "description": "Line discount, 0–100.",
+            "format": "double"
+          },
+          "vatRate": {
+            "type": "number",
+            "description": "VAT percentage, 0–100.",
+            "format": "double"
+          }
+        },
+        "description": "Adds billable work to a project."
+      },
+      "AddressDto": {
+        "required": [
+          "street",
+          "postalCode",
+          "city",
+          "province",
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street, number and unit."
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code."
+          },
+          "city": {
+            "type": "string",
+            "description": "City or municipality."
+          },
+          "province": {
+            "type": "string",
+            "description": "Province, region or state."
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code."
+          }
+        },
+        "description": "A postal address."
+      },
+      "AuditEventResponse": {
+        "required": [
+          "id",
+          "occurredAt",
+          "actor",
+          "action",
+          "entityType",
+          "entityId",
+          "details"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Event identifier.",
+            "format": "uuid"
+          },
+          "occurredAt": {
+            "type": "string",
+            "description": "Moment of the event (UTC).",
+            "format": "date-time"
+          },
+          "actor": {
+            "type": "string",
+            "description": "Who performed the action."
+          },
+          "action": {
+            "type": "string",
+            "description": "Stable action code, for example `invoice.issued`."
+          },
+          "entityType": {
+            "type": "string",
+            "description": "Affected entity type."
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Affected entity.",
+            "format": "uuid"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Action-specific facts."
+          }
+        },
+        "description": "An append-only audit event."
+      },
+      "BillableLineResponse": {
+        "required": [
+          "id",
+          "kind",
+          "description",
+          "quantity",
+          "unitPrice",
+          "discountPercent",
+          "vatRate",
+          "netAmount",
+          "billingState",
+          "draftId",
+          "invoiceId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Line identifier.",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string",
+            "description": "Line kind."
+          },
+          "description": {
+            "type": "string",
+            "description": "Text printed on the invoice."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Units, days or hours.",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "Net unit price.",
+            "format": "double"
+          },
+          "discountPercent": {
+            "type": "number",
+            "description": "Line discount percentage.",
+            "format": "double"
+          },
+          "vatRate": {
+            "type": "number",
+            "description": "VAT percentage.",
+            "format": "double"
+          },
+          "netAmount": {
+            "type": "number",
+            "description": "Net amount calculated by the server.",
+            "format": "double"
+          },
+          "billingState": {
+            "type": "string",
+            "description": "One of `unbilled`, `in-draft`, `invoiced`."
+          },
+          "draftId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Draft holding the line.",
+            "format": "uuid"
+          },
+          "invoiceId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Invoice that billed the line.",
+            "format": "uuid"
+          }
+        },
+        "description": "A billable line."
+      },
+      "CreateInvoiceDraftRequest": {
+        "required": [
+          "projectId",
+          "billableLineIds",
+          "seriesCode"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project to bill.",
+            "format": "uuid"
+          },
+          "billableLineIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Unbilled lines to include."
+          },
+          "seriesCode": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Series that will number the invoice; the default series when omitted."
+          }
+        },
+        "description": "Creates an invoice draft from unbilled project lines."
+      },
+      "CreateProjectRequest": {
+        "required": [
+          "name",
+          "customerId",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer billed for the project.",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "First day of the job.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Last day of the job.",
+            "format": "date"
+          }
+        },
+        "description": "Creates a project."
+      },
+      "CurrentUserResponse": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomerResponse": {
+        "required": [
+          "id",
+          "legalName",
+          "taxId",
+          "address",
+          "email",
+          "isInvoiceable"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Customer identifier.",
+            "format": "uuid"
+          },
+          "legalName": {
+            "type": "string",
+            "description": "Registered legal name."
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Normalized tax ID."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Billing address.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Billing e-mail."
+          },
+          "isInvoiceable": {
+            "type": "boolean",
+            "description": "Whether the legal details required on an invoice are complete."
+          }
+        },
+        "description": "A customer."
+      },
+      "FinalizeInvoiceDraftRequest": {
+        "required": [
+          "issueDate"
+        ],
+        "type": "object",
+        "properties": {
+          "issueDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Legal issue date; today in the organization's time zone when omitted.",
+            "format": "date"
+          }
+        },
+        "description": "Finalizes a draft."
+      },
+      "InvoiceDraftResponse": {
+        "required": [
+          "id",
+          "status",
+          "projectId",
+          "projectName",
+          "customerId",
+          "customerName",
+          "seriesCode",
+          "operationDate",
+          "createdAt",
+          "lines",
+          "totals",
+          "validationIssues",
+          "issuedInvoiceId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Draft identifier.",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "description": "Either `open` or `issued`."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Billed project.",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Billed customer.",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Customer legal name."
+          },
+          "seriesCode": {
+            "type": "string",
+            "description": "Numbering series."
+          },
+          "operationDate": {
+            "type": "string",
+            "description": "Date the work was delivered.",
+            "format": "date"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation moment (UTC).",
+            "format": "date-time"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceLineResponse"
+            },
+            "description": "Draft lines."
+          },
+          "totals": {
+            "description": "Server-calculated totals.",
+            "$ref": "#/components/schemas/InvoiceTotalsResponse"
+          },
+          "validationIssues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationIssueResponse"
+            },
+            "description": "What prevents issuing it today; empty when it can be finalized."
+          },
+          "issuedInvoiceId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The issued invoice, once finalized.",
+            "format": "uuid"
+          }
+        },
+        "description": "An invoice draft."
+      },
+      "InvoiceDraftSummaryResponse": {
+        "required": [
+          "id",
+          "projectId",
+          "projectName",
+          "customerName",
+          "lineCount",
+          "total",
+          "currency",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Draft identifier.",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Billed project.",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Customer legal name."
+          },
+          "lineCount": {
+            "type": "integer",
+            "description": "Number of lines.",
+            "format": "int32"
+          },
+          "total": {
+            "type": "number",
+            "description": "Current total.",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO currency code."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation moment (UTC).",
+            "format": "date-time"
+          }
+        },
+        "description": "A draft in a list."
+      },
+      "InvoiceLineResponse": {
+        "required": [
+          "id",
+          "position",
+          "description",
+          "quantity",
+          "unitPrice",
+          "discountPercent",
+          "vatRate",
+          "netAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Draft line identifier; null on issued invoices.",
+            "format": "uuid"
+          },
+          "position": {
+            "type": "integer",
+            "description": "One-based order.",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "description": "Printed text."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Units, days or hours.",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "Net unit price.",
+            "format": "double"
+          },
+          "discountPercent": {
+            "type": "number",
+            "description": "Line discount percentage.",
+            "format": "double"
+          },
+          "vatRate": {
+            "type": "number",
+            "description": "VAT percentage.",
+            "format": "double"
+          },
+          "netAmount": {
+            "type": "number",
+            "description": "Net amount.",
+            "format": "double"
+          }
+        },
+        "description": "A line of a draft or issued invoice."
+      },
+      "InvoiceSeriesResponse": {
+        "required": [
+          "code",
+          "description",
+          "isDefault"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Series code."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the series is used for."
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Whether new drafts use it by default."
+          }
+        },
+        "description": "An invoice numbering series."
+      },
+      "InvoiceTotalsResponse": {
+        "required": [
+          "currency",
+          "taxableBase",
+          "vatAmount",
+          "total",
+          "vatBreakdown"
+        ],
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "ISO currency code."
+          },
+          "taxableBase": {
+            "type": "number",
+            "description": "Sum of taxable bases.",
+            "format": "double"
+          },
+          "vatAmount": {
+            "type": "number",
+            "description": "Sum of VAT.",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "description": "Amount payable.",
+            "format": "double"
+          },
+          "vatBreakdown": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VatGroupResponse"
+            },
+            "description": "One entry per VAT rate."
+          }
+        },
+        "description": "Server-calculated totals."
+      },
+      "IssuedInvoiceResponse": {
+        "required": [
+          "id",
+          "number",
+          "seriesCode",
+          "issueDate",
+          "operationDate",
+          "issuedAt",
+          "issuer",
+          "recipient",
+          "lines",
+          "totals",
+          "contentHash",
+          "projectId",
+          "customerId",
+          "draftId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Invoice identifier.",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "string",
+            "description": "Printed number."
+          },
+          "seriesCode": {
+            "type": "string",
+            "description": "Numbering series."
+          },
+          "issueDate": {
+            "type": "string",
+            "description": "Legal issue date.",
+            "format": "date"
+          },
+          "operationDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Operation date when different from the issue date.",
+            "format": "date"
+          },
+          "issuedAt": {
+            "type": "string",
+            "description": "Finalization moment (UTC).",
+            "format": "date-time"
+          },
+          "issuer": {
+            "description": "Issuer snapshot.",
+            "$ref": "#/components/schemas/PartyResponse"
+          },
+          "recipient": {
+            "description": "Recipient snapshot.",
+            "$ref": "#/components/schemas/PartyResponse"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceLineResponse"
+            },
+            "description": "Invoice lines."
+          },
+          "totals": {
+            "description": "Totals.",
+            "$ref": "#/components/schemas/InvoiceTotalsResponse"
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "SHA-256 of the canonical issued representation."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Billed project.",
+            "format": "uuid"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Billed customer.",
+            "format": "uuid"
+          },
+          "draftId": {
+            "type": "string",
+            "description": "Finalized draft.",
+            "format": "uuid"
+          }
+        },
+        "description": "An issued, immutable invoice."
+      },
+      "IssuedInvoiceSummaryResponse": {
+        "required": [
+          "id",
+          "number",
+          "issueDate",
+          "recipientName",
+          "total",
+          "currency",
+          "projectId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Invoice identifier.",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "string",
+            "description": "Printed number."
+          },
+          "issueDate": {
+            "type": "string",
+            "description": "Legal issue date.",
+            "format": "date"
+          },
+          "recipientName": {
+            "type": "string",
+            "description": "Recipient legal name."
+          },
+          "total": {
+            "type": "number",
+            "description": "Amount payable.",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO currency code."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Billed project.",
+            "format": "uuid"
+          }
+        },
+        "description": "An issued invoice in a list."
+      },
+      "IssuerProfileResponse": {
+        "required": [
+          "legalName",
+          "taxId",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Registered legal name."
+          },
+          "taxId": {
+            "type": "string",
+            "description": "Normalized tax ID."
+          },
+          "address": {
+            "description": "Registered address.",
+            "$ref": "#/components/schemas/AddressDto"
+          }
+        },
+        "description": "The legal issuer of invoices."
+      },
+      "PartyResponse": {
+        "required": [
+          "legalName",
+          "taxId",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Registered legal name."
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Tax identification number."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Address, if known.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          }
+        },
+        "description": "A legal party as printed on an invoice."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProjectResponse": {
+        "required": [
+          "id",
+          "name",
+          "customerId",
+          "customerName",
+          "startDate",
+          "endDate",
+          "currency",
+          "billableLines"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Project identifier.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer identifier.",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Customer legal name."
+          },
+          "startDate": {
+            "type": "string",
+            "description": "First day of the job.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Last day of the job.",
+            "format": "date"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO currency code."
+          },
+          "billableLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BillableLineResponse"
+            },
+            "description": "Billable work."
+          }
+        },
+        "description": "A project with its billable lines."
+      },
+      "ProjectSummaryResponse": {
+        "required": [
+          "id",
+          "name",
+          "customerId",
+          "customerName",
+          "startDate",
+          "endDate",
+          "unbilledLineCount",
+          "unbilledNetAmount",
+          "currency"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Project identifier.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer identifier.",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Customer legal name."
+          },
+          "startDate": {
+            "type": "string",
+            "description": "First day of the job.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Last day of the job.",
+            "format": "date"
+          },
+          "unbilledLineCount": {
+            "type": "integer",
+            "description": "Lines not yet in a draft or invoice.",
+            "format": "int32"
+          },
+          "unbilledNetAmount": {
+            "type": "number",
+            "description": "Net amount of the unbilled lines.",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO currency code."
+          }
+        },
+        "description": "A project in a list."
+      },
+      "RegisterCustomerRequest": {
+        "required": [
+          "legalName",
+          "taxId",
+          "address",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Registered legal name."
+          },
+          "taxId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Tax ID; required before the customer can be invoiced."
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Billing address; required before the customer can be invoiced.",
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Billing e-mail."
+          }
+        },
+        "description": "Registers a customer."
+      },
+      "SignInRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "rememberMe": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "UnauthorizedHttpResult": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateIssuerProfileRequest": {
+        "required": [
+          "legalName",
+          "taxId",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "description": "Registered legal name."
+          },
+          "taxId": {
+            "type": "string",
+            "description": "Tax ID."
+          },
+          "address": {
+            "description": "Registered address.",
+            "$ref": "#/components/schemas/AddressDto"
+          }
+        },
+        "description": "Sets the legal issuer details used on future invoices."
+      },
+      "ValidationIssueResponse": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Stable rule code."
+          },
+          "message": {
+            "type": "string",
+            "description": "English explanation."
+          }
+        },
+        "description": "A reason an operation cannot proceed, identified by a stable code the UI can localize."
+      },
+      "VatGroupResponse": {
+        "required": [
+          "rate",
+          "taxableBase",
+          "vatAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "rate": {
+            "type": "number",
+            "description": "VAT percentage.",
+            "format": "double"
+          },
+          "taxableBase": {
+            "type": "number",
+            "description": "Sum of net amounts at this rate.",
+            "format": "double"
+          },
+          "vatAmount": {
+            "type": "number",
+            "description": "VAT at this rate.",
+            "format": "double"
+          }
+        },
+        "description": "Taxable base and VAT for one rate."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Organization"
+    },
+    {
+      "name": "Audit"
+    },
+    {
+      "name": "Customers"
+    },
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "Invoicing"
+    }
+  ]
 }

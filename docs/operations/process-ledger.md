@@ -88,6 +88,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Exclude cancelled work, classify draft/planned lines as soft holds, and active/completed lines as reservations.
 - Check: The endpoint and generated contract pass CI; atomic reservation remains a separate follow-up.
 
+## 2026-10-13 · Equipment shortages
+
+- Observation: A shortage resolution must preserve the catalogue's declared relationship rather than accepting arbitrary substitutions.
+- Action: Derive shortage rows from planned lines and permit replacement only through the source item's alternatives.
+- Check: Shortage review and resolve endpoints are covered by generated contracts and CI.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

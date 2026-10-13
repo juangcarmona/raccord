@@ -89,6 +89,23 @@ internal static class Endpoints
                     ? TypedResults.Ok(availability)
                     : TypedResults.NotFound()
         );
+        equipment.MapGet(
+            "/shortages",
+            async (EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListShortagesAsync(ct))
+        );
+        equipment.MapPost(
+            "/shortages/{lineId:guid}/resolve",
+            async Task<Results<Ok, NotFound>> (
+                Guid lineId,
+                Guid alternativeId,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.ResolveShortageAsync(lineId, alternativeId, ct)
+                    ? TypedResults.Ok()
+                    : TypedResults.NotFound()
+        );
         equipment.MapPost(
             "/items",
             async (

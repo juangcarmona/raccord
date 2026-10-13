@@ -55,7 +55,12 @@ public sealed record PackingLineResponse(
     DateTimeOffset? BookedOutAt = null,
     bool IsReceived = false,
     string? ReceivedBy = null,
-    DateTimeOffset? ReceivedAt = null
+    DateTimeOffset? ReceivedAt = null,
+    bool HasException = false,
+    string? ExceptionKind = null,
+    string? ExceptionDescription = null,
+    string? ExceptionReportedBy = null,
+    DateTimeOffset? ExceptionReportedAt = null
 );
 
 public sealed record PackLineRequest(string PackedBy);
@@ -63,6 +68,8 @@ public sealed record PackLineRequest(string PackedBy);
 public sealed record BookOutLineRequest(string BookedOutBy);
 
 public sealed record ReceiveLineRequest(string ReceivedBy);
+
+public sealed record ReportExceptionRequest(string Kind, string Description, string ReportedBy);
 
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>

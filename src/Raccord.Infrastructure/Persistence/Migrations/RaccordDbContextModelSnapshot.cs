@@ -1139,6 +1139,26 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("uuid")
                                 .HasColumnName("equipment_id");
 
+                            b1.Property<string>("ExceptionDescription")
+                                .HasColumnType("text")
+                                .HasColumnName("exception_description");
+
+                            b1.Property<string>("ExceptionKind")
+                                .HasColumnType("text")
+                                .HasColumnName("exception_kind");
+
+                            b1.Property<DateTimeOffset?>("ExceptionReportedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("exception_reported_at");
+
+                            b1.Property<string>("ExceptionReportedBy")
+                                .HasColumnType("text")
+                                .HasColumnName("exception_reported_by");
+
+                            b1.Property<bool>("HasException")
+                                .HasColumnType("boolean")
+                                .HasColumnName("has_exception");
+
                             b1.Property<bool>("IsBookedOut")
                                 .HasColumnType("boolean")
                                 .HasColumnName("is_booked_out");

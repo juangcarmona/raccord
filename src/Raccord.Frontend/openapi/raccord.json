@@ -1416,6 +1416,58 @@
         }
       }
     },
+    "/api/projects/{id}/packing-list/{lineId}/exception": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportExceptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/status": {
       "put": {
         "tags": [
@@ -3563,6 +3615,35 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "hasException": {
+            "type": "boolean",
+            "default": false
+          },
+          "exceptionKind": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionReportedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionReportedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -4148,6 +4229,25 @@
           }
         },
         "description": "Registers a customer."
+      },
+      "ReportExceptionRequest": {
+        "required": [
+          "kind",
+          "description",
+          "reportedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "reportedBy": {
+            "type": "string"
+          }
+        }
       },
       "ShiftProjectRequest": {
         "required": [

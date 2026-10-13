@@ -249,6 +249,53 @@ public sealed class ProjectTests
             .Code.ShouldBe("projects.receive-already-complete");
     }
 
+    [Fact]
+    public void An_exception_Should_be_recorded_once_after_receiving()
+    {
+        var project = NewProject();
+        project.PlanEquipment(
+            Guid.CreateVersion7(),
+            1,
+            new DateOnly(2026, 5, 5),
+            new DateOnly(2026, 5, 7)
+        );
+        var line = project.CreatePackingList()[0];
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.ReportException(
+                    line.Id,
+                    "damage",
+                    "Broken lens",
+                    "warehouse@example.test",
+                    DateTimeOffset.UtcNow
+                )
+            )
+            .Code.ShouldBe("projects.exception-not-received");
+        project.Pack(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow);
+        project.BookOut(line.Id, "driver@example.test", DateTimeOffset.UtcNow);
+        project.Receive(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow);
+        project
+            .ReportException(
+                line.Id,
+                "damage",
+                "Broken lens",
+                "warehouse@example.test",
+                DateTimeOffset.UtcNow
+            )
+            .HasException.ShouldBeTrue();
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.ReportException(
+                    line.Id,
+                    "loss",
+                    "Missing",
+                    "warehouse@example.test",
+                    DateTimeOffset.UtcNow
+                )
+            )
+            .Code.ShouldBe("projects.exception-already-recorded");
+    }
+
     private static Project NewProject() =>
         Project.Create(
             "Spring campaign shoot",

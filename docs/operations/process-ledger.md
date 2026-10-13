@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Warehouse exception slice
+
+- Observation: Loss and damage are operational exceptions, not implicit stock or invoice mutations.
+- Action: Require receipt first, record one descriptive exception with actor/time metadata, and defer valuation and billing consequences.
+- Check: Domain lifecycle coverage, migration, generated contracts, OpenSpec validation, visual evidence and full CI/E2E gates are required before merge.
+
 ## 2026-10-13 · Warehouse receiving slice
 
 - Observation: Return completion must be explicit and follow dispatch; otherwise a line can appear available while still in transit.

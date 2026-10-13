@@ -50,6 +50,21 @@ public sealed class PackingLine
     /// <summary>Trusted time at which the line was received.</summary>
     public DateTimeOffset? ReceivedAt { get; private set; }
 
+    /// <summary>Whether the received line has an operational exception.</summary>
+    public bool HasException { get; private set; }
+
+    /// <summary>Exception kind, such as loss or damage.</summary>
+    public string? ExceptionKind { get; private set; }
+
+    /// <summary>Exception description.</summary>
+    public string? ExceptionDescription { get; private set; }
+
+    /// <summary>Actor who recorded the exception.</summary>
+    public string? ExceptionReportedBy { get; private set; }
+
+    /// <summary>Trusted time at which the exception was recorded.</summary>
+    public DateTimeOffset? ExceptionReportedAt { get; private set; }
+
     /// <summary>Marks the line packed once.</summary>
     public void Pack(string actor, DateTimeOffset packedAt)
     {
@@ -112,5 +127,40 @@ public sealed class PackingLine
         IsReceived = true;
         ReceivedBy = actor.Trim();
         ReceivedAt = receivedAt;
+    }
+
+    /// <summary>Records one loss or damage exception after receipt.</summary>
+    public void ReportException(
+        string kind,
+        string description,
+        string actor,
+        DateTimeOffset reportedAt
+    )
+    {
+        if (!IsReceived)
+            throw new BusinessRuleViolationException(
+                "projects.exception-not-received",
+                "Exceptions can only be recorded after receiving."
+            );
+        if (HasException)
+            throw new BusinessRuleViolationException(
+                "projects.exception-already-recorded",
+                "This line already has an exception."
+            );
+        if (string.IsNullOrWhiteSpace(kind) || string.IsNullOrWhiteSpace(description))
+            throw new BusinessRuleViolationException(
+                "projects.exception-details-required",
+                "Exception kind and description are required."
+            );
+        if (string.IsNullOrWhiteSpace(actor))
+            throw new BusinessRuleViolationException(
+                "projects.exception-actor-required",
+                "The exception reporter is required."
+            );
+        HasException = true;
+        ExceptionKind = kind.Trim();
+        ExceptionDescription = description.Trim();
+        ExceptionReportedBy = actor.Trim();
+        ExceptionReportedAt = reportedAt;
     }
 }

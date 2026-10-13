@@ -138,6 +138,25 @@ public sealed class Project
         return line;
     }
 
+    /// <summary>Records a loss or damage exception on a received line.</summary>
+    public PackingLine ReportException(
+        Guid lineId,
+        string kind,
+        string description,
+        string actor,
+        DateTimeOffset reportedAt
+    )
+    {
+        var line =
+            packingLines.Find(candidate => candidate.Id == lineId)
+            ?? throw new BusinessRuleViolationException(
+                "projects.packing-line-not-found",
+                "The packing line does not belong to this project."
+            );
+        line.ReportException(kind, description, actor, reportedAt);
+        return line;
+    }
+
     /// <summary>Plans equipment for a period within the project period.</summary>
     public PlannedEquipmentLine PlanEquipment(
         Guid equipmentId,

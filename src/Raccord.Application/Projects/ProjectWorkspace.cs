@@ -274,6 +274,28 @@ public sealed class ProjectWorkspace(
         return ToPackingResponse(line);
     }
 
+    /// <summary>Records a loss or damage exception on a received line.</summary>
+    public async Task<PackingLineResponse?> ReportExceptionAsync(
+        Guid projectId,
+        Guid lineId,
+        ReportExceptionRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.ReportException(
+            lineId,
+            request.Kind,
+            request.Description,
+            request.ReportedBy,
+            clock.UtcNow
+        );
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToPackingResponse(line);
+    }
+
     /// <summary>Changes a project's planning lifecycle status.</summary>
     public async Task<ProjectResponse?> SetStatusAsync(
         Guid id,
@@ -328,7 +350,12 @@ public sealed class ProjectWorkspace(
             line.BookedOutAt,
             line.IsReceived,
             line.ReceivedBy,
-            line.ReceivedAt
+            line.ReceivedAt,
+            line.HasException,
+            line.ExceptionKind,
+            line.ExceptionDescription,
+            line.ExceptionReportedBy,
+            line.ExceptionReportedAt
         );
 
     private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(

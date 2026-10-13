@@ -497,6 +497,19 @@ internal static class Endpoints
                     ? TypedResults.Ok(line)
                     : TypedResults.NotFound()
         );
+        projects.MapPost(
+            "/{id:guid}/packing-list/{lineId:guid}/exception",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                ReportExceptionRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ReportExceptionAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
         projects.MapPut(
             "/{id:guid}/status",
             async Task<Results<Ok<ProjectResponse>, NotFound>> (

@@ -466,9 +466,10 @@ internal static class Endpoints
                 Guid projectId,
                 QuoteWorkspace workspace,
                 CancellationToken ct
-            ) => await workspace.GenerateAsync(projectId, ct) is { } quote
-                ? TypedResults.Created($"/api/quotes/{quote.Id}", quote)
-                : TypedResults.NotFound()
+            ) =>
+                await workspace.GenerateAsync(projectId, ct) is { } quote
+                    ? TypedResults.Created($"/api/quotes/{quote.Id}", quote)
+                    : TypedResults.NotFound()
         );
         quotes.MapGet(
             "/{id:guid}",
@@ -476,9 +477,10 @@ internal static class Endpoints
                 Guid id,
                 QuoteWorkspace workspace,
                 CancellationToken ct
-            ) => await workspace.GetAsync(id, ct) is { } quote
-                ? TypedResults.Ok(quote)
-                : TypedResults.NotFound()
+            ) =>
+                await workspace.GetAsync(id, ct) is { } quote
+                    ? TypedResults.Ok(quote)
+                    : TypedResults.NotFound()
         );
     }
 

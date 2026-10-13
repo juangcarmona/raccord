@@ -6,7 +6,10 @@ namespace Raccord.Domain.Commercial;
 /// <summary>Gapless numbering for quotes in one series and calendar year.</summary>
 public sealed class QuoteNumberSequence
 {
-    private QuoteNumberSequence() { SeriesCode = string.Empty; }
+    private QuoteNumberSequence()
+    {
+        SeriesCode = string.Empty;
+    }
 
     private QuoteNumberSequence(string seriesCode, int year)
     {
@@ -26,9 +29,17 @@ public sealed class QuoteNumberSequence
     /// <summary>Starts an empty quote sequence.</summary>
     public static QuoteNumberSequence Start(string seriesCode, int year)
     {
-        if (string.IsNullOrWhiteSpace(seriesCode) || seriesCode.Length > 10 ||
-            seriesCode.Any(character => (character < 'A' || character > 'Z') && !char.IsAsciiDigit(character)))
-            throw new BusinessRuleViolationException("quotes.series-invalid", "Quote series must be 1 to 10 uppercase letters or digits.");
+        if (
+            string.IsNullOrWhiteSpace(seriesCode)
+            || seriesCode.Length > 10
+            || seriesCode.Any(character =>
+                (character < 'A' || character > 'Z') && !char.IsAsciiDigit(character)
+            )
+        )
+            throw new BusinessRuleViolationException(
+                "quotes.series-invalid",
+                "Quote series must be 1 to 10 uppercase letters or digits."
+            );
         return new QuoteNumberSequence(seriesCode, year);
     }
 

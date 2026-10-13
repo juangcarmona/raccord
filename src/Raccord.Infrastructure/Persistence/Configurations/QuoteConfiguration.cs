@@ -4,7 +4,9 @@ using Raccord.Domain.Commercial;
 
 namespace Raccord.Infrastructure.Persistence.Configurations;
 
-internal sealed class QuoteConfiguration : IEntityTypeConfiguration<Quote>, IEntityTypeConfiguration<QuoteNumberSequence>
+internal sealed class QuoteConfiguration
+    : IEntityTypeConfiguration<Quote>,
+        IEntityTypeConfiguration<QuoteNumberSequence>
 {
     public void Configure(EntityTypeBuilder<Quote> builder)
     {
@@ -16,20 +18,23 @@ internal sealed class QuoteConfiguration : IEntityTypeConfiguration<Quote>, IEnt
         builder.Property(quote => quote.ProjectName).HasMaxLength(200).IsRequired();
         builder.Property(quote => quote.PaymentTerms).HasMaxLength(200);
         builder.HasIndex(quote => quote.Number).IsUnique();
-        builder.OwnsMany(quote => quote.Lines, line =>
-        {
-            line.ToTable("quote_lines");
-            line.WithOwner().HasForeignKey("QuoteId");
-            line.HasKey(item => item.Id);
-            line.Property(item => item.Id).ValueGeneratedNever();
-            line.Property(item => item.Description).HasMaxLength(500).IsRequired();
-            line.Property(item => item.CurrencyCode).HasMaxLength(3).IsRequired();
-            line.Property(item => item.Quantity).HasPrecision(18, 4);
-            line.Property(item => item.UnitPrice).HasPrecision(18, 4);
-            line.Property(item => item.DiscountPercent).HasPrecision(5, 2);
-            line.Property(item => item.VatPercentage).HasPrecision(5, 2);
-            line.HasIndex("QuoteId", nameof(QuoteLine.Position)).IsUnique();
-        });
+        builder.OwnsMany(
+            quote => quote.Lines,
+            line =>
+            {
+                line.ToTable("quote_lines");
+                line.WithOwner().HasForeignKey("QuoteId");
+                line.HasKey(item => item.Id);
+                line.Property(item => item.Id).ValueGeneratedNever();
+                line.Property(item => item.Description).HasMaxLength(500).IsRequired();
+                line.Property(item => item.CurrencyCode).HasMaxLength(3).IsRequired();
+                line.Property(item => item.Quantity).HasPrecision(18, 4);
+                line.Property(item => item.UnitPrice).HasPrecision(18, 4);
+                line.Property(item => item.DiscountPercent).HasPrecision(5, 2);
+                line.Property(item => item.VatPercentage).HasPrecision(5, 2);
+                line.HasIndex("QuoteId", nameof(QuoteLine.Position)).IsUnique();
+            }
+        );
         builder.Navigation(quote => quote.Lines).UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 

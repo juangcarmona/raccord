@@ -979,6 +979,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateProjectStatusRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -1956,11 +2004,14 @@ export interface components {
             defaultDiscountPercent: number;
             /** @description Payment terms copied from the contact. */
             paymentTerms: null | string;
+            /** @description Project planning status. */
+            status: components["schemas"]["ProjectStatus"];
             /** @description ISO currency code. */
             currency: string;
             /** @description Billable work. */
             billableLines: components["schemas"]["BillableLineResponse"][];
         };
+        ProjectStatus: number;
         /** @description A project in a list. */
         ProjectSummaryResponse: {
             /**
@@ -1994,6 +2045,8 @@ export interface components {
             defaultDiscountPercent: number;
             /** @description Payment terms copied from the contact. */
             paymentTerms: null | string;
+            /** @description Project planning status. */
+            status: components["schemas"]["ProjectStatus"];
             /**
              * Format: int32
              * @description Lines not yet in a draft or invoice.
@@ -2062,6 +2115,9 @@ export interface components {
             taxId: string;
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
+        };
+        UpdateProjectStatusRequest: {
+            status: components["schemas"]["ProjectStatus"];
         };
         /** @description A reason an operation cannot proceed, identified by a stable code the UI can localize. */
         ValidationIssueResponse: {

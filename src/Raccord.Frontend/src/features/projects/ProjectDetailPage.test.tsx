@@ -28,6 +28,7 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     endDate: "2026-09-18",
     defaultDiscountPercent: 0,
     paymentTerms: null,
+    status: 0,
     currency: "EUR",
     billableLines,
 });

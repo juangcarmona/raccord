@@ -29,6 +29,7 @@ public sealed class Project
         EndDate = endDate;
         DefaultDiscountPercent = discountPercent;
         PaymentTerms = paymentTerms;
+        Status = ProjectStatus.Draft;
     }
 
     /// <summary>Project identifier.</summary>
@@ -51,6 +52,12 @@ public sealed class Project
 
     /// <summary>Payment terms copied from the contact at creation time.</summary>
     public string? PaymentTerms { get; private set; }
+
+    /// <summary>Current planning lifecycle status.</summary>
+    public ProjectStatus Status { get; private set; }
+
+    /// <summary>Changes the project planning lifecycle status.</summary>
+    public void SetStatus(ProjectStatus status) => Status = status;
 
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>

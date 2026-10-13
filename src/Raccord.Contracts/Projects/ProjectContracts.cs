@@ -1,4 +1,17 @@
+#pragma warning disable CS1591
+
 namespace Raccord.Contracts.Projects;
+
+public enum ProjectStatus
+{
+    Draft,
+    Planned,
+    Active,
+    Completed,
+    Cancelled,
+}
+
+public sealed record UpdateProjectStatusRequest(ProjectStatus Status);
 
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>
@@ -37,6 +50,7 @@ public sealed record AddBillableLineRequest(
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
 /// <param name="PaymentTerms">Payment terms copied from the contact.</param>
+/// <param name="Status">Project planning status.</param>
 /// <param name="UnbilledLineCount">Lines not yet in a draft or invoice.</param>
 /// <param name="UnbilledNetAmount">Net amount of the unbilled lines.</param>
 /// <param name="Currency">ISO currency code.</param>
@@ -49,6 +63,7 @@ public sealed record ProjectSummaryResponse(
     DateOnly EndDate,
     decimal DefaultDiscountPercent,
     string? PaymentTerms,
+    ProjectStatus Status,
     int UnbilledLineCount,
     decimal UnbilledNetAmount,
     string Currency
@@ -63,6 +78,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
 /// <param name="PaymentTerms">Payment terms copied from the contact.</param>
+/// <param name="Status">Project planning status.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
 public sealed record ProjectResponse(
@@ -74,6 +90,7 @@ public sealed record ProjectResponse(
     DateOnly EndDate,
     decimal DefaultDiscountPercent,
     string? PaymentTerms,
+    ProjectStatus Status,
     string Currency,
     IReadOnlyList<BillableLineResponse> BillableLines
 );
@@ -103,3 +120,5 @@ public sealed record BillableLineResponse(
     Guid? DraftId,
     Guid? InvoiceId
 );
+
+#pragma warning restore CS1591

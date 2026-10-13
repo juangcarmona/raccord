@@ -34,6 +34,16 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-13 · External identity
+
+- Observation: Optional authentication handlers must not alter the default local-login path or make provider secrets mandatory in development and tests.
+- Action: Register external schemes only when explicitly enabled, validate their required settings at activation, and keep the disabled path covered by web tests.
+- Check: CI starts with no OIDC configuration and verifies local sign-in plus the disabled external challenge boundary.
+
+- Observation: The first external-login E2E selector collided with an existing shell control that used the same accessible label.
+- Action: Scope browser locators to the feature form or landmark whenever the application shell can expose a duplicate label.
+- Check: New journeys use accessible labels scoped to the owning form and keep screenshot evidence in the PR artifacts.
+
 ## 2026-10-13 · Epic #17 continuation
 
 - Observation: Starting the next epic before reconciling all children of the current epic caused avoidable context switching and uncommitted work in the wrong feature worktree.

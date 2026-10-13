@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,31 @@ builder
     .AddEntityFrameworkStores<RaccordDbContext>();
 if (requireAuthentication)
 {
-    builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+    var authentication = builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme);
+    authentication.AddIdentityCookies();
+    var oidc = builder.Configuration.GetSection("Raccord:Authentication:Oidc");
+    if (oidc.GetValue<bool>("Enabled"))
+    {
+        authentication.AddOpenIdConnect(
+            "oidc",
+            options =>
+            {
+                options.Authority =
+                    oidc["Authority"]
+                    ?? throw new InvalidOperationException("OIDC authority is required.");
+                options.ClientId =
+                    oidc["ClientId"]
+                    ?? throw new InvalidOperationException("OIDC client id is required.");
+                options.ClientSecret =
+                    oidc["ClientSecret"]
+                    ?? throw new InvalidOperationException("OIDC client secret is required.");
+                options.ResponseType = "code";
+                options.SaveTokens = false;
+                options.SignInScheme = IdentityConstants.ApplicationScheme;
+                options.CallbackPath = "/api/auth/external/callback";
+            }
+        );
+    }
 }
 else
 {

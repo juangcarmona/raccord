@@ -87,6 +87,40 @@ internal static class Endpoints
                     await catalog.CreateAsync(request, ct)
                 )
         );
+        equipment.MapPut(
+            "/items/{id:guid}/details",
+            async Task<Results<Ok<EquipmentItemSnapshot>, NotFound>> (
+                Guid id,
+                UpdateEquipmentItemDetailsRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateDetailsAsync(id, request, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
+        );
+        equipment.MapPost(
+            "/items/{id:guid}/image",
+            async Task<Results<Ok<EquipmentItemSnapshot>, NotFound>> (
+                Guid id,
+                IFormFile file,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+            {
+                await using var stream = file.OpenReadStream();
+                using var memory = new MemoryStream();
+                await stream.CopyToAsync(memory, ct);
+                var item = await catalog.SaveImageAsync(
+                    id,
+                    file.FileName,
+                    file.ContentType,
+                    memory.ToArray(),
+                    ct
+                );
+                return item is null ? TypedResults.NotFound() : TypedResults.Ok(item);
+            }
+        );
     }
 
     private static void MapCustomers(RouteGroupBuilder api)

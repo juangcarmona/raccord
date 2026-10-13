@@ -1,12 +1,13 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Raccord.BuildingBlocks.Storage;
 using Raccord.Modules.Equipment.Contracts;
 
 namespace Raccord.Infrastructure.Persistence;
 
 #pragma warning disable CS1591
 
-public sealed class EquipmentCatalog(RaccordDbContext db)
+public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documents)
 {
     public async Task<EquipmentItemSnapshot> CreateAsync(
         CreateEquipmentItemRequest request,
@@ -53,11 +54,59 @@ public sealed class EquipmentCatalog(RaccordDbContext db)
             row.Type,
             row.StockQuantity,
             ParseSerialNumbers(row.SerialNumbers),
-            row.IsPlanned
+            row.IsPlanned,
+            row.Details,
+            row.ImageKey,
+            ParseIds(row.AccessoryIds),
+            ParseIds(row.AlternativeIds)
         );
+
+    public async Task<EquipmentItemSnapshot?> UpdateDetailsAsync(
+        Guid id,
+        UpdateEquipmentItemDetailsRequest request,
+        CancellationToken ct
+    )
+    {
+        var row = await db
+            .EquipmentItems.FirstOrDefaultAsync(item => item.Id == id, ct)
+            .ConfigureAwait(false);
+        if (row is null)
+            return null;
+        row.Details = request.Details?.Trim();
+        row.AccessoryIds = JsonSerializer.Serialize(request.AccessoryIds ?? []);
+        row.AlternativeIds = JsonSerializer.Serialize(request.AlternativeIds ?? []);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToSnapshot(row);
+    }
+
+    public async Task<EquipmentItemSnapshot?> SaveImageAsync(
+        Guid id,
+        string fileName,
+        string contentType,
+        byte[] content,
+        CancellationToken ct
+    )
+    {
+        if (
+            content.Length is 0 or > 5_000_000
+            || !contentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase)
+        )
+            return null;
+        var row = await db
+            .EquipmentItems.FirstOrDefaultAsync(item => item.Id == id, ct)
+            .ConfigureAwait(false);
+        if (row is null)
+            return null;
+        row.ImageKey = $"equipment/{id:N}/{Path.GetFileName(fileName)}";
+        await documents.SaveAsync(row.ImageKey, content, contentType, ct).ConfigureAwait(false);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToSnapshot(row);
+    }
 
     private static string[] ParseSerialNumbers(string value) =>
         JsonSerializer.Deserialize<string[]>(value) ?? [];
+
+    private static Guid[] ParseIds(string value) => JsonSerializer.Deserialize<Guid[]>(value) ?? [];
 }
 
 #pragma warning restore CS1591

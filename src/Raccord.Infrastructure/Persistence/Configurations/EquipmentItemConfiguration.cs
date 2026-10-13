@@ -13,5 +13,9 @@ internal sealed class EquipmentItemConfiguration : IEntityTypeConfiguration<Equi
         builder.Property(item => item.Code).HasMaxLength(100).IsRequired();
         builder.Property(item => item.Name).HasMaxLength(200).IsRequired();
         builder.Property(item => item.SerialNumbers).HasColumnType("jsonb").IsRequired();
+        builder.Property(item => item.AccessoryIds).HasColumnType("jsonb").IsRequired();
+        builder.Property(item => item.AlternativeIds).HasColumnType("jsonb").IsRequired();
+        builder.Property(item => item.Details).HasMaxLength(5000);
+        builder.Property(item => item.ImageKey).HasMaxLength(300);
     }
 }

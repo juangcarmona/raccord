@@ -52,6 +52,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Add every new project to Dockerfile dependency-copy stages and verify the container gate before merging.
 - Check: Container, backend, migration, and generated-contract checks all pass for the item slice.
 
+## 2026-10-13 · Equipment item details
+
+- Observation: File uploads need both a storage boundary and persisted metadata; validation belongs before storage.
+- Action: Keep IDocumentStore provider-agnostic, cap image size/type at the API boundary, and persist only the object key.
+- Check: Web/OpenAPI and storage-backed tests plus CI validate the upload path.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

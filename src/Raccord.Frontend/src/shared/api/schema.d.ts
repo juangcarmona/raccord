@@ -639,6 +639,104 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/{id}/details": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateEquipmentItemDetailsRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemSnapshot"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": {
+                        file: components["schemas"]["IFormFile"];
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemSnapshot"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -1431,6 +1529,10 @@ export interface components {
             serialNumbers: string[];
             /** @default false */
             isPlanned: boolean;
+            details?: null | string;
+            imageKey?: null | string;
+            accessoryIds?: null | string[];
+            alternativeIds?: null | string[];
         };
         /** @description Stable equipment identity published for consumers such as Projects. */
         EquipmentItemType: number;
@@ -1827,6 +1929,11 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Contact e-mail. */
             email: null | string;
+        };
+        UpdateEquipmentItemDetailsRequest: {
+            details: null | string;
+            accessoryIds: null | string[];
+            alternativeIds: null | string[];
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

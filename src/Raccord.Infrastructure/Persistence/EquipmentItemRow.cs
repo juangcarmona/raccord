@@ -11,4 +11,8 @@ internal sealed class EquipmentItemRow
     public int StockQuantity { get; set; }
     public string SerialNumbers { get; set; } = "[]";
     public bool IsPlanned { get; set; }
+    public string? Details { get; set; }
+    public string? ImageKey { get; set; }
+    public string AccessoryIds { get; set; } = "[]";
+    public string AlternativeIds { get; set; } = "[]";
 }

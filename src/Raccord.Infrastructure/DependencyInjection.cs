@@ -79,6 +79,7 @@ public static class DependencyInjection
             provider.GetRequiredService<ApplicationAuditTrail>()
         );
         services.AddScoped<ApplicationComplianceRecorder, PendingComplianceRecorder>();
+        services.AddComplianceSubmission();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
 

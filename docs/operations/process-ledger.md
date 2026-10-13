@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Compliance submission worker
+
+- Observation: The transactional pending record is the safe outbox boundary; a worker must not recalculate or mutate the issued invoice.
+- Action: Submit the immutable representation with the record hash as idempotency key, load optional certificate material only from configuration, and persist response metadata without logging secrets.
+- Check: Analyzer-backed build, migration generation, OpenSpec citation validation, and CI container/E2E gates run before merge; authority sandbox tests remain an explicit follow-up until an endpoint is provisioned.
+
 ## 2026-10-13 · Rectifying invoices
 
 - Observation: Corrections must preserve the issued record while allowing negative differences and a separate numbering series.

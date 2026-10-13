@@ -83,6 +83,7 @@ internal sealed class RecordConfiguration
         builder.Property(row => row.Kind).HasMaxLength(30);
         builder.Property(row => row.Status).HasMaxLength(30);
         builder.Property(row => row.LastError).HasMaxLength(2000);
+        builder.Property(row => row.AuthorityReference).HasMaxLength(200);
         builder.HasIndex(row => row.InvoiceId).IsUnique();
         builder.HasIndex(row => row.Status);
         builder

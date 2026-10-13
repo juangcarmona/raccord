@@ -1,0 +1,3 @@
+name: compliance-submission
+description: Submit pending compliance records through an idempotent certificate-backed worker.
+status: proposed

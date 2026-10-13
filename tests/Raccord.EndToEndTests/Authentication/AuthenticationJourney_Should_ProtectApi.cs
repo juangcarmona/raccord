@@ -37,7 +37,7 @@ public sealed class AuthenticationJourney_Should_ProtectApi(DistributedAppFixtur
                 var authenticatedResponse = await page.GotoAsync("/api/projects");
                 Assert.Equal(200, authenticatedResponse!.Status);
 
-                await page.GetByRole(AriaRole.Button, new() { Name = "Sign out" }).ClickAsync();
+                await page.Locator(".shell__toolbar button").ClickAsync();
                 await page.WaitForURLAsync(url =>
                     url.EndsWith("/sign-in", StringComparison.Ordinal)
                 );

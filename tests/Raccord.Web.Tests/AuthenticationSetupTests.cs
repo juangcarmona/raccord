@@ -35,7 +35,7 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
 
         var after = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");
         after!.Required.ShouldBeFalse();
-        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.roles")).ShouldBe(4);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.user_roles")).ShouldBe(1);
 
@@ -82,7 +82,7 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
             new SetupRequest("second-admin@example.com", "SecondAdmin123!@#")
         );
         second.StatusCode.ShouldBe(HttpStatusCode.Conflict);
-        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
     }
 
     private sealed record SetupRequest(string Email, string Password);

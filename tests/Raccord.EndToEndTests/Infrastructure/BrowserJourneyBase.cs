@@ -78,6 +78,33 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         await page.GetByText($"Productora E2E {RunStamp}").First.WaitForAsync();
     }
 
+    protected static async Task EnsureInvoiceIssuerAsync(IPage page)
+    {
+        var response = await page.APIRequest.PutAsync(
+            "/api/organization/issuer",
+            new APIRequestContextOptions
+            {
+                DataObject = new
+                {
+                    legalName = "Raccord E2E S.L.",
+                    taxId = "B00000000",
+                    address = new
+                    {
+                        street = "Calle de pruebas 1",
+                        postalCode = "28001",
+                        city = "Madrid",
+                        province = "Madrid",
+                        countryCode = "ES",
+                    },
+                },
+            }
+        );
+        if (!response.Ok)
+        {
+            throw new InvalidOperationException(await response.TextAsync());
+        }
+    }
+
     /// <summary>
     /// Creates a project named after this run for the customer <see cref="CreateCustomerAsync"/>
     /// registered in the same page session (the project form needs a customer to bill), with one

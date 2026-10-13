@@ -30,6 +30,7 @@ builder
         options.Password.RequiredLength = 12;
     })
     .AddSignInManager()
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<RaccordDbContext>();
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
 builder.Services.Configure<CookieAuthenticationOptions>(
@@ -74,6 +75,7 @@ builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<QuoteWorkspace>();
 builder.Services.AddScoped<AuditLog>();
+builder.Services.AddScoped<InstallationSetup>();
 
 var app = builder.Build();
 

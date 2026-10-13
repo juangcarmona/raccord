@@ -16,11 +16,12 @@ import { ContactPage } from "../features/contacts/ContactPage";
 import { NewContactPage } from "../features/contacts/NewContactPage";
 
 export const routes: RouteObject[] = [
+    { index: true, element: <Navigate to="/setup" replace /> },
+    { path: "setup", element: <SetupPage /> },
     { path: "sign-in", element: <SignInPage /> },
     {
         element: <AppShell />,
         children: [
-            { index: true, element: <Navigate to="/projects" replace /> },
             { path: "projects", element: <ProjectsPage /> },
             { path: "projects/new", element: <NewProjectPage /> },
             { path: "projects/:id", element: <ProjectDetailPage /> },

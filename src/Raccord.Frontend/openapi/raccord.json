@@ -65,6 +65,47 @@
         }
       }
     },
+    "/api/setup/status": {
+      "get": {
+        "tags": [
+          "Installation setup"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/setup": {
+      "post": {
+        "tags": [
+          "Installation setup"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/organization/issuer": {
       "get": {
         "tags": [
@@ -8237,6 +8278,9 @@
   "tags": [
     {
       "name": "Authentication"
+    },
+    {
+      "name": "Installation setup"
     },
     {
       "name": "Organization"

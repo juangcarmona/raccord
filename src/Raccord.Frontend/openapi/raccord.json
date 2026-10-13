@@ -54,6 +54,52 @@
         }
       }
     },
+    "/api/organization/financial-settings": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinancialSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinancialSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinancialSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/invoice-series": {
       "get": {
         "tags": [
@@ -2510,6 +2556,28 @@
         },
         "description": "Finalizes a draft."
       },
+      "FinancialSettingsResponse": {
+        "required": [
+          "quoteValidityDays",
+          "contractValidityDays",
+          "allowSigningAfterExpiry"
+        ],
+        "type": "object",
+        "properties": {
+          "quoteValidityDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contractValidityDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowSigningAfterExpiry": {
+            "type": "boolean"
+          }
+        },
+        "description": "Company-wide quote and contract validity settings."
+      },
       "IFormFile": {
         "type": "string",
         "format": "binary"
@@ -3490,6 +3558,28 @@
             }
           }
         }
+      },
+      "UpdateFinancialSettingsRequest": {
+        "required": [
+          "quoteValidityDays",
+          "contractValidityDays",
+          "allowSigningAfterExpiry"
+        ],
+        "type": "object",
+        "properties": {
+          "quoteValidityDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contractValidityDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowSigningAfterExpiry": {
+            "type": "boolean"
+          }
+        },
+        "description": "Updates company-wide quote and contract validity settings."
       },
       "UpdateIssuerProfileRequest": {
         "required": [

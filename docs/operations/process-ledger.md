@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Financial settings seam
+
+- Observation: Epic-level commercial behavior needs a stable company-wide settings boundary before quote generation can consume it.
+- Action: Persist only validated quote/contract validity and expiry-signing policy, expose idempotent organization endpoints, and keep later quote/signing behavior out of this slice.
+- Check: Domain rule tests, migration, generated OpenAPI and a linked workflow visual are required in the PR before integration.
+
 ## 2026-10-13 · Compliance submission worker
 
 - Observation: The transactional pending record is the safe outbox boundary; a worker must not recalculate or mutate the issued invoice.

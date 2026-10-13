@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="320" viewBox="0 0 1100 320" role="img" aria-labelledby="title desc">
+  <title id="title">Financial settings API evidence</title>
+  <desc id="desc">The organization financial settings flow from administrator input to validation, persistence, and future quote consumers.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f6f8fb"/><stop offset="1" stop-color="#eaf0f7"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#18324d" flood-opacity=".15"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#52708f"/></marker>
+  </defs>
+  <rect width="1100" height="320" rx="22" fill="url(#background)"/>
+  <text x="42" y="48" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700" fill="#18324d">Financial settings · evidence flow</text>
+  <text x="42" y="75" font-family="Inter,Arial,sans-serif" font-size="14" fill="#52708f">One company-wide row, validated before persistence, ready for quote and contract consumers.</text>
+  <g filter="url(#shadow)" font-family="Inter,Arial,sans-serif">
+    <rect x="42" y="112" width="220" height="128" rx="15" fill="#fff" stroke="#7b9bb8" stroke-width="2"/>
+    <rect x="300" y="112" width="220" height="128" rx="15" fill="#fff" stroke="#7b9bb8" stroke-width="2"/>
+    <rect x="558" y="112" width="220" height="128" rx="15" fill="#fff" stroke="#7b9bb8" stroke-width="2"/>
+    <rect x="816" y="112" width="242" height="128" rx="15" fill="#fff" stroke="#4d9b78" stroke-width="2"/>
+  </g>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="65" y="148" font-size="17" font-weight="700" fill="#18324d">GET / PUT</text>
+    <text x="65" y="176" font-size="14" fill="#35536e">Financial settings</text>
+    <text x="65" y="200" font-size="14" fill="#35536e">quote + contract days</text>
+    <text x="65" y="222" font-size="13" fill="#52708f">expiry policy</text>
+    <text x="323" y="148" font-size="17" font-weight="700" fill="#18324d">Validate</text>
+    <text x="323" y="176" font-size="14" fill="#35536e">positive validity</text>
+    <text x="323" y="200" font-size="14" fill="#35536e">explicit signing policy</text>
+    <text x="323" y="222" font-size="13" fill="#52708f">domain rule codes</text>
+    <text x="581" y="148" font-size="17" font-weight="700" fill="#18324d">Persist</text>
+    <text x="581" y="176" font-size="14" fill="#35536e">single installation row</text>
+    <text x="581" y="200" font-size="14" fill="#35536e">audit event</text>
+    <text x="581" y="222" font-size="13" fill="#52708f">EF migration included</text>
+    <text x="839" y="148" font-size="17" font-weight="700" fill="#236344">Consume next</text>
+    <text x="839" y="176" font-size="14" fill="#35536e">quote validity</text>
+    <text x="839" y="200" font-size="14" fill="#35536e">contract validity</text>
+    <text x="839" y="222" font-size="13" fill="#52708f">later #21 slices</text>
+  </g>
+  <path d="M262 176H290M520 176H548M778 176H806" stroke="#52708f" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

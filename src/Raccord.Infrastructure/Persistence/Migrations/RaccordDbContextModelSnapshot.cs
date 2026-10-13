@@ -146,6 +146,43 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_series", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Organization.FinancialSettings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("AllowSigningAfterExpiry")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("allow_signing_after_expiry");
+
+                    b.Property<int>("ContractValidityDays")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(30)
+                        .HasColumnName("contract_validity_days");
+
+                    b.Property<int>("QuoteValidityDays")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(30)
+                        .HasColumnName("quote_validity_days");
+
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
+                    b.HasKey("Id")
+                        .HasName("pk_financial_settings");
+
+                    b.ToTable("financial_settings", (string)null);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Organization.IssuerProfile", b =>
                 {
                     b.Property<Guid>("Id")

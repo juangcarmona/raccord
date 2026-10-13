@@ -74,6 +74,7 @@ public static class DependencyInjection
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
+        services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<IAuditAppender>(provider =>
             provider.GetRequiredService<ApplicationAuditTrail>()

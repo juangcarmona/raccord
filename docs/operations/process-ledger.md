@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Quote document representation
+
+- Observation: A document seam can be delivered before PDF/template infrastructure if its output is deterministic and explicitly limited.
+- Action: Gate downloads on acceptance and render a stable UTF-8 text representation with invariant numeric formatting; leave visual document design to its own slice.
+- Check: Analyzer-backed build, generated API contracts, OpenSpec validation, and a linked workflow visual are required before merge.
+
 ## 2026-10-13 · Quote acceptance
 
 - Observation: Acceptance needs an auditable trusted timestamp while retaining the quote's immutable number and pricing.

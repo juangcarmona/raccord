@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
@@ -104,6 +106,49 @@ public sealed class QuoteWorkspace(
         quote.Accept(clock.UtcNow);
         await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
         return ToResponse(quote);
+    }
+
+    /// <summary>Builds a deterministic text document for an accepted quote.</summary>
+    public async Task<QuoteDocument?> GetDocumentAsync(Guid id, CancellationToken ct)
+    {
+        var quote = await quotes.FindAsync(id, ct).ConfigureAwait(false);
+        if (quote is null || quote.ReviewStatus != QuoteReviewStatus.Accepted)
+            return null;
+        var builder = new StringBuilder()
+            .AppendLine(CultureInfo.InvariantCulture, $"Quote {quote.Number}")
+            .AppendLine(CultureInfo.InvariantCulture, $"Customer: {quote.CustomerName}")
+            .AppendLine(CultureInfo.InvariantCulture, $"Project: {quote.ProjectName}")
+            .AppendLine(CultureInfo.InvariantCulture, $"Issued: {quote.IssuedOn:yyyy-MM-dd}")
+            .AppendLine(CultureInfo.InvariantCulture, $"Valid until: {quote.ValidUntil:yyyy-MM-dd}")
+            .AppendLine(CultureInfo.InvariantCulture, $"Accepted at: {quote.AcceptedAt:O}")
+            .AppendLine(
+                CultureInfo.InvariantCulture,
+                $"Payment terms: {quote.PaymentTerms ?? string.Empty}"
+            )
+            .AppendLine()
+            .AppendLine(
+                "Position | Description | Quantity | Unit price | Discount | VAT | Currency"
+            );
+        foreach (var line in quote.Lines)
+            builder
+                .Append(line.Position.ToString(CultureInfo.InvariantCulture))
+                .Append(" | ")
+                .Append(line.Description)
+                .Append(" | ")
+                .Append(line.Quantity.ToString(CultureInfo.InvariantCulture))
+                .Append(" | ")
+                .Append(line.UnitPrice.ToString(CultureInfo.InvariantCulture))
+                .Append(" | ")
+                .Append(line.DiscountPercent.ToString(CultureInfo.InvariantCulture))
+                .Append(" | ")
+                .Append(line.VatPercentage.ToString(CultureInfo.InvariantCulture))
+                .Append(" | ")
+                .AppendLine(line.CurrencyCode);
+        return new(
+            $"quote-{quote.Number}.txt",
+            "text/plain; charset=utf-8",
+            Encoding.UTF8.GetBytes(builder.ToString())
+        );
     }
 
     private static QuoteResponse ToResponse(Quote quote) =>

@@ -472,6 +472,17 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         quotes.MapGet(
+            "/{id:guid}/document",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.GetDocumentAsync(id, ct) is { } document
+                    ? TypedResults.File(document.Content, document.ContentType, document.FileName)
+                    : TypedResults.NotFound()
+        );
+        quotes.MapGet(
             "/{id:guid}",
             async Task<Results<Ok<QuoteResponse>, NotFound>> (
                 Guid id,

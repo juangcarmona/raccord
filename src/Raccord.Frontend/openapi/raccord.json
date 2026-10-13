@@ -1604,6 +1604,29 @@
         }
       }
     },
+    "/api/quotes/{id}/document": {
+      "get": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/quotes/{id}": {
       "get": {
         "tags": [

@@ -1127,9 +1127,21 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("uuid")
                                 .HasColumnName("id");
 
+                            b1.Property<DateTimeOffset?>("BookedOutAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("booked_out_at");
+
+                            b1.Property<string>("BookedOutBy")
+                                .HasColumnType("text")
+                                .HasColumnName("booked_out_by");
+
                             b1.Property<Guid>("EquipmentId")
                                 .HasColumnType("uuid")
                                 .HasColumnName("equipment_id");
+
+                            b1.Property<bool>("IsBookedOut")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_booked_out");
 
                             b1.Property<bool>("IsPacked")
                                 .HasColumnType("boolean")

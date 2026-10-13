@@ -193,6 +193,34 @@ public sealed class ProjectTests
             .Code.ShouldBe("projects.packing-already-complete");
     }
 
+    [Fact]
+    public void Only_a_packed_line_Should_be_booked_out_once()
+    {
+        var project = NewProject();
+        project.PlanEquipment(
+            Guid.CreateVersion7(),
+            1,
+            new DateOnly(2026, 5, 5),
+            new DateOnly(2026, 5, 7)
+        );
+        var line = project.CreatePackingList()[0];
+
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.BookOut(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.book-out-not-packed");
+        project.Pack(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow);
+        project
+            .BookOut(line.Id, "driver@example.test", DateTimeOffset.UtcNow)
+            .IsBookedOut.ShouldBeTrue();
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.BookOut(line.Id, "driver@example.test", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.book-out-already-complete");
+    }
+
     private static Project NewProject() =>
         Project.Create(
             "Spring campaign shoot",

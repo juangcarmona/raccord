@@ -25,6 +25,8 @@ public sealed class PlannedEquipmentLine
     public int Quantity { get; private set; }
     public DateOnly StartDate { get; private set; }
     public DateOnly EndDate { get; private set; }
+
+    public void ReplaceEquipment(Guid equipmentId) => EquipmentId = equipmentId;
 }
 
 #pragma warning restore CS1591

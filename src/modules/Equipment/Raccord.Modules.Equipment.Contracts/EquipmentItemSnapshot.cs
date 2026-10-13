@@ -86,4 +86,13 @@ public sealed record EquipmentAvailabilityResponse(
     int AvailableQuantity
 );
 
+public sealed record EquipmentShortageResponse(
+    Guid ProjectId,
+    Guid LineId,
+    Guid EquipmentId,
+    int Quantity,
+    int AvailableQuantity,
+    IReadOnlyList<Guid> AlternativeIds
+);
+
 #pragma warning restore CS1591, MA0048

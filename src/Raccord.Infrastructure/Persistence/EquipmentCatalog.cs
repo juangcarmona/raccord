@@ -61,6 +61,91 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         );
     }
 
+    public async Task<IReadOnlyList<EquipmentShortageResponse>> ListShortagesAsync(
+        CancellationToken ct
+    )
+    {
+        var items = await db
+            .EquipmentItems.AsNoTracking()
+            .ToDictionaryAsync(item => item.Id, ct)
+            .ConfigureAwait(false);
+        var projects = await db
+            .Projects.AsNoTracking()
+            .Where(project => project.Status != ProjectStatus.Cancelled)
+            .ToListAsync(ct)
+            .ConfigureAwait(false);
+        var result = new List<EquipmentShortageResponse>();
+        foreach (var project in projects)
+        foreach (var line in project.PlannedEquipmentLines)
+        {
+            if (!items.TryGetValue(line.EquipmentId, out var item))
+                continue;
+            var committed = projects
+                .SelectMany(candidate =>
+                    candidate
+                        .PlannedEquipmentLines.Where(candidateLine =>
+                            candidateLine.EquipmentId == line.EquipmentId
+                            && candidateLine.StartDate <= line.EndDate
+                            && candidateLine.EndDate >= line.StartDate
+                        )
+                        .Select(candidateLine =>
+                            candidate.Status is ProjectStatus.Active or ProjectStatus.Completed
+                            || candidate.Status is ProjectStatus.Draft or ProjectStatus.Planned
+                                ? candidateLine.Quantity
+                                : 0
+                        )
+                )
+                .Sum();
+            var available = item.StockQuantity - committed;
+            if (available < 0)
+                result.Add(
+                    new(
+                        project.Id,
+                        line.Id,
+                        line.EquipmentId,
+                        line.Quantity,
+                        available,
+                        ParseIds(item.AlternativeIds)
+                    )
+                );
+        }
+        return result;
+    }
+
+    public async Task<bool> ResolveShortageAsync(
+        Guid lineId,
+        Guid alternativeId,
+        CancellationToken ct
+    )
+    {
+        var alternative = await db
+            .EquipmentItems.AsNoTracking()
+            .FirstOrDefaultAsync(item => item.Id == alternativeId, ct)
+            .ConfigureAwait(false);
+        var project = (
+            await db
+                .Projects.Where(candidate =>
+                    candidate.PlannedEquipmentLines.Any(line => line.Id == lineId)
+                )
+                .ToListAsync(ct)
+                .ConfigureAwait(false)
+        ).SingleOrDefault();
+        var line = project?.PlannedEquipmentLines.SingleOrDefault(candidate =>
+            candidate.Id == lineId
+        );
+        if (alternative is null || project is null || line is null)
+            return false;
+        var source = await db
+            .EquipmentItems.AsNoTracking()
+            .FirstOrDefaultAsync(item => item.Id == line.EquipmentId, ct)
+            .ConfigureAwait(false);
+        if (source is null || !ParseIds(source.AlternativeIds).Contains(alternativeId))
+            return false;
+        line.ReplaceEquipment(alternativeId);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return true;
+    }
+
     public async Task<EquipmentItemSnapshot> CreateAsync(
         CreateEquipmentItemRequest request,
         CancellationToken cancellationToken

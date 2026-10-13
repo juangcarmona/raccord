@@ -1,0 +1,3 @@
+name: equipment-module
+description: Establish the Equipment bounded-context module seam and schema ownership.
+status: proposed

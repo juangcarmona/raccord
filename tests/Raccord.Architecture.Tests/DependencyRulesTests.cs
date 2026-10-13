@@ -146,6 +146,7 @@ public sealed class DependencyRulesTests
             "Raccord.Infrastructure",
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Contacts",
+            "Raccord.Modules.Equipment",
             "Raccord.BuildingBlocks",
             "Raccord.SharedKernel",
             "Raccord.ServiceDefaults",

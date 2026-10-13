@@ -40,6 +40,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Reconcile issue state against child PRs and executable acceptance tests before closing an epic.
 - Check: Contact CRUD, pagination, generated contracts, and web coverage are present before the feature branch is promoted.
 
+## 2026-10-13 · Equipment module scaffold
+
+- Observation: An empty bounded-context module should establish only the seam and ownership boundary.
+- Action: Add contracts, implementation, composition registration, and schema naming without inventing item behavior.
+- Check: The solution and analyzer-backed module build pass before starting the first equipment feature.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

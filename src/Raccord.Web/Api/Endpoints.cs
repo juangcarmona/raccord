@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
+using Raccord.Application.Commercial;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
 using Raccord.Contracts.Auditing;
+using Raccord.Contracts.Commercial;
 using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
@@ -27,6 +29,7 @@ internal static class Endpoints
         MapEquipment(api);
         MapProjects(api);
         MapInvoicing(api);
+        MapCommercial(api);
         api.MapGet(
                 "/audit-events",
                 async (Guid entityId, AuditLog audit, CancellationToken ct) =>
@@ -452,6 +455,33 @@ internal static class Endpoints
     {
         MapInvoiceDrafts(api);
         MapInvoices(api);
+    }
+
+    private static void MapCommercial(RouteGroupBuilder api)
+    {
+        var quotes = api.MapGroup("/quotes").WithTags("Commercial");
+        quotes.MapPost(
+            "/projects/{projectId:guid}",
+            async Task<Results<Created<QuoteResponse>, NotFound>> (
+                Guid projectId,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.GenerateAsync(projectId, ct) is { } quote
+                    ? TypedResults.Created($"/api/quotes/{quote.Id}", quote)
+                    : TypedResults.NotFound()
+        );
+        quotes.MapGet(
+            "/{id:guid}",
+            async Task<Results<Ok<QuoteResponse>, NotFound>> (
+                Guid id,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.GetAsync(id, ct) is { } quote
+                    ? TypedResults.Ok(quote)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)

@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
+using Raccord.Application.Commercial;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
@@ -32,6 +33,7 @@ builder.Services.AddScoped<EquipmentCatalog>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
+builder.Services.AddScoped<QuoteWorkspace>();
 builder.Services.AddScoped<AuditLog>();
 
 var app = builder.Build();

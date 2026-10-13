@@ -1570,6 +1570,72 @@
           }
         }
       }
+    },
+    "/api/quotes/projects/{projectId}": {
+      "post": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/quotes/{id}": {
+      "get": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3349,6 +3415,106 @@
           }
         }
       },
+      "QuoteLineResponse": {
+        "required": [
+          "position",
+          "description",
+          "quantity",
+          "unitPrice",
+          "discountPercent",
+          "vatPercentage",
+          "currency"
+        ],
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "vatPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "description": "A copied priced line in a quote snapshot."
+      },
+      "QuoteResponse": {
+        "required": [
+          "id",
+          "projectId",
+          "customerId",
+          "customerName",
+          "projectName",
+          "number",
+          "issuedOn",
+          "validUntil",
+          "paymentTerms",
+          "lines"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issuedOn": {
+            "type": "string",
+            "format": "date"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date"
+          },
+          "paymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuoteLineResponse"
+            }
+          }
+        },
+        "description": "A quote generated from a project's current plan."
+      },
       "RectifyInvoiceRequest": {
         "required": [
           "kind",
@@ -3695,6 +3861,9 @@
     },
     {
       "name": "Invoicing"
+    },
+    {
+      "name": "Commercial"
     }
   ]
 }

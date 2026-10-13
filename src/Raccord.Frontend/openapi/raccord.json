@@ -540,6 +540,70 @@
         }
       }
     },
+    "/api/equipment/items": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemPage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEquipmentItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemSnapshot"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -1434,6 +1498,39 @@
           }
         }
       },
+      "CreateEquipmentItemRequest": {
+        "required": [
+          "code",
+          "name",
+          "type",
+          "stockQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EquipmentItemType"
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serialNumbers": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "CreateInvoiceDraftRequest": {
         "required": [
           "projectId",
@@ -1561,6 +1658,79 @@
           }
         },
         "description": "A customer."
+      },
+      "EquipmentItemPage": {
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItemSnapshot"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EquipmentItemSnapshot": {
+        "required": [
+          "id",
+          "code",
+          "name",
+          "type",
+          "stockQuantity",
+          "serialNumbers"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EquipmentItemType"
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serialNumbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPlanned": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "EquipmentItemType": {
+        "type": "integer",
+        "description": "Stable equipment identity published for consumers such as Projects."
       },
       "FinalizeInvoiceDraftRequest": {
         "required": [
@@ -2443,6 +2613,9 @@
     },
     {
       "name": "Contacts"
+    },
+    {
+      "name": "Equipment"
     },
     {
       "name": "Projects"

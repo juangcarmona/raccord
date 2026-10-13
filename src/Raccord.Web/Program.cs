@@ -28,6 +28,7 @@ builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ContactPersonService>();
 builder.Services.AddScoped<ContactTaxonomyService>();
 builder.Services.AddEquipmentModule();
+builder.Services.AddScoped<EquipmentCatalog>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();

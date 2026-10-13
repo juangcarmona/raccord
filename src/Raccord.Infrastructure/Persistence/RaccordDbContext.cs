@@ -29,6 +29,7 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     internal DbSet<AuditEvent> AuditEvents => Set<AuditEvent>();
 
     internal DbSet<ComplianceRecordRow> ComplianceRecords => Set<ComplianceRecordRow>();
+    internal DbSet<EquipmentItemRow> EquipmentItems => Set<EquipmentItemRow>();
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

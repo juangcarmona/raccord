@@ -377,6 +377,52 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("customers", "contacts");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.EquipmentItemRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("code");
+
+                    b.Property<bool>("IsPlanned")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_planned");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("SerialNumbers")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("serial_numbers");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("stock_quantity");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id")
+                        .HasName("pk_items");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_items_code");
+
+                    b.ToTable("items", "equipment");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", b =>
                 {
                     b.Property<Guid>("Id")

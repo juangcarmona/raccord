@@ -82,6 +82,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Store planned equipment as project-owned lines, require positive quantities, and bound dates to the project period.
 - Check: Domain build, migration, generated contracts, and CI validate the period invariant.
 
+## 2026-10-13 · Equipment availability
+
+- Observation: Availability can be exposed safely before reservation commands exist if hold categories remain explicit.
+- Action: Exclude cancelled work, classify draft/planned lines as soft holds, and active/completed lines as reservations.
+- Check: The endpoint and generated contract pass CI; atomic reservation remains a separate follow-up.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

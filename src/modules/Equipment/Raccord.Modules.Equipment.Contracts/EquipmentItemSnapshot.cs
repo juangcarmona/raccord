@@ -76,4 +76,14 @@ public sealed record EquipmentImportResponse(
     IReadOnlyList<EquipmentImportRowResponse> Rows
 );
 
+public sealed record EquipmentAvailabilityResponse(
+    Guid ItemId,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    int StockQuantity,
+    int SoftHeldQuantity,
+    int ReservedQuantity,
+    int AvailableQuantity
+);
+
 #pragma warning restore CS1591, MA0048

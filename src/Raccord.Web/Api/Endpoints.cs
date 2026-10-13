@@ -67,6 +67,7 @@ internal static class Endpoints
             .WithTags("Organization");
     }
 
+#pragma warning disable MA0051
     private static void MapEquipment(RouteGroupBuilder api)
     {
         var equipment = api.MapGroup("/equipment").WithTags("Equipment");
@@ -74,6 +75,19 @@ internal static class Endpoints
             "/items",
             async (int? page, int? pageSize, EquipmentCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListAsync(page ?? 1, pageSize ?? 20, ct))
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/availability",
+            async Task<Results<Ok<EquipmentAvailabilityResponse>, NotFound>> (
+                Guid id,
+                DateOnly startDate,
+                DateOnly endDate,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.GetAvailabilityAsync(id, startDate, endDate, ct) is { } availability
+                    ? TypedResults.Ok(availability)
+                    : TypedResults.NotFound()
         );
         equipment.MapPost(
             "/items",
@@ -121,6 +135,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
     }
+#pragma warning restore MA0051
 
     private static async Task<
         Results<Ok<EquipmentItemSnapshot>, NotFound, BadRequest<string>>

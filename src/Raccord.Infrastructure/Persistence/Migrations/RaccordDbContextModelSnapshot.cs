@@ -384,11 +384,31 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("AccessoryIds")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("accessory_ids");
+
+                    b.Property<string>("AlternativeIds")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("alternative_ids");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("code");
+
+                    b.Property<string>("Details")
+                        .HasMaxLength(5000)
+                        .HasColumnType("character varying(5000)")
+                        .HasColumnName("details");
+
+                    b.Property<string>("ImageKey")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("image_key");
 
                     b.Property<bool>("IsPlanned")
                         .HasColumnType("boolean")

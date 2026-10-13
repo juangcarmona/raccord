@@ -16,7 +16,17 @@ public sealed record EquipmentItemSnapshot(
     EquipmentItemType Type,
     int StockQuantity,
     IReadOnlyList<string> SerialNumbers,
-    bool IsPlanned = false
+    bool IsPlanned = false,
+    string? Details = null,
+    string? ImageKey = null,
+    IReadOnlyList<Guid>? AccessoryIds = null,
+    IReadOnlyList<Guid>? AlternativeIds = null
+);
+
+public sealed record UpdateEquipmentItemDetailsRequest(
+    string? Details,
+    IReadOnlyList<Guid>? AccessoryIds,
+    IReadOnlyList<Guid>? AlternativeIds
 );
 
 public sealed record CreateEquipmentItemRequest(

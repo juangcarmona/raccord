@@ -87,6 +87,47 @@ internal static class Endpoints
                     await catalog.CreateAsync(request, ct)
                 )
         );
+        equipment.MapPut(
+            "/items/{id:guid}/details",
+            async Task<Results<Ok<EquipmentItemSnapshot>, NotFound>> (
+                Guid id,
+                UpdateEquipmentItemDetailsRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateDetailsAsync(id, request, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
+        );
+        equipment.MapPost("/items/{id:guid}/image", SaveEquipmentImageAsync);
+    }
+
+    private static async Task<
+        Results<Ok<EquipmentItemSnapshot>, NotFound, BadRequest<string>>
+    > SaveEquipmentImageAsync(
+        Guid id,
+        HttpRequest request,
+        EquipmentCatalog catalog,
+        CancellationToken ct
+    )
+    {
+        var form = await request.ReadFormAsync(ct);
+        var file = form.Files.GetFile("file");
+        if (file is null)
+            return TypedResults.BadRequest<string>("An image file is required.");
+        await using var stream = file.OpenReadStream();
+        using var memory = new MemoryStream();
+        await stream.CopyToAsync(memory, ct);
+        var item = await catalog.SaveImageAsync(
+            id,
+            file.FileName,
+            file.ContentType,
+            memory.ToArray(),
+            ct
+        );
+        return item is null
+            ? TypedResults.BadRequest<string>("The image is empty, too large, or unsupported.")
+            : TypedResults.Ok(item);
     }
 
     private static void MapCustomers(RouteGroupBuilder api)

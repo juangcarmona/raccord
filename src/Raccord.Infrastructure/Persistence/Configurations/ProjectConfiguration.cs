@@ -6,6 +6,7 @@ namespace Raccord.Infrastructure.Persistence.Configurations;
 
 internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 {
+#pragma warning disable MA0051
     public void Configure(EntityTypeBuilder<Project> builder)
     {
         builder.ToTable("projects");
@@ -53,5 +54,21 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder
             .Navigation(project => project.PlannedEquipmentLines)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder.OwnsMany(
+            project => project.PackingLines,
+            line =>
+            {
+                line.ToTable("packing_lines");
+                line.WithOwner().HasForeignKey("ProjectId");
+                line.HasKey(item => item.Id);
+                line.Property(item => item.Id).ValueGeneratedNever();
+                line.Property(item => item.PackedBy).HasMaxLength(200);
+                line.HasConcurrencyToken();
+            }
+        );
+        builder
+            .Navigation(project => project.PackingLines)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
+#pragma warning restore MA0051
 }

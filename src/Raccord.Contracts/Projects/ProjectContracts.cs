@@ -41,6 +41,19 @@ public sealed record PlannedEquipmentLineResponse(
     DateOnly EndDate
 );
 
+public sealed record CreatePackingListResponse(IReadOnlyList<PackingLineResponse> Lines);
+
+public sealed record PackingLineResponse(
+    Guid Id,
+    Guid EquipmentId,
+    int Quantity,
+    bool IsPacked,
+    string? PackedBy,
+    DateTimeOffset? PackedAt
+);
+
+public sealed record PackLineRequest(string PackedBy);
+
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>
 /// <param name="CustomerId">Customer billed for the project.</param>
@@ -110,6 +123,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
 /// <param name="PlannedEquipmentLines">Equipment planned for the project.</param>
+/// <param name="PackingLines">Warehouse packing lines.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -122,7 +136,8 @@ public sealed record ProjectResponse(
     ProjectStatus Status,
     string Currency,
     IReadOnlyList<BillableLineResponse> BillableLines,
-    IReadOnlyList<PlannedEquipmentLineResponse> PlannedEquipmentLines = null!
+    IReadOnlyList<PlannedEquipmentLineResponse> PlannedEquipmentLines = null!,
+    IReadOnlyList<PackingLineResponse> PackingLines = null!
 );
 
 /// <summary>A billable line.</summary>

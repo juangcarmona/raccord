@@ -166,6 +166,33 @@ public sealed class ProjectTests
         line.EndDate.ShouldBe(new DateOnly(2026, 5, 10));
     }
 
+    [Fact]
+    public void A_packing_list_Should_copy_planned_equipment_and_pack_each_line_once()
+    {
+        var project = NewProject();
+        project.PlanEquipment(
+            Guid.CreateVersion7(),
+            2,
+            new DateOnly(2026, 5, 5),
+            new DateOnly(2026, 5, 7)
+        );
+
+        var list = project.CreatePackingList();
+        var line = project.Pack(
+            list[0].Id,
+            "warehouse@example.test",
+            new DateTimeOffset(2026, 5, 4, 8, 0, 0, TimeSpan.Zero)
+        );
+
+        line.IsPacked.ShouldBeTrue();
+        line.PackedBy.ShouldBe("warehouse@example.test");
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.Pack(line.Id, "warehouse@example.test", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.packing-already-complete");
+    }
+
     private static Project NewProject() =>
         Project.Create(
             "Spring campaign shoot",

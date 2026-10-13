@@ -1121,6 +1121,56 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasConstraintName("fk_billable_lines_projects_project_id");
                         });
 
+                    b.OwnsMany("Raccord.Domain.Projects.PackingLine", "PackingLines", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<Guid>("EquipmentId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("equipment_id");
+
+                            b1.Property<bool>("IsPacked")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_packed");
+
+                            b1.Property<DateTimeOffset?>("PackedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("packed_at");
+
+                            b1.Property<string>("PackedBy")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("packed_by");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("project_id");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("integer")
+                                .HasColumnName("quantity");
+
+                            b1.Property<uint>("Version")
+                                .IsConcurrencyToken()
+                                .ValueGeneratedOnAddOrUpdate()
+                                .HasColumnType("xid")
+                                .HasColumnName("xmin");
+
+                            b1.HasKey("Id")
+                                .HasName("pk_packing_lines");
+
+                            b1.HasIndex("ProjectId")
+                                .HasDatabaseName("ix_packing_lines_project_id");
+
+                            b1.ToTable("packing_lines", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId")
+                                .HasConstraintName("fk_packing_lines_projects_project_id");
+                        });
+
                     b.OwnsMany("Raccord.Domain.Projects.PlannedEquipmentLine", "PlannedEquipmentLines", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -1161,6 +1211,8 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         });
 
                     b.Navigation("BillableLines");
+
+                    b.Navigation("PackingLines");
 
                     b.Navigation("PlannedEquipmentLines");
                 });

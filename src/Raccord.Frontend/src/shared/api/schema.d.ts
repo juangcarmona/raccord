@@ -1344,6 +1344,127 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/packing-list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CreatePackingListResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CreatePackingListResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-list/{lineId}/pack": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PackLineRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/status": {
         parameters: {
             query?: never;
@@ -2285,6 +2406,9 @@ export interface components {
             /** @description Series that will number the invoice; the default series when omitted. */
             seriesCode: null | string;
         };
+        CreatePackingListResponse: {
+            lines: components["schemas"]["PackingLineResponse"][];
+        };
         CreateProjectFromTemplateRequest: {
             /** Format: uuid */
             templateId: string;
@@ -2698,6 +2822,21 @@ export interface components {
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
         };
+        PackingLineResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            quantity: number;
+            isPacked: boolean;
+            packedBy: null | string;
+            /** Format: date-time */
+            packedAt: null | string;
+        };
+        PackLineRequest: {
+            packedBy: string;
+        };
         /** @description A legal party as printed on an invoice. */
         PartyResponse: {
             /** @description Registered legal name. */
@@ -2777,6 +2916,8 @@ export interface components {
             billableLines: components["schemas"]["BillableLineResponse"][];
             /** @description Equipment planned for the project. */
             plannedEquipmentLines?: components["schemas"]["PlannedEquipmentLineResponse"][];
+            /** @description Warehouse packing lines. */
+            packingLines?: components["schemas"]["PackingLineResponse"][];
         };
         ProjectStatus: number;
         /** @description A project in a list. */

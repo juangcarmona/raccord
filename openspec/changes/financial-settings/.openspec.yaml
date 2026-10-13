@@ -1,0 +1,3 @@
+name: financial-settings
+description: Persist company-wide quote and contract validity settings.
+status: proposed

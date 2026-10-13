@@ -69,6 +69,64 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/organization/financial-settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["FinancialSettingsResponse"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateFinancialSettingsRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["FinancialSettingsResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-series": {
         parameters: {
             query?: never;
@@ -2109,6 +2167,14 @@ export interface components {
              */
             issueDate: null | string;
         };
+        /** @description Company-wide quote and contract validity settings. */
+        FinancialSettingsResponse: {
+            /** Format: int32 */
+            quoteValidityDays: number;
+            /** Format: int32 */
+            contractValidityDays: number;
+            allowSigningAfterExpiry: boolean;
+        };
         /** Format: binary */
         IFormFile: string;
         /** @description An invoice draft. */
@@ -2560,6 +2626,14 @@ export interface components {
             details: null | string;
             accessoryIds: null | string[];
             alternativeIds: null | string[];
+        };
+        /** @description Updates company-wide quote and contract validity settings. */
+        UpdateFinancialSettingsRequest: {
+            /** Format: int32 */
+            quoteValidityDays: number;
+            /** Format: int32 */
+            contractValidityDays: number;
+            allowSigningAfterExpiry: boolean;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

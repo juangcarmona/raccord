@@ -59,6 +59,19 @@ internal static class Endpoints
                 CancellationToken ct
             ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
         );
+        organization.MapGet(
+            "/financial-settings",
+            async (OrganizationSettings settings, CancellationToken ct) =>
+                TypedResults.Ok(await settings.GetFinancialSettingsAsync(ct))
+        );
+        organization.MapPut(
+            "/financial-settings",
+            async (
+                UpdateFinancialSettingsRequest request,
+                OrganizationSettings settings,
+                CancellationToken ct
+            ) => TypedResults.Ok(await settings.UpdateFinancialSettingsAsync(request, ct))
+        );
         api.MapGet(
                 "/invoice-series",
                 async (OrganizationSettings settings, CancellationToken ct) =>

@@ -58,6 +58,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Store predecessor and record hashes in the compliance-owned append-only row and compute them before the issuing transaction commits.
 - Check: The migration, append-only database protections, and CI compliance tests must pass before the chain is used by submission work.
 
+## 2026-10-13 · Deterministic invoice QR
+
+- Observation: The invoice PDF needs tax verification data without making the renderer recalculate or depend on timestamps.
+- Action: Build the AEAT payload from the immutable invoice, generate level-M QR modules, and draw deterministic vectors in the first-page renderer.
+- Check: Payload ordering/encoding, label/legend placement, structural PDF validity, and byte-identical rendering are covered before merge.
+
 ## 2026-10-13 · Contact CRUD and pagination
 
 - Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.

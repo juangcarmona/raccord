@@ -1,0 +1,4 @@
+name: contact-import
+description: Atomic CSV contact import with row-level validation reports.
+status: proposed
+

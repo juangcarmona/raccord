@@ -8,6 +8,12 @@ This ledger records repeatable delivery improvements for future agents.
 - Action: Stack the next child on the prerequisite branch in a separate worktree, and keep the prerequisite checkout untouched.
 - Check: The PR base is the prerequisite feature branch and the source worktree remains agent-owned.
 
+## 2026-10-13 · Contact import
+
+- Observation: Bulk writes must validate the complete input before staging rows, otherwise a failed import can leave partial data.
+- Action: Parse and validate all rows first, then save the complete valid batch once.
+- Check: The import contract reports rejected rows and the web test suite exercises the invalid-row atomicity path.
+
 ## 2026-10-13 · Contact commercial defaults
 
 - Observation: Contact defaults must not remain a live read through project views, or later edits silently change an existing project.

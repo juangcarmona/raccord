@@ -243,6 +243,47 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/customers/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": {
+                        file: components["schemas"]["IFormFile"];
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactImportResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/customers/{id}/contact-persons": {
         parameters: {
             query?: never;
@@ -945,6 +986,20 @@ export interface components {
              */
             invoiceId: null | string;
         };
+        ContactImportResponse: {
+            /** Format: int32 */
+            importedCount: number;
+            /** Format: int32 */
+            rejectedCount: number;
+            rows: components["schemas"]["ContactImportRowResponse"][];
+        };
+        ContactImportRowResponse: {
+            /** Format: int32 */
+            row: number;
+            imported: boolean;
+            error: null | string;
+            contact: null | components["schemas"]["CustomerResponse"];
+        };
         ContactPersonResponse: {
             /** Format: uuid */
             id: string;
@@ -1028,6 +1083,8 @@ export interface components {
              */
             issueDate: null | string;
         };
+        /** Format: binary */
+        IFormFile: string;
         /** @description An invoice draft. */
         InvoiceDraftResponse: {
             /**

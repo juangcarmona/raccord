@@ -94,6 +94,12 @@ internal static class Endpoints
                 return TypedResults.Created($"/api/customers/{customer.Id}", customer);
             }
         );
+        MapCustomerImport(customers);
+        MapContactPersons(customers);
+    }
+
+    private static void MapContactPersons(RouteGroupBuilder customers)
+    {
         customers.MapGet(
             "/{id:guid}/contact-persons",
             async (Guid id, ContactPersonService persons, CancellationToken ct) =>
@@ -122,6 +128,18 @@ internal static class Endpoints
                 {
                     return TypedResults.BadRequest(exception.Message);
                 }
+            }
+        );
+    }
+
+    private static void MapCustomerImport(RouteGroupBuilder customers)
+    {
+        customers.MapPost(
+            "/import",
+            async (IFormFile file, CustomerDirectory directory, CancellationToken ct) =>
+            {
+                await using var stream = file.OpenReadStream();
+                return TypedResults.Ok(await directory.ImportCsvAsync(stream, ct));
             }
         );
     }

@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Focused route behavior tests
+
+- Observation: Untested route components left loading, empty and mutation regressions invisible despite broad end-to-end coverage.
+- Action: Prefer small rendered-UI tests with the existing API stub for high-value route states, while keeping E2E journeys for cross-process integration.
+- Check: Each new route behavior suite asserts accessible user-visible outcomes and request payloads, and runs in the existing Vitest CI step.
+
 ## 2026-10-13 · Browser identity evidence
 
 - Observation: Product-facing visual changes are hard to verify from a mobile PR view without a durable visual artifact and an explicit responsive/accessibility check.

@@ -332,6 +332,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(32)")
                         .HasColumnName("tax_id");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("type");
+
                     b.ComplexProperty(typeof(Dictionary<string, object>), "BillingAddress", "Raccord.Infrastructure.Persistence.CustomerRow.BillingAddress#AddressFields", b1 =>
                         {
                             b1.IsRequired();

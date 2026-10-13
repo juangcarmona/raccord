@@ -441,6 +441,143 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/contacts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateContactRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactPage"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RegisterContactRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -1079,6 +1216,26 @@ export interface components {
             error: null | string;
             contact: null | components["schemas"]["CustomerResponse"];
         };
+        /** @description A page of contacts. */
+        ContactPage: {
+            /** @description Contacts in this page. */
+            items: components["schemas"]["ContactResponse"][];
+            /**
+             * Format: int32
+             * @description One-based page number.
+             */
+            page: number;
+            /**
+             * Format: int32
+             * @description Requested page size.
+             */
+            pageSize: number;
+            /**
+             * Format: int32
+             * @description Total contacts.
+             */
+            totalCount: number;
+        };
         ContactPersonResponse: {
             /** Format: uuid */
             id: string;
@@ -1090,6 +1247,25 @@ export interface components {
             phone: null | string;
             isDefault: boolean;
         };
+        /** @description A contact in the contact database. */
+        ContactResponse: {
+            /**
+             * Format: uuid
+             * @description Contact identifier.
+             */
+            id: string;
+            /** @description Display or registered name. */
+            legalName: string;
+            /** @description Operational role. */
+            type: components["schemas"]["ContactType"];
+            /** @description Tax identifier. */
+            taxId: null | string;
+            address: null | components["schemas"]["AddressDto"];
+            /** @description Contact e-mail. */
+            email: null | string;
+            /** @description Whether legal details are complete. */
+            isInvoiceable: boolean;
+        };
         ContactTaxonomyRequest: {
             tags: string[];
             folder: null | string;
@@ -1100,6 +1276,8 @@ export interface components {
             tags: string[];
             folder: null | string;
         };
+        /** @description Operational role of a contact. */
+        ContactType: number;
         CreateContactPersonRequest: {
             name: string;
             role: string;
@@ -1516,6 +1694,18 @@ export interface components {
             /** @description ISO currency code. */
             currency: string;
         };
+        /** @description Creates a contact. */
+        RegisterContactRequest: {
+            /** @description Display or registered name. */
+            legalName: string;
+            /** @description Operational role. */
+            type: components["schemas"]["ContactType"];
+            /** @description Tax identifier. */
+            taxId: null | string;
+            address: null | components["schemas"]["AddressDto"];
+            /** @description Contact e-mail. */
+            email: null | string;
+        };
         /** @description Registers a customer. */
         RegisterCustomerRequest: {
             /** @description Registered legal name. */
@@ -1533,6 +1723,18 @@ export interface components {
             defaultDiscountPercent: number;
             /** @description Payment terms copied into new projects. */
             defaultPaymentTerms?: null | string;
+        };
+        /** @description Changes a contact. */
+        UpdateContactRequest: {
+            /** @description Display or registered name. */
+            legalName: string;
+            /** @description Operational role. */
+            type: components["schemas"]["ContactType"];
+            /** @description Tax identifier. */
+            taxId: null | string;
+            address: null | components["schemas"]["AddressDto"];
+            /** @description Contact e-mail. */
+            email: null | string;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

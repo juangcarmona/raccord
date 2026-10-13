@@ -13,6 +13,8 @@ public sealed class InvoiceDraftLine
         CurrencyCode = Currency.Eur.Code;
     }
 
+    private LinePricing? correctionPricing;
+
     internal InvoiceDraftLine(int position, BillableLine source)
     {
         Id = Guid.CreateVersion7();
@@ -24,6 +26,28 @@ public sealed class InvoiceDraftLine
         DiscountPercent = source.DiscountPercent;
         VatPercentage = source.VatPercentage;
         CurrencyCode = source.CurrencyCode;
+    }
+
+    internal InvoiceDraftLine(int position, IssuedInvoiceLine source, bool asDifference)
+    {
+        Id = Guid.CreateVersion7();
+        Position = position;
+        Description = source.Description;
+        Quantity = asDifference ? 1m : source.Pricing.Quantity;
+        UnitPrice = asDifference ? -source.Pricing.NetAmount.Amount : source.Pricing.UnitPrice;
+        DiscountPercent = source.Pricing.DiscountPercent;
+        VatPercentage = source.Pricing.VatRate.Percentage;
+        CurrencyCode = source.Pricing.Currency.Code;
+        if (asDifference)
+        {
+            IsAdjustment = true;
+            correctionPricing = LinePricing.CreateAdjustment(
+                -source.Pricing.NetAmount.Amount,
+                source.Pricing.VatRate,
+                source.Pricing.VatRegime,
+                source.Pricing.ExemptionCause
+            );
+        }
     }
 
     /// <summary>Draft line identifier.</summary>
@@ -53,7 +77,18 @@ public sealed class InvoiceDraftLine
     /// <summary>ISO currency code.</summary>
     public string CurrencyCode { get; private set; }
 
+    /// <summary>Whether the line is a signed rectification adjustment.</summary>
+    public bool IsAdjustment { get; private set; }
+
     /// <summary>The line's pricing.</summary>
     public LinePricing Pricing =>
-        LinePricing.Create(Quantity, UnitPrice, DiscountPercent, VatRate.Of(VatPercentage));
+        IsAdjustment
+            ? LinePricing.CreateAdjustment(Quantity * UnitPrice, VatRate.Of(VatPercentage))
+            : correctionPricing
+                ?? LinePricing.Create(
+                    Quantity,
+                    UnitPrice,
+                    DiscountPercent,
+                    VatRate.Of(VatPercentage)
+                );
 }

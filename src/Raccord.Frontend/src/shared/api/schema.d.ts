@@ -1608,6 +1608,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/invoices/{id}/rectifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RectifyInvoiceRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoiceDraftResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoices/{id}": {
         parameters: {
             query?: never;
@@ -2273,6 +2321,15 @@ export interface components {
              * @description Finalized draft.
              */
             draftId: string;
+            /**
+             * Format: uuid
+             * @description The immutable invoice corrected by this document.
+             */
+            originalInvoiceId?: null | string;
+            /** @description The correction method. */
+            rectificationKind?: null | string;
+            /** @description The stated correction reason. */
+            rectificationReason?: null | string;
         };
         /** @description An issued invoice in a list. */
         IssuedInvoiceSummaryResponse: {
@@ -2447,6 +2504,11 @@ export interface components {
             name: string;
             /** Format: uuid */
             customerId: string;
+        };
+        /** @description Starts a rectifying draft from one immutable issued invoice. */
+        RectifyInvoiceRequest: {
+            kind: string;
+            reason: string;
         };
         /** @description Creates a contact. */
         RegisterContactRequest: {

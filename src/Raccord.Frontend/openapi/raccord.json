@@ -1426,6 +1426,49 @@
         }
       }
     },
+    "/api/invoices/{id}/rectifications": {
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RectifyInvoiceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoices/{id}": {
       "get": {
         "tags": [
@@ -2831,6 +2874,28 @@
             "type": "string",
             "description": "Finalized draft.",
             "format": "uuid"
+          },
+          "originalInvoiceId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The immutable invoice corrected by this document.",
+            "format": "uuid"
+          },
+          "rectificationKind": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The correction method."
+          },
+          "rectificationReason": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The stated correction reason."
           }
         },
         "description": "An issued, immutable invoice."
@@ -3215,6 +3280,22 @@
             "format": "uuid"
           }
         }
+      },
+      "RectifyInvoiceRequest": {
+        "required": [
+          "kind",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "description": "Starts a rectifying draft from one immutable issued invoice."
       },
       "RegisterContactRequest": {
         "required": [

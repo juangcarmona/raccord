@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Rectifying invoices
+
+- Observation: Corrections must preserve the issued record while allowing negative differences and a separate numbering series.
+- Action: Create rectification drafts from the immutable invoice snapshot, persist the original ID, method and reason, and delegate numbering to series R.
+- Check: Domain tests issue an R-series rectification, assert signed differences, and verify the original totals remain unchanged; migration and OpenSpec validation run before CI.
+
 ## 2026-10-12 · Epic #16 module architecture
 
 - Observation: A final integration PR exposed inherited commit-message failures that child PRs did not see against their stacked feature branch.

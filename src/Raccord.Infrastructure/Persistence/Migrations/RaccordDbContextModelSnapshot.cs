@@ -46,9 +46,21 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("date")
                         .HasColumnName("operation_date");
 
+                    b.Property<Guid?>("OriginalInvoiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("original_invoice_id");
+
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
+
+                    b.Property<int?>("RectificationKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("rectification_kind");
+
+                    b.Property<string>("RectificationReason")
+                        .HasColumnType("text")
+                        .HasColumnName("rectification_reason");
 
                     b.Property<string>("SeriesCode")
                         .IsRequired()
@@ -747,6 +759,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.Property<Guid>("DraftId")
                                 .HasColumnType("uuid")
                                 .HasColumnName("draft_id");
+
+                            b1.Property<bool>("IsAdjustment")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_adjustment");
 
                             b1.Property<int>("Position")
                                 .HasColumnType("integer")

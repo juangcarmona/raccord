@@ -32,6 +32,32 @@ public sealed class InvoiceDraft
         Status = DraftStatus.Open;
     }
 
+    private InvoiceDraft(
+        Guid projectId,
+        Guid customerId,
+        DateOnly operationDate,
+        DateTimeOffset createdAt,
+        IssuedInvoice original,
+        RectificationKind kind,
+        string reason
+    )
+        : this(projectId, customerId, operationDate, "R", createdAt)
+    {
+        OriginalInvoiceId = original.Id;
+        RectificationKind = kind;
+        RectificationReason = reason;
+        lines.AddRange(
+            original.Lines.Select(
+                (line, index) =>
+                    new InvoiceDraftLine(
+                        index + 1,
+                        line,
+                        kind == global::Raccord.Domain.Billing.RectificationKind.Differences
+                    )
+            )
+        );
+    }
+
     /// <summary>Draft identifier.</summary>
     public Guid Id { get; private set; }
 
@@ -55,6 +81,41 @@ public sealed class InvoiceDraft
 
     /// <summary>The issued invoice, once finalized.</summary>
     public Guid? IssuedInvoiceId { get; private set; }
+
+    /// <summary>The immutable invoice being corrected, when this is a rectifying draft.</summary>
+    public Guid? OriginalInvoiceId { get; private set; }
+
+    /// <summary>Correction method, when this is a rectifying draft.</summary>
+    public RectificationKind? RectificationKind { get; private set; }
+
+    /// <summary>Reason stated on the rectifying invoice.</summary>
+    public string? RectificationReason { get; private set; }
+
+    /// <summary>Creates a new draft that corrects an immutable issued invoice.</summary>
+    public static InvoiceDraft CreateRectification(
+        IssuedInvoice original,
+        RectificationKind kind,
+        string reason,
+        DateTimeOffset createdAt
+    )
+    {
+        ArgumentNullException.ThrowIfNull(original);
+        if (string.IsNullOrWhiteSpace(reason))
+            throw new BusinessRuleViolationException(
+                "rectification.reason-required",
+                "A rectification reason is required."
+            );
+
+        return new InvoiceDraft(
+            original.Source.ProjectId,
+            original.Source.CustomerId,
+            original.OperationDate ?? original.IssueDate,
+            createdAt,
+            original,
+            kind,
+            reason.Trim()
+        );
+    }
 
     /// <summary>Lines in invoice order.</summary>
     public IReadOnlyList<InvoiceDraftLine> Lines => [.. lines.OrderBy(line => line.Position)];
@@ -125,7 +186,7 @@ public sealed class InvoiceDraft
         {
             issues.Add(new("draft.no-lines", "The draft has no lines."));
         }
-        else if (Totals.Total.Amount <= 0m)
+        else if (Totals.Total.Amount <= 0m && RectificationKind is null)
         {
             issues.Add(
                 new("draft.total-not-positive", "The invoice total must be greater than zero.")
@@ -182,7 +243,14 @@ public sealed class InvoiceDraft
         var number = sequence.Allocate(issueDate);
         var invoice = new IssuedInvoice(
             Guid.CreateVersion7(),
-            new IssuedInvoiceSource(Id, ProjectId, CustomerId),
+            new IssuedInvoiceSource(
+                Id,
+                ProjectId,
+                CustomerId,
+                OriginalInvoiceId,
+                RectificationKind,
+                RectificationReason
+            ),
             number,
             issueDate,
             OperationDate == issueDate ? null : OperationDate,

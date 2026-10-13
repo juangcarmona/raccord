@@ -263,6 +263,43 @@ public sealed class InvoicingWorkflow(
         return record?.Invoice.ToResponse(record.ContentHash);
     }
 
+    /// <summary>Starts a rectifying draft from an immutable issued invoice.</summary>
+    public async Task<InvoiceDraftResponse?> CreateRectificationDraftAsync(
+        Guid invoiceId,
+        RectifyInvoiceRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var original = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (original is null)
+            return null;
+
+        if (!Enum.TryParse<RectificationKind>(request.Kind, true, out var kind))
+            throw new BusinessRuleViolationException(
+                "rectification.kind-invalid",
+                "Rectification kind must be differences or substitution."
+            );
+
+        var draft = InvoiceDraft.CreateRectification(
+            original.Invoice,
+            kind,
+            request.Reason,
+            clock.UtcNow
+        );
+        drafts.Add(draft);
+        Record(
+            "invoice-rectification-draft.created",
+            DraftEntity,
+            draft.Id,
+            ("originalInvoiceId", invoiceId.ToString()),
+            ("kind", kind.ToString()),
+            ("reason", request.Reason.Trim())
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return await DescribeAsync(draft, null, cancellationToken).ConfigureAwait(false);
+    }
+
     /// <summary>Returns the invoice document, regenerating and storing it from the issued representation when missing.</summary>
     public async Task<InvoiceDocument?> GetDocumentAsync(
         Guid invoiceId,

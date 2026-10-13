@@ -115,4 +115,21 @@ public sealed record LinePricing
             string.IsNullOrWhiteSpace(exemptionCause) ? null : exemptionCause.Trim()
         );
     }
+
+    /// <summary>Creates a signed correction line while retaining the original tax rate.</summary>
+    public static LinePricing CreateAdjustment(
+        decimal amount,
+        VatRate vatRate,
+        string vatRegime = "standard",
+        string? exemptionCause = null
+    )
+    {
+        if (amount == 0m)
+            throw new BusinessRuleViolationException(
+                "pricing.adjustment-zero",
+                "A correction line cannot have a zero amount."
+            );
+
+        return new LinePricing(1m, amount, 0m, vatRate, Currency.Eur, vatRegime, exemptionCause);
+    }
 }

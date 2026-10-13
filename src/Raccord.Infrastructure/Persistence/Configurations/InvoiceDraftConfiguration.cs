@@ -35,6 +35,7 @@ internal sealed class InvoiceDraftConfiguration : IEntityTypeConfiguration<Invoi
                 line.Property(item => item.DiscountPercent).HasPrecision(5, 2);
                 line.Property(item => item.VatPercentage).HasPrecision(5, 2);
                 line.Property(item => item.CurrencyCode).HasMaxLength(3);
+                line.Property(item => item.IsAdjustment);
             }
         );
         builder.Navigation(draft => draft.Lines).UsePropertyAccessMode(PropertyAccessMode.Field);

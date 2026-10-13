@@ -29,6 +29,9 @@ public sealed class PackingLine
     /// <summary>Whether the line has left the warehouse.</summary>
     public bool IsBookedOut { get; private set; }
 
+    /// <summary>Whether the line has been received back.</summary>
+    public bool IsReceived { get; private set; }
+
     /// <summary>Actor who packed the line.</summary>
     public string? PackedBy { get; private set; }
 
@@ -40,6 +43,12 @@ public sealed class PackingLine
 
     /// <summary>Trusted time at which the line left the warehouse.</summary>
     public DateTimeOffset? BookedOutAt { get; private set; }
+
+    /// <summary>Actor who received the line.</summary>
+    public string? ReceivedBy { get; private set; }
+
+    /// <summary>Trusted time at which the line was received.</summary>
+    public DateTimeOffset? ReceivedAt { get; private set; }
 
     /// <summary>Marks the line packed once.</summary>
     public void Pack(string actor, DateTimeOffset packedAt)
@@ -80,5 +89,28 @@ public sealed class PackingLine
         IsBookedOut = true;
         BookedOutBy = actor.Trim();
         BookedOutAt = bookedOutAt;
+    }
+
+    /// <summary>Receives the booked-out line once.</summary>
+    public void Receive(string actor, DateTimeOffset receivedAt)
+    {
+        if (!IsBookedOut)
+            throw new BusinessRuleViolationException(
+                "projects.receive-not-booked-out",
+                "Only booked-out equipment can be received."
+            );
+        if (IsReceived)
+            throw new BusinessRuleViolationException(
+                "projects.receive-already-complete",
+                "This packing line is already received."
+            );
+        if (string.IsNullOrWhiteSpace(actor))
+            throw new BusinessRuleViolationException(
+                "projects.receive-actor-required",
+                "The receiving actor is required."
+            );
+        IsReceived = true;
+        ReceivedBy = actor.Trim();
+        ReceivedAt = receivedAt;
     }
 }

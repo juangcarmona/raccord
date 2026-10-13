@@ -258,6 +258,22 @@ public sealed class ProjectWorkspace(
         return ToPackingResponse(line);
     }
 
+    /// <summary>Receives a booked-out line into the warehouse.</summary>
+    public async Task<PackingLineResponse?> ReceiveAsync(
+        Guid projectId,
+        Guid lineId,
+        ReceiveLineRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.Receive(lineId, request.ReceivedBy, clock.UtcNow);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToPackingResponse(line);
+    }
+
     /// <summary>Changes a project's planning lifecycle status.</summary>
     public async Task<ProjectResponse?> SetStatusAsync(
         Guid id,
@@ -309,7 +325,10 @@ public sealed class ProjectWorkspace(
             line.PackedAt,
             line.IsBookedOut,
             line.BookedOutBy,
-            line.BookedOutAt
+            line.BookedOutAt,
+            line.IsReceived,
+            line.ReceivedBy,
+            line.ReceivedAt
         );
 
     private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(

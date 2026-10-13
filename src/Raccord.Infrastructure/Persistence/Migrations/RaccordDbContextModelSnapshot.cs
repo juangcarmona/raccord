@@ -1147,6 +1147,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("boolean")
                                 .HasColumnName("is_packed");
 
+                            b1.Property<bool>("IsReceived")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_received");
+
                             b1.Property<DateTimeOffset?>("PackedAt")
                                 .HasColumnType("timestamp with time zone")
                                 .HasColumnName("packed_at");
@@ -1163,6 +1167,14 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.Property<int>("Quantity")
                                 .HasColumnType("integer")
                                 .HasColumnName("quantity");
+
+                            b1.Property<DateTimeOffset?>("ReceivedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("received_at");
+
+                            b1.Property<string>("ReceivedBy")
+                                .HasColumnType("text")
+                                .HasColumnName("received_by");
 
                             b1.Property<uint>("Version")
                                 .IsConcurrencyToken()

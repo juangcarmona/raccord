@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Warehouse receiving slice
+
+- Observation: Return completion must be explicit and follow dispatch; otherwise a line can appear available while still in transit.
+- Action: Require booked-out state before receiving and retain independent receiving actor/time metadata for later loss and damage extensions.
+- Check: Domain lifecycle coverage, generated contracts, migration, OpenSpec validation, visual evidence and the full CI/E2E matrix are required before merge.
+
 ## 2026-10-13 · Warehouse booking-out slice
 
 - Observation: Dispatch must not be inferred from packing; it is a separate irreversible operational transition.

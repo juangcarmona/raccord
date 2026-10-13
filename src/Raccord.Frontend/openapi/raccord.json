@@ -1364,6 +1364,58 @@
         }
       }
     },
+    "/api/projects/{id}/packing-list/{lineId}/receive": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceiveLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/status": {
       "put": {
         "tags": [
@@ -3494,6 +3546,23 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "isReceived": {
+            "type": "boolean",
+            "default": false
+          },
+          "receivedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "receivedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -3952,6 +4021,17 @@
           }
         },
         "description": "A quote generated from a project's current plan."
+      },
+      "ReceiveLineRequest": {
+        "required": [
+          "receivedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "receivedBy": {
+            "type": "string"
+          }
+        }
       },
       "RectifyInvoiceRequest": {
         "required": [

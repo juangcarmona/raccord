@@ -89,6 +89,7 @@ builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<AuditLog>();
 builder.Services.AddScoped<InstallationSetup>();
+builder.Services.AddScoped<InvitationService>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 var app = builder.Build();
@@ -122,6 +123,7 @@ app.MapDefaultEndpoints();
 app.MapRaccordAuthentication();
 app.MapRaccordSetup();
 app.MapRaccordRoles();
+app.MapRaccordInvitations();
 app.MapRaccordApi(requireAuthentication);
 
 // Client-side routes fall back to the SPA; paths that look like files (assets) and server prefixes never do.

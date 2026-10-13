@@ -20,9 +20,10 @@ public sealed class WorkspaceSettingsJourney_Should_SavePreferences(DistributedA
                         new() { Name = "Workspace settings", Level = 1 }
                     )
                     .WaitForAsync();
-                await page.GetByLabel("Language").SelectOptionAsync("es");
-                await page.GetByLabel("Time zone").FillAsync("Europe/Madrid");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+                var settingsForm = page.Locator("form");
+                await settingsForm.GetByLabel("Language").SelectOptionAsync("es");
+                await settingsForm.GetByLabel("Time zone").FillAsync("Europe/Madrid");
+                await settingsForm.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
                 await page.GetByRole(AriaRole.Status)
                     .GetByText("Workspace settings saved.")
                     .WaitForAsync();

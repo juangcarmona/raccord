@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Quote generation
+
+- Observation: A quote must remain auditable after the project plan changes, while numbering must remain gapless within its series.
+- Action: Copy project/customer identity, priced lines, terms and validity into an immutable snapshot; allocate the yearly Q series in the same unit of work and enforce uniqueness in the database.
+- Check: Domain tests cover validity and empty plans; migration, generated OpenAPI, OpenSpec citations, and a repository-hosted workflow visual are required before merge.
+
 ## 2026-10-13 · Financial settings seam
 
 - Observation: Epic-level commercial behavior needs a stable company-wide settings boundary before quote generation can consume it.

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Npgsql;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
+using Raccord.Application.Commercial;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
 using Raccord.Application.Invoicing;
@@ -75,6 +76,7 @@ public static class DependencyInjection
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
         services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();
+        services.AddScoped<IQuoteRepository, QuoteRepository>();
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<IAuditAppender>(provider =>
             provider.GetRequiredService<ApplicationAuditTrail>()

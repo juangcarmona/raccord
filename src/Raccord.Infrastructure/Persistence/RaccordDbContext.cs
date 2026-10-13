@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
+using Raccord.Domain.Commercial;
 using Raccord.Domain.Organization;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Compliance;
@@ -25,6 +26,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<IssuerProfile> IssuerProfiles => Set<IssuerProfile>();
     internal DbSet<FinancialSettings> FinancialSettings => Set<FinancialSettings>();
+    internal DbSet<Quote> Quotes => Set<Quote>();
+    internal DbSet<QuoteNumberSequence> QuoteNumberSequences => Set<QuoteNumberSequence>();
 
     internal DbSet<IssuedInvoiceRow> IssuedInvoices => Set<IssuedInvoiceRow>();
 

@@ -75,6 +75,26 @@ public sealed class QuoteWorkspace(
             ? ToResponse(quote)
             : null;
 
+    /// <summary>Marks a draft quote ready for customer signature.</summary>
+    public async Task<QuoteResponse?> UpdateReviewAsync(
+        Guid id,
+        UpdateQuoteReviewRequest request,
+        CancellationToken ct
+    )
+    {
+        var quote = await quotes.FindAsync(id, ct).ConfigureAwait(false);
+        if (quote is null)
+            return null;
+        if (!string.Equals(request.Status, "ReadyForSignature", StringComparison.Ordinal))
+            throw new BusinessRuleViolationException(
+                "quotes.review-status-invalid",
+                "The only supported review transition is ReadyForSignature."
+            );
+        quote.MarkReadyForSignature();
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToResponse(quote);
+    }
+
     private static QuoteResponse ToResponse(Quote quote) =>
         new(
             quote.Id,
@@ -86,6 +106,7 @@ public sealed class QuoteWorkspace(
             quote.IssuedOn,
             quote.ValidUntil,
             quote.PaymentTerms,
+            quote.ReviewStatus.ToString(),
             [
                 .. quote.Lines.Select(line => new QuoteLineResponse(
                     line.Position,

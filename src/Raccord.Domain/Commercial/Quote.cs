@@ -38,6 +38,7 @@ public sealed class Quote
         IssuedOn = issuedOn;
         ValidUntil = validUntil;
         PaymentTerms = paymentTerms;
+        ReviewStatus = QuoteReviewStatus.Draft;
         lines.AddRange(snapshotLines);
     }
 
@@ -77,8 +78,22 @@ public sealed class Quote
     /// <summary>Payment terms snapshot.</summary>
     public string? PaymentTerms { get; private set; }
 
+    /// <summary>Current review state.</summary>
+    public QuoteReviewStatus ReviewStatus { get; private set; }
+
     /// <summary>Immutable planned lines.</summary>
     public IReadOnlyList<QuoteLine> Lines => [.. lines.OrderBy(line => line.Position)];
+
+    /// <summary>Marks the immutable quote as ready for customer signature.</summary>
+    public void MarkReadyForSignature()
+    {
+        if (ReviewStatus != QuoteReviewStatus.Draft)
+            throw new BusinessRuleViolationException(
+                "quotes.review-transition-invalid",
+                "Only draft quotes can be marked ready for signature."
+            );
+        ReviewStatus = QuoteReviewStatus.ReadyForSignature;
+    }
 
     /// <summary>Creates an immutable snapshot of the current project plan.</summary>
     public static Quote Generate(

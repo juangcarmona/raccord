@@ -11,8 +11,12 @@ public sealed record QuoteResponse(
     DateOnly IssuedOn,
     DateOnly ValidUntil,
     string? PaymentTerms,
+    string ReviewStatus,
     IReadOnlyList<QuoteLineResponse> Lines
 );
+
+/// <summary>Moves a quote into customer-signature readiness.</summary>
+public sealed record UpdateQuoteReviewRequest(string Status);
 
 /// <summary>A copied priced line in a quote snapshot.</summary>
 public sealed record QuoteLineResponse(

@@ -72,9 +72,12 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
 
         var custom = await client.PostAsJsonAsync(
             "/api/roles",
-            new RoleRequest("Read-only", ["projects:read"])
+            new RoleRequest("Read-only", ["projects:read"], RequireExternalSignIn: true)
         );
         custom.StatusCode.ShouldBe(HttpStatusCode.Created);
+
+        var external = await client.GetAsync("/api/auth/external?returnUrl=%2F");
+        external.StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 
     private async Task AssertInvitationLifecycleAsync()
@@ -115,7 +118,11 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         int UserCount
     );
 
-    private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
+    private sealed record RoleRequest(
+        string Name,
+        IReadOnlyCollection<string> Permissions,
+        bool RequireExternalSignIn = false
+    );
 
     private sealed record PreferencesRequest(string Language, string TimeZone);
 

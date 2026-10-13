@@ -46,6 +46,49 @@
         }
       }
     },
+    "/api/auth/external": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/external/callback": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/auth/me": {
       "get": {
         "tags": [
@@ -2055,6 +2098,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "requireExternalSignIn": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -2063,7 +2110,8 @@
           "name",
           "predefined",
           "permissions",
-          "userCount"
+          "userCount",
+          "requireExternalSignIn"
         ],
         "type": "object",
         "properties": {
@@ -2082,6 +2130,9 @@
           "userCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "requireExternalSignIn": {
+            "type": "boolean"
           }
         }
       },

@@ -18,6 +18,7 @@ public static class PermissionCatalog
     public const string InvoicingCreate = "invoicing:create";
     public const string InvoicingEdit = "invoicing:edit";
     public const string ClaimType = "raccord:permission";
+    public const string SsoRequiredClaimType = "raccord:sso-required";
     public const string All = "*";
 
     public static readonly IReadOnlySet<string> AllPermissions = new HashSet<string>(

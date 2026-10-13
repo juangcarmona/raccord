@@ -1,0 +1,4 @@
+name: external-identity
+description: Optional OpenID Connect sign-in linked to local accounts with role-level SSO enforcement.
+status: proposed
+

@@ -41,7 +41,8 @@ internal static class RoleEndpoints
                         .Select(claim => claim.Value)
                         .Order()
                         .ToArray(),
-                    count
+                    count,
+                    claims.Any(claim => claim.Type == PermissionCatalog.SsoRequiredClaimType)
                 )
             );
         }
@@ -68,10 +69,11 @@ internal static class RoleEndpoints
             );
         }
 
-        await ReplaceClaimsAsync(role, request.Permissions, roles).ConfigureAwait(false);
+        await ReplaceClaimsAsync(role, request.Permissions, request.RequireExternalSignIn, roles)
+            .ConfigureAwait(false);
         return TypedResults.Created(
             $"/api/roles/{role.Name}",
-            ToResponse(role, request.Permissions, 0)
+            ToResponse(role, request.Permissions, 0, request.RequireExternalSignIn)
         );
     }
 
@@ -88,9 +90,12 @@ internal static class RoleEndpoints
             return TypedResults.NotFound();
         }
 
-        await ReplaceClaimsAsync(role, request.Permissions, roles).ConfigureAwait(false);
+        await ReplaceClaimsAsync(role, request.Permissions, request.RequireExternalSignIn, roles)
+            .ConfigureAwait(false);
         var count = (await users.GetUsersInRoleAsync(role.Name!).ConfigureAwait(false)).Count;
-        return TypedResults.Ok(ToResponse(role, request.Permissions, count));
+        return TypedResults.Ok(
+            ToResponse(role, request.Permissions, count, request.RequireExternalSignIn)
+        );
     }
 
     private static async Task<Results<NoContent, NotFound, BadRequest<string>>> AssignAsync(
@@ -130,6 +135,7 @@ internal static class RoleEndpoints
     private static async Task ReplaceClaimsAsync(
         IdentityRole<Guid> role,
         IReadOnlyCollection<string> permissions,
+        bool requireExternalSignIn,
         RoleManager<IdentityRole<Guid>> roles
     )
     {
@@ -145,21 +151,32 @@ internal static class RoleEndpoints
                 .AddClaimAsync(role, new Claim(PermissionCatalog.ClaimType, permission))
                 .ConfigureAwait(false);
         }
+        var ssoClaim = new Claim(PermissionCatalog.SsoRequiredClaimType, bool.TrueString);
+        if (requireExternalSignIn)
+        {
+            await roles.AddClaimAsync(role, ssoClaim).ConfigureAwait(false);
+        }
     }
 
     private static RoleResponse ToResponse(
         IdentityRole<Guid> role,
         IEnumerable<string> permissions,
-        int users
+        int users,
+        bool requireExternalSignIn = false
     ) =>
         new(
             role.Name!,
             PermissionCatalog.PredefinedRoles.ContainsKey(role.Name!),
             permissions.Order().ToArray(),
-            users
+            users,
+            requireExternalSignIn
         );
 
-    private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
+    private sealed record RoleRequest(
+        string Name,
+        IReadOnlyCollection<string> Permissions,
+        bool RequireExternalSignIn = false
+    );
 
     private sealed record AssignRoleRequest(string Role);
 }
@@ -168,7 +185,8 @@ internal sealed record RoleResponse(
     string Name,
     bool Predefined,
     IReadOnlyList<string> Permissions,
-    int UserCount
+    int UserCount,
+    bool RequireExternalSignIn
 );
 
 #pragma warning restore MA0048, MA0002, MA0006

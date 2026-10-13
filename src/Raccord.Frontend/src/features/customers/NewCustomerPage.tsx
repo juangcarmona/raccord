@@ -61,7 +61,15 @@ export function NewCustomerPage() {
                     />
                     <Field label={t("common.taxId")} name="taxId" maxLength={32} />
                     <Field label={t("common.email")} name="email" type="email" maxLength={320} autoComplete="email" />
-                    <Field label="Default discount (%)" name="defaultDiscountPercent" type="number" min={0} max={100} step={0.01} defaultValue="0" />
+                    <Field
+                        label="Default discount (%)"
+                        name="defaultDiscountPercent"
+                        type="number"
+                        min={0}
+                        max={100}
+                        step={0.01}
+                        defaultValue="0"
+                    />
                     <Field label="Payment terms" name="defaultPaymentTerms" maxLength={200} />
                 </div>
                 <AddressFields legend={t("common.address")} required={false} />

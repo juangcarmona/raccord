@@ -101,10 +101,10 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
             )
         )!.ShouldMatch("^[0-9a-f]{64}$");
         (
-            await api.QueryScalarAsync<string?>(
-                $"SELECT previous_hash FROM compliance.compliance_records WHERE invoice_id = '{invoice.Id}'"
+            await api.QueryScalarAsync<long>(
+                $"SELECT count(*) FROM compliance.compliance_records WHERE invoice_id = '{invoice.Id}' AND previous_hash IS NULL"
             )
-        ).ShouldBeNull();
+        ).ShouldBe(1L);
     }
 
     private async Task<InvoiceDraftResponse> CreateDraftAsync(

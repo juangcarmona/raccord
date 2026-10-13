@@ -47,6 +47,16 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
             .Single(role => string.Equals(role.Name, "Admin", StringComparison.Ordinal))
             .Permissions.ShouldContain("projects:read");
 
+        var preferences = await client.GetFromJsonAsync<PreferencesResponse>(
+            "/api/organization/preferences"
+        );
+        preferences!.Language.ShouldBe("en");
+        var updatedPreferences = await client.PutAsJsonAsync(
+            "/api/organization/preferences",
+            new PreferencesRequest("es", "Europe/Madrid")
+        );
+        updatedPreferences.StatusCode.ShouldBe(HttpStatusCode.OK);
+
         var custom = await client.PostAsJsonAsync(
             "/api/roles",
             new RoleRequest("Read-only", ["projects:read"])
@@ -97,6 +107,10 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     );
 
     private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
+
+    private sealed record PreferencesRequest(string Language, string TimeZone);
+
+    private sealed record PreferencesResponse(string Language, string TimeZone);
 
     private sealed record InvitationRequest(string Email, string Role);
 

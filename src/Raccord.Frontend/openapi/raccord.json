@@ -383,6 +383,52 @@
         }
       }
     },
+    "/api/organization/preferences": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspacePreferencesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreferencesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspacePreferencesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/invoice-series": {
       "get": {
         "tags": [
@@ -1788,6 +1834,21 @@
         },
         "description": "A legal party as printed on an invoice."
       },
+      "PreferencesRequest": {
+        "required": [
+          "language",
+          "timeZone"
+        ],
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -2135,6 +2196,21 @@
           }
         },
         "description": "Taxable base and VAT for one rate."
+      },
+      "WorkspacePreferencesResponse": {
+        "required": [
+          "language",
+          "timeZone"
+        ],
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          }
+        }
       }
     }
   },

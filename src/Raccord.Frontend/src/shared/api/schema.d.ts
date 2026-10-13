@@ -514,6 +514,64 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/organization/preferences": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkspacePreferencesResponse"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PreferencesRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkspacePreferencesResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-series": {
         parameters: {
             query?: never;
@@ -1637,6 +1695,10 @@ export interface components {
             taxId: null | string;
             address: null | components["schemas"]["AddressDto"];
         };
+        PreferencesRequest: {
+            language: string;
+            timeZone: string;
+        };
         ProblemDetails: {
             type?: null | string;
             title?: null | string;
@@ -1782,6 +1844,10 @@ export interface components {
              * @description VAT at this rate.
              */
             vatAmount: number;
+        };
+        WorkspacePreferencesResponse: {
+            language: string;
+            timeZone: string;
         };
     };
     responses: never;

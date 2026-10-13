@@ -16,6 +16,7 @@ import { SetupPage } from "../features/auth/SetupPage";
 import { RolesPage } from "../features/organization/RolesPage";
 import { InvitationsPage } from "../features/organization/InvitationsPage";
 import { JoinPage } from "../features/auth/JoinPage";
+import { WorkspaceSettingsPage } from "../features/organization/WorkspaceSettingsPage";
 
 export const routes: RouteObject[] = [
     { index: true, element: <Navigate to="/setup" replace /> },
@@ -37,6 +38,7 @@ export const routes: RouteObject[] = [
             { path: "settings/issuer", element: <IssuerSettingsPage /> },
             { path: "settings/roles", element: <RolesPage /> },
             { path: "settings/invitations", element: <InvitationsPage /> },
+            { path: "settings/workspace", element: <WorkspaceSettingsPage /> },
             { path: "*", element: <NotFoundPage /> },
         ],
     },

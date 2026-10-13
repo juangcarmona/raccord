@@ -37,6 +37,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<Invitation> Invitations => Set<Invitation>();
 
+    internal DbSet<WorkspacePreferencesRow> WorkspacePreferences => Set<WorkspacePreferencesRow>();
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)
     {

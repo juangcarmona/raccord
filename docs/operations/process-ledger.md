@@ -44,6 +44,10 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Resolve role permissions from current Identity role claims at authorization time and update the security stamp on assignment changes; cover both permission denial and post-assignment behavior in CI.
 - Check: Web authorization tests and the role-management E2E journey run on every PR that changes the permission catalog or role APIs.
 
+- Observation: Invitation joins initially bypassed the PostgreSQL retry execution strategy, producing a runtime failure only in the container-backed test environment.
+- Action: Any new Identity or Workspace transaction must execute through `CreateExecutionStrategy().ExecuteAsync(...)`, and the lifecycle test must run against PostgreSQL.
+- Check: The .NET CI test job includes the invitation lifecycle and future settings persistence tests before merge.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

@@ -67,6 +67,26 @@ internal static class Endpoints
                 ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
             )
             .RequirePermission(PermissionCatalog.OrganizationEdit);
+        organization
+            .MapGet(
+                "/preferences",
+                async (WorkspacePreferencesService preferences, CancellationToken ct) =>
+                    TypedResults.Ok(await preferences.GetAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.OrganizationRead);
+        organization
+            .MapPut(
+                "/preferences",
+                async (
+                    PreferencesRequest request,
+                    WorkspacePreferencesService preferences,
+                    CancellationToken ct
+                ) =>
+                    TypedResults.Ok(
+                        await preferences.UpdateAsync(request.Language, request.TimeZone, ct)
+                    )
+            )
+            .RequirePermission(PermissionCatalog.OrganizationEdit);
         api.MapGet(
                 "/invoice-series",
                 async (OrganizationSettings settings, CancellationToken ct) =>
@@ -75,6 +95,8 @@ internal static class Endpoints
             .WithTags("Organization")
             .RequirePermission(PermissionCatalog.OrganizationRead);
     }
+
+    private sealed record PreferencesRequest(string Language, string TimeZone);
 
     private static void MapCustomers(RouteGroupBuilder api)
     {

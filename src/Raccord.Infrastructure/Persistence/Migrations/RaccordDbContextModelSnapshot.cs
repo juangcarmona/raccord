@@ -703,6 +703,33 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("users", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.WorkspacePreferencesRow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("language");
+
+                    b.Property<string>("TimeZone")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("time_zone");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workspace_preferences");
+
+                    b.ToTable("workspace_preferences", "workspace");
+                });
+
             modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>
                 {
                     b.Property<Guid>("Id")

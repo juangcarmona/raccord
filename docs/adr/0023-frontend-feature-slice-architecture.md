@@ -4,7 +4,7 @@ description: The React frontend uses thin application routes, feature-owned vert
 status: Accepted
 date: 2026-10-12
 deciders: ["Juan G. Carmona"]
-tags: ["frontend", "architecture", "conventions"]
+tags: ["frontend", "architecture", "enforced"]
 ---
 
 # ADR-0023: Organize the frontend as feature-owned vertical slices
@@ -24,14 +24,14 @@ The frontend grows as feature-owned vertical slices, composed by a thin applicat
 - **`src/shared/` owns stable cross-cutting mechanisms:** the generated API contract/client, localization, formatting, reusable UI primitives, and generic hooks. Shared code does not import from `app/` or `features/`, and does not contain product workflows or domain policy.
 - **Dependency direction is inward:** `app → features → shared`; `app` may also use `shared`. No reverse dependency is allowed, and features do not import peer features. Backend business rules remain authoritative; frontend code presents and orchestrates API behavior rather than reimplementing those rules.
 - **Keep boundaries proportional.** Do not create domain/application/infrastructure layers, wrapper abstractions, or empty feature folders without a concrete need. Split files or introduce stricter sublayers only when a capability's complexity makes the boundary useful.
-- **Verification:** keep TypeScript strictness, feature tests, and route-level accessibility tests. New or materially changed cross-area import rules should be enforced by an automated lint or architecture test; until such a guard exists, reviewers must check the dependency direction above. Do not claim the boundary is machine-enforced before CI proves it.
+- **Verification:** keep TypeScript strictness, feature tests, and route-level accessibility tests. `npm run architecture:check` parses relative imports under `src/` and fails on reverse-layer or peer-feature dependencies; its fixture suite proves each forbidden direction and the allowed compositions.
 
 This records the architecture for the existing SPA; it does not require a folder migration or a rewrite of current screens.
 
 ## Consequences
 
 - **Positive:** The current layout has an explicit ownership and dependency model; route files remain composition points; frontend work follows the same capability-oriented, explicit-boundary foundations used elsewhere in the codebase.
-- **Negative:** Preventing cross-feature imports is currently a review convention until an automated boundary check is added and verified.
+- **Negative:** The checker intentionally covers relative imports under the three architectural roots; introducing a new import mechanism requires extending the checker and its fixtures.
 - **Neutral:** ADR-0011 remains authoritative for stack, API typing, styling, localization, and deployment. This decision does not adopt full Feature-Sliced Design terminology or tooling.
 
 ## Alternatives considered

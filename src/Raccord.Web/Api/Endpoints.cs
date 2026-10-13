@@ -344,6 +344,18 @@ internal static class Endpoints
                     ? TypedResults.Created($"/api/projects/{id}", line)
                     : TypedResults.NotFound()
         );
+        projects.MapPut(
+            "/{id:guid}/status",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                UpdateProjectStatusRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.SetStatusAsync(id, request.Status, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapInvoicing(RouteGroupBuilder api)

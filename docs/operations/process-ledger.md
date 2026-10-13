@@ -70,6 +70,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Keep the CSV format narrow for the MVP, validate before adding rows, and return row numbers with rejection reasons.
 - Check: Generated API contracts and CI integration coverage verify valid rows persist while invalid rows do not.
 
+## 2026-10-13 · Project planning status
+
+- Observation: A lifecycle field is valuable before downstream planning effects are implemented.
+- Action: Persist a fixed status vocabulary and expose explicit transitions while leaving warehouse/invoicing effects to their owning slices.
+- Check: Project migration, generated contracts, and CI checks pass before adding planning lines.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

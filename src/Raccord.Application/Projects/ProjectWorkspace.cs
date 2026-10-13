@@ -70,6 +70,7 @@ public sealed class ProjectWorkspace(
                     project.EndDate,
                     project.DefaultDiscountPercent,
                     project.PaymentTerms,
+                    ToContractStatus(project.Status),
                     unbilled.Count,
                     amount.Amount,
                     amount.Currency.Code
@@ -134,6 +135,22 @@ public sealed class ProjectWorkspace(
         return line.ToResponse();
     }
 
+    /// <summary>Changes a project's planning lifecycle status.</summary>
+    public async Task<ProjectResponse?> SetStatusAsync(
+        Guid id,
+        Contracts.Projects.ProjectStatus status,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(id, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.SetStatus(Enum.Parse<Raccord.Domain.Projects.ProjectStatus>(status.ToString()));
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        var customer = await parties.FindAsync(project.CustomerId, ct).ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
     private static ProjectResponse ToResponse(Project project, string customerName) =>
         new(
             project.Id,
@@ -144,7 +161,12 @@ public sealed class ProjectWorkspace(
             project.EndDate,
             project.DefaultDiscountPercent,
             project.PaymentTerms,
+            ToContractStatus(project.Status),
             Currency.Eur.Code,
             [.. project.BillableLines.Select(line => line.ToResponse())]
         );
+
+    private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(
+        Raccord.Domain.Projects.ProjectStatus status
+    ) => Enum.Parse<Raccord.Contracts.Projects.ProjectStatus>(status.ToString());
 }

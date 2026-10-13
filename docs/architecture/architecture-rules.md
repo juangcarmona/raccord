@@ -49,4 +49,5 @@ Module contracts -> SharedKernel and other module contracts only
 - ZAP baseline scan of the Compose stack after merge to main **(enforced, blocking on FAIL)**.
 - No secrets, customer data, generated PDFs or local state in Git.
 - New production dependencies require an ADR.
+- Frontend imports follow `app → features → shared`; app may compose features, features may use shared, and shared/peer features may not import upward or sideways **(enforced: `npm run architecture:check` and its fixture suite)**.
 - Agent red lines (AGENTS.md): credentials, shared history, production — stop and ask a person first.

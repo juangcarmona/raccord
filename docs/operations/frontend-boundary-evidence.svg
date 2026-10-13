@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Frontend dependency boundaries</title>
+  <desc id="desc">The app layer composes features and shared code, features use shared code, and shared code never imports upward.</desc>
+  <rect width="960" height="390" rx="24" fill="#f7f5ef"/>
+  <text x="48" y="58" fill="#17211b" font-family="system-ui, sans-serif" font-size="29" font-weight="700">Frontend dependency boundaries</text>
+  <text x="48" y="91" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Machine-checked by npm run architecture:check in the frontend CI path.</text>
+  <rect x="48" y="138" width="220" height="170" rx="18" fill="#e8eafa" stroke="#9ba3d5" stroke-width="2"/>
+  <text x="78" y="184" fill="#354078" font-family="system-ui, sans-serif" font-size="23" font-weight="700">app</text>
+  <text x="78" y="230" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Routes and shell</text>
+  <text x="78" y="260" fill="#526057" font-family="system-ui, sans-serif" font-size="17">composes both layers</text>
+  <path d="M278 223h112" stroke="#718079" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="400" y="138" width="220" height="170" rx="18" fill="#fff0d5" stroke="#d8ad62" stroke-width="2"/>
+  <text x="430" y="184" fill="#805817" font-family="system-ui, sans-serif" font-size="23" font-weight="700">features</text>
+  <text x="430" y="230" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Capability slices</text>
+  <text x="430" y="260" fill="#526057" font-family="system-ui, sans-serif" font-size="17">use shared only</text>
+  <path d="M630 223h112" stroke="#718079" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="752" y="138" width="160" height="170" rx="18" fill="#e5f2e8" stroke="#91b79c" stroke-width="2"/>
+  <text x="782" y="184" fill="#1d5b35" font-family="system-ui, sans-serif" font-size="23" font-weight="700">shared</text>
+  <text x="782" y="230" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Stable kernel</text>
+  <text x="782" y="260" fill="#526057" font-family="system-ui, sans-serif" font-size="17">no upward imports</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#718079"/></marker></defs>
+</svg>

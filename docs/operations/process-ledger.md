@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Frontend boundary enforcement
+
+- Observation: The frontend dependency direction was documented in ADR-0023 but could drift because CI did not inspect imports.
+- Action: Add a small import-graph checker and fixture tests; run it in the existing frontend CI job without adding layers or dependencies.
+- Check: Reject app/features/shared reverse imports and peer-feature imports, allow app composition and feature-to-shared imports, and keep the ADR/rules marked as enforced.
+
 ## 2026-10-13 · Architecture documentation evidence
 
 - Observation: Authentication and frontend route protection had shipped, but arc42 still described the system as unauthenticated and omitted the auth feature slice.

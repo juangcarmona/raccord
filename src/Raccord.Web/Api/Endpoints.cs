@@ -436,6 +436,41 @@ internal static class Endpoints
                     ? TypedResults.Created($"/api/projects/{id}/equipment-lines/{line.Id}", line)
                     : TypedResults.NotFound()
         );
+        projects.MapPost(
+            "/{id:guid}/packing-list",
+            async Task<Results<Created<CreatePackingListResponse>, NotFound>> (
+                Guid id,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.CreatePackingListAsync(id, ct) is { } list
+                    ? TypedResults.Created($"/api/projects/{id}/packing-list", list)
+                    : TypedResults.NotFound()
+        );
+        projects.MapGet(
+            "/{id:guid}/packing-list",
+            async Task<Results<Ok<CreatePackingListResponse>, NotFound>> (
+                Guid id,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.GetPackingListAsync(id, ct) is { } list
+                    ? TypedResults.Ok(list)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/packing-list/{lineId:guid}/pack",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                PackLineRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.PackAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
         projects.MapPut(
             "/{id:guid}/status",
             async Task<Results<Ok<ProjectResponse>, NotFound>> (

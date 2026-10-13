@@ -2,6 +2,7 @@ using Raccord.Application.Abstractions;
 using Raccord.Contracts.Projects;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Pricing;
 
@@ -12,7 +13,8 @@ public sealed class ProjectWorkspace(
     IProjectRepository projects,
     IProjectTemplateRepository templates,
     IPartyDirectory parties,
-    IUnitOfWork unitOfWork
+    IUnitOfWork unitOfWork,
+    IClock clock
 )
 {
     /// <summary>Creates a reusable project template.</summary>
@@ -200,6 +202,46 @@ public sealed class ProjectWorkspace(
         return new(line.Id, line.EquipmentId, line.Quantity, line.StartDate, line.EndDate);
     }
 
+    /// <summary>Creates a warehouse packing list from planned equipment.</summary>
+    public async Task<CreatePackingListResponse?> CreatePackingListAsync(
+        Guid projectId,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var lines = project.CreatePackingList();
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return new([.. lines.Select(ToPackingResponse)]);
+    }
+
+    /// <summary>Returns a project's packing list.</summary>
+    public async Task<CreatePackingListResponse?> GetPackingListAsync(
+        Guid projectId,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        return project is null ? null : new([.. project.PackingLines.Select(ToPackingResponse)]);
+    }
+
+    /// <summary>Marks a packing line as packed.</summary>
+    public async Task<PackingLineResponse?> PackAsync(
+        Guid projectId,
+        Guid lineId,
+        PackLineRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.Pack(lineId, request.PackedBy, clock.UtcNow);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToPackingResponse(line);
+    }
+
     /// <summary>Changes a project's planning lifecycle status.</summary>
     public async Task<ProjectResponse?> SetStatusAsync(
         Guid id,
@@ -237,8 +279,12 @@ public sealed class ProjectWorkspace(
                     line.StartDate,
                     line.EndDate
                 )),
-            ]
+            ],
+            [.. project.PackingLines.Select(ToPackingResponse)]
         );
+
+    private static PackingLineResponse ToPackingResponse(PackingLine line) =>
+        new(line.Id, line.EquipmentId, line.Quantity, line.IsPacked, line.PackedBy, line.PackedAt);
 
     private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(
         Raccord.Domain.Projects.ProjectStatus status

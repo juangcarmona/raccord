@@ -8,6 +8,7 @@ public sealed class Project
 {
     private readonly List<BillableLine> billableLines = [];
     private readonly List<PlannedEquipmentLine> plannedEquipmentLines = [];
+    private readonly List<PackingLine> packingLines = [];
 
     private Project()
     {
@@ -75,6 +76,41 @@ public sealed class Project
 
     /// <summary>Equipment planned for this project.</summary>
     public IReadOnlyList<PlannedEquipmentLine> PlannedEquipmentLines => [.. plannedEquipmentLines];
+
+    /// <summary>Equipment quantities prepared for warehouse fulfillment.</summary>
+    public IReadOnlyList<PackingLine> PackingLines => [.. packingLines];
+
+    /// <summary>Creates a packing list from the project's planned equipment.</summary>
+    public IReadOnlyList<PackingLine> CreatePackingList()
+    {
+        if (packingLines.Count > 0)
+            throw new BusinessRuleViolationException(
+                "projects.packing-list-exists",
+                "A packing list already exists for this project."
+            );
+        if (plannedEquipmentLines.Count == 0)
+            throw new BusinessRuleViolationException(
+                "projects.packing-list-empty",
+                "The project has no planned equipment to pack."
+            );
+        packingLines.AddRange(
+            plannedEquipmentLines.Select(line => new PackingLine(line.EquipmentId, line.Quantity))
+        );
+        return PackingLines;
+    }
+
+    /// <summary>Marks one packing line ready for dispatch.</summary>
+    public PackingLine Pack(Guid lineId, string actor, DateTimeOffset packedAt)
+    {
+        var line =
+            packingLines.Find(candidate => candidate.Id == lineId)
+            ?? throw new BusinessRuleViolationException(
+                "projects.packing-line-not-found",
+                "The packing line does not belong to this project."
+            );
+        line.Pack(actor, packedAt);
+        return line;
+    }
 
     /// <summary>Plans equipment for a period within the project period.</summary>
     public PlannedEquipmentLine PlanEquipment(

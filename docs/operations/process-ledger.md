@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Warehouse packing slice
+
+- Observation: Warehouse fulfillment needs an explicit preparation state before dispatch or stock movement, otherwise packing would silently mutate inventory.
+- Action: Keep packing lines project-owned, copy planned quantities once, and record only actor/time until later dispatch and stock slices exist.
+- Check: Domain lifecycle coverage, migration, generated contracts, OpenSpec validation, a repository-hosted workflow visual and all CI gates are required before merge.
+
 ## 2026-10-13 · Quote signature metadata
 
 - Observation: Signature metadata must be a guarded lifecycle transition, not a mutable decoration on an accepted quote.

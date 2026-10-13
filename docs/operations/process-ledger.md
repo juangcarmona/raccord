@@ -40,6 +40,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Keep the offset operation on `Project`, reuse the existing project factory for template creation, and let availability recalculate from persisted dates.
 - Check: Domain coverage asserts the aggregate offset; generated API, migration, OpenSpec validation, and CI verify the integration boundary.
 
+## 2026-10-13 · VERI*FACTU responsibility boundary
+
+- Observation: Compliance implementation was blocked by ambiguity about whether an open-source maintainer or a self-hosted operator owns the installation's declaration and certificate.
+- Action: Record the deployment boundary in ADR-0023 and retain an explicit no-compliance-claim guard until tax/legal review and official-specification verification are complete.
+- Check: Risk R-2, the compliance seam, and future VERI*FACTU PR descriptions link the ADR and preserve the legal-review gate.
+
 ## 2026-10-13 · Contact CRUD and pagination
 
 - Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.

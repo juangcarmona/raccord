@@ -494,6 +494,17 @@ internal static class Endpoints
                     ? TypedResults.Ok(quote)
                     : TypedResults.NotFound()
         );
+        quotes.MapPost(
+            "/{id:guid}/accept",
+            async Task<Results<Ok<QuoteResponse>, NotFound>> (
+                Guid id,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.AcceptAsync(id, ct) is { } quote
+                    ? TypedResults.Ok(quote)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)

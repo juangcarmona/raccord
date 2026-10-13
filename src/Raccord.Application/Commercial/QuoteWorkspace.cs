@@ -95,6 +95,17 @@ public sealed class QuoteWorkspace(
         return ToResponse(quote);
     }
 
+    /// <summary>Records acceptance using the trusted application clock.</summary>
+    public async Task<QuoteResponse?> AcceptAsync(Guid id, CancellationToken ct)
+    {
+        var quote = await quotes.FindAsync(id, ct).ConfigureAwait(false);
+        if (quote is null)
+            return null;
+        quote.Accept(clock.UtcNow);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToResponse(quote);
+    }
+
     private static QuoteResponse ToResponse(Quote quote) =>
         new(
             quote.Id,
@@ -107,6 +118,7 @@ public sealed class QuoteWorkspace(
             quote.ValidUntil,
             quote.PaymentTerms,
             quote.ReviewStatus.ToString(),
+            quote.AcceptedAt,
             [
                 .. quote.Lines.Select(line => new QuoteLineResponse(
                     line.Position,

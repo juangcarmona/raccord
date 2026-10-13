@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Quote acceptance
+
+- Observation: Acceptance needs an auditable trusted timestamp while retaining the quote's immutable number and pricing.
+- Action: Permit acceptance only from `ReadyForSignature`, set `AcceptedAt` from `IClock`, and reject duplicate acceptance in the domain.
+- Check: Domain lifecycle tests, migration, generated contracts, OpenSpec validation and a linked workflow visual are required before merge.
+
 ## 2026-10-13 · Quote review transition
 
 - Observation: Review readiness is a workflow state, not permission to mutate a commercial snapshot.

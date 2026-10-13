@@ -47,3 +47,7 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Npgsql's retrying execution strategy rejects a manually opened EF transaction unless the complete setup unit is executed through that strategy.
 - Action: Wrap transactional first-run setup in `CreateExecutionStrategy().ExecuteAsync(...)` so retries preserve the atomic role/user operation.
 - Check: The web setup test and the empty-AppHost E2E run must create the first administrator successfully against PostgreSQL.
+
+- Observation: AppHost journeys share a database, so a boot journey cannot safely assert an empty global collection after another journey creates data.
+- Action: Assert that the boot page and its API-backed rendering work; reserve empty-state assertions for isolated fixtures.
+- Check: E2E journeys remain order-independent and the boot journey does not depend on another journey's database state.

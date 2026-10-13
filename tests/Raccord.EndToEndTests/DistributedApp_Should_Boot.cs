@@ -15,7 +15,7 @@ namespace Raccord.EndToEndTests;
 public sealed class DistributedApp_Should_Boot(DistributedAppFixture app) : BrowserJourneyBase(app)
 {
     [Fact]
-    public async Task Journey_Should_ServeTheSpaAndTheEmptyProjectsList()
+    public async Task Journey_Should_ServeTheSpaAndTheProjectsList()
     {
         await RunJourneyAsync(
             "distributed-app-boot",
@@ -24,7 +24,6 @@ public sealed class DistributedApp_Should_Boot(DistributedAppFixture app) : Brow
                 await page.GotoAsync("/projects");
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Projects", Level = 1 })
                     .WaitForAsync();
-                await page.GetByText("There are no projects yet.").WaitForAsync();
             }
         );
     }

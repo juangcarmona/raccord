@@ -30,7 +30,7 @@ public sealed class AuthenticationJourney_Should_ProtectApi(DistributedAppFixtur
 
                 Assert.Contains(
                     "admin@example.com",
-                    await page.Locator("header").InnerTextAsync(),
+                    await page.Locator(".shell__toolbar").InnerTextAsync(),
                     StringComparison.Ordinal
                 );
 

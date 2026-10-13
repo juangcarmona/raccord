@@ -84,6 +84,12 @@ public sealed class Quote
     /// <summary>Trusted timestamp at which customer acceptance was recorded.</summary>
     public DateTimeOffset? AcceptedAt { get; private set; }
 
+    /// <summary>Display name of the signer.</summary>
+    public string? SignedBy { get; private set; }
+
+    /// <summary>Trusted timestamp at which signature metadata was recorded.</summary>
+    public DateTimeOffset? SignedAt { get; private set; }
+
     /// <summary>Immutable planned lines.</summary>
     public IReadOnlyList<QuoteLine> Lines => [.. lines.OrderBy(line => line.Position)];
 
@@ -108,6 +114,24 @@ public sealed class Quote
             );
         ReviewStatus = QuoteReviewStatus.Accepted;
         AcceptedAt = acceptedAt;
+    }
+
+    /// <summary>Records signature metadata for an accepted quote.</summary>
+    public void Sign(string signerName, DateTimeOffset signedAt)
+    {
+        if (ReviewStatus != QuoteReviewStatus.Accepted)
+            throw new BusinessRuleViolationException(
+                "quotes.signature-invalid",
+                "Only accepted quotes can be signed."
+            );
+        if (string.IsNullOrWhiteSpace(signerName))
+            throw new BusinessRuleViolationException(
+                "quotes.signer-required",
+                "Signer name is required."
+            );
+        ReviewStatus = QuoteReviewStatus.SignatureRecorded;
+        SignedBy = signerName.Trim();
+        SignedAt = signedAt;
     }
 
     /// <summary>Creates an immutable snapshot of the current project plan.</summary>

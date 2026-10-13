@@ -90,4 +90,32 @@ public sealed class QuoteTests
         quote.ReviewStatus.ShouldBe(QuoteReviewStatus.Accepted);
         quote.AcceptedAt.ShouldBe(timestamp);
     }
+
+    [Fact]
+    public void Signature_Should_require_acceptance_and_capture_signer_metadata()
+    {
+        var quote = Quote.Generate(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "Customer",
+            "Project",
+            QuoteNumberSequence.Start("Q", 2026).Allocate(),
+            new DateOnly(2026, 10, 13),
+            14,
+            null,
+            [QuoteLine.FromProjectLine(1, "Camera", 1, 100, 0, 21, "EUR")]
+        );
+        var timestamp = new DateTimeOffset(2026, 10, 13, 13, 30, 0, TimeSpan.Zero);
+
+        Should
+            .Throw<BusinessRuleViolationException>(() => quote.Sign("Juan", timestamp))
+            .Code.ShouldBe("quotes.signature-invalid");
+        quote.MarkReadyForSignature();
+        quote.Accept(timestamp);
+        quote.Sign(" Juan G. Carmona ", timestamp);
+
+        quote.ReviewStatus.ShouldBe(QuoteReviewStatus.SignatureRecorded);
+        quote.SignedBy.ShouldBe("Juan G. Carmona");
+        quote.SignedAt.ShouldBe(timestamp);
+    }
 }

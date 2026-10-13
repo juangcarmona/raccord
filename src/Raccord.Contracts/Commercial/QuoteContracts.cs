@@ -13,11 +13,16 @@ public sealed record QuoteResponse(
     string? PaymentTerms,
     string ReviewStatus,
     DateTimeOffset? AcceptedAt,
+    string? SignedBy,
+    DateTimeOffset? SignedAt,
     IReadOnlyList<QuoteLineResponse> Lines
 );
 
 /// <summary>Moves a quote into customer-signature readiness.</summary>
 public sealed record UpdateQuoteReviewRequest(string Status);
+
+/// <summary>Records signature metadata for an accepted quote.</summary>
+public sealed record SignQuoteRequest(string SignerName);
 
 /// <summary>A copied priced line in a quote snapshot.</summary>
 public sealed record QuoteLineResponse(

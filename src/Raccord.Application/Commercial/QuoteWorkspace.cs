@@ -108,6 +108,21 @@ public sealed class QuoteWorkspace(
         return ToResponse(quote);
     }
 
+    /// <summary>Records signature metadata using the trusted application clock.</summary>
+    public async Task<QuoteResponse?> SignAsync(
+        Guid id,
+        SignQuoteRequest request,
+        CancellationToken ct
+    )
+    {
+        var quote = await quotes.FindAsync(id, ct).ConfigureAwait(false);
+        if (quote is null)
+            return null;
+        quote.Sign(request.SignerName, clock.UtcNow);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToResponse(quote);
+    }
+
     /// <summary>Builds a deterministic text document for an accepted quote.</summary>
     public async Task<QuoteDocument?> GetDocumentAsync(Guid id, CancellationToken ct)
     {
@@ -164,6 +179,8 @@ public sealed class QuoteWorkspace(
             quote.PaymentTerms,
             quote.ReviewStatus.ToString(),
             quote.AcceptedAt,
+            quote.SignedBy,
+            quote.SignedAt,
             [
                 .. quote.Lines.Select(line => new QuoteLineResponse(
                     line.Position,

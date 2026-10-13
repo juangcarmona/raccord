@@ -7,6 +7,7 @@ namespace Raccord.Domain.Projects;
 public sealed class Project
 {
     private readonly List<BillableLine> billableLines = [];
+    private readonly List<PlannedEquipmentLine> plannedEquipmentLines = [];
 
     private Project()
     {
@@ -62,6 +63,27 @@ public sealed class Project
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];
+
+    /// <summary>Equipment planned for this project.</summary>
+    public IReadOnlyList<PlannedEquipmentLine> PlannedEquipmentLines => [.. plannedEquipmentLines];
+
+    /// <summary>Plans equipment for a period within the project period.</summary>
+    public PlannedEquipmentLine PlanEquipment(
+        Guid equipmentId,
+        int quantity,
+        DateOnly startDate,
+        DateOnly endDate
+    )
+    {
+        if (quantity <= 0 || startDate < StartDate || endDate > EndDate || endDate < startDate)
+            throw new BusinessRuleViolationException(
+                "projects.equipment-period-invalid",
+                "Equipment planning must use a positive quantity within the project period."
+            );
+        var line = new PlannedEquipmentLine(equipmentId, quantity, startDate, endDate);
+        plannedEquipmentLines.Add(line);
+        return line;
+    }
 
     /// <summary>Creates a project for a customer and period.</summary>
     public static Project Create(

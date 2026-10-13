@@ -40,5 +40,18 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder
             .Navigation(project => project.BillableLines)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder.OwnsMany(
+            project => project.PlannedEquipmentLines,
+            line =>
+            {
+                line.ToTable("planned_equipment_lines");
+                line.WithOwner().HasForeignKey("ProjectId");
+                line.HasKey(item => item.Id);
+                line.Property(item => item.Id).ValueGeneratedNever();
+            }
+        );
+        builder
+            .Navigation(project => project.PlannedEquipmentLines)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

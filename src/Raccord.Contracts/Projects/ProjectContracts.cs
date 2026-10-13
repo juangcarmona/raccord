@@ -13,6 +13,21 @@ public enum ProjectStatus
 
 public sealed record UpdateProjectStatusRequest(ProjectStatus Status);
 
+public sealed record PlanEquipmentRequest(
+    Guid EquipmentId,
+    int Quantity,
+    DateOnly StartDate,
+    DateOnly EndDate
+);
+
+public sealed record PlannedEquipmentLineResponse(
+    Guid Id,
+    Guid EquipmentId,
+    int Quantity,
+    DateOnly StartDate,
+    DateOnly EndDate
+);
+
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>
 /// <param name="CustomerId">Customer billed for the project.</param>
@@ -81,6 +96,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="Status">Project planning status.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
+/// <param name="PlannedEquipmentLines">Equipment planned for the project.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -92,7 +108,8 @@ public sealed record ProjectResponse(
     string? PaymentTerms,
     ProjectStatus Status,
     string Currency,
-    IReadOnlyList<BillableLineResponse> BillableLines
+    IReadOnlyList<BillableLineResponse> BillableLines,
+    IReadOnlyList<PlannedEquipmentLineResponse> PlannedEquipmentLines = null!
 );
 
 /// <summary>A billable line.</summary>

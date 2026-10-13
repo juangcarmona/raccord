@@ -76,6 +76,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Persist a fixed status vocabulary and expose explicit transitions while leaving warehouse/invoicing effects to their owning slices.
 - Check: Project migration, generated contracts, and CI checks pass before adding planning lines.
 
+## 2026-10-13 · Project equipment planning
+
+- Observation: Line-specific periods need domain validation at the project boundary before availability logic exists.
+- Action: Store planned equipment as project-owned lines, require positive quantities, and bound dates to the project period.
+- Check: Domain build, migration, generated contracts, and CI validate the period invariant.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

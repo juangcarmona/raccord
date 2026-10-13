@@ -239,7 +239,8 @@ internal static class Endpoints
                 async (OrganizationSettings settings, CancellationToken ct) =>
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
-            .WithTags("Organization");
+            .WithTags("Organization")
+            .RequirePermission(PermissionCatalog.OrganizationRead);
     }
 
 #pragma warning disable MA0051
@@ -1238,7 +1239,9 @@ internal static class Endpoints
 
     private static void MapInvoices(RouteGroupBuilder api)
     {
-        var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
+        var invoices = api.MapGroup("/invoices")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
         invoices.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>

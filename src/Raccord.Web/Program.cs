@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
@@ -15,6 +16,7 @@ using Raccord.Modules.Contacts;
 using Raccord.Modules.Equipment;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
+using Raccord.Web.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,16 @@ builder
     .AddSignInManager()
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<RaccordDbContext>();
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+if (requireAuthentication)
+{
+    builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+}
+else
+{
+    builder
+        .Services.AddAuthentication("Testing")
+        .AddScheme<AuthenticationSchemeOptions, TestingAuthenticationHandler>("Testing", _ => { });
+}
 builder.Services.Configure<CookieAuthenticationOptions>(
     IdentityConstants.ApplicationScheme,
     options =>
@@ -76,6 +87,7 @@ builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<QuoteWorkspace>();
 builder.Services.AddScoped<AuditLog>();
 builder.Services.AddScoped<InstallationSetup>();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 var app = builder.Build();
 

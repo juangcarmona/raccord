@@ -10,6 +10,7 @@ const navigation = [
     { to: "/customers", key: "nav.customers" },
     { to: "/contacts", key: "nav.contacts" },
     { to: "/settings/issuer", key: "nav.settings" },
+    { to: "/settings/roles", key: "nav.roles" },
 ] as const;
 
 export function AppShell() {

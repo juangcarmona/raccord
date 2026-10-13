@@ -35,6 +35,7 @@ export const routes: RouteObject[] = [
             { path: "invoices", element: <InvoicesPage /> },
             { path: "invoices/:id", element: <InvoicePage /> },
             { path: "settings/issuer", element: <IssuerSettingsPage /> },
+            { path: "settings/roles", element: <RolesPage /> },
             { path: "*", element: <NotFoundPage /> },
         ],
     },

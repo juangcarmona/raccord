@@ -1,0 +1,3 @@
+name: equipment-availability
+description: Calculate equipment availability over a project period with soft holds and reservations.
+status: proposed

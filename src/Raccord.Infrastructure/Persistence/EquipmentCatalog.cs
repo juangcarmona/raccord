@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Raccord.BuildingBlocks.Storage;
+using Raccord.Domain.Projects;
 using Raccord.Modules.Equipment.Contracts;
 
 namespace Raccord.Infrastructure.Persistence;
@@ -10,6 +11,56 @@ namespace Raccord.Infrastructure.Persistence;
 
 public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documents)
 {
+    public async Task<EquipmentAvailabilityResponse?> GetAvailabilityAsync(
+        Guid itemId,
+        DateOnly startDate,
+        DateOnly endDate,
+        CancellationToken ct
+    )
+    {
+        if (endDate < startDate)
+            return null;
+        var item = await db
+            .EquipmentItems.AsNoTracking()
+            .FirstOrDefaultAsync(item => item.Id == itemId, ct)
+            .ConfigureAwait(false);
+        if (item is null)
+            return null;
+        var lines = await db
+            .Projects.AsNoTracking()
+            .Where(project => project.Status != ProjectStatus.Cancelled)
+            .SelectMany(project =>
+                project.PlannedEquipmentLines.Select(line => new
+                {
+                    project.Status,
+                    line.EquipmentId,
+                    line.Quantity,
+                    line.StartDate,
+                    line.EndDate,
+                })
+            )
+            .Where(line =>
+                line.EquipmentId == itemId && line.StartDate <= endDate && line.EndDate >= startDate
+            )
+            .ToListAsync(ct)
+            .ConfigureAwait(false);
+        var reserved = lines
+            .Where(line => line.Status is ProjectStatus.Active or ProjectStatus.Completed)
+            .Sum(line => line.Quantity);
+        var softHeld = lines
+            .Where(line => line.Status is ProjectStatus.Draft or ProjectStatus.Planned)
+            .Sum(line => line.Quantity);
+        return new(
+            itemId,
+            startDate,
+            endDate,
+            item.StockQuantity,
+            softHeld,
+            reserved,
+            item.StockQuantity - reserved - softHeld
+        );
+    }
+
     public async Task<EquipmentItemSnapshot> CreateAsync(
         CreateEquipmentItemRequest request,
         CancellationToken cancellationToken

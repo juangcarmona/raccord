@@ -639,6 +639,47 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": {
+                        file: components["schemas"]["IFormFile"];
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentImportResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/equipment/items/{id}/details": {
         parameters: {
             query?: never;
@@ -1563,6 +1604,19 @@ export interface components {
             defaultDiscountPercent: number;
             /** @description Payment terms copied into new projects. */
             defaultPaymentTerms: null | string;
+        };
+        EquipmentImportResponse: {
+            /** Format: int32 */
+            importedCount: number;
+            /** Format: int32 */
+            rejectedCount: number;
+            rows: components["schemas"]["EquipmentImportRowResponse"][];
+        };
+        EquipmentImportRowResponse: {
+            /** Format: int32 */
+            row: number;
+            imported: boolean;
+            error: null | string;
         };
         EquipmentItemPage: {
             items: components["schemas"]["EquipmentItemSnapshot"][];

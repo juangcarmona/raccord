@@ -87,6 +87,14 @@ internal static class Endpoints
                     await catalog.CreateAsync(request, ct)
                 )
         );
+        equipment.MapPost(
+            "/items/import",
+            async (IFormFile file, EquipmentCatalog catalog, CancellationToken ct) =>
+            {
+                await using var stream = file.OpenReadStream();
+                return TypedResults.Ok(await catalog.ImportCsvAsync(stream, ct));
+            }
+        );
         equipment.MapPut(
             "/items/{id:guid}/details",
             async Task<Results<Ok<EquipmentItemSnapshot>, NotFound>> (

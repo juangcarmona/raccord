@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Raccord.BuildingBlocks.Storage;
@@ -105,6 +106,87 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         await db.SaveChangesAsync(ct).ConfigureAwait(false);
         return ToSnapshot(row);
     }
+
+#pragma warning disable MA0051
+    public async Task<EquipmentImportResponse> ImportCsvAsync(Stream content, CancellationToken ct)
+    {
+        using var reader = new StreamReader(content);
+        var header = await reader.ReadLineAsync(ct).ConfigureAwait(false);
+        if (
+            !string.Equals(
+                header,
+                "code,name,type,stockQuantity",
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
+            return new(0, 1, [new(1, false, "Expected header code,name,type,stockQuantity.")]);
+
+        var results = new List<EquipmentImportRowResponse>();
+        var seenCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var rowNumber = 1;
+        while (await reader.ReadLineAsync(ct).ConfigureAwait(false) is { } line)
+        {
+            rowNumber++;
+            var fields = line.Split(',', StringSplitOptions.None);
+            if (
+                fields.Length != 4
+                || string.IsNullOrWhiteSpace(fields[0])
+                || string.IsNullOrWhiteSpace(fields[1])
+            )
+            {
+                results.Add(
+                    new(rowNumber, false, "Rows require code, name, type, and stock quantity.")
+                );
+                continue;
+            }
+            if (!Enum.TryParse<EquipmentItemType>(fields[2].Trim(), true, out var type))
+            {
+                results.Add(new(rowNumber, false, "Type must be Rental or Sale."));
+                continue;
+            }
+            if (
+                !int.TryParse(fields[3].Trim(), CultureInfo.InvariantCulture, out var stock)
+                || stock < 0
+            )
+            {
+                results.Add(
+                    new(rowNumber, false, "Stock quantity must be a non-negative integer.")
+                );
+                continue;
+            }
+            var code = fields[0].Trim();
+            if (
+                !seenCodes.Add(code)
+                || await db
+                    .EquipmentItems.AnyAsync(item => item.Code == code, ct)
+                    .ConfigureAwait(false)
+            )
+            {
+                results.Add(
+                    new(rowNumber, false, "Code already exists in this import or catalogue.")
+                );
+                continue;
+            }
+            db.EquipmentItems.Add(
+                new EquipmentItemRow
+                {
+                    Id = Guid.NewGuid(),
+                    Code = code,
+                    Name = fields[1].Trim(),
+                    Type = type,
+                    StockQuantity = stock,
+                }
+            );
+            results.Add(new(rowNumber, true, null));
+        }
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return new(
+            results.Count(row => row.Imported),
+            results.Count(row => !row.Imported),
+            results
+        );
+    }
+#pragma warning restore MA0051
 
     public async Task<EquipmentItemSnapshot?> SaveImageAsync(
         Guid id,

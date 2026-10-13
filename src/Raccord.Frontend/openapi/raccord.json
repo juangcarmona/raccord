@@ -604,6 +604,43 @@
         }
       }
     },
+    "/api/equipment/items/import": {
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentImportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/equipment/items/{id}/details": {
       "put": {
         "tags": [
@@ -1805,6 +1842,53 @@
           }
         },
         "description": "A customer."
+      },
+      "EquipmentImportResponse": {
+        "required": [
+          "importedCount",
+          "rejectedCount",
+          "rows"
+        ],
+        "type": "object",
+        "properties": {
+          "importedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EquipmentImportRowResponse"
+            }
+          }
+        }
+      },
+      "EquipmentImportRowResponse": {
+        "required": [
+          "row",
+          "imported",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imported": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       },
       "EquipmentItemPage": {
         "required": [

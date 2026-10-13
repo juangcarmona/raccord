@@ -17,6 +17,11 @@ internal sealed class QuoteConfiguration
         builder.Property(quote => quote.CustomerName).HasMaxLength(200).IsRequired();
         builder.Property(quote => quote.ProjectName).HasMaxLength(200).IsRequired();
         builder.Property(quote => quote.PaymentTerms).HasMaxLength(200);
+        builder
+            .Property(quote => quote.ReviewStatus)
+            .HasConversion<string>()
+            .HasMaxLength(30)
+            .IsRequired();
         builder.HasIndex(quote => quote.Number).IsUnique();
         builder.OwnsMany(
             quote => quote.Lines,

@@ -1636,6 +1636,49 @@
           }
         }
       }
+    },
+    "/api/quotes/{id}/review": {
+      "put": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuoteReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3467,6 +3510,7 @@
           "issuedOn",
           "validUntil",
           "paymentTerms",
+          "reviewStatus",
           "lines"
         ],
         "type": "object",
@@ -3505,6 +3549,9 @@
               "null",
               "string"
             ]
+          },
+          "reviewStatus": {
+            "type": "string"
           },
           "lines": {
             "type": "array",
@@ -3780,6 +3827,18 @@
             "$ref": "#/components/schemas/ProjectStatus"
           }
         }
+      },
+      "UpdateQuoteReviewRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "description": "Moves a quote into customer-signature readiness."
       },
       "ValidationIssueResponse": {
         "required": [

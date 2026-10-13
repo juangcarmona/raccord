@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Quote review transition
+
+- Observation: Review readiness is a workflow state, not permission to mutate a commercial snapshot.
+- Action: Persist a small explicit state machine and reject repeated or unknown transitions at the domain/API boundary.
+- Check: Transition tests, migration, generated contracts, OpenSpec validation and a linked workflow visual are required before merge.
+
 ## 2026-10-13 · Quote generation
 
 - Observation: A quote must remain auditable after the project plan changes, while numbering must remain gapless within its series.

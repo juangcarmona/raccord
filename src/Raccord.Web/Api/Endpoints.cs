@@ -482,6 +482,18 @@ internal static class Endpoints
                     ? TypedResults.Ok(quote)
                     : TypedResults.NotFound()
         );
+        quotes.MapPut(
+            "/{id:guid}/review",
+            async Task<Results<Ok<QuoteResponse>, NotFound>> (
+                Guid id,
+                UpdateQuoteReviewRequest request,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.UpdateReviewAsync(id, request, ct) is { } quote
+                    ? TypedResults.Ok(quote)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)

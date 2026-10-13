@@ -42,4 +42,26 @@ public sealed class QuoteTests
         );
         error.Code.ShouldBe("quotes.plan-empty");
     }
+
+    [Fact]
+    public void Review_Should_move_a_draft_to_signature_readiness_once()
+    {
+        var quote = Quote.Generate(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "Customer",
+            "Project",
+            QuoteNumberSequence.Start("Q", 2026).Allocate(),
+            new DateOnly(2026, 10, 13),
+            14,
+            null,
+            [QuoteLine.FromProjectLine(1, "Camera", 1, 100, 0, 21, "EUR")]
+        );
+
+        quote.MarkReadyForSignature();
+
+        quote.ReviewStatus.ShouldBe(QuoteReviewStatus.ReadyForSignature);
+        var error = Should.Throw<BusinessRuleViolationException>(quote.MarkReadyForSignature);
+        error.Code.ShouldBe("quotes.review-transition-invalid");
+    }
 }

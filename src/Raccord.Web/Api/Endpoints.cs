@@ -5,10 +5,12 @@ using Raccord.Contracts.Customers;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
+using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;
 
@@ -43,108 +45,127 @@ internal static class Endpoints
     private static void MapOrganization(RouteGroupBuilder api)
     {
         var organization = api.MapGroup("/organization").WithTags("Organization");
-        organization.MapGet(
-            "/issuer",
-            async Task<Results<Ok<IssuerProfileResponse>, NotFound>> (
-                OrganizationSettings settings,
-                CancellationToken ct
-            ) =>
-                await settings.GetIssuerAsync(ct) is { } issuer
-                    ? TypedResults.Ok(issuer)
-                    : TypedResults.NotFound()
-        );
-        organization.MapPut(
-            "/issuer",
-            async (
-                UpdateIssuerProfileRequest request,
-                OrganizationSettings settings,
-                CancellationToken ct
-            ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
-        );
+        organization
+            .MapGet(
+                "/issuer",
+                async Task<Results<Ok<IssuerProfileResponse>, NotFound>> (
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) =>
+                    await settings.GetIssuerAsync(ct) is { } issuer
+                        ? TypedResults.Ok(issuer)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.OrganizationRead);
+        organization
+            .MapPut(
+                "/issuer",
+                async (
+                    UpdateIssuerProfileRequest request,
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
+            )
+            .RequirePermission(PermissionCatalog.OrganizationEdit);
         api.MapGet(
                 "/invoice-series",
                 async (OrganizationSettings settings, CancellationToken ct) =>
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
-            .WithTags("Organization");
+            .WithTags("Organization")
+            .RequirePermission(PermissionCatalog.OrganizationRead);
     }
 
     private static void MapCustomers(RouteGroupBuilder api)
     {
         var customers = api.MapGroup("/customers").WithTags("Customers");
-        customers.MapGet(
-            "/",
-            async (CustomerDirectory directory, CancellationToken ct) =>
-                TypedResults.Ok(await directory.ListAsync(ct))
-        );
-        customers.MapGet(
-            "/{id:guid}",
-            async Task<Results<Ok<CustomerResponse>, NotFound>> (
-                Guid id,
-                CustomerDirectory directory,
-                CancellationToken ct
-            ) =>
-                await directory.GetAsync(id, ct) is { } customer
-                    ? TypedResults.Ok(customer)
-                    : TypedResults.NotFound()
-        );
-        customers.MapPost(
-            "/",
-            async (
-                RegisterCustomerRequest request,
-                CustomerDirectory directory,
-                CancellationToken ct
-            ) =>
-            {
-                var customer = await directory.RegisterAsync(request, ct);
-                return TypedResults.Created($"/api/customers/{customer.Id}", customer);
-            }
-        );
+        customers
+            .MapGet(
+                "/",
+                async (CustomerDirectory directory, CancellationToken ct) =>
+                    TypedResults.Ok(await directory.ListAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        customers
+            .MapGet(
+                "/{id:guid}",
+                async Task<Results<Ok<CustomerResponse>, NotFound>> (
+                    Guid id,
+                    CustomerDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.GetAsync(id, ct) is { } customer
+                        ? TypedResults.Ok(customer)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        customers
+            .MapPost(
+                "/",
+                async (
+                    RegisterCustomerRequest request,
+                    CustomerDirectory directory,
+                    CancellationToken ct
+                ) =>
+                {
+                    var customer = await directory.RegisterAsync(request, ct);
+                    return TypedResults.Created($"/api/customers/{customer.Id}", customer);
+                }
+            )
+            .RequirePermission(PermissionCatalog.ContactsCreate);
     }
 
     private static void MapProjects(RouteGroupBuilder api)
     {
         var projects = api.MapGroup("/projects").WithTags("Projects");
-        projects.MapGet(
-            "/",
-            async (ProjectWorkspace workspace, CancellationToken ct) =>
-                TypedResults.Ok(await workspace.ListAsync(ct))
-        );
-        projects.MapGet(
-            "/{id:guid}",
-            async Task<Results<Ok<ProjectResponse>, NotFound>> (
-                Guid id,
-                ProjectWorkspace workspace,
-                CancellationToken ct
-            ) =>
-                await workspace.GetAsync(id, ct) is { } project
-                    ? TypedResults.Ok(project)
-                    : TypedResults.NotFound()
-        );
-        projects.MapPost(
-            "/",
-            async (
-                CreateProjectRequest request,
-                ProjectWorkspace workspace,
-                CancellationToken ct
-            ) =>
-            {
-                var project = await workspace.CreateAsync(request, ct);
-                return TypedResults.Created($"/api/projects/{project.Id}", project);
-            }
-        );
-        projects.MapPost(
-            "/{id:guid}/billable-lines",
-            async Task<Results<Created<BillableLineResponse>, NotFound>> (
-                Guid id,
-                AddBillableLineRequest request,
-                ProjectWorkspace workspace,
-                CancellationToken ct
-            ) =>
-                await workspace.AddBillableLineAsync(id, request, ct) is { } line
-                    ? TypedResults.Created($"/api/projects/{id}", line)
-                    : TypedResults.NotFound()
-        );
+        projects
+            .MapGet(
+                "/",
+                async (ProjectWorkspace workspace, CancellationToken ct) =>
+                    TypedResults.Ok(await workspace.ListAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.ProjectsRead);
+        projects
+            .MapGet(
+                "/{id:guid}",
+                async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                    Guid id,
+                    ProjectWorkspace workspace,
+                    CancellationToken ct
+                ) =>
+                    await workspace.GetAsync(id, ct) is { } project
+                        ? TypedResults.Ok(project)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ProjectsRead);
+        projects
+            .MapPost(
+                "/",
+                async (
+                    CreateProjectRequest request,
+                    ProjectWorkspace workspace,
+                    CancellationToken ct
+                ) =>
+                {
+                    var project = await workspace.CreateAsync(request, ct);
+                    return TypedResults.Created($"/api/projects/{project.Id}", project);
+                }
+            )
+            .RequirePermission(PermissionCatalog.ProjectsCreate);
+        projects
+            .MapPost(
+                "/{id:guid}/billable-lines",
+                async Task<Results<Created<BillableLineResponse>, NotFound>> (
+                    Guid id,
+                    AddBillableLineRequest request,
+                    ProjectWorkspace workspace,
+                    CancellationToken ct
+                ) =>
+                    await workspace.AddBillableLineAsync(id, request, ct) is { } line
+                        ? TypedResults.Created($"/api/projects/{id}", line)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ProjectsEdit);
     }
 
     private static void MapInvoicing(RouteGroupBuilder api)
@@ -155,7 +176,9 @@ internal static class Endpoints
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)
     {
-        var drafts = api.MapGroup("/invoice-drafts").WithTags("Invoicing");
+        var drafts = api.MapGroup("/invoice-drafts")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
         drafts.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>
@@ -241,7 +264,9 @@ internal static class Endpoints
 
     private static void MapInvoices(RouteGroupBuilder api)
     {
-        var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
+        var invoices = api.MapGroup("/invoices")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
         invoices.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>

@@ -34,6 +34,16 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-13 · Epic #17 continuation
+
+- Observation: Starting the next epic before reconciling all children of the current epic caused avoidable context switching and uncommitted work in the wrong feature worktree.
+- Action: At the start of every FF loop, query the epic and all child issue states, then complete the dependency-ordered child list before selecting a new epic. Keep exploratory work isolated and uncommitted until the current epic is reconciled.
+- Check: The loop update names the active epic, remaining children, and target base branch; no new-epic PR is opened while a prior epic has open implementation children.
+
+- Observation: Role authorization is security-sensitive and stale cookie claims can mask assignment changes.
+- Action: Resolve role permissions from current Identity role claims at authorization time and update the security stamp on assignment changes; cover both permission denial and post-assignment behavior in CI.
+- Check: Web authorization tests and the role-management E2E journey run on every PR that changes the permission catalog or role APIs.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

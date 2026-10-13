@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,6 +57,8 @@ public sealed class InstallationSetup(
                     return SetupResult.Failed(roleResult.Errors.Select(error => error.Description));
                 }
             }
+
+            await EnsureRolePermissionsAsync(roleName).ConfigureAwait(false);
         }
 
         var user = new RaccordUser
@@ -78,6 +81,30 @@ public sealed class InstallationSetup(
 
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return SetupResult.Created;
+    }
+
+    private async Task EnsureRolePermissionsAsync(string roleName)
+    {
+        var role = await roles.FindByNameAsync(roleName).ConfigureAwait(false);
+        if (role is null)
+        {
+            return;
+        }
+
+        var existingClaims = await roles.GetClaimsAsync(role).ConfigureAwait(false);
+        var permissions = PermissionCatalog.PredefinedRoles[roleName];
+        foreach (
+            var permission in permissions.Where(permission =>
+                existingClaims.All(claim =>
+                    !string.Equals(claim.Value, permission, StringComparison.Ordinal)
+                )
+            )
+        )
+        {
+            await roles
+                .AddClaimAsync(role, new Claim(PermissionCatalog.ClaimType, permission))
+                .ConfigureAwait(false);
+        }
     }
 
     /// <summary>The outcome of a first-administrator attempt.</summary>

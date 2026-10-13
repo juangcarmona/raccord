@@ -8,6 +8,13 @@
 4. Audit `invoice-draft.created`; one `SaveChanges`. A concurrent reservation of the same line fails on `xmin` → 409, or on the domain rule → 422.
 5. The response includes server totals and validation issues for today's date.
 
+## R-0 Sign in and authorize the application
+
+1. The frontend restores the session through `GET /api/auth/me`.
+2. If no cookie session exists, `RequireAuth` redirects the browser to `/sign-in`.
+3. `POST /api/auth/sign-in` validates the local Identity password and establishes the `raccord.session` cookie; the sign-out endpoint clears it.
+4. The `/api` group requires an authenticated user. The sign-in endpoint and infrastructure health endpoints are anonymous; test bypass authentication is explicit configuration.
+
 ## R-2 Finalize (issue) an invoice
 
 1. `POST /api/invoice-drafts/{id}/finalize {issueDate?}`; default date is today in the organization time zone.

@@ -4,7 +4,7 @@
 
 | ID | Risk | Impact | Mitigation |
 | --- | --- | --- | --- |
-| R-1 | **No authentication yet** | Anyone with network access can read data and issue invoices | Do not expose installations; MVP slice 2 adds OIDC and roles. Audit actor shows `unauthenticated`. |
+| R-1 | **No role-based authorization yet** | Any authenticated account can reach the current application API | Keep account creation and deployment access controlled; add scoped permissions before multi-role deployments. |
 | R-2 | VERI*FACTU legal responsibility for open-source self-hosted software unresolved | Could block the Spanish market | Compliance seam records obligations now; legal review before implementation |
 | R-3 | Tax rules and dates change (announced 2028 postponement not enacted) | Rework | Requirements dated and sourced; adapters isolated |
 | R-4 | Rounding policy not yet confirmed by an accountant | Possible disagreement on VAT breakdown | ADR-0006 explicit and tested; easy to change in one place |
@@ -24,5 +24,5 @@
 | D-5 | Frontend has tests for formatting, draft and project pages only | Add tests as forms gain behavior |
 | D-6 | No data export yet | MVP slice 8 |
 | D-7 | Azure template uses PostgreSQL password auth over public network with "Azure services" firewall rule | Move to Entra auth and private networking for production |
-| D-9 | Open technical questions: is one web replica enough for numbering under load; which OIDC provider ships as the self-hosted default; should the PDF renderer move to a library once templates are configurable | Decide with MVP slices 2 and 5 |
+| D-9 | Open technical questions: is one web replica enough for numbering under load; which role and permission model should ship for self-hosted deployments; should the PDF renderer move to a library once templates are configurable | Decide with MVP slices 2 and 5 |
 | D-8 | Local Node 24.11 is below jsdom's declared minimum (24.15); tests pass, CI uses current Node 24 | Upgrade local toolchains |

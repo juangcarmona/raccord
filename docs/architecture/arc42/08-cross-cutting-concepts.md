@@ -26,7 +26,8 @@ Issued representation + SHA-256 verified on every read (ADR-0005); documents reg
 
 ## Security
 
-- No authentication yet (MVP slice 2); the actor is recorded as `unauthenticated` so the gap is visible. Do not expose installations publicly until then.
+- Local ASP.NET Identity creates cookie sessions named `raccord.session`; `/api` requires an authenticated user, while sign-in and infrastructure health endpoints are anonymous. The frontend restores the session and guards the application shell through `AuthProvider` and `RequireAuth`.
+- Role-based authorization is not implemented yet; all authenticated users currently share the same application authorization boundary. Keep the deployment protected and record `unauthenticated` only when the explicit test bypass is enabled.
 - Secrets only through environment variables, user secrets or Key Vault; `.env` files are git-ignored; Azure uses managed identity.
 - Containers run as non-root; health endpoints reveal only a status word.
 - File-storage keys cannot escape the storage root.

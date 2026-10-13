@@ -680,6 +680,19 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(2000)")
                         .HasColumnName("last_error");
 
+                    b.Property<string>("PreviousHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("character(64)")
+                        .HasColumnName("previous_hash")
+                        .IsFixedLength();
+
+                    b.Property<string>("RecordHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character(64)")
+                        .HasColumnName("record_hash")
+                        .IsFixedLength();
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(30)

@@ -78,6 +78,8 @@ internal sealed class RecordConfiguration
         builder.HasKey(row => row.Id);
         builder.Property(row => row.InvoiceNumber).HasMaxLength(32);
         builder.Property(row => row.ContentHash).HasMaxLength(64).IsFixedLength();
+        builder.Property(row => row.PreviousHash).HasMaxLength(64).IsFixedLength();
+        builder.Property(row => row.RecordHash).HasMaxLength(64).IsFixedLength();
         builder.Property(row => row.Kind).HasMaxLength(30);
         builder.Property(row => row.Status).HasMaxLength(30);
         builder.Property(row => row.LastError).HasMaxLength(2000);

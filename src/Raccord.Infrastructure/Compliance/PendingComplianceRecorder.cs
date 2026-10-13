@@ -1,3 +1,6 @@
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Raccord.Application.Compliance;
 using Raccord.Domain.Billing;
 using Raccord.Infrastructure.Persistence;
@@ -22,16 +25,32 @@ internal sealed class PendingComplianceRecorder(RaccordDbContext db, IClock cloc
     {
         ArgumentNullException.ThrowIfNull(invoice);
         ArgumentNullException.ThrowIfNull(representation);
+        var previousHash = db
+            .ComplianceRecords.OrderByDescending(record => record.CreatedAt)
+            .ThenByDescending(record => record.Id)
+            .Select(record => record.RecordHash)
+            .FirstOrDefault();
+        var id = Guid.CreateVersion7();
+        var createdAt = clock.UtcNow;
+        var recordHash = Convert.ToHexStringLower(
+            SHA256.HashData(
+                Encoding.UTF8.GetBytes(
+                    $"{invoice.Id:N}|{invoice.Number.Value}|invoice-issued|{representation.ContentHash}|{previousHash}|{createdAt:O}"
+                )
+            )
+        );
         db.ComplianceRecords.Add(
             new ComplianceRecordRow
             {
-                Id = Guid.CreateVersion7(),
+                Id = id,
                 InvoiceId = invoice.Id,
                 InvoiceNumber = invoice.Number.Value,
                 ContentHash = representation.ContentHash,
                 Kind = "invoice-issued",
                 Status = PendingStatus,
-                CreatedAt = clock.UtcNow,
+                PreviousHash = previousHash,
+                RecordHash = recordHash,
+                CreatedAt = createdAt,
             }
         );
     }

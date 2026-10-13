@@ -52,6 +52,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Carry regime and cause through pricing, grouped totals, public contracts, and versioned issued representations; retain a legacy restore path for existing invoices.
 - Check: Domain tests keep equal-rate exemptions separate, representation tests cover the new schema, and CI checks generated contracts.
 
+## 2026-10-13 · Compliance record chaining
+
+- Observation: A pending obligation with only the invoice hash could detect invoice tampering but not record reordering or altered chain context.
+- Action: Store predecessor and record hashes in the compliance-owned append-only row and compute them before the issuing transaction commits.
+- Check: The migration, append-only database protections, and CI compliance tests must pass before the chain is used by submission work.
+
 ## 2026-10-13 · Contact CRUD and pagination
 
 - Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.

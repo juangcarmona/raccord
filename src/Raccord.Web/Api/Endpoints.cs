@@ -301,6 +301,7 @@ internal static class Endpoints
         );
     }
 
+#pragma warning disable MA0051
     private static void MapProjects(RouteGroupBuilder api)
     {
         var projects = api.MapGroup("/projects").WithTags("Projects");
@@ -344,6 +345,18 @@ internal static class Endpoints
                     ? TypedResults.Created($"/api/projects/{id}", line)
                     : TypedResults.NotFound()
         );
+        projects.MapPost(
+            "/{id:guid}/equipment-lines",
+            async Task<Results<Created<PlannedEquipmentLineResponse>, NotFound>> (
+                Guid id,
+                PlanEquipmentRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.PlanEquipmentAsync(id, request, ct) is { } line
+                    ? TypedResults.Created($"/api/projects/{id}/equipment-lines/{line.Id}", line)
+                    : TypedResults.NotFound()
+        );
         projects.MapPut(
             "/{id:guid}/status",
             async Task<Results<Ok<ProjectResponse>, NotFound>> (
@@ -357,6 +370,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
     }
+#pragma warning restore MA0051
 
     private static void MapInvoicing(RouteGroupBuilder api)
     {

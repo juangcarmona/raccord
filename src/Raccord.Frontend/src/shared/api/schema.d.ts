@@ -979,6 +979,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/equipment-lines": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PlanEquipmentRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PlannedEquipmentLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/status": {
         parameters: {
             query?: never;
@@ -1963,6 +2011,28 @@ export interface components {
             taxId: null | string;
             address: null | components["schemas"]["AddressDto"];
         };
+        PlanEquipmentRequest: {
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            quantity: number;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+        };
+        PlannedEquipmentLineResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            quantity: number;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+        };
         ProblemDetails: {
             type?: null | string;
             title?: null | string;
@@ -2010,6 +2080,8 @@ export interface components {
             currency: string;
             /** @description Billable work. */
             billableLines: components["schemas"]["BillableLineResponse"][];
+            /** @description Equipment planned for the project. */
+            plannedEquipmentLines?: components["schemas"]["PlannedEquipmentLineResponse"][];
         };
         ProjectStatus: number;
         /** @description A project in a list. */

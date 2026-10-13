@@ -895,6 +895,49 @@
         }
       }
     },
+    "/api/projects/{id}/equipment-lines": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanEquipmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlannedEquipmentLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/status": {
       "put": {
         "tags": [
@@ -2547,6 +2590,65 @@
         },
         "description": "A legal party as printed on an invoice."
       },
+      "PlanEquipmentRequest": {
+        "required": [
+          "equipmentId",
+          "quantity",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "equipmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "PlannedEquipmentLineResponse": {
+        "required": [
+          "id",
+          "equipmentId",
+          "quantity",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "equipmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -2653,6 +2755,13 @@
               "$ref": "#/components/schemas/BillableLineResponse"
             },
             "description": "Billable work."
+          },
+          "plannedEquipmentLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedEquipmentLineResponse"
+            },
+            "description": "Equipment planned for the project."
           }
         },
         "description": "A project with its billable lines."

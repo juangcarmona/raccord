@@ -135,6 +135,26 @@ public sealed class ProjectWorkspace(
         return line.ToResponse();
     }
 
+    /// <summary>Plans an equipment item for a period within a project.</summary>
+    public async Task<PlannedEquipmentLineResponse?> PlanEquipmentAsync(
+        Guid projectId,
+        PlanEquipmentRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.PlanEquipment(
+            request.EquipmentId,
+            request.Quantity,
+            request.StartDate,
+            request.EndDate
+        );
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return new(line.Id, line.EquipmentId, line.Quantity, line.StartDate, line.EndDate);
+    }
+
     /// <summary>Changes a project's planning lifecycle status.</summary>
     public async Task<ProjectResponse?> SetStatusAsync(
         Guid id,
@@ -163,7 +183,16 @@ public sealed class ProjectWorkspace(
             project.PaymentTerms,
             ToContractStatus(project.Status),
             Currency.Eur.Code,
-            [.. project.BillableLines.Select(line => line.ToResponse())]
+            [.. project.BillableLines.Select(line => line.ToResponse())],
+            [
+                .. project.PlannedEquipmentLines.Select(line => new PlannedEquipmentLineResponse(
+                    line.Id,
+                    line.EquipmentId,
+                    line.Quantity,
+                    line.StartDate,
+                    line.EndDate
+                )),
+            ]
         );
 
     private static Raccord.Contracts.Projects.ProjectStatus ToContractStatus(

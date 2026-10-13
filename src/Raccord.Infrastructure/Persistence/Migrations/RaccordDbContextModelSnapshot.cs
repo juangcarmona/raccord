@@ -848,7 +848,48 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasConstraintName("fk_billable_lines_projects_project_id");
                         });
 
+                    b.OwnsMany("Raccord.Domain.Projects.PlannedEquipmentLine", "PlannedEquipmentLines", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<DateOnly>("EndDate")
+                                .HasColumnType("date")
+                                .HasColumnName("end_date");
+
+                            b1.Property<Guid>("EquipmentId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("equipment_id");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("project_id");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("integer")
+                                .HasColumnName("quantity");
+
+                            b1.Property<DateOnly>("StartDate")
+                                .HasColumnType("date")
+                                .HasColumnName("start_date");
+
+                            b1.HasKey("Id")
+                                .HasName("pk_planned_equipment_lines");
+
+                            b1.HasIndex("ProjectId")
+                                .HasDatabaseName("ix_planned_equipment_lines_project_id");
+
+                            b1.ToTable("planned_equipment_lines", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId")
+                                .HasConstraintName("fk_planned_equipment_lines_projects_project_id");
+                        });
+
                     b.Navigation("BillableLines");
+
+                    b.Navigation("PlannedEquipmentLines");
                 });
 
             modelBuilder.Entity("Raccord.Modules.Compliance.ComplianceRecordRow", b =>

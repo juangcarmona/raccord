@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Modules.Contacts.Contracts;
 
@@ -53,7 +54,12 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             customer.BillingAddress.ToAddress(),
             customer.Email,
             customer.DefaultDiscountPercent,
-            customer.DefaultPaymentTerms
+            customer.DefaultPaymentTerms,
+            ParseTags(customer.Tags),
+            customer.Folder
         );
     }
+
+    private static string[] ParseTags(string? tags) =>
+        string.IsNullOrWhiteSpace(tags) ? [] : JsonSerializer.Deserialize<string[]>(tags) ?? [];
 }

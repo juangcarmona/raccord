@@ -68,8 +68,12 @@ internal static class Endpoints
         var customers = api.MapGroup("/customers").WithTags("Customers");
         customers.MapGet(
             "/",
-            async (CustomerDirectory directory, CancellationToken ct) =>
-                TypedResults.Ok(await directory.ListAsync(ct))
+            async (
+                string? tag,
+                string? folder,
+                CustomerDirectory directory,
+                CancellationToken ct
+            ) => TypedResults.Ok(await directory.ListAsync(ct, tag, folder))
         );
         customers.MapGet(
             "/{id:guid}",
@@ -96,7 +100,28 @@ internal static class Endpoints
         );
         MapCustomerImport(customers);
         MapContactPersons(customers);
+        customers.MapGet("/{id:guid}/taxonomy", GetTaxonomyAsync);
+        customers.MapPut("/{id:guid}/taxonomy", SetTaxonomyAsync);
     }
+
+    private static async Task<Results<Ok<ContactTaxonomyResponse>, NotFound>> GetTaxonomyAsync(
+        Guid id,
+        ContactTaxonomyService taxonomy,
+        CancellationToken ct
+    ) =>
+        await taxonomy.GetAsync(id, ct) is { } result
+            ? TypedResults.Ok(result)
+            : TypedResults.NotFound();
+
+    private static async Task<Results<Ok<ContactTaxonomyResponse>, NotFound>> SetTaxonomyAsync(
+        Guid id,
+        ContactTaxonomyRequest request,
+        ContactTaxonomyService taxonomy,
+        CancellationToken ct
+    ) =>
+        await taxonomy.SetAsync(id, request, ct) is { } result
+            ? TypedResults.Ok(result)
+            : TypedResults.NotFound();
 
     private static void MapContactPersons(RouteGroupBuilder customers)
     {

@@ -10,7 +10,9 @@ public sealed record PartySnapshot(
     PostalAddress? Address,
     string? Email,
     decimal DefaultDiscountPercent = 0,
-    string? DefaultPaymentTerms = null
+    string? DefaultPaymentTerms = null,
+    IReadOnlyList<string>? Tags = null,
+    string? Folder = null
 )
 {
     /// <summary>The party data required by an invoice.</summary>

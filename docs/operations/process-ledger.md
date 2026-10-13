@@ -19,3 +19,9 @@ This ledger records repeatable delivery improvements for future agents.
 - Observation: Contact defaults must not remain a live read through project views, or later edits silently change an existing project.
 - Action: Copy defaults at project creation and persist them as project-owned values.
 - Check: The project contract exposes copied values and migration-backed tests cover creation after a contact default is set.
+
+## 2026-10-13 · Contact tags and folders
+
+- Observation: Taxonomy is contact-scoped and should not leak into unrelated record types.
+- Action: Normalize tags at the write boundary and expose filtering through the existing customer list.
+- Check: The taxonomy API and generated contract cover read/update operations, while list filters are case-insensitive.

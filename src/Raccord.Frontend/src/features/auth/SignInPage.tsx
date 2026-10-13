@@ -1,6 +1,8 @@
 import { useState, type SyntheticEvent } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useI18n } from "../../shared/i18n/I18nProvider";
+import { ApiError } from "../../shared/api/client";
+import { useAuth } from "./AuthProvider";
 
 export function SignInPage() {
     const { t } = useI18n();
@@ -8,21 +10,24 @@ export function SignInPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-    const [invalid, setInvalid] = useState(false);
+    const [error, setError] = useState<"invalid" | "network" | null>(null);
+    const [pending, setPending] = useState(false);
+    const auth = useAuth();
+    const location = useLocation();
 
     async function submit(event: SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
-        setInvalid(false);
-        const response = await fetch("/api/auth/sign-in", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password, rememberMe }),
-        });
-        if (!response.ok) {
-            setInvalid(true);
-            return;
+        setError(null);
+        setPending(true);
+        try {
+            await auth.signIn(email, password, rememberMe);
+            const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? "/projects";
+            await navigate(from, { replace: true });
+        } catch (exception) {
+            setError(exception instanceof ApiError && exception.status === 401 ? "invalid" : "network");
+        } finally {
+            setPending(false);
         }
-        await navigate("/projects", { replace: true });
     }
 
     return (
@@ -68,9 +73,9 @@ export function SignInPage() {
                     />
                     {t("auth.remember")}
                 </label>
-                {invalid && <p role="alert">{t("auth.invalid")}</p>}
-                <button className="button button--primary" type="submit">
-                    {t("auth.submit")}
+                {error && <p role="alert">{t(error === "invalid" ? "auth.invalid" : "auth.unavailable")}</p>}
+                <button className="button button--primary" type="submit" disabled={pending}>
+                    {pending ? t("auth.pending") : t("auth.submit")}
                 </button>
             </form>
         </main>

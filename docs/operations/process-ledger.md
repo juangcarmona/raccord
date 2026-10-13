@@ -2,6 +2,18 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Mutation and dependency gates
+
+- Observation: The scheduled mutation job failed before running because its working directory was combined with a repository-relative config path; the PR security gate also exposed vulnerable transitive crypto packages despite passing tests.
+- Action: Resolve tool configuration paths relative to the declared working directory and keep centrally managed .NET servicing packages current.
+- Check: Run the mutation workflow manually after workflow changes and run `dotnet list Raccord.slnx package --vulnerable --include-transitive` during every FF loop.
+
+## 2026-10-13 · Authenticated web session
+
+- Observation: A server session without client restoration leaves protected navigation inconsistent and encourages direct untyped fetch calls.
+- Action: Centralize current-user, sign-in and sign-out calls behind the generated API client, guard routes for UX, and keep server authorization authoritative.
+- Check: Frontend behavior tests, authenticated browser sign-in/sign-out journey, accurate 401 OpenAPI response, OpenSpec validation and all CI gates are required before merge.
+
 ## 2026-10-12 · Epic #16 module architecture
 
 - Observation: A final integration PR exposed inherited commit-message failures that child PRs did not see against their stacked feature branch.

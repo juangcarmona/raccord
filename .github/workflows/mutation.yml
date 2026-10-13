@@ -28,7 +28,7 @@ jobs:
           dotnet restore Raccord.slnx
           dotnet tool restore
       - name: Run Stryker over the Domain tests
-        run: dotnet stryker --config-file tests/Raccord.Domain.Tests/stryker-config.json
+        run: dotnet stryker --config-file stryker-config.json
         working-directory: tests/Raccord.Domain.Tests
       - name: Upload mutation report
         if: always()

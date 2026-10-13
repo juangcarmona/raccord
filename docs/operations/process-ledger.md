@@ -34,6 +34,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-13 · Project templates and rescheduling
+
+- Observation: Rescheduling must move project-owned planning lines with the aggregate, while availability should remain a derived read rather than duplicated state.
+- Action: Keep the offset operation on `Project`, reuse the existing project factory for template creation, and let availability recalculate from persisted dates.
+- Check: Domain coverage asserts the aggregate offset; generated API, migration, OpenSpec validation, and CI verify the integration boundary.
+
 ## 2026-10-13 · Contact CRUD and pagination
 
 - Observation: A feature can be marked in review before its acceptance criteria are represented by a pushed PR.

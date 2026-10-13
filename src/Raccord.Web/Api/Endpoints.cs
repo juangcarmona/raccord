@@ -366,6 +366,37 @@ internal static class Endpoints
             }
         );
         projects.MapPost(
+            "/templates",
+            async (
+                CreateProjectTemplateRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) => TypedResults.Ok(await workspace.CreateTemplateAsync(request, ct))
+        );
+        projects.MapPost(
+            "/from-template",
+            async Task<Results<Created<ProjectResponse>, NotFound>> (
+                CreateProjectFromTemplateRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.CreateFromTemplateAsync(request, ct) is { } project
+                    ? TypedResults.Created($"/api/projects/{project.Id}", project)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/shift",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                ShiftProjectRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ShiftAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
             "/{id:guid}/billable-lines",
             async Task<Results<Created<BillableLineResponse>, NotFound>> (
                 Guid id,

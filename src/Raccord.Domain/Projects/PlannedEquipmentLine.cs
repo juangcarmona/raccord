@@ -27,6 +27,12 @@ public sealed class PlannedEquipmentLine
     public DateOnly EndDate { get; private set; }
 
     public void ReplaceEquipment(Guid equipmentId) => EquipmentId = equipmentId;
+
+    public void ShiftDays(int days)
+    {
+        StartDate = StartDate.AddDays(days);
+        EndDate = EndDate.AddDays(days);
+    }
 }
 
 #pragma warning restore CS1591

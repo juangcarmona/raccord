@@ -10,10 +10,55 @@ namespace Raccord.Application.Projects;
 /// <summary>Use cases for projects and their billable work.</summary>
 public sealed class ProjectWorkspace(
     IProjectRepository projects,
+    IProjectTemplateRepository templates,
     IPartyDirectory parties,
     IUnitOfWork unitOfWork
 )
 {
+    /// <summary>Creates a reusable project template.</summary>
+    public async Task<ProjectTemplateResponse> CreateTemplateAsync(
+        CreateProjectTemplateRequest request,
+        CancellationToken ct
+    )
+    {
+        var template = ProjectTemplate.Create(request.Name, request.CustomerId);
+        templates.Add(template);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        return new(template.Id, template.Name, template.CustomerId);
+    }
+
+    /// <summary>Creates a project using a stored template's customer.</summary>
+    public async Task<ProjectResponse?> CreateFromTemplateAsync(
+        CreateProjectFromTemplateRequest request,
+        CancellationToken ct
+    )
+    {
+        var template = await templates.FindAsync(request.TemplateId, ct).ConfigureAwait(false);
+        if (template is null)
+            return null;
+        return await CreateAsync(
+                new(request.Name, template.CustomerId, request.StartDate, request.EndDate),
+                ct
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>Moves a project and its planned equipment by the requested number of days.</summary>
+    public async Task<ProjectResponse?> ShiftAsync(
+        Guid id,
+        ShiftProjectRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(id, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.ShiftDates(request.Days);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        var customer = await parties.FindAsync(project.CustomerId, ct).ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
     /// <summary>Creates a project for an existing customer.</summary>
     public async Task<ProjectResponse> CreateAsync(
         CreateProjectRequest request,

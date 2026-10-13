@@ -69,6 +69,7 @@ public static class DependencyInjection
         );
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<IProjectTemplateRepository, ProjectTemplateRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();

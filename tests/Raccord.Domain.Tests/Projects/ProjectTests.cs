@@ -147,6 +147,25 @@ public sealed class ProjectTests
         error.Code.ShouldBe("projects.billable-line-description-required");
     }
 
+    [Fact]
+    public void Shifting_a_project_Should_shift_its_planned_equipment()
+    {
+        var project = NewProject();
+        var line = project.PlanEquipment(
+            Guid.CreateVersion7(),
+            2,
+            new DateOnly(2026, 5, 5),
+            new DateOnly(2026, 5, 7)
+        );
+
+        project.ShiftDates(3);
+
+        project.StartDate.ShouldBe(new DateOnly(2026, 5, 7));
+        project.EndDate.ShouldBe(new DateOnly(2026, 5, 11));
+        line.StartDate.ShouldBe(new DateOnly(2026, 5, 8));
+        line.EndDate.ShouldBe(new DateOnly(2026, 5, 10));
+    }
+
     private static Project NewProject() =>
         Project.Create(
             "Spring campaign shoot",

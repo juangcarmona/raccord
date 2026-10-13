@@ -90,6 +90,7 @@ builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<AuditLog>();
 builder.Services.AddScoped<InstallationSetup>();
 builder.Services.AddScoped<InvitationService>();
+builder.Services.AddScoped<WorkspacePreferencesService>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 var app = builder.Build();

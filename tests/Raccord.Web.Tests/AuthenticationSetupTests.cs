@@ -39,6 +39,19 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         (await api.QueryScalarAsync<long>("select count(*) from workspace.roles")).ShouldBe(4);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.user_roles")).ShouldBe(1);
 
+        await AssertRolesAndSettingsAsync();
+        await AssertInvitationLifecycleAsync();
+
+        var second = await client.PostAsJsonAsync(
+            "/api/setup",
+            new SetupRequest("second-admin@example.com", "SecondAdmin123!@#")
+        );
+        second.StatusCode.ShouldBe(HttpStatusCode.Conflict);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
+    }
+
+    private async Task AssertRolesAndSettingsAsync()
+    {
         var roles =
             await client.GetFromJsonAsync<List<RoleResponse>>("/api/roles")
             ?? throw new InvalidOperationException("The role list was empty.");
@@ -47,26 +60,39 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
             .Single(role => string.Equals(role.Name, "Admin", StringComparison.Ordinal))
             .Permissions.ShouldContain("projects:read");
 
+        var preferences = await client.GetFromJsonAsync<PreferencesResponse>(
+            "/api/organization/preferences"
+        );
+        preferences!.Language.ShouldBe("en");
+        var updatedPreferences = await client.PutAsJsonAsync(
+            "/api/organization/preferences",
+            new PreferencesRequest("es", "Europe/Madrid")
+        );
+        updatedPreferences.StatusCode.ShouldBe(HttpStatusCode.OK);
+
         var custom = await client.PostAsJsonAsync(
             "/api/roles",
             new RoleRequest("Read-only", ["projects:read"])
         );
         custom.StatusCode.ShouldBe(HttpStatusCode.Created);
+    }
 
+    private async Task AssertInvitationLifecycleAsync()
+    {
         var invitation = await client.PostAsJsonAsync(
             "/api/invitations",
             new InvitationRequest("crew@example.com", "Crew")
         );
         invitation.StatusCode.ShouldBe(HttpStatusCode.OK);
-        var invitationDetails = (await invitation.Content.ReadFromJsonAsync<InvitationResponse>())!;
+        var details = (await invitation.Content.ReadFromJsonAsync<InvitationResponse>())!;
         var joined = await client.PostAsJsonAsync(
-            $"/api/invitations/{invitationDetails.Token}/accept",
+            $"/api/invitations/{details.Token}/accept",
             new JoinRequest("CrewMember123!@#")
         );
         joined.StatusCode.ShouldBe(HttpStatusCode.OK);
 
         var replay = await client.PostAsJsonAsync(
-            $"/api/invitations/{invitationDetails.Token}/accept",
+            $"/api/invitations/{details.Token}/accept",
             new JoinRequest("CrewMember123!@#")
         );
         replay.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -76,13 +102,6 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
                 "select count(*) from workspace.user_roles ur join workspace.roles r on r.id = ur.role_id where r.name = 'Crew'"
             )
         ).ShouldBe(1);
-
-        var second = await client.PostAsJsonAsync(
-            "/api/setup",
-            new SetupRequest("second-admin@example.com", "SecondAdmin123!@#")
-        );
-        second.StatusCode.ShouldBe(HttpStatusCode.Conflict);
-        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(2);
     }
 
     private sealed record SetupRequest(string Email, string Password);
@@ -97,6 +116,10 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     );
 
     private sealed record RoleRequest(string Name, IReadOnlyCollection<string> Permissions);
+
+    private sealed record PreferencesRequest(string Language, string TimeZone);
+
+    private sealed record PreferencesResponse(string Language, string TimeZone);
 
     private sealed record InvitationRequest(string Email, string Role);
 

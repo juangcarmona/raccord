@@ -11,6 +11,7 @@ const navigation = [
     { to: "/settings/issuer", key: "nav.settings" },
     { to: "/settings/roles", key: "nav.roles" },
     { to: "/settings/invitations", key: "nav.invitations" },
+    { to: "/settings/workspace", key: "nav.workspaceSettings" },
 ] as const;
 
 export function AppShell() {

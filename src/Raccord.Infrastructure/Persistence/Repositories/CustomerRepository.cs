@@ -32,12 +32,30 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             Id = party.Id,
             LegalName = party.LegalName,
             TaxId = party.TaxId,
+            Type = party.Type,
             Email = party.Email,
             DefaultDiscountPercent = party.DefaultDiscountPercent,
             DefaultPaymentTerms = party.DefaultPaymentTerms,
         };
         row.BillingAddress.Set(party.Address);
         db.Customers.Add(row);
+    }
+
+    public void Update(PartySnapshot party)
+    {
+        var row = db.Customers.Local.FirstOrDefault(customer => customer.Id == party.Id);
+        if (row is null)
+        {
+            row = db.Customers.First(customer => customer.Id == party.Id);
+        }
+
+        row.LegalName = party.LegalName;
+        row.Type = party.Type;
+        row.TaxId = party.TaxId;
+        row.Email = party.Email;
+        row.DefaultDiscountPercent = party.DefaultDiscountPercent;
+        row.DefaultPaymentTerms = party.DefaultPaymentTerms;
+        row.BillingAddress.Set(party.Address);
     }
 
     private static PartySnapshot? ToSnapshot(CustomerRow? customer)
@@ -53,6 +71,7 @@ internal sealed class CustomerRepository(RaccordDbContext db) : IPartyDirectory,
             customer.TaxId,
             customer.BillingAddress.ToAddress(),
             customer.Email,
+            customer.Type,
             customer.DefaultDiscountPercent,
             customer.DefaultPaymentTerms,
             ParseTags(customer.Tags),

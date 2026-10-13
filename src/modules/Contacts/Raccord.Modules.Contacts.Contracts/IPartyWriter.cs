@@ -5,4 +5,7 @@ public interface IPartyWriter
 {
     /// <summary>Adds a customer to the current unit of work.</summary>
     void Add(PartySnapshot party);
+
+    /// <summary>Updates a contact while preserving its identity.</summary>
+    void Update(PartySnapshot party);
 }

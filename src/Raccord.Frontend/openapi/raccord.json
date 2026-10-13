@@ -1735,6 +1735,49 @@
           }
         }
       }
+    },
+    "/api/quotes/{id}/sign": {
+      "post": {
+        "tags": [
+          "Commercial"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignQuoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3568,6 +3611,8 @@
           "paymentTerms",
           "reviewStatus",
           "acceptedAt",
+          "signedBy",
+          "signedAt",
           "lines"
         ],
         "type": "object",
@@ -3611,6 +3656,19 @@
             "type": "string"
           },
           "acceptedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "signedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "signedAt": {
             "type": [
               "null",
               "string"
@@ -3753,6 +3811,18 @@
             "format": "int32"
           }
         }
+      },
+      "SignQuoteRequest": {
+        "required": [
+          "signerName"
+        ],
+        "type": "object",
+        "properties": {
+          "signerName": {
+            "type": "string"
+          }
+        },
+        "description": "Records signature metadata for an accepted quote."
       },
       "UpdateContactRequest": {
         "required": [

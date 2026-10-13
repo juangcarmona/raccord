@@ -2008,6 +2008,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/quotes/{id}/sign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SignQuoteRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["QuoteResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2820,6 +2868,9 @@ export interface components {
             reviewStatus: string;
             /** Format: date-time */
             acceptedAt: null | string;
+            signedBy: null | string;
+            /** Format: date-time */
+            signedAt: null | string;
             lines: components["schemas"]["QuoteLineResponse"][];
         };
         /** @description Starts a rectifying draft from one immutable issued invoice. */
@@ -2860,6 +2911,10 @@ export interface components {
         ShiftProjectRequest: {
             /** Format: int32 */
             days: number;
+        };
+        /** @description Records signature metadata for an accepted quote. */
+        SignQuoteRequest: {
+            signerName: string;
         };
         /** @description Changes a contact. */
         UpdateContactRequest: {

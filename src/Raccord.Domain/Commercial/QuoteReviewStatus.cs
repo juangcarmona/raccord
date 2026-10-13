@@ -11,4 +11,7 @@ public enum QuoteReviewStatus
 
     /// <summary>Customer acceptance has been recorded.</summary>
     Accepted,
+
+    /// <summary>Signature metadata has been recorded.</summary>
+    SignatureRecorded,
 }

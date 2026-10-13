@@ -457,6 +457,7 @@ internal static class Endpoints
         MapInvoices(api);
     }
 
+#pragma warning disable MA0051
     private static void MapCommercial(RouteGroupBuilder api)
     {
         var quotes = api.MapGroup("/quotes").WithTags("Commercial");
@@ -516,7 +517,21 @@ internal static class Endpoints
                     ? TypedResults.Ok(quote)
                     : TypedResults.NotFound()
         );
+        quotes.MapPost(
+            "/{id:guid}/sign",
+            async Task<Results<Ok<QuoteResponse>, NotFound>> (
+                Guid id,
+                SignQuoteRequest request,
+                QuoteWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.SignAsync(id, request, ct) is { } quote
+                    ? TypedResults.Ok(quote)
+                    : TypedResults.NotFound()
+        );
     }
+
+#pragma warning restore MA0051
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)
     {

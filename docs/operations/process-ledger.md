@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-13 · Quote signature metadata
+
+- Observation: Signature metadata must be a guarded lifecycle transition, not a mutable decoration on an accepted quote.
+- Action: Require acceptance first, capture signer name and trusted time, and reject repeated signing in the domain.
+- Check: Analyzer-backed build, lifecycle tests, migration, generated contracts, OpenSpec validation and a linked workflow visual are required before merge.
+
 ## 2026-10-13 · Quote document representation
 
 - Observation: A document seam can be delivered before PDF/template infrastructure if its output is deterministic and explicitly limited.

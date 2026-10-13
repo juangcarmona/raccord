@@ -208,6 +208,15 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(10)")
                         .HasColumnName("series_code");
 
+                    b.Property<DateTimeOffset?>("SignedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("signed_at");
+
+                    b.Property<string>("SignedBy")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("signed_by");
+
                     b.Property<DateOnly>("ValidUntil")
                         .HasColumnType("date")
                         .HasColumnName("valid_until");

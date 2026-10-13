@@ -23,6 +23,8 @@ internal sealed class QuoteConfiguration
             .HasMaxLength(30)
             .IsRequired();
         builder.Property(quote => quote.AcceptedAt);
+        builder.Property(quote => quote.SignedBy).HasMaxLength(200);
+        builder.Property(quote => quote.SignedAt);
         builder.HasIndex(quote => quote.Number).IsUnique();
         builder.OwnsMany(
             quote => quote.Lines,

@@ -134,6 +134,7 @@ public sealed class DependencyRulesTests
             "Raccord.Modules.Compliance",
             "Raccord.Modules.Compliance.Contracts",
             "Raccord.Modules.Contacts.Contracts",
+            "Raccord.Modules.Equipment.Contracts",
             "Raccord.SharedKernel",
         }
     )]

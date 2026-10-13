@@ -578,6 +578,67 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemPage"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateEquipmentItemRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemSnapshot"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -1286,6 +1347,14 @@ export interface components {
             /** @default false */
             isDefault: boolean;
         };
+        CreateEquipmentItemRequest: {
+            code: string;
+            name: string;
+            type: components["schemas"]["EquipmentItemType"];
+            /** Format: int32 */
+            stockQuantity: number;
+            serialNumbers?: null | string[];
+        };
         /** @description Creates an invoice draft from unbilled project lines. */
         CreateInvoiceDraftRequest: {
             /**
@@ -1342,6 +1411,29 @@ export interface components {
             /** @description Payment terms copied into new projects. */
             defaultPaymentTerms: null | string;
         };
+        EquipmentItemPage: {
+            items: components["schemas"]["EquipmentItemSnapshot"][];
+            /** Format: int32 */
+            page: number;
+            /** Format: int32 */
+            pageSize: number;
+            /** Format: int32 */
+            totalCount: number;
+        };
+        EquipmentItemSnapshot: {
+            /** Format: uuid */
+            id: string;
+            code: string;
+            name: string;
+            type: components["schemas"]["EquipmentItemType"];
+            /** Format: int32 */
+            stockQuantity: number;
+            serialNumbers: string[];
+            /** @default false */
+            isPlanned: boolean;
+        };
+        /** @description Stable equipment identity published for consumers such as Projects. */
+        EquipmentItemType: number;
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
             /**

@@ -11,6 +11,7 @@ using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
+using Raccord.Modules.Equipment.Contracts;
 
 namespace Raccord.Web.Api;
 
@@ -23,6 +24,7 @@ internal static class Endpoints
         MapOrganization(api);
         MapCustomers(api);
         MapContacts(api);
+        MapEquipment(api);
         MapProjects(api);
         MapInvoicing(api);
         api.MapGet(
@@ -63,6 +65,28 @@ internal static class Endpoints
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
             .WithTags("Organization");
+    }
+
+    private static void MapEquipment(RouteGroupBuilder api)
+    {
+        var equipment = api.MapGroup("/equipment").WithTags("Equipment");
+        equipment.MapGet(
+            "/items",
+            async (int? page, int? pageSize, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(page ?? 1, pageSize ?? 20, ct))
+        );
+        equipment.MapPost(
+            "/items",
+            async (
+                CreateEquipmentItemRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/equipment/items",
+                    await catalog.CreateAsync(request, ct)
+                )
+        );
     }
 
     private static void MapCustomers(RouteGroupBuilder api)

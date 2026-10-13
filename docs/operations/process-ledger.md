@@ -46,6 +46,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Add contracts, implementation, composition registration, and schema naming without inventing item behavior.
 - Check: The solution and analyzer-backed module build pass before starting the first equipment feature.
 
+## 2026-10-13 · Equipment items
+
+- Observation: New module projects must be included in the container restore cache, not only the solution.
+- Action: Add every new project to Dockerfile dependency-copy stages and verify the container gate before merging.
+- Check: Container, backend, migration, and generated-contract checks all pass for the item slice.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

@@ -38,6 +38,7 @@ export function SignInPage() {
                     void submit(event);
                 }}
             >
+                <img className="auth-form__mark" src="/raccord-mark.svg" alt="Raccord" />
                 <h1 data-page-heading tabIndex={-1}>
                     {t("auth.title")}
                 </h1>

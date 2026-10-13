@@ -42,7 +42,10 @@ export function AppShell() {
             </a>
             <div className="shell__layout">
                 <aside className="shell__sidebar">
-                    <span className="brand">{t("app.name")}</span>
+                    <span className="brand">
+                        <img src="/raccord-mark.svg" alt="" aria-hidden="true" />
+                        <span>{t("app.name")}</span>
+                    </span>
                     <nav aria-label={t("nav.main")}>
                         <ul>
                             {navigation.map((item) => (

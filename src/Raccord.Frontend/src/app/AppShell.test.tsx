@@ -30,6 +30,8 @@ describe("AppShell", () => {
         expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute("aria-current", "page");
         expect(screen.getByRole("navigation", { name: "Main navigation" })).toBeInTheDocument();
         expect(screen.getByRole("combobox", { name: "Language" })).toHaveValue("en");
+        expect(document.querySelector(".brand img")).toHaveAttribute("src", "/raccord-mark.svg");
+        expect(document.querySelector(".brand img")).toHaveAttribute("aria-hidden", "true");
 
         await userEvent.tab();
         expect(screen.getByRole("link", { name: "Skip to content" })).toHaveFocus();

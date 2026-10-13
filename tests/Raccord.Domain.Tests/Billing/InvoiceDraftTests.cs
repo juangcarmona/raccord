@@ -242,6 +242,37 @@ public sealed class InvoiceDraftTests
         error.Code.ShouldBe("numbering.series-mismatch");
     }
 
+    [Fact]
+    public void A_rectifying_draft_Should_reference_the_original_and_use_series_R()
+    {
+        var originalDraft = DraftWith(AddLine("Cinema camera kit", 2m, 450m));
+        var original = originalDraft.Finalize(Issuer, Recipient, Sequence(), IssueDate, Now);
+
+        var rectification = InvoiceDraft.CreateRectification(
+            original,
+            RectificationKind.Differences,
+            "Returned equipment",
+            Now
+        );
+
+        rectification.SeriesCode.ShouldBe("R");
+        rectification.OriginalInvoiceId.ShouldBe(original.Id);
+        rectification.RectificationKind.ShouldBe(RectificationKind.Differences);
+        rectification.Lines.ShouldHaveSingleItem().Pricing.NetAmount.Amount.ShouldBe(-900m);
+
+        var issued = rectification.Finalize(
+            Issuer,
+            Recipient,
+            InvoiceNumberSequence.Start("R", 2026),
+            IssueDate,
+            Now
+        );
+
+        issued.Number.Value.ShouldBe("R2026-00001");
+        issued.Source.OriginalInvoiceId.ShouldBe(original.Id);
+        original.Totals.Total.Amount.ShouldBe(1089m);
+    }
+
     private BillableLine AddLine(string description, decimal quantity, decimal unitPrice) =>
         project.AddBillableLine(
             BillableLineKind.Equipment,

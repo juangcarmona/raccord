@@ -78,6 +78,9 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
             invoice.Source.DraftId,
             invoice.Source.ProjectId,
             invoice.Source.CustomerId,
+            invoice.Source.OriginalInvoiceId,
+            invoice.Source.RectificationKind?.ToString(),
+            invoice.Source.RectificationReason,
             invoice.Number.SeriesCode,
             invoice.Number.Year,
             invoice.Number.Sequence,
@@ -137,7 +140,16 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
 
         return new IssuedInvoice(
             document.Id,
-            new IssuedInvoiceSource(document.DraftId, document.ProjectId, document.CustomerId),
+            new IssuedInvoiceSource(
+                document.DraftId,
+                document.ProjectId,
+                document.CustomerId,
+                document.OriginalInvoiceId,
+                Enum.TryParse<RectificationKind>(document.RectificationKind, out var kind)
+                    ? kind
+                    : null,
+                document.RectificationReason
+            ),
             new InvoiceNumber(document.Series, document.Year, document.Sequence, document.Number),
             DateOnly.ParseExact(document.IssueDate, "yyyy-MM-dd", CultureInfo.InvariantCulture),
             document.OperationDate is { } operationDate
@@ -198,6 +210,9 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
         Guid DraftId,
         Guid ProjectId,
         Guid CustomerId,
+        Guid? OriginalInvoiceId,
+        string? RectificationKind,
+        string? RectificationReason,
         string Series,
         int Year,
         int Sequence,

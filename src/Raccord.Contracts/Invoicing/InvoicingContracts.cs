@@ -16,6 +16,9 @@ public sealed record CreateInvoiceDraftRequest(
 /// <param name="IssueDate">Legal issue date; today in the organization's time zone when omitted.</param>
 public sealed record FinalizeInvoiceDraftRequest(DateOnly? IssueDate);
 
+/// <summary>Starts a rectifying draft from one immutable issued invoice.</summary>
+public sealed record RectifyInvoiceRequest(string Kind, string Reason);
+
 /// <summary>A line of a draft or issued invoice.</summary>
 /// <param name="Id">Draft line identifier; null on issued invoices.</param>
 /// <param name="Position">One-based order.</param>
@@ -133,6 +136,9 @@ public sealed record InvoiceDraftSummaryResponse(
 /// <param name="ProjectId">Billed project.</param>
 /// <param name="CustomerId">Billed customer.</param>
 /// <param name="DraftId">Finalized draft.</param>
+/// <param name="OriginalInvoiceId">The immutable invoice corrected by this document.</param>
+/// <param name="RectificationKind">The correction method.</param>
+/// <param name="RectificationReason">The stated correction reason.</param>
 public sealed record IssuedInvoiceResponse(
     Guid Id,
     string Number,
@@ -147,7 +153,10 @@ public sealed record IssuedInvoiceResponse(
     string ContentHash,
     Guid ProjectId,
     Guid CustomerId,
-    Guid DraftId
+    Guid DraftId,
+    Guid? OriginalInvoiceId = null,
+    string? RectificationKind = null,
+    string? RectificationReason = null
 );
 
 /// <summary>An issued invoice in a list.</summary>

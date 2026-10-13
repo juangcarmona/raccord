@@ -535,6 +535,18 @@ internal static class Endpoints
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>
                 TypedResults.Ok(await invoicing.ListInvoicesAsync(ct))
         );
+        invoices.MapPost(
+            "/{id:guid}/rectifications",
+            async Task<Results<Created<InvoiceDraftResponse>, NotFound>> (
+                Guid id,
+                RectifyInvoiceRequest request,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.CreateRectificationDraftAsync(id, request, ct) is { } draft
+                    ? TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft)
+                    : TypedResults.NotFound()
+        );
         invoices.MapGet(
             "/{id:guid}",
             async Task<Results<Ok<IssuedInvoiceResponse>, NotFound>> (

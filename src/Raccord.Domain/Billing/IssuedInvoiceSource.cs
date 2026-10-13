@@ -4,4 +4,14 @@ namespace Raccord.Domain.Billing;
 /// <param name="DraftId">The finalized draft.</param>
 /// <param name="ProjectId">The billed project.</param>
 /// <param name="CustomerId">The billed customer.</param>
-public sealed record IssuedInvoiceSource(Guid DraftId, Guid ProjectId, Guid CustomerId);
+/// <param name="OriginalInvoiceId">The invoice being corrected.</param>
+/// <param name="RectificationKind">The correction method.</param>
+/// <param name="RectificationReason">The stated reason.</param>
+public sealed record IssuedInvoiceSource(
+    Guid DraftId,
+    Guid ProjectId,
+    Guid CustomerId,
+    Guid? OriginalInvoiceId = null,
+    RectificationKind? RectificationKind = null,
+    string? RectificationReason = null
+);

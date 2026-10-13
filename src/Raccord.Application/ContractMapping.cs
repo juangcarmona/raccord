@@ -125,6 +125,9 @@ internal static class ContractMapping
             contentHash,
             invoice.Source.ProjectId,
             invoice.Source.CustomerId,
-            invoice.Source.DraftId
+            invoice.Source.DraftId,
+            invoice.Source.OriginalInvoiceId,
+            invoice.Source.RectificationKind?.ToString().ToLowerInvariant(),
+            invoice.Source.RectificationReason
         );
 }

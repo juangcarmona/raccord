@@ -1038,7 +1038,9 @@
           "taxId",
           "address",
           "email",
-          "isInvoiceable"
+          "isInvoiceable",
+          "defaultDiscountPercent",
+          "defaultPaymentTerms"
         ],
         "type": "object",
         "properties": {
@@ -1079,6 +1081,18 @@
           "isInvoiceable": {
             "type": "boolean",
             "description": "Whether the legal details required on an invoice are complete."
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied into new projects.",
+            "format": "double"
+          },
+          "defaultPaymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied into new projects."
           }
         },
         "description": "A customer."
@@ -1599,6 +1613,8 @@
           "customerName",
           "startDate",
           "endDate",
+          "defaultDiscountPercent",
+          "paymentTerms",
           "currency",
           "billableLines"
         ],
@@ -1632,6 +1648,18 @@
             "description": "Last day of the job.",
             "format": "date"
           },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied from the contact.",
+            "format": "double"
+          },
+          "paymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied from the contact."
+          },
           "currency": {
             "type": "string",
             "description": "ISO currency code."
@@ -1654,6 +1682,8 @@
           "customerName",
           "startDate",
           "endDate",
+          "defaultDiscountPercent",
+          "paymentTerms",
           "unbilledLineCount",
           "unbilledNetAmount",
           "currency"
@@ -1687,6 +1717,18 @@
             "type": "string",
             "description": "Last day of the job.",
             "format": "date"
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied from the contact.",
+            "format": "double"
+          },
+          "paymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied from the contact."
           },
           "unbilledLineCount": {
             "type": "integer",
@@ -1742,6 +1784,19 @@
               "string"
             ],
             "description": "Billing e-mail."
+          },
+          "defaultDiscountPercent": {
+            "type": "number",
+            "description": "Discount copied into new projects.",
+            "format": "double",
+            "default": 0
+          },
+          "defaultPaymentTerms": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Payment terms copied into new projects."
           }
         },
         "description": "Registers a customer."

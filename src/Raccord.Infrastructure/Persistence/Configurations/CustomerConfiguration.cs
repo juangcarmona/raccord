@@ -13,6 +13,8 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<CustomerR
         builder.Property(customer => customer.LegalName).HasMaxLength(200);
         builder.Property(customer => customer.TaxId).HasMaxLength(32);
         builder.Property(customer => customer.Email).HasMaxLength(320);
+        builder.Property(customer => customer.DefaultDiscountPercent).HasPrecision(5, 2);
+        builder.Property(customer => customer.DefaultPaymentTerms).HasMaxLength(200);
         builder.ComplexProperty(customer => customer.BillingAddress, AddressMapping.Configure);
         builder.HasIndex(customer => customer.TaxId);
     }

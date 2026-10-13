@@ -9,7 +9,6 @@ namespace Raccord.Infrastructure.Compliance;
 
 internal sealed partial class ComplianceSubmissionWorker(
     IServiceScopeFactory scopes,
-    IComplianceAuthorityClient authority,
     IOptions<ComplianceOptions> options,
     ILogger<ComplianceSubmissionWorker> logger
 ) : BackgroundService
@@ -32,6 +31,7 @@ internal sealed partial class ComplianceSubmissionWorker(
     {
         using var scope = scopes.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<RaccordDbContext>();
+        var authority = scope.ServiceProvider.GetRequiredService<IComplianceAuthorityClient>();
         var pending = await db
             .ComplianceRecords.Where(record =>
                 record.Status == PendingComplianceRecorder.PendingStatus

@@ -7,6 +7,8 @@ public sealed class ComplianceRecordRow
     public Guid InvoiceId { get; init; }
     public required string InvoiceNumber { get; init; }
     public required string ContentHash { get; init; }
+    public string? PreviousHash { get; init; }
+    public required string RecordHash { get; init; }
     public required string Kind { get; init; }
     public required string Status { get; set; }
     public DateTimeOffset CreatedAt { get; init; }

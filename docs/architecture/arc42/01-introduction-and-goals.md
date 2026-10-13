@@ -1,3 +1,10 @@
+---
+title: Introduction and goals
+arc42-section: "01"
+description: Defines Raccord's architectural goals, stakeholders, and quality drivers.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 1. Introduction and goals
 
 Raccord is an independent, open-source, self-hostable operations and invoicing system for audiovisual production and rental companies. It is its own system of record. See the [product definition](../../product/README.md) (PDaC model, proposed as `CHG-INITIAL`).

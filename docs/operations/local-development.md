@@ -80,6 +80,8 @@ The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selec
 bash .github/scripts/check-e2e-selection.sh --update
 ```
 
+Set `PLAYWRIGHT_CAPTURE_EVIDENCE=true` when running the E2E assembly directly to save a success checkpoint and a video per journey alongside the normal trace/failure evidence under `playwright-artifacts/`. CI enables this only for the nightly report run so ordinary PR evidence stays small.
+
 ### Security and license gates
 
 The CI `security` job runs TruffleHog (secrets in history since the base), Semgrep (`.semgrep/` in-repo rules + OWASP/secrets registry sets) and Trivy; the `sbom` job Trivy-scans the built image, publishes the Syft SPDX SBOM, and enforces the license allowlist via `tools/dependency-licenses`. To run the license check locally:

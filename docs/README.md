@@ -8,6 +8,7 @@
 
 - [arc42](architecture/arc42/README.md) · [Decisions (ADRs)](adr/README.md) · [Architecture rules](architecture/architecture-rules.md)
 - [Compliance seam (VERI\*FACTU, e-invoicing)](architecture/compliance-seam.md)
+- Public snapshots: [architecture](https://juangcarmona.github.io/raccord/architecture/) · [product model](https://juangcarmona.github.io/raccord/model/) · [nightly E2E reports](https://juangcarmona.github.io/raccord/e2e/)
 
 ## Research
 

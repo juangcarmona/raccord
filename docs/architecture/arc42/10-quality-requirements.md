@@ -1,3 +1,10 @@
+---
+title: Quality requirements
+arc42-section: "10"
+description: Defines measurable quality scenarios and how the architecture realizes them.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 10. Quality requirements
 
 ## Quality tree

@@ -1,0 +1,273 @@
+name: Static snapshots and nightly E2E
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/static-site.yml"
+      - ".github/scripts/**"
+      - "tests/Raccord.EndToEndTests/**"
+      - "tools/static-site/**"
+      - "tools/arc42-snapshot/**"
+      - "docs/architecture/**"
+      - "docs/adr/**"
+      - "deploy/**"
+      - "src/**"
+      - ".github/workflows/ci.yml"
+      - "docs/product/model/**"
+      - ".product/config.yaml"
+      - "openspec/changes/nightly-e2e-and-documentation-site/**"
+      - "docs/operations/nightly-e2e-reports.md"
+  pull_request:
+    paths:
+      - ".github/workflows/static-site.yml"
+      - ".github/scripts/**"
+      - "tests/Raccord.EndToEndTests/**"
+      - "tools/static-site/**"
+      - "tools/arc42-snapshot/**"
+      - "docs/architecture/**"
+      - "docs/adr/**"
+      - "deploy/**"
+      - "src/**"
+      - ".github/workflows/ci.yml"
+      - "docs/product/model/**"
+      - ".product/config.yaml"
+      - "openspec/changes/nightly-e2e-and-documentation-site/**"
+      - "docs/operations/nightly-e2e-reports.md"
+  workflow_dispatch:
+    inputs:
+      run_e2e:
+        description: "Run the complete non-quarantined E2E selection now"
+        type: boolean
+        required: false
+        default: true
+
+permissions:
+  contents: read
+
+# One publisher owns the combined site; queue updates rather than cancelling a deployment in flight.
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('raccord-static-site-pr-{0}', github.event.pull_request.number) || 'raccord-static-site' }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Check static-site scripts
+        run: |
+          node --check tools/static-site/static-site.mjs
+          node --test tools/static-site/static-site.test.mjs
+
+  prepare:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      main_sha: ${{ steps.head.outputs.sha }}
+      run_e2e: ${{ steps.decision.outputs.run_e2e }}
+      publish: ${{ steps.decision.outputs.publish }}
+      build_architecture: ${{ steps.snapshots.outputs.architecture }}
+      build_model: ${{ steps.snapshots.outputs.model }}
+      base_url: ${{ steps.pages.outputs.base_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/configure-pages@v5
+        id: pages
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Resolve the current main revision
+        id: head
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Decide whether tonight needs an E2E run and site update
+        id: decision
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
+          EVENT_NAME: ${{ github.event_name }}
+          MAIN_SHA: ${{ steps.head.outputs.sha }}
+          RUN_E2E_INPUT: ${{ inputs.run_e2e }}
+        run: |
+          decision=$(node tools/static-site/static-site.mjs decide "$BASE_URL" "$MAIN_SHA" "$EVENT_NAME" "$RUN_E2E_INPUT")
+          echo "run_e2e=$(jq -r '.runE2e' <<< "$decision")" >> "$GITHUB_OUTPUT"
+          echo "publish=$(jq -r '.publish' <<< "$decision")" >> "$GITHUB_OUTPUT"
+          echo "has_site=$(jq -r '.hasSite' <<< "$decision")" >> "$GITHUB_OUTPUT"
+          echo "needs_prune=$(jq -r '.needsPrune' <<< "$decision")" >> "$GITHUB_OUTPUT"
+          echo "Latest published E2E SHA: $(jq -r '.latestSha // "none"' <<< "$decision")"
+          echo "Current main SHA: $MAIN_SHA"
+
+      - name: Select documentation snapshots to rebuild
+        id: snapshots
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          HAS_SITE: ${{ steps.decision.outputs.has_site }}
+        run: |
+          architecture=false
+          model=false
+          if [ "$HAS_SITE" != "true" ]; then
+            architecture=true
+            model=true
+          elif [ "$EVENT_NAME" = "push" ]; then
+            changed=$(git diff --name-only "$BEFORE_SHA" HEAD)
+            if grep -Eq '^(docs/architecture/|docs/adr/|tools/arc42-snapshot/|deploy/|src/|\.github/workflows/ci\.yml$)' <<< "$changed"; then architecture=true; fi
+            if grep -Eq '^(docs/product/model/|\.product/config\.yaml)' <<< "$changed"; then model=true; fi
+          fi
+          echo "architecture=$architecture" >> "$GITHUB_OUTPUT"
+          echo "model=$model" >> "$GITHUB_OUTPUT"
+
+      - name: Record the run decision
+        run: |
+          echo "## Public engineering snapshot site" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Main revision: `${{ steps.head.outputs.sha }}`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Nightly E2E required: `${{ steps.decision.outputs.run_e2e }}`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Architecture snapshot refresh: `${{ steps.snapshots.outputs.architecture }}`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Product model snapshot refresh: `${{ steps.snapshots.outputs.model }}`" >> "$GITHUB_STEP_SUMMARY"
+
+  e2e:
+    needs: prepare
+    if: needs.prepare.outputs.run_e2e == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.prepare.outputs.main_sha }}
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/Raccord.Frontend/package-lock.json
+
+      - name: Restore solution and local tools
+        run: |
+          dotnet restore Raccord.slnx
+          dotnet tool restore
+
+      - name: Build E2E suite
+        run: dotnet build Raccord.slnx -c Release --no-restore
+
+      - name: Install Playwright Chromium and system dependencies
+        run: npx -y playwright@1.63.0 install --with-deps chromium
+
+      - name: Verify the complete E2E selection
+        run: bash .github/scripts/check-e2e-selection.sh
+
+      - name: Run the non-quarantined journeys with visual evidence
+        id: test
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_CAPTURE_EVIDENCE: "true"
+        run: timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+
+      - name: Retain evidence as a recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-playwright-evidence-${{ github.run_id }}
+          path: playwright-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Preserve the test verdict
+        if: always() && steps.test.outcome != 'success'
+        run: exit 1
+
+  publish:
+    needs: [prepare, e2e]
+    if: always() && needs.prepare.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - uses: actions/configure-pages@v5
+        id: pages
+
+      - name: Restore the existing public site
+        run: node tools/static-site/static-site.mjs restore "${{ steps.pages.outputs.base_url }}" _site
+
+      - name: Install the arc42 snapshot renderer
+        if: needs.prepare.outputs.build_architecture == 'true'
+        run: npm ci --ignore-scripts --prefix tools/arc42-snapshot
+
+      - name: Install Chromium for Mermaid rendering
+        if: needs.prepare.outputs.build_architecture == 'true'
+        run: npm exec --offline --prefix tools/arc42-snapshot -- puppeteer browsers install chrome
+
+      - name: Generate the architecture snapshot
+        if: needs.prepare.outputs.build_architecture == 'true'
+        run: node tools/arc42-snapshot/generate.mjs docs/architecture/arc42 --out "$GITHUB_WORKSPACE/_site/architecture/index.html" --title "Raccord architecture"
+
+      - name: Generate the ProductShape model snapshot
+        if: needs.prepare.outputs.build_model == 'true'
+        run: |
+          npx -y @prodshape/cli@0.22.0 graph --format html
+          mkdir -p _site/model
+          cp .product/generated/snapshot.html _site/model/index.html
+
+      - name: Download the nightly E2E evidence
+        if: needs.prepare.outputs.run_e2e == 'true'
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: nightly-playwright-evidence-${{ github.run_id }}
+          path: playwright-artifacts
+
+      - name: Generate the per-run E2E gallery
+        if: needs.prepare.outputs.run_e2e == 'true'
+        env:
+          E2E_RUN_ID: ${{ github.run_id }}
+        run: node tools/static-site/static-site.mjs report playwright-artifacts "_site/e2e/reports/${{ github.run_id }}" "${{ github.run_id }}" "${{ needs.prepare.outputs.main_sha }}" "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "${{ needs.e2e.result }}"
+
+      - name: Enforce report retention and build the site indexes
+        env:
+          E2E_RUN_ID: ${{ needs.prepare.outputs.run_e2e == 'true' && github.run_id || '' }}
+        run: node tools/static-site/static-site.mjs finalize _site
+
+      - name: Upload static site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Publish GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Publish the stable latest-report URL
+        if: needs.prepare.outputs.run_e2e == 'true'
+        run: |
+          echo "Latest report: ${{ steps.deployment.outputs.page_url }}e2e/latest.html" >> "$GITHUB_STEP_SUMMARY"

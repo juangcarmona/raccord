@@ -1,3 +1,10 @@
+---
+title: Risks and technical debt
+arc42-section: "11"
+description: Records architectural risks, technical debt, and evidence-backed mitigations.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 11. Risks and technical debt
 
 ## Risks

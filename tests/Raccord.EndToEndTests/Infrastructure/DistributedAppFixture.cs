@@ -115,13 +115,18 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     /// assert on localized labels; leaving it to the runner's default would make the suite's
     /// meaning depend on where it runs.
     /// </summary>
-    public async Task<IBrowserContext> NewContextAsync()
+    public async Task<IBrowserContext> NewContextAsync(BrowserNewContextOptions? overrides = null)
     {
         var options = new BrowserNewContextOptions
         {
             BaseURL = FrontendBaseUrl.ToString(),
             Locale = "en-US",
         };
+        if (overrides is not null)
+        {
+            options.RecordVideoDir = overrides.RecordVideoDir;
+            options.RecordVideoSize = overrides.RecordVideoSize;
+        }
         return await Browser.NewContextAsync(options);
     }
 

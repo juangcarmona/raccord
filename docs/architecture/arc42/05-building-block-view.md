@@ -1,3 +1,10 @@
+---
+title: Building block view
+arc42-section: "05"
+description: Decomposes Raccord into deployable building blocks, modules, and their responsibilities.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 5. Building block view
 
 ## Level 1 — deployable and projects

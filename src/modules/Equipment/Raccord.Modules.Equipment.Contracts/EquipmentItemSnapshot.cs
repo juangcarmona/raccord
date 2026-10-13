@@ -68,4 +68,12 @@ public sealed record EquipmentItemPage(
     int TotalCount
 );
 
+public sealed record EquipmentImportRowResponse(int Row, bool Imported, string? Error);
+
+public sealed record EquipmentImportResponse(
+    int ImportedCount,
+    int RejectedCount,
+    IReadOnlyList<EquipmentImportRowResponse> Rows
+);
+
 #pragma warning restore CS1591, MA0048

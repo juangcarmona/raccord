@@ -1,0 +1,3 @@
+name: equipment-import
+description: Import equipment catalogue rows from CSV with row-level rejection.
+status: proposed

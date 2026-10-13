@@ -64,6 +64,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Persist explicit kind/content lines, validate positive quantities and existing non-self references, and defer stock calculations to the planning slice.
 - Check: Kit migration, API contract generation, and CI architecture tests pass before adding import behavior.
 
+## 2026-10-13 · Equipment import
+
+- Observation: Import validation is easiest to reason about when each row produces an explicit outcome.
+- Action: Keep the CSV format narrow for the MVP, validate before adding rows, and return row numbers with rejection reasons.
+- Check: Generated API contracts and CI integration coverage verify valid rows persist while invalid rows do not.
+
 ## 2026-10-12 · First-administrator setup
 
 - Observation: A fresh worktree has no generated NuGet assets, so a direct `--no-restore` build reports infrastructure errors before compiling the change.

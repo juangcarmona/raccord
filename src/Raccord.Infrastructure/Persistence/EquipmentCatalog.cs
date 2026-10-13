@@ -58,7 +58,9 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
             row.Details,
             row.ImageKey,
             ParseIds(row.AccessoryIds),
-            ParseIds(row.AlternativeIds)
+            ParseIds(row.AlternativeIds),
+            row.KitKind,
+            ParseKitContent(row.KitContent)
         );
 
     public async Task<EquipmentItemSnapshot?> UpdateDetailsAsync(
@@ -75,6 +77,31 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         row.Details = request.Details?.Trim();
         row.AccessoryIds = JsonSerializer.Serialize(request.AccessoryIds ?? []);
         row.AlternativeIds = JsonSerializer.Serialize(request.AlternativeIds ?? []);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToSnapshot(row);
+    }
+
+    public async Task<EquipmentItemSnapshot?> ConfigureKitAsync(
+        Guid id,
+        ConfigureEquipmentKitRequest request,
+        CancellationToken ct
+    )
+    {
+        if (request.Content.Any(line => line.Quantity <= 0 || line.ItemId == id))
+            return null;
+        var row = await db
+            .EquipmentItems.FirstOrDefaultAsync(item => item.Id == id, ct)
+            .ConfigureAwait(false);
+        if (row is null)
+            return null;
+        var contentIds = request.Content.Select(line => line.ItemId).Distinct().ToArray();
+        var existing = await db
+            .EquipmentItems.CountAsync(item => contentIds.Contains(item.Id), ct)
+            .ConfigureAwait(false);
+        if (existing != contentIds.Length)
+            return null;
+        row.KitKind = request.Kind;
+        row.KitContent = JsonSerializer.Serialize(request.Content);
         await db.SaveChangesAsync(ct).ConfigureAwait(false);
         return ToSnapshot(row);
     }
@@ -107,6 +134,9 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         JsonSerializer.Deserialize<string[]>(value) ?? [];
 
     private static Guid[] ParseIds(string value) => JsonSerializer.Deserialize<Guid[]>(value) ?? [];
+
+    private static EquipmentKitContentLine[] ParseKitContent(string value) =>
+        JsonSerializer.Deserialize<EquipmentKitContentLine[]>(value) ?? [];
 }
 
 #pragma warning restore CS1591

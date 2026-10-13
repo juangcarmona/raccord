@@ -690,6 +690,49 @@
         }
       }
     },
+    "/api/equipment/items/{id}/kit": {
+      "put": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureEquipmentKitRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemSnapshot"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -1308,6 +1351,24 @@
         },
         "description": "A billable line."
       },
+      "ConfigureEquipmentKitRequest": {
+        "required": [
+          "kind",
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/EquipmentKitKind"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EquipmentKitContentLine"
+            }
+          }
+        }
+      },
       "ContactImportResponse": {
         "required": [
           "importedCount",
@@ -1843,12 +1904,45 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          "kitKind": {
+            "$ref": "#/components/schemas/EquipmentKitKind"
+          },
+          "kitContent": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EquipmentKitContentLine"
+            }
           }
         }
       },
       "EquipmentItemType": {
         "type": "integer",
         "description": "Stable equipment identity published for consumers such as Projects."
+      },
+      "EquipmentKitContentLine": {
+        "required": [
+          "itemId",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EquipmentKitKind": {
+        "type": "integer",
+        "default": 0
       },
       "FinalizeInvoiceDraftRequest": {
         "required": [

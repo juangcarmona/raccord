@@ -15,4 +15,6 @@ internal sealed class EquipmentItemRow
     public string? ImageKey { get; set; }
     public string AccessoryIds { get; set; } = "[]";
     public string AlternativeIds { get; set; } = "[]";
+    public EquipmentKitKind KitKind { get; set; }
+    public string KitContent { get; set; } = "[]";
 }

@@ -9,6 +9,15 @@ public enum EquipmentItemType
     Sale,
 }
 
+public enum EquipmentKitKind
+{
+    None,
+    Physical,
+    Virtual,
+}
+
+public sealed record EquipmentKitContentLine(Guid ItemId, int Quantity);
+
 public sealed record EquipmentItemSnapshot(
     Guid Id,
     string Code,
@@ -20,13 +29,20 @@ public sealed record EquipmentItemSnapshot(
     string? Details = null,
     string? ImageKey = null,
     IReadOnlyList<Guid>? AccessoryIds = null,
-    IReadOnlyList<Guid>? AlternativeIds = null
+    IReadOnlyList<Guid>? AlternativeIds = null,
+    EquipmentKitKind KitKind = EquipmentKitKind.None,
+    IReadOnlyList<EquipmentKitContentLine>? KitContent = null
 );
 
 public sealed record UpdateEquipmentItemDetailsRequest(
     string? Details,
     IReadOnlyList<Guid>? AccessoryIds,
     IReadOnlyList<Guid>? AlternativeIds
+);
+
+public sealed record ConfigureEquipmentKitRequest(
+    EquipmentKitKind Kind,
+    IReadOnlyList<EquipmentKitContentLine> Content
 );
 
 public sealed record CreateEquipmentItemRequest(

@@ -740,6 +740,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/{id}/kit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ConfigureEquipmentKitRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemSnapshot"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -1364,6 +1412,10 @@ export interface components {
              */
             invoiceId: null | string;
         };
+        ConfigureEquipmentKitRequest: {
+            kind: components["schemas"]["EquipmentKitKind"];
+            content: components["schemas"]["EquipmentKitContentLine"][];
+        };
         ContactImportResponse: {
             /** Format: int32 */
             importedCount: number;
@@ -1536,9 +1588,19 @@ export interface components {
             imageKey?: null | string;
             accessoryIds?: null | string[];
             alternativeIds?: null | string[];
+            kitKind?: components["schemas"]["EquipmentKitKind"];
+            kitContent?: null | components["schemas"]["EquipmentKitContentLine"][];
         };
         /** @description Stable equipment identity published for consumers such as Projects. */
         EquipmentItemType: number;
+        EquipmentKitContentLine: {
+            /** Format: uuid */
+            itemId: string;
+            /** Format: int32 */
+            quantity: number;
+        };
+        /** @default 0 */
+        EquipmentKitKind: number;
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
             /**

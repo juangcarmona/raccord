@@ -17,7 +17,8 @@ namespace Raccord.Domain.Billing;
 public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash)
 {
     /// <summary>Schema identifier written into every representation.</summary>
-    public const string Schema = "raccord.issued-invoice/1";
+    public const string Schema = "raccord.issued-invoice/2";
+    private const string LegacySchema = "raccord.issued-invoice/1";
 
     private static readonly JsonSerializerOptions SerializerOptions = new()
     {
@@ -51,7 +52,10 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
                 "issued-invoice.integrity-violation",
                 "The stored invoice is empty."
             );
-        if (!string.Equals(document.Schema, Schema, StringComparison.Ordinal))
+        if (
+            !string.Equals(document.Schema, Schema, StringComparison.Ordinal)
+            && !string.Equals(document.Schema, LegacySchema, StringComparison.Ordinal)
+        )
         {
             throw new BusinessRuleViolationException(
                 "issued-invoice.schema-unsupported",
@@ -95,6 +99,8 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
                     Number(line.Pricing.UnitPrice),
                     Number(line.Pricing.DiscountPercent),
                     Number(line.Pricing.VatRate.Percentage),
+                    line.Pricing.VatRegime,
+                    line.Pricing.ExemptionCause,
                     Amount(line.Pricing.NetAmount.Amount, minorUnits)
                 )),
             ],
@@ -122,7 +128,9 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
                     Parse(line.Quantity),
                     Parse(line.UnitPrice),
                     Parse(line.DiscountPercent),
-                    VatRate.Of(Parse(line.VatRate))
+                    VatRate.Of(Parse(line.VatRate)),
+                    line.VatRegime ?? "standard",
+                    line.ExemptionCause
                 )
             ))
             .ToList();
@@ -224,6 +232,8 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
         string UnitPrice,
         string DiscountPercent,
         string VatRate,
+        string? VatRegime,
+        string? ExemptionCause,
         string NetAmount
     );
 

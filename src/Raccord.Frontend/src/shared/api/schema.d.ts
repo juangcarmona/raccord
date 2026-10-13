@@ -2183,6 +2183,13 @@ export interface components {
              * @description Net amount.
              */
             netAmount: number;
+            /**
+             * @description Tax authority VAT regime key.
+             * @default standard
+             */
+            vatRegime: string;
+            /** @description VAT exemption cause, when applicable. */
+            exemptionCause?: null | string;
         };
         /** @description An invoice numbering series. */
         InvoiceSeriesResponse: {
@@ -2511,7 +2518,7 @@ export interface components {
             /** @description English explanation. */
             message: string;
         };
-        /** @description Taxable base and VAT for one rate. */
+        /** @description Taxable base and VAT for one regime and rate. */
         VatGroupResponse: {
             /**
              * Format: double
@@ -2528,6 +2535,10 @@ export interface components {
              * @description VAT at this rate.
              */
             vatAmount: number;
+            /** @description Tax authority VAT regime key. */
+            vatRegime: string;
+            /** @description VAT exemption cause, when applicable. */
+            exemptionCause: null | string;
         };
     };
     responses: never;

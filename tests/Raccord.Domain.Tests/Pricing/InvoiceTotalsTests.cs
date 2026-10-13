@@ -22,6 +22,21 @@ public sealed class InvoiceTotalsTests
     }
 
     [Fact]
+    public void Vat_Should_be_grouped_by_regime_and_exemption_cause()
+    {
+        var totals = InvoiceTotals.Calculate(
+            [
+                LinePricing.Create(1m, 100m, 0m, VatRate.Of(0m), "exempt", "E1"),
+                LinePricing.Create(1m, 100m, 0m, VatRate.Of(0m), "exempt", "E2"),
+            ],
+            Currency.Eur
+        );
+
+        totals.VatBreakdown.Count.ShouldBe(2);
+        totals.VatBreakdown.Select(group => group.ExemptionCause).ShouldBe(["E1", "E2"]);
+    }
+
+    [Fact]
     public void Lines_Should_be_grouped_by_rate_and_ordered_from_highest_rate()
     {
         var lines = new[]

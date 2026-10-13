@@ -46,7 +46,9 @@ internal static class ContractMapping
                 .. totals.VatBreakdown.Select(group => new VatGroupResponse(
                     group.Rate.Percentage,
                     group.TaxableBase.Amount,
-                    group.VatAmount.Amount
+                    group.VatAmount.Amount,
+                    group.VatRegime,
+                    group.ExemptionCause
                 )),
             ]
         );
@@ -62,7 +64,9 @@ internal static class ContractMapping
             pricing.UnitPrice,
             pricing.DiscountPercent,
             pricing.VatRate.Percentage,
-            pricing.NetAmount.Amount
+            pricing.NetAmount.Amount,
+            pricing.VatRegime,
+            pricing.ExemptionCause
         );
     }
 
@@ -75,7 +79,9 @@ internal static class ContractMapping
             line.Pricing.UnitPrice,
             line.Pricing.DiscountPercent,
             line.Pricing.VatRate.Percentage,
-            line.Pricing.NetAmount.Amount
+            line.Pricing.NetAmount.Amount,
+            line.Pricing.VatRegime,
+            line.Pricing.ExemptionCause
         );
 
     public static ValidationIssueResponse ToResponse(this ValidationIssue issue) =>

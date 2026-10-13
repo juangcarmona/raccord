@@ -25,6 +25,8 @@ public sealed record FinalizeInvoiceDraftRequest(DateOnly? IssueDate);
 /// <param name="DiscountPercent">Line discount percentage.</param>
 /// <param name="VatRate">VAT percentage.</param>
 /// <param name="NetAmount">Net amount.</param>
+/// <param name="VatRegime">Tax authority VAT regime key.</param>
+/// <param name="ExemptionCause">VAT exemption cause, when applicable.</param>
 public sealed record InvoiceLineResponse(
     Guid? Id,
     int Position,
@@ -33,14 +35,24 @@ public sealed record InvoiceLineResponse(
     decimal UnitPrice,
     decimal DiscountPercent,
     decimal VatRate,
-    decimal NetAmount
+    decimal NetAmount,
+    string VatRegime = "standard",
+    string? ExemptionCause = null
 );
 
-/// <summary>Taxable base and VAT for one rate.</summary>
+/// <summary>Taxable base and VAT for one regime and rate.</summary>
 /// <param name="Rate">VAT percentage.</param>
 /// <param name="TaxableBase">Sum of net amounts at this rate.</param>
 /// <param name="VatAmount">VAT at this rate.</param>
-public sealed record VatGroupResponse(decimal Rate, decimal TaxableBase, decimal VatAmount);
+/// <param name="VatRegime">Tax authority VAT regime key.</param>
+/// <param name="ExemptionCause">VAT exemption cause, when applicable.</param>
+public sealed record VatGroupResponse(
+    decimal Rate,
+    decimal TaxableBase,
+    decimal VatAmount,
+    string VatRegime,
+    string? ExemptionCause
+);
 
 /// <summary>Server-calculated totals.</summary>
 /// <param name="Currency">ISO currency code.</param>

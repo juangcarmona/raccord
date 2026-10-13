@@ -13,7 +13,9 @@ public sealed record LinePricing
         decimal unitPrice,
         decimal discountPercent,
         VatRate vatRate,
-        Currency currency
+        Currency currency,
+        string vatRegime,
+        string? exemptionCause
     )
     {
         Quantity = quantity;
@@ -21,6 +23,8 @@ public sealed record LinePricing
         DiscountPercent = discountPercent;
         VatRate = vatRate;
         Currency = currency;
+        VatRegime = vatRegime;
+        ExemptionCause = exemptionCause;
         NetAmount = Money.Of(quantity * unitPrice * (1m - (discountPercent / 100m)), currency);
     }
 
@@ -39,6 +43,12 @@ public sealed record LinePricing
     /// <summary>VAT rate applied to the net amount.</summary>
     public VatRate VatRate { get; }
 
+    /// <summary>Tax authority VAT regime key for this line.</summary>
+    public string VatRegime { get; }
+
+    /// <summary>Reason for VAT exemption, when the line is exempt.</summary>
+    public string? ExemptionCause { get; }
+
     /// <summary>Quantity × unit price × (1 − discount), rounded once to the currency's minor units.</summary>
     public Money NetAmount { get; }
 
@@ -47,7 +57,9 @@ public sealed record LinePricing
         decimal quantity,
         decimal unitPrice,
         decimal discountPercent,
-        VatRate vatRate
+        VatRate vatRate,
+        string vatRegime = "standard",
+        string? exemptionCause = null
     )
     {
         if (quantity <= 0m)
@@ -82,6 +94,25 @@ public sealed record LinePricing
             );
         }
 
-        return new LinePricing(quantity, unitPrice, discountPercent, vatRate, Currency.Eur);
+        if (string.IsNullOrWhiteSpace(vatRegime))
+            throw new BusinessRuleViolationException(
+                "pricing.vat-regime-required",
+                "VAT regime is required."
+            );
+        if (vatRate.Percentage > 0m && exemptionCause is not null)
+            throw new BusinessRuleViolationException(
+                "pricing.exemption-cause-not-applicable",
+                "An exemption cause is only valid for a zero VAT rate."
+            );
+
+        return new LinePricing(
+            quantity,
+            unitPrice,
+            discountPercent,
+            vatRate,
+            Currency.Eur,
+            vatRegime.Trim(),
+            string.IsNullOrWhiteSpace(exemptionCause) ? null : exemptionCause.Trim()
+        );
     }
 }

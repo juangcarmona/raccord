@@ -28,7 +28,7 @@ public sealed class IssuedInvoiceRepresentationTests
 
         json.ShouldContain("\"taxableBase\":\"1280.00\"", Case.Sensitive);
         json.ShouldContain("\"total\":\"1548.80\"", Case.Sensitive);
-        json.ShouldContain("\"schema\":\"raccord.issued-invoice/1\"", Case.Sensitive);
+        json.ShouldContain("\"schema\":\"raccord.issued-invoice/2\"", Case.Sensitive);
     }
 
     [Fact]

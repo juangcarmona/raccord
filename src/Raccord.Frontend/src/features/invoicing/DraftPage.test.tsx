@@ -25,6 +25,8 @@ const draft: Schemas["InvoiceDraftResponse"] = {
             discountPercent: 0,
             vatRate: 21,
             netAmount: 900,
+            vatRegime: "standard",
+            exemptionCause: null,
         },
     ],
     totals: {
@@ -32,7 +34,9 @@ const draft: Schemas["InvoiceDraftResponse"] = {
         taxableBase: 900,
         vatAmount: 189,
         total: 1089,
-        vatBreakdown: [{ rate: 21, taxableBase: 900, vatAmount: 189 }],
+        vatBreakdown: [
+            { rate: 21, taxableBase: 900, vatAmount: 189, vatRegime: "standard", exemptionCause: null },
+        ],
     },
     validationIssues: [],
     issuedInvoiceId: null,

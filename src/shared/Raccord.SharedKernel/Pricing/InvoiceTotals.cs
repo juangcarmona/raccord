@@ -13,7 +13,7 @@ public sealed record InvoiceTotals
         Total = taxableBase + vatAmount;
     }
 
-    /// <summary>One group per VAT rate, ordered from the highest rate.</summary>
+    /// <summary>One group per VAT regime, exemption cause and rate, ordered from the highest rate.</summary>
     public IReadOnlyList<VatGroup> VatBreakdown { get; }
 
     /// <summary>Sum of all taxable bases.</summary>
@@ -35,16 +35,30 @@ public sealed record InvoiceTotals
         ArgumentNullException.ThrowIfNull(currency);
 
         var groups = lines
-            .GroupBy(line => line.VatRate)
-            .OrderByDescending(group => group.Key.Percentage)
+            .GroupBy(line => new
+            {
+                line.VatRate,
+                line.VatRegime,
+                line.ExemptionCause,
+            })
+            .OrderByDescending(group => group.Key.VatRate.Percentage)
             .Select(group =>
             {
                 var taxableBase = group.Aggregate(
                     Money.Zero(currency),
                     (sum, line) => sum + line.NetAmount
                 );
-                var vat = Money.Of(taxableBase.Amount * group.Key.Percentage / 100m, currency);
-                return new VatGroup(group.Key, taxableBase, vat);
+                var vat = Money.Of(
+                    taxableBase.Amount * group.Key.VatRate.Percentage / 100m,
+                    currency
+                );
+                return new VatGroup(
+                    group.Key.VatRate,
+                    group.Key.VatRegime,
+                    group.Key.ExemptionCause,
+                    taxableBase,
+                    vat
+                );
             })
             .ToList();
 

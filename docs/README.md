@@ -18,4 +18,5 @@
 
 - [Local development](operations/local-development.md) · [Self-hosting](operations/self-hosting.md)
 - [Backup and restore](operations/backup-and-restore.md) · [Azure deployment](operations/azure-deployment.md)
+- [Data portability](operations/data-portability.md)
 - [Claude execution brief](operations/claude-execution-brief.md)

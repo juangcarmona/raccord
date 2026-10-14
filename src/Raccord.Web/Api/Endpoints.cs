@@ -154,6 +154,7 @@ internal static class Endpoints
         MapProjectRequests(coordination);
         MapProjectClassifications(coordination);
         MapProjectBoard(coordination);
+        MapProjectSchedules(coordination);
     }
 
     private static void MapProjectRequests(RouteGroupBuilder coordination)
@@ -296,6 +297,43 @@ internal static class Endpoints
             ) =>
                 await service.ProgressTaskAsync(id, request, ct) is { } task
                     ? TypedResults.Ok(task)
+                    : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapProjectSchedules(RouteGroupBuilder coordination)
+    {
+        coordination.MapGet(
+            "/schedules",
+            async (
+                Guid? projectId,
+                Guid? assigneeId,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) => TypedResults.Ok(await service.ListSchedulesAsync(projectId, assigneeId, ct))
+        );
+        coordination.MapPost(
+            "/schedules",
+            async (
+                CreateProjectScheduleRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/project-coordination/schedules",
+                    await service.CreateScheduleAsync(request, ct)
+                )
+        );
+        coordination.MapPost(
+            "/schedules/{id:guid}/shift",
+            async Task<Results<Ok<ProjectScheduleResponse>, NotFound>> (
+                Guid id,
+                ShiftProjectScheduleRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                await service.ShiftScheduleAsync(id, request, ct) is { } schedule
+                    ? TypedResults.Ok(schedule)
                     : TypedResults.NotFound()
         );
     }

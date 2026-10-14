@@ -432,6 +432,44 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("project_requests", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Projects.ProjectSchedule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid?>("AssigneeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("assignee_id");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("end_date");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_id");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("start_date");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_schedules");
+
+                    b.HasIndex("AssigneeId", "StartDate", "EndDate")
+                        .HasDatabaseName("ix_project_schedules_assignee_id_start_date_end_date");
+
+                    b.ToTable("project_schedules", "workspace");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Projects.ProjectTask", b =>
                 {
                     b.Property<Guid>("Id")

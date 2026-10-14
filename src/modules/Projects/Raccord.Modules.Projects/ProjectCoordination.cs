@@ -305,6 +305,75 @@ public sealed class ProjectCoordination(
             task.AssigneeId
         );
 
+    /// <summary>Creates scheduled project work.</summary>
+    public async Task<ProjectScheduleResponse> CreateScheduleAsync(
+        CreateProjectScheduleRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        if (
+            await projects.FindAsync(request.ProjectId, cancellationToken).ConfigureAwait(false)
+            is null
+        )
+            throw new BusinessRuleViolationException(
+                "projects.not-found",
+                $"Project '{request.ProjectId}' does not exist."
+            );
+        var schedule = ProjectSchedule.Create(
+            request.ProjectId,
+            request.Title,
+            request.StartDate,
+            request.EndDate,
+            request.AssigneeId
+        );
+        coordination.Add(schedule);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(schedule);
+    }
+
+    /// <summary>Lists project schedules, optionally for one operator.</summary>
+    public async Task<IReadOnlyList<ProjectScheduleResponse>> ListSchedulesAsync(
+        Guid? projectId,
+        Guid? assigneeId,
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (
+                await coordination
+                    .ListSchedulesAsync(projectId, assigneeId, cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(ToResponse),
+        ];
+
+    /// <summary>Shifts a schedule by whole days.</summary>
+    public async Task<ProjectScheduleResponse?> ShiftScheduleAsync(
+        Guid id,
+        ShiftProjectScheduleRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var schedule = await coordination
+            .FindScheduleAsync(id, cancellationToken)
+            .ConfigureAwait(false);
+        if (schedule is null)
+            return null;
+        schedule.Shift(request.Days);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(schedule);
+    }
+
+    private static ProjectScheduleResponse ToResponse(ProjectSchedule schedule) =>
+        new(
+            schedule.Id,
+            schedule.ProjectId,
+            schedule.Title,
+            schedule.StartDate,
+            schedule.EndDate,
+            schedule.AssigneeId
+        );
+
     private async Task ValidateCustomerAsync(Guid? customerId, CancellationToken cancellationToken)
     {
         if (

@@ -964,6 +964,115 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/project-coordination/schedules": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    projectId?: string;
+                    assigneeId?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectScheduleResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectScheduleRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectScheduleResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/schedules/{id}/shift": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ShiftProjectScheduleRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectScheduleResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -1485,6 +1594,18 @@ export interface components {
              */
             teamId?: null | string;
         };
+        /** @description Creates scheduled project work. */
+        CreateProjectScheduleRequest: {
+            /** Format: uuid */
+            projectId: string;
+            title: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: uuid */
+            assigneeId: null | string;
+        };
         /** @description Creates a project task. */
         CreateProjectTaskRequest: {
             /** Format: uuid */
@@ -1878,6 +1999,20 @@ export interface components {
              */
             teamId?: null | string;
         };
+        /** @description A scheduled project work item. */
+        ProjectScheduleResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            projectId: string;
+            title: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: uuid */
+            assigneeId: null | string;
+        };
         /** @description A project in a list. */
         ProjectSummaryResponse: {
             /**
@@ -1991,6 +2126,11 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+        };
+        /** @description Shifts scheduled project work. */
+        ShiftProjectScheduleRequest: {
+            /** Format: int32 */
+            days: number;
         };
         SignInRequest: {
             email: string;

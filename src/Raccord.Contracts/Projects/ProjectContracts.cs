@@ -106,6 +106,28 @@ public sealed record ProjectBoardResponse(
     IReadOnlyList<ProjectTaskResponse> Tasks
 );
 
+/// <summary>Creates scheduled project work.</summary>
+public sealed record CreateProjectScheduleRequest(
+    Guid ProjectId,
+    string Title,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? AssigneeId
+);
+
+/// <summary>Shifts scheduled project work.</summary>
+public sealed record ShiftProjectScheduleRequest(int Days);
+
+/// <summary>A scheduled project work item.</summary>
+public sealed record ProjectScheduleResponse(
+    Guid Id,
+    Guid ProjectId,
+    string Title,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? AssigneeId
+);
+
 /// <summary>Adds billable work to a project.</summary>
 /// <param name="Kind">One of <c>equipment</c>, <c>labour</c>, <c>transport</c>, <c>consumable</c>, <c>service</c>, <c>other</c>.</param>
 /// <param name="Description">Text printed on the invoice.</param>

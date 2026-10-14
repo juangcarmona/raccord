@@ -763,6 +763,116 @@
         }
       }
     },
+    "/api/project-coordination/schedules": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "assigneeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectScheduleResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectScheduleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project-coordination/schedules/{id}/shift": {
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShiftProjectScheduleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectScheduleResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -1352,6 +1462,41 @@
           }
         },
         "description": "Creates a project."
+      },
+      "CreateProjectScheduleRequest": {
+        "required": [
+          "projectId",
+          "title",
+          "startDate",
+          "endDate",
+          "assigneeId"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "assigneeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "Creates scheduled project work."
       },
       "CreateProjectTaskRequest": {
         "required": [
@@ -2211,6 +2356,46 @@
         },
         "description": "A project with its billable lines."
       },
+      "ProjectScheduleResponse": {
+        "required": [
+          "id",
+          "projectId",
+          "title",
+          "startDate",
+          "endDate",
+          "assigneeId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "assigneeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "A scheduled project work item."
+      },
       "ProjectSummaryResponse": {
         "required": [
           "id",
@@ -2508,6 +2693,19 @@
           }
         },
         "description": "Registers a customer."
+      },
+      "ShiftProjectScheduleRequest": {
+        "required": [
+          "days"
+        ],
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Shifts scheduled project work."
       },
       "SignInRequest": {
         "required": [

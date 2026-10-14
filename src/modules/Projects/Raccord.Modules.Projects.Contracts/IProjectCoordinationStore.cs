@@ -48,4 +48,17 @@ public interface IProjectCoordinationStore
 
     /// <summary>Adds a project task.</summary>
     void Add(ProjectTask task);
+
+    /// <summary>Lists schedules for a project or operator.</summary>
+    Task<IReadOnlyList<ProjectSchedule>> ListSchedulesAsync(
+        Guid? projectId,
+        Guid? assigneeId,
+        CancellationToken cancellationToken
+    );
+
+    /// <summary>Finds a schedule.</summary>
+    Task<ProjectSchedule?> FindScheduleAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>Adds a schedule.</summary>
+    void Add(ProjectSchedule schedule);
 }

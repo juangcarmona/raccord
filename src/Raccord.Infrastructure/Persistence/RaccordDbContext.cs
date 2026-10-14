@@ -37,6 +37,7 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     internal DbSet<EquipmentItemRow> EquipmentItems => Set<EquipmentItemRow>();
     internal DbSet<EquipmentStockMovementRow> EquipmentStockMovements =>
         Set<EquipmentStockMovementRow>();
+    internal DbSet<LetterheadRow> Letterheads => Set<LetterheadRow>();
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

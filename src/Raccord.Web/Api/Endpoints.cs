@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Application.Commercial;
@@ -8,6 +9,7 @@ using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Commercial;
 using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Customers;
+using Raccord.Contracts.Documents;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
@@ -27,6 +29,7 @@ internal static class Endpoints
         MapCustomers(api);
         MapContacts(api);
         MapEquipment(api);
+        MapDocuments(api);
         MapProjects(api);
         MapInvoicing(api);
         MapCommercial(api);
@@ -235,6 +238,94 @@ internal static class Endpoints
             "/project-history",
             async (Guid[] itemIds, EquipmentCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ProjectHistoryAsync(itemIds, ct))
+        );
+    }
+
+    private static void MapDocuments(RouteGroupBuilder api)
+    {
+        var documents = api.MapGroup("/documents").WithTags("Documents");
+        documents.MapGet(
+            "/letterheads",
+            async (LetterheadCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(ct))
+        );
+        documents.MapPost(
+            "/letterheads",
+            async Task<Results<Ok<LetterheadSnapshot>, Conflict, BadRequest<string>>> (
+                HttpRequest http,
+                LetterheadCatalog catalog,
+                CancellationToken ct
+            ) =>
+            {
+                var form = await http.ReadFormAsync(ct);
+                var file = form.Files.GetFile("file");
+                if (
+                    file is null
+                    || !string.Equals(
+                        file.ContentType,
+                        "application/pdf",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                    return TypedResults.BadRequest<string>("A PDF letterhead file is required.");
+                var request = new CreateLetterheadRequest(
+                    form["name"].ToString(),
+                    form["documentTypes"].ToString(),
+                    decimal.TryParse(
+                        form["pageWidthMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var width
+                    )
+                        ? width
+                        : 0,
+                    decimal.TryParse(
+                        form["pageHeightMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var height
+                    )
+                        ? height
+                        : 0,
+                    decimal.TryParse(
+                        form["marginTopMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var top
+                    )
+                        ? top
+                        : 0,
+                    decimal.TryParse(
+                        form["marginRightMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var right
+                    )
+                        ? right
+                        : 0,
+                    decimal.TryParse(
+                        form["marginBottomMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var bottom
+                    )
+                        ? bottom
+                        : 0,
+                    decimal.TryParse(
+                        form["marginLeftMillimetres"],
+                        CultureInfo.InvariantCulture,
+                        out var left
+                    )
+                        ? left
+                        : 0
+                );
+                await using var stream = file.OpenReadStream();
+                var result = await catalog.CreateAsync(request, stream, ct);
+                return result is null ? TypedResults.Conflict() : TypedResults.Ok(result);
+            }
+        );
+        documents.MapPost(
+            "/letterheads/{id:guid}/default",
+            async Task<Results<Ok, NotFound>> (
+                Guid id,
+                LetterheadCatalog catalog,
+                CancellationToken ct
+            ) => await catalog.SetDefaultAsync(id, ct) ? TypedResults.Ok() : TypedResults.NotFound()
         );
     }
 #pragma warning restore MA0051

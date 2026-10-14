@@ -15,7 +15,7 @@ concurrency:
 jobs:
   backend:
     name: .NET restore, analyzers, format, tests, vulnerabilities
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
@@ -47,7 +47,7 @@ jobs:
   # duplicated here: the frontend job already fails on it.
   lint:
     name: Lint mirror (format, commit messages)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
         with:
@@ -79,7 +79,7 @@ jobs:
 
   openspec:
     name: OpenSpec changes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -96,7 +96,7 @@ jobs:
   # committed manifest, so a narrowed filter is a red build, not a quieter suite.
   e2e:
     name: E2E journeys (Playwright over the Aspire AppHost)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
@@ -133,7 +133,7 @@ jobs:
           timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
       - name: Upload journey artifacts on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-artifacts
           path: "**/playwright-artifacts/"
@@ -142,7 +142,7 @@ jobs:
 
   product:
     name: Product definition (PDaC)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -166,7 +166,7 @@ jobs:
 
   frontend:
     name: Frontend lint, types, tests, build, audit, contract drift
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     defaults:
       run:
         working-directory: src/Raccord.Frontend
@@ -202,7 +202,7 @@ jobs:
   # Trivy does.
   security:
     name: Security gates (secrets, patterns, vulnerabilities)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
         with:
@@ -241,7 +241,7 @@ jobs:
   # the SBOM artifact.
   sbom:
     name: SBOM and license policy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
@@ -269,7 +269,7 @@ jobs:
 
   deployment:
     name: Container image, Compose and Bicep
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - name: Build container image

@@ -39,13 +39,16 @@ test("builds an empty report that explains missing journey evidence", () => {
                 sha: "abc123",
                 runUrl: "https://github.com/example/run/7",
                 date: "2026-10-13T00:00:00Z",
-                overallStatus: "failure",
+                overallStatus: "success",
             },
         });
         const html = readFileSync(join(root, "report", "index.html"), "utf8");
         assert.equal(report.journeys.length, 0);
+        assert.equal(report.workflowStatus, "success");
+        assert.equal(report.overallStatus, "failure");
         assert.match(html, /No journey result was recorded/);
-        assert.match(html, /workflow result: <strong>failure/);
+        assert.match(html, /workflow result: <strong class="status failure">failure/);
+        assert.match(html, /No journey evidence captured/);
         assert.match(html, /abc123/);
     } finally {
         rmSync(root, { recursive: true, force: true });
@@ -183,7 +186,7 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         mkdirSync(join(root, "e2e", "reports", "22"), { recursive: true });
         writeFileSync(
             join(root, "e2e", "reports", "22", "index.html"),
-            "report",
+            "<main>report</main>",
         );
         writeFileSync(
             join(root, "e2e", "reports", "22", "report.json"),
@@ -196,6 +199,24 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 files: ["index.html"],
             }),
         );
+        mkdirSync(join(root, "e2e", "reports", "21"), { recursive: true });
+        writeFileSync(join(root, "e2e", "reports", "21", "index.html"), "older");
+        writeFileSync(
+            join(root, "e2e", "history.json"),
+            JSON.stringify({
+                reports: [
+                    {
+                        runId: "21",
+                        date: new Date(Date.now() - 60_000).toISOString(),
+                        sha: "cafebabe",
+                        status: "success",
+                        runUrl: "https://github.com/example/run/21",
+                        path: "reports/21/index.html",
+                        files: ["reports/21/index.html"],
+                    },
+                ],
+            }),
+        );
         process.env.E2E_RUN_ID = "22";
         finalizeSite(root);
         const latest = readFileSync(join(root, "e2e", "latest.html"), "utf8");
@@ -204,7 +225,24 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         );
         assert.match(latest, /reports\/22\/index\.html/);
         assert.ok(manifest.files.includes("e2e/reports/22/index.html"));
+        assert.ok(manifest.files.includes("assets/raccord-mark.svg"));
         assert.equal(manifest.files.includes("architecture"), false);
+        const landing = readFileSync(join(root, "index.html"), "utf8");
+        assert.match(landing, /How Raccord is built, in the open/);
+        assert.match(landing, /href="e2e\/latest\.html"/);
+        assert.match(landing, /assets\/raccord-mark\.svg/);
+        const reportsIndex = readFileSync(
+            join(root, "e2e", "index.html"),
+            "utf8",
+        );
+        assert.match(reportsIndex, /url=latest\.html/);
+        assert.doesNotMatch(reportsIndex, /All retained reports/);
+        const report = readFileSync(
+            join(root, "e2e", "reports", "22", "index.html"),
+            "utf8",
+        );
+        assert.match(report, /Earlier runs/);
+        assert.match(report, /\.\.\/21\/index\.html/);
     } finally {
         if (priorRun === undefined) delete process.env.E2E_RUN_ID;
         else process.env.E2E_RUN_ID = priorRun;

@@ -17,7 +17,7 @@ permissions:
 jobs:
   domain:
     name: Stryker (Raccord.Domain)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
@@ -32,7 +32,7 @@ jobs:
         working-directory: tests/Raccord.Domain.Tests
       - name: Upload mutation report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mutation-report-domain
           path: tests/Raccord.Domain.Tests/StrykerOutput/**

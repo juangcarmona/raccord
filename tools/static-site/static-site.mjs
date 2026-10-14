@@ -10,7 +10,7 @@ import {
     createWriteStream,
 } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 
@@ -245,13 +245,16 @@ export function buildReport({ artifactsDirectory, outputDirectory, metadata }) {
     const runUrl = escapeHtml(metadata.runUrl ?? "#");
     const sha = escapeHtml(metadata.sha ?? "unknown");
     const date = escapeHtml(metadata.date ?? new Date().toISOString());
-    const overall = escapeHtml(metadata.overallStatus ?? "unknown");
+    const workflowStatus = metadata.overallStatus ?? "unknown";
+    // A successful workflow without journey records is not a successful report.
+    const overallStatus = journeyRecords.length === 0 ? "failure" : workflowStatus;
+    const overall = escapeHtml(overallStatus);
     const emptyMessage =
         journeyRecords.length === 0
             ? "No journey result was recorded. The runner may have failed before test discovery; inspect the linked workflow run."
             : "";
     const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Raccord E2E · ${date}</title><style>
-*{box-sizing:border-box}body{margin:0;background:#10151d;color:#e6edf3;font:16px/1.5 system-ui,sans-serif;padding:clamp(1rem,4vw,3rem)}main{max-width:1100px;margin:auto}a{color:#80c8ff}h1{margin-bottom:.2rem}.meta,.summary{color:#aeb8c4}.summary{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.2rem 0}.summary span,.badge{border:1px solid #364352;border-radius:999px;padding:.2rem .65rem}.journey{border-top:1px solid #364352;padding:1.25rem 0}.journey h2{font-size:1.2rem}.badge{font-size:.75rem;text-transform:uppercase;margin-right:.5rem}.passed{color:#67d99c}.failed{color:#ff827d}.flaky{color:#f5c451}.unknown{color:#b4c4d5}.assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1rem}.image,.asset{min-width:0}.image img,video{display:block;width:100%;height:auto;border:1px solid #364352;border-radius:.5rem;background:#090d12}.image span{display:block;color:#aeb8c4;font-size:.85rem;margin-top:.3rem}.run{word-break:break-all}.empty{padding:1rem;border:1px solid #855f24;border-radius:.5rem}</style></head><body><main><h1>Raccord nightly browser journeys</h1><p class="meta">Tested commit <code class="run">${sha}</code> · ${date} · workflow result: <strong>${overall}</strong></p><p><a href="${runUrl}">Open this GitHub Actions run</a> · <a href="../../index.html">All retained reports</a> · <a href="../../../index.html">Raccord snapshots</a></p><div class="summary">${Object.entries(
+:root{color-scheme:dark;--ink:#0b1020;--surface:#151c2b;--line:#30394b;--cloud:#f5f7fa;--muted:#aab5c7;--cyan:#2de2e6;--coral:#ff6b5e}*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--cloud);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;padding:clamp(1rem,4vw,3.5rem)}main{max-width:1120px;margin:auto}a{color:var(--cyan);text-underline-offset:.2em}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}.topline{display:flex;align-items:center;gap:.8rem;color:var(--muted);font-size:.9rem}.brand{width:2.5rem;height:2.5rem;border-radius:.55rem}h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.08;letter-spacing:-.035em;margin:2rem 0 .7rem}.meta,.lede{color:var(--muted)}.lede{max-width:68ch}.run{overflow-wrap:anywhere}.status{font-weight:700;text-transform:uppercase;letter-spacing:.08em}.status.failure{color:#ff948d}.status.success{color:#79e2ad}.summary{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.5rem 0}.summary span,.badge{border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem}.summary span{display:inline-flex;gap:.35em}.passed{color:#79e2ad}.failed{color:#ff948d}.flaky{color:#ffd071}.unknown{color:#c1ccdc}.filters{display:flex;gap:1rem;flex-wrap:wrap;margin:1.4rem 0 2rem}.filters label{display:grid;gap:.35rem;color:var(--muted);font-size:.9rem}.filters input,.filters select{font:inherit;color:var(--cloud);background:var(--surface);border:1px solid var(--line);border-radius:.4rem;padding:.55rem .7rem}.journey{border-top:1px solid var(--line);padding:1.5rem 0}.journey h2{font-size:1.25rem}.journey h2 small{font-size:.85rem;color:var(--muted);font-weight:400}.badge{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:1rem}.image,.asset{min-width:0}.image img,video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:.4rem;background:#080b12}.image span{display:block;color:var(--muted);font-size:.85rem;margin-top:.4rem}.empty{padding:1.25rem;border:1px solid #9a4b45;border-left:4px solid var(--coral);border-radius:.45rem;background:#24191e}.footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.25rem;color:var(--muted);font-size:.9rem}</style></head><body><main><div class="topline"><img class="brand" src="../../../assets/raccord-mark.svg" alt=""><span>Raccord · Browser journey evidence</span></div><h1>Nightly browser journeys</h1><p class="lede">A recorded view of the user journeys exercised against this revision.</p><p class="meta">Tested commit <code class="run">${sha}</code> · ${date} · workflow result: <strong class="status ${overall}">${overall}</strong></p><p><a href="${runUrl}">Open this GitHub Actions run</a> · <a href="../../../index.html">Engineering snapshots</a></p><div class="summary">${Object.entries(
         counts,
     )
         .map(
@@ -260,7 +263,7 @@ export function buildReport({ artifactsDirectory, outputDirectory, metadata }) {
         )
         .join(
             "",
-        )}</div>${emptyMessage ? `<p class="empty">${escapeHtml(emptyMessage)}</p>` : ""}${journeysHtml}</main></body></html>`;
+        )}</div>${emptyMessage ? `<p class="empty"><strong>No journey evidence captured.</strong><br>${escapeHtml(emptyMessage)} The report is marked as a failure, regardless of the workflow’s reported status.</p>` : ""}${journeysHtml}<footer class="footer">Screenshots, videos, and traces are retained with this run. Earlier runs are listed below when available.</footer></main></body></html>`;
     const summaryEnd =
         html.indexOf("</div>", html.indexOf('<div class="summary">')) + 6;
     const filters =
@@ -274,6 +277,8 @@ export function buildReport({ artifactsDirectory, outputDirectory, metadata }) {
     writeFileSync(join(outputDirectory, "index.html"), galleryHtml);
     const reportManifest = {
         ...metadata,
+        workflowStatus,
+        overallStatus,
         counts,
         journeys: journeyRecords,
         files: ["index.html", ...assetRecords.map((asset) => asset.path)],
@@ -365,23 +370,48 @@ export function finalizeSite(siteDirectory) {
     mkdirSync(join(root, "e2e"), { recursive: true });
     writeFileSync(historyPath, JSON.stringify({ reports: history }, null, 2));
     const latest = history[0];
+    if (latest) {
+        const reportPath = join(root, "e2e", latest.path);
+        const earlierReports = history
+            .slice(1)
+            .map(
+                (report) =>
+                    `<li><a href="../${escapeHtml(String(report.runId))}/index.html">${escapeHtml(report.date)} · ${escapeHtml(report.sha.slice(0, 8))}</a> <span>${escapeHtml(report.status)}</span></li>`,
+            )
+            .join("");
+        const archive = earlierReports
+            ? `<section class="archive" aria-labelledby="archive-title"><h2 id="archive-title">Earlier runs</h2><ul>${earlierReports}</ul><p>Reports are retained for up to 30 days (maximum 14 runs).</p></section>`
+            : "";
+        if (archive && statSync(reportPath, { throwIfNoEntry: false })?.isFile()) {
+            const reportHtml = readFileSync(reportPath, "utf8");
+            writeFileSync(
+                reportPath,
+                reportHtml.replace("</main>", `${archive}</main>`),
+            );
+        }
+    }
     const latestHtml = latest
-        ? `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta http-equiv="refresh" content="0;url=${escapeHtml(latest.path)}"><title>Latest Raccord E2E report</title><p><a href="${escapeHtml(latest.path)}">Open the latest nightly report (${escapeHtml(latest.date)})</a></p></html>`
+        ? `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta http-equiv="refresh" content="0;url=${escapeHtml(latest.path)}"><title>Latest Raccord E2E report</title></head><body><p>Opening the <a href="${escapeHtml(latest.path)}">latest nightly report (${escapeHtml(latest.date)})</a>…</p></body></html>`
         : '<!doctype html><html lang="en"><meta charset="utf-8"><title>Raccord E2E</title><p>No nightly report has been published yet.</p></html>';
     writeFileSync(join(root, "e2e", "latest.html"), latestHtml);
-    const list = history
-        .map(
-            (report) =>
-                `<li><a href="${escapeHtml(report.path)}">${escapeHtml(report.date)} · ${escapeHtml(report.sha.slice(0, 8))} · ${escapeHtml(report.status)}</a></li>`,
-        )
-        .join("");
     writeFileSync(
         join(root, "e2e", "index.html"),
-        `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Raccord E2E reports</title><body><main><h1>Nightly E2E reports</h1><p><a href="latest.html">Latest report</a> · <a href="../">Raccord snapshots</a></p><ul>${list || "<li>No reports published yet.</li>"}</ul><p>Reports are public and retained for at most 30 days (up to 14 runs).</p></main></body></html>`,
+        '<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=latest.html"><title>Raccord E2E</title><body><p><a href="latest.html">Open latest browser journey report</a></p></body></html>',
     );
+    const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+    mkdirSync(join(root, "assets"), { recursive: true });
+    copyFileSync(
+        join(sourceRoot, "docs", "design", "raccord-mark.svg"),
+        join(root, "assets", "raccord-mark.svg"),
+    );
+    const latestLink = latest ? "e2e/latest.html" : "e2e/";
+    const latestRun = latest
+        ? `<p class="meta">Latest run · ${escapeHtml(latest.date)} · <span class="status ${escapeHtml(latest.status)}">${escapeHtml(latest.status)}</span></p>`
+        : '<p class="meta">No browser journey report has been published yet.</p>';
     writeFileSync(
         join(root, "index.html"),
-        `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Raccord engineering snapshots</title><body><main><h1>Raccord engineering snapshots</h1><ul><li><a href="architecture/">Architecture (arc42)</a></li><li><a href="model/">Product model</a></li><li><a href="e2e/">Nightly browser journey evidence</a></li></ul></main></body></html>`,
+        `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><title>Raccord · Engineering snapshots</title><style>
+:root{color-scheme:light;--ink:#0b1020;--cyan:#2de2e6;--coral:#ff6b5e;--cloud:#f5f7fa;--slate:#667085;--line:#dfe4ec;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--cloud);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#075f83;text-underline-offset:.2em}a:focus-visible{outline:3px solid #087eaa;outline-offset:4px}.shell{max-width:1160px;margin:auto;padding:clamp(1.1rem,5vw,4rem)}header{display:flex;align-items:center;gap:.9rem}.mark{width:3rem;height:3rem;border-radius:.65rem}.wordmark{font-weight:750;letter-spacing:.02em}main{padding-top:clamp(3.5rem,10vw,7rem)}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700;color:#526074}.hero{max-width:780px}h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.99;letter-spacing:-.06em;margin:.8rem 0 1.2rem}.intro{font-size:clamp(1.05rem,2vw,1.25rem);color:#475467;max-width:62ch}.latest{margin:2.5rem 0;background:var(--ink);color:var(--white);padding:clamp(1.3rem,4vw,2.2rem);border-radius:.7rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.latest .eyebrow,.latest .meta{color:#bac6d8}.latest h2{margin:.25rem 0;font-size:1.5rem}.status{font-weight:750;text-transform:uppercase;letter-spacing:.07em}.status.success{color:#87e8b4}.status.failure{color:#ff9a91}.button{display:inline-block;background:var(--cyan);color:var(--ink);text-decoration:none;font-weight:750;padding:.75rem 1rem;border-radius:.35rem}.button:hover{background:#75f1f2}.section-label{margin:3rem 0 1rem;font-size:1.15rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1rem}.card{display:block;background:var(--white);border:1px solid var(--line);border-radius:.55rem;padding:1.35rem;color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}.card:hover{border-color:#0781a5;transform:translateY(-2px)}.card .eyebrow{color:#667085}.card h3{font-size:1.25rem;margin:.65rem 0 .35rem}.card p{color:#526074;margin:0}.arrow{display:inline-block;margin-top:1.1rem;color:#075f83;font-weight:700}footer{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--line);color:var(--slate);font-size:.9rem}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}</style></head><body><div class="shell"><header><img class="mark" src="assets/raccord-mark.svg" alt=""><span class="wordmark">RACCORD</span></header><main><section class="hero"><p class="eyebrow">Engineering snapshots</p><h1>How Raccord is built, in the open.</h1><p class="intro">Architecture, product shape, and real browser journeys from the latest application revision—kept together in one place.</p></section><section class="latest" aria-labelledby="latest-title"><div><p class="eyebrow">Latest browser run</p><h2 id="latest-title">Nightly journey evidence</h2>${latestRun}</div><a class="button" href="${latestLink}">View latest report <span aria-hidden="true">→</span></a></section><h2 class="section-label">Explore the project</h2><nav class="grid" aria-label="Engineering snapshots"><a class="card" href="architecture/"><span class="eyebrow">System design</span><h3>Architecture</h3><p>System boundaries, runtime structure, and key engineering decisions.</p><span class="arrow">Explore architecture →</span></a><a class="card" href="model/"><span class="eyebrow">Product definition</span><h3>Product model</h3><p>The current product shape, workflows, and domain concepts.</p><span class="arrow">Explore product model →</span></a><a class="card" href="${latestLink}"><span class="eyebrow">Quality evidence</span><h3>Browser journeys</h3><p>Screenshots and videos captured while exercising the running application.</p><span class="arrow">See the latest run →</span></a></nav></main><footer>Public engineering material for Raccord · Browser reports are retained for up to 30 days (maximum 14 runs).</footer></div></body></html>`,
     );
 
     const siteFiles = getFiles(root)

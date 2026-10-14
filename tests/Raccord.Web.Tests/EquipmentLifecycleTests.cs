@@ -30,7 +30,9 @@ public sealed class EquipmentLifecycleTests(PostgresContainer postgres) : IAsync
             $"/api/equipment/items/{rental.Id}/sell",
             new SellEquipmentRequest(2, "CAM-SALE", "Used camera")
         );
-        var sale = await response.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<EquipmentSaleResponse>();
+        var sale = await response
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<EquipmentSaleResponse>();
 
         sale.ShouldNotBeNull();
         sale!.RentalItem.StockQuantity.ShouldBe(3);
@@ -53,7 +55,9 @@ public sealed class EquipmentLifecycleTests(PostgresContainer postgres) : IAsync
             $"/api/equipment/items/{rental.Id}/archive?expectedStockQuantity=1",
             null
         );
-        var archived = await response.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<EquipmentItemSnapshot>();
+        var archived = await response
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>();
         archived.ShouldNotBeNull();
         archived!.IsArchived.ShouldBeTrue();
         archived.StockQuantity.ShouldBe(0);
@@ -67,5 +71,6 @@ public sealed class EquipmentLifecycleTests(PostgresContainer postgres) : IAsync
             )
         )
             .EnsureSuccessStatusCode()
-            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>() ?? throw new InvalidOperationException();
+            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>()
+        ?? throw new InvalidOperationException();
 }

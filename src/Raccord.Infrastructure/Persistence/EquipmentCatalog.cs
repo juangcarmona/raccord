@@ -17,10 +17,23 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         CancellationToken ct
     )
     {
-        if (request.Quantity <= 0 || string.IsNullOrWhiteSpace(request.SaleCode) || string.IsNullOrWhiteSpace(request.SaleName))
+        if (
+            request.Quantity <= 0
+            || string.IsNullOrWhiteSpace(request.SaleCode)
+            || string.IsNullOrWhiteSpace(request.SaleName)
+        )
             return null;
-        var item = await db.EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct).ConfigureAwait(false);
-        if (item is null || item.IsArchived || item.Type != EquipmentItemType.Rental || request.Quantity > item.StockQuantity || request.ExpectedStockQuantity is not null && request.ExpectedStockQuantity != item.StockQuantity)
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
+        if (
+            item is null
+            || item.IsArchived
+            || item.Type != EquipmentItemType.Rental
+            || request.Quantity > item.StockQuantity
+            || request.ExpectedStockQuantity is not null
+                && request.ExpectedStockQuantity != item.StockQuantity
+        )
             return null;
         var saleItem = new EquipmentItemRow
         {
@@ -42,9 +55,15 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         return new(ToSnapshot(item), ToSnapshot(saleItem), ToMovementSnapshot(movement));
     }
 
-    public async Task<EquipmentItemSnapshot?> ArchiveAsync(Guid itemId, int expectedStockQuantity, CancellationToken ct)
+    public async Task<EquipmentItemSnapshot?> ArchiveAsync(
+        Guid itemId,
+        int expectedStockQuantity,
+        CancellationToken ct
+    )
     {
-        var item = await db.EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct).ConfigureAwait(false);
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
         if (item is null || item.IsArchived || item.StockQuantity != expectedStockQuantity)
             return null;
         var movement = NewMovement(item, -item.StockQuantity, "Archive", "Archived");
@@ -63,21 +82,36 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         var ids = itemIds.Distinct().ToArray();
         if (ids.Length == 0)
             return [];
-        return await db.Projects.AsNoTracking()
-            .Where(project => project.PlannedEquipmentLines.Count(line => ids.Contains(line.EquipmentId)) == ids.Length)
-            .SelectMany(project => project.PlannedEquipmentLines
-                .Where(line => ids.Contains(line.EquipmentId))
-                .GroupBy(line => new { project.Id, project.Name, project.Status, project.StartDate, project.EndDate })
-                .Select(group => new EquipmentProjectHistoryResponse(
-                    group.Key.Id,
-                    group.Key.Name,
-                    group.Key.Status.ToString(),
-                    group.Key.StartDate,
-                    group.Key.EndDate,
-                    group.Sum(line => line.Quantity))))
+        return await db
+            .Projects.AsNoTracking()
+            .Where(project =>
+                project.PlannedEquipmentLines.Count(line => ids.Contains(line.EquipmentId))
+                == ids.Length
+            )
+            .SelectMany(project =>
+                project
+                    .PlannedEquipmentLines.Where(line => ids.Contains(line.EquipmentId))
+                    .GroupBy(line => new
+                    {
+                        project.Id,
+                        project.Name,
+                        project.Status,
+                        project.StartDate,
+                        project.EndDate,
+                    })
+                    .Select(group => new EquipmentProjectHistoryResponse(
+                        group.Key.Id,
+                        group.Key.Name,
+                        group.Key.Status.ToString(),
+                        group.Key.StartDate,
+                        group.Key.EndDate,
+                        group.Sum(line => line.Quantity)
+                    ))
+            )
             .ToListAsync(ct)
             .ConfigureAwait(false);
     }
+
     public async Task<StockMovementSnapshot?> ScheduleStockMovementAsync(
         Guid itemId,
         ScheduleStockMovementRequest request,

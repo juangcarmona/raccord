@@ -214,9 +214,10 @@ internal static class Endpoints
                 SellEquipmentRequest request,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.SellAsync(id, request, ct) is { } sale
-                ? TypedResults.Ok(sale)
-                : TypedResults.Conflict()
+            ) =>
+                await catalog.SellAsync(id, request, ct) is { } sale
+                    ? TypedResults.Ok(sale)
+                    : TypedResults.Conflict()
         );
         equipment.MapPost(
             "/items/{id:guid}/archive",
@@ -225,9 +226,10 @@ internal static class Endpoints
                 int expectedStockQuantity,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.ArchiveAsync(id, expectedStockQuantity, ct) is { } item
-                ? TypedResults.Ok(item)
-                : TypedResults.Conflict()
+            ) =>
+                await catalog.ArchiveAsync(id, expectedStockQuantity, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.Conflict()
         );
         equipment.MapGet(
             "/project-history",

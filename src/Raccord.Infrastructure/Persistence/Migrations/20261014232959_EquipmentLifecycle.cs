@@ -16,16 +16,14 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                 table: "items",
                 type: "boolean",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: false
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "is_archived",
-                schema: "equipment",
-                table: "items");
+            migrationBuilder.DropColumn(name: "is_archived", schema: "equipment", table: "items");
         }
     }
 }

@@ -1013,6 +1013,176 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/{id}/stock-movements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockMovementSnapshot"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ScheduleStockMovementRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockMovementSnapshot"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/stock-correction": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CorrectStockRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockMovementSnapshot"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Conflict */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/stock-counts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CompleteStockCountRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockCountResult"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -2448,6 +2618,11 @@ export interface components {
         BookOutLineRequest: {
             bookedOutBy: string;
         };
+        CompleteStockCountRequest: {
+            name: string;
+            items: components["schemas"]["StockCountLine"][];
+            description?: null | string;
+        };
         ConfigureEquipmentKitRequest: {
             kind: components["schemas"]["EquipmentKitKind"];
             content: components["schemas"]["EquipmentKitContentLine"][];
@@ -2528,6 +2703,13 @@ export interface components {
         };
         /** @description Operational role of a contact. */
         ContactType: number;
+        CorrectStockRequest: {
+            /** Format: int32 */
+            stockQuantity: number;
+            /** Format: int32 */
+            expectedStockQuantity: number;
+            description?: null | string;
+        };
         CreateContactPersonRequest: {
             name: string;
             role: string;
@@ -3224,6 +3406,13 @@ export interface components {
             description: string;
             reportedBy: string;
         };
+        ScheduleStockMovementRequest: {
+            /** Format: int32 */
+            quantity: number;
+            /** Format: date */
+            effectiveDate: string;
+            description?: null | string;
+        };
         ShiftProjectRequest: {
             /** Format: int32 */
             days: number;
@@ -3231,6 +3420,42 @@ export interface components {
         /** @description Records signature metadata for an accepted quote. */
         SignQuoteRequest: {
             signerName: string;
+        };
+        StockCountLine: {
+            /** Format: uuid */
+            itemId: string;
+            /** Format: int32 */
+            expectedStockQuantity: number;
+            /** Format: int32 */
+            countedQuantity: number;
+        };
+        StockCountResult: {
+            /** Format: uuid */
+            itemId: string;
+            /** Format: int32 */
+            expectedStockQuantity: number;
+            /** Format: int32 */
+            countedQuantity: number;
+            /** Format: int32 */
+            difference: number;
+            /** Format: int32 */
+            stockQuantity: number;
+        };
+        StockMovementSnapshot: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            itemId: string;
+            /** Format: int32 */
+            quantity: number;
+            /** Format: int32 */
+            stockQuantityAfter: number;
+            /** Format: date */
+            effectiveDate: string;
+            kind: string;
+            description: null | string;
+            /** Format: date-time */
+            createdAt: string;
         };
         /** @description Changes a contact. */
         UpdateContactRequest: {

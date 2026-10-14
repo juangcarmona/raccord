@@ -28,7 +28,11 @@ public sealed class EquipmentStockTests(PostgresContainer postgres) : IAsyncLife
         var item = await CreateItemAsync("LGT-01", 4);
         var scheduled = await client.PostAsJsonAsync(
             $"/api/equipment/items/{item.Id}/stock-movements",
-            new ScheduleStockMovementRequest(3, DateOnly.FromDateTime(DateTime.UtcNow.AddDays(2)), "Inbound delivery")
+            new ScheduleStockMovementRequest(
+                3,
+                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(2)),
+                "Inbound delivery"
+            )
         );
         scheduled.StatusCode.ShouldBe(HttpStatusCode.OK);
 
@@ -66,13 +70,12 @@ public sealed class EquipmentStockTests(PostgresContainer postgres) : IAsyncLife
             "/api/equipment/stock-counts",
             new CompleteStockCountRequest(
                 "October count",
-                [
-                    new StockCountLine(first.Id, 4, 3),
-                    new StockCountLine(second.Id, 2, 4),
-                ]
+                [new StockCountLine(first.Id, 4, 3), new StockCountLine(second.Id, 2, 4)]
             )
         );
-        var results = await response.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<StockCountResult[]>();
+        var results = await response
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<StockCountResult[]>();
         results.ShouldNotBeNull();
         results!.Select(result => result.Difference).ShouldBe([-1, 2]);
     }
@@ -85,5 +88,6 @@ public sealed class EquipmentStockTests(PostgresContainer postgres) : IAsyncLife
             )
         )
             .EnsureSuccessStatusCode()
-            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>() ?? throw new InvalidOperationException();
+            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>()
+        ?? throw new InvalidOperationException();
 }

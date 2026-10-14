@@ -19,7 +19,9 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
     {
         if (request.Quantity == 0)
             return null;
-        var item = await db.EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct).ConfigureAwait(false);
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
         if (item is null || item.KitKind == EquipmentKitKind.Virtual)
             return null;
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -49,10 +51,21 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
     {
         if (request.StockQuantity < 0)
             return null;
-        var item = await db.EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct).ConfigureAwait(false);
-        if (item is null || item.KitKind == EquipmentKitKind.Virtual || item.StockQuantity != request.ExpectedStockQuantity)
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
+        if (
+            item is null
+            || item.KitKind == EquipmentKitKind.Virtual
+            || item.StockQuantity != request.ExpectedStockQuantity
+        )
             return null;
-        var movement = NewMovement(item, request.StockQuantity - item.StockQuantity, "Correction", request.Description);
+        var movement = NewMovement(
+            item,
+            request.StockQuantity - item.StockQuantity,
+            "Correction",
+            request.Description
+        );
         item.StockQuantity = request.StockQuantity;
         db.EquipmentStockMovements.Add(movement);
         await db.SaveChangesAsync(ct).ConfigureAwait(false);
@@ -64,11 +77,21 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         CancellationToken ct
     )
     {
-        if (string.IsNullOrWhiteSpace(request.Name) || request.Items.Count == 0 || request.Items.Any(line => line.CountedQuantity < 0))
+        if (
+            string.IsNullOrWhiteSpace(request.Name)
+            || request.Items.Count == 0
+            || request.Items.Any(line => line.CountedQuantity < 0)
+        )
             return null;
         var ids = request.Items.Select(line => line.ItemId).Distinct().ToArray();
-        var items = await db.EquipmentItems.Where(item => ids.Contains(item.Id)).ToDictionaryAsync(item => item.Id, ct).ConfigureAwait(false);
-        if (items.Count != ids.Length || items.Values.Any(item => item.KitKind == EquipmentKitKind.Virtual))
+        var items = await db
+            .EquipmentItems.Where(item => ids.Contains(item.Id))
+            .ToDictionaryAsync(item => item.Id, ct)
+            .ConfigureAwait(false);
+        if (
+            items.Count != ids.Length
+            || items.Values.Any(item => item.KitKind == EquipmentKitKind.Virtual)
+        )
             return null;
         var results = new List<StockCountResult>(request.Items.Count);
         foreach (var line in request.Items)
@@ -77,18 +100,35 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
             if (item.StockQuantity != line.ExpectedStockQuantity)
                 return null;
             var difference = line.CountedQuantity - item.StockQuantity;
-            var movement = NewMovement(item, difference, "Count", request.Description ?? request.Name);
+            var movement = NewMovement(
+                item,
+                difference,
+                "Count",
+                request.Description ?? request.Name
+            );
             item.StockQuantity = line.CountedQuantity;
             db.EquipmentStockMovements.Add(movement);
-            results.Add(new(line.ItemId, line.ExpectedStockQuantity, line.CountedQuantity, difference, item.StockQuantity));
+            results.Add(
+                new(
+                    line.ItemId,
+                    line.ExpectedStockQuantity,
+                    line.CountedQuantity,
+                    difference,
+                    item.StockQuantity
+                )
+            );
         }
         await db.SaveChangesAsync(ct).ConfigureAwait(false);
         return results;
     }
 
-    public async Task<IReadOnlyList<StockMovementSnapshot>> ListStockMovementsAsync(Guid itemId, CancellationToken ct)
+    public async Task<IReadOnlyList<StockMovementSnapshot>> ListStockMovementsAsync(
+        Guid itemId,
+        CancellationToken ct
+    )
     {
-        var movements = await db.EquipmentStockMovements.AsNoTracking()
+        var movements = await db
+            .EquipmentStockMovements.AsNoTracking()
             .Where(movement => movement.EquipmentItemId == itemId)
             .OrderByDescending(movement => movement.EffectiveDate)
             .ThenByDescending(movement => movement.CreatedAt)
@@ -97,7 +137,12 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         return movements.Select(ToMovementSnapshot).ToArray();
     }
 
-    private static EquipmentStockMovementRow NewMovement(EquipmentItemRow item, int quantity, string kind, string? description) =>
+    private static EquipmentStockMovementRow NewMovement(
+        EquipmentItemRow item,
+        int quantity,
+        string kind,
+        string? description
+    ) =>
         new()
         {
             Id = Guid.NewGuid(),
@@ -111,7 +156,16 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
         };
 
     private static StockMovementSnapshot ToMovementSnapshot(EquipmentStockMovementRow movement) =>
-        new(movement.Id, movement.EquipmentItemId, movement.Quantity, movement.StockQuantityAfter, movement.EffectiveDate, movement.Kind, movement.Description, movement.CreatedAt);
+        new(
+            movement.Id,
+            movement.EquipmentItemId,
+            movement.Quantity,
+            movement.StockQuantityAfter,
+            movement.EffectiveDate,
+            movement.Kind,
+            movement.Description,
+            movement.CreatedAt
+        );
 
     public async Task<EquipmentAvailabilityResponse?> GetAvailabilityAsync(
         Guid itemId,
@@ -147,15 +201,17 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
             .ToListAsync(ct)
             .ConfigureAwait(false);
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
-        var scheduledQuantity = await db.EquipmentStockMovements
-            .AsNoTracking()
-            .Where(movement =>
-                movement.EquipmentItemId == itemId
-                && movement.EffectiveDate > today
-                && movement.EffectiveDate <= endDate
-            )
-            .SumAsync(movement => (int?)movement.Quantity, ct)
-            .ConfigureAwait(false) ?? 0;
+        var scheduledQuantity =
+            await db
+                .EquipmentStockMovements.AsNoTracking()
+                .Where(movement =>
+                    movement.EquipmentItemId == itemId
+                    && movement.EffectiveDate > today
+                    && movement.EffectiveDate <= endDate
+                )
+                .SumAsync(movement => (int?)movement.Quantity, ct)
+                .ConfigureAwait(false)
+            ?? 0;
         var reserved = lines
             .Where(line => line.Status is ProjectStatus.Active or ProjectStatus.Completed)
             .Sum(line => line.Quantity);

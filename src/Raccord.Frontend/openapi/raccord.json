@@ -924,6 +924,161 @@
         }
       }
     },
+    "/api/equipment/items/{id}/stock-movements": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockMovementSnapshot"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleStockMovementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockMovementSnapshot"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/equipment/items/{id}/stock-correction": {
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorrectStockRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockMovementSnapshot"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/equipment/stock-counts": {
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteStockCountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockCountResult"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -2266,6 +2421,30 @@
           }
         }
       },
+      "CompleteStockCountRequest": {
+        "required": [
+          "name",
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockCountLine"
+            }
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ConfigureEquipmentKitRequest": {
         "required": [
           "kind",
@@ -2526,6 +2705,29 @@
       "ContactType": {
         "type": "integer",
         "description": "Operational role of a contact."
+      },
+      "CorrectStockRequest": {
+        "required": [
+          "stockQuantity",
+          "expectedStockQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "expectedStockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       },
       "CreateContactPersonRequest": {
         "required": [
@@ -4249,6 +4451,29 @@
           }
         }
       },
+      "ScheduleStockMovementRequest": {
+        "required": [
+          "quantity",
+          "effectiveDate"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ShiftProjectRequest": {
         "required": [
           "days"
@@ -4272,6 +4497,108 @@
           }
         },
         "description": "Records signature metadata for an accepted quote."
+      },
+      "StockCountLine": {
+        "required": [
+          "itemId",
+          "expectedStockQuantity",
+          "countedQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expectedStockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "countedQuantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "StockCountResult": {
+        "required": [
+          "itemId",
+          "expectedStockQuantity",
+          "countedQuantity",
+          "difference",
+          "stockQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expectedStockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "countedQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "difference": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "StockMovementSnapshot": {
+        "required": [
+          "id",
+          "itemId",
+          "quantity",
+          "stockQuantityAfter",
+          "effectiveDate",
+          "kind",
+          "description",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stockQuantityAfter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
       },
       "UpdateContactRequest": {
         "required": [

@@ -179,9 +179,10 @@ internal static class Endpoints
                 ScheduleStockMovementRequest request,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.ScheduleStockMovementAsync(id, request, ct) is { } movement
-                ? TypedResults.Ok(movement)
-                : TypedResults.NotFound()
+            ) =>
+                await catalog.ScheduleStockMovementAsync(id, request, ct) is { } movement
+                    ? TypedResults.Ok(movement)
+                    : TypedResults.NotFound()
         );
         equipment.MapPost(
             "/items/{id:guid}/stock-correction",
@@ -190,9 +191,10 @@ internal static class Endpoints
                 CorrectStockRequest request,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.CorrectStockAsync(id, request, ct) is { } movement
-                ? TypedResults.Ok(movement)
-                : TypedResults.Conflict()
+            ) =>
+                await catalog.CorrectStockAsync(id, request, ct) is { } movement
+                    ? TypedResults.Ok(movement)
+                    : TypedResults.Conflict()
         );
         equipment.MapPost(
             "/stock-counts",
@@ -200,9 +202,10 @@ internal static class Endpoints
                 CompleteStockCountRequest request,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.CompleteStockCountAsync(request, ct) is { } result
-                ? TypedResults.Ok(result)
-                : TypedResults.BadRequest()
+            ) =>
+                await catalog.CompleteStockCountAsync(request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.BadRequest()
         );
     }
 #pragma warning restore MA0051

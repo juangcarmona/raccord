@@ -179,14 +179,26 @@ jobs:
         continue-on-error: true
         env:
           PLAYWRIGHT_CAPTURE_EVIDENCE: "true"
-        run: timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+          PLAYWRIGHT_ARTIFACTS_DIR: ${{ github.workspace }}/playwright-artifacts
+        run: |
+          set +e
+          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+          test_status=$?
+          set -e
+          evidence_count=$(find "$PLAYWRIGHT_ARTIFACTS_DIR" -maxdepth 1 -type f -name '*.json' 2>/dev/null | wc -l)
+          echo "Journey result files: $evidence_count"
+          if [ "$evidence_count" -eq 0 ]; then
+            echo "No Playwright journey result files were written to $PLAYWRIGHT_ARTIFACTS_DIR" >&2
+            exit 1
+          fi
+          exit "$test_status"
 
       - name: Retain evidence as a recovery artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nightly-playwright-evidence-${{ github.run_id }}
-          path: playwright-artifacts/
+          path: ${{ github.workspace }}/playwright-artifacts/
           if-no-files-found: ignore
           retention-days: 7
 

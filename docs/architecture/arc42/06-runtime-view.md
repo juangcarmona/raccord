@@ -60,6 +60,13 @@ Web ─► InvoicingWorkflow ─► Domain (validate, allocate, snapshot)
 - Aspire: the same sequence with `migrate --seed-demo`, plus Azurite and the Vite dev server.
 - Azure: run the Container Apps Job, then roll the Container App.
 
+## R-4a Back up and restore an installation
+
+1. The operator runs the host-side backup script; PostgreSQL exports records and the document volume exports stored files into a temporary set.
+2. The script writes the checksum manifest and publishes the set atomically only after both exports succeed; completed sets beyond the configured retention window are removed.
+3. The restore script verifies the manifest before stopping `web`, recreates the database schema, restores documents and starts the migration gate before `web`.
+4. Readiness verification confirms the restored application can reach the database; a checksum mismatch exits before the installation is changed.
+
 ## R-5 Future: VERI*FACTU submission
 
 A background worker claims pending compliance records per issuer in order, builds/sends batches, stores evidence, and handles outages and rejections (see [compliance seam](../compliance-seam.md)).

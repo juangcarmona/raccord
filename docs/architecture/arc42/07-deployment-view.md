@@ -18,7 +18,7 @@ host
 └── web      (raccord image)            port ${RACCORD_HTTP_PORT:-8080} → 8080, volume documents
 ```
 
-Configuration: `deploy/.env` (from `.env.example`). Operations: [self-hosting](../../operations/self-hosting.md), [backup and restore](../../operations/backup-and-restore.md). Put a TLS-terminating reverse proxy in front for anything beyond a trusted LAN.
+Configuration: `deploy/.env` (from `.env.example`). The host-side backup and restore tooling owns the database dump, document volume archive, checksum manifest and configurable retention; the backup set is external to the running containers. Operations: [self-hosting](../../operations/self-hosting.md), [backup and restore](../../operations/backup-and-restore.md). Put a TLS-terminating reverse proxy in front for anything beyond a trusted LAN.
 
 ## .NET Aspire (development)
 

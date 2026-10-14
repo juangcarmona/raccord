@@ -8,6 +8,9 @@
   "bin": {
     "arc42-snapshot": "./generate.mjs"
   },
+  "scripts": {
+    "test": "node --test"
+  },
   "engines": {
     "node": ">=24"
   },

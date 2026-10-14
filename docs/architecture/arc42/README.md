@@ -1,3 +1,8 @@
+---
+title: Raccord Architecture
+description: A guided view of how Raccord is structured, how its parts interact, and the decisions and constraints that shape it.
+---
+
 # arc42 architecture
 
 This folder follows the arc42 structure and describes the system as implemented on 2026-10-13 plus the planned direction.

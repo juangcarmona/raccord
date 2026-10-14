@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">Project request coordination flow</title>
+  <desc id="desc">An incoming request retains source context and is converted or declined, with type and team classifications preserved.</desc>
+  <rect width="960" height="430" rx="24" fill="#f7f5ef"/>
+  <text x="48" y="58" fill="#17211b" font-family="system-ui, sans-serif" font-size="29" font-weight="700">Project request coordination</text>
+  <text x="48" y="91" fill="#526057" font-family="system-ui, sans-serif" font-size="17">Source context survives either terminal outcome.</text>
+  <rect x="48" y="140" width="246" height="210" rx="18" fill="#e8eafa" stroke="#9ba3d5" stroke-width="2"/>
+  <text x="78" y="184" fill="#354078" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Received request</text>
+  <text x="78" y="230" fill="#17211b" font-family="ui-monospace, monospace" font-size="16">contact + dates</text>
+  <text x="78" y="260" fill="#17211b" font-family="ui-monospace, monospace" font-size="16">type + team</text>
+  <text x="78" y="305" fill="#526057" font-family="system-ui, sans-serif" font-size="16">durable source record</text>
+  <path d="M304 205h92" stroke="#718079" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M304 285h92" stroke="#718079" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="408" y="140" width="212" height="90" rx="18" fill="#e5f2e8" stroke="#91b79c" stroke-width="2"/>
+  <text x="438" y="194" fill="#1d5b35" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Converted</text>
+  <text x="438" y="218" fill="#526057" font-family="system-ui, sans-serif" font-size="14">project created</text>
+  <rect x="408" y="260" width="212" height="90" rx="18" fill="#fff0d5" stroke="#d8ad62" stroke-width="2"/>
+  <text x="438" y="314" fill="#805817" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Declined</text>
+  <text x="438" y="338" fill="#526057" font-family="system-ui, sans-serif" font-size="14">reason retained</text>
+  <rect x="690" y="140" width="222" height="210" rx="18" fill="#f0e5ec" stroke="#c49bb0" stroke-width="2"/>
+  <text x="720" y="184" fill="#733b57" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Project context</text>
+  <text x="720" y="230" fill="#17211b" font-family="ui-monospace, monospace" font-size="16">customer</text>
+  <text x="720" y="260" fill="#17211b" font-family="ui-monospace, monospace" font-size="16">projectTypeId</text>
+  <text x="720" y="290" fill="#17211b" font-family="ui-monospace, monospace" font-size="16">teamId</text>
+  <text x="720" y="325" fill="#526057" font-family="system-ui, sans-serif" font-size="16">ready for next slices</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#718079"/></marker></defs>
+</svg>

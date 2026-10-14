@@ -8,6 +8,14 @@
 4. Audit `invoice-draft.created`; one `SaveChanges`. A concurrent reservation of the same line fails on `xmin` → 409, or on the domain rule → 422.
 5. The response includes server totals and validation issues for today's date.
 
+## R-1a Receive and convert project work
+
+1. `POST /api/project-coordination/requests` validates the optional customer and persists the request, source contact and requested classifications.
+2. The coordinator either declines the request with a reason or calls the conversion endpoint.
+3. Conversion creates the project and marks the original request converted in the same unit of work; missing customer links are rejected.
+
+<!-- pdac:cite id="UC-PRJ-CONVERT-PROJECT-REQUEST" digest="sha256:7efe604979d08b83572e4bf7e9441cef0e69f20f7e51645a99419d611c473a50" -->
+
 ## R-0 Sign in and authorize the application
 
 1. The frontend restores the session through `GET /api/auth/me`.

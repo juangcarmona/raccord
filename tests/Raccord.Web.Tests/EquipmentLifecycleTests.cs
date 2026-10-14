@@ -23,7 +23,7 @@ public sealed class EquipmentLifecycleTests(PostgresContainer postgres) : IAsync
     }
 
     [Fact]
-    public async Task Selling_Rental_Equipment_Creates_Sale_Copy_And_Reduces_Rental_Stock()
+    public async Task Rental_Equipment_Should_Create_Sale_Copy_And_Reduce_Stock()
     {
         var rental = await CreateItemAsync("CAM-SELL", 5);
         var response = await client.PostAsJsonAsync(
@@ -42,7 +42,7 @@ public sealed class EquipmentLifecycleTests(PostgresContainer postgres) : IAsync
     }
 
     [Fact]
-    public async Task Archiving_Requires_Current_Stock_And_Preserves_The_Item()
+    public async Task Equipment_Should_Archive_With_Current_Stock_And_Preserve_Item()
     {
         var rental = await CreateItemAsync("CAM-ARCHIVE", 1);
         var conflict = await client.PostAsync(

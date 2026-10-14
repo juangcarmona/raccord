@@ -47,8 +47,12 @@ test("builds an empty report that explains missing journey evidence", () => {
         assert.equal(report.workflowStatus, "success");
         assert.equal(report.overallStatus, "failure");
         assert.match(html, /No journey result was recorded/);
-        assert.match(html, /workflow result: <strong class="status failure">failure/);
+        assert.match(html, /Workflow result: <strong class="status failure">failure/);
         assert.match(html, /No journey evidence captured/);
+        assert.match(html, /id="journey-nav"/);
+        assert.match(html, /mobile-nav-toggle/);
+        assert.match(html, /data-appearance="dark"/);
+        assert.match(html, /data-appearance="light"/);
         assert.match(html, /abc123/);
     } finally {
         rmSync(root, { recursive: true, force: true });
@@ -183,24 +187,54 @@ test("finalizes a stable latest link and bounds retained report history", () => 
     const root = temporaryDirectory();
     const priorRun = process.env.E2E_RUN_ID;
     try {
-        mkdirSync(join(root, "e2e", "reports", "22"), { recursive: true });
+        const artifacts = join(root, "artifacts-22");
+        mkdirSync(artifacts, { recursive: true });
         writeFileSync(
-            join(root, "e2e", "reports", "22", "index.html"),
-            "<main>report</main>",
-        );
-        writeFileSync(
-            join(root, "e2e", "reports", "22", "report.json"),
+            join(artifacts, "customer-register.json"),
             JSON.stringify({
+                name: "customer-register",
+                status: "passed",
+                viewport: "mobile",
+            }),
+        );
+        writeFileSync(join(artifacts, "customer-register-checkpoint.png"), "png");
+        buildReport({
+            artifactsDirectory: artifacts,
+            outputDirectory: join(root, "e2e", "reports", "22"),
+            metadata: {
                 runId: "22",
-                date: new Date().toISOString(),
                 sha: "deadbeef",
                 overallStatus: "success",
                 runUrl: "https://github.com/example/run/22",
-                files: ["index.html"],
+                date: new Date().toISOString(),
+            },
+        });
+        writeFileSync(join(root, "e2e", "reports", "22", "index.html"), "legacy report page");
+        const olderArtifacts = join(root, "artifacts-21");
+        mkdirSync(olderArtifacts, { recursive: true });
+        writeFileSync(
+            join(olderArtifacts, "project-list.json"),
+            JSON.stringify({
+                name: "project-list",
+                status: "passed",
+                viewport: "desktop",
             }),
         );
-        mkdirSync(join(root, "e2e", "reports", "21"), { recursive: true });
-        writeFileSync(join(root, "e2e", "reports", "21", "index.html"), "older");
+        buildReport({
+            artifactsDirectory: olderArtifacts,
+            outputDirectory: join(root, "e2e", "reports", "21"),
+            metadata: {
+                runId: "21",
+                date: new Date(Date.now() - 60_000).toISOString(),
+                sha: "cafebabe",
+                overallStatus: "success",
+                runUrl: "https://github.com/example/run/21",
+            },
+        });
+        writeFileSync(
+            join(root, "e2e", "reports", "21", "index.html"),
+            "legacy older report page",
+        );
         writeFileSync(
             join(root, "e2e", "history.json"),
             JSON.stringify({
@@ -223,7 +257,16 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         const manifest = JSON.parse(
             readFileSync(join(root, "site-manifest.json"), "utf8"),
         );
-        assert.match(latest, /reports\/22\/index\.html/);
+        assert.match(latest, /Raccord · E2E/);
+        assert.match(latest, /data-appearance/);
+        assert.match(latest, /mobile-nav-toggle/);
+        assert.match(latest, /reports\/21\/index\.html/);
+        assert.match(latest, /src="\.\.\/assets\/raccord-mark\.svg"/);
+        assert.match(
+            latest,
+            /src="reports\/22\/assets\/customer-register-checkpoint\.png"/,
+        );
+        assert.doesNotMatch(latest, /http-equiv="refresh"/);
         assert.ok(manifest.files.includes("e2e/reports/22/index.html"));
         assert.ok(manifest.files.includes("assets/raccord-mark.svg"));
         assert.equal(manifest.files.includes("architecture"), false);
@@ -235,14 +278,23 @@ test("finalizes a stable latest link and bounds retained report history", () => 
             join(root, "e2e", "index.html"),
             "utf8",
         );
-        assert.match(reportsIndex, /url=latest\.html/);
+        assert.match(reportsIndex, /id="journey-nav"/);
+        assert.doesNotMatch(reportsIndex, /url=latest\.html/);
         assert.doesNotMatch(reportsIndex, /All retained reports/);
         const report = readFileSync(
             join(root, "e2e", "reports", "22", "index.html"),
             "utf8",
         );
         assert.match(report, /Earlier runs/);
+        assert.match(report, /archive-nav/);
         assert.match(report, /\.\.\/21\/index\.html/);
+        const olderReport = readFileSync(
+            join(root, "e2e", "reports", "21", "index.html"),
+            "utf8",
+        );
+        assert.match(olderReport, /id="journey-nav"/);
+        assert.match(olderReport, /data-appearance="dark"/);
+        assert.doesNotMatch(olderReport, /legacy older report page/);
     } finally {
         if (priorRun === undefined) delete process.env.E2E_RUN_ID;
         else process.env.E2E_RUN_ID = priorRun;

@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-14 · Product behaviors drive E2E journey contracts
+
+- **Observation:** Product structure behaviors already provide the canonical user-facing Given/When/Then semantics.
+- **Action:** Every new browser journey must reference its ProductShape behavior ID in the journey docstring and preserve those Given/When/Then steps; API-only slices use domain/integration and contract tests until a browser surface exists.
+- **Check:** PR review verifies the behavior citation, the three modeled steps, and the journey’s entry in the E2E selection manifest when applicable.
+
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
 ## 2026-10-14 · Project task board progress is status-driven

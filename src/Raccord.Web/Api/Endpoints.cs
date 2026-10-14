@@ -105,6 +105,8 @@ internal static class Endpoints
     private static void MapProjects(RouteGroupBuilder api)
     {
         var projects = api.MapGroup("/projects").WithTags("Projects");
+        var coordination = api.MapGroup("/project-coordination").WithTags("Project coordination");
+        MapProjectCoordination(coordination);
         projects.MapGet(
             "/",
             async (ProjectWorkspace workspace, CancellationToken ct) =>
@@ -144,6 +146,100 @@ internal static class Endpoints
                 await workspace.AddBillableLineAsync(id, request, ct) is { } line
                     ? TypedResults.Created($"/api/projects/{id}", line)
                     : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapProjectCoordination(RouteGroupBuilder coordination)
+    {
+        MapProjectRequests(coordination);
+        MapProjectClassifications(coordination);
+    }
+
+    private static void MapProjectRequests(RouteGroupBuilder coordination)
+    {
+        coordination.MapGet(
+            "/requests",
+            async (ProjectCoordination service, CancellationToken ct) =>
+                TypedResults.Ok(await service.ListRequestsAsync(ct))
+        );
+        coordination.MapPost(
+            "/requests",
+            async (
+                ReceiveProjectRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+            {
+                var result = await service.ReceiveAsync(request, ct);
+                return TypedResults.Created(
+                    $"/api/project-coordination/requests/{result.Id}",
+                    result
+                );
+            }
+        );
+        coordination.MapPost(
+            "/requests/{id:guid}/convert",
+            async Task<Results<Created<ProjectResponse>, NotFound>> (
+                Guid id,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+            {
+                var result = await service.ConvertAsync(id, ct);
+                return result is null
+                    ? TypedResults.NotFound()
+                    : TypedResults.Created($"/api/projects/{result.Id}", result);
+            }
+        );
+        coordination.MapPost(
+            "/requests/{id:guid}/decline",
+            async Task<Results<Ok<ProjectRequestResponse>, NotFound>> (
+                Guid id,
+                DeclineProjectRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                await service.DeclineAsync(id, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapProjectClassifications(RouteGroupBuilder coordination)
+    {
+        coordination.MapGet(
+            "/types",
+            async (ProjectCoordination service, CancellationToken ct) =>
+                TypedResults.Ok(await service.ListTypesAsync(ct))
+        );
+        coordination.MapPost(
+            "/types",
+            async (
+                CreateProjectClassificationRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/project-coordination/types",
+                    await service.CreateTypeAsync(request, ct)
+                )
+        );
+        coordination.MapGet(
+            "/teams",
+            async (ProjectCoordination service, CancellationToken ct) =>
+                TypedResults.Ok(await service.ListTeamsAsync(ct))
+        );
+        coordination.MapPost(
+            "/teams",
+            async (
+                CreateProjectClassificationRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/project-coordination/teams",
+                    await service.CreateTeamAsync(request, ct)
+                )
         );
     }
 

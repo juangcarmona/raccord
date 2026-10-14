@@ -5,12 +5,60 @@ namespace Raccord.Contracts.Projects;
 /// <param name="CustomerId">Customer billed for the project.</param>
 /// <param name="StartDate">First day of the job.</param>
 /// <param name="EndDate">Last day of the job.</param>
+/// <param name="ProjectTypeId">Optional reusable project type.</param>
+/// <param name="TeamId">Optional assigned team.</param>
 public sealed record CreateProjectRequest(
     string Name,
     Guid CustomerId,
     DateOnly StartDate,
-    DateOnly EndDate
+    DateOnly EndDate,
+    Guid? ProjectTypeId = null,
+    Guid? TeamId = null
 );
+
+/// <summary>Records incoming project work.</summary>
+public sealed record ReceiveProjectRequest(
+    string Name,
+    string RequesterName,
+    string RequesterEmail,
+    Guid? CustomerId,
+    string? Description,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? ProjectTypeId,
+    Guid? TeamId
+);
+
+/// <summary>Declines an incoming project request.</summary>
+public sealed record DeclineProjectRequest(string Reason);
+
+/// <summary>Creates a reusable project type or team.</summary>
+public sealed record CreateProjectClassificationRequest(string Name, string? Description);
+
+/// <summary>Incoming project request.</summary>
+public sealed record ProjectRequestResponse(
+    Guid Id,
+    string Name,
+    string RequesterName,
+    string RequesterEmail,
+    Guid? CustomerId,
+    string? Description,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? ProjectTypeId,
+    Guid? TeamId,
+    string Status,
+    Guid? ProjectId,
+    string? DeclineReason,
+    DateTimeOffset ReceivedAt,
+    DateTimeOffset? ResolvedAt
+);
+
+/// <summary>Project classification.</summary>
+public sealed record ProjectTypeResponse(Guid Id, string Name, string? Description);
+
+/// <summary>Project team.</summary>
+public sealed record ProjectTeamResponse(Guid Id, string Name, string? Description);
 
 /// <summary>Adds billable work to a project.</summary>
 /// <param name="Kind">One of <c>equipment</c>, <c>labour</c>, <c>transport</c>, <c>consumable</c>, <c>service</c>, <c>other</c>.</param>
@@ -38,6 +86,8 @@ public sealed record AddBillableLineRequest(
 /// <param name="UnbilledLineCount">Lines not yet in a draft or invoice.</param>
 /// <param name="UnbilledNetAmount">Net amount of the unbilled lines.</param>
 /// <param name="Currency">ISO currency code.</param>
+/// <param name="ProjectTypeId">Assigned reusable project type.</param>
+/// <param name="TeamId">Assigned team.</param>
 public sealed record ProjectSummaryResponse(
     Guid Id,
     string Name,
@@ -47,7 +97,9 @@ public sealed record ProjectSummaryResponse(
     DateOnly EndDate,
     int UnbilledLineCount,
     decimal UnbilledNetAmount,
-    string Currency
+    string Currency,
+    Guid? ProjectTypeId = null,
+    Guid? TeamId = null
 );
 
 /// <summary>A project with its billable lines.</summary>
@@ -59,6 +111,8 @@ public sealed record ProjectSummaryResponse(
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
+/// <param name="ProjectTypeId">Assigned reusable project type.</param>
+/// <param name="TeamId">Assigned team.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -67,7 +121,9 @@ public sealed record ProjectResponse(
     DateOnly StartDate,
     DateOnly EndDate,
     string Currency,
-    IReadOnlyList<BillableLineResponse> BillableLines
+    IReadOnlyList<BillableLineResponse> BillableLines,
+    Guid? ProjectTypeId = null,
+    Guid? TeamId = null
 );
 
 /// <summary>A billable line.</summary>

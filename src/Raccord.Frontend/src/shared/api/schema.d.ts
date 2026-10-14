@@ -509,6 +509,272 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/project-coordination/requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectRequestResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReceiveProjectRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectRequestResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/requests/{id}/convert": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/requests/{id}/decline": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["DeclineProjectRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectRequestResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/types": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTypeResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectClassificationRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTypeResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/teams": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTeamResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectClassificationRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTeamResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -995,6 +1261,11 @@ export interface components {
             /** @description Series that will number the invoice; the default series when omitted. */
             seriesCode: null | string;
         };
+        /** @description Creates a reusable project type or team. */
+        CreateProjectClassificationRequest: {
+            name: string;
+            description: null | string;
+        };
         /** @description Creates a project. */
         CreateProjectRequest: {
             /** @description Project name. */
@@ -1014,6 +1285,16 @@ export interface components {
              * @description Last day of the job.
              */
             endDate: string;
+            /**
+             * Format: uuid
+             * @description Optional reusable project type.
+             */
+            projectTypeId?: null | string;
+            /**
+             * Format: uuid
+             * @description Optional assigned team.
+             */
+            teamId?: null | string;
         };
         CurrentUserResponse: {
             email: string;
@@ -1034,6 +1315,10 @@ export interface components {
             email: null | string;
             /** @description Whether the legal details required on an invoice are complete. */
             isInvoiceable: boolean;
+        };
+        /** @description Declines an incoming project request. */
+        DeclineProjectRequest: {
+            reason: string;
         };
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
@@ -1301,6 +1586,33 @@ export interface components {
             detail?: null | string;
             instance?: null | string;
         };
+        /** @description Incoming project request. */
+        ProjectRequestResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            requesterName: string;
+            requesterEmail: string;
+            /** Format: uuid */
+            customerId: null | string;
+            description: null | string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: uuid */
+            projectTypeId: null | string;
+            /** Format: uuid */
+            teamId: null | string;
+            status: string;
+            /** Format: uuid */
+            projectId: null | string;
+            declineReason: null | string;
+            /** Format: date-time */
+            receivedAt: string;
+            /** Format: date-time */
+            resolvedAt: null | string;
+        };
         /** @description A project with its billable lines. */
         ProjectResponse: {
             /**
@@ -1331,6 +1643,16 @@ export interface components {
             currency: string;
             /** @description Billable work. */
             billableLines: components["schemas"]["BillableLineResponse"][];
+            /**
+             * Format: uuid
+             * @description Assigned reusable project type.
+             */
+            projectTypeId?: null | string;
+            /**
+             * Format: uuid
+             * @description Assigned team.
+             */
+            teamId?: null | string;
         };
         /** @description A project in a list. */
         ProjectSummaryResponse: {
@@ -1370,6 +1692,47 @@ export interface components {
             unbilledNetAmount: number;
             /** @description ISO currency code. */
             currency: string;
+            /**
+             * Format: uuid
+             * @description Assigned reusable project type.
+             */
+            projectTypeId?: null | string;
+            /**
+             * Format: uuid
+             * @description Assigned team.
+             */
+            teamId?: null | string;
+        };
+        /** @description Project team. */
+        ProjectTeamResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description: null | string;
+        };
+        /** @description Project classification. */
+        ProjectTypeResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description: null | string;
+        };
+        /** @description Records incoming project work. */
+        ReceiveProjectRequest: {
+            name: string;
+            requesterName: string;
+            requesterEmail: string;
+            /** Format: uuid */
+            customerId: null | string;
+            description: null | string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: uuid */
+            projectTypeId: null | string;
+            /** Format: uuid */
+            teamId: null | string;
         };
         /** @description Registers a customer. */
         RegisterCustomerRequest: {

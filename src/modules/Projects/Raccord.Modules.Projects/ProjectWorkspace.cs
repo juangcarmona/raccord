@@ -31,7 +31,9 @@ public sealed class ProjectWorkspace(
             request.Name ?? string.Empty,
             customer.Id,
             request.StartDate,
-            request.EndDate
+            request.EndDate,
+            request.ProjectTypeId,
+            request.TeamId
         );
         projects.Add(project);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
@@ -68,7 +70,9 @@ public sealed class ProjectWorkspace(
                     project.EndDate,
                     unbilled.Count,
                     amount.Amount,
-                    amount.Currency.Code
+                    amount.Currency.Code,
+                    project.ProjectTypeId,
+                    project.TeamId
                 );
             }),
         ];
@@ -139,7 +143,9 @@ public sealed class ProjectWorkspace(
             project.StartDate,
             project.EndDate,
             Currency.Eur.Code,
-            [.. project.BillableLines.Select(ToResponse)]
+            [.. project.BillableLines.Select(ToResponse)],
+            project.ProjectTypeId,
+            project.TeamId
         );
 
     private static BillableLineResponse ToResponse(BillableLine line) =>

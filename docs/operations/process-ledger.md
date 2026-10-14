@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-14 · Project request conversion preserves source context
+
+- Observation: Project creation had no durable intake state, so converting incoming work could lose the requester context and classification decisions.
+- Action: Persist request status, source contact, requested dates, project type and team; convert transactionally while retaining the resolved request.
+- Check: Domain lifecycle tests cover received, one-way conversion and reasoned decline; the API contract and migration are validated by CI.
+
 ## 2026-10-13 · Frontend boundary enforcement
 
 - Observation: The frontend dependency direction was documented in ADR-0023 but could drift because CI did not inspect imports.

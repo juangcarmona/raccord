@@ -13,13 +13,22 @@ public sealed class Project
         Name = string.Empty;
     }
 
-    private Project(string name, Guid customerId, DateOnly startDate, DateOnly endDate)
+    private Project(
+        string name,
+        Guid customerId,
+        DateOnly startDate,
+        DateOnly endDate,
+        Guid? projectTypeId,
+        Guid? teamId
+    )
     {
         Id = Guid.CreateVersion7();
         Name = name;
         CustomerId = customerId;
         StartDate = startDate;
         EndDate = endDate;
+        ProjectTypeId = projectTypeId;
+        TeamId = teamId;
     }
 
     /// <summary>Project identifier.</summary>
@@ -37,12 +46,25 @@ public sealed class Project
     /// <summary>Last day of the job; also the operation date on invoices.</summary>
     public DateOnly EndDate { get; private set; }
 
+    /// <summary>Configured project type, when assigned.</summary>
+    public Guid? ProjectTypeId { get; private set; }
+
+    /// <summary>Assigned project team, when assigned.</summary>
+    public Guid? TeamId { get; private set; }
+
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];
 
     /// <summary>Creates a project for a customer and period.</summary>
-    public static Project Create(string name, Guid customerId, DateOnly startDate, DateOnly endDate)
+    public static Project Create(
+        string name,
+        Guid customerId,
+        DateOnly startDate,
+        DateOnly endDate,
+        Guid? projectTypeId = null,
+        Guid? teamId = null
+    )
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -60,7 +82,7 @@ public sealed class Project
             );
         }
 
-        return new Project(name.Trim(), customerId, startDate, endDate);
+        return new Project(name.Trim(), customerId, startDate, endDate, projectTypeId, teamId);
     }
 
     /// <summary>Records billable work.</summary>

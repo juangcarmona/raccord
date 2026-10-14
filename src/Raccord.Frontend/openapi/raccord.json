@@ -386,6 +386,229 @@
         }
       }
     },
+    "/api/project-coordination/requests": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectRequestResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceiveProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project-coordination/requests/{id}/convert": {
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/project-coordination/requests/{id}/decline": {
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeclineProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRequestResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/project-coordination/types": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectTypeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectClassificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTypeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project-coordination/teams": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectTeamResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectClassificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTeamResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -910,6 +1133,25 @@
         },
         "description": "Creates an invoice draft from unbilled project lines."
       },
+      "CreateProjectClassificationRequest": {
+        "required": [
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Creates a reusable project type or team."
+      },
       "CreateProjectRequest": {
         "required": [
           "name",
@@ -937,6 +1179,22 @@
             "type": "string",
             "description": "Last day of the job.",
             "format": "date"
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional reusable project type.",
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional assigned team.",
+            "format": "uuid"
           }
         },
         "description": "Creates a project."
@@ -1003,6 +1261,18 @@
           }
         },
         "description": "A customer."
+      },
+      "DeclineProjectRequest": {
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "description": "Declines an incoming project request."
       },
       "FinalizeInvoiceDraftRequest": {
         "required": [
@@ -1512,6 +1782,104 @@
           }
         }
       },
+      "ProjectRequestResponse": {
+        "required": [
+          "id",
+          "name",
+          "requesterName",
+          "requesterEmail",
+          "customerId",
+          "description",
+          "startDate",
+          "endDate",
+          "projectTypeId",
+          "teamId",
+          "status",
+          "projectId",
+          "declineReason",
+          "receivedAt",
+          "resolvedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "requesterName": {
+            "type": "string"
+          },
+          "requesterEmail": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "declineReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "receivedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resolvedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        },
+        "description": "Incoming project request."
+      },
       "ProjectResponse": {
         "required": [
           "id",
@@ -1563,6 +1931,22 @@
               "$ref": "#/components/schemas/BillableLineResponse"
             },
             "description": "Billable work."
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned reusable project type.",
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned team.",
+            "format": "uuid"
           }
         },
         "description": "A project with its billable lines."
@@ -1622,9 +2006,134 @@
           "currency": {
             "type": "string",
             "description": "ISO currency code."
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned reusable project type.",
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned team.",
+            "format": "uuid"
           }
         },
         "description": "A project in a list."
+      },
+      "ProjectTeamResponse": {
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Project team."
+      },
+      "ProjectTypeResponse": {
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Project classification."
+      },
+      "ReceiveProjectRequest": {
+        "required": [
+          "name",
+          "requesterName",
+          "requesterEmail",
+          "customerId",
+          "description",
+          "startDate",
+          "endDate",
+          "projectTypeId",
+          "teamId"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "requesterName": {
+            "type": "string"
+          },
+          "requesterEmail": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "Records incoming project work."
       },
       "RegisterCustomerRequest": {
         "required": [
@@ -1779,6 +2288,9 @@
     },
     {
       "name": "Projects"
+    },
+    {
+      "name": "Project coordination"
     },
     {
       "name": "Invoicing"

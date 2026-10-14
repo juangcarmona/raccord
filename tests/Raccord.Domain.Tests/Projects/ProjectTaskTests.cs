@@ -6,7 +6,7 @@ namespace Raccord.Domain.Tests.Projects;
 public sealed class ProjectTaskTests
 {
     [Fact]
-    public void Create_should_preserve_board_position()
+    public void Creating_a_task_Should_preserve_board_position()
     {
         var statusId = Guid.CreateVersion7();
         var task = ProjectTask.Create(
@@ -24,7 +24,7 @@ public sealed class ProjectTaskTests
     }
 
     [Fact]
-    public void Progress_should_move_task_to_a_new_status()
+    public void Progressing_a_task_Should_move_it_to_a_new_status()
     {
         var task = ProjectTask.Create(
             Guid.CreateVersion7(),
@@ -43,7 +43,7 @@ public sealed class ProjectTaskTests
     }
 
     [Fact]
-    public void Project_should_reject_progress_outside_percentage_range()
+    public void A_project_Should_reject_progress_outside_percentage_range()
     {
         var project = Project.Create(
             "Show",

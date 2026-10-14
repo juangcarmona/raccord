@@ -32,12 +32,12 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         var evidenceEnabled = PlaywrightArtifacts.VisualEvidenceEnabled;
         if (evidenceEnabled)
         {
-            System.IO.Directory.CreateDirectory(PlaywrightArtifacts.Directory);
+            System.IO.Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
         }
         var contextOptions = new BrowserNewContextOptions { Locale = "en-US" };
         if (evidenceEnabled)
         {
-            contextOptions.RecordVideoDir = PlaywrightArtifacts.Directory;
+            contextOptions.RecordVideoDir = PlaywrightArtifacts.EvidenceDirectory;
             contextOptions.RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 };
         }
 

@@ -3,13 +3,26 @@ using Microsoft.Playwright;
 namespace Raccord.EndToEndTests.Infrastructure;
 
 /// <summary>
-/// Where journey evidence lives: <c>playwright-artifacts/</c> under the test output directory,
-/// gitignored in the repo root. Success screenshots and videos are opt-in; failure traces and
-/// screenshots remain best-effort so a capture problem never replaces the journey's real failure.
+/// Where journey evidence lives: the absolute <c>PLAYWRIGHT_ARTIFACTS_DIR</c> when configured,
+/// otherwise <c>playwright-artifacts/</c> relative to the runner's current directory. Success
+/// screenshots and videos are opt-in; failure traces and screenshots remain best-effort so a
+/// capture problem never replaces the journey's real failure.
 /// </summary>
 internal static class PlaywrightArtifacts
 {
     internal const string Directory = "playwright-artifacts";
+    internal static string EvidenceDirectory
+    {
+        get
+        {
+            var configuredDirectory = Environment.GetEnvironmentVariable(
+                "PLAYWRIGHT_ARTIFACTS_DIR"
+            );
+            return Path.GetFullPath(
+                string.IsNullOrWhiteSpace(configuredDirectory) ? Directory : configuredDirectory
+            );
+        }
+    }
     internal static bool VisualEvidenceEnabled =>
         string.Equals(
             Environment.GetEnvironmentVariable("PLAYWRIGHT_CAPTURE_EVIDENCE"),
@@ -17,13 +30,13 @@ internal static class PlaywrightArtifacts
             StringComparison.OrdinalIgnoreCase
         );
 
-    private static string ArtifactPath(string name) => Path.Combine(Directory, name);
+    private static string ArtifactPath(string name) => Path.Combine(EvidenceDirectory, name);
 
     internal static void WriteJourneyResult(string name, string status)
     {
         try
         {
-            System.IO.Directory.CreateDirectory(Directory);
+            System.IO.Directory.CreateDirectory(EvidenceDirectory);
             File.WriteAllText(
                 ArtifactPath($"{name}.json"),
                 System.Text.Json.JsonSerializer.Serialize(
@@ -46,7 +59,7 @@ internal static class PlaywrightArtifacts
     {
         try
         {
-            System.IO.Directory.CreateDirectory(Directory);
+            System.IO.Directory.CreateDirectory(EvidenceDirectory);
             await page.ScreenshotAsync(
                 new() { Path = ArtifactPath($"{name}-checkpoint.png"), FullPage = true }
             );
@@ -96,7 +109,7 @@ internal static class PlaywrightArtifacts
     /// </summary>
     internal static async Task CaptureAsync(IBrowserContext context, IPage page, string name)
     {
-        System.IO.Directory.CreateDirectory(Directory);
+        System.IO.Directory.CreateDirectory(EvidenceDirectory);
         try
         {
             await context.Tracing.StopAsync(new() { Path = ArtifactPath($"{name}-failure.zip") });

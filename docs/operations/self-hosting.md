@@ -52,15 +52,23 @@ Both return only `Healthy`/`Unhealthy`. Compose uses readiness for the `web` ser
 
 ## Upgrades
 
-```bash
-git pull
-```
+Use the guarded upgrade script from `deploy/` after reviewing the release notes:
 
 ```bash
-docker compose up -d --build
+bash scripts/upgrade.sh ./backups
 ```
 
-The `migrate` service applies new migrations before `web` starts. Take a backup first.
+The script creates a database and document backup, builds the new image, runs the migration job, replaces `web` only after migrations succeed and verifies `/health/ready`. It leaves the previous web container running while the migration gate is executing, so a failed migration does not publish the new application image.
+
+For a manual upgrade, preserve the same order:
+
+1. Run `bash scripts/backup.sh ./backups` and keep the reported stamp.
+2. Run `docker compose build migrate web`.
+3. Run `docker compose run --rm migrate` and stop if it fails.
+4. Run `docker compose up -d --no-deps web`.
+5. Verify `curl -fsS http://localhost:8080/health/ready`.
+
+If readiness fails after the web replacement, stop the stack, restore the recorded backup with `scripts/restore.sh`, and verify readiness before retrying. Keep the backup until the upgraded installation has passed its smoke checks.
 
 ## TLS and exposure
 

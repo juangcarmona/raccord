@@ -6,16 +6,33 @@ set -euo pipefail
 project="${COMPOSE_PROJECT_NAME:-raccord}"
 target="${1:-./backups}"
 stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+retention_days="${RACCORD_BACKUP_RETENTION_DAYS:-30}"
+
+if [[ ! "$retention_days" =~ ^[0-9]+$ ]]; then
+  echo "RACCORD_BACKUP_RETENTION_DAYS must be a non-negative integer" >&2
+  exit 2
+fi
+
 mkdir -p "$target"
 target="$(cd "$target" && pwd)"
+work="${target}/.raccord-backup-${stamp}-$$"
+mkdir "$work"
+trap 'rm -rf "$work"' EXIT
 
 echo "Dumping database..."
 docker compose -p "$project" exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" --format=custom' \
-  > "$target/raccord-db-$stamp.dump"
+  > "$work/raccord-db-$stamp.dump"
 
 echo "Archiving documents..."
 docker run --rm -v "${project}_documents:/data:ro" -v "$target:/backup" alpine:3 \
-  tar czf "/backup/raccord-documents-$stamp.tgz" -C /data .
+  tar czf "/backup/.raccord-backup-${stamp}-$$/raccord-documents-$stamp.tgz" -C /data .
 
-( cd "$target" && sha256sum "raccord-db-$stamp.dump" "raccord-documents-$stamp.tgz" > "raccord-$stamp.sha256" )
+( cd "$work" && sha256sum "raccord-db-$stamp.dump" "raccord-documents-$stamp.tgz" > "raccord-$stamp.sha256" )
+mv "$work"/raccord-* "$target/"
+find "$target" -maxdepth 1 -type f -name 'raccord-*.sha256' -mtime "+$retention_days" -print0 |
+  while IFS= read -r -d '' manifest; do
+    old_stamp="${manifest##*/raccord-}"
+    old_stamp="${old_stamp%.sha256}"
+    rm -f "$manifest" "$target/raccord-db-$old_stamp.dump" "$target/raccord-documents-$old_stamp.tgz"
+  done
 echo "Backup written to $target (stamp $stamp)"

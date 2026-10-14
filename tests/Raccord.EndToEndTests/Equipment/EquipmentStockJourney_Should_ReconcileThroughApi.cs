@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text.Json.Serialization;
 using Microsoft.Playwright;
 using Raccord.EndToEndTests.Infrastructure;
 using Xunit;
@@ -73,7 +74,7 @@ public sealed class EquipmentStockJourney_Should_ReconcileThroughApi(Distributed
         );
     }
 
-    private sealed record EquipmentResponse(Guid Id);
+    private sealed record EquipmentResponse([property: JsonPropertyName("id")] Guid Id);
 
-    private sealed record MovementResponse(string Kind);
+    private sealed record MovementResponse([property: JsonPropertyName("kind")] string Kind);
 }

@@ -19,7 +19,7 @@ permissions:
 jobs:
   zap-baseline:
     name: ZAP baseline scan of the Compose stack
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
       - name: Build container image

@@ -39,7 +39,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=backend /app ./
 COPY --from=frontend /src/frontend/dist ./wwwroot
-RUN mkdir -p /var/lib/raccord/documents && chown -R app:app /var/lib/raccord
+RUN mkdir -p /var/lib/raccord/documents && chown -R app:app /app /var/lib/raccord
 ENV ASPNETCORE_URLS=http://+:8080 \
     ASPNETCORE_ENVIRONMENT=Production \
     Storage__Provider=FileSystem \

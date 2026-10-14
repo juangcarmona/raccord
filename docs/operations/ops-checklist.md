@@ -6,7 +6,7 @@ Work through this checklist on a regular cadence (monthly is a reasonable start;
 
 ## Backup and restore
 
-- [ ] Run the restore drill from `backup-and-restore.md` against a scratch target and confirm the restored system boots and serves real data. **Done means:** the drill is executed end-to-end, not read; the restore command's output is checked, and any undocumented step it needed is folded back into the runbook.
+- [x] Run the restore drill from `backup-and-restore.md` against a scratch target and confirm the restored system boots and serves real data. **Done 2026-10-14:** the isolated `raccorddrill` backup was checksum-verified and restored into `raccordrestore`; both stacks reported healthy, and the restored database preserved the seeded data row counts. The drill also corrected the runtime image ownership documented in `backup-and-restore.md`.
 - [ ] Confirm automated backups actually ran since the last check (volume snapshots or `pg_dump` history, depending on the deployment target). **Done means:** evidence of successful runs exists for the whole interval, and failed runs have a triaged reason.
 
 ## Secrets and access

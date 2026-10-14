@@ -25,4 +25,27 @@ public interface IProjectCoordinationStore
 
     /// <summary>Adds a project team.</summary>
     void Add(ProjectTeam team);
+
+    /// <summary>Lists configured task statuses.</summary>
+    Task<IReadOnlyList<ProjectTaskStatus>> ListTaskStatusesAsync(
+        CancellationToken cancellationToken
+    );
+
+    /// <summary>Finds a task status.</summary>
+    Task<ProjectTaskStatus?> FindTaskStatusAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>Lists project tasks.</summary>
+    Task<IReadOnlyList<ProjectTask>> ListTasksAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    );
+
+    /// <summary>Finds a task.</summary>
+    Task<ProjectTask?> FindTaskAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>Adds a task status.</summary>
+    void Add(ProjectTaskStatus status);
+
+    /// <summary>Adds a project task.</summary>
+    void Add(ProjectTask task);
 }

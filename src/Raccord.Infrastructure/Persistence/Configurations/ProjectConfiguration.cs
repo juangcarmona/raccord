@@ -13,6 +13,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder.Property(project => project.Name).HasMaxLength(200);
         builder.Property(project => project.ProjectTypeId);
         builder.Property(project => project.TeamId);
+        builder.Property(project => project.ProgressPercent).HasPrecision(5, 2).IsRequired();
         builder.HasConcurrencyToken();
 
         builder.OwnsMany(

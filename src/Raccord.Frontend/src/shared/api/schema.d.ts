@@ -775,6 +775,195 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/project-coordination/statuses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTaskStatusResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectTaskStatusRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTaskStatusResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/projects/{projectId}/board": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectBoardResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectTaskRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTaskResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/project-coordination/tasks/{id}/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ProgressProjectTaskRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTaskResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -1296,6 +1485,26 @@ export interface components {
              */
             teamId?: null | string;
         };
+        /** @description Creates a project task. */
+        CreateProjectTaskRequest: {
+            /** Format: uuid */
+            projectId: string;
+            title: string;
+            description: null | string;
+            /** Format: uuid */
+            statusId: string;
+            /** Format: int32 */
+            position: number;
+            /** Format: uuid */
+            assigneeId: null | string;
+        };
+        /** @description Creates a task status. */
+        CreateProjectTaskStatusRequest: {
+            name: string;
+            /** Format: int32 */
+            position: number;
+            completesProject: boolean;
+        };
         CurrentUserResponse: {
             email: string;
         };
@@ -1586,6 +1795,21 @@ export interface components {
             detail?: null | string;
             instance?: null | string;
         };
+        /** @description Moves a task on the board. */
+        ProgressProjectTaskRequest: {
+            /** Format: uuid */
+            statusId: string;
+            /** Format: int32 */
+            position: number;
+        };
+        /** @description A project board with automatic progress. */
+        ProjectBoardResponse: {
+            /** Format: uuid */
+            projectId: string;
+            /** Format: double */
+            progressPercent: number;
+            tasks: components["schemas"]["ProjectTaskResponse"][];
+        };
         /** @description Incoming project request. */
         ProjectRequestResponse: {
             /** Format: uuid */
@@ -1702,6 +1926,30 @@ export interface components {
              * @description Assigned team.
              */
             teamId?: null | string;
+        };
+        /** @description A project task. */
+        ProjectTaskResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            projectId: string;
+            title: string;
+            description: null | string;
+            /** Format: uuid */
+            statusId: string;
+            /** Format: int32 */
+            position: number;
+            /** Format: uuid */
+            assigneeId: null | string;
+        };
+        /** @description A configured task status. */
+        ProjectTaskStatusResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** Format: int32 */
+            position: number;
+            completesProject: boolean;
         };
         /** @description Project team. */
         ProjectTeamResponse: {

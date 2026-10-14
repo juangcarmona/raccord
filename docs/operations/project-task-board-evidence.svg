@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="260" viewBox="0 0 1100 260" role="img" aria-labelledby="title desc">
+  <title id="title">Project task board flow</title><desc id="desc">Tasks move between configured statuses and update automatic project progress.</desc>
+  <rect width="1100" height="260" fill="#f8fafc"/><g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="40" y="42" font-size="25" font-weight="700">Project task board</text>
+    <g stroke="#2563eb" stroke-width="2" fill="#dbeafe"><rect x="40" y="80" width="220" height="105" rx="12"/><rect x="330" y="80" width="220" height="105" rx="12"/><rect x="620" y="80" width="220" height="105" rx="12"/></g>
+    <text x="65" y="115" font-size="18" font-weight="700">Configured status</text><text x="65" y="145" font-size="15">To do · In progress</text><text x="65" y="168" font-size="15">Done (completes)</text>
+    <text x="355" y="115" font-size="18" font-weight="700">Ordered tasks</text><text x="355" y="145" font-size="15">Create · assign · position</text><text x="355" y="168" font-size="15">Move between columns</text>
+    <text x="645" y="115" font-size="18" font-weight="700">Project progress</text><text x="645" y="145" font-size="15">Automatic percentage</text><text x="645" y="168" font-size="15">Based on completed tasks</text>
+    <path d="M265 132h55m235 0h55" stroke="#0f172a" stroke-width="3" marker-end="url(#a)"/><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0f172a"/></marker></defs>
+  </g>
+</svg>

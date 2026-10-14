@@ -609,6 +609,160 @@
         }
       }
     },
+    "/api/project-coordination/statuses": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectTaskStatusResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectTaskStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTaskStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project-coordination/projects/{projectId}/board": {
+      "get": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectBoardResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/project-coordination/tasks": {
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectTaskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTaskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project-coordination/tasks/{id}/progress": {
+      "post": {
+        "tags": [
+          "Project coordination"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressProjectTaskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTaskResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -1199,6 +1353,69 @@
         },
         "description": "Creates a project."
       },
+      "CreateProjectTaskRequest": {
+        "required": [
+          "projectId",
+          "title",
+          "description",
+          "statusId",
+          "position",
+          "assigneeId"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assigneeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "Creates a project task."
+      },
+      "CreateProjectTaskStatusRequest": {
+        "required": [
+          "name",
+          "position",
+          "completesProject"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "completesProject": {
+            "type": "boolean"
+          }
+        },
+        "description": "Creates a task status."
+      },
       "CurrentUserResponse": {
         "required": [
           "email"
@@ -1782,6 +1999,49 @@
           }
         }
       },
+      "ProgressProjectTaskRequest": {
+        "required": [
+          "statusId",
+          "position"
+        ],
+        "type": "object",
+        "properties": {
+          "statusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Moves a task on the board."
+      },
+      "ProjectBoardResponse": {
+        "required": [
+          "projectId",
+          "progressPercent",
+          "tasks"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "progressPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTaskResponse"
+            }
+          }
+        },
+        "description": "A project board with automatic progress."
+      },
       "ProjectRequestResponse": {
         "required": [
           "id",
@@ -2025,6 +2285,79 @@
           }
         },
         "description": "A project in a list."
+      },
+      "ProjectTaskResponse": {
+        "required": [
+          "id",
+          "projectId",
+          "title",
+          "description",
+          "statusId",
+          "position",
+          "assigneeId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assigneeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "A project task."
+      },
+      "ProjectTaskStatusResponse": {
+        "required": [
+          "id",
+          "name",
+          "position",
+          "completesProject"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "completesProject": {
+            "type": "boolean"
+          }
+        },
+        "description": "A configured task status."
       },
       "ProjectTeamResponse": {
         "required": [

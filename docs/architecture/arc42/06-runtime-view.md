@@ -63,3 +63,6 @@ Web ─► InvoicingWorkflow ─► Domain (validate, allocate, snapshot)
 ## R-5 Future: VERI*FACTU submission
 
 A background worker claims pending compliance records per issuer in order, builds/sends batches, stores evidence, and handles outages and rejections (see [compliance seam](../compliance-seam.md)).
+For task progression, the Projects coordination service validates the configured status, moves the task, and recalculates project progress from statuses marked complete.
+
+<!-- pdac:cite id="UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY" digest="sha256:cd576d336c8096b0e71096d084bb2258c78c0d81522848e32a78730276caafed" -->

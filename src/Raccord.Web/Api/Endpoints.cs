@@ -153,6 +153,7 @@ internal static class Endpoints
     {
         MapProjectRequests(coordination);
         MapProjectClassifications(coordination);
+        MapProjectBoard(coordination);
     }
 
     private static void MapProjectRequests(RouteGroupBuilder coordination)
@@ -240,6 +241,62 @@ internal static class Endpoints
                     "/api/project-coordination/teams",
                     await service.CreateTeamAsync(request, ct)
                 )
+        );
+    }
+
+    private static void MapProjectBoard(RouteGroupBuilder coordination)
+    {
+        coordination.MapGet(
+            "/statuses",
+            async (ProjectCoordination service, CancellationToken ct) =>
+                TypedResults.Ok(await service.ListTaskStatusesAsync(ct))
+        );
+        coordination.MapPost(
+            "/statuses",
+            async (
+                CreateProjectTaskStatusRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/project-coordination/statuses",
+                    await service.CreateTaskStatusAsync(request, ct)
+                )
+        );
+        coordination.MapGet(
+            "/projects/{projectId:guid}/board",
+            async Task<Results<Ok<ProjectBoardResponse>, NotFound>> (
+                Guid projectId,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                await service.GetBoardAsync(projectId, ct) is { } board
+                    ? TypedResults.Ok(board)
+                    : TypedResults.NotFound()
+        );
+        coordination.MapPost(
+            "/tasks",
+            async (
+                CreateProjectTaskRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/project-coordination/tasks",
+                    await service.CreateTaskAsync(request, ct)
+                )
+        );
+        coordination.MapPost(
+            "/tasks/{id:guid}/progress",
+            async Task<Results<Ok<ProjectTaskResponse>, NotFound>> (
+                Guid id,
+                ProgressProjectTaskRequest request,
+                ProjectCoordination service,
+                CancellationToken ct
+            ) =>
+                await service.ProgressTaskAsync(id, request, ct) is { } task
+                    ? TypedResults.Ok(task)
+                    : TypedResults.NotFound()
         );
     }
 

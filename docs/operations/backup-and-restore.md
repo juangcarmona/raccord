@@ -29,11 +29,14 @@ bash scripts/restore.sh ./backups <stamp>
 
 The script verifies checksums, stops `web`, recreates the database schema from the dump (which also restores the append-only triggers), restores the documents, and starts `web`.
 
-### Rehearsal (performed 2026-10-06)
+### Rehearsal (performed 2026-10-14)
 
-1. Issued `F2026-00001` in a running stack; took a backup.
-2. Started a second, empty stack (`COMPOSE_PROJECT_NAME=raccordrestore`, another port) and restored into it.
-3. Verified: same invoice number and content fingerprint, byte-identical PDF, same audit events, and `DELETE FROM audit_events` refused by the trigger.
+1. Started an isolated seeded stack as `COMPOSE_PROJECT_NAME=raccorddrill` and verified `/health/ready`.
+2. Ran `scripts/backup.sh`; the database dump, document archive and SHA-256 manifest were created.
+3. Started a second empty stack as `COMPOSE_PROJECT_NAME=raccordrestore` on another port and ran `scripts/restore.sh`; both checksums verified.
+4. Verified the restored stack was healthy, contained the same 26 application tables and preserved the same seeded row counts: 2 customers, 2 projects, 7 billable lines, 1 user, 2 invoice series and 1 issuer profile.
+
+The drill also found and fixed a deployment defect: published runtime files were owned by `root` with mode `660`, which prevented the non-root migration process from reading `Raccord.Web.runtimeconfig.json`. The image now assigns `/app` to the runtime user.
 
 Repeat this rehearsal after every major upgrade.
 

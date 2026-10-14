@@ -797,6 +797,75 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("issued_invoices", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.LetterheadRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("DocumentTypes")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("document_types");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<decimal>("MarginBottomMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("margin_bottom_millimetres");
+
+                    b.Property<decimal>("MarginLeftMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("margin_left_millimetres");
+
+                    b.Property<decimal>("MarginRightMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("margin_right_millimetres");
+
+                    b.Property<decimal>("MarginTopMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("margin_top_millimetres");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<decimal>("PageHeightMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("page_height_millimetres");
+
+                    b.Property<decimal>("PageWidthMillimetres")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("page_width_millimetres");
+
+                    b.Property<string>("StorageKey")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("storage_key");
+
+                    b.HasKey("Id")
+                        .HasName("pk_letterheads");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_letterheads_name");
+
+                    b.ToTable("letterheads", "documents");
+                });
+
             modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>
                 {
                     b.Property<Guid>("Id")

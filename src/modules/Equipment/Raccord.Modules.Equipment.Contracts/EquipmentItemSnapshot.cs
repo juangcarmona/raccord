@@ -31,7 +31,8 @@ public sealed record EquipmentItemSnapshot(
     IReadOnlyList<Guid>? AccessoryIds = null,
     IReadOnlyList<Guid>? AlternativeIds = null,
     EquipmentKitKind KitKind = EquipmentKitKind.None,
-    IReadOnlyList<EquipmentKitContentLine>? KitContent = null
+    IReadOnlyList<EquipmentKitContentLine>? KitContent = null,
+    bool IsArchived = false
 );
 
 public sealed record UpdateEquipmentItemDetailsRequest(
@@ -132,6 +133,29 @@ public sealed record StockCountResult(
     int CountedQuantity,
     int Difference,
     int StockQuantity
+);
+
+public sealed record SellEquipmentRequest(
+    int Quantity,
+    string SaleCode,
+    string SaleName,
+    string? Description = null,
+    int? ExpectedStockQuantity = null
+);
+
+public sealed record EquipmentSaleResponse(
+    EquipmentItemSnapshot RentalItem,
+    EquipmentItemSnapshot SaleItem,
+    StockMovementSnapshot Movement
+);
+
+public sealed record EquipmentProjectHistoryResponse(
+    Guid ProjectId,
+    string ProjectName,
+    string Status,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    int Quantity
 );
 
 #pragma warning restore CS1591, MA0048

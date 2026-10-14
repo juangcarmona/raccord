@@ -220,20 +220,18 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 viewport: "desktop",
             }),
         );
-        buildReport({
-            artifactsDirectory: olderArtifacts,
-            outputDirectory: join(root, "e2e", "reports", "21"),
-            metadata: {
-                runId: "21",
-                date: new Date(Date.now() - 60_000).toISOString(),
-                sha: "cafebabe",
-                overallStatus: "success",
-                runUrl: "https://github.com/example/run/21",
-            },
-        });
+        mkdirSync(join(root, "e2e", "reports", "21"), { recursive: true });
         writeFileSync(
             join(root, "e2e", "reports", "21", "index.html"),
-            "legacy older report page",
+            "<main>No journey result was recorded. workflow result: <strong>success</strong></main>",
+        );
+        writeFileSync(
+            join(root, "e2e", "reports", "21", "report.json"),
+            JSON.stringify({
+                runId: "21",
+                overallStatus: "success",
+                journeys: [],
+            }),
         );
         writeFileSync(
             join(root, "e2e", "history.json"),
@@ -295,6 +293,23 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(olderReport, /id="journey-nav"/);
         assert.match(olderReport, /data-appearance="dark"/);
         assert.doesNotMatch(olderReport, /legacy older report page/);
+        assert.match(report, /failure/);
+        assert.match(report, /failure/);
+        const archivedReport = JSON.parse(
+            readFileSync(
+                join(root, "e2e", "reports", "21", "report.json"),
+                "utf8",
+            ),
+        );
+        assert.equal(archivedReport.workflowStatus, "success");
+        assert.equal(archivedReport.overallStatus, "failure");
+        assert.match(
+            readFileSync(
+                join(root, "e2e", "reports", "21", "index.html"),
+                "utf8",
+            ),
+            /Workflow result: <strong class="status failure">failure<\/strong>/,
+        );
     } finally {
         if (priorRun === undefined) delete process.env.E2E_RUN_ID;
         else process.env.E2E_RUN_ID = priorRun;

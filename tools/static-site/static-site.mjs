@@ -438,6 +438,35 @@ export function finalizeSite(siteDirectory) {
         });
     }
 
+    // Correct retained pre-guard reports too; publishing the new site should not
+    // continue to present an old zero-journey run as successful.
+    for (const item of history) {
+        const reportDirectory = join(reportsDirectory, String(item.runId));
+        const reportJsonPath = join(reportDirectory, "report.json");
+        try {
+            const report = JSON.parse(readFileSync(reportJsonPath, "utf8"));
+            if (Array.isArray(report.journeys) && report.journeys.length === 0) {
+                report.workflowStatus ??= report.overallStatus;
+                report.overallStatus = "failure";
+                item.status = "failure";
+                writeFileSync(reportJsonPath, JSON.stringify(report, null, 2));
+                const reportHtmlPath = join(reportDirectory, "index.html");
+                if (statSync(reportHtmlPath, { throwIfNoEntry: false })?.isFile()) {
+                    const reportHtml = readFileSync(reportHtmlPath, "utf8");
+                    writeFileSync(
+                        reportHtmlPath,
+                        reportHtml.replace(
+                            /workflow result: <strong(?: class="[^"]*")?>([^<]+)<\/strong>/,
+                            'workflow result: <strong style="color:#ff827d">failure</strong>',
+                        ),
+                    );
+                }
+            }
+        } catch {
+            // A missing or malformed legacy manifest does not discard its history entry.
+        }
+    }
+
     const cutoff = Date.now() - MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
     history = history
         .filter((report) => Date.parse(report.date) >= cutoff)

@@ -236,6 +236,10 @@ jobs:
         if: needs.prepare.outputs.build_architecture == 'true'
         run: npm ci --ignore-scripts --prefix tools/arc42-snapshot
 
+      - name: Test the arc42 snapshot renderer
+        if: needs.prepare.outputs.build_architecture == 'true'
+        run: npm test --prefix tools/arc42-snapshot
+
       - name: Install Chromium for Mermaid rendering
         if: needs.prepare.outputs.build_architecture == 'true'
         run: npm exec --offline --prefix tools/arc42-snapshot -- puppeteer browsers install chrome

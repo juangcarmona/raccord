@@ -644,6 +644,53 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("items", "equipment");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.EquipmentStockMovementRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("description");
+
+                    b.Property<DateOnly>("EffectiveDate")
+                        .HasColumnType("date")
+                        .HasColumnName("effective_date");
+
+                    b.Property<Guid>("EquipmentItemId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("equipment_item_id");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("kind");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.Property<int>("StockQuantityAfter")
+                        .HasColumnType("integer")
+                        .HasColumnName("stock_quantity_after");
+
+                    b.HasKey("Id")
+                        .HasName("pk_stock_movements");
+
+                    b.HasIndex("EquipmentItemId", "EffectiveDate")
+                        .HasDatabaseName("ix_stock_movements_equipment_item_id_effective_date");
+
+                    b.ToTable("stock_movements", "equipment");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", b =>
                 {
                     b.Property<Guid>("Id")

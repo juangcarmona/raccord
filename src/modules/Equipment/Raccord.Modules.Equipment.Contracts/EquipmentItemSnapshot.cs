@@ -95,4 +95,43 @@ public sealed record EquipmentShortageResponse(
     IReadOnlyList<Guid> AlternativeIds
 );
 
+public sealed record ScheduleStockMovementRequest(
+    int Quantity,
+    DateOnly EffectiveDate,
+    string? Description = null
+);
+
+public sealed record CorrectStockRequest(
+    int StockQuantity,
+    int ExpectedStockQuantity,
+    string? Description = null
+);
+
+public sealed record StockCountLine(Guid ItemId, int ExpectedStockQuantity, int CountedQuantity);
+
+public sealed record CompleteStockCountRequest(
+    string Name,
+    IReadOnlyList<StockCountLine> Items,
+    string? Description = null
+);
+
+public sealed record StockMovementSnapshot(
+    Guid Id,
+    Guid ItemId,
+    int Quantity,
+    int StockQuantityAfter,
+    DateOnly EffectiveDate,
+    string Kind,
+    string? Description,
+    DateTimeOffset CreatedAt
+);
+
+public sealed record StockCountResult(
+    Guid ItemId,
+    int ExpectedStockQuantity,
+    int CountedQuantity,
+    int Difference,
+    int StockQuantity
+);
+
 #pragma warning restore CS1591, MA0048

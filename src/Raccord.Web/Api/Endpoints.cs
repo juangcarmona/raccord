@@ -167,6 +167,43 @@ internal static class Endpoints
                     ? TypedResults.Ok(item)
                     : TypedResults.NotFound()
         );
+        equipment.MapGet(
+            "/items/{id:guid}/stock-movements",
+            async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListStockMovementsAsync(id, ct))
+        );
+        equipment.MapPost(
+            "/items/{id:guid}/stock-movements",
+            async Task<Results<Ok<StockMovementSnapshot>, NotFound>> (
+                Guid id,
+                ScheduleStockMovementRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) => await catalog.ScheduleStockMovementAsync(id, request, ct) is { } movement
+                ? TypedResults.Ok(movement)
+                : TypedResults.NotFound()
+        );
+        equipment.MapPost(
+            "/items/{id:guid}/stock-correction",
+            async Task<Results<Ok<StockMovementSnapshot>, Conflict, NotFound>> (
+                Guid id,
+                CorrectStockRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) => await catalog.CorrectStockAsync(id, request, ct) is { } movement
+                ? TypedResults.Ok(movement)
+                : TypedResults.Conflict()
+        );
+        equipment.MapPost(
+            "/stock-counts",
+            async Task<Results<Ok<IReadOnlyList<StockCountResult>>, BadRequest>> (
+                CompleteStockCountRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) => await catalog.CompleteStockCountAsync(request, ct) is { } result
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest()
+        );
     }
 #pragma warning restore MA0051
 

@@ -315,6 +315,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("name");
 
+                    b.Property<decimal>("ProgressPercent")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)")
+                        .HasColumnName("progress_percent");
+
                     b.Property<Guid?>("ProjectTypeId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_type_id");
@@ -425,6 +430,80 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_project_requests_status");
 
                     b.ToTable("project_requests", "workspace");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Projects.ProjectTask", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid?>("AssigneeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("assignee_id");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("description");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer")
+                        .HasColumnName("position");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_id");
+
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("status_id");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_tasks");
+
+                    b.HasIndex("ProjectId", "StatusId", "Position")
+                        .HasDatabaseName("ix_project_tasks_project_id_status_id_position");
+
+                    b.ToTable("project_tasks", "workspace");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Projects.ProjectTaskStatus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("CompletesProject")
+                        .HasColumnType("boolean")
+                        .HasColumnName("completes_project");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer")
+                        .HasColumnName("position");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_task_statuses");
+
+                    b.HasIndex("Position")
+                        .IsUnique()
+                        .HasDatabaseName("ix_project_task_statuses_position");
+
+                    b.ToTable("project_task_statuses", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Projects.ProjectTeam", b =>

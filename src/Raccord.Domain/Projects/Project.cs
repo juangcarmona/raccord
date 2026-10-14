@@ -52,6 +52,20 @@ public sealed class Project
     /// <summary>Assigned project team, when assigned.</summary>
     public Guid? TeamId { get; private set; }
 
+    /// <summary>Automatic completion percentage based on task statuses.</summary>
+    public decimal ProgressPercent { get; private set; }
+
+    /// <summary>Updates the automatic progress percentage.</summary>
+    public void UpdateProgress(decimal progressPercent)
+    {
+        if (progressPercent is < 0 or > 100)
+            throw new BusinessRuleViolationException(
+                "projects.progress-invalid",
+                "Project progress must be between 0 and 100."
+            );
+        ProgressPercent = progressPercent;
+    }
+
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];

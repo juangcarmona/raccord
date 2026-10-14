@@ -87,3 +87,9 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 ## Review rule
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
+
+## 2026-10-14 · Project task board progress is status-driven
+
+- **Observation:** A shared board needs one source of truth for task ordering and completion semantics.
+- **Action:** Store status completion rules with the task status and recalculate project progress in the coordination service after every task transition.
+- **Check:** Domain and CI tests must cover status validation, task movement, and the resulting progress percentage.

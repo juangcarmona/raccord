@@ -160,6 +160,151 @@ public sealed class ProjectCoordination(
             ),
         ];
 
+    /// <summary>Creates a configurable task status.</summary>
+    public async Task<ProjectTaskStatusResponse> CreateTaskStatusAsync(
+        CreateProjectTaskStatusRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var status = ProjectTaskStatus.Create(
+            request.Name,
+            request.Position,
+            request.CompletesProject
+        );
+        coordination.Add(status);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(status);
+    }
+
+    /// <summary>Lists configurable task statuses.</summary>
+    public async Task<IReadOnlyList<ProjectTaskStatusResponse>> ListTaskStatusesAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (
+                await coordination.ListTaskStatusesAsync(cancellationToken).ConfigureAwait(false)
+            ).Select(ToResponse),
+        ];
+
+    /// <summary>Creates a task on a project board.</summary>
+    public async Task<ProjectTaskResponse> CreateTaskAsync(
+        CreateProjectTaskRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        await EnsureProjectAsync(request.ProjectId, cancellationToken).ConfigureAwait(false);
+        await EnsureStatusAsync(request.StatusId, cancellationToken).ConfigureAwait(false);
+        var task = ProjectTask.Create(
+            request.ProjectId,
+            request.Title,
+            request.Description,
+            request.StatusId,
+            request.Position,
+            request.AssigneeId
+        );
+        coordination.Add(task);
+        await RecalculateProgressAsync(request.ProjectId, cancellationToken).ConfigureAwait(false);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(task);
+    }
+
+    /// <summary>Returns the project board.</summary>
+    public async Task<ProjectBoardResponse?> GetBoardAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        return new(projectId, project.ProgressPercent, [.. tasks.Select(ToResponse)]);
+    }
+
+    /// <summary>Moves a task and recalculates project progress.</summary>
+    public async Task<ProjectTaskResponse?> ProgressTaskAsync(
+        Guid taskId,
+        ProgressProjectTaskRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var task = await coordination
+            .FindTaskAsync(taskId, cancellationToken)
+            .ConfigureAwait(false);
+        if (task is null)
+            return null;
+        await EnsureStatusAsync(request.StatusId, cancellationToken).ConfigureAwait(false);
+        task.Progress(request.StatusId, request.Position);
+        await RecalculateProgressAsync(task.ProjectId, cancellationToken).ConfigureAwait(false);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(task);
+    }
+
+    private async Task EnsureProjectAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+            throw new BusinessRuleViolationException(
+                "projects.not-found",
+                $"Project '{projectId}' does not exist."
+            );
+    }
+
+    private async Task EnsureStatusAsync(Guid statusId, CancellationToken cancellationToken)
+    {
+        if (
+            await coordination
+                .FindTaskStatusAsync(statusId, cancellationToken)
+                .ConfigureAwait(false)
+            is null
+        )
+            throw new BusinessRuleViolationException(
+                "projects.task-status-not-found",
+                $"Task status '{statusId}' does not exist."
+            );
+    }
+
+    private async Task RecalculateProgressAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return;
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var statuses = await coordination
+            .ListTaskStatusesAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var completed =
+            tasks.Count == 0
+                ? 0
+                : tasks.Count(task =>
+                    statuses.FirstOrDefault(status => status.Id == task.StatusId)?.CompletesProject
+                    == true
+                )
+                    * 100m
+                    / tasks.Count;
+        project.UpdateProgress(completed);
+    }
+
+    private static ProjectTaskStatusResponse ToResponse(ProjectTaskStatus status) =>
+        new(status.Id, status.Name, status.Position, status.CompletesProject);
+
+    private static ProjectTaskResponse ToResponse(ProjectTask task) =>
+        new(
+            task.Id,
+            task.ProjectId,
+            task.Title,
+            task.Description,
+            task.StatusId,
+            task.Position,
+            task.AssigneeId
+        );
+
     private async Task ValidateCustomerAsync(Guid? customerId, CancellationToken cancellationToken)
     {
         if (

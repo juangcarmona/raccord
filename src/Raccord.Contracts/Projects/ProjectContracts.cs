@@ -60,6 +60,52 @@ public sealed record ProjectTypeResponse(Guid Id, string Name, string? Descripti
 /// <summary>Project team.</summary>
 public sealed record ProjectTeamResponse(Guid Id, string Name, string? Description);
 
+/// <summary>Creates a task status.</summary>
+public sealed record CreateProjectTaskStatusRequest(
+    string Name,
+    int Position,
+    bool CompletesProject
+);
+
+/// <summary>Creates a project task.</summary>
+public sealed record CreateProjectTaskRequest(
+    Guid ProjectId,
+    string Title,
+    string? Description,
+    Guid StatusId,
+    int Position,
+    Guid? AssigneeId
+);
+
+/// <summary>Moves a task on the board.</summary>
+public sealed record ProgressProjectTaskRequest(Guid StatusId, int Position);
+
+/// <summary>A configured task status.</summary>
+public sealed record ProjectTaskStatusResponse(
+    Guid Id,
+    string Name,
+    int Position,
+    bool CompletesProject
+);
+
+/// <summary>A project task.</summary>
+public sealed record ProjectTaskResponse(
+    Guid Id,
+    Guid ProjectId,
+    string Title,
+    string? Description,
+    Guid StatusId,
+    int Position,
+    Guid? AssigneeId
+);
+
+/// <summary>A project board with automatic progress.</summary>
+public sealed record ProjectBoardResponse(
+    Guid ProjectId,
+    decimal ProgressPercent,
+    IReadOnlyList<ProjectTaskResponse> Tasks
+);
+
 /// <summary>Adds billable work to a project.</summary>
 /// <param name="Kind">One of <c>equipment</c>, <c>labour</c>, <c>transport</c>, <c>consumable</c>, <c>service</c>, <c>other</c>.</param>
 /// <param name="Description">Text printed on the invoice.</param>

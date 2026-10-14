@@ -70,3 +70,7 @@ src/shared     api (generated schema + typed client) | i18n | format | hooks | u
 ```
 
 The frontend entry point (`src/main.tsx`) composes `AuthProvider` around the router. `RequireAuth` protects the application shell and feature routes; the sign-in feature remains public.
+
+The Projects module owns task-board statuses, ordered tasks, and the automatic progress calculation for project work. This realizes the shared task-board flow described by `UC-PRJ-WORK-WITH-TASK-BOARD`.
+
+<!-- pdac:cite id="UC-PRJ-WORK-WITH-TASK-BOARD" digest="sha256:65df11dcd76ee45a2e918382f5bd13ff287d104711451d4de3ebb776c6ca9f20" -->

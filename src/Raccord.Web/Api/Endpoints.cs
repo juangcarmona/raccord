@@ -207,6 +207,35 @@ internal static class Endpoints
                     ? TypedResults.Ok(result)
                     : TypedResults.BadRequest()
         );
+        equipment.MapPost(
+            "/items/{id:guid}/sell",
+            async Task<Results<Ok<EquipmentSaleResponse>, Conflict>> (
+                Guid id,
+                SellEquipmentRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.SellAsync(id, request, ct) is { } sale
+                    ? TypedResults.Ok(sale)
+                    : TypedResults.Conflict()
+        );
+        equipment.MapPost(
+            "/items/{id:guid}/archive",
+            async Task<Results<Ok<EquipmentItemSnapshot>, Conflict>> (
+                Guid id,
+                int expectedStockQuantity,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.ArchiveAsync(id, expectedStockQuantity, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.Conflict()
+        );
+        equipment.MapGet(
+            "/project-history",
+            async (Guid[] itemIds, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ProjectHistoryAsync(itemIds, ct))
+        );
     }
 #pragma warning restore MA0051
 

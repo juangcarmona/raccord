@@ -602,6 +602,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(300)")
                         .HasColumnName("image_key");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_archived");
+
                     b.Property<bool>("IsPlanned")
                         .HasColumnType("boolean")
                         .HasColumnName("is_planned");

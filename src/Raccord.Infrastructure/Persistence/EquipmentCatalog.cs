@@ -11,6 +11,107 @@ namespace Raccord.Infrastructure.Persistence;
 
 public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documents)
 {
+    public async Task<EquipmentSaleResponse?> SellAsync(
+        Guid itemId,
+        SellEquipmentRequest request,
+        CancellationToken ct
+    )
+    {
+        if (
+            request.Quantity <= 0
+            || string.IsNullOrWhiteSpace(request.SaleCode)
+            || string.IsNullOrWhiteSpace(request.SaleName)
+        )
+            return null;
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
+        if (
+            item is null
+            || item.IsArchived
+            || item.Type != EquipmentItemType.Rental
+            || request.Quantity > item.StockQuantity
+            || request.ExpectedStockQuantity is not null
+                && request.ExpectedStockQuantity != item.StockQuantity
+        )
+            return null;
+        var saleItem = new EquipmentItemRow
+        {
+            Id = Guid.NewGuid(),
+            Code = request.SaleCode.Trim(),
+            Name = request.SaleName.Trim(),
+            Type = EquipmentItemType.Sale,
+            StockQuantity = 0,
+            SerialNumbers = "[]",
+            AccessoryIds = "[]",
+            AlternativeIds = "[]",
+            KitContent = "[]",
+        };
+        var movement = NewMovement(item, -request.Quantity, "Sale", request.Description);
+        item.StockQuantity -= request.Quantity;
+        db.EquipmentItems.Add(saleItem);
+        db.EquipmentStockMovements.Add(movement);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return new(ToSnapshot(item), ToSnapshot(saleItem), ToMovementSnapshot(movement));
+    }
+
+    public async Task<EquipmentItemSnapshot?> ArchiveAsync(
+        Guid itemId,
+        int expectedStockQuantity,
+        CancellationToken ct
+    )
+    {
+        var item = await db
+            .EquipmentItems.FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
+        if (item is null || item.IsArchived || item.StockQuantity != expectedStockQuantity)
+            return null;
+        var movement = NewMovement(item, -item.StockQuantity, "Archive", "Archived");
+        item.StockQuantity = 0;
+        item.IsArchived = true;
+        db.EquipmentStockMovements.Add(movement);
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToSnapshot(item);
+    }
+
+    public async Task<IReadOnlyList<EquipmentProjectHistoryResponse>> ProjectHistoryAsync(
+        IReadOnlyList<Guid> itemIds,
+        CancellationToken ct
+    )
+    {
+        var ids = itemIds.Distinct().ToArray();
+        if (ids.Length == 0)
+            return [];
+        return await db
+            .Projects.AsNoTracking()
+            .Where(project =>
+                project.PlannedEquipmentLines.Count(line => ids.Contains(line.EquipmentId))
+                == ids.Length
+            )
+            .SelectMany(project =>
+                project
+                    .PlannedEquipmentLines.Where(line => ids.Contains(line.EquipmentId))
+                    .GroupBy(line => new
+                    {
+                        project.Id,
+                        project.Name,
+                        project.Status,
+                        project.StartDate,
+                        project.EndDate,
+                    })
+                    .Select(group => new EquipmentProjectHistoryResponse(
+                        group.Key.Id,
+                        group.Key.Name,
+                        group.Key.Status.ToString(),
+                        group.Key.StartDate,
+                        group.Key.EndDate,
+                        group.Sum(line => line.Quantity)
+                    ))
+            )
+            .ToListAsync(ct)
+            .ConfigureAwait(false);
+    }
+
     public async Task<StockMovementSnapshot?> ScheduleStockMovementAsync(
         Guid itemId,
         ScheduleStockMovementRequest request,
@@ -365,7 +466,8 @@ public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documen
             ParseIds(row.AccessoryIds),
             ParseIds(row.AlternativeIds),
             row.KitKind,
-            ParseKitContent(row.KitContent)
+            ParseKitContent(row.KitContent),
+            row.IsArchived
         );
 
     public async Task<EquipmentItemSnapshot?> UpdateDetailsAsync(

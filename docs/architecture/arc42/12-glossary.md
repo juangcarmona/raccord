@@ -1,3 +1,10 @@
+---
+title: Glossary
+arc42-section: "12"
+description: Defines architecture terms used consistently across the Raccord documentation.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 12. Glossary
 
 | Term | Meaning in Raccord |

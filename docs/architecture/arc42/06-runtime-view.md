@@ -1,3 +1,10 @@
+---
+title: Runtime view
+arc42-section: "06"
+description: Shows the runtime interactions for the system's important scenarios.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 6. Runtime view
 
 ## R-1 Create a draft

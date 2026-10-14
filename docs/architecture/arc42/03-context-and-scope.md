@@ -1,3 +1,10 @@
+---
+title: Context and scope
+arc42-section: "03"
+description: Describes Raccord's external actors, systems, interfaces, and architectural boundary.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 3. Context and scope
 
 ## Business context

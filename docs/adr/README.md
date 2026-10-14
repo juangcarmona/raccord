@@ -29,3 +29,4 @@ Records are immutable in spirit. To reverse or replace a decision, write a new r
 | ADR-0021 | [Authenticate with local Identity and cookie sessions, authorize with scoped role permissions](0021-local-identity-with-cookie-sessions-and-scoped-permissions.md) | Accepted               | 2026-10-12 |
 | ADR-0022 | [Write each use case as a single-file slice returning result errors](0022-single-file-use-case-slices-with-result-errors.md)                                       | Accepted               | 2026-10-12 |
 | ADR-0023 | [Organize the frontend as feature-owned vertical slices](0023-frontend-feature-slice-architecture.md)                                                              | Accepted               | 2026-10-12 |
+| ADR-0024 | [Publish static engineering snapshots through GitHub Pages](0024-publish-static-engineering-snapshots-on-github-pages.md)                                          | Accepted               | 2026-10-13 |

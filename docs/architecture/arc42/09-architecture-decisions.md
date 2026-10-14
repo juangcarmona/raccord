@@ -1,3 +1,10 @@
+---
+title: Architecture decisions
+arc42-section: "09"
+description: Indexes the accepted architectural decisions and the views they affect.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 9. Architecture decisions
 
 Decision records live in [`../../adr/`](../../adr/). This section lists the accepted decisions that shape the current architecture; status, rationale, alternatives and history stay in each ADR.
@@ -26,3 +33,4 @@ Decision records live in [`../../adr/`](../../adr/). This section lists the acce
 | Authenticate with local Identity and cookie sessions, authorize with scoped role permissions | [ADR-0021](../../adr/0021-local-identity-with-cookie-sessions-and-scoped-permissions.md) | §8 security, §11 risks (R-1, D-9)                                 |
 | Write each use case as a single-file slice returning result errors                           | [ADR-0022](../../adr/0022-single-file-use-case-slices-with-result-errors.md)             | §5 building blocks, §8 error handling and API contract            |
 | Organize the frontend as feature-owned vertical slices                                       | [ADR-0023](../../adr/0023-frontend-feature-slice-architecture.md)                        | §5 building blocks, §8 frontend quality                           |
+| Publish static engineering snapshots through GitHub Pages                                    | [ADR-0024](../../adr/0024-publish-static-engineering-snapshots-on-github-pages.md)       | §7 deployment, §8 testing evidence                                |

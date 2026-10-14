@@ -1,3 +1,10 @@
+---
+title: Constraints
+arc42-section: "02"
+description: Records the technical, organizational, and legal constraints that shape the architecture.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 2. Constraints
 
 ## Technical

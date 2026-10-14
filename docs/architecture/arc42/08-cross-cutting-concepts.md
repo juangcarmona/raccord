@@ -1,3 +1,10 @@
+---
+title: Cross-cutting concepts
+arc42-section: "08"
+description: Explains concepts and mechanisms that span multiple Raccord building blocks.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 8. Cross-cutting concepts
 
 ## Domain rules and errors

@@ -16,8 +16,9 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected DistributedAppFixture App { get; } = app;
 
     /// <summary>
-    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; on failure,
-    /// saves trace and screenshot artifacts under <c>playwright-artifacts/</c> and rethrows. The
+    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; when visual
+    /// evidence capture is enabled, records a video and a final screenshot on success. On failure,
+    /// saves a trace and failure screenshot under <c>playwright-artifacts/</c> and rethrows. The
     /// locale is pinned because the SPA picks es/en from <c>navigator.language</c> and journeys
     /// assert on localized labels — leaving it to the runner's default would make the suite's
     /// meaning depend on where it runs.
@@ -28,7 +29,19 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         bool signIn = true
     )
     {
-        await using var context = await App.NewContextAsync();
+        var evidenceEnabled = PlaywrightArtifacts.VisualEvidenceEnabled;
+        if (evidenceEnabled)
+        {
+            System.IO.Directory.CreateDirectory(PlaywrightArtifacts.Directory);
+        }
+        var contextOptions = new BrowserNewContextOptions { Locale = "en-US" };
+        if (evidenceEnabled)
+        {
+            contextOptions.RecordVideoDir = PlaywrightArtifacts.Directory;
+            contextOptions.RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 };
+        }
+
+        var context = await App.NewContextAsync(contextOptions);
         await context.Tracing.StartAsync(
             new TracingStartOptions
             {
@@ -52,16 +65,26 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
                 );
             }
             await journey(page);
+            if (evidenceEnabled)
+            {
+                await PlaywrightArtifacts.CaptureSuccessAsync(page, artifactName);
+            }
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
+            PlaywrightArtifacts.WriteJourneyResult(artifactName, "passed");
         }
         catch
         {
             await PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
+            PlaywrightArtifacts.WriteJourneyResult(artifactName, "failed");
             throw;
         }
         finally
         {
             await context.CloseAsync();
+            if (evidenceEnabled)
+            {
+                await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
+            }
         }
     }
 

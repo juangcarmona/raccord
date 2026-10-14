@@ -1,3 +1,10 @@
+---
+title: Solution strategy
+arc42-section: "04"
+description: Summarizes the architectural strategies used to meet the system's goals and constraints.
+---
+<!-- markdownlint-disable MD025 -->
+
 # 4. Solution strategy
 
 | Goal | Approach | Decision |

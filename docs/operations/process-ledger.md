@@ -72,6 +72,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 - Action: Capture a representative sign-in screenshot as versioned PR evidence and reuse the shared browser context for E2E journeys. Do not replace required security, acceptance, or contract gates; reduce cost through shared setup and by avoiding redundant local reruns after the same CI head is green.
 - Check: Every PR that adds UI behavior links a screenshot in its description, and the E2E selection manifest names the new journey explicitly.
 
+## 2026-10-13 · Public static evidence publication
+
+- Observation: Static-site deployments replace the whole Pages artifact; independent documentation and E2E publishers could silently erase each other's content or lose reports during overlapping runs.
+- Action: Route all static snapshots through one serialized publisher, restore retained files from the published manifest, and test source-path refreshes separately from nightly report updates.
+- Check: The workflow has one non-cancelling concurrency group; report tests cover the stable index and retention, and snapshot refreshes preserve unrelated site paths.
+
 ## Review rule
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.

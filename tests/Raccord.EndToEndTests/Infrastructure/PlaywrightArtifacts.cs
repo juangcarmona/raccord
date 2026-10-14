@@ -3,13 +3,76 @@ using Microsoft.Playwright;
 namespace Raccord.EndToEndTests.Infrastructure;
 
 /// <summary>
-/// Where failed-journey evidence lives: <c>playwright-artifacts/</c> under the test output
-/// directory, gitignored in the repo root. Kept tiny and best-effort on purpose — a capture
-/// failure must not replace the journey's real failure.
+/// Where journey evidence lives: <c>playwright-artifacts/</c> under the test output directory,
+/// gitignored in the repo root. Success screenshots and videos are opt-in; failure traces and
+/// screenshots remain best-effort so a capture problem never replaces the journey's real failure.
 /// </summary>
 internal static class PlaywrightArtifacts
 {
     internal const string Directory = "playwright-artifacts";
+    internal static bool VisualEvidenceEnabled =>
+        string.Equals(
+            Environment.GetEnvironmentVariable("PLAYWRIGHT_CAPTURE_EVIDENCE"),
+            "true",
+            StringComparison.OrdinalIgnoreCase
+        );
+
+    private static string ArtifactPath(string name) => Path.Combine(Directory, name);
+
+    internal static void WriteJourneyResult(string name, string status)
+    {
+        try
+        {
+            System.IO.Directory.CreateDirectory(Directory);
+            File.WriteAllText(
+                ArtifactPath($"{name}.json"),
+                System.Text.Json.JsonSerializer.Serialize(
+                    new
+                    {
+                        name,
+                        status,
+                        viewport = "desktop",
+                    }
+                )
+            );
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Saving result for '{name}' failed: {ex.Message}");
+        }
+    }
+
+    internal static async Task CaptureSuccessAsync(IPage page, string name)
+    {
+        try
+        {
+            System.IO.Directory.CreateDirectory(Directory);
+            await page.ScreenshotAsync(
+                new() { Path = ArtifactPath($"{name}-checkpoint.png"), FullPage = true }
+            );
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Saving success screenshot for '{name}' failed: {ex.Message}");
+        }
+    }
+
+    internal static async Task SaveVideoAsync(IPage page, string name)
+    {
+        try
+        {
+            var video = page.Video;
+            if (video is not null)
+            {
+                await video.SaveAsAsync(ArtifactPath($"{name}.webm"));
+                await video.DeleteAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Saving video for '{name}' failed: {ex.Message}");
+        }
+    }
 
     /// <summary>
     /// Saves the context's trace (<c>{name}.zip</c>) — the browser-actions timeline, screenshots
@@ -19,9 +82,7 @@ internal static class PlaywrightArtifacts
     {
         try
         {
-            await context.Tracing.StopAsync(
-                new() { Path = Path.Combine(Directory, $"{name}.zip") }
-            );
+            await context.Tracing.StopAsync(new() { Path = ArtifactPath($"{name}.zip") });
         }
         catch (Exception ex)
         {
@@ -38,9 +99,7 @@ internal static class PlaywrightArtifacts
         System.IO.Directory.CreateDirectory(Directory);
         try
         {
-            await context.Tracing.StopAsync(
-                new() { Path = Path.Combine(Directory, $"{name}-failure.zip") }
-            );
+            await context.Tracing.StopAsync(new() { Path = ArtifactPath($"{name}-failure.zip") });
         }
         catch (Exception ex)
         {
@@ -50,7 +109,7 @@ internal static class PlaywrightArtifacts
         try
         {
             await page.ScreenshotAsync(
-                new() { Path = Path.Combine(Directory, $"{name}-failure.png"), FullPage = true }
+                new() { Path = ArtifactPath($"{name}-failure.png"), FullPage = true }
             );
         }
         catch (Exception ex)

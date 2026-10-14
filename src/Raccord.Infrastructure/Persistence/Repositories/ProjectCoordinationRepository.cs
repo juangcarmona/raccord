@@ -69,4 +69,23 @@ internal sealed class ProjectCoordinationRepository(RaccordDbContext db) : IProj
     public void Add(ProjectTaskStatus status) => db.ProjectTaskStatuses.Add(status);
 
     public void Add(ProjectTask task) => db.ProjectTasks.Add(task);
+
+    public async Task<IReadOnlyList<ProjectSchedule>> ListSchedulesAsync(
+        Guid? projectId,
+        Guid? assigneeId,
+        CancellationToken cancellationToken
+    ) =>
+        await db
+            .ProjectSchedules.Where(schedule =>
+                (!projectId.HasValue || schedule.ProjectId == projectId)
+                && (!assigneeId.HasValue || schedule.AssigneeId == assigneeId)
+            )
+            .OrderBy(schedule => schedule.StartDate)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+    public Task<ProjectSchedule?> FindScheduleAsync(Guid id, CancellationToken cancellationToken) =>
+        db.ProjectSchedules.FirstOrDefaultAsync(schedule => schedule.Id == id, cancellationToken);
+
+    public void Add(ProjectSchedule schedule) => db.ProjectSchedules.Add(schedule);
 }

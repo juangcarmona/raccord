@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
 using Microsoft.Playwright;
 using Raccord.EndToEndTests.Infrastructure;
 using Xunit;
@@ -55,5 +56,9 @@ public sealed class LetterheadJourney_Should_StoreAndListThroughApi(DistributedA
         );
     }
 
-    private sealed record LetterheadResponse(Guid Id, bool IsDefault, string StorageKey);
+    private sealed record LetterheadResponse(
+        [property: JsonPropertyName("id")] Guid Id,
+        [property: JsonPropertyName("isDefault")] bool IsDefault,
+        [property: JsonPropertyName("storageKey")] string StorageKey
+    );
 }

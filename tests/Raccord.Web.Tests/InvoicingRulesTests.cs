@@ -65,7 +65,9 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
             await api.QueryScalarAsync<long>("SELECT count(*) FROM workspace.issued_invoices")
         ).ShouldBe(0L);
         (
-            await api.QueryScalarAsync<long>("SELECT count(*) FROM invoice_number_sequences")
+            await api.QueryScalarAsync<long>(
+                "SELECT count(*) FROM workspace.invoice_number_sequences"
+            )
         ).ShouldBe(0L);
     }
 

@@ -100,9 +100,9 @@ public sealed class DocumentTemplateSliceTests(PostgresContainer postgres) : IAs
         );
         french!.ShouldContain(item => item.Id == template.Id && item.IsDefault);
 
-        var english = await client.GetFromJsonAsync<List<DocumentTemplateResponse>>(
+        var englishTemplates = await client.GetFromJsonAsync<List<DocumentTemplateResponse>>(
             "/api/documents/templates?language=en"
         );
-        english!.ShouldContain(item => item.DocumentType == "invoice" && item.IsDefault);
+        englishTemplates!.ShouldContain(item => item.DocumentType == "invoice" && item.IsDefault);
     }
 }

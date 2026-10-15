@@ -76,17 +76,11 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         );
         reloaded!.ContentHash.ShouldBe(invoice.ContentHash);
 
-        var document = await client.GetAsync($"/api/invoices/{invoice.Id}/document");
-        document.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
-        System
-            .Text.Encoding.ASCII.GetString((await document.Content.ReadAsByteArrayAsync())[..5])
-            .ShouldStartWith("%PDF-", Case.Sensitive);
+        await AssertPdfDocumentAsync(invoice.Id);
 
-        var audit = await client.GetFromJsonAsync<List<AuditEventResponse>>(
-            $"/api/audit-events?entityId={invoice.Id}"
-        );
-        audit!.Select(item => item.Action).ShouldBe(["invoice.issued", "invoice.document.stored"]);
-        audit![0].Details["contentHash"].ShouldBe(invoice.ContentHash);
+        await AssertEnglishDocumentAsync(invoice.Id);
+
+        await AssertInvoiceAuditAsync(invoice.Id, invoice.ContentHash);
 
         var billed = await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project.Id}");
         billed!.BillableLines.ShouldAllBe(line => line.BillingState == "invoiced");
@@ -118,5 +112,38 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         );
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
         return (await response.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
+    }
+
+    private async Task AssertEnglishDocumentAsync(Guid invoiceId)
+    {
+        var document = await client.GetAsync($"/api/invoices/{invoiceId}/document?language=en");
+        document.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
+        System
+            .Text.Encoding.Latin1.GetString(await document.Content.ReadAsByteArrayAsync())
+            .ShouldContain("(INVOICE)", Case.Sensitive);
+    }
+
+    private async Task AssertPdfDocumentAsync(Guid invoiceId)
+    {
+        var document = await client.GetAsync($"/api/invoices/{invoiceId}/document");
+        document.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
+        System
+            .Text.Encoding.ASCII.GetString((await document.Content.ReadAsByteArrayAsync())[..5])
+            .ShouldStartWith("%PDF-", Case.Sensitive);
+    }
+
+    private async Task AssertInvoiceAuditAsync(Guid invoiceId, string contentHash)
+    {
+        var audit = await client.GetFromJsonAsync<List<AuditEventResponse>>(
+            $"/api/audit-events?entityId={invoiceId}"
+        );
+        audit!
+            .Select(item => item.Action)
+            .ShouldBe([
+                "invoice.issued",
+                "invoice.document.stored",
+                "invoice.document.regenerated",
+            ]);
+        audit![0].Details["contentHash"].ShouldBe(contentHash);
     }
 }

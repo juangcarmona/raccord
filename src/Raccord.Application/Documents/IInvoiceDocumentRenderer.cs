@@ -13,4 +13,7 @@ public interface IInvoiceDocumentRenderer
 
     /// <summary>Renders the invoice. The same invoice always produces the same bytes.</summary>
     byte[] Render(IssuedInvoice invoice);
+
+    /// <summary>Renders the invoice using the requested two-letter presentation language.</summary>
+    byte[] Render(IssuedInvoice invoice, string language);
 }

@@ -10,8 +10,8 @@ using Format = Raccord.Infrastructure.Documents.SpanishInvoiceFormat;
 namespace Raccord.Infrastructure.Documents;
 
 /// <summary>
-/// Renders an issued invoice as an A4 PDF with Spanish labels. The document is a presentation of the issued
-/// representation; it never recalculates or changes the invoice.
+/// Renders an issued invoice as an A4 PDF. The document is a presentation of the issued representation;
+/// it never recalculates or changes the invoice.
 /// </summary>
 internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
 {
@@ -23,27 +23,30 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
     private const double BodySize = 9;
     private const double DescriptionWidth = 235;
 
-    private static readonly (string Label, double Right)[] Columns =
-    [
-        ("Cantidad", 345),
-        ("Precio", 410),
-        ("Dto.", 450),
-        ("IVA", 490),
-        ("Importe", Right),
-    ];
+    private static (string Label, double Right)[] Columns(bool english) =>
+        [
+            (english ? "Quantity" : "Cantidad", 345),
+            (english ? "Price" : "Precio", 410),
+            (english ? "Discount" : "Dto.", 450),
+            ("VAT", 490),
+            (english ? "Amount" : "Importe", Right),
+        ];
 
     public string ContentType => "application/pdf";
 
     public string FileExtension => "pdf";
 
-    public byte[] Render(IssuedInvoice invoice)
+    public byte[] Render(IssuedInvoice invoice) => Render(invoice, "es");
+
+    public byte[] Render(IssuedInvoice invoice, string language)
     {
         ArgumentNullException.ThrowIfNull(invoice);
+        var english = string.Equals(language, "en", StringComparison.OrdinalIgnoreCase);
         var pages = new List<PdfPage>();
         var page = NewPage(pages);
-        var y = DrawHeader(page, invoice);
-        DrawTaxQr(page, invoice);
-        y = DrawTableHeader(page, y);
+        var y = DrawHeader(page, invoice, english);
+        DrawTaxQr(page, invoice, english);
+        y = DrawTableHeader(page, y, english);
 
         foreach (var line in invoice.Lines)
         {
@@ -52,49 +55,58 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
             if (y - needed < Bottom)
             {
                 page = NewPage(pages);
-                y = DrawTableHeader(page, ContinuationHeader(page, invoice));
+                y = DrawTableHeader(page, ContinuationHeader(page, invoice, english), english);
             }
-
-            var pricing = line.Pricing;
-            page.TextRight(Columns[0].Right, y, Format.Quantity(pricing.Quantity), BodySize);
-            page.TextRight(Columns[1].Right, y, Format.UnitPrice(pricing.UnitPrice), BodySize);
-            page.TextRight(
-                Columns[2].Right,
-                y,
-                pricing.DiscountPercent == 0
-                    ? string.Empty
-                    : Format.Percent(pricing.DiscountPercent),
-                BodySize
-            );
-            page.TextRight(
-                Columns[3].Right,
-                y,
-                Format.Percent(pricing.VatRate.Percentage),
-                BodySize
-            );
-            page.TextRight(
-                Columns[4].Right,
-                y,
-                Format.Money(pricing.NetAmount.Amount, invoice.Currency.Code),
-                BodySize
-            );
-            foreach (var text in descriptionLines)
-            {
-                page.Text(Left, y, text, BodySize);
-                y -= RowHeight;
-            }
+            DrawLine(page, line, invoice.Currency.Code, y, descriptionLines, english);
+            y -= needed;
         }
 
         var totalsHeight = ((invoice.Totals.VatBreakdown.Count * 2) + 3) * RowHeight;
         if (y - totalsHeight < Bottom)
         {
             page = NewPage(pages);
-            y = ContinuationHeader(page, invoice);
+            y = ContinuationHeader(page, invoice, english);
         }
 
-        DrawTotals(page, invoice, y - 6);
-        DrawFooters(pages, invoice);
-        return PdfDocumentWriter.Write(pages, "Factura " + invoice.Number.Value);
+        DrawTotals(page, invoice, y - 6, english);
+        DrawFooters(pages, invoice, english);
+        return PdfDocumentWriter.Write(
+            pages,
+            (english ? "Invoice " : "Factura ") + invoice.Number.Value
+        );
+    }
+
+    private static void DrawLine(
+        PdfPage page,
+        IssuedInvoiceLine line,
+        string currency,
+        double y,
+        IReadOnlyList<string> descriptionLines,
+        bool english
+    )
+    {
+        var pricing = line.Pricing;
+        var columns = Columns(english);
+        page.TextRight(columns[0].Right, y, Quantity(pricing.Quantity, english), BodySize);
+        page.TextRight(columns[1].Right, y, UnitPrice(pricing.UnitPrice, english), BodySize);
+        page.TextRight(
+            columns[2].Right,
+            y,
+            pricing.DiscountPercent == 0 ? string.Empty : Percent(pricing.DiscountPercent, english),
+            BodySize
+        );
+        page.TextRight(columns[3].Right, y, Percent(pricing.VatRate.Percentage, english), BodySize);
+        page.TextRight(
+            columns[4].Right,
+            y,
+            Money(pricing.NetAmount.Amount, currency, english),
+            BodySize
+        );
+        foreach (var text in descriptionLines)
+        {
+            page.Text(Left, y, text, BodySize);
+            y -= RowHeight;
+        }
     }
 
     private static PdfPage NewPage(List<PdfPage> pages)
@@ -104,32 +116,48 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         return page;
     }
 
-    private static double DrawHeader(PdfPage page, IssuedInvoice invoice)
+    private static double DrawHeader(PdfPage page, IssuedInvoice invoice, bool english)
     {
-        var y = DrawParty(page, Left, Top, invoice.Issuer, 14);
+        var y = DrawParty(page, Left, Top, invoice.Issuer, 14, english);
 
-        page.TextRight(Right, Top, "FACTURA", 18, bold: true);
+        page.TextRight(Right, Top, english ? "INVOICE" : "FACTURA", 18, bold: true);
         var metaY = Top - 24;
-        DrawMeta(page, ref metaY, "Número", invoice.Number.Value);
-        DrawMeta(page, ref metaY, "Fecha de expedición", Format.Date(invoice.IssueDate));
+        DrawMeta(page, ref metaY, english ? "Number" : "Número", invoice.Number.Value);
+        DrawMeta(
+            page,
+            ref metaY,
+            english ? "Issue date" : "Fecha de expedición",
+            FormatDate(invoice.IssueDate, english)
+        );
         if (invoice.OperationDate is { } operationDate)
         {
-            DrawMeta(page, ref metaY, "Fecha de operación", Format.Date(operationDate));
+            DrawMeta(
+                page,
+                ref metaY,
+                english ? "Operation date" : "Fecha de operación",
+                FormatDate(operationDate, english)
+            );
         }
 
         y = Math.Min(y, metaY) - 24;
-        page.Text(Left, y, "Facturar a", 8, bold: true);
-        return DrawParty(page, Left, y - 14, invoice.Recipient, 11) - 20;
+        page.Text(Left, y, english ? "Bill to" : "Facturar a", 8, bold: true);
+        return DrawParty(page, Left, y - 14, invoice.Recipient, 11, english) - 20;
     }
 
-    private static void DrawTaxQr(PdfPage page, IssuedInvoice invoice)
+    private static void DrawTaxQr(PdfPage page, IssuedInvoice invoice, bool english)
     {
         const double size = 85;
         const double left = 450;
         const double bottom = 585;
         const double module = 2.5;
         const double quiet = 4;
-        page.Text(left, bottom + size + 13, "QR tributario:", BodySize, bold: true);
+        page.Text(
+            left,
+            bottom + size + 13,
+            english ? "Tax QR:" : "QR tributario:",
+            BodySize,
+            bold: true
+        );
         using var generator = new QRCodeGenerator();
         using var data = generator.CreateQrCode(
             AeatQrPayload.Build(invoice),
@@ -170,12 +198,13 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         double x,
         double y,
         LegalParty party,
-        double nameSize
+        double nameSize,
+        bool english
     )
     {
         page.Text(x, y, party.LegalName, nameSize, bold: true);
         y -= nameSize + 3;
-        page.Text(x, y, "NIF: " + party.TaxId, BodySize);
+        page.Text(x, y, (english ? "Tax ID: " : "NIF: ") + party.TaxId, BodySize);
         y -= RowHeight;
         if (party.Address is { } address)
         {
@@ -198,24 +227,26 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         return y;
     }
 
-    private static double ContinuationHeader(PdfPage page, IssuedInvoice invoice)
+    private static double ContinuationHeader(PdfPage page, IssuedInvoice invoice, bool english)
     {
         page.Text(Left, Top, invoice.Issuer.LegalName, 10, bold: true);
         page.TextRight(
             Right,
             Top,
-            "Factura " + invoice.Number.Value + " (continuación)",
+            (english ? "Invoice " : "Factura ")
+                + invoice.Number.Value
+                + (english ? " (continued)" : " (continuación)"),
             10,
             bold: true
         );
         return Top - 30;
     }
 
-    private static double DrawTableHeader(PdfPage page, double y)
+    private static double DrawTableHeader(PdfPage page, double y, bool english)
     {
         page.Band(Left - 4, y - 4, Right - Left + 8, RowHeight + 2);
-        page.Text(Left, y, "Descripción", 8, bold: true);
-        foreach (var (label, right) in Columns)
+        page.Text(Left, y, english ? "Description" : "Descripción", 8, bold: true);
+        foreach (var (label, right) in Columns(english))
         {
             page.TextRight(right, y, label, 8, bold: true);
         }
@@ -223,34 +254,45 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
         return y - RowHeight - 6;
     }
 
-    private static void DrawTotals(PdfPage page, IssuedInvoice invoice, double y)
+    private static void DrawTotals(PdfPage page, IssuedInvoice invoice, double y, bool english)
     {
         const double LabelRight = 450;
         var currency = invoice.Currency.Code;
         page.Rule(330, Right, y + RowHeight - 2);
         foreach (var group in invoice.Totals.VatBreakdown)
         {
-            var rate = Format.Percent(group.Rate.Percentage);
-            page.TextRight(LabelRight, y, "Base imponible (" + rate + ")", BodySize);
-            page.TextRight(Right, y, Format.Money(group.TaxableBase.Amount, currency), BodySize);
+            var rate = Percent(group.Rate.Percentage, english);
+            page.TextRight(
+                LabelRight,
+                y,
+                (english ? "Tax base (" : "Base imponible (") + rate + ")",
+                BodySize
+            );
+            page.TextRight(Right, y, Money(group.TaxableBase.Amount, currency, english), BodySize);
             y -= RowHeight;
-            page.TextRight(LabelRight, y, "Cuota IVA " + rate, BodySize);
-            page.TextRight(Right, y, Format.Money(group.VatAmount.Amount, currency), BodySize);
+            page.TextRight(LabelRight, y, (english ? "VAT " : "Cuota IVA ") + rate, BodySize);
+            page.TextRight(Right, y, Money(group.VatAmount.Amount, currency, english), BodySize);
             y -= RowHeight;
         }
 
         page.Rule(330, Right, y + RowHeight - 2);
-        page.TextRight(LabelRight, y - 4, "Total factura", 11, bold: true);
+        page.TextRight(
+            LabelRight,
+            y - 4,
+            english ? "Invoice total" : "Total factura",
+            11,
+            bold: true
+        );
         page.TextRight(
             Right,
             y - 4,
-            Format.Money(invoice.Totals.Total.Amount, currency),
+            Money(invoice.Totals.Total.Amount, currency, english),
             11,
             bold: true
         );
     }
 
-    private static void DrawFooters(List<PdfPage> pages, IssuedInvoice invoice)
+    private static void DrawFooters(List<PdfPage> pages, IssuedInvoice invoice, bool english)
     {
         var issued = invoice.IssuedAt.UtcDateTime.ToString(
             "yyyy-MM-dd HH:mm:ss 'UTC'",
@@ -263,22 +305,40 @@ internal sealed class PdfInvoiceRenderer : IInvoiceDocumentRenderer
             page.Text(
                 Left,
                 40,
-                "Emitida el "
+                (english ? "Issued on " : "Emitida el ")
                     + issued
-                    + " · Representación emitida verificable por su huella SHA-256",
+                    + (
+                        english
+                            ? " · Issued representation verifiable by its SHA-256 hash"
+                            : " · Representación emitida verificable por su huella SHA-256"
+                    ),
                 7
             );
             page.TextRight(
                 Right,
                 40,
-                string.Create(
-                    CultureInfo.InvariantCulture,
-                    $"{invoice.Number.Value} · Página {index + 1} de {pages.Count}"
-                ),
+                english
+                    ? $"{invoice.Number.Value} · Page {index + 1} of {pages.Count}"
+                    : $"{invoice.Number.Value} · Página {index + 1} de {pages.Count}",
                 7
             );
         }
     }
+
+    private static string Quantity(decimal value, bool english) =>
+        english ? EnglishInvoiceFormat.Quantity(value) : Format.Quantity(value);
+
+    private static string UnitPrice(decimal value, bool english) =>
+        english ? EnglishInvoiceFormat.UnitPrice(value) : Format.UnitPrice(value);
+
+    private static string Percent(decimal value, bool english) =>
+        english ? EnglishInvoiceFormat.Percent(value) : Format.Percent(value);
+
+    private static string Money(decimal value, string currency, bool english) =>
+        english ? EnglishInvoiceFormat.Money(value, currency) : Format.Money(value, currency);
+
+    private static string FormatDate(DateOnly value, bool english) =>
+        english ? EnglishInvoiceFormat.Date(value) : Format.Date(value);
 
     private static List<string> Wrap(string text, double width, double size)
     {

@@ -227,7 +227,7 @@ public sealed class InvoicingWorkflow(
             ("contentHash", representation.ContentHash)
         );
 
-        await StoreDocumentAsync(invoice, "invoice.document.stored", cancellationToken)
+        await StoreDocumentAsync(invoice, "es", "invoice.document.stored", cancellationToken)
             .ConfigureAwait(false);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return invoice.ToResponse(representation.ContentHash);
@@ -300,12 +300,20 @@ public sealed class InvoicingWorkflow(
         return await DescribeAsync(draft, null, cancellationToken).ConfigureAwait(false);
     }
 
-    /// <summary>Returns the invoice document, regenerating and storing it from the issued representation when missing.</summary>
+    /// <summary>Returns the default Spanish invoice document, regenerating it when missing.</summary>
     public async Task<InvoiceDocument?> GetDocumentAsync(
         Guid invoiceId,
         CancellationToken cancellationToken
+    ) => await GetDocumentAsync(invoiceId, "es", cancellationToken).ConfigureAwait(false);
+
+    /// <summary>Returns the invoice document in the requested presentation language.</summary>
+    public async Task<InvoiceDocument?> GetDocumentAsync(
+        Guid invoiceId,
+        string language,
+        CancellationToken cancellationToken
     )
     {
+        language = NormalizeLanguage(language);
         var record = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
         if (record is null)
         {
@@ -314,12 +322,13 @@ public sealed class InvoicingWorkflow(
 
         var invoice = record.Invoice;
         var content = await documents
-            .ReadAsync(DocumentKey(invoice), cancellationToken)
+            .ReadAsync(DocumentKey(invoice, language), cancellationToken)
             .ConfigureAwait(false);
         if (content is null)
         {
             content = await StoreDocumentAsync(
                     invoice,
+                    language,
                     "invoice.document.regenerated",
                     cancellationToken
                 )
@@ -336,12 +345,13 @@ public sealed class InvoicingWorkflow(
 
     private async Task<byte[]> StoreDocumentAsync(
         IssuedInvoice invoice,
+        string language,
         string action,
         CancellationToken cancellationToken
     )
     {
-        var content = renderer.Render(invoice);
-        var key = DocumentKey(invoice);
+        var content = renderer.Render(invoice, language);
+        var key = DocumentKey(invoice, language);
         await documents
             .SaveAsync(key, content, renderer.ContentType, cancellationToken)
             .ConfigureAwait(false);
@@ -356,8 +366,11 @@ public sealed class InvoicingWorkflow(
         return content;
     }
 
-    private string DocumentKey(IssuedInvoice invoice) =>
-        $"invoices/{invoice.Id:N}/{invoice.Number.Value}.{renderer.FileExtension}";
+    private string DocumentKey(IssuedInvoice invoice, string language) =>
+        $"invoices/{invoice.Id:N}/{invoice.Number.Value}-{language}.{renderer.FileExtension}";
+
+    private static string NormalizeLanguage(string language) =>
+        string.Equals(language, "en", StringComparison.OrdinalIgnoreCase) ? "en" : "es";
 
     private async Task<InvoiceDraftResponse> DescribeAsync(
         InvoiceDraft draft,

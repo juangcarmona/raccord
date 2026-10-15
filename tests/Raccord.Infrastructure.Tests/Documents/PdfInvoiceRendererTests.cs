@@ -57,6 +57,21 @@ public sealed class PdfInvoiceRendererTests
     }
 
     [Fact]
+    public void English_documents_Should_use_English_labels_and_formatting()
+    {
+        var text = Latin1.GetString(renderer.Render(SampleInvoices.Issue(), "en"));
+
+        text.ShouldContain("(INVOICE)", Case.Sensitive);
+        text.ShouldContain("(Bill to)", Case.Sensitive);
+        text.ShouldContain("(Tax ID: B00000000)", Case.Sensitive);
+        text.Replace("\u0080", "€", StringComparison.Ordinal)
+            .ShouldContain("(1,548.80 €)", Case.Sensitive);
+        text.ShouldContain("(05/11/2026)", Case.Sensitive);
+        text.ShouldContain("(Tax QR:)", Case.Sensitive);
+        text.ShouldContain("(Invoice total)", Case.Sensitive);
+    }
+
+    [Fact]
     public void The_AEAT_payload_Should_use_the_required_parameter_order_and_encoding()
     {
         AeatQrPayload

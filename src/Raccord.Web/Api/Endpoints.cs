@@ -936,9 +936,10 @@ internal static class Endpoints
             async Task<Results<FileContentHttpResult, NotFound>> (
                 Guid id,
                 InvoicingWorkflow invoicing,
+                string? language,
                 CancellationToken ct
             ) =>
-                await invoicing.GetDocumentAsync(id, ct) is { } document
+                await invoicing.GetDocumentAsync(id, language ?? "es", ct) is { } document
                     ? TypedResults.File(document.Content, document.ContentType, document.FileName)
                     : TypedResults.NotFound()
         );

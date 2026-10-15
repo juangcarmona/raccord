@@ -2332,6 +2332,13 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

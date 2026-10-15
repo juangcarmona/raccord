@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Static evidence uses viewer-local time and test-result truth
+
+- **Observation:** Engineering snapshot timestamps rendered as raw UTC and a green workflow status could imply browser journeys passed even when no journey result had been recorded.
+- **Action:** Retain the ISO instant in machine-readable markup, format it with the viewer's browser locale/time zone, and display journey totals and explicit no-results state from the retained report manifest. Share the snapshot appearance preference across pages.
+- **Check:** Static-site tests cover generated local-time hooks, shared theme persistence, responsive breakpoints and the successful-workflow/zero-journey edge case; OpenSpec validation and the PR workflow must pass before merge.
+
 ## 2026-10-14 · Product behaviors drive E2E journey contracts
 
 - **Observation:** Product structure behaviors already provide the canonical user-facing Given/When/Then semantics.

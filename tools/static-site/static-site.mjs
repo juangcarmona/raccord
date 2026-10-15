@@ -402,6 +402,90 @@ function directoryBytes(directory) {
     );
 }
 
+function renderLatestRun(latest, report) {
+    if (!latest) {
+        return '<p class="run-message">No browser journey report has been published yet. The report page will appear after the next run.</p>';
+    }
+
+    const status = ["success", "failure"].includes(latest.status)
+        ? latest.status
+        : "unknown";
+    const journeys = Array.isArray(report?.journeys) ? report.journeys : null;
+    const counts = report?.counts;
+    const parsedDate = latest.date ? new Date(latest.date) : null;
+    const canonicalDate =
+        parsedDate && !Number.isNaN(parsedDate.getTime())
+            ? parsedDate.toISOString()
+            : null;
+    const time = canonicalDate
+        ? `<time class="run-time" data-local-time datetime="${escapeHtml(canonicalDate)}">${escapeHtml(canonicalDate)} UTC</time>`
+        : '<span class="run-time">Run time unavailable</span>';
+    let runUrl;
+    try {
+        const parsedUrl = new URL(latest.runUrl);
+        if (parsedUrl.protocol === "https:") runUrl = parsedUrl.href;
+    } catch {
+        runUrl = undefined;
+    }
+    const commit = latest.sha && runUrl
+        ? `<a class="commit" href="${escapeHtml(runUrl)}" aria-label="Open workflow for commit ${escapeHtml(latest.sha)}">${escapeHtml(latest.sha.slice(0, 8))}</a>`
+        : "";
+    let resultMessage;
+    if (journeys?.length === 0) {
+        resultMessage = `<p class="run-message no-results"><strong>No journeys were recorded.</strong> The workflow reported ${escapeHtml(report.workflowStatus ?? latest.status)}; inspect the report for the discovery or setup failure.</p>`;
+    } else if (journeys === null) {
+        resultMessage = '<p class="run-message">Journey details are unavailable in this report.</p>';
+    } else {
+        const recorded = journeys.length;
+        const totals = [
+            ["passed", counts?.passed ?? 0],
+            ["failed", counts?.failed ?? 0],
+            ["flaky", counts?.flaky ?? 0],
+            ["unknown", counts?.unknown ?? 0],
+        ]
+            .filter(([, count]) => count > 0)
+            .map(([name, count]) => `${count} ${name}`)
+            .join(" · ");
+        resultMessage = `<p class="run-message">${recorded} ${recorded === 1 ? "journey" : "journeys"} recorded${totals ? ` · ${escapeHtml(totals)}` : ""}</p>`;
+    }
+
+    const label = journeys?.length === 0 ? "No results" : status;
+    const statusClass = journeys?.length === 0 ? "no-results" : status;
+    return `<p class="run-meta">${time}${commit ? ` <span aria-hidden="true">·</span> ${commit}` : ""} <span aria-hidden="true">·</span> <span class="status ${statusClass}">${label}</span></p>${resultMessage}`;
+}
+
+function renderLandingPage({ latestRun, latestLink }) {
+    return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fbfbfa">
+  <title>Raccord · Engineering snapshots</title>
+  <style>
+:root{color-scheme:light;--bg:#fbfbfa;--panel:#f2f2ef;--surface:#fff;--ink:#1c1e21;--text:#33373d;--muted:#6b7078;--line:#dcdcd6;--line-strong:#b9bab2;--accent:#0b5cad;--accent-soft:#e3edf7;--mark:#ffe9a8;--success:#187443;--failure:#b42318;--sans:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-appearance=light]){color-scheme:dark;--bg:#16181b;--panel:#1d2024;--surface:#24272c;--ink:#e8eaed;--text:#c6cad0;--muted:#8d939c;--line:#33373d;--line-strong:#4a4f57;--accent:#6cb2eb;--accent-soft:#22303c;--mark:#6a5b1e;--success:#74d69a;--failure:#ff827d}}
+:root[data-appearance=dark]{color-scheme:dark;--bg:#16181b;--panel:#1d2024;--surface:#24272c;--ink:#e8eaed;--text:#c6cad0;--muted:#8d939c;--line:#33373d;--line-strong:#4a4f57;--accent:#6cb2eb;--accent-soft:#22303c;--mark:#6a5b1e;--success:#74d69a;--failure:#ff827d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--sans);-webkit-text-size-adjust:100%}a{color:var(--accent);text-underline-offset:.2em}a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.shell{max-width:1240px;margin:auto;padding:clamp(1rem,3vw,2.5rem)}header{display:flex;align-items:center;gap:.8rem;min-height:2.6rem}.mark{width:2rem;height:2rem;border-radius:.4rem}.wordmark{font-weight:750;letter-spacing:.03em;color:var(--ink)}.spacer{flex:1}.appearance{display:flex;gap:.25rem;padding:.2rem;border:1px solid var(--line);border-radius:.4rem;background:var(--panel)}.appearance button{font:inherit;font-size:.78rem;color:var(--muted);background:transparent;border:0;border-radius:.25rem;padding:.32rem .5rem;cursor:pointer}.appearance button[aria-pressed=true]{color:var(--ink);background:var(--surface);box-shadow:0 0 0 1px var(--line)}main{padding-top:clamp(2.5rem,7vw,5rem)}.eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;font-weight:750;color:var(--muted)}.hero{max-width:850px}h1{font-size:clamp(2.7rem,7.3vw,6.2rem);line-height:.98;letter-spacing:-.065em;color:var(--ink);margin:.6rem 0 1rem}.intro{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text);max-width:64ch;margin:0}.latest{margin:clamp(2rem,5vw,3.5rem) 0;background:var(--panel);color:var(--ink);padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--line);border-radius:.65rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.latest .eyebrow{margin:0 0 .35rem}.latest h2{margin:0;font-size:1.45rem}.run-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:.65rem 0 0;color:var(--muted);font-variant-numeric:tabular-nums}.run-time{white-space:normal}.commit{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em}.status{font-size:.77rem;font-weight:750;text-transform:uppercase;letter-spacing:.06em;color:var(--success)}.status.failure,.status.no-results,.status.unknown{color:var(--failure)}.run-message{margin:.35rem 0 0;color:var(--text);max-width:70ch}.run-message.no-results{color:var(--failure)}.button{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:750;padding:.72rem 1rem;border-radius:.35rem;white-space:nowrap}.button:hover{filter:brightness(1.12)}.section-label{margin:2.5rem 0 .9rem;font-size:1.1rem;color:var(--ink)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.card{display:flex;flex-direction:column;align-items:flex-start;min-height:220px;background:var(--surface);border:1px solid var(--line);border-radius:.55rem;padding:clamp(1rem,2.5vw,1.4rem);color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}.card:hover{border-color:var(--accent);transform:translateY(-2px)}.card .eyebrow{margin:0;color:var(--muted)}.card h3{font-size:1.25rem;margin:.55rem 0 .3rem;color:var(--ink)}.card p{color:var(--text);margin:0}.arrow{margin-top:auto;padding-top:1rem;color:var(--accent);font-weight:700}footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}@media(max-width:760px){.grid{grid-template-columns:1fr}.card{min-height:0}.latest{align-items:flex-start}.latest .button{white-space:normal}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+  <style>.button{color:var(--bg)}@media(min-width:601px) and (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.grid{grid-template-columns:1fr}.card{min-height:0}}</style>
+</head>
+<body>
+  <div class="shell">
+    <header><img class="mark" src="assets/raccord-mark.svg" alt=""><span class="wordmark">RACCORD</span><span class="spacer"></span><div class="appearance" role="group" aria-label="Color theme"><button type="button" data-appearance-set="auto" aria-pressed="true">Auto</button><button type="button" data-appearance-set="light" aria-pressed="false">Light</button><button type="button" data-appearance-set="dark" aria-pressed="false">Dark</button></div></header>
+    <main id="main"><section class="hero"><p class="eyebrow">Engineering snapshots</p><h1>How Raccord is built, in the open.</h1><p class="intro">Architecture, product shape, and real browser journeys from the latest application revision—kept together in one place.</p></section>
+      <section class="latest" aria-labelledby="latest-title"><div><p class="eyebrow">Latest browser run</p><h2 id="latest-title">Nightly journey evidence</h2>${latestRun}</div><a class="button" href="${latestLink}">View latest report <span aria-hidden="true">→</span></a></section>
+      <h2 class="section-label">Explore the project</h2><nav class="grid" aria-label="Engineering snapshots"><a class="card" href="architecture/"><span class="eyebrow">System design</span><h3>Architecture</h3><p>System boundaries, runtime structure, and key engineering decisions.</p><span class="arrow">Explore architecture →</span></a><a class="card" href="model/"><span class="eyebrow">Product definition</span><h3>Product model</h3><p>The current product shape, workflows, and domain concepts.</p><span class="arrow">Explore product model →</span></a><a class="card" href="${latestLink}"><span class="eyebrow">Quality evidence</span><h3>Browser journeys</h3><p>Screenshots and videos captured while exercising the running application.</p><span class="arrow">See the latest run →</span></a></nav>
+    </main><footer>Public engineering material for Raccord · Browser reports are retained for up to 30 days (maximum 14 runs).</footer>
+  </div>
+  <script>
+    (()=>{const root=document.documentElement;const buttons=[...document.querySelectorAll('[data-appearance-set]')];const apply=choice=>{if(choice==='auto')root.removeAttribute('data-appearance');else root.setAttribute('data-appearance',choice);buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.appearanceSet===choice)));try{localStorage.setItem('raccord-appearance',choice)}catch{}};let choice='auto';try{choice=localStorage.getItem('raccord-appearance')||'auto'}catch{}apply(choice);buttons.forEach(button=>button.addEventListener('click',()=>apply(button.dataset.appearanceSet)));for(const time of document.querySelectorAll('time[data-local-time]')){const date=new Date(time.dateTime);if(Number.isNaN(date.getTime()))continue;try{const zone=Intl.DateTimeFormat().resolvedOptions().timeZone;time.textContent=new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(date);if(zone)time.title=zone;time.setAttribute('aria-label',time.textContent+' in your local time zone')}catch{time.textContent=date.toISOString().replace('T',' ').replace(/\\.\\d{3}Z$/,' UTC')}}})();
+  </script>
+</body>
+</html>`;
+}
+
 export function finalizeSite(siteDirectory) {
     const root = resolve(siteDirectory);
     const reportsDirectory = join(root, "e2e", "reports");
@@ -573,13 +657,23 @@ export function finalizeSite(siteDirectory) {
         join(root, "assets", "raccord-mark.svg"),
     );
     const latestLink = latest ? "e2e/latest.html" : "e2e/";
-    const latestRun = latest
-        ? `<p class="meta">Latest run · ${escapeHtml(latest.date)} · <span class="status ${escapeHtml(latest.status)}">${escapeHtml(latest.status)}</span></p>`
-        : '<p class="meta">No browser journey report has been published yet.</p>';
+    let latestReport;
+    if (latest) {
+        const manifestPath = join(
+            root,
+            "e2e",
+            latest.path.replace(/index\.html$/, "report.json"),
+        );
+        try {
+            latestReport = JSON.parse(readFileSync(manifestPath, "utf8"));
+        } catch {
+            latestReport = undefined;
+        }
+    }
+    const latestRun = renderLatestRun(latest, latestReport);
     writeFileSync(
         join(root, "index.html"),
-        `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><title>Raccord · Engineering snapshots</title><style>
-:root{color-scheme:light;--ink:#0b1020;--cyan:#2de2e6;--coral:#ff6b5e;--cloud:#f5f7fa;--slate:#667085;--line:#dfe4ec;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--cloud);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#075f83;text-underline-offset:.2em}a:focus-visible{outline:3px solid #087eaa;outline-offset:4px}.shell{max-width:1160px;margin:auto;padding:clamp(1.1rem,5vw,4rem)}header{display:flex;align-items:center;gap:.9rem}.mark{width:3rem;height:3rem;border-radius:.65rem}.wordmark{font-weight:750;letter-spacing:.02em}main{padding-top:clamp(3.5rem,10vw,7rem)}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700;color:#526074}.hero{max-width:780px}h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.99;letter-spacing:-.06em;margin:.8rem 0 1.2rem}.intro{font-size:clamp(1.05rem,2vw,1.25rem);color:#475467;max-width:62ch}.latest{margin:2.5rem 0;background:var(--ink);color:var(--white);padding:clamp(1.3rem,4vw,2.2rem);border-radius:.7rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.latest .eyebrow,.latest .meta{color:#bac6d8}.latest h2{margin:.25rem 0;font-size:1.5rem}.status{font-weight:750;text-transform:uppercase;letter-spacing:.07em}.status.success{color:#87e8b4}.status.failure{color:#ff9a91}.button{display:inline-block;background:var(--cyan);color:var(--ink);text-decoration:none;font-weight:750;padding:.75rem 1rem;border-radius:.35rem}.button:hover{background:#75f1f2}.section-label{margin:3rem 0 1rem;font-size:1.15rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1rem}.card{display:block;background:var(--white);border:1px solid var(--line);border-radius:.55rem;padding:1.35rem;color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}.card:hover{border-color:#0781a5;transform:translateY(-2px)}.card .eyebrow{color:#667085}.card h3{font-size:1.25rem;margin:.65rem 0 .35rem}.card p{color:#526074;margin:0}.arrow{display:inline-block;margin-top:1.1rem;color:#075f83;font-weight:700}footer{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--line);color:var(--slate);font-size:.9rem}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}</style></head><body><div class="shell"><header><img class="mark" src="assets/raccord-mark.svg" alt=""><span class="wordmark">RACCORD</span></header><main><section class="hero"><p class="eyebrow">Engineering snapshots</p><h1>How Raccord is built, in the open.</h1><p class="intro">Architecture, product shape, and real browser journeys from the latest application revision—kept together in one place.</p></section><section class="latest" aria-labelledby="latest-title"><div><p class="eyebrow">Latest browser run</p><h2 id="latest-title">Nightly journey evidence</h2>${latestRun}</div><a class="button" href="${latestLink}">View latest report <span aria-hidden="true">→</span></a></section><h2 class="section-label">Explore the project</h2><nav class="grid" aria-label="Engineering snapshots"><a class="card" href="architecture/"><span class="eyebrow">System design</span><h3>Architecture</h3><p>System boundaries, runtime structure, and key engineering decisions.</p><span class="arrow">Explore architecture →</span></a><a class="card" href="model/"><span class="eyebrow">Product definition</span><h3>Product model</h3><p>The current product shape, workflows, and domain concepts.</p><span class="arrow">Explore product model →</span></a><a class="card" href="${latestLink}"><span class="eyebrow">Quality evidence</span><h3>Browser journeys</h3><p>Screenshots and videos captured while exercising the running application.</p><span class="arrow">See the latest run →</span></a></nav></main><footer>Public engineering material for Raccord · Browser reports are retained for up to 30 days (maximum 14 runs).</footer></div></body></html>`,
+        renderLandingPage({ latestRun, latestLink }),
     );
 
     const siteFiles = getFiles(root)

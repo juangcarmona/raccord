@@ -272,6 +272,17 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(landing, /How Raccord is built, in the open/);
         assert.match(landing, /href="e2e\/latest\.html"/);
         assert.match(landing, /assets\/raccord-mark\.svg/);
+        assert.match(landing, /data-local-time datetime="/);
+        assert.match(landing, /data-appearance-set="auto"/);
+        assert.match(landing, /data-appearance-set="dark"/);
+        assert.match(landing, /localStorage\.setItem\('raccord-appearance'/);
+        assert.match(landing, /journey recorded · 1 passed/);
+        assert.match(landing, /max-width:900px/);
+        assert.match(landing, /max-width:600px/);
+        assert.match(landing, /prefers-reduced-motion:reduce/);
+        const landingScript = landing.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+        assert.ok(landingScript);
+        assert.doesNotThrow(() => new Function(landingScript));
         const reportsIndex = readFileSync(
             join(root, "e2e", "index.html"),
             "utf8",
@@ -313,6 +324,57 @@ test("finalizes a stable latest link and bounds retained report history", () => 
     } finally {
         if (priorRun === undefined) delete process.env.E2E_RUN_ID;
         else process.env.E2E_RUN_ID = priorRun;
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
+test("labels an empty latest run as missing evidence instead of successful", () => {
+    const root = temporaryDirectory();
+    try {
+        const runId = "empty-run";
+        const date = "2026-10-15T05:48:53Z";
+        const reportDirectory = join(root, "e2e", "reports", runId);
+        mkdirSync(reportDirectory, { recursive: true });
+        writeFileSync(
+            join(reportDirectory, "report.json"),
+            JSON.stringify({
+                runId,
+                date,
+                sha: "0123456789abcdef",
+                runUrl: "https://github.com/example/run/empty-run",
+                workflowStatus: "success",
+                overallStatus: "failure",
+                counts: { passed: 0, failed: 0, flaky: 0, unknown: 0 },
+                journeys: [],
+                files: [],
+            }),
+        );
+        writeFileSync(
+            join(root, "e2e", "history.json"),
+            JSON.stringify({
+                reports: [
+                    {
+                        runId,
+                        date,
+                        sha: "0123456789abcdef",
+                        status: "failure",
+                        runUrl: "https://github.com/example/run/empty-run",
+                        path: `reports/${runId}/index.html`,
+                        files: [],
+                    },
+                ],
+            }),
+        );
+
+        finalizeSite(root);
+
+        const landing = readFileSync(join(root, "index.html"), "utf8");
+        assert.match(landing, /No journeys were recorded/);
+        assert.match(landing, /workflow reported success/);
+        assert.match(landing, />No results</);
+        assert.match(landing, /2026-10-15T05:48:53\.000Z UTC/);
+        assert.match(landing, /new Intl\.DateTimeFormat\(undefined/);
+    } finally {
         rmSync(root, { recursive: true, force: true });
     }
 });

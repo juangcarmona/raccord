@@ -115,7 +115,7 @@ public static class EInvoiceExport
                 Amount(Basic + "TaxAmount", group.VatAmount.Amount, invoice.Currency.Code),
                 new XElement(
                     Aggregate + "TaxCategory",
-                    new XElement(Basic + "ID", TaxCategory(group.VatRegime)),
+                    new XElement(Basic + "ID", TaxCategory(group.Rate.Percentage)),
                     new XElement(
                         Basic + "Percent",
                         group.Rate.Percentage.ToString("0.##", CultureInfo.InvariantCulture)
@@ -140,7 +140,7 @@ public static class EInvoiceExport
                 new XElement(Basic + "Name", line.Description),
                 new XElement(
                     Aggregate + "ClassifiedTaxCategory",
-                    new XElement(Basic + "ID", TaxCategory(line.Pricing.VatRegime)),
+                    new XElement(Basic + "ID", TaxCategory(line.Pricing.VatRate.Percentage)),
                     new XElement(
                         Basic + "Percent",
                         line.Pricing.VatRate.Percentage.ToString(
@@ -164,12 +164,5 @@ public static class EInvoiceExport
             value.ToString("0.00", CultureInfo.InvariantCulture)
         );
 
-    private static string TaxCategory(string regime) =>
-        regime.ToLowerInvariant() switch
-        {
-            "reverse-charge" or "reversecharge" => "AE",
-            "exempt" => "E",
-            "out-of-scope" or "outofscope" => "O",
-            _ => "S",
-        };
+    private static string TaxCategory(decimal rate) => rate == 0m ? "E" : "S";
 }

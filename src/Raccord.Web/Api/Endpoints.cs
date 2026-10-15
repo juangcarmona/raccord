@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
+using Raccord.Application.Invoicing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;

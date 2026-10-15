@@ -26,7 +26,6 @@ public sealed class EInvoiceJourney_Should_ExportUbl(DistributedAppFixture app)
             "invoice-einvoice-ubl",
             async page =>
             {
-                await EnsureInvoiceIssuerAsync(page);
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
                 await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-60));

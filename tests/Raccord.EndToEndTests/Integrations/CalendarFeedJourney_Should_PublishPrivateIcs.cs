@@ -34,7 +34,7 @@ public sealed class CalendarFeedJourney_Should_PublishPrivateIcs(DistributedAppF
                 calendar.ShouldContain("Rodaje campaña primavera");
                 calendar.ShouldContain("END:VCALENDAR");
 
-                await page.GotoAsync(feed.Url);
+                await page.SetContentAsync($"<pre>{WebUtility.HtmlEncode(calendar)}</pre>");
                 await page.ScreenshotAsync(
                     new()
                     {

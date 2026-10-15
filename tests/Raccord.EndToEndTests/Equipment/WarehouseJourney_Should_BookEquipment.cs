@@ -13,7 +13,8 @@ namespace Raccord.EndToEndTests.Equipment;
 /// then the same persisted line reaches packed, dispatched and received states while planned
 /// movements and physical count corrections remain traceable.
 /// ProductShape: UC-EQP-SCHEDULE-STOCK-MOVEMENT, UC-EQP-COUNT-SELECTED-EQUIPMENT,
-/// UC-EQP-CORRECT-STOCK.
+/// UC-EQP-CORRECT-STOCK, UC-EQP-SELL-RENTAL-EQUIPMENT, UC-EQP-ARCHIVE-ITEM,
+/// UC-EQP-VIEW-EQUIPMENT-PROJECT-HISTORY, UC-EQP-VIEW-ITEM-INSIGHTS.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
@@ -135,6 +136,7 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
 
         await RunPackingTransitionsAsync(api, projectId, lineId);
         await AssertReturnedAsync(api, projectId, itemId);
+        await AssertLifecycleAsync(api, projectId, itemId);
         await page.SetContentAsync("<h1>Warehouse equipment returned</h1>");
     }
 
@@ -267,5 +269,32 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
             .Value.GetProperty("availableQuantity")
             .GetInt32()
             .ShouldBe(2);
+    }
+
+    private static async Task AssertLifecycleAsync(
+        IAPIRequestContext api,
+        Guid projectId,
+        Guid itemId
+    )
+    {
+        var sold = await api.PutAsync(
+            $"/api/equipment/items/{itemId}/sell",
+            new() { DataObject = new { amount = 1250, buyer = "E2E studio buyer" } }
+        );
+        sold.Status.ShouldBe(200);
+        (await sold.JsonAsync())!.Value.GetProperty("status").GetString().ShouldBe("sold");
+
+        var history = await api.GetAsync($"/api/equipment/items/{itemId}/history");
+        history.Status.ShouldBe(200);
+        (await history.TextAsync()).ShouldContain(projectId.ToString());
+
+        var insights = await api.GetAsync($"/api/equipment/items/{itemId}/insights");
+        insights.Status.ShouldBe(200);
+        var body = await insights.TextAsync();
+        body.ShouldContain("\"movementCount\":1");
+        body.ShouldContain("\"countAdjustmentCount\":1");
+        body.ShouldContain("\"projectCount\":1");
+        body.ShouldContain("\"totalProjectQuantity\":1");
+        body.ShouldContain("\"status\":\"sold\"");
     }
 }

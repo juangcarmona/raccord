@@ -6,6 +6,10 @@ public sealed record CreateEquipmentItemRequest(string Code, string Name, int St
 
 public sealed record AssignEquipmentScanCodeRequest(string ScanCode);
 
+public sealed record RetireEquipmentRequest(string Reason);
+
+public sealed record SellEquipmentRequest(decimal Amount, string? Buyer);
+
 public sealed record ScheduleStockMovementRequest(
     string Direction,
     int Quantity,
@@ -42,7 +46,31 @@ public sealed record EquipmentItemResponse(
     string Name,
     string? ScanCode,
     int StockQuantity,
-    int AvailableQuantity
+    int AvailableQuantity,
+    string Status,
+    DateTimeOffset? DisposedAt,
+    string? DispositionReason,
+    decimal? SaleAmount
+);
+
+public sealed record EquipmentProjectHistoryResponse(
+    Guid ProjectId,
+    string ProjectName,
+    Guid PackingLineId,
+    int Quantity,
+    string Role,
+    bool IsPacked,
+    bool IsBookedOut,
+    bool IsReceived
+);
+
+public sealed record EquipmentInsightsResponse(
+    Guid EquipmentId,
+    int MovementCount,
+    int CountAdjustmentCount,
+    int ProjectCount,
+    int TotalProjectQuantity,
+    string Status
 );
 
 #pragma warning restore CS1591

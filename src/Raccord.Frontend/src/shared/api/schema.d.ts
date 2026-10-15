@@ -685,6 +685,183 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RetireEquipmentRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/sell": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SellEquipmentRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentProjectHistoryResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/insights": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentInsightsResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -2788,6 +2965,19 @@ export interface components {
          * @default 0
          */
         DepositStatus: number;
+        EquipmentInsightsResponse: {
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            movementCount: number;
+            /** Format: int32 */
+            countAdjustmentCount: number;
+            /** Format: int32 */
+            projectCount: number;
+            /** Format: int32 */
+            totalProjectQuantity: number;
+            status: string;
+        };
         EquipmentItemResponse: {
             /** Format: uuid */
             id: string;
@@ -2798,6 +2988,25 @@ export interface components {
             stockQuantity: number;
             /** Format: int32 */
             availableQuantity: number;
+            status: string;
+            /** Format: date-time */
+            disposedAt: null | string;
+            dispositionReason: null | string;
+            /** Format: double */
+            saleAmount: null | number;
+        };
+        EquipmentProjectHistoryResponse: {
+            /** Format: uuid */
+            projectId: string;
+            projectName: string;
+            /** Format: uuid */
+            packingLineId: string;
+            /** Format: int32 */
+            quantity: number;
+            role: string;
+            isPacked: boolean;
+            isBookedOut: boolean;
+            isReceived: boolean;
         };
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
@@ -3456,6 +3665,9 @@ export interface components {
             /** @description Billing e-mail. */
             email: null | string;
         };
+        RetireEquipmentRequest: {
+            reason: string;
+        };
         ReviewPackingDispositionRequest: {
             disposition: string;
             actor: string;
@@ -3467,6 +3679,11 @@ export interface components {
             /** Format: date */
             scheduledDate: string;
             reference: null | string;
+        };
+        SellEquipmentRequest: {
+            /** Format: double */
+            amount: number;
+            buyer: null | string;
         };
         SetDepositStatusRequest: {
             status: components["schemas"]["DepositStatus"];

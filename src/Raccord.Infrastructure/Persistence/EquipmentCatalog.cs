@@ -25,37 +25,29 @@ public sealed class EquipmentCatalog(RaccordDbContext db) : IEquipmentStock
     public async Task<IReadOnlyList<EquipmentItemResponse>> ListAsync(
         CancellationToken cancellationToken
     ) =>
-        await db
-            .EquipmentItems.AsNoTracking()
-            .OrderBy(item => item.Code)
-            .Select(item => new EquipmentItemResponse(
-                item.Id,
-                item.Code,
-                item.Name,
-                item.ScanCode,
-                item.StockQuantity,
-                item.AvailableQuantity
-            ))
-            .ToListAsync(cancellationToken)
-            .ConfigureAwait(false);
+        (
+            await db
+                .EquipmentItems.AsNoTracking()
+                .OrderBy(item => item.Code)
+                .ToListAsync(cancellationToken)
+                .ConfigureAwait(false)
+        )
+            .Select(ToResponse)
+            .ToList();
 
     public async Task<EquipmentItemResponse?> FindAsync(
         Guid id,
         CancellationToken cancellationToken
     ) =>
-        await db
-            .EquipmentItems.AsNoTracking()
-            .Where(item => item.Id == id)
-            .Select(item => new EquipmentItemResponse(
-                item.Id,
-                item.Code,
-                item.Name,
-                item.ScanCode,
-                item.StockQuantity,
-                item.AvailableQuantity
-            ))
-            .FirstOrDefaultAsync(cancellationToken)
-            .ConfigureAwait(false);
+        (
+            await db
+                .EquipmentItems.AsNoTracking()
+                .FirstOrDefaultAsync(item => item.Id == id, cancellationToken)
+                .ConfigureAwait(false)
+        )
+            is { } item
+            ? ToResponse(item)
+            : null;
 
     public async Task<EquipmentItemResponse?> AssignScanCodeAsync(
         Guid id,
@@ -198,6 +190,96 @@ public sealed class EquipmentCatalog(RaccordDbContext db) : IEquipmentStock
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
 
+    public async Task<EquipmentItemResponse?> RetireAsync(
+        Guid id,
+        RetireEquipmentRequest request,
+        DateTimeOffset disposedAt,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var item = await FindEntityAsync(id, cancellationToken).ConfigureAwait(false);
+        if (item is null)
+            return null;
+        item.Retire(request.Reason, disposedAt);
+        await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(item);
+    }
+
+    public async Task<EquipmentItemResponse?> SellAsync(
+        Guid id,
+        SellEquipmentRequest request,
+        DateTimeOffset disposedAt,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var item = await FindEntityAsync(id, cancellationToken).ConfigureAwait(false);
+        if (item is null)
+            return null;
+        item.Sell(request.Amount, request.Buyer, disposedAt);
+        await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(item);
+    }
+
+    public async Task<IReadOnlyList<EquipmentProjectHistoryResponse>> ListHistoryAsync(
+        Guid equipmentId,
+        CancellationToken cancellationToken
+    )
+    {
+        var projects = await db
+            .Projects.AsNoTracking()
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return projects
+            .SelectMany(project =>
+                project
+                    .PackingLines.Where(line => line.EquipmentId == equipmentId)
+                    .Select(line => new EquipmentProjectHistoryResponse(
+                        project.Id,
+                        project.Name,
+                        line.Id,
+                        line.Quantity,
+                        line.Role.ToString().ToLowerInvariant(),
+                        line.IsPacked,
+                        line.IsBookedOut,
+                        line.IsReceived
+                    ))
+            )
+            .OrderBy(history => history.ProjectName, StringComparer.Ordinal)
+            .ThenBy(history => history.PackingLineId)
+            .ToList();
+    }
+
+    public async Task<EquipmentInsightsResponse?> GetInsightsAsync(
+        Guid equipmentId,
+        CancellationToken cancellationToken
+    )
+    {
+        var item = await FindEntityAsync(equipmentId, cancellationToken).ConfigureAwait(false);
+        if (item is null)
+            return null;
+        var history = await ListHistoryAsync(equipmentId, cancellationToken).ConfigureAwait(false);
+        return new EquipmentInsightsResponse(
+            equipmentId,
+            await db
+                .StockMovements.CountAsync(
+                    movement => movement.EquipmentId == equipmentId,
+                    cancellationToken
+                )
+                .ConfigureAwait(false),
+            await db
+                .StockCounts.CountAsync(
+                    count => count.EquipmentId == equipmentId,
+                    cancellationToken
+                )
+                .ConfigureAwait(false),
+            history.Select(entry => entry.ProjectId).Distinct().Count(),
+            history.Sum(entry => entry.Quantity),
+            item.Status.ToString().ToLowerInvariant()
+        );
+    }
+
     private Task<EquipmentItem?> FindEntityAsync(Guid id, CancellationToken cancellationToken) =>
         db.EquipmentItems.FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
 
@@ -208,7 +290,11 @@ public sealed class EquipmentCatalog(RaccordDbContext db) : IEquipmentStock
             item.Name,
             item.ScanCode,
             item.StockQuantity,
-            item.AvailableQuantity
+            item.AvailableQuantity,
+            item.Status.ToString().ToLowerInvariant(),
+            item.DisposedAt,
+            item.DispositionReason,
+            item.SaleAmount
         );
 
     private static StockMovementResponse ToResponse(StockMovement movement) =>

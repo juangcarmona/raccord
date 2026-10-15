@@ -69,5 +69,40 @@ public sealed class EquipmentStockSliceTests(PostgresContainer postgres) : IAsyn
             $"/api/equipment/items/{item.Id}/counts"
         );
         counts!.ShouldContain(entry => entry.Id == countResponse.Id);
+        await AssertLifecycleAsync(item.Id);
+    }
+
+    private async Task AssertLifecycleAsync(Guid itemId)
+    {
+        var sold = await client.PutAsJsonAsync(
+            $"/api/equipment/items/{itemId}/sell",
+            new SellEquipmentRequest(1250m, "Studio buyer")
+        );
+        sold.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var soldItem = (await sold.Content.ReadFromJsonAsync<EquipmentItemResponse>())!;
+        soldItem.Status.ShouldBe("sold");
+        soldItem.SaleAmount.ShouldBe(1250m);
+
+        var insights = await client.GetFromJsonAsync<EquipmentInsightsResponse>(
+            $"/api/equipment/items/{itemId}/insights"
+        );
+        insights!.MovementCount.ShouldBe(1);
+        insights.CountAdjustmentCount.ShouldBe(1);
+        insights.ProjectCount.ShouldBe(0);
+        insights.Status.ShouldBe("sold");
+
+        var retireResponse = await client.PostAsJsonAsync(
+            "/api/equipment/items",
+            new CreateEquipmentItemRequest("CAM-RETIRE", "Retired camera", 1)
+        );
+        var retireItem = (await retireResponse.Content.ReadFromJsonAsync<EquipmentItemResponse>())!;
+        var retired = await client.PutAsJsonAsync(
+            $"/api/equipment/items/{retireItem.Id}/retire",
+            new RetireEquipmentRequest("End of service life")
+        );
+        retired.StatusCode.ShouldBe(HttpStatusCode.OK);
+        (await retired.Content.ReadFromJsonAsync<EquipmentItemResponse>())!.Status.ShouldBe(
+            "retired"
+        );
     }
 }

@@ -28,7 +28,7 @@ public sealed class EInvoiceJourney_Should_ExportUbl(DistributedAppFixture app)
             {
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
-                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-60));
+                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow));
 
                 var invoiceId = new Uri(page.Url).Segments[^1];
                 var response = await page.APIRequest.GetAsync(

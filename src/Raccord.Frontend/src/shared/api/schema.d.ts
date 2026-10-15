@@ -3050,6 +3050,80 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/finance/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    from: string;
+                    to: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["FinanceSummaryResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/finance/accounting-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    from: string;
+                    to: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/quotes/projects/{projectId}": {
         parameters: {
             query?: never;
@@ -3758,6 +3832,25 @@ export interface components {
              * @description Legal issue date; today in the organization's time zone when omitted.
              */
             issueDate: null | string;
+        };
+        /** @description Current financial totals for a date range. */
+        FinanceSummaryResponse: {
+            /** Format: date */
+            from: string;
+            /** Format: date */
+            to: string;
+            /** Format: int32 */
+            invoiceCount: number;
+            /** Format: double */
+            invoicedTotal: number;
+            /** Format: double */
+            vatTotal: number;
+            /** Format: double */
+            paidTotal: number;
+            /** Format: double */
+            outstandingTotal: number;
+            /** Format: int32 */
+            overdueInvoiceCount: number;
         };
         /** @description Company-wide quote and contract validity settings. */
         FinancialSettingsResponse: {

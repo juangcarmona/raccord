@@ -9,6 +9,7 @@ using Raccord.Application.Auditing;
 using Raccord.Application.Commercial;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
+using Raccord.Application.Finance;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
@@ -48,7 +49,6 @@ public static class DependencyInjection
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.AddNpgsqlDbContext<RaccordDbContext>(DatabaseConnectionName);
-
         var services = builder.Services;
         services.AddScoped<ApplicationUnitOfWork, UnitOfWork>();
         services.AddSender();
@@ -74,6 +74,7 @@ public static class DependencyInjection
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
+        services.AddScoped<FinanceReportingWorkflow>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
         services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();

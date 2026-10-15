@@ -52,7 +52,14 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         }
         finally
         {
-            await context.CloseAsync();
+            try
+            {
+                await context.CloseAsync().WaitAsync(TimeSpan.FromSeconds(30));
+            }
+            catch (TimeoutException)
+            {
+                Console.Error.WriteLine($"[e2e] {artifactName} browser context disposal timed out");
+            }
         }
     }
 

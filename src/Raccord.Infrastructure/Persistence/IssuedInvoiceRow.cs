@@ -22,7 +22,7 @@ internal sealed class IssuedInvoiceRow
 
     public Guid DraftId { get; init; }
 
-    public Guid ProjectId { get; init; }
+    public Guid? ProjectId { get; init; }
 
     public Guid CustomerId { get; init; }
 

@@ -2227,6 +2227,35 @@
         }
       }
     },
+    "/api/invoice-drafts/standalone": {
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStandaloneInvoiceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/invoice-drafts/{id}/lines/{lineId}": {
       "delete": {
         "tags": [
@@ -2587,6 +2616,39 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}/duplicate": {
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found"
           }
@@ -3343,6 +3405,41 @@
         },
         "description": "Creates a task status."
       },
+      "CreateStandaloneInvoiceRequest": {
+        "required": [
+          "customerId",
+          "operationDate",
+          "lines",
+          "seriesCode"
+        ],
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "operationDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StandaloneInvoiceLineRequest"
+            }
+          },
+          "seriesCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Creates an invoice draft that is not linked to a project."
+      },
       "CurrentUserResponse": {
         "required": [
           "email"
@@ -3867,12 +3964,18 @@
             "description": "Either `open` or `issued`."
           },
           "projectId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Billed project.",
             "format": "uuid"
           },
           "projectName": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Project name."
           },
           "customerId": {
@@ -3946,12 +4049,18 @@
             "format": "uuid"
           },
           "projectId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Billed project.",
             "format": "uuid"
           },
           "projectName": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Project name."
           },
           "customerName": {
@@ -4121,7 +4230,10 @@
         "type": "object",
         "properties": {
           "projectId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "format": "uuid"
           },
           "projectName": {
@@ -4338,7 +4450,10 @@
             "description": "SHA-256 of the canonical issued representation."
           },
           "projectId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Billed project.",
             "format": "uuid"
           },
@@ -4395,7 +4510,10 @@
             "description": "ISO currency code."
           },
           "projectId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Billed project.",
             "format": "uuid"
           }
@@ -5470,6 +5588,38 @@
             "default": false
           }
         }
+      },
+      "StandaloneInvoiceLineRequest": {
+        "required": [
+          "description",
+          "quantity",
+          "unitPrice",
+          "discountPercent",
+          "vatRate"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "vatRate": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "A manually entered standalone invoice line."
       },
       "StockCountResponse": {
         "required": [

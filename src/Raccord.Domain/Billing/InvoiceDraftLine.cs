@@ -26,6 +26,25 @@ public sealed class InvoiceDraftLine
         CurrencyCode = source.CurrencyCode;
     }
 
+    internal InvoiceDraftLine(
+        int position,
+        string description,
+        decimal quantity,
+        decimal unitPrice,
+        decimal discountPercent,
+        decimal vatPercentage
+    )
+    {
+        Id = Guid.CreateVersion7();
+        Position = position;
+        Description = description.Trim();
+        Quantity = quantity;
+        UnitPrice = unitPrice;
+        DiscountPercent = discountPercent;
+        VatPercentage = vatPercentage;
+        CurrencyCode = Currency.Eur.Code;
+    }
+
     /// <summary>Draft line identifier.</summary>
     public Guid Id { get; private set; }
 
@@ -33,7 +52,7 @@ public sealed class InvoiceDraftLine
     public int Position { get; private set; }
 
     /// <summary>The project billable line this line bills.</summary>
-    public Guid SourceBillableLineId { get; private set; }
+    public Guid? SourceBillableLineId { get; private set; }
 
     /// <summary>Text printed on the invoice.</summary>
     public string Description { get; private set; }

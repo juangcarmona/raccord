@@ -16,7 +16,7 @@ public sealed class InvoiceDraft
     }
 
     private InvoiceDraft(
-        Guid projectId,
+        Guid? projectId,
         Guid customerId,
         DateOnly operationDate,
         string seriesCode,
@@ -36,7 +36,76 @@ public sealed class InvoiceDraft
     public Guid Id { get; private set; }
 
     /// <summary>The billed project.</summary>
-    public Guid ProjectId { get; private set; }
+    public Guid? ProjectId { get; private set; }
+
+    /// <summary>Creates a draft from manually entered standalone invoice lines.</summary>
+    public static InvoiceDraft CreateStandalone(
+        Guid customerId,
+        DateOnly operationDate,
+        IReadOnlyCollection<(
+            string Description,
+            decimal Quantity,
+            decimal UnitPrice,
+            decimal DiscountPercent,
+            decimal VatRate
+        )> lines,
+        string seriesCode,
+        DateTimeOffset createdAt
+    )
+    {
+        ArgumentNullException.ThrowIfNull(lines);
+        InvoiceNumberSequence.EnsureValidSeriesCode(seriesCode);
+        if (lines.Count == 0)
+            throw new BusinessRuleViolationException(
+                "draft.no-lines",
+                "Add at least one invoice line."
+            );
+        var draft = new InvoiceDraft(null, customerId, operationDate, seriesCode, createdAt);
+        draft.lines.AddRange(
+            lines.Select(
+                (line, index) =>
+                    new InvoiceDraftLine(
+                        index + 1,
+                        line.Description,
+                        line.Quantity,
+                        line.UnitPrice,
+                        line.DiscountPercent,
+                        line.VatRate
+                    )
+            )
+        );
+        return draft;
+    }
+
+    /// <summary>Creates a new project draft from source lines without reserving those lines again.</summary>
+    public static InvoiceDraft DuplicateFromProject(
+        Project project,
+        IReadOnlyCollection<Guid> billableLineIds,
+        string seriesCode,
+        DateTimeOffset createdAt
+    )
+    {
+        ArgumentNullException.ThrowIfNull(project);
+        var selected = project
+            .BillableLines.Where(line => billableLineIds.Contains(line.Id))
+            .ToList();
+        if (selected.Count != billableLineIds.Count)
+            throw new BusinessRuleViolationException(
+                "invoice.duplicate-source-missing",
+                "The invoice source line no longer exists in the project."
+            );
+        var draft = new InvoiceDraft(
+            project.Id,
+            project.CustomerId,
+            project.EndDate,
+            seriesCode,
+            createdAt
+        );
+        draft.lines.AddRange(
+            selected.Select((line, index) => new InvoiceDraftLine(index + 1, line))
+        );
+        return draft;
+    }
 
     /// <summary>The billed customer.</summary>
     public Guid CustomerId { get; private set; }
@@ -97,7 +166,7 @@ public sealed class InvoiceDraft
     }
 
     /// <summary>Removes a line and returns the billable line that must be released on the project.</summary>
-    public Guid RemoveLine(Guid draftLineId)
+    public Guid? RemoveLine(Guid draftLineId)
     {
         EnsureOpen();
         var line =

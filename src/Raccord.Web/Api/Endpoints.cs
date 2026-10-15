@@ -830,6 +830,18 @@ internal static class Endpoints
                 return TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft);
             }
         );
+        drafts.MapPost(
+            "/standalone",
+            async (
+                CreateStandaloneInvoiceRequest request,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+            {
+                var draft = await invoicing.CreateStandaloneDraftAsync(request, ct);
+                return TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft);
+            }
+        );
         MapDraftLineRemoval(drafts);
         MapDraftDiscard(drafts);
         MapDraftFinalize(drafts);
@@ -885,6 +897,7 @@ internal static class Endpoints
             .ProducesProblem(StatusCodes.Status409Conflict);
     }
 
+#pragma warning disable MA0051
     private static void MapInvoices(RouteGroupBuilder api)
     {
         var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
@@ -939,7 +952,19 @@ internal static class Endpoints
                     ? TypedResults.File(document.Content, document.ContentType, document.FileName)
                     : TypedResults.NotFound()
         );
+        invoices.MapPost(
+            "/{id:guid}/duplicate",
+            async Task<Results<Created<InvoiceDraftResponse>, NotFound>> (
+                Guid id,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.DuplicateInvoiceAsync(id, ct) is { } draft
+                    ? TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft)
+                    : TypedResults.NotFound()
+        );
     }
+#pragma warning restore MA0051
 
     private static void MapInvoiceReminders(RouteGroupBuilder invoices)
     {

@@ -61,13 +61,17 @@ function DraftView({ draft, onChanged }: { draft: Schemas["InvoiceDraftResponse"
     function discard() {
         void run(async () => {
             await unwrap(api.DELETE("/api/invoice-drafts/{id}", { params: { path: { id: draft.id } } }));
-            await navigate(`/projects/${draft.projectId}`);
+            await navigate(draft.projectId ? `/projects/${draft.projectId}` : "/drafts");
         });
     }
 
     return (
         <>
-            <PageHeader title={t("drafts.heading", { project: draft.projectName })}>
+            <PageHeader
+                title={t("drafts.heading", {
+                    project: draft.projectName ?? t("drafts.standalone"),
+                })}
+            >
                 <p className="subtitle">
                     {draft.customerName} · {t("drafts.series")} {draft.seriesCode} · {t("drafts.operationDate")}{" "}
                     {format.date(draft.operationDate)}

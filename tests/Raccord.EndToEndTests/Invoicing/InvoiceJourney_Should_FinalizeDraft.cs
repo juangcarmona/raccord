@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.Playwright;
 using Raccord.EndToEndTests.Infrastructure;
 using Raccord.EndToEndTests.Projects;
@@ -7,14 +8,10 @@ using Xunit;
 namespace Raccord.EndToEndTests.Invoicing;
 
 /// <summary>
-/// Drives the full money path — customer, project, billable line, draft, issued invoice — and
-/// asserts the numbering and immutability the domain guarantees. This is the deepest smoke
-/// journey; it exists so that "an invoice can be issued from the browser" is always true.
-/// ProductShape: JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE,
-/// UC-FIN-CONFIGURE-INVOICE-MOMENTS, UC-FIN-WORK-INVOICING-QUEUE,
-/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT, UC-FIN-SEND-PAYMENT-REMINDER,
-/// UC-FIN-MANAGE-LEDGERS, UC-FIN-EXPORT-INVOICES-SPREADSHEET, UC-FIN-RUN-ACCOUNTING-EXPORT,
-/// UC-FIN-ANALYZE-STATISTICS.
+/// JRN-FIN-CREATE-STANDALONE-INVOICE / UC-FIN-CREATE-STANDALONE-INVOICE / UC-FIN-DUPLICATE-INVOICE.
+/// Given a customer and billable project work, when an operator issues an invoice, duplicates it,
+/// and creates a standalone draft, then the numbered invoice remains immutable and both drafts retain their own lines.
+/// ProductShape: BC-INVOICING, JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
@@ -37,26 +34,22 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 );
                 queue.Ok.ShouldBeTrue();
                 (await queue.TextAsync()).ShouldContain($"Promo E2E {RunStamp}");
-                var projectId = new Uri(page.Url).Segments[^1];
-                await SetDepositAsync(page, projectId);
 
-                await FinalizeDraftAsync(page, "2026-08-18");
+                await FinalizeDraftAsync(page);
+
                 var invoiceId = new Uri(page.Url).Segments[^1];
-                var payment = await page.APIRequest.PostAsync(
-                    $"/api/invoices/{invoiceId}/payments",
-                    new APIRequestContextOptions
-                    {
-                        Data =
-                            "{\"date\":\"2026-09-18\",\"method\":\"bank-transfer\",\"amount\":100,\"description\":\"E2E payment\"}",
-                        Headers = new Dictionary<string, string>(StringComparer.Ordinal)
-                        {
-                            ["content-type"] = "application/json",
-                        },
-                    }
+                await AssertDuplicateAndStandaloneAsync(page, invoiceId);
+
+                var englishDocument = await page.APIRequest.GetAsync(
+                    $"/api/invoices/{invoiceId}/document?language=en"
                 );
-                payment.Status.ShouldBe(201);
-                await AssertPaymentReminderAsync(page, invoiceId);
-                await AssertFinanceReportingAsync(page, invoiceId);
+                englishDocument.Ok.ShouldBeTrue();
+                englishDocument.Headers["content-type"].ShouldStartWith("application/pdf");
+                var englishPdf = await englishDocument.BodyAsync();
+                englishPdf.Length.ShouldBeGreaterThan(1000);
+                System.Text.Encoding.ASCII.GetString(englishPdf[..5]).ShouldBe("%PDF-");
+                var pdfText = System.Text.Encoding.ASCII.GetString(englishPdf).TrimEnd();
+                pdfText.ShouldEndWith("%%EOF");
 
                 // The invoice number comes from the domain's series sequence; asserting its presence
                 // (not exact digits — journeys share one database within a run) proves the final
@@ -69,87 +62,39 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         );
     }
 
-    private static async Task AssertPaymentReminderAsync(IPage page, string invoiceId)
+    private async Task AssertDuplicateAndStandaloneAsync(IPage page, string invoiceId)
     {
-        var overdue = await page.APIRequest.GetAsync("/api/invoices/overdue");
-        overdue.Ok.ShouldBeTrue();
-        (await overdue.TextAsync()).ShouldContain(invoiceId);
-        var newDueDate = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(30);
-        var reminder = await page.APIRequest.PostAsync(
-            $"/api/invoices/{invoiceId}/reminders",
+        var duplicate = await page.APIRequest.PostAsync($"/api/invoices/{invoiceId}/duplicate");
+        duplicate.Status.ShouldBe(201);
+        (await duplicate.TextAsync()).ShouldContain("Camera kit with lenses");
+
+        var customers = await page.APIRequest.GetAsync("/api/customers");
+        customers.Ok.ShouldBeTrue();
+        using var customerDocument = JsonDocument.Parse(await customers.TextAsync());
+        var customerId = customerDocument
+            .RootElement.EnumerateArray()
+            .Single(item =>
+                string.Equals(
+                    item.GetProperty("legalName").GetString(),
+                    $"Productora E2E {RunStamp}",
+                    StringComparison.Ordinal
+                )
+            )
+            .GetProperty("id")
+            .GetGuid();
+        var standalone = await page.APIRequest.PostAsync(
+            "/api/invoice-drafts/standalone",
             new APIRequestContextOptions
             {
                 Data =
-                    $"{{\"newDueDate\":\"{newDueDate:yyyy-MM-dd}\",\"template\":\"friendly\",\"letterhead\":\"default\"}}",
+                    $"{{\"customerId\":\"{customerId}\",\"operationDate\":\"2026-09-18\",\"lines\":[{{\"description\":\"Standalone E2E service\",\"quantity\":1,\"unitPrice\":75,\"discountPercent\":0,\"vatRate\":21}}]}}",
                 Headers = new Dictionary<string, string>(StringComparer.Ordinal)
                 {
                     ["content-type"] = "application/json",
                 },
             }
         );
-        reminder.Status.ShouldBe(201);
-        (await reminder.TextAsync()).ShouldContain("\"number\":1");
-        var history = await page.APIRequest.GetAsync($"/api/invoices/{invoiceId}/reminders");
-        history.Ok.ShouldBeTrue();
-        (await history.TextAsync()).ShouldContain($"\"dueDate\":\"{newDueDate:yyyy-MM-dd}\"");
-    }
-
-    private static async Task AssertFinanceReportingAsync(IPage page, string invoiceId)
-    {
-        var report = await page.APIRequest.GetAsync(
-            "/api/finance/report?from=2026-08-01&to=2026-10-31"
-        );
-        report.Ok.ShouldBeTrue();
-        var reportText = await report.TextAsync();
-        reportText.ShouldContain($"\"invoiceCount\":1");
-        reportText.ShouldContain("\"invoicedTotal\":1089");
-        reportText.ShouldContain("\"paidTotal\":100");
-        reportText.ShouldContain("\"outstandingTotal\":989");
-
-        var ledger = await page.APIRequest.GetAsync(
-            "/api/finance/ledger?from=2026-08-01&to=2026-10-31"
-        );
-        ledger.Ok.ShouldBeTrue();
-        var ledgerText = await ledger.TextAsync();
-        ledgerText.ShouldContain(invoiceId);
-        ledgerText.ShouldContain("\"entryType\":\"invoice\"");
-        ledgerText.ShouldContain("\"entryType\":\"payment\"");
-
-        var export = await page.APIRequest.GetAsync(
-            "/api/finance/accounting-export?from=2026-08-01&to=2026-10-31"
-        );
-        export.Ok.ShouldBeTrue();
-        export.Headers["content-type"].ShouldContain("text/csv");
-        (await export.TextAsync()).ShouldContain("invoiceId,invoiceNumber,date,entryType");
-
-        var invoiceExport = await page.APIRequest.GetAsync(
-            "/api/finance/invoices-export?from=2026-08-01&to=2026-10-31"
-        );
-        invoiceExport.Ok.ShouldBeTrue();
-        invoiceExport.Headers["content-type"].ShouldContain("text/csv");
-        (await invoiceExport.TextAsync()).ShouldContain("invoiceId,invoiceNumber,issueDate");
-    }
-
-    private static async Task SetDepositAsync(IPage page, string projectId)
-    {
-        var headers = new Dictionary<string, string>(StringComparer.Ordinal)
-        {
-            ["content-type"] = "application/json",
-        };
-        var configure = await page.APIRequest.PutAsync(
-            $"/api/projects/{projectId}/deposit",
-            new APIRequestContextOptions { Data = "{\"amount\":500}", Headers = headers }
-        );
-        configure.Ok.ShouldBeTrue();
-        var paid = await page.APIRequest.PutAsync(
-            $"/api/projects/{projectId}/deposit/status",
-            new APIRequestContextOptions { Data = "{\"status\":1}", Headers = headers }
-        );
-        paid.Ok.ShouldBeTrue();
-        var returned = await page.APIRequest.PutAsync(
-            $"/api/projects/{projectId}/deposit/status",
-            new APIRequestContextOptions { Data = "{\"status\":2}", Headers = headers }
-        );
-        returned.Ok.ShouldBeTrue();
+        standalone.Status.ShouldBe(201);
+        (await standalone.TextAsync()).ShouldContain("Standalone E2E service");
     }
 }

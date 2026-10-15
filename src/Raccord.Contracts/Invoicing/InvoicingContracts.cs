@@ -12,6 +12,23 @@ public sealed record CreateInvoiceDraftRequest(
     string? SeriesCode
 );
 
+/// <summary>Creates an invoice draft that is not linked to a project.</summary>
+public sealed record CreateStandaloneInvoiceRequest(
+    Guid CustomerId,
+    DateOnly? OperationDate,
+    IReadOnlyList<StandaloneInvoiceLineRequest> Lines,
+    string? SeriesCode
+);
+
+/// <summary>A manually entered standalone invoice line.</summary>
+public sealed record StandaloneInvoiceLineRequest(
+    string Description,
+    decimal Quantity,
+    decimal UnitPrice,
+    decimal DiscountPercent,
+    decimal VatRate
+);
+
 /// <summary>Finalizes a draft.</summary>
 /// <param name="IssueDate">Legal issue date; today in the organization's time zone when omitted.</param>
 public sealed record FinalizeInvoiceDraftRequest(DateOnly? IssueDate);
@@ -156,8 +173,8 @@ public sealed record InvoiceTotalsResponse(
 public sealed record InvoiceDraftResponse(
     Guid Id,
     string Status,
-    Guid ProjectId,
-    string ProjectName,
+    Guid? ProjectId,
+    string? ProjectName,
     Guid CustomerId,
     string CustomerName,
     string SeriesCode,
@@ -180,8 +197,8 @@ public sealed record InvoiceDraftResponse(
 /// <param name="CreatedAt">Creation moment (UTC).</param>
 public sealed record InvoiceDraftSummaryResponse(
     Guid Id,
-    Guid ProjectId,
-    string ProjectName,
+    Guid? ProjectId,
+    string? ProjectName,
     string CustomerName,
     int LineCount,
     decimal Total,
@@ -191,7 +208,7 @@ public sealed record InvoiceDraftSummaryResponse(
 
 /// <summary>One project currently eligible for the staged-invoicing queue.</summary>
 public sealed record InvoiceQueueEntryResponse(
-    Guid ProjectId,
+    Guid? ProjectId,
     string ProjectName,
     Guid CustomerId,
     string CustomerName,
@@ -229,7 +246,7 @@ public sealed record IssuedInvoiceResponse(
     IReadOnlyList<InvoiceLineResponse> Lines,
     InvoiceTotalsResponse Totals,
     string ContentHash,
-    Guid ProjectId,
+    Guid? ProjectId,
     Guid CustomerId,
     Guid DraftId
 );
@@ -249,7 +266,7 @@ public sealed record IssuedInvoiceSummaryResponse(
     string RecipientName,
     decimal Total,
     string Currency,
-    Guid ProjectId
+    Guid? ProjectId
 );
 
 /// <summary>An invoice numbering series.</summary>

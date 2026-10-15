@@ -100,6 +100,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-15 · Standalone and duplicated invoices
+
+- Observation: Making project linkage optional affects the draft aggregate, immutable invoice representation, indexed persistence rows, generated API types, and existing draft UI assumptions; an API-only change leaves nullable values unsafe in the frontend.
+- Action: Model nullable project identity end-to-end, regenerate the OpenAPI client, and add explicit standalone/duplicate assertions to both the integration slice and the existing Playwright money journey.
+- Check: The migration, repository-wide CSharpier check, frontend typecheck/tests, PostgreSQL-backed integration test, and Playwright trace/screenshot artifact all pass before merge.
+
 ## 2026-10-15 · Generated API contracts stay outside source lint
 
 - Observation: Generated API schema files are intentionally ignored by ESLint, but lint-staged still passed them to ESLint and failed every contract-only commit.

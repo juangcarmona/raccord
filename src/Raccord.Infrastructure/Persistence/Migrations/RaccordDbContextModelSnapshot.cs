@@ -232,7 +232,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("date")
                         .HasColumnName("operation_date");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
@@ -1121,7 +1121,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(32)")
                         .HasColumnName("number");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
@@ -1530,7 +1530,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("numeric(18,4)")
                                 .HasColumnName("quantity");
 
-                            b1.Property<Guid>("SourceBillableLineId")
+                            b1.Property<Guid?>("SourceBillableLineId")
                                 .HasColumnType("uuid")
                                 .HasColumnName("source_billable_line_id");
 

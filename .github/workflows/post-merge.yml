@@ -30,13 +30,13 @@ jobs:
           # CI-only values; nothing here touches any real environment.
           POSTGRES_PASSWORD=ci-only RACCORD_SEED_DEMO_DATA=true docker compose up --detach --wait
       - name: ZAP baseline scan (blocking on FAIL)
-        uses: zaproxy/action-baseline@v0.14.0
+        uses: zaproxy/action-baseline@v0.15.0
         with:
           target: "http://localhost:8080"
           # Passive baseline scan: no attack traffic, findings surface as WARN by
           # default; the job fails only on a FAILED scan. Rules to escalate live in
           # the zap-rules file once a first baseline is recorded.
-          cmd-options: "-a -I"
+          cmd_options: "-a -I"
       - name: Tear down the Compose stack
         if: always()
         working-directory: deploy

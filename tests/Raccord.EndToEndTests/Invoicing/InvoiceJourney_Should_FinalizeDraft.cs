@@ -12,7 +12,7 @@ namespace Raccord.EndToEndTests.Invoicing;
 /// journey; it exists so that "an invoice can be issued from the browser" is always true.
 /// ProductShape: JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE,
 /// UC-FIN-CONFIGURE-INVOICE-MOMENTS, UC-FIN-WORK-INVOICING-QUEUE,
-/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT.
+/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT, UC-FIN-SEND-PAYMENT-REMINDER.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
@@ -53,6 +53,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                     }
                 );
                 payment.Status.ShouldBe(201);
+                await AssertPaymentReminderAsync(page, invoiceId);
 
                 // The invoice number comes from the domain's series sequence; asserting its presence
                 // (not exact digits — journeys share one database within a run) proves the final
@@ -63,6 +64,31 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 number.TrimStart('F').ShouldNotBeNullOrEmpty();
             }
         );
+    }
+
+    private static async Task AssertPaymentReminderAsync(IPage page, string invoiceId)
+    {
+        var overdue = await page.APIRequest.GetAsync("/api/invoices/overdue");
+        overdue.Ok.ShouldBeTrue();
+        (await overdue.TextAsync()).ShouldContain(invoiceId);
+        var newDueDate = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(30);
+        var reminder = await page.APIRequest.PostAsync(
+            $"/api/invoices/{invoiceId}/reminders",
+            new APIRequestContextOptions
+            {
+                Data =
+                    $"{{\"newDueDate\":\"{newDueDate:yyyy-MM-dd}\",\"template\":\"friendly\",\"letterhead\":\"default\"}}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        reminder.Status.ShouldBe(201);
+        (await reminder.TextAsync()).ShouldContain("\"number\":1");
+        var history = await page.APIRequest.GetAsync($"/api/invoices/{invoiceId}/reminders");
+        history.Ok.ShouldBeTrue();
+        (await history.TextAsync()).ShouldContain($"\"dueDate\":\"{newDueDate:yyyy-MM-dd}\"");
     }
 
     private static async Task SetDepositAsync(IPage page, string projectId)

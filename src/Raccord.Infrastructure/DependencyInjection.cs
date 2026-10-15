@@ -41,6 +41,7 @@ public static class DependencyInjection
     public const string DocumentsConnectionName = "documents";
 
     /// <summary>Adds persistence, document storage, rendering, compliance and time adapters.</summary>
+#pragma warning disable MA0051
     public static IHostApplicationBuilder AddRaccordInfrastructure(
         this IHostApplicationBuilder builder
     )
@@ -78,6 +79,7 @@ public static class DependencyInjection
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
+        services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
         RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<IAuditAppender>(provider =>
@@ -105,6 +107,7 @@ public static class DependencyInjection
 
         return builder;
     }
+#pragma warning restore MA0051
 
     private static void RegisterWorkspaceServices(IServiceCollection services)
     {

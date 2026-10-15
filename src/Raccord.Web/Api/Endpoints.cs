@@ -627,6 +627,7 @@ internal static class Endpoints
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>
                 TypedResults.Ok(await invoicing.ListInvoicesAsync(ct))
         );
+        MapInvoiceReminders(invoices);
         invoices.MapGet(
             "/{id:guid}",
             async Task<Results<Ok<IssuedInvoiceResponse>, NotFound>> (
@@ -672,5 +673,42 @@ internal static class Endpoints
                     ? TypedResults.File(document.Content, document.ContentType, document.FileName)
                     : TypedResults.NotFound()
         );
+    }
+
+    private static void MapInvoiceReminders(RouteGroupBuilder invoices)
+    {
+        invoices.MapGet(
+            "/overdue",
+            async (InvoicingWorkflow invoicing, CancellationToken ct) =>
+                TypedResults.Ok(await invoicing.ListOverdueInvoicesAsync(ct))
+        );
+        invoices.MapGet(
+            "/{id:guid}/reminders",
+            async Task<Results<Ok<IReadOnlyList<InvoiceReminderResponse>>, NotFound>> (
+                Guid id,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ListRemindersAsync(id, ct) is { } reminders
+                    ? TypedResults.Ok(reminders)
+                    : TypedResults.NotFound()
+        );
+        invoices
+            .MapPost(
+                "/{id:guid}/reminders",
+                async Task<Results<Created<InvoiceReminderResponse>, NotFound>> (
+                    Guid id,
+                    CreateInvoiceReminderRequest request,
+                    InvoicingWorkflow invoicing,
+                    CancellationToken ct
+                ) =>
+                    await invoicing.CreateReminderAsync(id, request, ct) is { } reminder
+                        ? TypedResults.Created(
+                            $"/api/invoices/{id}/reminders/{reminder.Id}",
+                            reminder
+                        )
+                        : TypedResults.NotFound()
+            )
+            .ProducesProblem(StatusCodes.Status422UnprocessableEntity);
     }
 }

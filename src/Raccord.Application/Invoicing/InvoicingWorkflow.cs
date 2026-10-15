@@ -24,6 +24,7 @@ public sealed class InvoicingWorkflow(
     IInvoiceDraftRepository drafts,
     IIssuedInvoiceRepository invoices,
     IInvoicePaymentRepository payments,
+    IInvoiceReminderRepository reminders,
     IInvoiceSeriesCatalog series,
     IInvoiceNumberSequenceRepository sequences,
     IBillableWork projects,
@@ -368,6 +369,119 @@ public sealed class InvoicingWorkflow(
         return DescribePayments(existing, record.Invoice.Totals.Total.Amount);
     }
 
+    /// <summary>Lists unpaid invoices whose current due date has passed.</summary>
+    public async Task<IReadOnlyList<OverdueInvoiceResponse>> ListOverdueInvoicesAsync(
+        CancellationToken cancellationToken
+    )
+    {
+        var overdue = new List<OverdueInvoiceResponse>();
+        foreach (var item in await invoices.ListAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var invoice = await invoices
+                .FindAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            if (invoice is null)
+                continue;
+            var invoicePayments = await payments
+                .ListAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            var outstanding =
+                invoice.Invoice.Totals.Total.Amount
+                - invoicePayments.Sum(payment => payment.Amount);
+            if (outstanding <= 0m)
+                continue;
+            var invoiceReminders = await reminders
+                .ListAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            var lastReminder = invoiceReminders.Count > 0 ? invoiceReminders[^1] : null;
+            var dueDate = lastReminder?.DueDate ?? DefaultDueDate(invoice.Invoice.IssueDate);
+            if (dueDate >= clock.Today)
+                continue;
+            overdue.Add(
+                new(
+                    item.Id,
+                    item.Number,
+                    invoice.Invoice.Source.CustomerId,
+                    invoice.Invoice.Recipient.LegalName,
+                    dueDate,
+                    outstanding,
+                    invoiceReminders.Count,
+                    lastReminder?.CreatedOn
+                )
+            );
+        }
+
+        return overdue
+            .OrderBy(entry => entry.DueDate)
+            .ThenBy(entry => entry.InvoiceNumber, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    /// <summary>Generates the next manual reminder for an overdue invoice.</summary>
+    public async Task<InvoiceReminderResponse?> CreateReminderAsync(
+        Guid invoiceId,
+        CreateInvoiceReminderRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var invoice = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (invoice is null)
+            return null;
+        var invoicePayments = await payments
+            .ListAsync(invoiceId, cancellationToken)
+            .ConfigureAwait(false);
+        var outstanding =
+            invoice.Invoice.Totals.Total.Amount - invoicePayments.Sum(payment => payment.Amount);
+        if (outstanding <= 0m)
+            throw new BusinessRuleViolationException(
+                "invoice.not-overdue",
+                "A paid invoice cannot receive a reminder."
+            );
+        var existing = await reminders
+            .ListAsync(invoiceId, cancellationToken)
+            .ConfigureAwait(false);
+        var previousDueDate =
+            existing.Count > 0 ? existing[^1].DueDate : DefaultDueDate(invoice.Invoice.IssueDate);
+        if (previousDueDate >= clock.Today)
+            throw new BusinessRuleViolationException(
+                "invoice.not-overdue",
+                "A reminder can only be generated after the due date."
+            );
+        var reminder = InvoiceReminder.Create(
+            invoiceId,
+            existing.Count + 1,
+            clock.Today,
+            request.NewDueDate ?? previousDueDate,
+            request.Template,
+            request.Letterhead
+        );
+        reminders.Add(reminder);
+        Record(
+            "invoice.payment-reminder-generated",
+            InvoiceEntity,
+            invoiceId,
+            ("reminderId", reminder.Id.ToString()),
+            ("number", Text(reminder.Number)),
+            ("dueDate", reminder.DueDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToReminderResponse(reminder);
+    }
+
+    /// <summary>Reads the manual reminder history of an invoice.</summary>
+    public async Task<IReadOnlyList<InvoiceReminderResponse>?> ListRemindersAsync(
+        Guid invoiceId,
+        CancellationToken cancellationToken
+    )
+    {
+        if (await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false) is null)
+            return null;
+        return (await reminders.ListAsync(invoiceId, cancellationToken).ConfigureAwait(false))
+            .Select(ToReminderResponse)
+            .ToArray();
+    }
+
     /// <summary>Returns the invoice document, regenerating and storing it from the issued representation when missing.</summary>
     public async Task<InvoiceDocument?> GetDocumentAsync(
         Guid invoiceId,
@@ -529,6 +643,19 @@ public sealed class InvoicingWorkflow(
                 : "partially-paid"
         );
     }
+
+    private static DateOnly DefaultDueDate(DateOnly issueDate) => issueDate.AddDays(30);
+
+    private static InvoiceReminderResponse ToReminderResponse(InvoiceReminder reminder) =>
+        new(
+            reminder.Id,
+            reminder.InvoiceId,
+            reminder.Number,
+            reminder.CreatedOn,
+            reminder.DueDate,
+            reminder.Template,
+            reminder.Letterhead
+        );
 
     private void Record(
         string action,

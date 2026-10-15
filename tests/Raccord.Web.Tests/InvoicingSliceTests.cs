@@ -229,9 +229,9 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
             .ShouldBe([
                 "invoice.issued",
                 "invoice.document.stored",
+                "invoice.payment-recorded",
+                "invoice.payment-recorded",
                 "invoice.document.regenerated",
-                "invoice.payment-recorded",
-                "invoice.payment-recorded",
             ]);
         audit![0].Details["contentHash"].ShouldBe(contentHash);
     }

@@ -11,6 +11,15 @@ namespace Raccord.Infrastructure.Persistence;
 
 public sealed class EquipmentCatalog(RaccordDbContext db, IDocumentStore documents)
 {
+    public async Task<EquipmentItemSnapshot?> GetAsync(Guid itemId, CancellationToken ct)
+    {
+        var item = await db
+            .EquipmentItems.AsNoTracking()
+            .FirstOrDefaultAsync(row => row.Id == itemId, ct)
+            .ConfigureAwait(false);
+        return item is null ? null : ToSnapshot(item);
+    }
+
     public async Task<EquipmentSaleResponse?> SellAsync(
         Guid itemId,
         SellEquipmentRequest request,

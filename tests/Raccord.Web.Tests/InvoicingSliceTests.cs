@@ -104,6 +104,41 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         ).ShouldBe(1L);
     }
 
+    [Fact]
+    public async Task A_standalone_invoice_Should_be_duplicable_without_project_identity()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client);
+        var create = await client.PostAsJsonAsync(
+            "/api/invoice-drafts/standalone",
+            new CreateStandaloneInvoiceRequest(
+                project.CustomerId,
+                IssueDate,
+                [new("One-off service", 1m, 100m, 0m, 21m)],
+                null
+            )
+        );
+        create.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var draft = (await create.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
+        draft.ProjectId.ShouldBeNull();
+        draft.ProjectName.ShouldBeNull();
+
+        var finalize = await client.PostAsJsonAsync(
+            $"/api/invoice-drafts/{draft.Id}/finalize",
+            new FinalizeInvoiceDraftRequest(IssueDate)
+        );
+        finalize.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var invoice = (await finalize.Content.ReadFromJsonAsync<IssuedInvoiceResponse>())!;
+        invoice.ProjectId.ShouldBeNull();
+
+        var duplicate = await client.PostAsync($"/api/invoices/{invoice.Id}/duplicate", null);
+        duplicate.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var copy = (await duplicate.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
+        copy.Id.ShouldNotBe(draft.Id);
+        copy.ProjectId.ShouldBeNull();
+        copy.Lines.Single().Description.ShouldBe("One-off service");
+        copy.Totals.Total.ShouldBe(draft.Totals.Total);
+    }
+
     private async Task<InvoiceDraftResponse> CreateDraftAsync(
         ProjectResponse project,
         IEnumerable<Guid> lineIds

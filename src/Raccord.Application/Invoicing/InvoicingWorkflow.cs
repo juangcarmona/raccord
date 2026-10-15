@@ -74,6 +74,51 @@ public sealed class InvoicingWorkflow(
         return await DescribeAsync(draft, project, cancellationToken).ConfigureAwait(false);
     }
 
+    /// <summary>Creates an invoice draft from manually entered lines without a project.</summary>
+    public async Task<InvoiceDraftResponse> CreateStandaloneDraftAsync(
+        CreateStandaloneInvoiceRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var customer =
+            await parties.FindAsync(request.CustomerId, cancellationToken).ConfigureAwait(false)
+            ?? throw new BusinessRuleViolationException(
+                "customers.not-found",
+                $"Customer '{request.CustomerId}' does not exist."
+            );
+        var seriesCode = await ResolveSeriesCodeAsync(request.SeriesCode, cancellationToken)
+            .ConfigureAwait(false);
+        var draft = InvoiceDraft.CreateStandalone(
+            customer.Id,
+            request.OperationDate ?? clock.Today,
+            request
+                .Lines.Select(line =>
+                    (
+                        line.Description,
+                        line.Quantity,
+                        line.UnitPrice,
+                        line.DiscountPercent,
+                        line.VatRate
+                    )
+                )
+                .ToList(),
+            seriesCode,
+            clock.UtcNow
+        );
+        drafts.Add(draft);
+        Record(
+            "invoice-draft.created",
+            DraftEntity,
+            draft.Id,
+            ("customerId", customer.Id.ToString()),
+            ("lineCount", Text(draft.Lines.Count)),
+            ("total", Text(draft.Totals.Total.Amount))
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return await DescribeAsync(draft, null, cancellationToken).ConfigureAwait(false);
+    }
+
     /// <summary>Reads a draft with its totals and current validation issues.</summary>
     public async Task<InvoiceDraftResponse?> GetDraftAsync(
         Guid draftId,
@@ -95,9 +140,9 @@ public sealed class InvoicingWorkflow(
         var result = new List<InvoiceDraftSummaryResponse>(open.Count);
         foreach (var draft in open)
         {
-            var project = await projects
-                .FindAsync(draft.ProjectId, cancellationToken)
-                .ConfigureAwait(false);
+            var project = draft.ProjectId is { } projectId
+                ? await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false)
+                : null;
             var customer = await parties
                 .FindAsync(draft.CustomerId, cancellationToken)
                 .ConfigureAwait(false);
@@ -180,15 +225,17 @@ public sealed class InvoicingWorkflow(
             return null;
         }
 
-        var project = await RequireProjectAsync(draft.ProjectId, cancellationToken)
-            .ConfigureAwait(false);
+        var project = draft.ProjectId is { } projectId
+            ? await RequireProjectAsync(projectId, cancellationToken).ConfigureAwait(false)
+            : null;
         var billableLineId = draft.RemoveLine(draftLineId);
-        project.ReleaseFromDraft(draft.Id, [billableLineId]);
+        if (project is not null && billableLineId is { } sourceId)
+            project.ReleaseFromDraft(draft.Id, [sourceId]);
         Record(
             "invoice-draft.line-removed",
             DraftEntity,
             draft.Id,
-            ("billableLineId", billableLineId.ToString())
+            ("billableLineId", billableLineId?.ToString() ?? string.Empty)
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
@@ -205,18 +252,20 @@ public sealed class InvoicingWorkflow(
         }
 
         draft.EnsureOpen();
-        var project = await RequireProjectAsync(draft.ProjectId, cancellationToken)
-            .ConfigureAwait(false);
-        project.ReleaseFromDraft(
-            draft.Id,
-            [.. draft.Lines.Select(line => line.SourceBillableLineId)]
-        );
+        var project = draft.ProjectId is { } projectId
+            ? await RequireProjectAsync(projectId, cancellationToken).ConfigureAwait(false)
+            : null;
+        if (project is not null)
+            project.ReleaseFromDraft(
+                draft.Id,
+                [.. draft.Lines.Select(line => line.SourceBillableLineId).OfType<Guid>()]
+            );
         drafts.Remove(draft);
         Record(
             "invoice-draft.discarded",
             DraftEntity,
             draft.Id,
-            ("projectId", project.Id.ToString())
+            ("projectId", project?.Id.ToString() ?? string.Empty)
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return true;
@@ -241,8 +290,9 @@ public sealed class InvoicingWorkflow(
 
         draft.EnsureOpen();
         var issueDate = request.IssueDate ?? clock.Today;
-        var project = await RequireProjectAsync(draft.ProjectId, cancellationToken)
-            .ConfigureAwait(false);
+        var project = draft.ProjectId is { } projectId
+            ? await RequireProjectAsync(projectId, cancellationToken).ConfigureAwait(false)
+            : null;
         var customer = await parties
             .FindAsync(draft.CustomerId, cancellationToken)
             .ConfigureAwait(false);
@@ -261,7 +311,7 @@ public sealed class InvoicingWorkflow(
         }
 
         var invoice = draft.Finalize(issuer!, recipient!, sequence, issueDate, clock.UtcNow);
-        project.MarkInvoiced(draft.Id, invoice.Id);
+        project?.MarkInvoiced(draft.Id, invoice.Id);
         var representation = IssuedInvoiceRepresentation.From(invoice);
         invoices.Add(invoice, representation);
         compliance.RegisterIssuedInvoice(invoice, representation);
@@ -310,6 +360,69 @@ public sealed class InvoicingWorkflow(
     {
         var record = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
         return record?.Invoice.ToResponse(record.ContentHash);
+    }
+
+    /// <summary>Duplicates an issued invoice into a new draft using current source data.</summary>
+    public async Task<InvoiceDraftResponse?> DuplicateInvoiceAsync(
+        Guid invoiceId,
+        CancellationToken cancellationToken
+    )
+    {
+        var original = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (original is null)
+            return null;
+
+        var sourceDraft =
+            await drafts
+                .FindAsync(original.Invoice.Source.DraftId, cancellationToken)
+                .ConfigureAwait(false)
+            ?? throw new BusinessRuleViolationException(
+                "invoice.duplicate-source-missing",
+                "The invoice draft source no longer exists."
+            );
+        InvoiceDraft draft;
+        Project? project = null;
+        if (original.Invoice.Source.ProjectId is { } projectId)
+        {
+            project = await RequireProjectAsync(projectId, cancellationToken).ConfigureAwait(false);
+            draft = InvoiceDraft.DuplicateFromProject(
+                project,
+                sourceDraft.Lines.Select(line => line.SourceBillableLineId).OfType<Guid>().ToList(),
+                sourceDraft.SeriesCode,
+                clock.UtcNow
+            );
+        }
+        else
+        {
+            draft = InvoiceDraft.CreateStandalone(
+                original.Invoice.Source.CustomerId,
+                sourceDraft.OperationDate,
+                sourceDraft
+                    .Lines.Select(line =>
+                        (
+                            line.Description,
+                            line.Quantity,
+                            line.UnitPrice,
+                            line.DiscountPercent,
+                            line.VatPercentage
+                        )
+                    )
+                    .ToList(),
+                sourceDraft.SeriesCode,
+                clock.UtcNow
+            );
+        }
+
+        drafts.Add(draft);
+        Record(
+            "invoice-draft.duplicated",
+            DraftEntity,
+            draft.Id,
+            ("sourceInvoiceId", invoiceId.ToString()),
+            ("projectId", project?.Id.ToString() ?? string.Empty)
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return await DescribeAsync(draft, project, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>Starts a rectifying draft from an immutable issued invoice.</summary>
@@ -427,8 +540,6 @@ public sealed class InvoicingWorkflow(
         CancellationToken cancellationToken
     )
     {
-        project ??= await RequireProjectAsync(draft.ProjectId, cancellationToken)
-            .ConfigureAwait(false);
         PartySnapshot? customer = await parties
             .FindAsync(draft.CustomerId, cancellationToken)
             .ConfigureAwait(false);
@@ -450,8 +561,8 @@ public sealed class InvoicingWorkflow(
         return new InvoiceDraftResponse(
             draft.Id,
             draft.Status == DraftStatus.Open ? "open" : "issued",
-            project.Id,
-            project.Name,
+            project?.Id,
+            project?.Name,
             draft.CustomerId,
             customer?.LegalName ?? string.Empty,
             draft.SeriesCode,

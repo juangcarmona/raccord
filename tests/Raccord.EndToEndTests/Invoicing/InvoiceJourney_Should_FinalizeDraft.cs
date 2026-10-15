@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.Playwright;
 using Raccord.EndToEndTests.Infrastructure;
 using Raccord.EndToEndTests.Projects;
@@ -36,6 +37,8 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 await FinalizeDraftAsync(page);
 
                 var invoiceId = new Uri(page.Url).Segments[^1];
+                await AssertDuplicateAndStandaloneAsync(page, invoiceId);
+
                 var englishDocument = await page.APIRequest.GetAsync(
                     $"/api/invoices/{invoiceId}/document?language=en"
                 );
@@ -56,5 +59,41 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 number.TrimStart('F').ShouldNotBeNullOrEmpty();
             }
         );
+    }
+
+    private async Task AssertDuplicateAndStandaloneAsync(IPage page, string invoiceId)
+    {
+        var duplicate = await page.APIRequest.PostAsync($"/api/invoices/{invoiceId}/duplicate");
+        duplicate.Status.ShouldBe(201);
+        (await duplicate.TextAsync()).ShouldContain("Camera kit with lenses");
+
+        var customers = await page.APIRequest.GetAsync("/api/customers");
+        customers.Ok.ShouldBeTrue();
+        using var customerDocument = JsonDocument.Parse(await customers.TextAsync());
+        var customerId = customerDocument
+            .RootElement.EnumerateArray()
+            .Single(item =>
+                string.Equals(
+                    item.GetProperty("legalName").GetString(),
+                    $"Productora E2E {RunStamp}",
+                    StringComparison.Ordinal
+                )
+            )
+            .GetProperty("id")
+            .GetGuid();
+        var standalone = await page.APIRequest.PostAsync(
+            "/api/invoice-drafts/standalone",
+            new APIRequestContextOptions
+            {
+                Data =
+                    $"{{\"customerId\":\"{customerId}\",\"operationDate\":\"2026-09-18\",\"lines\":[{{\"description\":\"Standalone E2E service\",\"quantity\":1,\"unitPrice\":75,\"discountPercent\":0,\"vatRate\":21}}]}}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        standalone.Status.ShouldBe(201);
+        (await standalone.TextAsync()).ShouldContain("Standalone E2E service");
     }
 }

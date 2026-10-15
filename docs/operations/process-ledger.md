@@ -285,3 +285,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: A clean E2E database has no identity or schedule data unless the AppHost migration resource seeds it explicitly; infrastructure readiness probes also must remain reachable after authentication is enabled.
 - Action: Make the feed one-way and token-addressed, bound its project stream to a six-month window, seed the documented E2E administrator, and keep readiness/liveness probes anonymous with bounded fixture startup and disposal.
 - Check: The journey issues a private feed, reads valid iCalendar, verifies a project event, captures a screenshot/trace, and rejects revoked or unknown feed addresses through the public endpoint.
+
+## 2026-10-15 · Payment reporting API
+
+- Observation: External payment reporting must reuse the existing invoice workflow and be constrained by explicit token scopes; inventing registry data would make an integration demo look like a real lookup.
+- Action: Add invoices.read and payments.write scopes and route public invoice reads through the existing payment workflow; keep registry lookup provider-backed and separate until a real provider contract is selected.
+- Check: The payment-reporting journey issues scoped credentials, reads invoices through the public interface, and captures hosted screenshot/trace evidence.

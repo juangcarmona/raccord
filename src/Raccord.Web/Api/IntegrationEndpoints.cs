@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Projects;
 using Raccord.Contracts.Integrations;
+using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Projects;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Web.Authorization;
@@ -28,6 +29,8 @@ internal static class IntegrationEndpoints
 
         integrations.MapGet("/projects", ListProjectsAsync).AllowAnonymous();
         integrations.MapPost("/projects", CreateProjectAsync).AllowAnonymous();
+        integrations.MapGet("/invoices", ListInvoicesAsync).AllowAnonymous();
+        integrations.MapPost("/invoices/{id:guid}/payments", RecordPaymentAsync).AllowAnonymous();
     }
 
     public static void MapCalendarFeed(IEndpointRouteBuilder app)
@@ -197,4 +200,28 @@ internal static class IntegrationEndpoints
 
     private static string? GetToken(HttpContext context) =>
         context.Request.Headers["X-Api-Key"].FirstOrDefault();
+
+    private static async Task<IResult> ListInvoicesAsync(
+        HttpContext context,
+        ApiAccessCatalog tokens,
+        Raccord.Application.Invoicing.InvoicingWorkflow invoicing,
+        CancellationToken ct
+    ) =>
+        await tokens.HasScopeAsync(GetToken(context), ApiAccessScopes.InvoicesRead, ct)
+            ? TypedResults.Ok(await invoicing.ListInvoicesAsync(ct))
+            : TypedResults.Unauthorized();
+
+    private static async Task<IResult> RecordPaymentAsync(
+        Guid id,
+        RecordInvoicePaymentRequest request,
+        HttpContext context,
+        ApiAccessCatalog tokens,
+        Raccord.Application.Invoicing.InvoicingWorkflow invoicing,
+        CancellationToken ct
+    ) =>
+        !await tokens.HasScopeAsync(GetToken(context), ApiAccessScopes.PaymentsWrite, ct)
+            ? TypedResults.Unauthorized()
+        : await invoicing.RecordPaymentAsync(id, request, ct) is { } result
+            ? TypedResults.Ok(result)
+        : TypedResults.NotFound();
 }

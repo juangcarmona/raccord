@@ -150,6 +150,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         MapEquipmentStockActions(equipment);
+        MapEquipmentLifecycle(equipment);
     }
 
     private static void MapEquipmentStockActions(RouteGroupBuilder equipment)
@@ -192,6 +193,52 @@ internal static class Endpoints
             "/items/{id:guid}/counts",
             async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListCountsAsync(id, ct))
+        );
+    }
+
+    private static void MapEquipmentLifecycle(RouteGroupBuilder equipment)
+    {
+        equipment.MapPut(
+            "/items/{id:guid}/retire",
+            async Task<Results<Ok<EquipmentItemResponse>, NotFound>> (
+                Guid id,
+                RetireEquipmentRequest request,
+                EquipmentCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                await catalog.RetireAsync(id, request, clock.UtcNow, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
+        );
+        equipment.MapPut(
+            "/items/{id:guid}/sell",
+            async Task<Results<Ok<EquipmentItemResponse>, NotFound>> (
+                Guid id,
+                SellEquipmentRequest request,
+                EquipmentCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                await catalog.SellAsync(id, request, clock.UtcNow, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/history",
+            async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListHistoryAsync(id, ct))
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/insights",
+            async Task<Results<Ok<EquipmentInsightsResponse>, NotFound>> (
+                Guid id,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.GetInsightsAsync(id, ct) is { } insights
+                    ? TypedResults.Ok(insights)
+                    : TypedResults.NotFound()
         );
     }
 

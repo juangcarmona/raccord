@@ -17,6 +17,10 @@ internal sealed class EquipmentItemConfiguration : IEntityTypeConfiguration<Equi
         builder.HasIndex(item => item.ScanCode).IsUnique();
         builder.Property(item => item.StockQuantity).IsRequired();
         builder.Property(item => item.AvailableQuantity).IsRequired();
+        builder.Property(item => item.Status).HasConversion<int>().IsRequired();
+        builder.Property(item => item.DisposedAt).IsRequired(false);
+        builder.Property(item => item.DispositionReason).HasMaxLength(500).IsRequired(false);
+        builder.Property(item => item.SaleAmount).HasPrecision(18, 2).IsRequired(false);
         builder.HasConcurrencyToken();
     }
 }

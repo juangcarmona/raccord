@@ -151,3 +151,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A stock count can otherwise overwrite equipment already committed to a project and make the availability figure physically impossible.
 - **Action:** Reconcile counts against booked quantity, record every correction with a reason, and keep planned movements as append-only history.
 - **Check:** Domain, integration and browser coverage must exercise movement scheduling, count history, and the booked-quantity guard.
+
+## 2026-10-15 · Equipment lifecycle keeps history after disposition
+
+- **Observation:** Selling or retiring an item without preserving its project usage and stock history makes asset audit and traceability impossible.
+- **Action:** Model terminal sold/retired statuses, block disposition while booked out, and derive item insights and project history from existing movement, count and packing records.
+- **Check:** Integration and warehouse browser journeys must assert sold/retired status, project history and insight counts with hosted evidence.

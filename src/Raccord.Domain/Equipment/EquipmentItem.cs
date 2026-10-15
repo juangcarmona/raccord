@@ -15,6 +15,7 @@ public sealed class EquipmentItem
         Name = name;
         StockQuantity = stockQuantity;
         AvailableQuantity = stockQuantity;
+        Status = EquipmentLifecycleStatus.Active;
     }
 
     public Guid Id { get; private set; }
@@ -23,6 +24,10 @@ public sealed class EquipmentItem
     public string? ScanCode { get; private set; }
     public int StockQuantity { get; private set; }
     public int AvailableQuantity { get; private set; }
+    public EquipmentLifecycleStatus Status { get; private set; }
+    public DateTimeOffset? DisposedAt { get; private set; }
+    public string? DispositionReason { get; private set; }
+    public decimal? SaleAmount { get; private set; }
 
     public static EquipmentItem Create(string code, string name, int stockQuantity)
     {
@@ -97,6 +102,48 @@ public sealed class EquipmentItem
         StockQuantity = countedQuantity;
         AvailableQuantity = countedQuantity - bookedQuantity;
         return count;
+    }
+
+    public void Retire(string reason, DateTimeOffset disposedAt)
+    {
+        EnsureDisposable();
+        if (string.IsNullOrWhiteSpace(reason))
+            throw new BusinessRuleViolationException(
+                "equipment.retirement-reason-required",
+                "A retirement reason is required."
+            );
+        Status = EquipmentLifecycleStatus.Retired;
+        DisposedAt = disposedAt;
+        DispositionReason = reason.Trim();
+        SaleAmount = null;
+    }
+
+    public void Sell(decimal amount, string? buyer, DateTimeOffset disposedAt)
+    {
+        EnsureDisposable();
+        if (amount <= 0m)
+            throw new BusinessRuleViolationException(
+                "equipment.sale-amount-positive",
+                "A sale amount must be positive."
+            );
+        Status = EquipmentLifecycleStatus.Sold;
+        DisposedAt = disposedAt;
+        DispositionReason = buyer?.Trim();
+        SaleAmount = amount;
+    }
+
+    private void EnsureDisposable()
+    {
+        if (Status != EquipmentLifecycleStatus.Active)
+            throw new BusinessRuleViolationException(
+                "equipment.already-disposed",
+                "Only active equipment can be sold or retired."
+            );
+        if (AvailableQuantity != StockQuantity)
+            throw new BusinessRuleViolationException(
+                "equipment.booked-out",
+                "Equipment must be fully returned before it can be sold or retired."
+            );
     }
 }
 

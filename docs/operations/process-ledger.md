@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Crew availability keeps planning responses durable
+
+- **Observation:** Availability, invitations and job-board signups are separate responses to the same planning function and need independent status and duplicate constraints.
+- **Action:** Persist each response as a typed record, keep invitation and signup uniqueness at the database boundary, and exercise the complete journey with ProductShape citations and hosted visual evidence.
+- **Check:** The availability journey remains in the per-PR manifest, invalid date ranges are rejected, duplicate participation is rejected, and the hosted artifact is linked before merge.
+
 ## 2026-10-15 · Crew records keep planning inputs explicit
 
 - **Observation:** Crew, vehicle and rate data are planning inputs with different validation and defaulting rules; treating them as untyped settings would allow invalid identities, capacity and cost bands into later scheduling flows.

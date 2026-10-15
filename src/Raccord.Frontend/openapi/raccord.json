@@ -1517,6 +1517,171 @@
         }
       }
     },
+    "/api/projects/functions/{functionId}/invitations": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteCrewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewInvitationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/invitations/{invitationId}/response": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "invitationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RespondToCrewInvitationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewInvitationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/functions/{functionId}/job-board": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostFunctionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewJobResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/job-board/{jobId}/signups/{crewMemberId}": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "crewMemberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewSignupResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/billable-lines": {
       "post": {
         "tags": [
@@ -2484,6 +2649,68 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/crew/availability": {
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetCrewAvailabilityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/crew/availability/{crewMemberId}": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "crewMemberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CrewAvailabilityResponse"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4226,6 +4453,117 @@
           }
         }
       },
+      "CrewAvailabilityKind": {
+        "type": "integer"
+      },
+      "CrewAvailabilityResponse": {
+        "required": [
+          "id",
+          "crewMemberId",
+          "startDate",
+          "endDate",
+          "kind",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewAvailabilityKind"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CrewInvitationResponse": {
+        "required": [
+          "id",
+          "functionId",
+          "crewMemberId",
+          "status",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "functionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/CrewInvitationStatus"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CrewInvitationStatus": {
+        "type": "integer"
+      },
+      "CrewJobResponse": {
+        "required": [
+          "id",
+          "functionId",
+          "brief",
+          "postedAt",
+          "signupCount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "functionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "brief": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "postedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "signupCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "CrewMemberResponse": {
         "required": [
           "id",
@@ -4328,6 +4666,33 @@
           },
           "isDefault": {
             "type": "boolean"
+          }
+        }
+      },
+      "CrewSignupResponse": {
+        "required": [
+          "id",
+          "jobId",
+          "crewMemberId",
+          "signedUpAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "signedUpAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -4847,6 +5212,24 @@
           },
           "html": {
             "type": "string"
+          }
+        }
+      },
+      "InviteCrewRequest": {
+        "required": [
+          "crewMemberId"
+        ],
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -5660,6 +6043,17 @@
           "role": {
             "type": "string",
             "default": "required"
+          }
+        }
+      },
+      "PostFunctionRequest": {
+        "type": "object",
+        "properties": {
+          "brief": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -6622,6 +7016,17 @@
         },
         "description": "Registers a customer."
       },
+      "RespondToCrewInvitationRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/CrewInvitationStatus"
+          }
+        }
+      },
       "RetireEquipmentRequest": {
         "required": [
           "reason"
@@ -6707,6 +7112,38 @@
             "format": "double"
           },
           "buyer": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetCrewAvailabilityRequest": {
+        "required": [
+          "crewMemberId",
+          "startDate",
+          "endDate",
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewAvailabilityKind"
+          },
+          "remark": {
             "type": [
               "null",
               "string"

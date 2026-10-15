@@ -1018,6 +1018,42 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("api_access_tokens", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CalendarFeedRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTimeOffset?>("RevokedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("revoked_at");
+
+                    b.Property<string>("Stream")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("stream");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("token_hash");
+
+                    b.HasKey("Id")
+                        .HasName("pk_calendar_feeds");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique()
+                        .HasDatabaseName("ix_calendar_feeds_token_hash");
+
+                    b.ToTable("calendar_feeds", "workspace");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CommunicationRow", b =>
                 {
                     b.Property<Guid>("Id")

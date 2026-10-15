@@ -5,6 +5,36 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/calendar-feeds/{token}/{stream}.ics": {
+      "get": {
+        "tags": [
+          "Raccord.Web"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stream",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/auth/sign-in": {
       "post": {
         "tags": [
@@ -4312,6 +4342,94 @@
         }
       }
     },
+    "/api/integrations/calendar-feeds": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueCalendarFeedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarFeedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/integrations/calendar-feeds/{id}/regenerate": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarFeedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/integrations/calendar-feeds/{id}": {
+      "delete": {
+        "tags": [
+          "Integrations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/integrations/projects": {
       "get": {
         "tags": [
@@ -4780,6 +4898,26 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "CalendarFeedResponse": {
+        "required": [
+          "id",
+          "stream",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stream": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
           }
         }
       },
@@ -6705,6 +6843,17 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "IssueCalendarFeedRequest": {
+        "required": [
+          "stream"
+        ],
+        "type": "object",
+        "properties": {
+          "stream": {
+            "type": "string"
           }
         }
       },
@@ -8938,6 +9087,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Raccord.Web"
+    },
     {
       "name": "Authentication"
     },

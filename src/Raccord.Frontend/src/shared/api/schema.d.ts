@@ -756,6 +756,104 @@ export interface paths {
         };
         trace?: never;
     };
+    "/api/projects/{id}/packing-lines/{lineId}/exceptions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RecordPackingExceptionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-lines/{lineId}/disposition": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReviewPackingDispositionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/packing-lines/{lineId}/pack": {
         parameters: {
             query?: never;
@@ -2331,12 +2429,18 @@ export interface components {
             /** Format: int32 */
             quantity: number;
             role: string;
+            disposition: string;
             isPacked: boolean;
             isBookedOut: boolean;
             isReceived: boolean;
             packedBy: null | string;
             bookedOutBy: null | string;
             receivedBy: null | string;
+            exceptionKind: null | string;
+            exceptionDescription: null | string;
+            exceptionReportedBy: null | string;
+            /** Format: date-time */
+            exceptionReportedAt: null | string;
         };
         PackLineRequest: {
             actor: string;
@@ -2571,6 +2675,11 @@ export interface components {
             /** Format: uuid */
             teamId: null | string;
         };
+        RecordPackingExceptionRequest: {
+            kind: string;
+            description: string;
+            actor: string;
+        };
         /** @description Registers a customer. */
         RegisterCustomerRequest: {
             /** @description Registered legal name. */
@@ -2580,6 +2689,10 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+        };
+        ReviewPackingDispositionRequest: {
+            disposition: string;
+            actor: string;
         };
         /** @description Shifts scheduled project work. */
         ShiftProjectScheduleRequest: {

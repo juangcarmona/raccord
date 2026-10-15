@@ -176,6 +176,61 @@ public sealed class ProjectWorkspace(
         return ToResponse(line);
     }
 
+    /// <summary>Records a warehouse exception in the packing trace.</summary>
+    public async Task<PackingLineResponse?> RecordExceptionAsync(
+        Guid projectId,
+        Guid lineId,
+        RecordPackingExceptionRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
+        if (line is null)
+            return null;
+        line.RecordException(
+            request.Kind,
+            request.Description,
+            request.Actor,
+            DateTimeOffset.UtcNow
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(line);
+    }
+
+    /// <summary>Reviews a cross-docking or sale-return disposition.</summary>
+    public async Task<PackingLineResponse?> ReviewDispositionAsync(
+        Guid projectId,
+        Guid lineId,
+        ReviewPackingDispositionRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
+        if (line is null)
+            return null;
+        var dispositionName = request.Disposition.Replace(
+            "-",
+            string.Empty,
+            StringComparison.Ordinal
+        );
+        if (!Enum.TryParse<PackingLineDisposition>(dispositionName, true, out var disposition))
+            throw new BusinessRuleViolationException(
+                "projects.disposition-invalid",
+                $"Unknown packing disposition '{request.Disposition}'."
+            );
+        line.SetDisposition(disposition, request.Actor);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(line);
+    }
+
     /// <summary>Marks a project packing line as prepared.</summary>
     public Task<PackingLineResponse?> PackAsync(
         Guid projectId,
@@ -317,11 +372,16 @@ public sealed class ProjectWorkspace(
             line.EquipmentId,
             line.Quantity,
             line.Role.ToString().ToLowerInvariant(),
+            line.Disposition.ToString().ToLowerInvariant(),
             line.IsPacked,
             line.IsBookedOut,
             line.IsReceived,
             line.PackedBy,
             line.BookedOutBy,
-            line.ReceivedBy
+            line.ReceivedBy,
+            line.ExceptionKind,
+            line.ExceptionDescription,
+            line.ExceptionReportedBy,
+            line.ExceptionReportedAt
         );
 }

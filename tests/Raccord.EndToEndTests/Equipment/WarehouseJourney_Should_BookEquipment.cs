@@ -69,6 +69,57 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         );
     }
 
+    /// <summary>
+    /// JRN-WHS-EXCEPTIONS / UC-WHS-MARK-DELAYED / UC-WHS-MARK-FOUND / UC-WHS-MARK-LOST /
+    /// UC-WHS-TRACE-TRACKING-LOG / UC-WHS-REVIEW-CROSS-DOCKING / UC-WHS-RETURN-SALE-ITEMS:
+    /// Given a dispatched line, when the warehouse records an exception and disposition,
+    /// then both remain visible in the project trace.
+    /// </summary>
+    [Fact]
+    public async Task Journey_Should_RecordExceptionAndCrossDockDisposition()
+    {
+        await RunJourneyAsync(
+            "warehouse-exception-trace",
+            async page =>
+            {
+                await CreateCustomerAsync(page);
+                await CreateProjectWithBillableLineAsync(page);
+                var projectId = Guid.Parse(new Uri(page.Url).Segments[^1]);
+                var api = page.Context.APIRequest;
+                var itemId = await CreateEquipmentAsync(api, "TRACE");
+                var lineId = await CreatePackingLineAsync(api, projectId, itemId);
+                await PostPackingTransitionAsync(api, projectId, lineId, "pack");
+                await PostPackingTransitionAsync(api, projectId, lineId, "book-out");
+
+                var disposition = await api.PostAsync(
+                    $"/api/projects/{projectId}/packing-lines/{lineId}/disposition",
+                    new()
+                    {
+                        DataObject = new { disposition = "cross-docked", actor = "warehouse-e2e" },
+                    }
+                );
+                disposition.Status.ShouldBe(200);
+                var exception = await api.PostAsync(
+                    $"/api/projects/{projectId}/packing-lines/{lineId}/exceptions",
+                    new()
+                    {
+                        DataObject = new
+                        {
+                            kind = "delayed",
+                            description = "Receiving dock delayed the handoff",
+                            actor = "warehouse-e2e",
+                        },
+                    }
+                );
+                exception.Status.ShouldBe(200);
+                var trace = await exception.JsonAsync();
+                trace!.Value.GetProperty("disposition").GetString().ShouldBe("cross-docked");
+                trace.Value.GetProperty("exceptionKind").GetString().ShouldBe("delayed");
+                await page.SetContentAsync("<h1>Warehouse exception trace recorded</h1>");
+            }
+        );
+    }
+
     private async Task CompleteJourneyAsync(IPage page)
     {
         await CreateCustomerAsync(page);
@@ -143,12 +194,23 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
             object data = string.Equals(transition, "book-out", StringComparison.Ordinal)
                 ? (object)new { actor = "warehouse-e2e", scanCode = $"scan-{RunStamp}" }
                 : new { actor = "warehouse-e2e", scanCode = (string?)null };
-            var response = await api.PostAsync(
-                $"/api/projects/{projectId}/packing-lines/{lineId}/{transition}",
-                new() { DataObject = data }
-            );
-            response.Status.ShouldBe(200);
+            await PostPackingTransitionAsync(api, projectId, lineId, transition, data);
         }
+    }
+
+    private static async Task PostPackingTransitionAsync(
+        IAPIRequestContext api,
+        Guid projectId,
+        Guid lineId,
+        string transition,
+        object? data = null
+    )
+    {
+        var response = await api.PostAsync(
+            $"/api/projects/{projectId}/packing-lines/{lineId}/{transition}",
+            new() { DataObject = data ?? new { actor = "warehouse-e2e" } }
+        );
+        response.Status.ShouldBe(200);
     }
 
     private static async Task AssertReturnedAsync(

@@ -13,6 +13,7 @@ var documents = builder
 var migrations = builder
     .AddProject<Projects.Raccord_Web>("migrations")
     .WithArgs("migrate")
+    .WithEnvironment("Raccord__SeedDemoData", "true")
     .WithReference(database)
     .WaitFor(database);
 

@@ -1898,6 +1898,50 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("vehicles", "crew");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.WorkdayEventRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Actor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("actor");
+
+                    b.Property<Guid>("CrewMemberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("crew_member_id");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("kind");
+
+                    b.Property<DateTimeOffset>("OccurredAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("occurred_at");
+
+                    b.Property<DateTimeOffset>("RecordedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("recorded_at");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("remark");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workday_events");
+
+                    b.HasIndex("CrewMemberId", "OccurredAt")
+                        .HasDatabaseName("ix_workday_events_crew_member_id_occurred_at");
+
+                    b.ToTable("workday_events", "crew");
+                });
+
             modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>
                 {
                     b.Property<Guid>("Id")

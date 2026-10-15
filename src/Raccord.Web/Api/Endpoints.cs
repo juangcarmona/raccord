@@ -499,6 +499,16 @@ internal static class Endpoints
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)
     {
+        api.MapGet(
+                "/invoicing/queue",
+                async (
+                    DateOnly? from,
+                    DateOnly? to,
+                    InvoicingWorkflow invoicing,
+                    CancellationToken ct
+                ) => TypedResults.Ok(await invoicing.ListQueueAsync(from, to, ct))
+            )
+            .WithTags("Invoicing");
         var drafts = api.MapGroup("/invoice-drafts").WithTags("Invoicing");
         drafts.MapGet(
             "/",

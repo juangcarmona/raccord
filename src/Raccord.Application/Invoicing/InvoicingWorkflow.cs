@@ -15,6 +15,7 @@ using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using Raccord.SharedKernel.Common;
+using Raccord.SharedKernel.Pricing;
 
 namespace Raccord.Modules.Invoicing;
 
@@ -118,6 +119,55 @@ public sealed class InvoicingWorkflow(
         }
 
         return result;
+    }
+
+    /// <summary>Lists project work eligible for the staged-invoicing queue.</summary>
+    public async Task<IReadOnlyList<InvoiceQueueEntryResponse>> ListQueueAsync(
+        DateOnly? from,
+        DateOnly? to,
+        CancellationToken cancellationToken
+    )
+    {
+        var today = clock.Today;
+        var start = from ?? today.AddMonths(-1);
+        var end = to ?? today.AddMonths(1);
+        var customers = (
+            await parties.ListAsync(cancellationToken).ConfigureAwait(false)
+        ).ToDictionary(party => party.Id, party => party.LegalName);
+        var entries = new List<InvoiceQueueEntryResponse>();
+        foreach (var project in await projects.ListAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var unbilled = project
+                .BillableLines.Where(line => line.State == BillingState.Unbilled)
+                .ToList();
+            if (unbilled.Count == 0 || project.EndDate < start || project.EndDate > end)
+            {
+                continue;
+            }
+
+            var amount = unbilled.Aggregate(
+                Money.Zero(Currency.Eur),
+                (sum, line) => sum + line.Pricing.NetAmount
+            );
+            entries.Add(
+                new(
+                    project.Id,
+                    project.Name,
+                    project.CustomerId,
+                    customers.GetValueOrDefault(project.CustomerId, string.Empty),
+                    project.EndDate,
+                    project.EndDate < today,
+                    unbilled.Count,
+                    amount.Amount,
+                    amount.Currency.Code
+                )
+            );
+        }
+
+        return entries
+            .OrderBy(entry => entry.DueDate)
+            .ThenBy(entry => entry.ProjectName, StringComparer.Ordinal)
+            .ToList();
     }
 
     /// <summary>Removes a line from an open draft and makes its billable line available again.</summary>

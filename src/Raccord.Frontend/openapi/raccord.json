@@ -146,6 +146,46 @@
         }
       }
     },
+    "/api/invoicing/queue": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceQueueEntryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/audit-events": {
       "get": {
         "tags": [
@@ -2433,6 +2473,55 @@
         },
         "description": "A line of a draft or issued invoice."
       },
+      "InvoiceQueueEntryResponse": {
+        "required": [
+          "projectId",
+          "projectName",
+          "customerId",
+          "customerName",
+          "dueDate",
+          "overdue",
+          "unbilledLineCount",
+          "unbilledNetAmount",
+          "currency"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "overdue": {
+            "type": "boolean"
+          },
+          "unbilledLineCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unbilledNetAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "description": "One project currently eligible for the staged-invoicing queue."
+      },
       "InvoiceSeriesResponse": {
         "required": [
           "code",
@@ -3572,6 +3661,9 @@
       "name": "Organization"
     },
     {
+      "name": "Invoicing"
+    },
+    {
       "name": "Audit"
     },
     {
@@ -3585,9 +3677,6 @@
     },
     {
       "name": "Project coordination"
-    },
-    {
-      "name": "Invoicing"
     }
   ]
 }

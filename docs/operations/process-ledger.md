@@ -260,6 +260,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Gate invoice reads and payment writes with explicit API scopes and delegate recording to the existing invoicing workflow, preserving its idempotency and validation rules.
 - **Check:** The ProductShape-cited payment journey proves the scoped invoice read and payment path, with hosted screenshot and trace evidence.
 
+## 2026-10-15 · Inbound e-invoice status is an auditable local boundary
+
+- **Observation:** Inbound e-invoice protocol and legal exchange requirements are not selected yet, so pretending to implement a public-platform connector would create false compliance confidence.
+- **Action:** Preserve the received XML and content hash locally, expose explicit pending/accepted/paid transitions, and leave external exchange behind a future adapter boundary.
+- **Check:** The ProductShape-cited journey receives a UBL document, verifies acceptance and payment transitions, lists the final state, and links hosted browser evidence.
+
 ## 2026-10-15 · Structured exports derive from immutable invoices
 
 - **Observation:** A structured e-invoice must be a reproducible legal projection, not a second editable invoice representation.

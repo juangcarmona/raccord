@@ -4143,6 +4143,98 @@
         }
       }
     },
+    "/api/e-invoices/inbound": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InboundEInvoiceResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceiveInboundEInvoiceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboundEInvoiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/e-invoices/inbound/{id}/status": {
+      "put": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInboundEInvoiceStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboundEInvoiceResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/finance/report": {
       "get": {
         "tags": [
@@ -6502,6 +6594,78 @@
           }
         }
       },
+      "InboundEInvoiceResponse": {
+        "required": [
+          "id",
+          "invoiceNumber",
+          "supplierName",
+          "supplierTaxId",
+          "issueDate",
+          "payableAmount",
+          "currency",
+          "receivedAt",
+          "statusDueOn",
+          "status",
+          "reason",
+          "paidOn",
+          "contentHash"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "supplierName": {
+            "type": "string"
+          },
+          "supplierTaxId": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "payableAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "receivedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statusDueOn": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paidOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "contentHash": {
+            "type": "string"
+          }
+        },
+        "description": "An inbound structured invoice and its current reporting status."
+      },
       "IntegrationProjectResponse": {
         "required": [
           "id",
@@ -8228,6 +8392,18 @@
         },
         "description": "Project classification."
       },
+      "ReceiveInboundEInvoiceRequest": {
+        "required": [
+          "xml"
+        ],
+        "type": "object",
+        "properties": {
+          "xml": {
+            "type": "string"
+          }
+        },
+        "description": "Receives a structured invoice from the configured exchange boundary."
+      },
       "ReceiveLineRequest": {
         "required": [
           "actor"
@@ -9029,6 +9205,31 @@
             ]
           }
         }
+      },
+      "UpdateInboundEInvoiceStatusRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paidOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          }
+        },
+        "description": "Changes the business status of an inbound e-invoice."
       },
       "UpdateIssuerProfileRequest": {
         "required": [

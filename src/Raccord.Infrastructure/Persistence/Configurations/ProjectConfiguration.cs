@@ -14,6 +14,8 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder.Property(project => project.Name).HasMaxLength(200);
         builder.Property(project => project.DefaultDiscountPercent).HasPrecision(5, 2);
         builder.Property(project => project.PaymentTerms).HasMaxLength(200);
+        builder.Property(project => project.RefundableDepositAmount).HasPrecision(18, 2);
+        builder.Property(project => project.DepositStatus).HasConversion<string>().HasMaxLength(20);
         builder.Property(project => project.Status).HasConversion<string>().HasMaxLength(20);
         builder.HasConcurrencyToken();
 

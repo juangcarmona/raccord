@@ -117,6 +117,8 @@ public sealed class ProjectWorkspace(
                     project.EndDate,
                     project.DefaultDiscountPercent,
                     project.PaymentTerms,
+                    project.RefundableDepositAmount,
+                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
                     ToContractStatus(project.Status),
                     unbilled.Count,
                     amount.Amount,
@@ -312,6 +314,38 @@ public sealed class ProjectWorkspace(
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
 
+    /// <summary>Configures a fixed refundable deposit for a project.</summary>
+    public async Task<ProjectResponse?> SetDepositAsync(
+        Guid id,
+        SetRefundableDepositRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(id, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.SetRefundableDeposit(request.Amount);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        var customer = await parties.FindAsync(project.CustomerId, ct).ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Updates the refundable deposit lifecycle status.</summary>
+    public async Task<ProjectResponse?> SetDepositStatusAsync(
+        Guid id,
+        SetDepositStatusRequest request,
+        CancellationToken ct
+    )
+    {
+        var project = await projects.FindAsync(id, ct).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.SetDepositStatus((Raccord.Domain.Projects.DepositStatus)request.Status);
+        await unitOfWork.SaveChangesAsync(ct).ConfigureAwait(false);
+        var customer = await parties.FindAsync(project.CustomerId, ct).ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
     private static ProjectResponse ToResponse(Project project, string customerName) =>
         new(
             project.Id,
@@ -322,6 +356,8 @@ public sealed class ProjectWorkspace(
             project.EndDate,
             project.DefaultDiscountPercent,
             project.PaymentTerms,
+            project.RefundableDepositAmount,
+            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
             ToContractStatus(project.Status),
             Currency.Eur.Code,
             [.. project.BillableLines.Select(line => line.ToResponse())],

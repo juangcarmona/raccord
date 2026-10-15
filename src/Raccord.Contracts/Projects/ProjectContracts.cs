@@ -11,6 +11,17 @@ public enum ProjectStatus
     Cancelled,
 }
 
+public enum DepositStatus
+{
+    NotPaid,
+    Paid,
+    Returned,
+}
+
+public sealed record SetRefundableDepositRequest(decimal Amount);
+
+public sealed record SetDepositStatusRequest(DepositStatus Status);
+
 public sealed record UpdateProjectStatusRequest(ProjectStatus Status);
 
 public sealed record CreateProjectTemplateRequest(string Name, Guid CustomerId);
@@ -108,6 +119,8 @@ public sealed record AddBillableLineRequest(
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
 /// <param name="PaymentTerms">Payment terms copied from the contact.</param>
+/// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
+/// <param name="DepositStatus">Current deposit lifecycle status.</param>
 /// <param name="Status">Project planning status.</param>
 /// <param name="UnbilledLineCount">Lines not yet in a draft or invoice.</param>
 /// <param name="UnbilledNetAmount">Net amount of the unbilled lines.</param>
@@ -121,6 +134,8 @@ public sealed record ProjectSummaryResponse(
     DateOnly EndDate,
     decimal DefaultDiscountPercent,
     string? PaymentTerms,
+    decimal? RefundableDepositAmount,
+    DepositStatus DepositStatus,
     ProjectStatus Status,
     int UnbilledLineCount,
     decimal UnbilledNetAmount,
@@ -136,6 +151,8 @@ public sealed record ProjectSummaryResponse(
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="DefaultDiscountPercent">Discount copied from the contact.</param>
 /// <param name="PaymentTerms">Payment terms copied from the contact.</param>
+/// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
+/// <param name="DepositStatus">Current deposit lifecycle status.</param>
 /// <param name="Status">Project planning status.</param>
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="BillableLines">Billable work.</param>
@@ -150,6 +167,8 @@ public sealed record ProjectResponse(
     DateOnly EndDate,
     decimal DefaultDiscountPercent,
     string? PaymentTerms,
+    decimal? RefundableDepositAmount,
+    DepositStatus DepositStatus,
     ProjectStatus Status,
     string Currency,
     IReadOnlyList<BillableLineResponse> BillableLines,

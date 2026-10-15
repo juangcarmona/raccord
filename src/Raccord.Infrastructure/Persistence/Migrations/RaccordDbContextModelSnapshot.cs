@@ -123,6 +123,50 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_number_sequences", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Billing.InvoicePayment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)")
+                        .HasColumnName("amount");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date")
+                        .HasColumnName("date");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("invoice_id");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("method");
+
+                    b.Property<DateTimeOffset>("RecordedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("recorded_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_invoice_payments");
+
+                    b.HasIndex("InvoiceId")
+                        .HasDatabaseName("ix_invoice_payments_invoice_id");
+
+                    b.ToTable("invoice_payments", (string)null);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceSeries", b =>
                 {
                     b.Property<string>("Code")
@@ -370,6 +414,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("numeric(5,2)")
                         .HasColumnName("default_discount_percent");
 
+                    b.Property<string>("DepositStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("deposit_status");
+
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date")
                         .HasColumnName("end_date");
@@ -384,6 +434,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("payment_terms");
+
+                    b.Property<decimal?>("RefundableDepositAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)")
+                        .HasColumnName("refundable_deposit_amount");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date")

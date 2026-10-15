@@ -55,11 +55,45 @@ public sealed class Project
     /// <summary>Payment terms copied from the contact at creation time.</summary>
     public string? PaymentTerms { get; private set; }
 
+    /// <summary>Fixed refundable security deposit, when requested.</summary>
+    public decimal? RefundableDepositAmount { get; private set; }
+
+    /// <summary>not-paid, paid, or returned.</summary>
+    public DepositStatus DepositStatus { get; private set; }
+
     /// <summary>Current planning lifecycle status.</summary>
     public ProjectStatus Status { get; private set; }
 
     /// <summary>Changes the project planning lifecycle status.</summary>
     public void SetStatus(ProjectStatus status) => Status = status;
+
+    /// <summary>Requests or changes the fixed refundable deposit.</summary>
+    public void SetRefundableDeposit(decimal amount)
+    {
+        if (amount <= 0m)
+            throw new BusinessRuleViolationException(
+                "deposit.amount-positive",
+                "A refundable deposit must be a positive fixed amount."
+            );
+        RefundableDepositAmount = amount;
+        DepositStatus = DepositStatus.NotPaid;
+    }
+
+    /// <summary>Moves a deposit through receipt and return.</summary>
+    public void SetDepositStatus(DepositStatus status)
+    {
+        if (RefundableDepositAmount is null)
+            throw new BusinessRuleViolationException(
+                "deposit.not-configured",
+                "Configure a deposit first."
+            );
+        if (status == DepositStatus.Returned && DepositStatus != DepositStatus.Paid)
+            throw new BusinessRuleViolationException(
+                "deposit.return-requires-paid",
+                "A deposit must be paid before it can be returned."
+            );
+        DepositStatus = status;
+    }
 
     /// <summary>Moves the project and all planned equipment by the same number of days.</summary>
     public void ShiftDates(int days)

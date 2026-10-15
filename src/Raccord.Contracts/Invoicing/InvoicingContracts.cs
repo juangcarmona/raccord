@@ -33,6 +33,32 @@ public sealed record StandaloneInvoiceLineRequest(
 /// <param name="IssueDate">Legal issue date; today in the organization's time zone when omitted.</param>
 public sealed record FinalizeInvoiceDraftRequest(DateOnly? IssueDate);
 
+/// <summary>Records money received against an issued invoice.</summary>
+public sealed record RecordInvoicePaymentRequest(
+    DateOnly Date,
+    string Method,
+    decimal Amount,
+    string? Description
+);
+
+/// <summary>Payment history and current outstanding balance.</summary>
+public sealed record InvoicePaymentResponse(
+    Guid Id,
+    DateOnly Date,
+    string Method,
+    decimal Amount,
+    string? Description,
+    DateTimeOffset RecordedAt
+);
+
+/// <summary>Payment history and outstanding balance for an issued invoice.</summary>
+public sealed record InvoicePaymentSummaryResponse(
+    IReadOnlyList<InvoicePaymentResponse> Payments,
+    decimal TotalPaid,
+    decimal Outstanding,
+    string Status
+);
+
 /// <summary>Starts a rectifying draft from one immutable issued invoice.</summary>
 public sealed record RectifyInvoiceRequest(string Kind, string Reason);
 

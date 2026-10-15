@@ -73,6 +73,7 @@ public static class DependencyInjection
         services.AddScoped<IProjectTemplateRepository, ProjectTemplateRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
+        services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
         services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();
@@ -87,7 +88,6 @@ public static class DependencyInjection
         services.AddScoped<DatabaseMaintenance>();
         services.AddScoped<LetterheadCatalog>();
         services.AddScoped<CommunicationCatalog>();
-
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);
         services.AddSingleton<IClock>(provider => new SystemClock(

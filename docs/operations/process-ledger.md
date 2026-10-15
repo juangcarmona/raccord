@@ -193,3 +193,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Notes, files, folders, fields, tags and saved views all need project scoping and history; separate MVP tables would duplicate ordering and audit behavior.
 - **Action:** Persist a typed project-context entry with optional payload fields, append a shared audit event for every addition, and expose one context read model for the project page.
 - **Check:** The ProductShape-cited browser journey creates all six record kinds and verifies their order plus six retained history events; hosted success capture supplies screenshot, trace and video evidence.
+
+## 2026-10-15 · Hosted browser setup needs recovery
+
+- **Observation:** A hosted E2E run can remain indefinitely in Playwright browser installation with no log progress, blocking the feedback loop before any journey executes.
+- **Action:** Treat an unchanged setup step as runner failure, cancel the run, and retrigger from a small process-ledger update; keep the application merge blocked until a fresh E2E artifact exists.
+- **Check:** A restarted run must reach journey execution and upload success evidence before merge.

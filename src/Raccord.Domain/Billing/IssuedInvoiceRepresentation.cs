@@ -208,7 +208,7 @@ public sealed record IssuedInvoiceRepresentation(string Json, string ContentHash
         string Schema,
         Guid Id,
         Guid DraftId,
-        Guid ProjectId,
+        Guid? ProjectId,
         Guid CustomerId,
         Guid? OriginalInvoiceId,
         string? RectificationKind,

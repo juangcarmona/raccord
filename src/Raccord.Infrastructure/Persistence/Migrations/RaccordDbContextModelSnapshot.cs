@@ -50,7 +50,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("original_invoice_id");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
@@ -792,7 +792,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(32)")
                         .HasColumnName("number");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
@@ -1057,7 +1057,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_invoice_drafts_projects_project_id");
 
                     b.OwnsMany("Raccord.Domain.Billing.InvoiceDraftLine", "Lines", b1 =>
@@ -1100,7 +1099,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("numeric(18,4)")
                                 .HasColumnName("quantity");
 
-                            b1.Property<Guid>("SourceBillableLineId")
+                            b1.Property<Guid?>("SourceBillableLineId")
                                 .HasColumnType("uuid")
                                 .HasColumnName("source_billable_line_id");
 

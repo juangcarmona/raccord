@@ -2400,6 +2400,45 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/invoice-drafts/standalone": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateStandaloneInvoiceRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoiceDraftResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts/{id}/lines/{lineId}": {
         parameters: {
             query?: never;
@@ -2569,6 +2608,50 @@ export interface paths {
                     "application/json": components["schemas"]["RectifyInvoiceRequest"];
                 };
             };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoiceDraftResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoices/{id}/duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
             responses: {
                 /** @description Created */
                 201: {
@@ -3237,6 +3320,15 @@ export interface components {
             /** Format: uuid */
             customerId: string;
         };
+        /** @description Creates an invoice draft that is not linked to a project. */
+        CreateStandaloneInvoiceRequest: {
+            /** Format: uuid */
+            customerId: string;
+            /** Format: date */
+            operationDate: null | string;
+            lines: components["schemas"]["StandaloneInvoiceLineRequest"][];
+            seriesCode: null | string;
+        };
         /** @description A customer. */
         CustomerResponse: {
             /**
@@ -3390,9 +3482,9 @@ export interface components {
              * Format: uuid
              * @description Billed project.
              */
-            projectId: string;
+            projectId: null | string;
             /** @description Project name. */
-            projectName: string;
+            projectName: null | string;
             /**
              * Format: uuid
              * @description Billed customer.
@@ -3435,9 +3527,9 @@ export interface components {
              * Format: uuid
              * @description Billed project.
              */
-            projectId: string;
+            projectId: null | string;
             /** @description Project name. */
-            projectName: string;
+            projectName: null | string;
             /** @description Customer legal name. */
             customerName: string;
             /**
@@ -3593,7 +3685,7 @@ export interface components {
              * Format: uuid
              * @description Billed project.
              */
-            projectId: string;
+            projectId: null | string;
             /**
              * Format: uuid
              * @description Billed customer.
@@ -3641,7 +3733,7 @@ export interface components {
              * Format: uuid
              * @description Billed project.
              */
-            projectId: string;
+            projectId: null | string;
         };
         /** @description The legal issuer of invoices. */
         IssuerProfileResponse: {
@@ -3951,6 +4043,18 @@ export interface components {
         /** @description Records signature metadata for an accepted quote. */
         SignQuoteRequest: {
             signerName: string;
+        };
+        /** @description A manually entered standalone invoice line. */
+        StandaloneInvoiceLineRequest: {
+            description: string;
+            /** Format: double */
+            quantity: number;
+            /** Format: double */
+            unitPrice: number;
+            /** Format: double */
+            discountPercent: number;
+            /** Format: double */
+            vatRate: number;
         };
         StockCountLine: {
             /** Format: uuid */

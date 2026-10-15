@@ -15,5 +15,5 @@ public sealed record IssuedInvoiceListItem(
     string RecipientName,
     decimal Total,
     string Currency,
-    Guid ProjectId
+    Guid? ProjectId
 );

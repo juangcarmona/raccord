@@ -219,3 +219,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: AppHost journeys share a database, so a boot journey cannot safely assert an empty global collection after another journey creates data.
 - Action: Assert that the boot page and its API-backed rendering work; reserve empty-state assertions for isolated fixtures.
 - Check: E2E journeys remain order-independent and the boot journey does not depend on another journey's database state.
+
+## 2026-10-15 · Standalone and duplicated invoices
+
+- Observation: Making project linkage optional affects the draft aggregate, immutable invoice representation, indexed persistence rows, generated API types, and existing draft UI assumptions; an API-only change leaves nullable values unsafe in the frontend.
+- Action: Model nullable project identity end-to-end, regenerate the OpenAPI client, and add explicit standalone/duplicate assertions to both the integration slice and the existing Playwright money journey.
+- Check: The migration, repository-wide CSharpier check, frontend typecheck/tests, PostgreSQL-backed integration test, and Playwright trace/screenshot artifact all pass before merge.

@@ -35,7 +35,9 @@ export function DraftsPage() {
                                     {drafts.map((draft) => (
                                         <tr key={draft.id}>
                                             <th scope="row">
-                                                <Link to={`/drafts/${draft.id}`}>{draft.projectName}</Link>
+                                                <Link to={`/drafts/${draft.id}`}>
+                                                    {draft.projectName ?? t("drafts.standalone")}
+                                                </Link>
                                             </th>
                                             <td>{draft.customerName}</td>
                                             <td className="num">{draft.lineCount}</td>

@@ -89,6 +89,7 @@ builder.Services.AddScoped<ProjectContext>();
 builder.Services.AddScoped<ProjectTimeTracking>();
 builder.Services.AddScoped<ProjectCoordination>();
 builder.Services.AddScoped<InvoicingWorkflow>();
+builder.Services.AddScoped<InboundEInvoiceWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<AuditLog>();
 builder.Services.AddScoped<InstallationSetup>();

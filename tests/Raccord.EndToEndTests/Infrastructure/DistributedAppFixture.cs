@@ -135,7 +135,17 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             await DisposeWithTimeoutAsync(browser.DisposeAsync, "browser");
         }
 
-        playwright?.Dispose();
+        if (playwright is not null)
+        {
+            try
+            {
+                await Task.Run(playwright.Dispose).WaitAsync(TimeSpan.FromSeconds(30));
+            }
+            catch (TimeoutException)
+            {
+                Console.Error.WriteLine("[e2e-fixture] playwright disposal timed out");
+            }
+        }
 
         if (app is not null)
         {

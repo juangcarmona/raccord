@@ -92,9 +92,10 @@ public static class Extensions
         ArgumentNullException.ThrowIfNull(app);
         app.MapHealthChecks(ReadinessPath).AllowAnonymous();
         app.MapHealthChecks(
-            LivenessPath,
-            new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") }
-        ).AllowAnonymous();
+                LivenessPath,
+                new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") }
+            )
+            .AllowAnonymous();
         return app;
     }
 }

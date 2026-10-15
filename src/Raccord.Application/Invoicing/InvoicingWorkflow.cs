@@ -22,6 +22,7 @@ namespace Raccord.Application.Invoicing;
 public sealed class InvoicingWorkflow(
     IInvoiceDraftRepository drafts,
     IIssuedInvoiceRepository invoices,
+    IInvoicePaymentRepository payments,
     IInvoiceSeriesRepository series,
     IProjectRepository projects,
     IPartyDirectory parties,
@@ -362,6 +363,60 @@ public sealed class InvoicingWorkflow(
         return record?.Invoice.ToResponse(record.ContentHash);
     }
 
+    /// <summary>Records a validated payment and recalculates the outstanding balance.</summary>
+    public async Task<InvoicePaymentSummaryResponse?> RecordPaymentAsync(
+        Guid invoiceId,
+        RecordInvoicePaymentRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var invoice = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (invoice is null)
+            return null;
+        var existing = await payments.ListAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        var outstanding =
+            invoice.Invoice.Totals.Total.Amount - existing.Sum(payment => payment.Amount);
+        if (request.Amount > outstanding)
+            throw new BusinessRuleViolationException(
+                "payment.exceeds-outstanding",
+                "The payment cannot exceed the invoice outstanding amount."
+            );
+
+        var payment = InvoicePayment.Create(
+            invoiceId,
+            request.Date,
+            request.Method,
+            request.Amount,
+            request.Description,
+            clock.UtcNow
+        );
+        payments.Add(payment);
+        Record(
+            "invoice.payment-recorded",
+            InvoiceEntity,
+            invoiceId,
+            ("paymentId", payment.Id.ToString()),
+            ("amount", Text(payment.Amount))
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return await DescribePaymentsAsync(invoice.Invoice, [.. existing, payment])
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>Reads payment history and the derived payment status.</summary>
+    public async Task<InvoicePaymentSummaryResponse?> ListPaymentsAsync(
+        Guid invoiceId,
+        CancellationToken cancellationToken
+    )
+    {
+        var invoice = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (invoice is null)
+            return null;
+        var existing = await payments.ListAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        return await DescribePaymentsAsync(invoice.Invoice, existing).ConfigureAwait(false);
+    }
+
     /// <summary>Duplicates an issued invoice into a new draft using current source data.</summary>
     public async Task<InvoiceDraftResponse?> DuplicateInvoiceAsync(
         Guid invoiceId,
@@ -597,6 +652,34 @@ public sealed class InvoicingWorkflow(
                 "numbering.default-series-missing",
                 "No default invoice series is configured."
             );
+    }
+
+    private static Task<InvoicePaymentSummaryResponse> DescribePaymentsAsync(
+        IssuedInvoice invoice,
+        IReadOnlyList<InvoicePayment> payments
+    )
+    {
+        var totalPaid = payments.Sum(payment => payment.Amount);
+        var outstanding = invoice.Totals.Total.Amount - totalPaid;
+        return Task.FromResult(
+            new InvoicePaymentSummaryResponse(
+                [
+                    .. payments.Select(payment => new InvoicePaymentResponse(
+                        payment.Id,
+                        payment.Date,
+                        payment.Method,
+                        payment.Amount,
+                        payment.Description,
+                        payment.RecordedAt
+                    )),
+                ],
+                totalPaid,
+                outstanding,
+                outstanding == 0m ? "paid"
+                    : totalPaid == 0m ? "unpaid"
+                    : "partially-paid"
+            )
+        );
     }
 
     private async Task<Project> RequireProjectAsync(

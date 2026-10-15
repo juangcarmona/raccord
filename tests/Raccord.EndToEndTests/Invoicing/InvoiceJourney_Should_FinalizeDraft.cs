@@ -33,10 +33,24 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 );
                 queue.Ok.ShouldBeTrue();
                 (await queue.TextAsync()).ShouldContain($"Promo E2E {RunStamp}");
+                await AssertDepositAsync(page, new Uri(page.Url).Segments[^1]);
 
                 await FinalizeDraftAsync(page);
 
                 var invoiceId = new Uri(page.Url).Segments[^1];
+                var payment = await page.APIRequest.PostAsync(
+                    $"/api/invoices/{invoiceId}/payments",
+                    new APIRequestContextOptions
+                    {
+                        Data =
+                            "{\"date\":\"2026-09-18\",\"method\":\"bank-transfer\",\"amount\":100,\"description\":\"E2E payment\"}",
+                        Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                        {
+                            ["content-type"] = "application/json",
+                        },
+                    }
+                );
+                payment.Status.ShouldBe(201);
                 await AssertDuplicateAndStandaloneAsync(page, invoiceId);
 
                 var englishDocument = await page.APIRequest.GetAsync(
@@ -95,5 +109,45 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         );
         standalone.Status.ShouldBe(201);
         (await standalone.TextAsync()).ShouldContain("Standalone E2E service");
+    }
+
+    private static async Task AssertDepositAsync(IPage page, string projectId)
+    {
+        var configure = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit",
+            new APIRequestContextOptions
+            {
+                Data = "{\"amount\":500}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        configure.Ok.ShouldBeTrue();
+        var paid = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new APIRequestContextOptions
+            {
+                Data = "{\"status\":1}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        paid.Ok.ShouldBeTrue();
+        var returned = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new APIRequestContextOptions
+            {
+                Data = "{\"status\":2}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        returned.Ok.ShouldBeTrue();
     }
 }

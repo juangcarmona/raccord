@@ -225,3 +225,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Making project linkage optional affects the draft aggregate, immutable invoice representation, indexed persistence rows, generated API types, and existing draft UI assumptions; an API-only change leaves nullable values unsafe in the frontend.
 - Action: Model nullable project identity end-to-end, regenerate the OpenAPI client, and add explicit standalone/duplicate assertions to both the integration slice and the existing Playwright money journey.
 - Check: The migration, repository-wide CSharpier check, frontend typecheck/tests, PostgreSQL-backed integration test, and Playwright trace/screenshot artifact all pass before merge.
+
+## 2026-10-15 · Payments and refundable deposits
+
+- Observation: Payment status is derived data and must never be stored independently from the issued invoice total and payment history; deposit lifecycle has a separate security-liability meaning.
+- Action: Keep payments append-only, reject overpayment before persistence, derive unpaid/partially-paid/paid from the aggregate, and model deposits on projects with explicit not-paid/paid/returned transitions.
+- Check: Integration coverage settles an invoice through partial then full payment, while the Playwright journey exercises deposit configuration, receipt, return, and payment APIs with hosted screenshots/traces.

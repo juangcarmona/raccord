@@ -79,6 +79,8 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         );
         reloaded!.ContentHash.ShouldBe(invoice.ContentHash);
 
+        await AssertPaymentsAsync(invoice.Id);
+
         await AssertPdfDocumentAsync(invoice.Id);
 
         await AssertEnglishDocumentAsync(invoice.Id);
@@ -152,6 +154,30 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         return (await response.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
     }
 
+    private async Task AssertPaymentsAsync(Guid invoiceId)
+    {
+        var partial = await client.PostAsJsonAsync(
+            $"/api/invoices/{invoiceId}/payments",
+            new RecordInvoicePaymentRequest(IssueDate, "bank-transfer", 500m, "Deposit received")
+        );
+        partial.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var partialSummary = (
+            await partial.Content.ReadFromJsonAsync<InvoicePaymentSummaryResponse>()
+        )!;
+        partialSummary.TotalPaid.ShouldBe(500m);
+        partialSummary.Outstanding.ShouldBe(1048.80m);
+        partialSummary.Status.ShouldBe("partially-paid");
+
+        var paid = await client.PostAsJsonAsync(
+            $"/api/invoices/{invoiceId}/payments",
+            new RecordInvoicePaymentRequest(IssueDate, "card", 1048.80m, null)
+        );
+        paid.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var paidSummary = (await paid.Content.ReadFromJsonAsync<InvoicePaymentSummaryResponse>())!;
+        paidSummary.Outstanding.ShouldBe(0m);
+        paidSummary.Status.ShouldBe("paid");
+    }
+
     private async Task MarkProjectActiveAsync(Guid projectId)
     {
         var response = await client.PutAsJsonAsync(
@@ -204,6 +230,8 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
                 "invoice.issued",
                 "invoice.document.stored",
                 "invoice.document.regenerated",
+                "invoice.payment-recorded",
+                "invoice.payment-recorded",
             ]);
         audit![0].Details["contentHash"].ShouldBe(contentHash);
     }

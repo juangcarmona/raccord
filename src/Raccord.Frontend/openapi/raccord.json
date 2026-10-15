@@ -2049,6 +2049,92 @@
         }
       }
     },
+    "/api/projects/{id}/deposit": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRefundableDepositRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/deposit/status": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetDepositStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -2344,6 +2430,80 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InvoiceDraftResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}/payments": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoicePaymentSummaryResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordInvoicePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoicePaymentSummaryResponse"
                 }
               }
             }
@@ -3538,6 +3698,9 @@
         },
         "description": "A customer."
       },
+      "DepositStatus": {
+        "type": "integer"
+      },
       "EquipmentAvailabilityResponse": {
         "required": [
           "itemId",
@@ -4128,6 +4291,74 @@
           }
         },
         "description": "A line of a draft or issued invoice."
+      },
+      "InvoicePaymentResponse": {
+        "required": [
+          "id",
+          "date",
+          "method",
+          "amount",
+          "description",
+          "recordedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "method": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recordedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "Payment history and current outstanding balance."
+      },
+      "InvoicePaymentSummaryResponse": {
+        "required": [
+          "payments",
+          "totalPaid",
+          "outstanding",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoicePaymentResponse"
+            }
+          },
+          "totalPaid": {
+            "type": "number",
+            "format": "double"
+          },
+          "outstanding": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "description": "Payment history and outstanding balance for an issued invoice."
       },
       "InvoiceQueueEntryResponse": {
         "required": [
@@ -4740,6 +4971,8 @@
           "endDate",
           "defaultDiscountPercent",
           "paymentTerms",
+          "refundableDepositAmount",
+          "depositStatus",
           "status",
           "currency",
           "billableLines"
@@ -4786,6 +5019,18 @@
             ],
             "description": "Payment terms copied from the contact."
           },
+          "refundableDepositAmount": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "description": "Fixed refundable deposit.",
+            "format": "double"
+          },
+          "depositStatus": {
+            "description": "Current deposit lifecycle status.",
+            "$ref": "#/components/schemas/DepositStatus"
+          },
           "status": {
             "description": "Project planning status.",
             "$ref": "#/components/schemas/ProjectStatus"
@@ -4831,6 +5076,8 @@
           "endDate",
           "defaultDiscountPercent",
           "paymentTerms",
+          "refundableDepositAmount",
+          "depositStatus",
           "status",
           "unbilledLineCount",
           "unbilledNetAmount",
@@ -4877,6 +5124,18 @@
               "string"
             ],
             "description": "Payment terms copied from the contact."
+          },
+          "refundableDepositAmount": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "description": "Fixed refundable deposit.",
+            "format": "double"
+          },
+          "depositStatus": {
+            "description": "Current deposit lifecycle status.",
+            "$ref": "#/components/schemas/DepositStatus"
           },
           "status": {
             "description": "Project planning status.",
@@ -5075,6 +5334,35 @@
           }
         }
       },
+      "RecordInvoicePaymentRequest": {
+        "required": [
+          "date",
+          "method",
+          "amount",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "method": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Records money received against an issued invoice."
+      },
       "RectifyInvoiceRequest": {
         "required": [
           "kind",
@@ -5263,6 +5551,29 @@
               "integer"
             ],
             "format": "int32"
+          }
+        }
+      },
+      "SetDepositStatusRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/DepositStatus"
+          }
+        }
+      },
+      "SetRefundableDepositRequest": {
+        "required": [
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
           }
         }
       },

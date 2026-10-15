@@ -220,6 +220,94 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/document": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GeneratedProjectDocumentResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/label": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentLabelResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoicing/queue": {
         parameters: {
             query?: never;
@@ -3205,6 +3293,16 @@ export interface components {
             /** Format: double */
             saleAmount: null | number;
         };
+        EquipmentLabelResponse: {
+            /** Format: uuid */
+            equipmentId: string;
+            code: string;
+            name: string;
+            scanCode: null | string;
+            fileName: string;
+            contentType: string;
+            html: string;
+        };
         EquipmentProjectHistoryResponse: {
             /** Format: uuid */
             projectId: string;
@@ -3264,6 +3362,14 @@ export interface components {
             /** Format: double */
             overdueTotal: number;
             currency: string;
+        };
+        GeneratedProjectDocumentResponse: {
+            /** Format: uuid */
+            projectId: string;
+            documentType: string;
+            fileName: string;
+            contentType: string;
+            html: string;
         };
         /** @description An invoice draft. */
         InvoiceDraftResponse: {

@@ -146,6 +146,72 @@
         }
       }
     },
+    "/api/projects/{id}/document": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedProjectDocumentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/equipment/items/{id}/label": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentLabelResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoicing/queue": {
       "get": {
         "tags": [
@@ -3337,6 +3403,45 @@
           }
         }
       },
+      "EquipmentLabelResponse": {
+        "required": [
+          "equipmentId",
+          "code",
+          "name",
+          "scanCode",
+          "fileName",
+          "contentType",
+          "html"
+        ],
+        "type": "object",
+        "properties": {
+          "equipmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "scanCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          }
+        }
+      },
       "EquipmentProjectHistoryResponse": {
         "required": [
           "projectId",
@@ -3501,6 +3606,34 @@
           }
         },
         "description": "Period totals for finance operators and accountants."
+      },
+      "GeneratedProjectDocumentResponse": {
+        "required": [
+          "projectId",
+          "documentType",
+          "fileName",
+          "contentType",
+          "html"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentType": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          }
+        }
       },
       "InvoiceDraftResponse": {
         "required": [
@@ -5333,13 +5466,13 @@
       "name": "Organization"
     },
     {
+      "name": "Documents"
+    },
+    {
       "name": "Invoicing"
     },
     {
       "name": "Audit"
-    },
-    {
-      "name": "Documents"
     },
     {
       "name": "Customers"

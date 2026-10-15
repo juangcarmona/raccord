@@ -31,6 +31,7 @@ internal static class Endpoints
         }
         MapOrganization(api);
         MapDocuments(api);
+        MapGeneratedDocuments(api);
         MapCustomers(api);
         MapEquipment(api);
         MapProjects(api);
@@ -131,6 +132,34 @@ internal static class Endpoints
                     ? TypedResults.Ok(preview)
                     : TypedResults.NotFound()
         );
+    }
+
+    private static void MapGeneratedDocuments(RouteGroupBuilder api)
+    {
+        api.MapGet(
+                "/projects/{id:guid}/document",
+                async Task<Results<Ok<GeneratedProjectDocumentResponse>, NotFound>> (
+                    Guid id,
+                    DocumentGenerationCatalog catalog,
+                    CancellationToken ct
+                ) =>
+                    await catalog.GenerateProjectAsync(id, ct) is { } document
+                        ? TypedResults.Ok(document)
+                        : TypedResults.NotFound()
+            )
+            .WithTags("Documents");
+        api.MapGet(
+                "/equipment/items/{id:guid}/label",
+                async Task<Results<Ok<EquipmentLabelResponse>, NotFound>> (
+                    Guid id,
+                    DocumentGenerationCatalog catalog,
+                    CancellationToken ct
+                ) =>
+                    await catalog.GenerateLabelAsync(id, ct) is { } label
+                        ? TypedResults.Ok(label)
+                        : TypedResults.NotFound()
+            )
+            .WithTags("Documents");
     }
 
     private static void MapCustomers(RouteGroupBuilder api)

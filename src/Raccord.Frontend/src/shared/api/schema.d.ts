@@ -1773,6 +1773,387 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/functions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectFunctionRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/shifts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectShiftRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/crew": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AssignCrewRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/vehicles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AssignVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/invitations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["InviteCrewRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewInvitationResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/invitations/{invitationId}/response": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    invitationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RespondToCrewInvitationRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewInvitationResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/job-board": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PostFunctionRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewJobResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/job-board/{jobId}/signups/{crewMemberId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    jobId: string;
+                    crewMemberId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewSignupResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/billable-lines": {
         parameters: {
             query?: never;
@@ -2823,6 +3204,518 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/crew/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SetCrewAvailabilityRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewAvailabilityResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/availability/{crewMemberId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    crewMemberId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewAvailabilityResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/hours": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RegisterCrewHoursRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/hours/{id}/approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ApproveCrewHoursRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/payroll-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    from: string;
+                    to: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCrewMemberRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/members/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateCrewMemberRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/vehicles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/vehicles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/rates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewRateResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCrewRateRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewRateResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -3668,8 +4561,27 @@ export interface components {
             quantity: number;
             role: string;
         };
+        ApproveCrewHoursRequest: {
+            status: components["schemas"]["CrewHourStatus"];
+        };
+        AssignCrewRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: uuid */
+            rateId?: null | string;
+            /** @default false */
+            includeTravel: boolean;
+            /** @default false */
+            isProjectLeader: boolean;
+            remark?: null | string;
+        };
         AssignEquipmentScanCodeRequest: {
             scanCode: string;
+        };
+        AssignVehicleRequest: {
+            /** Format: uuid */
+            vehicleId: string;
+            remark?: null | string;
         };
         /** @description An append-only audit event. */
         AuditEventResponse: {
@@ -3770,6 +4682,23 @@ export interface components {
             subject: string;
             documentKey?: null | string;
         };
+        CreateCrewMemberRequest: {
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: null | string[];
+            /** @default true */
+            isPlannable: boolean;
+        };
+        CreateCrewRateRequest: {
+            name: string;
+            kind: components["schemas"]["CrewRateKind"];
+            bands: components["schemas"]["CrewRateBand"][];
+            /** @default false */
+            isDefault: boolean;
+        };
         CreateDocumentTemplateRequest: {
             name: string;
             documentType: string;
@@ -3813,6 +4742,19 @@ export interface components {
             name: string;
             description: null | string;
         };
+        CreateProjectFunctionRequest: {
+            name: string;
+            kind: components["schemas"]["CrewFunctionKind"];
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /**
+             * Format: int32
+             * @default 1
+             */
+            requiredResources: number;
+        };
         /** @description Creates a project. */
         CreateProjectRequest: {
             /** @description Project name. */
@@ -3855,6 +4797,14 @@ export interface components {
             /** Format: uuid */
             assigneeId: null | string;
         };
+        CreateProjectShiftRequest: {
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            startTime: string;
+            /** Format: time */
+            endTime: string;
+        };
         /** @description Creates a project task. */
         CreateProjectTaskRequest: {
             /** Format: uuid */
@@ -3883,6 +4833,117 @@ export interface components {
             operationDate: null | string;
             lines: components["schemas"]["StandaloneInvoiceLineRequest"][];
             seriesCode: null | string;
+        };
+        CreateVehicleRequest: {
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: null | string[];
+            /** @default true */
+            isShownInPlanning: boolean;
+        };
+        CrewAssignmentResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: uuid */
+            rateId: null | string;
+            includeTravel: boolean;
+            isProjectLeader: boolean;
+            remark: null | string;
+        };
+        CrewAvailabilityKind: number;
+        CrewAvailabilityResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            kind: components["schemas"]["CrewAvailabilityKind"];
+            remark: null | string;
+        };
+        CrewFunctionKind: number;
+        CrewHourSource: number;
+        CrewHoursResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            workDate: string;
+            /** Format: double */
+            hours: number;
+            source: components["schemas"]["CrewHourSource"];
+            /** Format: uuid */
+            functionId: null | string;
+            status: components["schemas"]["CrewHourStatus"];
+            remark: null | string;
+        };
+        CrewHourStatus: number;
+        CrewInvitationResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            functionId: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            status: components["schemas"]["CrewInvitationStatus"];
+            remark: null | string;
+        };
+        CrewInvitationStatus: number;
+        CrewJobResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            functionId: string;
+            brief: null | string;
+            /** Format: date-time */
+            postedAt: string;
+            /** Format: int32 */
+            signupCount: number;
+        };
+        CrewMemberResponse: {
+            /** Format: uuid */
+            id: string;
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: string[];
+            isPlannable: boolean;
+        };
+        CrewRateBand: {
+            /** Format: double */
+            fromHour: number;
+            /** Format: double */
+            fixedAmount: number;
+            /** Format: double */
+            hourlyAmount: number;
+        };
+        CrewRateKind: number;
+        CrewRateResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            kind: components["schemas"]["CrewRateKind"];
+            bands: components["schemas"]["CrewRateBand"][];
+            isDefault: boolean;
+        };
+        CrewSignupResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            jobId: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date-time */
+            signedUpAt: string;
         };
         CurrentUserResponse: {
             email: string;
@@ -4049,6 +5110,11 @@ export interface components {
             fileName: string;
             contentType: string;
             html: string;
+        };
+        InviteCrewRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            remark?: null | string;
         };
         /** @description An invoice draft. */
         InvoiceDraftResponse: {
@@ -4403,6 +5469,9 @@ export interface components {
             /** @default required */
             role: string;
         };
+        PostFunctionRequest: {
+            brief?: null | string;
+        };
         ProblemDetails: {
             type?: null | string;
             title?: null | string;
@@ -4447,6 +5516,26 @@ export interface components {
             projectId: string;
             entries: components["schemas"]["ProjectContextEntryResponse"][];
             history: components["schemas"]["ProjectHistoryEntryResponse"][];
+        };
+        ProjectFunctionResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            projectId: string;
+            name: string;
+            kind: components["schemas"]["CrewFunctionKind"];
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: int32 */
+            requiredResources: number;
+            /** Format: int32 */
+            assignedResources: number;
+            isStaffed: boolean;
+            shifts: components["schemas"]["ProjectShiftResponse"][];
+            crew: components["schemas"]["CrewAssignmentResponse"][];
+            vehicles: components["schemas"]["VehicleAssignmentResponse"][];
         };
         ProjectHistoryEntryResponse: {
             /** Format: uuid */
@@ -4549,6 +5638,16 @@ export interface components {
             endDate: string;
             /** Format: uuid */
             assigneeId: null | string;
+        };
+        ProjectShiftResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            startTime: string;
+            /** Format: time */
+            endTime: string;
         };
         /** @description A project in a list. */
         ProjectSummaryResponse: {
@@ -4724,6 +5823,18 @@ export interface components {
             actualHours: number;
             actor: string;
         };
+        RegisterCrewHoursRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            workDate: string;
+            /** Format: double */
+            hours: number;
+            source?: components["schemas"]["CrewHourSource"];
+            /** Format: uuid */
+            functionId?: null | string;
+            remark?: null | string;
+        };
         /** @description Registers a customer. */
         RegisterCustomerRequest: {
             /** @description Registered legal name. */
@@ -4733,6 +5844,9 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+        };
+        RespondToCrewInvitationRequest: {
+            status: components["schemas"]["CrewInvitationStatus"];
         };
         RetireEquipmentRequest: {
             reason: string;
@@ -4758,6 +5872,16 @@ export interface components {
             /** Format: double */
             amount: number;
             buyer: null | string;
+        };
+        SetCrewAvailabilityRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            kind: components["schemas"]["CrewAvailabilityKind"];
+            remark?: null | string;
         };
         SetDepositStatusRequest: {
             status: components["schemas"]["DepositStatus"];
@@ -4830,6 +5954,15 @@ export interface components {
             /** Format: int32 */
             statusCode?: number;
         };
+        UpdateCrewMemberRequest: {
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: null | string[];
+            isPlannable: boolean;
+        };
         UpdateDocumentTemplateRequest: {
             name: string;
             letterhead: string;
@@ -4849,6 +5982,14 @@ export interface components {
             taxId: string;
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
+        };
+        UpdateVehicleRequest: {
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: null | string[];
+            isShownInPlanning: boolean;
         };
         /** @description A reason an operation cannot proceed, identified by a stable code the UI can localize. */
         ValidationIssueResponse: {
@@ -4874,6 +6015,23 @@ export interface components {
              * @description VAT at this rate.
              */
             vatAmount: number;
+        };
+        VehicleAssignmentResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            vehicleId: string;
+            remark: null | string;
+        };
+        VehicleResponse: {
+            /** Format: uuid */
+            id: string;
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: string[];
+            isShownInPlanning: boolean;
         };
     };
     responses: never;

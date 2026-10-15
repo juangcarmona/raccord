@@ -66,6 +66,24 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<CommunicationRow> Communications => Set<CommunicationRow>();
 
+    internal DbSet<CrewMemberRow> CrewMembers => Set<CrewMemberRow>();
+
+    internal DbSet<VehicleRow> Vehicles => Set<VehicleRow>();
+
+    internal DbSet<CrewRateRow> CrewRates => Set<CrewRateRow>();
+
+    internal DbSet<CrewAvailabilityRow> CrewAvailability => Set<CrewAvailabilityRow>();
+
+    internal DbSet<CrewInvitationRow> CrewInvitations => Set<CrewInvitationRow>();
+
+    internal DbSet<CrewJobRow> CrewJobs => Set<CrewJobRow>();
+
+    internal DbSet<CrewSignupRow> CrewSignups => Set<CrewSignupRow>();
+
+    internal DbSet<ProjectFunctionRow> ProjectFunctions => Set<ProjectFunctionRow>();
+
+    internal DbSet<CrewHoursRow> CrewHours => Set<CrewHoursRow>();
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)
     {

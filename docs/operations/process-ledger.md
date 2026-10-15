@@ -86,6 +86,30 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Payroll exports contain only approved hours
+
+- **Observation:** Registered time is not payroll data until it has been reviewed; exporting pending registrations would turn an operational draft into a financial commitment.
+- **Action:** Persist source and approval status separately, make approval explicit, and generate deterministic CSV only from approved registrations in the requested period.
+- **Check:** The payroll journey cites the ProductShape Given/When/Then, asserts pending exclusion and approved inclusion, stays in the per-PR manifest, and links hosted screenshot evidence.
+
+## 2026-10-15 · Planning assignments are typed by function kind
+
+- **Observation:** Crew and vehicle planning share a project-function boundary but have different valid resources; accepting either resource for every function hides staffing conflicts.
+- **Action:** Persist functions, shifts and assignments separately, enforce kind-specific assignment rules and uniqueness, and calculate staffing from the assigned resource type.
+- **Check:** The planning journey cites the ProductShape Given/When/Then, verifies crew and transport staffing, stays in the per-PR manifest, and links hosted screenshot evidence before merge.
+
+## 2026-10-15 · Crew availability keeps planning responses durable
+
+- **Observation:** Availability, invitations and job-board signups are separate responses to the same planning function and need independent status and duplicate constraints.
+- **Action:** Persist each response as a typed record, keep invitation and signup uniqueness at the database boundary, and exercise the complete journey with ProductShape citations and hosted visual evidence.
+- **Check:** The availability journey remains in the per-PR manifest, invalid date ranges are rejected, duplicate participation is rejected, and the hosted artifact is linked before merge.
+
+## 2026-10-15 · Crew records keep planning inputs explicit
+
+- **Observation:** Crew, vehicle and rate data are planning inputs with different validation and defaulting rules; treating them as untyped settings would allow invalid identities, capacity and cost bands into later scheduling flows.
+- **Action:** Keep typed contracts and a focused catalog with unique identities, positive vehicle capacity, non-negative ordered rate bands and one default rate per kind. Cover the complete save/list journey with a ProductShape citation and hosted screenshot artifact.
+- **Check:** The crew E2E journey remains in the PR selection manifest, API and migration checks pass, and the PR links the hosted Playwright artifact.
+
 ## 2026-10-15 · Static evidence uses viewer-local time and test-result truth
 
 - **Observation:** Engineering snapshot timestamps rendered as raw UTC and a green workflow status could imply browser journeys passed even when no journey result had been recorded.

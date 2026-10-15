@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Contracts.Auditing;
+using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Documents;
 using Raccord.Contracts.Equipment;
@@ -35,6 +36,7 @@ internal static class Endpoints
         MapCustomers(api);
         MapEquipment(api);
         MapProjects(api);
+        MapCrew(api);
         MapInvoicing(api);
         api.MapGet(
                 "/audit-events",
@@ -46,6 +48,132 @@ internal static class Endpoints
             .WithTags("Audit");
         return app;
     }
+
+#pragma warning disable MA0051
+    private static void MapCrew(RouteGroupBuilder api)
+    {
+        var crew = api.MapGroup("/crew").WithTags("Crew");
+        crew.MapPost(
+            "/availability",
+            async (
+                SetCrewAvailabilityRequest request,
+                CrewAvailabilityCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/crew/availability",
+                    await catalog.SetAvailabilityAsync(request, ct)
+                )
+        );
+        crew.MapGet(
+            "/availability/{crewMemberId:guid}",
+            async (Guid crewMemberId, CrewAvailabilityCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAvailabilityAsync(crewMemberId, ct))
+        );
+        crew.MapPost(
+            "/hours",
+            async (
+                RegisterCrewHoursRequest request,
+                CrewHoursCatalog catalog,
+                CancellationToken ct
+            ) => TypedResults.Created("/api/crew/hours", await catalog.RegisterAsync(request, ct))
+        );
+        crew.MapGet(
+            "/hours",
+            async (DateOnly? from, DateOnly? to, CrewHoursCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(from, to, ct))
+        );
+        crew.MapPut(
+            "/hours/{id:guid}/approval",
+            async Task<Results<Ok<CrewHoursResponse>, NotFound>> (
+                Guid id,
+                ApproveCrewHoursRequest request,
+                CrewHoursCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.ApproveAsync(id, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/payroll-export",
+            async (DateOnly from, DateOnly to, CrewHoursCatalog catalog, CancellationToken ct) =>
+                Results.Text(await catalog.ExportAsync(from, to, ct), "text/csv")
+        );
+        crew.MapGet(
+            "/members",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListCrewAsync(ct))
+        );
+        crew.MapPost(
+            "/members",
+            async Task<Results<Created<CrewMemberResponse>, BadRequest>> (
+                CreateCrewMemberRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateCrewAsync(request, ct) is { } member
+                    ? TypedResults.Created($"/api/crew/members/{member.Id}", member)
+                    : TypedResults.BadRequest()
+        );
+        crew.MapPut(
+            "/members/{id:guid}",
+            async Task<Results<Ok<CrewMemberResponse>, NotFound>> (
+                Guid id,
+                UpdateCrewMemberRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateCrewAsync(id, request, ct) is { } member
+                    ? TypedResults.Ok(member)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/vehicles",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListVehiclesAsync(ct))
+        );
+        crew.MapPost(
+            "/vehicles",
+            async Task<Results<Created<VehicleResponse>, BadRequest>> (
+                CreateVehicleRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateVehicleAsync(request, ct) is { } vehicle
+                    ? TypedResults.Created($"/api/crew/vehicles/{vehicle.Id}", vehicle)
+                    : TypedResults.BadRequest()
+        );
+        crew.MapPut(
+            "/vehicles/{id:guid}",
+            async Task<Results<Ok<VehicleResponse>, NotFound>> (
+                Guid id,
+                UpdateVehicleRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateVehicleAsync(id, request, ct) is { } vehicle
+                    ? TypedResults.Ok(vehicle)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/rates",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListRatesAsync(ct))
+        );
+        crew.MapPost(
+            "/rates",
+            async Task<Results<Created<CrewRateResponse>, BadRequest>> (
+                CreateCrewRateRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateRateAsync(request, ct) is { } rate
+                    ? TypedResults.Created($"/api/crew/rates/{rate.Id}", rate)
+                    : TypedResults.BadRequest()
+        );
+    }
+#pragma warning restore MA0051
 
     private static void MapOrganization(RouteGroupBuilder api)
     {
@@ -399,6 +527,113 @@ internal static class Endpoints
                 var project = await workspace.CreateAsync(request, ct);
                 return TypedResults.Created($"/api/projects/{project.Id}", project);
             }
+        );
+        projects.MapPost(
+            "/{id:guid}/functions",
+            async (
+                Guid id,
+                CreateProjectFunctionRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/{id}/functions",
+                    await catalog.CreateFunctionAsync(id, request, ct)
+                )
+        );
+        projects.MapGet(
+            "/{id:guid}/functions",
+            async (Guid id, CrewPlanningCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListFunctionsAsync(id, ct))
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/shifts",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                CreateProjectShiftRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AddShiftAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/crew",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                AssignCrewRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AssignCrewAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/vehicles",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                AssignVehicleRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AssignVehicleAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/invitations",
+            async (
+                Guid functionId,
+                InviteCrewRequest request,
+                CrewAvailabilityCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/functions/{functionId}/invitations",
+                    await catalog.InviteAsync(functionId, request, ct)
+                )
+        );
+        projects.MapPut(
+            "/invitations/{invitationId:guid}/response",
+            async Task<Results<Ok<CrewInvitationResponse>, NotFound>> (
+                Guid invitationId,
+                RespondToCrewInvitationRequest request,
+                CrewAvailabilityCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.RespondAsync(invitationId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/job-board",
+            async (
+                Guid functionId,
+                PostFunctionRequest request,
+                CrewAvailabilityCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/functions/{functionId}/job-board",
+                    await catalog.PostAsync(functionId, request, ct)
+                )
+        );
+        projects.MapPost(
+            "/job-board/{jobId:guid}/signups/{crewMemberId:guid}",
+            async Task<Results<Created<CrewSignupResponse>, NotFound>> (
+                Guid jobId,
+                Guid crewMemberId,
+                CrewAvailabilityCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.SignupAsync(jobId, crewMemberId, ct) is { } result
+                    ? TypedResults.Created(
+                        $"/api/projects/job-board/{jobId}/signups/{result.Id}",
+                        result
+                    )
+                    : TypedResults.NotFound()
         );
         projects.MapPost(
             "/{id:guid}/billable-lines",

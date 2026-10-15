@@ -5216,6 +5216,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/integrations/company-registry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    country: string;
+                    query: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CompanyRegistryMatchResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -5414,6 +5452,14 @@ export interface components {
             createdAt: string;
             /** Format: date-time */
             deliveredAt: null | string;
+        };
+        CompanyRegistryMatchResponse: {
+            registrationNumber: string;
+            legalName: string;
+            street: null | string;
+            postalCode: null | string;
+            city: null | string;
+            countryCode: null | string;
         };
         CreateCommunicationRequest: {
             recipient: string;

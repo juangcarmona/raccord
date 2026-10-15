@@ -1,8 +1,10 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Contracts.Integrations;
+using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Projects;
 using Raccord.Infrastructure.Persistence;
+using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Web.Authorization;
 
@@ -225,7 +227,7 @@ internal static class IntegrationEndpoints
     private static async Task<IResult> ListInvoicesAsync(
         HttpContext context,
         ApiAccessCatalog tokens,
-        Raccord.Application.Invoicing.InvoicingWorkflow invoicing,
+        InvoicingWorkflow invoicing,
         CancellationToken ct
     ) =>
         await tokens.HasScopeAsync(GetToken(context), ApiAccessScopes.InvoicesRead, ct)
@@ -237,7 +239,7 @@ internal static class IntegrationEndpoints
         RecordInvoicePaymentRequest request,
         HttpContext context,
         ApiAccessCatalog tokens,
-        Raccord.Application.Invoicing.InvoicingWorkflow invoicing,
+        InvoicingWorkflow invoicing,
         CancellationToken ct
     ) =>
         !await tokens.HasScopeAsync(GetToken(context), ApiAccessScopes.PaymentsWrite, ct)

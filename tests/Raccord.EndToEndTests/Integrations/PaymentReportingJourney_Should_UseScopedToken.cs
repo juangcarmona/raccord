@@ -15,6 +15,11 @@ public sealed class PaymentReportingJourney_Should_UseScopedToken(DistributedApp
 {
     private static readonly string[] PaymentScopes = ["invoices.read", "payments.write"];
 
+    /// <summary>
+    /// Given an administrator issues an integration token with invoice and payment scopes, when
+    /// an external client reads invoices, then the scoped invoice collection is available.
+    /// ProductShape: UC-INT-REPORT-PAYMENT-THROUGH-API.
+    /// </summary>
     [Fact]
     public async Task Journey_Should_ReadInvoicesWithPaymentScope()
     {

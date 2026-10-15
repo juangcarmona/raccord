@@ -90,11 +90,11 @@ public static class Extensions
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
         ArgumentNullException.ThrowIfNull(app);
-        app.MapHealthChecks(ReadinessPath);
+        app.MapHealthChecks(ReadinessPath).AllowAnonymous();
         app.MapHealthChecks(
             LivenessPath,
             new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") }
-        );
+        ).AllowAnonymous();
         return app;
     }
 }

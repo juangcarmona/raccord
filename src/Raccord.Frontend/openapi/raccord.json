@@ -1648,6 +1648,209 @@
         }
       }
     },
+    "/api/projects/{id}/functions": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectFunctionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectFunctionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectFunctionResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/functions/{functionId}/shifts": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectShiftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectFunctionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/functions/{functionId}/crew": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignCrewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectFunctionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/functions/{functionId}/vehicles": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignVehicleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectFunctionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/billable-lines": {
       "post": {
         "tags": [
@@ -3321,6 +3524,57 @@
         },
         "description": "A postal address."
       },
+      "AssignCrewRequest": {
+        "required": [
+          "crewMemberId"
+        ],
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "includeTravel": {
+            "type": "boolean",
+            "default": false
+          },
+          "isProjectLeader": {
+            "type": "boolean",
+            "default": false
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AssignVehicleRequest": {
+        "required": [
+          "vehicleId"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "AuditEventResponse": {
         "required": [
           "id",
@@ -4076,6 +4330,36 @@
           }
         }
       },
+      "CreateProjectFunctionRequest": {
+        "required": [
+          "name",
+          "kind",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewFunctionKind"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "requiredResources": {
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          }
+        }
+      },
       "CreateProjectRequest": {
         "required": [
           "name",
@@ -4106,6 +4390,28 @@
           }
         },
         "description": "Creates a project."
+      },
+      "CreateProjectShiftRequest": {
+        "required": [
+          "date",
+          "startTime",
+          "endTime"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          }
+        }
       },
       "CreateProjectTemplateRequest": {
         "required": [
@@ -4194,6 +4500,49 @@
             "default": true
           }
         }
+      },
+      "CrewAssignmentResponse": {
+        "required": [
+          "id",
+          "crewMemberId",
+          "rateId",
+          "includeTravel",
+          "isProjectLeader",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "includeTravel": {
+            "type": "boolean"
+          },
+          "isProjectLeader": {
+            "type": "boolean"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CrewFunctionKind": {
+        "type": "integer"
       },
       "CrewMemberResponse": {
         "required": [
@@ -5773,6 +6122,76 @@
           }
         }
       },
+      "ProjectFunctionResponse": {
+        "required": [
+          "id",
+          "projectId",
+          "name",
+          "kind",
+          "startDate",
+          "endDate",
+          "requiredResources",
+          "assignedResources",
+          "isStaffed",
+          "shifts",
+          "crew",
+          "vehicles"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewFunctionKind"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "requiredResources": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assignedResources": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isStaffed": {
+            "type": "boolean"
+          },
+          "shifts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectShiftResponse"
+            }
+          },
+          "crew": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrewAssignmentResponse"
+            }
+          },
+          "vehicles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VehicleAssignmentResponse"
+            }
+          }
+        }
+      },
       "ProjectResponse": {
         "required": [
           "id",
@@ -5874,6 +6293,33 @@
           }
         },
         "description": "A project with its billable lines."
+      },
+      "ProjectShiftResponse": {
+        "required": [
+          "id",
+          "date",
+          "startTime",
+          "endTime"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          }
+        }
       },
       "ProjectStatus": {
         "type": "integer"
@@ -6837,6 +7283,30 @@
           }
         },
         "description": "Taxable base and VAT for one regime and rate."
+      },
+      "VehicleAssignmentResponse": {
+        "required": [
+          "id",
+          "vehicleId",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vehicleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       },
       "VehicleResponse": {
         "required": [

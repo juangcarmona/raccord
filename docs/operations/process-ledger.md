@@ -249,3 +249,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: The crew MVP spans three related registries, but each has a small independent invariant: required crew identity, unique vehicle registration with a planning flag, and ordered non-negative rate bands with one default per kind.
 - Action: Keep the first slice as one focused catalog with explicit contracts, unique database constraints, and a single Playwright journey that creates and reloads all three records.
 - Check: The hosted E2E run must retain the journey trace and success screenshot; local builds must include the generated migration and OpenAPI contract checks.
+
+## 2026-10-15 · Crew planning
+
+- Observation: Resource planning needs one shared function vocabulary for dated shifts, assignments and staffing status; separate crew and transport rules are easier to enforce at the boundary.
+- Action: Keep functions and assignments in a focused planning catalog, capture the selected rate at crew assignment time, and retain successful Playwright artifacts so review evidence is available even when CI is green.
+- Check: The #159 journey creates crew and transport functions, adds a shift, assigns a crew member and vehicle, verifies staffing and retains a screenshot/trace artifact in hosted CI.

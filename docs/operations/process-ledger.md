@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Payroll exports contain only approved hours
+
+- **Observation:** Registered time is not payroll data until it has been reviewed; exporting pending registrations would turn an operational draft into a financial commitment.
+- **Action:** Persist source and approval status separately, make approval explicit, and generate deterministic CSV only from approved registrations in the requested period.
+- **Check:** The payroll journey cites the ProductShape Given/When/Then, asserts pending exclusion and approved inclusion, stays in the per-PR manifest, and links hosted screenshot evidence.
+
 ## 2026-10-15 · Planning assignments are typed by function kind
 
 - **Observation:** Crew and vehicle planning share a project-function boundary but have different valid resources; accepting either resource for every function hides staffing conflicts.

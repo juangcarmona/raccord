@@ -99,6 +99,7 @@ public static class DependencyInjection
         services.AddScoped<CrewCatalog>();
         services.AddScoped<CrewAvailabilityCatalog>();
         services.AddScoped<CrewPlanningCatalog>();
+        services.AddScoped<CrewHoursCatalog>();
 
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);

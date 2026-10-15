@@ -70,6 +70,36 @@ internal static class Endpoints
             async (Guid crewMemberId, CrewAvailabilityCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListAvailabilityAsync(crewMemberId, ct))
         );
+        crew.MapPost(
+            "/hours",
+            async (
+                RegisterCrewHoursRequest request,
+                CrewHoursCatalog catalog,
+                CancellationToken ct
+            ) => TypedResults.Created("/api/crew/hours", await catalog.RegisterAsync(request, ct))
+        );
+        crew.MapGet(
+            "/hours",
+            async (DateOnly? from, DateOnly? to, CrewHoursCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(from, to, ct))
+        );
+        crew.MapPut(
+            "/hours/{id:guid}/approval",
+            async Task<Results<Ok<CrewHoursResponse>, NotFound>> (
+                Guid id,
+                ApproveCrewHoursRequest request,
+                CrewHoursCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.ApproveAsync(id, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/payroll-export",
+            async (DateOnly from, DateOnly to, CrewHoursCatalog catalog, CancellationToken ct) =>
+                Results.Text(await catalog.ExportAsync(from, to, ct), "text/csv")
+        );
         crew.MapGet(
             "/members",
             async (CrewCatalog catalog, CancellationToken ct) =>

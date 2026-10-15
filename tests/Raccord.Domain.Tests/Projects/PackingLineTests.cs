@@ -11,7 +11,10 @@ public sealed class PackingLineTests
     {
         var line = PackingLine.Create(Guid.CreateVersion7(), 1);
 
-        Should.Throw<BusinessRuleViolationException>(() => line.BookOut("warehouse", DateTimeOffset.UtcNow))
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                line.BookOut("warehouse", DateTimeOffset.UtcNow)
+            )
             .Code.ShouldBe("projects.book-out-not-packed");
 
         line.Pack("warehouse", DateTimeOffset.UtcNow);
@@ -30,7 +33,8 @@ public sealed class PackingLineTests
         line.Pack("warehouse", DateTimeOffset.UtcNow);
         line.BookOut("warehouse", DateTimeOffset.UtcNow);
 
-        Should.Throw<BusinessRuleViolationException>(() =>
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
                 line.BookOut("warehouse", DateTimeOffset.UtcNow)
             )
             .Code.ShouldBe("projects.book-out-already-complete");

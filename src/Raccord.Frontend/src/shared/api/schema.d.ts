@@ -359,6 +359,156 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateEquipmentItemRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/scan-code": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AssignEquipmentScanCodeRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EquipmentItemResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -492,6 +642,201 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["BillableLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-lines": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PlanEquipmentRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-lines/{lineId}/pack": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PackLineRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-lines/{lineId}/book-out": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["BookOutLineRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/packing-lines/{lineId}/receive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReceiveLineRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
                     };
                 };
                 /** @description Not Found */
@@ -1470,6 +1815,9 @@ export interface components {
             /** @description ISO 3166-1 alpha-2 country code. */
             countryCode: string;
         };
+        AssignEquipmentScanCodeRequest: {
+            scanCode: string;
+        };
         /** @description An append-only audit event. */
         AuditEventResponse: {
             /**
@@ -1546,6 +1894,16 @@ export interface components {
              * @description Invoice that billed the line.
              */
             invoiceId: null | string;
+        };
+        BookOutLineRequest: {
+            actor: string;
+            scanCode?: null | string;
+        };
+        CreateEquipmentItemRequest: {
+            code: string;
+            name: string;
+            /** Format: int32 */
+            stockQuantity: number;
         };
         /** @description Creates an invoice draft from unbilled project lines. */
         CreateInvoiceDraftRequest: {
@@ -1649,6 +2007,17 @@ export interface components {
         /** @description Declines an incoming project request. */
         DeclineProjectRequest: {
             reason: string;
+        };
+        EquipmentItemResponse: {
+            /** Format: uuid */
+            id: string;
+            code: string;
+            name: string;
+            scanCode: null | string;
+            /** Format: int32 */
+            stockQuantity: number;
+            /** Format: int32 */
+            availableQuantity: number;
         };
         /** @description Finalizes a draft. */
         FinalizeInvoiceDraftRequest: {
@@ -1900,6 +2269,23 @@ export interface components {
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
         };
+        PackingLineResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            quantity: number;
+            isPacked: boolean;
+            isBookedOut: boolean;
+            isReceived: boolean;
+            packedBy: null | string;
+            bookedOutBy: null | string;
+            receivedBy: null | string;
+        };
+        PackLineRequest: {
+            actor: string;
+        };
         /** @description A legal party as printed on an invoice. */
         PartyResponse: {
             /** @description Registered legal name. */
@@ -1907,6 +2293,12 @@ export interface components {
             /** @description Tax identification number. */
             taxId: null | string;
             address: null | components["schemas"]["AddressDto"];
+        };
+        PlanEquipmentRequest: {
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            quantity: number;
         };
         ProblemDetails: {
             type?: null | string;
@@ -1998,6 +2390,8 @@ export interface components {
              * @description Assigned team.
              */
             teamId?: null | string;
+            /** @description Warehouse packing lines. */
+            packingLines?: null | components["schemas"]["PackingLineResponse"][];
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -2099,6 +2493,9 @@ export interface components {
             id: string;
             name: string;
             description: null | string;
+        };
+        ReceiveLineRequest: {
+            actor: string;
         };
         /** @description Records incoming project work. */
         ReceiveProjectRequest: {

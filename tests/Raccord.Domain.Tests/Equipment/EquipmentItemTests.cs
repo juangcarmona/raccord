@@ -23,7 +23,8 @@ public sealed class EquipmentItemTests
     {
         var item = EquipmentItem.Create("CAM-01", "Camera", 1);
 
-        Should.Throw<BusinessRuleViolationException>(() => item.BookOut(2))
+        Should
+            .Throw<BusinessRuleViolationException>(() => item.BookOut(2))
             .Code.ShouldBe("equipment.stock-unavailable");
     }
 }

@@ -27,30 +27,57 @@ public sealed class EquipmentItem
     public static EquipmentItem Create(string code, string name, int stockQuantity)
     {
         if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(name))
-            throw new BusinessRuleViolationException("equipment.identity-required", "Equipment code and name are required.");
+            throw new BusinessRuleViolationException(
+                "equipment.identity-required",
+                "Equipment code and name are required."
+            );
         if (stockQuantity < 0)
-            throw new BusinessRuleViolationException("equipment.stock-invalid", "Stock cannot be negative.");
+            throw new BusinessRuleViolationException(
+                "equipment.stock-invalid",
+                "Stock cannot be negative."
+            );
         return new(code.Trim(), name.Trim(), stockQuantity);
     }
 
     public void AssignScanCode(string scanCode)
     {
         if (string.IsNullOrWhiteSpace(scanCode))
-            throw new BusinessRuleViolationException("equipment.scan-code-required", "A scan code is required.");
+            throw new BusinessRuleViolationException(
+                "equipment.scan-code-required",
+                "A scan code is required."
+            );
         ScanCode = scanCode.Trim();
+    }
+
+    public void ValidateScanCode(string? scanCode)
+    {
+        if (
+            scanCode is not null
+            && !string.Equals(ScanCode, scanCode.Trim(), StringComparison.Ordinal)
+        )
+            throw new BusinessRuleViolationException(
+                "equipment.scan-code-invalid",
+                "The scanned equipment code does not match the item."
+            );
     }
 
     public void BookOut(int quantity)
     {
         if (quantity <= 0 || quantity > AvailableQuantity)
-            throw new BusinessRuleViolationException("equipment.stock-unavailable", "The requested equipment is not available.");
+            throw new BusinessRuleViolationException(
+                "equipment.stock-unavailable",
+                "The requested equipment is not available."
+            );
         AvailableQuantity -= quantity;
     }
 
     public void Receive(int quantity)
     {
         if (quantity <= 0 || AvailableQuantity + quantity > StockQuantity)
-            throw new BusinessRuleViolationException("equipment.receive-invalid", "Received quantity is invalid.");
+            throw new BusinessRuleViolationException(
+                "equipment.receive-invalid",
+                "Received quantity is invalid."
+            );
         AvailableQuantity += quantity;
     }
 }

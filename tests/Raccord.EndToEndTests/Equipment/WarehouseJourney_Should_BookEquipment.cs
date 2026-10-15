@@ -34,7 +34,15 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
                 var api = page.Context.APIRequest;
                 var itemResponse = await api.PostAsync(
                     "/api/equipment/items",
-                    new() { DataObject = new { code = $"CAM-{RunStamp}", name = "Camera", stockQuantity = 1 } }
+                    new()
+                    {
+                        DataObject = new
+                        {
+                            code = $"CAM-{RunStamp}",
+                            name = "Camera",
+                            stockQuantity = 1,
+                        },
+                    }
                 );
                 itemResponse.Status.ShouldBe(201);
                 var item = await itemResponse.JsonAsync();
@@ -58,7 +66,13 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
                 {
                     var response = await api.PostAsync(
                         $"/api/projects/{projectId}/packing-lines/{lineId}/{transition}",
-                        new() { DataObject = new { actor = "warehouse-e2e" } }
+                        new()
+                        {
+                            DataObject =
+                                transition == "book-out"
+                                    ? new { actor = "warehouse-e2e", scanCode = $"scan-{RunStamp}" }
+                                    : new { actor = "warehouse-e2e" },
+                        }
                     );
                     response.Status.ShouldBe(200);
                 }
@@ -66,8 +80,17 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
                 var projectResponse = await api.GetAsync($"/api/projects/{projectId}");
                 projectResponse.Status.ShouldBe(200);
                 var project = await projectResponse.JsonAsync();
-                project!.Value.GetProperty("packingLines")[0].GetProperty("isReceived").GetBoolean()
+                project!
+                    .Value.GetProperty("packingLines")[0]
+                    .GetProperty("isReceived")
+                    .GetBoolean()
                     .ShouldBeTrue();
+                var equipmentResponse = await api.GetAsync($"/api/equipment/items/{itemId}");
+                equipmentResponse.Status.ShouldBe(200);
+                (await equipmentResponse.JsonAsync())!
+                    .Value.GetProperty("availableQuantity")
+                    .GetInt32()
+                    .ShouldBe(1);
                 await page.SetContentAsync("<h1>Warehouse equipment returned</h1>");
             }
         );

@@ -6,11 +6,11 @@ using Raccord.Contracts.Equipment;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
-using Raccord.Infrastructure.Persistence;
 
 namespace Raccord.Web.Api;
 
@@ -110,11 +110,27 @@ internal static class Endpoints
         var equipment = api.MapGroup("/equipment").WithTags("Equipment");
         equipment.MapGet(
             "/items",
-            async (EquipmentCatalog catalog, CancellationToken ct) => TypedResults.Ok(await catalog.ListAsync(ct))
+            async (EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(ct))
+        );
+        equipment.MapGet(
+            "/items/{id:guid}",
+            async Task<Results<Ok<EquipmentItemResponse>, NotFound>> (
+                Guid id,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                (await catalog.FindAsync(id, ct)) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
         );
         equipment.MapPost(
             "/items",
-            async (CreateEquipmentItemRequest request, EquipmentCatalog catalog, CancellationToken ct) =>
+            async (
+                CreateEquipmentItemRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
             {
                 var item = await catalog.CreateAsync(request, ct);
                 return TypedResults.Created($"/api/equipment/items/{item.Id}", item);
@@ -127,9 +143,10 @@ internal static class Endpoints
                 AssignEquipmentScanCodeRequest request,
                 EquipmentCatalog catalog,
                 CancellationToken ct
-            ) => await catalog.AssignScanCodeAsync(id, request, ct) is { } item
-                ? TypedResults.Ok(item)
-                : TypedResults.NotFound()
+            ) =>
+                await catalog.AssignScanCodeAsync(id, request, ct) is { } item
+                    ? TypedResults.Ok(item)
+                    : TypedResults.NotFound()
         );
     }
 

@@ -22,13 +22,34 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     is_packed = table.Column<bool>(type: "boolean", nullable: false),
                     is_booked_out = table.Column<bool>(type: "boolean", nullable: false),
                     is_received = table.Column<bool>(type: "boolean", nullable: false),
-                    packed_by = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    packed_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    booked_out_by = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    booked_out_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    received_by = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    received_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    project_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    packed_by = table.Column<string>(
+                        type: "character varying(200)",
+                        maxLength: 200,
+                        nullable: true
+                    ),
+                    packed_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: true
+                    ),
+                    booked_out_by = table.Column<string>(
+                        type: "character varying(200)",
+                        maxLength: 200,
+                        nullable: true
+                    ),
+                    booked_out_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: true
+                    ),
+                    received_by = table.Column<string>(
+                        type: "character varying(200)",
+                        maxLength: 200,
+                        nullable: true
+                    ),
+                    received_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: true
+                    ),
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -39,22 +60,23 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         principalSchema: "projects",
                         principalTable: "projects",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "ix_packing_lines_project_id",
                 schema: "projects",
                 table: "packing_lines",
-                column: "project_id");
+                column: "project_id"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "packing_lines",
-                schema: "projects");
+            migrationBuilder.DropTable(name: "packing_lines", schema: "projects");
         }
     }
 }

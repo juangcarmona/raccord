@@ -11,6 +11,7 @@ namespace Raccord.Modules.Projects;
 public sealed class ProjectWorkspace(
     IBillableWork projects,
     IPartyDirectory parties,
+    IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork
 )
 {
@@ -156,7 +157,16 @@ public sealed class ProjectWorkspace(
         Guid lineId,
         PackLineRequest request,
         CancellationToken cancellationToken
-    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.Pack(id, actor, at), cancellationToken);
+    ) =>
+        TransitionPackingAsync(
+            projectId,
+            lineId,
+            request.Actor,
+            null,
+            PackingTransition.Pack,
+            static (project, id, actor, at) => project.Pack(id, actor, at),
+            cancellationToken
+        );
 
     /// <summary>Marks a prepared project packing line as dispatched.</summary>
     public Task<PackingLineResponse?> BookOutAsync(
@@ -164,7 +174,16 @@ public sealed class ProjectWorkspace(
         Guid lineId,
         BookOutLineRequest request,
         CancellationToken cancellationToken
-    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.BookOut(id, actor, at), cancellationToken);
+    ) =>
+        TransitionPackingAsync(
+            projectId,
+            lineId,
+            request.Actor,
+            request.ScanCode,
+            PackingTransition.BookOut,
+            static (project, id, actor, at) => project.BookOut(id, actor, at),
+            cancellationToken
+        );
 
     /// <summary>Marks a dispatched project packing line as received.</summary>
     public Task<PackingLineResponse?> ReceiveAsync(
@@ -172,12 +191,23 @@ public sealed class ProjectWorkspace(
         Guid lineId,
         ReceiveLineRequest request,
         CancellationToken cancellationToken
-    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.Receive(id, actor, at), cancellationToken);
+    ) =>
+        TransitionPackingAsync(
+            projectId,
+            lineId,
+            request.Actor,
+            null,
+            PackingTransition.Receive,
+            static (project, id, actor, at) => project.Receive(id, actor, at),
+            cancellationToken
+        );
 
     private async Task<PackingLineResponse?> TransitionPackingAsync(
         Guid projectId,
         Guid lineId,
         string actor,
+        string? scanCode,
+        PackingTransition packingTransition,
         Func<Project, Guid, string, DateTimeOffset, PackingLine> transition,
         CancellationToken cancellationToken
     )
@@ -185,9 +215,32 @@ public sealed class ProjectWorkspace(
         var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
         if (project is null)
             return null;
+        var plannedLine = project.PackingLines.FirstOrDefault(line => line.Id == lineId);
+        if (plannedLine is null)
+            return null;
+        if (packingTransition == PackingTransition.BookOut)
+            await equipment
+                .BookOutAsync(
+                    plannedLine.EquipmentId,
+                    plannedLine.Quantity,
+                    scanCode,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+        else if (packingTransition == PackingTransition.Receive)
+            await equipment
+                .ReceiveAsync(plannedLine.EquipmentId, plannedLine.Quantity, cancellationToken)
+                .ConfigureAwait(false);
         var line = transition(project, lineId, actor, DateTimeOffset.UtcNow);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(line);
+    }
+
+    private enum PackingTransition
+    {
+        Pack,
+        BookOut,
+        Receive,
     }
 
     private static ProjectResponse ToResponse(Project project, string customerName) =>

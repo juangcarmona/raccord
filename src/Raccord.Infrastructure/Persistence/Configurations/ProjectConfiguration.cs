@@ -56,6 +56,8 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
                 line.Property(packing => packing.ReceivedBy).HasMaxLength(200);
             }
         );
-        builder.Navigation(project => project.PackingLines).UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder
+            .Navigation(project => project.PackingLines)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

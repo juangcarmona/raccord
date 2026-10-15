@@ -20,8 +20,7 @@ public sealed class PackingLine
         Quantity = quantity;
     }
 
-    public static PackingLine Create(Guid equipmentId, int quantity) =>
-        new(equipmentId, quantity);
+    public static PackingLine Create(Guid equipmentId, int quantity) => new(equipmentId, quantity);
 
     public Guid Id { get; private set; }
     public Guid EquipmentId { get; private set; }

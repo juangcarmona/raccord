@@ -164,7 +164,7 @@ public sealed record PackingLineResponse(
 
 public sealed record PackLineRequest(string Actor);
 
-public sealed record BookOutLineRequest(string Actor);
+public sealed record BookOutLineRequest(string Actor, string? ScanCode = null);
 
 public sealed record ReceiveLineRequest(string Actor);
 

@@ -40,5 +40,22 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder
             .Navigation(project => project.BillableLines)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.OwnsMany(
+            project => project.PackingLines,
+            line =>
+            {
+                line.ToTable("packing_lines", "projects");
+                line.WithOwner().HasForeignKey("ProjectId");
+                line.HasKey(packing => packing.Id);
+                line.Property(packing => packing.Id).ValueGeneratedNever();
+                line.Property(packing => packing.EquipmentId).IsRequired();
+                line.Property(packing => packing.Quantity).IsRequired();
+                line.Property(packing => packing.PackedBy).HasMaxLength(200);
+                line.Property(packing => packing.BookedOutBy).HasMaxLength(200);
+                line.Property(packing => packing.ReceivedBy).HasMaxLength(200);
+            }
+        );
+        builder.Navigation(project => project.PackingLines).UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

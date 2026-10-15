@@ -71,6 +71,7 @@ public static class DependencyInjection
         services.AddScoped<IBillableWork, ProjectRepository>();
         services.AddScoped<IProjectCoordinationStore, ProjectCoordinationRepository>();
         services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
+        services.AddScoped<EquipmentCatalog>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         RegisterWorkspaceServices(services);

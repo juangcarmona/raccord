@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Customers;
+using Raccord.Contracts.Equipment;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
@@ -9,6 +10,7 @@ using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
+using Raccord.Infrastructure.Persistence;
 
 namespace Raccord.Web.Api;
 
@@ -27,6 +29,7 @@ internal static class Endpoints
         }
         MapOrganization(api);
         MapCustomers(api);
+        MapEquipment(api);
         MapProjects(api);
         MapInvoicing(api);
         api.MapGet(
@@ -102,6 +105,34 @@ internal static class Endpoints
         );
     }
 
+    private static void MapEquipment(RouteGroupBuilder api)
+    {
+        var equipment = api.MapGroup("/equipment").WithTags("Equipment");
+        equipment.MapGet(
+            "/items",
+            async (EquipmentCatalog catalog, CancellationToken ct) => TypedResults.Ok(await catalog.ListAsync(ct))
+        );
+        equipment.MapPost(
+            "/items",
+            async (CreateEquipmentItemRequest request, EquipmentCatalog catalog, CancellationToken ct) =>
+            {
+                var item = await catalog.CreateAsync(request, ct);
+                return TypedResults.Created($"/api/equipment/items/{item.Id}", item);
+            }
+        );
+        equipment.MapPut(
+            "/items/{id:guid}/scan-code",
+            async Task<Results<Ok<EquipmentItemResponse>, NotFound>> (
+                Guid id,
+                AssignEquipmentScanCodeRequest request,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) => await catalog.AssignScanCodeAsync(id, request, ct) is { } item
+                ? TypedResults.Ok(item)
+                : TypedResults.NotFound()
+        );
+    }
+
     private static void MapProjects(RouteGroupBuilder api)
     {
         var projects = api.MapGroup("/projects").WithTags("Projects");
@@ -145,6 +176,62 @@ internal static class Endpoints
             ) =>
                 await workspace.AddBillableLineAsync(id, request, ct) is { } line
                     ? TypedResults.Created($"/api/projects/{id}", line)
+                    : TypedResults.NotFound()
+        );
+        MapPackingLines(projects);
+    }
+
+    private static void MapPackingLines(RouteGroupBuilder projects)
+    {
+        projects.MapPost(
+            "/{id:guid}/packing-lines",
+            async Task<Results<Created<PackingLineResponse>, NotFound>> (
+                Guid id,
+                PlanEquipmentRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.AddPackingLineAsync(id, request, ct) is { } line
+                    ? TypedResults.Created($"/api/projects/{id}/packing-lines/{line.Id}", line)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/packing-lines/{lineId:guid}/pack",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                PackLineRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.PackAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/packing-lines/{lineId:guid}/book-out",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                BookOutLineRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.BookOutAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/packing-lines/{lineId:guid}/receive",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                ReceiveLineRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ReceiveAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
                     : TypedResults.NotFound()
         );
     }

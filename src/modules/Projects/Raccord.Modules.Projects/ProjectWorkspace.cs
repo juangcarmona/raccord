@@ -134,6 +134,62 @@ public sealed class ProjectWorkspace(
         return ToResponse(line);
     }
 
+    /// <summary>Adds equipment to a project's warehouse packing list.</summary>
+    public async Task<PackingLineResponse?> AddPackingLineAsync(
+        Guid projectId,
+        PlanEquipmentRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.AddPackingLine(request.EquipmentId, request.Quantity);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(line);
+    }
+
+    /// <summary>Marks a project packing line as prepared.</summary>
+    public Task<PackingLineResponse?> PackAsync(
+        Guid projectId,
+        Guid lineId,
+        PackLineRequest request,
+        CancellationToken cancellationToken
+    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.Pack(id, actor, at), cancellationToken);
+
+    /// <summary>Marks a prepared project packing line as dispatched.</summary>
+    public Task<PackingLineResponse?> BookOutAsync(
+        Guid projectId,
+        Guid lineId,
+        BookOutLineRequest request,
+        CancellationToken cancellationToken
+    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.BookOut(id, actor, at), cancellationToken);
+
+    /// <summary>Marks a dispatched project packing line as received.</summary>
+    public Task<PackingLineResponse?> ReceiveAsync(
+        Guid projectId,
+        Guid lineId,
+        ReceiveLineRequest request,
+        CancellationToken cancellationToken
+    ) => TransitionPackingAsync(projectId, lineId, request.Actor, static (project, id, actor, at) => project.Receive(id, actor, at), cancellationToken);
+
+    private async Task<PackingLineResponse?> TransitionPackingAsync(
+        Guid projectId,
+        Guid lineId,
+        string actor,
+        Func<Project, Guid, string, DateTimeOffset, PackingLine> transition,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = transition(project, lineId, actor, DateTimeOffset.UtcNow);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(line);
+    }
+
     private static ProjectResponse ToResponse(Project project, string customerName) =>
         new(
             project.Id,
@@ -145,7 +201,8 @@ public sealed class ProjectWorkspace(
             Currency.Eur.Code,
             [.. project.BillableLines.Select(ToResponse)],
             project.ProjectTypeId,
-            project.TeamId
+            project.TeamId,
+            [.. project.PackingLines.Select(ToResponse)]
         );
 
     private static BillableLineResponse ToResponse(BillableLine line) =>
@@ -166,5 +223,18 @@ public sealed class ProjectWorkspace(
             },
             line.DraftId,
             line.InvoiceId
+        );
+
+    private static PackingLineResponse ToResponse(PackingLine line) =>
+        new(
+            line.Id,
+            line.EquipmentId,
+            line.Quantity,
+            line.IsPacked,
+            line.IsBookedOut,
+            line.IsReceived,
+            line.PackedBy,
+            line.BookedOutBy,
+            line.ReceivedBy
         );
 }

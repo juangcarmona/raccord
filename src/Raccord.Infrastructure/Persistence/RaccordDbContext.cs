@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
+using Raccord.Domain.Equipment;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Compliance;
 
@@ -44,6 +45,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     internal DbSet<IssuedInvoiceRow> IssuedInvoices => Set<IssuedInvoiceRow>();
 
     internal DbSet<AuditEvent> AuditEvents => Set<AuditEvent>();
+
+    internal DbSet<EquipmentItem> EquipmentItems => Set<EquipmentItem>();
 
     internal DbSet<ComplianceRecordRow> ComplianceRecords => Set<ComplianceRecordRow>();
 

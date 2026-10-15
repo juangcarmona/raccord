@@ -370,6 +370,7 @@ internal static class Endpoints
         var projects = api.MapGroup("/projects").WithTags("Projects");
         var coordination = api.MapGroup("/project-coordination").WithTags("Project coordination");
         MapProjectCoordination(coordination);
+        MapProjectContext(projects);
         projects.MapGet(
             "/",
             async (ProjectWorkspace workspace, CancellationToken ct) =>
@@ -435,6 +436,93 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         MapPackingLines(projects);
+    }
+
+    private static void MapProjectContext(RouteGroupBuilder projects)
+    {
+        projects.MapGet(
+            "/{id:guid}/context",
+            async Task<Results<Ok<ProjectContextResponse>, NotFound>> (
+                Guid id,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.GetAsync(id, ct) is { } response
+                    ? TypedResults.Ok(response)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/notes",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                AddProjectNoteRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.AddNoteAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/files",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                AddProjectFileRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.AddFileAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/folders",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                AddProjectFolderRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.AddFolderAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/fields",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                DefineProjectFieldRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.DefineFieldAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/tags",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                TagProjectRecordRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.AddTagAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/context/views",
+            async Task<Results<Created<ProjectContextEntryResponse>, NotFound>> (
+                Guid id,
+                SaveProjectViewRequest request,
+                ProjectContext context,
+                CancellationToken ct
+            ) =>
+                await context.SaveViewAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/context/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapPackingLines(RouteGroupBuilder projects)

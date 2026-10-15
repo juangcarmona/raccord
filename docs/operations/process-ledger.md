@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Workday events preserve audit identity
+
+- **Observation:** Clock-in/out records can support regulated working-day review only when event time, recording time and actor remain distinct and immutable.
+- **Action:** Store append-only typed events with server recording timestamps, actor identity and a bounded future-time guard; leave jurisdiction-specific legal policy as an explicit follow-up.
+- **Check:** The workday journey cites the ProductShape Given/When/Then, verifies both event kinds and audit fields, stays in the per-PR manifest, and links hosted screenshot evidence.
+
 ## 2026-10-15 · Payroll exports contain only approved hours
 
 - **Observation:** Registered time is not payroll data until it has been reviewed; exporting pending registrations would turn an operational draft into a financial commitment.

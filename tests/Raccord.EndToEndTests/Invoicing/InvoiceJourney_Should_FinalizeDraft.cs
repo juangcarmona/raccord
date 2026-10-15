@@ -35,7 +35,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 (await queue.TextAsync()).ShouldContain($"Promo E2E {RunStamp}");
                 await AssertDepositAsync(page, new Uri(page.Url).Segments[^1]);
 
-                await FinalizeDraftAsync(page);
+                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-60));
 
                 var invoiceId = new Uri(page.Url).Segments[^1];
                 var payment = await page.APIRequest.PostAsync(

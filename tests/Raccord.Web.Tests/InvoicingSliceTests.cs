@@ -48,6 +48,8 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);
 
+        await AssertQueueEntryAsync(project);
+
         var draft = await CreateDraftAsync(
             project,
             project.BillableLines.Select(line => line.Id).Reverse()
@@ -108,5 +110,19 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         );
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
         return (await response.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
+    }
+
+    private async Task AssertQueueEntryAsync(ProjectResponse project)
+    {
+        var queue = await client.GetFromJsonAsync<List<InvoiceQueueEntryResponse>>(
+            $"/api/invoicing/queue?from={IssueDate.AddMonths(-1):yyyy-MM-dd}&to={IssueDate.AddMonths(1):yyyy-MM-dd}"
+        );
+        queue!.ShouldContain(entry =>
+            entry.ProjectId == project.Id
+            && entry.ProjectName == project.Name
+            && entry.UnbilledLineCount == 2
+            && entry.UnbilledNetAmount == 1280m
+            && !entry.Overdue
+        );
     }
 }

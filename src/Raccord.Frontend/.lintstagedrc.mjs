@@ -2,11 +2,16 @@
 // ProductShape (or copied from .agents/skills/ by the lifecycle's adopt step). Reformatting them
 // at commit time makes them drift from what their generators and lockfiles expect, so Prettier
 // skips them here.
-const generated = /(^|[\\/])\.(agents|claude)[\\/]/;
+const generated = /(^|[\\/])(\.(agents|claude)|src[\\/]shared[\\/]api[\\/]schema\.d\.ts)([\\/]|$)/;
 const quote = (file) => JSON.stringify(file);
 
 export default {
-    "*.{ts,tsx}": ["eslint --fix --max-warnings=0", "prettier --write"],
+    "*.{ts,tsx}": (files) => {
+        const source = files.filter((file) => !generated.test(file));
+        return source.length
+            ? [`eslint --fix --max-warnings=0 ${source.map(quote).join(" ")}`, "prettier --write"]
+            : [];
+    },
     "*.{json,yml,yaml,css}": (files) => {
         const formatted = files.filter((file) => !generated.test(file));
         return formatted.length ? [`prettier --write ${formatted.map(quote).join(" ")}`] : [];

@@ -100,6 +100,18 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-15 · Generated API contracts stay outside source lint
+
+- Observation: Generated API schema files are intentionally ignored by ESLint, but lint-staged still passed them to ESLint and failed every contract-only commit.
+- Action: Filter generated API schemas from the source lint-staged task while retaining the repository-wide frontend lint and generated-contract checks in CI.
+- Check: A staged schema change must pass the commit hook, and `npm run lint` plus API generation remain required in CI.
+
+## 2026-10-15 · Queue eligibility stays derived from billable state
+
+- Observation: A staged-invoicing queue can drift if it stores a second copy of invoice eligibility.
+- Action: Derive queue entries from project billable state, with an explicit date window and overdue flag.
+- Check: The queue endpoint and browser journey assert that newly created work appears before draft creation.
+
 ## 2026-10-15 · Delivery journeys must click the product surface
 
 - **Observation:** The delivery stack had API-level document tests, but the invoice download control had no browser journey, so a green API check could still leave the user journey unverified.

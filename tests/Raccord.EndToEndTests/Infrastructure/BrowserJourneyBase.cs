@@ -34,6 +34,8 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             }
         );
         var page = await context.NewPageAsync();
+        page.SetDefaultTimeout(30_000);
+        page.SetDefaultNavigationTimeout(30_000);
 
         try
         {
@@ -42,7 +44,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             await page.GetByLabel("Password").FillAsync("DemoPassword123!");
             await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
             await page.WaitForURLAsync(url => url.EndsWith("/projects", StringComparison.Ordinal));
-            await journey(page);
+            await journey(page).WaitAsync(TimeSpan.FromMinutes(2));
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
         }
         catch

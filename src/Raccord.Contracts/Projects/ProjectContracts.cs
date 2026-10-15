@@ -144,6 +144,32 @@ public sealed record AddBillableLineRequest(
     decimal VatRate
 );
 
+#pragma warning disable CS1591
+
+public sealed record PlanEquipmentRequest(Guid EquipmentId, int Quantity);
+
+public sealed record PlannedEquipmentResponse(Guid EquipmentId, int Quantity);
+
+public sealed record PackingLineResponse(
+    Guid Id,
+    Guid EquipmentId,
+    int Quantity,
+    bool IsPacked,
+    bool IsBookedOut,
+    bool IsReceived,
+    string? PackedBy,
+    string? BookedOutBy,
+    string? ReceivedBy
+);
+
+public sealed record PackLineRequest(string Actor);
+
+public sealed record BookOutLineRequest(string Actor);
+
+public sealed record ReceiveLineRequest(string Actor);
+
+#pragma warning restore CS1591
+
 /// <summary>A project in a list.</summary>
 /// <param name="Id">Project identifier.</param>
 /// <param name="Name">Project name.</param>

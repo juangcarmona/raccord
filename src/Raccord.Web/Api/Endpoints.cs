@@ -82,8 +82,8 @@ internal static class Endpoints
         var documents = api.MapGroup("/documents").WithTags("Documents");
         documents.MapGet(
             "/templates",
-            async (DocumentTemplateCatalog catalog, CancellationToken ct) =>
-                TypedResults.Ok(await catalog.ListAsync(ct))
+            async (string? language, DocumentTemplateCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(language, ct))
         );
         documents.MapGet(
             "/templates/{id:guid}",

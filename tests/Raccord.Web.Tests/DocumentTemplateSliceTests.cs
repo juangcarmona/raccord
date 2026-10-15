@@ -37,7 +37,8 @@ public sealed class DocumentTemplateSliceTests(PostgresContainer postgres) : IAs
                 "Inter",
                 "#123456",
                 "branding/logo.svg",
-                true
+                true,
+                "en"
             )
         );
         created.StatusCode.ShouldBe(HttpStatusCode.Created);
@@ -55,5 +56,37 @@ public sealed class DocumentTemplateSliceTests(PostgresContainer postgres) : IAs
             "/api/documents/templates"
         );
         listed!.ShouldContain(item => item.Id == template.Id && item.DocumentType == "invoice");
+    }
+
+    [Fact]
+    public async Task Templates_Should_Isolate_Defaults_By_Language()
+    {
+        var request = new CreateDocumentTemplateRequest(
+            "French invoice",
+            "invoice",
+            "Studio Raccord",
+            "Facture {{number}}",
+            "Merci",
+            "Inter",
+            "#1d4ed8",
+            null,
+            true,
+            "fr-FR"
+        );
+        var created = await client.PostAsJsonAsync("/api/documents/templates", request);
+        created.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var template = (await created.Content.ReadFromJsonAsync<DocumentTemplateResponse>())!;
+        template.Language.ShouldBe("fr-fr");
+        template.IsDefault.ShouldBeTrue();
+
+        var french = await client.GetFromJsonAsync<List<DocumentTemplateResponse>>(
+            "/api/documents/templates?language=FR-fr"
+        );
+        french!.ShouldContain(item => item.Id == template.Id && item.IsDefault);
+
+        var english = await client.GetFromJsonAsync<List<DocumentTemplateResponse>>(
+            "/api/documents/templates?language=en"
+        );
+        english!.ShouldContain(item => item.DocumentType == "invoice" && item.IsDefault);
     }
 }

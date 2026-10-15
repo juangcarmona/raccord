@@ -290,6 +290,15 @@
         "tags": [
           "Documents"
         ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -3084,6 +3093,10 @@
           },
           "isDefault": {
             "type": "boolean"
+          },
+          "language": {
+            "type": "string",
+            "default": "en"
           }
         }
       },
@@ -3414,6 +3427,7 @@
         "required": [
           "id",
           "documentType",
+          "language",
           "html"
         ],
         "type": "object",
@@ -3423,6 +3437,9 @@
             "format": "uuid"
           },
           "documentType": {
+            "type": "string"
+          },
+          "language": {
             "type": "string"
           },
           "html": {
@@ -3435,6 +3452,7 @@
           "id",
           "name",
           "documentType",
+          "language",
           "letterhead",
           "bodyTemplate",
           "footer",
@@ -3454,6 +3472,9 @@
             "type": "string"
           },
           "documentType": {
+            "type": "string"
+          },
+          "language": {
             "type": "string"
           },
           "letterhead": {
@@ -5586,6 +5607,12 @@
           },
           "isDefault": {
             "type": "boolean"
+          },
+          "language": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

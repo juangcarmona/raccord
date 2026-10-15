@@ -1013,6 +1013,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_default");
 
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("language");
+
                     b.Property<string>("Letterhead")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -1043,9 +1049,9 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_document_templates");
 
-                    b.HasIndex("DocumentType", "Name")
+                    b.HasIndex("DocumentType", "Language", "Name")
                         .IsUnique()
-                        .HasDatabaseName("ix_document_templates_document_type_name");
+                        .HasDatabaseName("ix_document_templates_document_type_language_name");
 
                     b.ToTable("document_templates", "workspace");
                 });

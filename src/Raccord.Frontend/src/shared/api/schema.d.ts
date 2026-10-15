@@ -392,7 +392,9 @@ export interface paths {
         };
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    language?: string;
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -3255,6 +3257,8 @@ export interface components {
             accentColor: string;
             logoStorageKey: null | string;
             isDefault: boolean;
+            /** @default en */
+            language: string;
         };
         CreateEquipmentItemRequest: {
             code: string;
@@ -3381,6 +3385,7 @@ export interface components {
             /** Format: uuid */
             id: string;
             documentType: string;
+            language: string;
             html: string;
         };
         DocumentTemplateResponse: {
@@ -3388,6 +3393,7 @@ export interface components {
             id: string;
             name: string;
             documentType: string;
+            language: string;
             letterhead: string;
             bodyTemplate: string;
             footer: string;
@@ -4201,6 +4207,7 @@ export interface components {
             accentColor: string;
             logoStorageKey: null | string;
             isDefault: boolean;
+            language?: null | string;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

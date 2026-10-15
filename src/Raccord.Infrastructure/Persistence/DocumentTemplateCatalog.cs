@@ -6,12 +6,15 @@ namespace Raccord.Infrastructure.Persistence;
 
 public sealed class DocumentTemplateCatalog(RaccordDbContext db)
 {
-    public async Task<IReadOnlyList<DocumentTemplateResponse>> ListAsync(CancellationToken ct) =>
+    public async Task<IReadOnlyList<DocumentTemplateResponse>> ListAsync(
+        string? language,
+        CancellationToken ct
+    ) =>
         [
             .. (
-                await db
-                    .DocumentTemplates.AsNoTracking()
+                await ApplyLanguageFilter(db.DocumentTemplates.AsNoTracking(), language)
                     .OrderBy(t => t.DocumentType)
+                    .ThenBy(t => t.Language)
                     .ThenBy(t => t.Name)
                     .ToListAsync(ct)
                     .ConfigureAwait(false)
@@ -43,14 +46,16 @@ public sealed class DocumentTemplateCatalog(RaccordDbContext db)
             request.FontFamily,
             request.AccentColor
         );
+        var language = NormalizeLanguage(request.Language);
         if (request.IsDefault)
-            await ClearDefaultAsync(request.DocumentType.Trim().ToLowerInvariant(), ct)
+            await ClearDefaultAsync(request.DocumentType.Trim().ToLowerInvariant(), language, ct)
                 .ConfigureAwait(false);
         var template = new DocumentTemplateRow
         {
             Id = Guid.CreateVersion7(),
             Name = request.Name.Trim(),
             DocumentType = request.DocumentType.Trim().ToLowerInvariant(),
+            Language = language,
             Letterhead = request.Letterhead.Trim(),
             BodyTemplate = request.BodyTemplate.Trim(),
             Footer = request.Footer.Trim(),
@@ -85,9 +90,13 @@ public sealed class DocumentTemplateCatalog(RaccordDbContext db)
             .ConfigureAwait(false);
         if (template is null)
             return null;
+        var language = request.Language is null
+            ? template.Language
+            : NormalizeLanguage(request.Language);
         if (request.IsDefault)
-            await ClearDefaultAsync(template.DocumentType, ct, id).ConfigureAwait(false);
+            await ClearDefaultAsync(template.DocumentType, language, ct, id).ConfigureAwait(false);
         template.Name = request.Name.Trim();
+        template.Language = language;
         template.Letterhead = request.Letterhead.Trim();
         template.BodyTemplate = request.BodyTemplate.Trim();
         template.Footer = request.Footer.Trim();
@@ -112,14 +121,22 @@ public sealed class DocumentTemplateCatalog(RaccordDbContext db)
         return new(
             template.Id,
             template.DocumentType,
+            template.Language,
             $"<article style=\"font-family:{encode(template.FontFamily)};color:{encode(template.AccentColor)}\"><header>{encode(template.Letterhead)}</header><main>{encode(template.BodyTemplate)}</main><footer>{encode(template.Footer)}</footer></article>"
         );
     }
 
-    private async Task ClearDefaultAsync(string type, CancellationToken ct, Guid? except = null)
+    private async Task ClearDefaultAsync(
+        string type,
+        string language,
+        CancellationToken ct,
+        Guid? except = null
+    )
     {
         var defaults = await db
-            .DocumentTemplates.Where(t => t.DocumentType == type && t.IsDefault && t.Id != except)
+            .DocumentTemplates.Where(t =>
+                t.DocumentType == type && t.Language == language && t.IsDefault && t.Id != except
+            )
             .ToListAsync(ct)
             .ConfigureAwait(false);
         foreach (var template in defaults)
@@ -148,11 +165,30 @@ public sealed class DocumentTemplateCatalog(RaccordDbContext db)
             );
     }
 
+    private static string NormalizeLanguage(string language)
+    {
+        var normalized = language.Trim().ToLowerInvariant();
+        if (
+            normalized.Length is < 2 or > 16
+            || normalized.Any(character => !char.IsLetterOrDigit(character) && character != '-')
+        )
+            throw new InvalidOperationException(
+                "Language must be a valid locale such as en or fr-CA."
+            );
+        return normalized;
+    }
+
+    private static IQueryable<DocumentTemplateRow> ApplyLanguageFilter(
+        IQueryable<DocumentTemplateRow> query,
+        string? language
+    ) => language is null ? query : query.Where(t => t.Language == NormalizeLanguage(language));
+
     private static DocumentTemplateResponse ToResponse(DocumentTemplateRow t) =>
         new(
             t.Id,
             t.Name,
             t.DocumentType,
+            t.Language,
             t.Letterhead,
             t.BodyTemplate,
             t.Footer,

@@ -49,8 +49,8 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         ForceEphemeralPostgres(builder);
 
         Log("build+start app: starting");
-        app = await builder.BuildAsync();
-        await app.StartAsync();
+        app = await builder.BuildAsync().WaitAsync(StartupTimeout);
+        await app.StartAsync().WaitAsync(StartupTimeout);
         Log("build+start app: done");
 
         using var startupCts = new CancellationTokenSource(StartupTimeout);
@@ -67,8 +67,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         // the suite runnable with no manual setup beyond a Docker-capable machine.
         Log("playwright install: starting");
         var installExitCode = await Task.Run(() =>
-            Microsoft.Playwright.Program.Main(["install", "chromium"])
-        );
+                Microsoft.Playwright.Program.Main(["install", "chromium"])
+            )
+            .WaitAsync(StartupTimeout);
         Log($"playwright install: exit {installExitCode}");
         if (installExitCode != 0)
         {

@@ -12,6 +12,8 @@ namespace Raccord.Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(name: "workspace");
+
             migrationBuilder.CreateTable(
                 name: "data_protection_keys",
                 schema: "workspace",

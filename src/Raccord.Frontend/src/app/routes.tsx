@@ -14,6 +14,9 @@ import { NotFoundPage } from "./NotFoundPage";
 import { ContactsPage } from "../features/contacts/ContactsPage";
 import { ContactPage } from "../features/contacts/ContactPage";
 import { NewContactPage } from "../features/contacts/NewContactPage";
+import { SignInPage } from "../features/auth/SignInPage";
+import { SetupPage } from "../features/auth/SetupPage";
+import { RolesPage } from "../features/organization/RolesPage";
 
 export const routes: RouteObject[] = [
     { index: true, element: <Navigate to="/setup" replace /> },

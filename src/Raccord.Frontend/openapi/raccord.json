@@ -4137,6 +4137,147 @@
           }
         }
       }
+    },
+    "/api/integrations/api-tokens": {
+      "get": {
+        "tags": [
+          "Integrations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiTokenResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueApiTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/integrations/api-tokens/{id}/regenerate": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiTokenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/integrations/projects": {
+      "get": {
+        "tags": [
+          "Integrations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationProjectResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationProjectResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4216,6 +4357,40 @@
         },
         "description": "A postal address."
       },
+      "ApiTokenResponse": {
+        "required": [
+          "id",
+          "name",
+          "scopes",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ApproveCrewHoursRequest": {
         "required": [
           "status"
@@ -4257,6 +4432,17 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "AssignRoleRequest": {
+        "required": [
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
           }
         }
       },
@@ -5546,6 +5732,17 @@
           }
         }
       },
+      "CurrentUserResponse": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
       "CustomerResponse": {
         "required": [
           "id",
@@ -6031,6 +6228,32 @@
         "type": "string",
         "format": "binary"
       },
+      "IntegrationProjectResponse": {
+        "required": [
+          "id",
+          "name",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
       "InviteCrewRequest": {
         "required": [
           "crewMemberId"
@@ -6497,6 +6720,24 @@
           }
         },
         "description": "Server-calculated totals."
+      },
+      "IssueApiTokenRequest": {
+        "required": [
+          "name",
+          "scopes"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "IssuedInvoiceResponse": {
         "required": [
@@ -7762,6 +8003,51 @@
           }
         }
       },
+      "RoleRequest": {
+        "required": [
+          "name",
+          "permissions"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RoleResponse": {
+        "required": [
+          "name",
+          "predefined",
+          "permissions",
+          "userCount"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ScheduleStockMovementRequest": {
         "required": [
           "quantity",
@@ -7873,6 +8159,32 @@
           }
         }
       },
+      "SetupRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "SetupStatusResponse": {
+        "required": [
+          "required"
+        ],
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean"
+          }
+        }
+      },
       "ShiftProjectRequest": {
         "required": [
           "days"
@@ -7882,6 +8194,25 @@
           "days": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "SignInRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "rememberMe": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -8474,6 +8805,9 @@
     },
     {
       "name": "Crew"
+    },
+    {
+      "name": "Integrations"
     }
   ]
 }

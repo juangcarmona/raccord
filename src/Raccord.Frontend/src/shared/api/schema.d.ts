@@ -1419,6 +1419,132 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/documents/communications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    search?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CommunicationSnapshot"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCommunicationRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CommunicationSnapshot"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/documents/communications/{id}/delivery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RecordDeliveryOutcomeRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CommunicationSnapshot"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/documents/letterheads/{id}/default": {
         parameters: {
             query?: never;
@@ -2896,6 +3022,19 @@ export interface components {
         BookOutLineRequest: {
             bookedOutBy: string;
         };
+        CommunicationSnapshot: {
+            /** Format: uuid */
+            id: string;
+            recipient: string;
+            subject: string;
+            documentKey: null | string;
+            status: string;
+            failureReason: null | string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            deliveredAt: null | string;
+        };
         CompleteStockCountRequest: {
             name: string;
             items: components["schemas"]["StockCountLine"][];
@@ -2987,6 +3126,11 @@ export interface components {
             /** Format: int32 */
             expectedStockQuantity: number;
             description?: null | string;
+        };
+        CreateCommunicationRequest: {
+            recipient: string;
+            subject: string;
+            documentKey?: null | string;
         };
         CreateContactPersonRequest: {
             name: string;
@@ -3682,6 +3826,10 @@ export interface components {
         };
         ReceiveLineRequest: {
             receivedBy: string;
+        };
+        RecordDeliveryOutcomeRequest: {
+            status: string;
+            failureReason?: null | string;
         };
         /** @description Starts a rectifying draft from one immutable issued invoice. */
         RectifyInvoiceRequest: {

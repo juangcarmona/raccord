@@ -265,6 +265,37 @@ internal static class Endpoints
             async (LetterheadCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListAsync(ct))
         );
+        documents.MapGet(
+            "/communications",
+            async (string? search, CommunicationCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(search, ct))
+        );
+        documents.MapPost(
+            "/communications",
+            async Task<Results<Created<CommunicationSnapshot>, BadRequest<string>>> (
+                CreateCommunicationRequest request,
+                CommunicationCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateAsync(request, ct) is { } communication
+                    ? TypedResults.Created(
+                        $"/api/documents/communications/{communication.Id}",
+                        communication
+                    )
+                    : TypedResults.BadRequest<string>("Recipient and subject are required.")
+        );
+        documents.MapPut(
+            "/communications/{id:guid}/delivery",
+            async Task<Results<Ok<CommunicationSnapshot>, NotFound, BadRequest<string>>> (
+                Guid id,
+                RecordDeliveryOutcomeRequest request,
+                CommunicationCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.RecordOutcomeAsync(id, request, ct) is { } communication
+                    ? TypedResults.Ok(communication)
+                    : TypedResults.NotFound()
+        );
         documents.MapPost(
             "/letterheads",
             async Task<Results<Ok<LetterheadSnapshot>, Conflict, BadRequest<string>>> (

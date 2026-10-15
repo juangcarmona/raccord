@@ -132,14 +132,26 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     {
         if (browser is not null)
         {
-            await browser.DisposeAsync();
+            await DisposeWithTimeoutAsync(browser.DisposeAsync, "browser");
         }
 
         playwright?.Dispose();
 
         if (app is not null)
         {
-            await app.DisposeAsync();
+            await DisposeWithTimeoutAsync(app.DisposeAsync, "distributed application");
+        }
+    }
+
+    private static async Task DisposeWithTimeoutAsync(Func<ValueTask> dispose, string resource)
+    {
+        try
+        {
+            await dispose().AsTask().WaitAsync(TimeSpan.FromSeconds(30));
+        }
+        catch (TimeoutException)
+        {
+            Console.Error.WriteLine($"[e2e-fixture] {resource} disposal timed out");
         }
     }
 }

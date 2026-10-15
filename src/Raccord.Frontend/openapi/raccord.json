@@ -3498,6 +3498,68 @@
         }
       }
     },
+    "/api/crew/workday-events": {
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordWorkdayEventRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkdayEventResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/crew/workday-events/{crewMemberId}": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "crewMemberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkdayEventResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/crew/hours/{id}/approval": {
       "put": {
         "tags": [
@@ -7227,6 +7289,37 @@
         },
         "description": "Records money received against an issued invoice."
       },
+      "RecordWorkdayEventRequest": {
+        "required": [
+          "crewMemberId",
+          "kind",
+          "occurredAt",
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/WorkdayEventKind"
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "RectifyInvoiceRequest": {
         "required": [
           "kind",
@@ -8031,6 +8124,51 @@
           },
           "isShownInPlanning": {
             "type": "boolean"
+          }
+        }
+      },
+      "WorkdayEventKind": {
+        "type": "integer"
+      },
+      "WorkdayEventResponse": {
+        "required": [
+          "id",
+          "crewMemberId",
+          "kind",
+          "occurredAt",
+          "actor",
+          "recordedAt",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/WorkdayEventKind"
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "recordedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       }

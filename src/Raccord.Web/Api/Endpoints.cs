@@ -84,6 +84,23 @@ internal static class Endpoints
             async (DateOnly? from, DateOnly? to, CrewHoursCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListAsync(from, to, ct))
         );
+        crew.MapPost(
+            "/workday-events",
+            async (
+                RecordWorkdayEventRequest request,
+                WorkdayEventCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/crew/workday-events",
+                    await catalog.RecordAsync(request, ct)
+                )
+        );
+        crew.MapGet(
+            "/workday-events/{crewMemberId:guid}",
+            async (Guid crewMemberId, WorkdayEventCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(crewMemberId, ct))
+        );
         crew.MapPut(
             "/hours/{id:guid}/approval",
             async Task<Results<Ok<CrewHoursResponse>, NotFound>> (

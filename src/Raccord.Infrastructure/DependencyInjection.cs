@@ -114,5 +114,6 @@ public static class DependencyInjection
         services.AddScoped<CrewPlanningCatalog>();
         services.AddScoped<CrewAvailabilityCatalog>();
         services.AddScoped<CrewHoursCatalog>();
+        services.AddScoped<WorkdayEventCatalog>();
     }
 }

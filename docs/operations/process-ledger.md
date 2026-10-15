@@ -267,3 +267,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Payroll output must be derived from approved registrations, not from raw or pending time entries.
 - Action: Keep registrations append-only with an explicit source and approval status, and export a deterministic date-bounded CSV from approved rows only.
 - Check: The #160 journey registers 7.5 hours, approves them, proves pending data is not exported before approval, and verifies the approved payroll CSV with hosted screenshot/trace evidence.
+
+## 2026-10-15 · Workday event records
+
+- Observation: Clock events are auditable operational records, but statutory workday compliance depends on jurisdiction-specific rules that are not selected yet.
+- Action: Implement only raw clock-in/out events with occurrence time, server recording time, actor and remark; make no legal compliance claim until the jurisdiction review is complete.
+- Check: The #161 journey records both events, reloads them in order, and verifies actor, remark and server audit timestamp with hosted screenshot/trace evidence.

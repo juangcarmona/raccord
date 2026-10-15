@@ -241,3 +241,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** External integrations need stable scope boundaries without exposing reusable plaintext credentials through storage or read APIs.
 - **Action:** Hash API keys at rest, return plaintext only on issue or rotation, enforce administrator permission for token management and explicit read/write scopes for integration routes.
 - **Check:** The ProductShape-cited journey issues and rotates a token, proves read access and rejected write access, and retains hosted screenshot and trace evidence.
+
+## 2026-10-15 · Personal calendar feeds are private, revocable projections
+
+- **Observation:** A calendar subscription must remain useful to the individual without exposing the project workspace or leaving an unrevocable URL behind.
+- **Action:** Store only a hash of each feed token, derive the ICS response from the authenticated user's relevant schedule, and rotate or revoke access through the integration boundary.
+- **Check:** The ProductShape-cited journey downloads a private ICS feed, verifies the relevant event, proves an old token is rejected after rotation, and links hosted browser evidence.

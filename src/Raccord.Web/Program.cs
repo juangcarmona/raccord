@@ -122,6 +122,7 @@ app.UseAuthorization();
 
 app.MapOpenApi();
 app.MapDefaultEndpoints();
+IntegrationEndpoints.MapCalendarFeed(app);
 app.MapRaccordAuthentication();
 app.MapRaccordSetup();
 app.MapRaccordRoles();

@@ -121,6 +121,7 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         {
             BaseURL = FrontendBaseUrl.ToString(),
             Locale = "en-US",
+            IgnoreHTTPSErrors = true,
         };
         if (overrides is not null)
         {

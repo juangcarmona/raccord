@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Contracts.Integrations;
 using Raccord.Contracts.Projects;
@@ -19,9 +20,94 @@ internal static class IntegrationEndpoints
         tokens.MapPost("/", IssueTokenAsync);
         tokens.MapPost("/{id:guid}/regenerate", RegenerateTokenAsync);
 
+        var feeds = integrations
+            .MapGroup("/calendar-feeds")
+            .RequirePermission(PermissionCatalog.ApiAccessManage);
+        feeds.MapPost("/", IssueCalendarFeedAsync);
+        feeds.MapDelete("/{id:guid}", RevokeCalendarFeedAsync);
+
         integrations.MapGet("/projects", ListProjectsAsync).AllowAnonymous();
         integrations.MapPost("/projects", CreateProjectAsync).AllowAnonymous();
     }
+
+    public static void MapCalendarFeed(IEndpointRouteBuilder app)
+    {
+        app.MapGet(
+                "/calendar-feeds/{token}/{stream}.ics",
+                async (
+                    string token,
+                    string stream,
+                    CalendarFeedCatalog catalog,
+                    HttpResponse response,
+                    CancellationToken ct
+                ) =>
+                {
+                    var projects = await catalog.LoadAsync(token, stream, ct);
+                    if (projects is null)
+                    {
+                        response.StatusCode = StatusCodes.Status404NotFound;
+                        return;
+                    }
+
+                    response.ContentType = "text/calendar; charset=utf-8";
+                    await response.WriteAsync(ToCalendar(stream, projects), ct);
+                }
+            )
+            .AllowAnonymous();
+    }
+
+    private static async Task<Created<CalendarFeedResponse>> IssueCalendarFeedAsync(
+        IssueCalendarFeedRequest request,
+        HttpContext context,
+        CalendarFeedCatalog catalog,
+        CancellationToken ct
+    )
+    {
+        var result = await catalog.IssueAsync(
+            request.Stream,
+            $"{context.Request.Scheme}://{context.Request.Host}",
+            ct
+        );
+        return TypedResults.Created(result.Url, result);
+    }
+
+    private static async Task<Results<NoContent, NotFound>> RevokeCalendarFeedAsync(
+        Guid id,
+        CalendarFeedCatalog catalog,
+        CancellationToken ct
+    ) => await catalog.RevokeAsync(id, ct) ? TypedResults.NoContent() : TypedResults.NotFound();
+
+    private static string ToCalendar(
+        string stream,
+        IReadOnlyList<global::Raccord.Domain.Projects.Project> projects
+    )
+    {
+        var builder = new System.Text.StringBuilder(
+            "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Raccord//Personal Schedule//EN\r\n"
+        );
+        foreach (var project in projects)
+        {
+            builder.Append("BEGIN:VEVENT\r\n");
+            builder.Append("UID:").Append(project.Id).Append("@raccord\r\n");
+            builder
+                .Append("DTSTART;VALUE=DATE:")
+                .Append(project.StartDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
+            builder
+                .Append("\r\nDTEND;VALUE=DATE:")
+                .Append(
+                    project.EndDate.AddDays(1).ToString("yyyyMMdd", CultureInfo.InvariantCulture)
+                );
+            builder.Append("\r\nSUMMARY:").Append(EscapeCalendar(project.Name));
+            if (project.Status == global::Raccord.Domain.Projects.ProjectStatus.Cancelled)
+                builder.Append("\r\nSTATUS:CANCELLED");
+            builder.Append("\r\nEND:VEVENT\r\n");
+        }
+        builder.Append("END:VCALENDAR\r\n");
+        return builder.ToString();
+    }
+
+    private static string EscapeCalendar(string value) =>
+        value.Replace("\\", "\\\\").Replace(";", "\\;").Replace(",", "\\,").Replace("\n", "\\n");
 
     private static async Task<Ok<IReadOnlyList<ApiTokenResponse>>> ListTokensAsync(
         ApiAccessCatalog catalog,

@@ -98,6 +98,20 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         await page.GetByLabel("Unit price").FillAsync("450");
         await page.GetByRole(AriaRole.Button, new() { Name = "Add billable line" }).ClickAsync();
         await page.GetByText("Camera kit with lenses").First.WaitForAsync();
+
+        var projectId = new Uri(page.Url).Segments[^1];
+        var status = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/status",
+            new APIRequestContextOptions
+            {
+                Data = "{\"status\":\"active\"}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        status.Ok.ShouldBeTrue();
     }
 
     /// <summary>

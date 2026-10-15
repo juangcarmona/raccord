@@ -1025,6 +1025,43 @@ internal static class Endpoints
     {
         MapInvoiceDrafts(api);
         MapInvoices(api);
+        MapInboundEInvoices(api);
+    }
+
+    private static void MapInboundEInvoices(RouteGroupBuilder api)
+    {
+        var inbound = api.MapGroup("/e-invoices/inbound")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
+        inbound.MapGet(
+            "/",
+            async (InboundEInvoiceWorkflow workflow, CancellationToken ct) =>
+                TypedResults.Ok(await workflow.ListAsync(ct))
+        );
+        inbound.MapPost(
+            "/",
+            async (
+                ReceiveInboundEInvoiceRequest request,
+                InboundEInvoiceWorkflow workflow,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/e-invoices/inbound",
+                    await workflow.ReceiveAsync(request, ct)
+                )
+        );
+        inbound.MapPut(
+            "/{id:guid}/status",
+            async Task<Results<Ok<InboundEInvoiceResponse>, NotFound>> (
+                Guid id,
+                UpdateInboundEInvoiceStatusRequest request,
+                InboundEInvoiceWorkflow workflow,
+                CancellationToken ct
+            ) =>
+                await workflow.UpdateStatusAsync(id, request, ct) is { } invoice
+                    ? TypedResults.Ok(invoice)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapFinance(RouteGroupBuilder api)

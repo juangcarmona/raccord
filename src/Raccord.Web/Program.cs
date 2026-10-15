@@ -92,6 +92,7 @@ builder.Services.AddEquipmentModule();
 builder.Services.AddScoped<EquipmentCatalog>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<InvoicingWorkflow>();
+builder.Services.AddScoped<InboundEInvoiceWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<QuoteWorkspace>();
 builder.Services.AddScoped<AuditLog>();

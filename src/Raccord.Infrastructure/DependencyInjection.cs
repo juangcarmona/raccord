@@ -72,6 +72,7 @@ public static class DependencyInjection
         services.AddScoped<IProjectTemplateRepository, ProjectTemplateRepository>();
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
+        services.AddScoped<IInboundEInvoiceRepository, InboundEInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
         services.AddScoped<FinanceReportingWorkflow>();

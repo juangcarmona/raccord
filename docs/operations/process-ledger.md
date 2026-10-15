@@ -303,3 +303,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Registry providers differ by country and response shape, while manual entry must remain available when no provider is configured or a search has no match.
 - Action: Add a narrow provider-backed HTTP adapter with explicit country/query inputs and return an empty match set when configuration is absent; do not fabricate company records.
 - Check: The registry journey verifies the safe no-match response and captures screenshot/trace evidence for the manual-entry path.
+
+## 2026-10-15 · Inbound structured e-invoice tracking
+
+- Observation: The product describes public-platform exchange and legal reporting deadlines, but the protocol, certificate and holiday calendar needed for a compliance claim are not selected yet.
+- Action: Keep the first increment at a local authenticated intake boundary, preserve the original XML with a content hash, record status transitions as audit events, and leave external exchange connectivity behind a future adapter boundary.
+- Check: The #166 journey receives a UBL invoice, verifies pending status, reports acceptance, records full payment, lists the final state, and retains hosted screenshot/trace evidence.

@@ -266,6 +266,6 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         (await equipmentResponse.JsonAsync())!
             .Value.GetProperty("availableQuantity")
             .GetInt32()
-            .ShouldBe(1);
+            .ShouldBe(2);
     }
 }

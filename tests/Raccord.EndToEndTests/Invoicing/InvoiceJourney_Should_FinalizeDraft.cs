@@ -48,7 +48,8 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 var englishPdf = await englishDocument.BodyAsync();
                 englishPdf.Length.ShouldBeGreaterThan(1000);
                 System.Text.Encoding.ASCII.GetString(englishPdf[..5]).ShouldBe("%PDF-");
-                System.Text.Encoding.ASCII.GetString(englishPdf[^5..]).ShouldBe("%%EOF");
+                var pdfText = System.Text.Encoding.ASCII.GetString(englishPdf).TrimEnd();
+                pdfText.ShouldEndWith("%%EOF");
 
                 // The invoice number comes from the domain's series sequence; asserting its presence
                 // (not exact digits — journeys share one database within a run) proves the final

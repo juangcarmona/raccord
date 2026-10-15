@@ -309,3 +309,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: The product describes public-platform exchange and legal reporting deadlines, but the protocol, certificate and holiday calendar needed for a compliance claim are not selected yet.
 - Action: Keep the first increment at a local authenticated intake boundary, preserve the original XML with a content hash, record status transitions as audit events, and leave external exchange connectivity behind a future adapter boundary.
 - Check: The #166 journey receives a UBL invoice, verifies pending status, reports acceptance, records full payment, lists the final state, and retains hosted screenshot/trace evidence.
+
+## 2026-10-15 · Equipment lifecycle evidence
+
+- Observation: A feature can be implemented in an earlier stacked branch while the current feature tip still has no direct journey proving its operator-visible lifecycle.
+- Action: Before reimplementing an open issue, inspect the current tip and prior merged stacks; when behavior is already present, add the missing focused journey and screenshot evidence instead of duplicating domain code.
+- Check: The #152 journey sells one rental unit, archives the remaining stock, and verifies Sale and Archive movements in hosted CI.

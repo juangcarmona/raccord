@@ -71,6 +71,7 @@ public static class DependencyInjection
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
         services.AddScoped<IBillableWork, ProjectRepository>();
         services.AddScoped<IProjectCoordinationStore, ProjectCoordinationRepository>();
+        services.AddScoped<IProjectContextStore, ProjectContextRepository>();
         services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
         services.AddScoped<EquipmentCatalog>();
         services.AddScoped<DocumentTemplateCatalog>();

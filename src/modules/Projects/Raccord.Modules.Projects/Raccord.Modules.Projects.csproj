@@ -2,6 +2,7 @@
     <ItemGroup>
         <ProjectReference Include="../Raccord.Modules.Projects.Contracts/Raccord.Modules.Projects.Contracts.csproj" />
         <ProjectReference Include="../../../modules/Contacts/Raccord.Modules.Contacts.Contracts/Raccord.Modules.Contacts.Contracts.csproj" />
+        <ProjectReference Include="../../../modules/Compliance/Raccord.Modules.Compliance.Contracts/Raccord.Modules.Compliance.Contracts.csproj" />
         <ProjectReference Include="../../../Raccord.Contracts/Raccord.Contracts.csproj" />
         <ProjectReference Include="../../../shared/Raccord.SharedKernel/Raccord.SharedKernel.csproj" />
     </ItemGroup>

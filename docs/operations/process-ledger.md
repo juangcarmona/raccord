@@ -187,3 +187,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Customer documents can share a document type while requiring independent wording, branding and default selection per locale.
 - **Action:** Store a normalized language tag on each template, scope uniqueness and defaults by document type plus language, and expose a language-filtered catalog.
 - **Check:** Integration and browser journeys must save a foreign-language variant, select it by locale, preview its translated content, and prove the default in another locale remains intact.
+
+## 2026-10-15 · Project context uses one auditable record stream
+
+- **Observation:** Notes, files, folders, fields, tags and saved views all need project scoping and history; separate MVP tables would duplicate ordering and audit behavior.
+- **Action:** Persist a typed project-context entry with optional payload fields, append a shared audit event for every addition, and expose one context read model for the project page.
+- **Check:** The ProductShape-cited browser journey creates all six record kinds and verifies their order plus six retained history events; hosted success capture supplies screenshot, trace and video evidence.

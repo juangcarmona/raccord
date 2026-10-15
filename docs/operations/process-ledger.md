@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Planning assignments are typed by function kind
+
+- **Observation:** Crew and vehicle planning share a project-function boundary but have different valid resources; accepting either resource for every function hides staffing conflicts.
+- **Action:** Persist functions, shifts and assignments separately, enforce kind-specific assignment rules and uniqueness, and calculate staffing from the assigned resource type.
+- **Check:** The planning journey cites the ProductShape Given/When/Then, verifies crew and transport staffing, stays in the per-PR manifest, and links hosted screenshot evidence before merge.
+
 ## 2026-10-15 · Crew availability keeps planning responses durable
 
 - **Observation:** Availability, invitations and job-board signups are separate responses to the same planning function and need independent status and duplicate constraints.

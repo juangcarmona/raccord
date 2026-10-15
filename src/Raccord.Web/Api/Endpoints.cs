@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
+using Raccord.Application.Invoicing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;
@@ -1334,6 +1335,19 @@ internal static class Endpoints
             ) =>
                 await invoicing.DuplicateInvoiceAsync(id, ct) is { } draft
                     ? TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft)
+                    : TypedResults.NotFound()
+        );
+        invoices.MapGet(
+            "/{id:guid}/e-invoice",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                string? format,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ExportEInvoiceAsync(id, format ?? EInvoiceExport.Format, ct)
+                    is { } content
+                    ? TypedResults.File(content, EInvoiceExport.ContentType, $"invoice-{id:N}.xml")
                     : TypedResults.NotFound()
         );
     }

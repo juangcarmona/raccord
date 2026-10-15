@@ -259,3 +259,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** External payment notifications must not invent a second invoice or payment model.
 - **Action:** Gate invoice reads and payment writes with explicit API scopes and delegate recording to the existing invoicing workflow, preserving its idempotency and validation rules.
 - **Check:** The ProductShape-cited payment journey proves the scoped invoice read and payment path, with hosted screenshot and trace evidence.
+
+## 2026-10-15 · Structured exports derive from immutable invoices
+
+- **Observation:** A structured e-invoice must be a reproducible legal projection, not a second editable invoice representation.
+- **Action:** Build the supported UBL document from the issued invoice aggregate, validate the required party and amount fields, and record the export hash in the audit trail.
+- **Check:** The ProductShape-cited journey parses the UBL namespace, parties, lines and payable amount, captures hosted evidence, and leaves no pending model changes.

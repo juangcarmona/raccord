@@ -3858,6 +3858,151 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/crew/hours": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RegisterCrewHoursRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/hours/{id}/approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ApproveCrewHoursRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewHoursResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/payroll-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    from: string;
+                    to: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/crew/members": {
         parameters: {
             query?: never;
@@ -4199,6 +4344,9 @@ export interface components {
             province: string;
             /** @description ISO 3166-1 alpha-2 country code. */
             countryCode: string;
+        };
+        ApproveCrewHoursRequest: {
+            status: components["schemas"]["CrewHourStatus"];
         };
         AssignCrewRequest: {
             /** Format: uuid */
@@ -4559,6 +4707,23 @@ export interface components {
             remark: null | string;
         };
         CrewFunctionKind: number;
+        CrewHourSource: number;
+        CrewHoursResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            workDate: string;
+            /** Format: double */
+            hours: number;
+            source: components["schemas"]["CrewHourSource"];
+            /** Format: uuid */
+            functionId: null | string;
+            status: components["schemas"]["CrewHourStatus"];
+            remark: null | string;
+        };
+        CrewHourStatus: number;
         CrewInvitationResponse: {
             /** Format: uuid */
             id: string;
@@ -5421,6 +5586,18 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Contact e-mail. */
             email: null | string;
+        };
+        RegisterCrewHoursRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: date */
+            workDate: string;
+            /** Format: double */
+            hours: number;
+            source?: components["schemas"]["CrewHourSource"];
+            /** Format: uuid */
+            functionId?: null | string;
+            remark?: null | string;
         };
         /** @description Registers a customer. */
         RegisterCustomerRequest: {

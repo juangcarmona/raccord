@@ -235,3 +235,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Plan-versus-actual reporting becomes misleading if recording actual work mutates the planned source or stores a cached variance.
 - **Action:** Store each time record immutably with planned and actual hours, then derive variance and project totals when reporting.
 - **Check:** Domain and browser journeys must retain both source values, aggregate multiple entries, and expose the derived variance with hosted evidence.
+
+## 2026-10-15 · Scoped API access keeps credentials revocable
+
+- **Observation:** External integrations need stable scope boundaries without exposing reusable plaintext credentials through storage or read APIs.
+- **Action:** Hash API keys at rest, return plaintext only on issue or rotation, enforce administrator permission for token management and explicit read/write scopes for integration routes.
+- **Check:** The ProductShape-cited journey issues and rotates a token, proves read access and rejected write access, and retains hosted screenshot and trace evidence.

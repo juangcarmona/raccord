@@ -66,11 +66,12 @@ if (requireAuthentication)
 {
     builder
         .Services.AddAuthorizationBuilder()
+        .AddPermissionPolicies()
         .SetFallbackPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
 }
 else
 {
-    builder.Services.AddAuthorization();
+    builder.Services.AddAuthorizationBuilder().AddPermissionPolicies();
 }
 
 builder.Services.ConfigureHttpJsonOptions(options =>

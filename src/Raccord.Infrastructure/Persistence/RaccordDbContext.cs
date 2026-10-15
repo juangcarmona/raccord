@@ -59,6 +59,7 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
     internal DbSet<CrewHoursRow> CrewHours => Set<CrewHoursRow>();
     internal DbSet<WorkdayEventRow> WorkdayEvents => Set<WorkdayEventRow>();
     internal DbSet<ApiAccessRow> ApiAccessTokens => Set<ApiAccessRow>();
+    internal DbSet<CalendarFeedRow> CalendarFeeds => Set<CalendarFeedRow>();
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)

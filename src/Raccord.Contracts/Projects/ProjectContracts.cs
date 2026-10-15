@@ -146,7 +146,9 @@ public sealed record AddBillableLineRequest(
 
 #pragma warning disable CS1591
 
-public sealed record PlanEquipmentRequest(Guid EquipmentId, int Quantity);
+public sealed record PlanEquipmentRequest(Guid EquipmentId, int Quantity, string Role = "required");
+
+public sealed record AdjustPackingLineRequest(int Quantity, string Role);
 
 public sealed record PlannedEquipmentResponse(Guid EquipmentId, int Quantity);
 
@@ -154,6 +156,7 @@ public sealed record PackingLineResponse(
     Guid Id,
     Guid EquipmentId,
     int Quantity,
+    string Role,
     bool IsPacked,
     bool IsBookedOut,
     bool IsReceived,

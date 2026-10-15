@@ -2915,6 +2915,148 @@
         }
       }
     },
+    "/api/crew/hours": {
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCrewHoursRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewHoursResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CrewHoursResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/crew/hours/{id}/approval": {
+      "put": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveCrewHoursRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewHoursResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/crew/payroll-export": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/crew/members": {
       "get": {
         "tags": [
@@ -3989,6 +4131,17 @@
           }
         }
       },
+      "ApproveCrewHoursRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/CrewHourStatus"
+          }
+        }
+      },
       "AssignCrewRequest": {
         "required": [
           "crewMemberId"
@@ -4838,6 +4991,62 @@
         }
       },
       "CrewFunctionKind": {
+        "type": "integer"
+      },
+      "CrewHourSource": {
+        "type": "integer"
+      },
+      "CrewHoursResponse": {
+        "required": [
+          "id",
+          "crewMemberId",
+          "workDate",
+          "hours",
+          "source",
+          "functionId",
+          "status",
+          "remark"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "workDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "hours": {
+            "type": "number",
+            "format": "double"
+          },
+          "source": {
+            "$ref": "#/components/schemas/CrewHourSource"
+          },
+          "functionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/CrewHourStatus"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CrewHourStatus": {
         "type": "integer"
       },
       "CrewInvitationResponse": {
@@ -7415,6 +7624,44 @@
           },
           "actor": {
             "type": "string"
+          }
+        }
+      },
+      "RegisterCrewHoursRequest": {
+        "required": [
+          "crewMemberId",
+          "workDate",
+          "hours"
+        ],
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "workDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "hours": {
+            "type": "number",
+            "format": "double"
+          },
+          "source": {
+            "$ref": "#/components/schemas/CrewHourSource"
+          },
+          "functionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "remark": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

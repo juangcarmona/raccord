@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
+using Raccord.Application.Invoicing;
 using Raccord.Infrastructure;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;

@@ -434,6 +434,61 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("project_templates", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CommunicationRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTimeOffset?>("DeliveredAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("delivered_at");
+
+                    b.Property<string>("DocumentKey")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("document_key");
+
+                    b.Property<string>("FailureReason")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("failure_reason");
+
+                    b.Property<string>("Recipient")
+                        .IsRequired()
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
+                        .HasColumnName("recipient");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("subject");
+
+                    b.HasKey("Id")
+                        .HasName("pk_communications");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("ix_communications_created_at");
+
+                    b.HasIndex("Recipient")
+                        .HasDatabaseName("ix_communications_recipient");
+
+                    b.ToTable("communications", "documents");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
                 {
                     b.Property<Guid>("Id")

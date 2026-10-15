@@ -638,7 +638,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
@@ -675,6 +674,101 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_project_crew_assignments_project_function_row_id_crew_membe~");
 
                     b.ToTable("project_crew_assignments", "crew");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAvailabilityRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CrewMemberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("crew_member_id");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("end_date");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("kind");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("remark");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("start_date");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_availability");
+
+                    b.ToTable("crew_availability", "crew");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewInvitationRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CrewMemberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("crew_member_id");
+
+                    b.Property<Guid>("FunctionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("function_id");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("remark");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_invitations");
+
+                    b.HasIndex("FunctionId", "CrewMemberId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_crew_invitations_function_id_crew_member_id");
+
+                    b.ToTable("crew_invitations", "crew");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewJobRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Brief")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("brief");
+
+                    b.Property<Guid>("FunctionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("function_id");
+
+                    b.Property<DateTimeOffset>("PostedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("posted_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_jobs");
+
+                    b.ToTable("crew_jobs", "crew");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewMemberRow", b =>
@@ -767,6 +861,34 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_crew_rates_name_kind");
 
                     b.ToTable("crew_rates", "crew");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewSignupRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CrewMemberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("crew_member_id");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("job_id");
+
+                    b.Property<DateTimeOffset>("SignedUpAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("signed_up_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_signups");
+
+                    b.HasIndex("JobId", "CrewMemberId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_crew_signups_job_id_crew_member_id");
+
+                    b.ToTable("crew_signups", "crew");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
@@ -1156,7 +1278,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectFunctionRow", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
@@ -1201,7 +1322,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectShiftRow", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
@@ -1233,7 +1353,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.VehicleAssignmentRow", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
@@ -1825,6 +1944,16 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_project_crew_assignments_project_functions_project_function~");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewSignupRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.CrewJobRow", null)
+                        .WithMany("Signups")
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_crew_signups_crew_jobs_job_id");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectShiftRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.ProjectFunctionRow", null)
@@ -1853,6 +1982,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_compliance_records_issued_invoices_invoice_id");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewJobRow", b =>
+                {
+                    b.Navigation("Signups");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectFunctionRow", b =>

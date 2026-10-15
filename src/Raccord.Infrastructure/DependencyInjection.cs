@@ -112,5 +112,6 @@ public static class DependencyInjection
         services.AddScoped<CommunicationCatalog>();
         services.AddScoped<CrewCatalog>();
         services.AddScoped<CrewPlanningCatalog>();
+        services.AddScoped<CrewAvailabilityCatalog>();
     }
 }

@@ -255,3 +255,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Resource planning needs one shared function vocabulary for dated shifts, assignments and staffing status; separate crew and transport rules are easier to enforce at the boundary.
 - Action: Keep functions and assignments in a focused planning catalog, capture the selected rate at crew assignment time, and retain successful Playwright artifacts so review evidence is available even when CI is green.
 - Check: The #159 journey creates crew and transport functions, adds a shift, assigns a crew member and vehicle, verifies staffing and retains a screenshot/trace artifact in hosted CI.
+
+## 2026-10-15 · Crew availability and job board
+
+- Observation: Availability, invitations and public sign-up are separate lifecycle records even when they converge on the same planned function.
+- Action: Keep availability windows append-only, invitations explicitly stateful, and job-board sign-ups unique per crew member; expose each transition through a small catalog and API slice.
+- Check: The #158 journey records availability, accepts an invitation, posts the function and signs the crew member up, with hosted screenshot/trace evidence retained.

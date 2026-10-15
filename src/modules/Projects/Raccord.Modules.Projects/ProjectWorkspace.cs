@@ -372,7 +372,12 @@ public sealed class ProjectWorkspace(
             line.EquipmentId,
             line.Quantity,
             line.Role.ToString().ToLowerInvariant(),
-            line.Disposition.ToString().ToLowerInvariant(),
+            line.Disposition switch
+            {
+                PackingLineDisposition.CrossDocked => "cross-docked",
+                PackingLineDisposition.SaleReturn => "sale-return",
+                _ => "normal-return",
+            },
             line.IsPacked,
             line.IsBookedOut,
             line.IsReceived,

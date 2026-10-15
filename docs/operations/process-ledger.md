@@ -169,3 +169,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A document configuration is not useful to operators until project and warehouse data can be turned into a concrete printable artifact.
 - **Action:** Keep generation endpoints derived from persisted project/equipment records, return stable filenames and content types, and HTML-encode all printable fields.
 - **Check:** Integration and browser journeys must generate a project summary or equipment label and assert identifiers are present in the output.
+
+## 2026-10-15 · Delivery outcomes remain searchable and append-only
+
+- **Observation:** Sending a document without a durable outcome and searchable failure reason leaves operators unable to investigate delivery problems.
+- **Action:** Record pending, sent and failed communication outcomes with recipient, subject, document key and failure reason; expose a filtered communication log.
+- **Check:** Integration and browser journeys must create a communication, record a failed delivery, and find it through the searchable log.

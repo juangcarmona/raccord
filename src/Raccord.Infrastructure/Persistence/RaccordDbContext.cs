@@ -60,6 +60,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<DocumentTemplateRow> DocumentTemplates => Set<DocumentTemplateRow>();
 
+    internal DbSet<CommunicationRow> Communications => Set<CommunicationRow>();
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)
     {

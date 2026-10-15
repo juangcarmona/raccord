@@ -163,3 +163,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Template configuration combines reusable user text, styling and image references; previewing raw content would turn administrator input into executable markup.
 - **Action:** Persist versioned template settings by document type, keep one default per type, and HTML-encode all preview fields while retaining the logo as a storage key.
 - **Check:** Integration and browser journeys must save a branded template, preview it, verify styling and confirm script content is not executable.
+
+## 2026-10-15 · Generated documents expose printable outputs
+
+- **Observation:** A document configuration is not useful to operators until project and warehouse data can be turned into a concrete printable artifact.
+- **Action:** Keep generation endpoints derived from persisted project/equipment records, return stable filenames and content types, and HTML-encode all printable fields.
+- **Check:** Integration and browser journeys must generate a project summary or equipment label and assert identifiers are present in the output.

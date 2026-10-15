@@ -2248,6 +2248,154 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/finance/report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["FinanceReportResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/finance/ledger": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["FinanceLedgerEntryResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/finance/accounting-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/finance/invoices-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    from?: string;
+                    to?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2520,6 +2668,45 @@ export interface components {
              * @description Legal issue date; today in the organization's time zone when omitted.
              */
             issueDate: null | string;
+        };
+        /** @description A finance ledger entry derived from an issued invoice or received payment. */
+        FinanceLedgerEntryResponse: {
+            /** Format: uuid */
+            invoiceId: string;
+            invoiceNumber: string;
+            /** Format: date */
+            date: string;
+            entryType: string;
+            /** Format: double */
+            debit: number;
+            /** Format: double */
+            credit: number;
+            /** Format: double */
+            balance: number;
+            currency: string;
+            description: string;
+        };
+        /** @description Period totals for finance operators and accountants. */
+        FinanceReportResponse: {
+            /** Format: date */
+            from: string;
+            /** Format: date */
+            to: string;
+            /** Format: int32 */
+            invoiceCount: number;
+            /** Format: int32 */
+            paidInvoiceCount: number;
+            /** Format: int32 */
+            overdueInvoiceCount: number;
+            /** Format: double */
+            invoicedTotal: number;
+            /** Format: double */
+            paidTotal: number;
+            /** Format: double */
+            outstandingTotal: number;
+            /** Format: double */
+            overdueTotal: number;
+            currency: string;
         };
         /** @description An invoice draft. */
         InvoiceDraftResponse: {

@@ -12,7 +12,9 @@ namespace Raccord.EndToEndTests.Invoicing;
 /// journey; it exists so that "an invoice can be issued from the browser" is always true.
 /// ProductShape: JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE,
 /// UC-FIN-CONFIGURE-INVOICE-MOMENTS, UC-FIN-WORK-INVOICING-QUEUE,
-/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT, UC-FIN-SEND-PAYMENT-REMINDER.
+/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT, UC-FIN-SEND-PAYMENT-REMINDER,
+/// UC-FIN-MANAGE-LEDGERS, UC-FIN-EXPORT-INVOICES-SPREADSHEET, UC-FIN-RUN-ACCOUNTING-EXPORT,
+/// UC-FIN-ANALYZE-STATISTICS.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
@@ -54,6 +56,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 );
                 payment.Status.ShouldBe(201);
                 await AssertPaymentReminderAsync(page, invoiceId);
+                await AssertFinanceReportingAsync(page, invoiceId);
 
                 // The invoice number comes from the domain's series sequence; asserting its presence
                 // (not exact digits — journeys share one database within a run) proves the final
@@ -89,6 +92,42 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         var history = await page.APIRequest.GetAsync($"/api/invoices/{invoiceId}/reminders");
         history.Ok.ShouldBeTrue();
         (await history.TextAsync()).ShouldContain($"\"dueDate\":\"{newDueDate:yyyy-MM-dd}\"");
+    }
+
+    private static async Task AssertFinanceReportingAsync(IPage page, string invoiceId)
+    {
+        var report = await page.APIRequest.GetAsync(
+            "/api/finance/report?from=2026-08-01&to=2026-10-31"
+        );
+        report.Ok.ShouldBeTrue();
+        var reportText = await report.TextAsync();
+        reportText.ShouldContain($"\"invoiceCount\":1");
+        reportText.ShouldContain("\"invoicedTotal\":1089");
+        reportText.ShouldContain("\"paidTotal\":100");
+        reportText.ShouldContain("\"outstandingTotal\":989");
+
+        var ledger = await page.APIRequest.GetAsync(
+            "/api/finance/ledger?from=2026-08-01&to=2026-10-31"
+        );
+        ledger.Ok.ShouldBeTrue();
+        var ledgerText = await ledger.TextAsync();
+        ledgerText.ShouldContain(invoiceId);
+        ledgerText.ShouldContain("\"entryType\":\"invoice\"");
+        ledgerText.ShouldContain("\"entryType\":\"payment\"");
+
+        var export = await page.APIRequest.GetAsync(
+            "/api/finance/accounting-export?from=2026-08-01&to=2026-10-31"
+        );
+        export.Ok.ShouldBeTrue();
+        export.Headers["content-type"].ShouldContain("text/csv");
+        (await export.TextAsync()).ShouldContain("invoiceId,invoiceNumber,date,entryType");
+
+        var invoiceExport = await page.APIRequest.GetAsync(
+            "/api/finance/invoices-export?from=2026-08-01&to=2026-10-31"
+        );
+        invoiceExport.Ok.ShouldBeTrue();
+        invoiceExport.Headers["content-type"].ShouldContain("text/csv");
+        (await invoiceExport.TextAsync()).ShouldContain("invoiceId,invoiceNumber,issueDate");
     }
 
     private static async Task SetDepositAsync(IPage page, string projectId)

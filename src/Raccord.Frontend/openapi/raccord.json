@@ -1950,6 +1950,143 @@
           }
         }
       }
+    },
+    "/api/finance/report": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinanceReportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finance/ledger": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FinanceLedgerEntryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finance/accounting-export": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/finance/invoices-export": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2575,6 +2712,112 @@
           }
         },
         "description": "Finalizes a draft."
+      },
+      "FinanceLedgerEntryResponse": {
+        "required": [
+          "invoiceId",
+          "invoiceNumber",
+          "date",
+          "entryType",
+          "debit",
+          "credit",
+          "balance",
+          "currency",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "entryType": {
+            "type": "string"
+          },
+          "debit": {
+            "type": "number",
+            "format": "double"
+          },
+          "credit": {
+            "type": "number",
+            "format": "double"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "description": "A finance ledger entry derived from an issued invoice or received payment."
+      },
+      "FinanceReportResponse": {
+        "required": [
+          "from",
+          "to",
+          "invoiceCount",
+          "paidInvoiceCount",
+          "overdueInvoiceCount",
+          "invoicedTotal",
+          "paidTotal",
+          "outstandingTotal",
+          "overdueTotal",
+          "currency"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "date"
+          },
+          "to": {
+            "type": "string",
+            "format": "date"
+          },
+          "invoiceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paidInvoiceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "overdueInvoiceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invoicedTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "paidTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "outstandingTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "overdueTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "description": "Period totals for finance operators and accountants."
       },
       "InvoiceDraftResponse": {
         "required": [
@@ -4219,6 +4462,9 @@
     },
     {
       "name": "Project coordination"
+    },
+    {
+      "name": "Finance"
     }
   ]
 }

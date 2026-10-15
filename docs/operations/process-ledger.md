@@ -139,3 +139,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A shared board needs one source of truth for task ordering and completion semantics.
 - **Action:** Store status completion rules with the task status and recalculate project progress in the coordination service after every task transition.
 - **Check:** Domain and CI tests must cover status validation, task movement, and the resulting progress percentage.
+
+## 2026-10-15 · Finance reports stay derived from legal records
+
+- **Observation:** Accountant views can become contradictory if reports, ledgers and exports each persist their own totals.
+- **Action:** Derive the finance report and CSV ledger from immutable issued invoices, append-only payments and reminder deadlines; keep one shared period normalization rule.
+- **Check:** Integration and browser journeys must compare report totals, ledger entries and export headers for the same period, with successful hosted Playwright evidence linked from the PR.

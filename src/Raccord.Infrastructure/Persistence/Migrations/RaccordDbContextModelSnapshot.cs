@@ -294,6 +294,58 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_number_sequences", "invoicing");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Equipment.EquipmentItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("available_quantity");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("ScanCode")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("scan_code");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("stock_quantity");
+
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
+                    b.HasKey("Id")
+                        .HasName("pk_equipment_items");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_equipment_items_code");
+
+                    b.HasIndex("ScanCode")
+                        .IsUnique()
+                        .HasDatabaseName("ix_equipment_items_scan_code");
+
+                    b.ToTable("equipment_items", "equipment");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1257,7 +1309,79 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasConstraintName("fk_billable_lines_projects_project_id");
                         });
 
+                    b.OwnsMany("Raccord.Domain.Projects.PackingLine", "PackingLines", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<DateTimeOffset?>("BookedOutAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("booked_out_at");
+
+                            b1.Property<string>("BookedOutBy")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("booked_out_by");
+
+                            b1.Property<Guid>("EquipmentId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("equipment_id");
+
+                            b1.Property<bool>("IsBookedOut")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_booked_out");
+
+                            b1.Property<bool>("IsPacked")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_packed");
+
+                            b1.Property<bool>("IsReceived")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_received");
+
+                            b1.Property<DateTimeOffset?>("PackedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("packed_at");
+
+                            b1.Property<string>("PackedBy")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("packed_by");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("project_id");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("integer")
+                                .HasColumnName("quantity");
+
+                            b1.Property<DateTimeOffset?>("ReceivedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("received_at");
+
+                            b1.Property<string>("ReceivedBy")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("received_by");
+
+                            b1.HasKey("Id")
+                                .HasName("pk_packing_lines");
+
+                            b1.HasIndex("ProjectId")
+                                .HasDatabaseName("ix_packing_lines_project_id");
+
+                            b1.ToTable("packing_lines", "projects");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId")
+                                .HasConstraintName("fk_packing_lines_projects_project_id");
+                        });
+
                     b.Navigation("BillableLines");
+
+                    b.Navigation("PackingLines");
                 });
 #pragma warning restore 612, 618
         }

@@ -261,6 +261,131 @@
         }
       }
     },
+    "/api/equipment/items": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EquipmentItemResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEquipmentItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/equipment/items/{id}": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/equipment/items/{id}/scan-code": {
+      "put": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignEquipmentScanCodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentItemResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -376,6 +501,205 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BillableLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/packing-lines": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanEquipmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/packing-lines/{lineId}/pack": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/packing-lines/{lineId}/book-out": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookOutLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/packing-lines/{lineId}/receive": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceiveLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
                 }
               }
             }
@@ -1240,6 +1564,17 @@
         },
         "description": "A postal address."
       },
+      "AssignEquipmentScanCodeRequest": {
+        "required": [
+          "scanCode"
+        ],
+        "type": "object",
+        "properties": {
+          "scanCode": {
+            "type": "string"
+          }
+        }
+      },
       "AuditEventResponse": {
         "required": [
           "id",
@@ -1365,6 +1700,43 @@
           }
         },
         "description": "A billable line."
+      },
+      "BookOutLineRequest": {
+        "required": [
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "string"
+          },
+          "scanCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CreateEquipmentItemRequest": {
+        "required": [
+          "code",
+          "name",
+          "stockQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "CreateInvoiceDraftRequest": {
         "required": [
@@ -1635,6 +2007,43 @@
           }
         },
         "description": "Declines an incoming project request."
+      },
+      "EquipmentItemResponse": {
+        "required": [
+          "id",
+          "code",
+          "name",
+          "scanCode",
+          "stockQuantity",
+          "availableQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "scanCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "availableQuantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "FinalizeInvoiceDraftRequest": {
         "required": [
@@ -2075,6 +2484,72 @@
         },
         "description": "The legal issuer of invoices."
       },
+      "PackingLineResponse": {
+        "required": [
+          "id",
+          "equipmentId",
+          "quantity",
+          "isPacked",
+          "isBookedOut",
+          "isReceived",
+          "packedBy",
+          "bookedOutBy",
+          "receivedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "equipmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isPacked": {
+            "type": "boolean"
+          },
+          "isBookedOut": {
+            "type": "boolean"
+          },
+          "isReceived": {
+            "type": "boolean"
+          },
+          "packedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bookedOutBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "receivedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PackLineRequest": {
+        "required": [
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "string"
+          }
+        }
+      },
       "PartyResponse": {
         "required": [
           "legalName",
@@ -2107,6 +2582,23 @@
           }
         },
         "description": "A legal party as printed on an invoice."
+      },
+      "PlanEquipmentRequest": {
+        "required": [
+          "equipmentId",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "equipmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "ProblemDetails": {
         "type": "object",
@@ -2352,6 +2844,16 @@
             ],
             "description": "Assigned team.",
             "format": "uuid"
+          },
+          "packingLines": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/PackingLineResponse"
+            },
+            "description": "Warehouse packing lines."
           }
         },
         "description": "A project with its billable lines."
@@ -2592,6 +3094,17 @@
         },
         "description": "Project classification."
       },
+      "ReceiveLineRequest": {
+        "required": [
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "string"
+          }
+        }
+      },
       "ReceiveProjectRequest": {
         "required": [
           "name",
@@ -2816,6 +3329,9 @@
     },
     {
       "name": "Customers"
+    },
+    {
+      "name": "Equipment"
     },
     {
       "name": "Projects"

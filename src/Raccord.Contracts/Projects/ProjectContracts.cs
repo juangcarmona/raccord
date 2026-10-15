@@ -144,6 +144,32 @@ public sealed record AddBillableLineRequest(
     decimal VatRate
 );
 
+#pragma warning disable CS1591
+
+public sealed record PlanEquipmentRequest(Guid EquipmentId, int Quantity);
+
+public sealed record PlannedEquipmentResponse(Guid EquipmentId, int Quantity);
+
+public sealed record PackingLineResponse(
+    Guid Id,
+    Guid EquipmentId,
+    int Quantity,
+    bool IsPacked,
+    bool IsBookedOut,
+    bool IsReceived,
+    string? PackedBy,
+    string? BookedOutBy,
+    string? ReceivedBy
+);
+
+public sealed record PackLineRequest(string Actor);
+
+public sealed record BookOutLineRequest(string Actor, string? ScanCode = null);
+
+public sealed record ReceiveLineRequest(string Actor);
+
+#pragma warning restore CS1591
+
 /// <summary>A project in a list.</summary>
 /// <param name="Id">Project identifier.</param>
 /// <param name="Name">Project name.</param>
@@ -181,6 +207,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="BillableLines">Billable work.</param>
 /// <param name="ProjectTypeId">Assigned reusable project type.</param>
 /// <param name="TeamId">Assigned team.</param>
+/// <param name="PackingLines">Warehouse packing lines.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -191,7 +218,8 @@ public sealed record ProjectResponse(
     string Currency,
     IReadOnlyList<BillableLineResponse> BillableLines,
     Guid? ProjectTypeId = null,
-    Guid? TeamId = null
+    Guid? TeamId = null,
+    IReadOnlyList<PackingLineResponse>? PackingLines = null
 );
 
 /// <summary>A billable line.</summary>

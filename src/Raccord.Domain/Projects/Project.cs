@@ -7,6 +7,7 @@ namespace Raccord.Domain.Projects;
 public sealed class Project
 {
     private readonly List<BillableLine> billableLines = [];
+    private readonly List<PackingLine> packingLines = [];
 
     private Project()
     {
@@ -69,6 +70,41 @@ public sealed class Project
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];
+
+    /// <summary>Equipment lines currently handled by the warehouse.</summary>
+    public IReadOnlyList<PackingLine> PackingLines => [.. packingLines];
+
+    /// <summary>Adds a quantity of equipment to the project's packing list.</summary>
+    public PackingLine AddPackingLine(Guid equipmentId, int quantity)
+    {
+        var line = PackingLine.Create(equipmentId, quantity);
+        packingLines.Add(line);
+        return line;
+    }
+
+    /// <summary>Marks a packing line as prepared.</summary>
+    public PackingLine Pack(Guid lineId, string actor, DateTimeOffset at)
+    {
+        var line = FindPackingLine(lineId);
+        line.Pack(actor, at);
+        return line;
+    }
+
+    /// <summary>Marks a prepared line as dispatched.</summary>
+    public PackingLine BookOut(Guid lineId, string actor, DateTimeOffset at)
+    {
+        var line = FindPackingLine(lineId);
+        line.BookOut(actor, at);
+        return line;
+    }
+
+    /// <summary>Marks a dispatched line as received.</summary>
+    public PackingLine Receive(Guid lineId, string actor, DateTimeOffset at)
+    {
+        var line = FindPackingLine(lineId);
+        line.Receive(actor, at);
+        return line;
+    }
 
     /// <summary>Creates a project for a customer and period.</summary>
     public static Project Create(
@@ -161,5 +197,12 @@ public sealed class Project
         ?? throw new BusinessRuleViolationException(
             "projects.billable-line-not-found",
             $"Billable line '{lineId}' does not belong to this project."
+        );
+
+    private PackingLine FindPackingLine(Guid lineId) =>
+        packingLines.Find(line => line.Id == lineId)
+        ?? throw new BusinessRuleViolationException(
+            "projects.packing-line-not-found",
+            $"Packing line '{lineId}' does not belong to this project."
         );
 }

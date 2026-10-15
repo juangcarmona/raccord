@@ -73,6 +73,25 @@ public sealed class CalendarFeedCatalog(RaccordDbContext db)
         return true;
     }
 
+    public async Task<CalendarFeedResponse?> RotateAsync(
+        Guid id,
+        string baseUrl,
+        CancellationToken ct
+    )
+    {
+        var feed = await db
+            .CalendarFeeds.SingleOrDefaultAsync(row => row.Id == id && row.RevokedAt == null, ct)
+            .ConfigureAwait(false);
+        if (feed is null)
+            return null;
+
+        var token = ToBase64Url(RandomNumberGenerator.GetBytes(32));
+        feed.TokenHash = Hash(token);
+        feed.CreatedAt = DateTimeOffset.UtcNow;
+        await db.SaveChangesAsync(ct).ConfigureAwait(false);
+        return ToResponse(feed, token, baseUrl);
+    }
+
     private static CalendarFeedResponse ToResponse(
         CalendarFeedRow row,
         string token,

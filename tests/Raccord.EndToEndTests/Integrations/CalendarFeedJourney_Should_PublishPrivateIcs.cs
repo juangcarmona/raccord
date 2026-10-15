@@ -12,6 +12,11 @@ namespace Raccord.EndToEndTests.Integrations;
 public sealed class CalendarFeedJourney_Should_PublishPrivateIcs(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
+    /// <summary>
+    /// Given an authenticated user with project schedule data, when they issue and rotate a
+    /// personal calendar feed, then the current token returns ICS and the previous token is
+    /// rejected. ProductShape: JRN-INT-SYNC-PERSONAL-CALENDAR, UC-INT-SUBSCRIBE-TO-CALENDAR-FEED.
+    /// </summary>
     [Fact]
     public async Task Journey_Should_IssuePrivateReadOnlyProjectFeed()
     {
@@ -41,6 +46,18 @@ public sealed class CalendarFeedJourney_Should_PublishPrivateIcs(DistributedAppF
                         Path = $"playwright-artifacts/calendar-feed-{RunStamp}.png",
                         FullPage = true,
                     }
+                );
+
+                var rotate = await page.APIRequest.PostAsync(
+                    $"/api/integrations/calendar-feeds/{feed.Id}/regenerate"
+                );
+                rotate.Status.ShouldBe((int)HttpStatusCode.OK);
+                var rotated = (await rotate.JsonAsync<FeedResponse>())!;
+                (await page.APIRequest.GetAsync(feed.Url)).Status.ShouldBe(
+                    (int)HttpStatusCode.NotFound
+                );
+                (await page.APIRequest.GetAsync(rotated.Url)).Status.ShouldBe(
+                    (int)HttpStatusCode.OK
                 );
 
                 var revoke = await page.APIRequest.DeleteAsync(

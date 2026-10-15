@@ -6,13 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Npgsql;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
-using Raccord.Application.Commercial;
 using Raccord.Application.Compliance;
 using Raccord.Application.Documents;
-using Raccord.Application.Finance;
 using Raccord.Application.Invoicing;
-using Raccord.Application.Organization;
-using Raccord.Application.Projects;
 using Raccord.BuildingBlocks.Messaging;
 using Raccord.BuildingBlocks.Persistence;
 using Raccord.BuildingBlocks.Storage;
@@ -25,6 +21,8 @@ using Raccord.Infrastructure.Time;
 using Raccord.Modules.Compliance;
 using Raccord.Modules.Compliance.Contracts;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Projects.Contracts;
+using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.SharedKernel.Auditing;
 using ApplicationAuditTrail = Raccord.Application.Auditing.IAuditTrail;
@@ -43,12 +41,15 @@ public static class DependencyInjection
     public const string DocumentsConnectionName = "documents";
 
     /// <summary>Adds persistence, document storage, rendering, compliance and time adapters.</summary>
+#pragma warning disable MA0051
     public static IHostApplicationBuilder AddRaccordInfrastructure(
         this IHostApplicationBuilder builder
     )
     {
         ArgumentNullException.ThrowIfNull(builder);
+
         builder.AddNpgsqlDbContext<RaccordDbContext>(DatabaseConnectionName);
+
         var services = builder.Services;
         services.AddScoped<ApplicationUnitOfWork, UnitOfWork>();
         services.AddSender();
@@ -68,32 +69,48 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException("Contacts persistence must support writes.")
         );
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
-        services.AddScoped<IProjectRepository, ProjectRepository>();
-        services.AddScoped<IProjectTemplateRepository, ProjectTemplateRepository>();
+        services.AddScoped<IBillableWork, ProjectRepository>();
+        services.AddScoped<IProjectCoordinationStore, ProjectCoordinationRepository>();
+        services.AddScoped<IProjectContextStore, ProjectContextRepository>();
+        services.AddScoped<IProjectTimeStore, ProjectTimeRepository>();
+        services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
+        services.AddScoped<EquipmentCatalog>();
+        services.AddScoped<DocumentTemplateCatalog>();
+        services.AddScoped<DocumentGenerationCatalog>();
+        services.AddScoped<IEquipmentStock>(provider =>
+            provider.GetRequiredService<EquipmentCatalog>()
+        );
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
-        services.AddScoped<FinanceReportingWorkflow>();
-        services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
-        services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
-        services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();
-        services.AddScoped<IQuoteRepository, QuoteRepository>();
+        RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
+        services.AddScoped<Raccord.Modules.Compliance.Contracts.IAuditTrail>(provider =>
+            provider.GetRequiredService<ApplicationAuditTrail>()
+        );
         services.AddScoped<IAuditAppender>(provider =>
             provider.GetRequiredService<ApplicationAuditTrail>()
         );
         services.AddScoped<ApplicationComplianceRecorder, PendingComplianceRecorder>();
-        services.AddComplianceSubmission();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
-        RegisterDocumentAndCrewCatalogs(services);
+        services.AddScoped<CommunicationCatalog>();
+        services.AddScoped<CrewCatalog>();
+        services.AddScoped<CrewAvailabilityCatalog>();
+        services.AddScoped<CrewPlanningCatalog>();
+        services.AddScoped<CrewHoursCatalog>();
+        services.AddScoped<WorkdayEventCatalog>();
+        services.AddScoped<ApiAccessCatalog>();
+        services.AddScoped<CalendarFeedCatalog>();
+
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);
         services.AddSingleton<IClock>(provider => new SystemClock(
             provider.GetRequiredService<TimeProvider>(),
             TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)
         ));
+
         var storage =
             builder.Configuration.GetSection(StorageOptions.Section).Get<StorageOptions>()
             ?? new StorageOptions();
@@ -105,17 +122,20 @@ public static class DependencyInjection
 
         return builder;
     }
+#pragma warning restore MA0051
 
-    private static void RegisterDocumentAndCrewCatalogs(IServiceCollection services)
+    private static void RegisterWorkspaceServices(IServiceCollection services)
     {
-        services.AddScoped<LetterheadCatalog>();
-        services.AddScoped<CommunicationCatalog>();
-        services.AddScoped<CrewCatalog>();
-        services.AddScoped<CrewPlanningCatalog>();
-        services.AddScoped<CrewAvailabilityCatalog>();
-        services.AddScoped<CrewHoursCatalog>();
-        services.AddScoped<WorkdayEventCatalog>();
-        services.AddScoped<ApiAccessCatalog>();
-        services.AddScoped<CalendarFeedCatalog>();
+        services.AddScoped<WorkspaceRepository>();
+        services.AddScoped<IWorkspaceStore>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IInvoiceSeriesCatalog>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IInvoiceNumberSequenceRepository>(provider =>
+            provider.GetRequiredService<WorkspaceRepository>()
+        );
+        services.AddScoped<IWorkspaceUnitOfWork, WorkspaceUnitOfWork>();
     }
 }

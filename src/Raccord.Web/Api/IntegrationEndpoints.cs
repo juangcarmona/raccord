@@ -24,6 +24,7 @@ internal static class IntegrationEndpoints
             .MapGroup("/calendar-feeds")
             .RequirePermission(PermissionCatalog.ApiAccessManage);
         feeds.MapPost("/", IssueCalendarFeedAsync);
+        feeds.MapPost("/{id:guid}/regenerate", RegenerateCalendarFeedAsync);
         feeds.MapDelete("/{id:guid}", RevokeCalendarFeedAsync);
 
         integrations.MapGet("/projects", ListProjectsAsync).AllowAnonymous();
@@ -77,6 +78,19 @@ internal static class IntegrationEndpoints
         CancellationToken ct
     ) => await catalog.RevokeAsync(id, ct) ? TypedResults.NoContent() : TypedResults.NotFound();
 
+    private static async Task<
+        Results<Ok<CalendarFeedResponse>, NotFound>
+    > RegenerateCalendarFeedAsync(
+        Guid id,
+        HttpContext context,
+        CalendarFeedCatalog catalog,
+        CancellationToken ct
+    ) =>
+        await catalog.RotateAsync(id, $"{context.Request.Scheme}://{context.Request.Host}", ct)
+            is { } result
+            ? TypedResults.Ok(result)
+            : TypedResults.NotFound();
+
     private static string ToCalendar(
         string stream,
         IReadOnlyList<global::Raccord.Domain.Projects.Project> projects
@@ -98,8 +112,6 @@ internal static class IntegrationEndpoints
                     project.EndDate.AddDays(1).ToString("yyyyMMdd", CultureInfo.InvariantCulture)
                 );
             builder.Append("\r\nSUMMARY:").Append(EscapeCalendar(project.Name));
-            if (project.Status == global::Raccord.Domain.Projects.ProjectStatus.Cancelled)
-                builder.Append("\r\nSTATUS:CANCELLED");
             builder.Append("\r\nEND:VEVENT\r\n");
         }
         builder.Append("END:VCALENDAR\r\n");

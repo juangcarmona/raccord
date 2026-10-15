@@ -3876,6 +3876,112 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/e-invoices/inbound": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InboundEInvoiceResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReceiveInboundEInvoiceRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InboundEInvoiceResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/e-invoices/inbound/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateInboundEInvoiceStatusRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InboundEInvoiceResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/finance/summary": {
         parameters: {
             query?: never;
@@ -5840,6 +5946,28 @@ export interface components {
         };
         /** Format: binary */
         IFormFile: string;
+        /** @description An inbound structured invoice and its current reporting status. */
+        InboundEInvoiceResponse: {
+            /** Format: uuid */
+            id: string;
+            invoiceNumber: string;
+            supplierName: string;
+            supplierTaxId: string;
+            /** Format: date */
+            issueDate: string;
+            /** Format: double */
+            payableAmount: number;
+            currency: string;
+            /** Format: date-time */
+            receivedAt: string;
+            /** Format: date */
+            statusDueOn: string;
+            status: string;
+            reason: null | string;
+            /** Format: date */
+            paidOn: null | string;
+            contentHash: string;
+        };
         IntegrationProjectResponse: {
             /** Format: uuid */
             id: string;
@@ -6466,6 +6594,10 @@ export interface components {
             signedAt: null | string;
             lines: components["schemas"]["QuoteLineResponse"][];
         };
+        /** @description Receives a structured invoice from the configured exchange boundary. */
+        ReceiveInboundEInvoiceRequest: {
+            xml: string;
+        };
         ReceiveLineRequest: {
             receivedBy: string;
         };
@@ -6692,6 +6824,13 @@ export interface components {
             /** Format: int32 */
             contractValidityDays: number;
             allowSigningAfterExpiry: boolean;
+        };
+        /** @description Changes the business status of an inbound e-invoice. */
+        UpdateInboundEInvoiceStatusRequest: {
+            status: string;
+            reason?: null | string;
+            /** Format: date */
+            paidOn?: null | string;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

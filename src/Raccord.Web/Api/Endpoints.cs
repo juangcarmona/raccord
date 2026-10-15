@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Contracts.Auditing;
+using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Documents;
 using Raccord.Contracts.Equipment;
@@ -35,6 +36,7 @@ internal static class Endpoints
         MapCustomers(api);
         MapEquipment(api);
         MapProjects(api);
+        MapCrew(api);
         MapInvoicing(api);
         api.MapGet(
                 "/audit-events",
@@ -46,6 +48,85 @@ internal static class Endpoints
             .WithTags("Audit");
         return app;
     }
+
+#pragma warning disable MA0051
+    private static void MapCrew(RouteGroupBuilder api)
+    {
+        var crew = api.MapGroup("/crew").WithTags("Crew");
+        crew.MapGet(
+            "/members",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListCrewAsync(ct))
+        );
+        crew.MapPost(
+            "/members",
+            async Task<Results<Created<CrewMemberResponse>, BadRequest>> (
+                CreateCrewMemberRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateCrewAsync(request, ct) is { } member
+                    ? TypedResults.Created($"/api/crew/members/{member.Id}", member)
+                    : TypedResults.BadRequest()
+        );
+        crew.MapPut(
+            "/members/{id:guid}",
+            async Task<Results<Ok<CrewMemberResponse>, NotFound>> (
+                Guid id,
+                UpdateCrewMemberRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateCrewAsync(id, request, ct) is { } member
+                    ? TypedResults.Ok(member)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/vehicles",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListVehiclesAsync(ct))
+        );
+        crew.MapPost(
+            "/vehicles",
+            async Task<Results<Created<VehicleResponse>, BadRequest>> (
+                CreateVehicleRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateVehicleAsync(request, ct) is { } vehicle
+                    ? TypedResults.Created($"/api/crew/vehicles/{vehicle.Id}", vehicle)
+                    : TypedResults.BadRequest()
+        );
+        crew.MapPut(
+            "/vehicles/{id:guid}",
+            async Task<Results<Ok<VehicleResponse>, NotFound>> (
+                Guid id,
+                UpdateVehicleRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateVehicleAsync(id, request, ct) is { } vehicle
+                    ? TypedResults.Ok(vehicle)
+                    : TypedResults.NotFound()
+        );
+        crew.MapGet(
+            "/rates",
+            async (CrewCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListRatesAsync(ct))
+        );
+        crew.MapPost(
+            "/rates",
+            async Task<Results<Created<CrewRateResponse>, BadRequest>> (
+                CreateCrewRateRequest request,
+                CrewCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateRateAsync(request, ct) is { } rate
+                    ? TypedResults.Created($"/api/crew/rates/{rate.Id}", rate)
+                    : TypedResults.BadRequest()
+        );
+    }
+#pragma warning restore MA0051
 
     private static void MapOrganization(RouteGroupBuilder api)
     {

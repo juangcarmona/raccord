@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Crew records keep planning inputs explicit
+
+- **Observation:** Crew, vehicle and rate data are planning inputs with different validation and defaulting rules; treating them as untyped settings would allow invalid identities, capacity and cost bands into later scheduling flows.
+- **Action:** Keep typed contracts and a focused catalog with unique identities, positive vehicle capacity, non-negative ordered rate bands and one default rate per kind. Cover the complete save/list journey with a ProductShape citation and hosted screenshot artifact.
+- **Check:** The crew E2E journey remains in the PR selection manifest, API and migration checks pass, and the PR links the hosted Playwright artifact.
+
 ## 2026-10-15 · Static evidence uses viewer-local time and test-result truth
 
 - **Observation:** Engineering snapshot timestamps rendered as raw UTC and a green workflow status could imply browser journeys passed even when no journey result had been recorded.

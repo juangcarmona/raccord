@@ -61,6 +61,22 @@ public sealed class DocumentTemplateSliceTests(PostgresContainer postgres) : IAs
     [Fact]
     public async Task Templates_Should_Isolate_Defaults_By_Language()
     {
+        var english = await client.PostAsJsonAsync(
+            "/api/documents/templates",
+            new CreateDocumentTemplateRequest(
+                "English invoice",
+                "invoice",
+                "Raccord Studio",
+                "Invoice {{number}}",
+                "Thank you",
+                "Inter",
+                "#123456",
+                null,
+                true
+            )
+        );
+        english.StatusCode.ShouldBe(HttpStatusCode.Created);
+
         var request = new CreateDocumentTemplateRequest(
             "French invoice",
             "invoice",

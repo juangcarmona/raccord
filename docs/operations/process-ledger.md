@@ -100,6 +100,10 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Add one smoke journey per user-visible delivery path that follows the ProductShape journey and activates the real accessible control; keep generated screenshots, trace and video in the CI artifact rather than source control.
 - **Check:** The journey is listed in `per-pr-selection.txt`, asserts a usable non-empty download, and the PR links the exact hosted evidence artifact.
 
+- **Observation:** The first integration workflow uploaded Playwright output only after a failure and did not enable success capture, leaving successful UI behavior without mobile-reviewable evidence.
+- **Action:** Enable success capture for the blocking E2E run and upload its artifacts with `always()`; retain a short artifact lifetime so evidence remains cheap and attached to the exact CI run.
+- **Check:** Every successful UI integration run exposes the screenshot, trace and video artifact before merge.
+
 ## 2026-10-14 · Project task board progress is status-driven
 
 - **Observation:** A shared board needs one source of truth for task ordering and completion semantics.

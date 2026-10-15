@@ -112,6 +112,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Derive queue entries from project billable state, with an explicit date window and overdue flag.
 - Check: The queue endpoint and browser journey assert that newly created work appears before draft creation.
 
+## 2026-10-15 · Payments and refundable deposits
+
+- Observation: Payment status is derived data and must never be stored independently from the issued invoice total and payment history; deposit lifecycle has a separate security-liability meaning.
+- Action: Keep payments append-only, reject overpayment before persistence, derive unpaid/partially-paid/paid from the aggregate, and model deposits with explicit not-paid/paid/returned transitions.
+- Check: Integration coverage settles an invoice through partial then full payment, while the Playwright journey exercises deposit configuration, receipt, return, and payment APIs with hosted evidence.
+
 ## 2026-10-15 · Delivery journeys must click the product surface
 
 - **Observation:** The delivery stack had API-level document tests, but the invoice download control had no browser journey, so a green API check could still leave the user journey unverified.

@@ -77,6 +77,7 @@ public static class DependencyInjection
         );
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
+        services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<IAuditAppender>(provider =>

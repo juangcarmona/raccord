@@ -697,6 +697,102 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/deposit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SetRefundableDepositRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/deposit/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SetDepositStatusRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/packing-lines": {
         parameters: {
             query?: never;
@@ -1921,6 +2017,82 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/invoices/{id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoicePaymentSummaryResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RecordInvoicePaymentRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoicePaymentSummaryResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoices/{id}/document": {
         parameters: {
             query?: never;
@@ -2198,6 +2370,11 @@ export interface components {
         DeclineProjectRequest: {
             reason: string;
         };
+        /**
+         * @description Lifecycle status of a refundable project deposit.
+         * @default 0
+         */
+        DepositStatus: number;
         EquipmentItemResponse: {
             /** Format: uuid */
             id: string;
@@ -2337,6 +2514,28 @@ export interface components {
              * @description Net amount.
              */
             netAmount: number;
+        };
+        /** @description One payment received against an issued invoice. */
+        InvoicePaymentResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date */
+            date: string;
+            method: string;
+            /** Format: double */
+            amount: number;
+            description: null | string;
+            /** Format: date-time */
+            recordedAt: string;
+        };
+        /** @description Payment history and outstanding balance for an issued invoice. */
+        InvoicePaymentSummaryResponse: {
+            payments: components["schemas"]["InvoicePaymentResponse"][];
+            /** Format: double */
+            totalPaid: number;
+            /** Format: double */
+            outstanding: number;
+            status: string;
         };
         /** @description One project currently eligible for the staged-invoicing queue. */
         InvoiceQueueEntryResponse: {
@@ -2608,6 +2807,13 @@ export interface components {
             teamId?: null | string;
             /** @description Warehouse packing lines. */
             packingLines?: null | components["schemas"]["PackingLineResponse"][];
+            /**
+             * Format: double
+             * @description Fixed refundable deposit.
+             */
+            refundableDepositAmount?: null | number;
+            /** @description Current deposit lifecycle status. */
+            depositStatus?: components["schemas"]["DepositStatus"];
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -2671,6 +2877,13 @@ export interface components {
              * @description Assigned team.
              */
             teamId?: null | string;
+            /**
+             * Format: double
+             * @description Fixed refundable deposit.
+             */
+            refundableDepositAmount?: null | number;
+            /** @description Current deposit lifecycle status. */
+            depositStatus?: components["schemas"]["DepositStatus"];
         };
         /** @description A project task. */
         ProjectTaskResponse: {
@@ -2730,6 +2943,15 @@ export interface components {
             /** Format: uuid */
             teamId: null | string;
         };
+        /** @description Records money received against an issued invoice. */
+        RecordInvoicePaymentRequest: {
+            /** Format: date */
+            date: string;
+            method: string;
+            /** Format: double */
+            amount: number;
+            description: null | string;
+        };
         RecordPackingExceptionRequest: {
             kind: string;
             description: string;
@@ -2748,6 +2970,13 @@ export interface components {
         ReviewPackingDispositionRequest: {
             disposition: string;
             actor: string;
+        };
+        SetDepositStatusRequest: {
+            status: components["schemas"]["DepositStatus"];
+        };
+        SetRefundableDepositRequest: {
+            /** Format: double */
+            amount: number;
         };
         /** @description Shifts scheduled project work. */
         ShiftProjectScheduleRequest: {

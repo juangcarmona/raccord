@@ -1,5 +1,18 @@
 namespace Raccord.Contracts.Projects;
 
+/// <summary>Lifecycle status of a refundable project deposit.</summary>
+public enum DepositStatus
+{
+    /// <summary>No payment has been received.</summary>
+    NotPaid,
+
+    /// <summary>The customer has paid the deposit.</summary>
+    Paid,
+
+    /// <summary>The deposit has been returned.</summary>
+    Returned,
+}
+
 /// <summary>Creates a project.</summary>
 /// <param name="Name">Project name.</param>
 /// <param name="CustomerId">Customer billed for the project.</param>
@@ -180,6 +193,10 @@ public sealed record BookOutLineRequest(string Actor, string? ScanCode = null);
 
 public sealed record ReceiveLineRequest(string Actor);
 
+public sealed record SetRefundableDepositRequest(decimal Amount);
+
+public sealed record SetDepositStatusRequest(DepositStatus Status);
+
 #pragma warning restore CS1591
 
 /// <summary>A project in a list.</summary>
@@ -194,6 +211,8 @@ public sealed record ReceiveLineRequest(string Actor);
 /// <param name="Currency">ISO currency code.</param>
 /// <param name="ProjectTypeId">Assigned reusable project type.</param>
 /// <param name="TeamId">Assigned team.</param>
+/// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
+/// <param name="DepositStatus">Current deposit lifecycle status.</param>
 public sealed record ProjectSummaryResponse(
     Guid Id,
     string Name,
@@ -205,7 +224,9 @@ public sealed record ProjectSummaryResponse(
     decimal UnbilledNetAmount,
     string Currency,
     Guid? ProjectTypeId = null,
-    Guid? TeamId = null
+    Guid? TeamId = null,
+    decimal? RefundableDepositAmount = null,
+    DepositStatus DepositStatus = DepositStatus.NotPaid
 );
 
 /// <summary>A project with its billable lines.</summary>
@@ -220,6 +241,8 @@ public sealed record ProjectSummaryResponse(
 /// <param name="ProjectTypeId">Assigned reusable project type.</param>
 /// <param name="TeamId">Assigned team.</param>
 /// <param name="PackingLines">Warehouse packing lines.</param>
+/// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
+/// <param name="DepositStatus">Current deposit lifecycle status.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -231,7 +254,9 @@ public sealed record ProjectResponse(
     IReadOnlyList<BillableLineResponse> BillableLines,
     Guid? ProjectTypeId = null,
     Guid? TeamId = null,
-    IReadOnlyList<PackingLineResponse>? PackingLines = null
+    IReadOnlyList<PackingLineResponse>? PackingLines = null,
+    decimal? RefundableDepositAmount = null,
+    DepositStatus DepositStatus = DepositStatus.NotPaid
 );
 
 /// <summary>A billable line.</summary>

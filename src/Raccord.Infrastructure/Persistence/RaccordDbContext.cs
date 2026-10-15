@@ -44,6 +44,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<IssuedInvoiceRow> IssuedInvoices => Set<IssuedInvoiceRow>();
 
+    internal DbSet<InvoicePayment> InvoicePayments => Set<InvoicePayment>();
+
     internal DbSet<AuditEvent> AuditEvents => Set<AuditEvent>();
 
     internal DbSet<EquipmentItem> EquipmentItems => Set<EquipmentItem>();

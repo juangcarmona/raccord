@@ -73,7 +73,9 @@ public sealed class ProjectWorkspace(
                     amount.Amount,
                     amount.Currency.Code,
                     project.ProjectTypeId,
-                    project.TeamId
+                    project.TeamId,
+                    project.RefundableDepositAmount,
+                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
                 );
             }),
         ];
@@ -88,6 +90,44 @@ public sealed class ProjectWorkspace(
             return null;
         }
 
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Configures a project's fixed refundable deposit.</summary>
+    public async Task<ProjectResponse?> SetDepositAsync(
+        Guid projectId,
+        SetRefundableDepositRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.SetRefundableDeposit(request.Amount);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Moves a configured deposit through receipt and return.</summary>
+    public async Task<ProjectResponse?> SetDepositStatusAsync(
+        Guid projectId,
+        SetDepositStatusRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.SetDepositStatus((global::Raccord.Domain.Projects.DepositStatus)request.Status);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         var customer = await parties
             .FindAsync(project.CustomerId, cancellationToken)
             .ConfigureAwait(false);
@@ -343,7 +383,9 @@ public sealed class ProjectWorkspace(
             [.. project.BillableLines.Select(ToResponse)],
             project.ProjectTypeId,
             project.TeamId,
-            [.. project.PackingLines.Select(ToResponse)]
+            [.. project.PackingLines.Select(ToResponse)],
+            project.RefundableDepositAmount,
+            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
         );
 
     private static BillableLineResponse ToResponse(BillableLine line) =>

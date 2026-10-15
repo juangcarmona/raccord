@@ -6,6 +6,7 @@ namespace Raccord.Infrastructure.Persistence.Configurations;
 
 internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 {
+#pragma warning disable MA0051
     public void Configure(EntityTypeBuilder<Project> builder)
     {
         builder.ToTable("projects", "projects");
@@ -14,6 +15,8 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder.Property(project => project.ProjectTypeId);
         builder.Property(project => project.TeamId);
         builder.Property(project => project.ProgressPercent).HasPrecision(5, 2).IsRequired();
+        builder.Property(project => project.RefundableDepositAmount).HasPrecision(18, 2);
+        builder.Property(project => project.DepositStatus).HasConversion<string>().HasMaxLength(20);
         builder.HasConcurrencyToken();
 
         builder.OwnsMany(
@@ -67,4 +70,5 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .Navigation(project => project.PackingLines)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
+#pragma warning restore MA0051
 }

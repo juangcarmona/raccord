@@ -80,6 +80,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<CrewSignupRow> CrewSignups => Set<CrewSignupRow>();
 
+    internal DbSet<ProjectFunctionRow> ProjectFunctions => Set<ProjectFunctionRow>();
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder builder)
     {

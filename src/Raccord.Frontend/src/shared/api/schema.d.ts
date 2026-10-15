@@ -1773,6 +1773,212 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/functions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectFunctionRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/shifts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectShiftRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/crew": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AssignCrewRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/functions/{functionId}/vehicles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    functionId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AssignVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/functions/{functionId}/invitations": {
         parameters: {
             query?: never;
@@ -4210,8 +4416,24 @@ export interface components {
             quantity: number;
             role: string;
         };
+        AssignCrewRequest: {
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: uuid */
+            rateId?: null | string;
+            /** @default false */
+            includeTravel: boolean;
+            /** @default false */
+            isProjectLeader: boolean;
+            remark?: null | string;
+        };
         AssignEquipmentScanCodeRequest: {
             scanCode: string;
+        };
+        AssignVehicleRequest: {
+            /** Format: uuid */
+            vehicleId: string;
+            remark?: null | string;
         };
         /** @description An append-only audit event. */
         AuditEventResponse: {
@@ -4372,6 +4594,19 @@ export interface components {
             name: string;
             description: null | string;
         };
+        CreateProjectFunctionRequest: {
+            name: string;
+            kind: components["schemas"]["CrewFunctionKind"];
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /**
+             * Format: int32
+             * @default 1
+             */
+            requiredResources: number;
+        };
         /** @description Creates a project. */
         CreateProjectRequest: {
             /** @description Project name. */
@@ -4414,6 +4649,14 @@ export interface components {
             /** Format: uuid */
             assigneeId: null | string;
         };
+        CreateProjectShiftRequest: {
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            startTime: string;
+            /** Format: time */
+            endTime: string;
+        };
         /** @description Creates a project task. */
         CreateProjectTaskRequest: {
             /** Format: uuid */
@@ -4452,6 +4695,17 @@ export interface components {
             /** @default true */
             isShownInPlanning: boolean;
         };
+        CrewAssignmentResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            crewMemberId: string;
+            /** Format: uuid */
+            rateId: null | string;
+            includeTravel: boolean;
+            isProjectLeader: boolean;
+            remark: null | string;
+        };
         CrewAvailabilityKind: number;
         CrewAvailabilityResponse: {
             /** Format: uuid */
@@ -4465,6 +4719,7 @@ export interface components {
             kind: components["schemas"]["CrewAvailabilityKind"];
             remark: null | string;
         };
+        CrewFunctionKind: number;
         CrewInvitationResponse: {
             /** Format: uuid */
             id: string;
@@ -5097,6 +5352,26 @@ export interface components {
             entries: components["schemas"]["ProjectContextEntryResponse"][];
             history: components["schemas"]["ProjectHistoryEntryResponse"][];
         };
+        ProjectFunctionResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            projectId: string;
+            name: string;
+            kind: components["schemas"]["CrewFunctionKind"];
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: int32 */
+            requiredResources: number;
+            /** Format: int32 */
+            assignedResources: number;
+            isStaffed: boolean;
+            shifts: components["schemas"]["ProjectShiftResponse"][];
+            crew: components["schemas"]["CrewAssignmentResponse"][];
+            vehicles: components["schemas"]["VehicleAssignmentResponse"][];
+        };
         ProjectHistoryEntryResponse: {
             /** Format: uuid */
             id: string;
@@ -5198,6 +5473,16 @@ export interface components {
             endDate: string;
             /** Format: uuid */
             assigneeId: null | string;
+        };
+        ProjectShiftResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            startTime: string;
+            /** Format: time */
+            endTime: string;
         };
         /** @description A project in a list. */
         ProjectSummaryResponse: {
@@ -5553,6 +5838,13 @@ export interface components {
              * @description VAT at this rate.
              */
             vatAmount: number;
+        };
+        VehicleAssignmentResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            vehicleId: string;
+            remark: null | string;
         };
         VehicleResponse: {
             /** Format: uuid */

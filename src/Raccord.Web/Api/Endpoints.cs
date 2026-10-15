@@ -499,6 +499,60 @@ internal static class Endpoints
             }
         );
         projects.MapPost(
+            "/{id:guid}/functions",
+            async (
+                Guid id,
+                CreateProjectFunctionRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/{id}/functions",
+                    await catalog.CreateFunctionAsync(id, request, ct)
+                )
+        );
+        projects.MapGet(
+            "/{id:guid}/functions",
+            async (Guid id, CrewPlanningCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListFunctionsAsync(id, ct))
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/shifts",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                CreateProjectShiftRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AddShiftAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/crew",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                AssignCrewRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AssignCrewAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/functions/{functionId:guid}/vehicles",
+            async Task<Results<Ok<ProjectFunctionResponse>, NotFound>> (
+                Guid functionId,
+                AssignVehicleRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.AssignVehicleAsync(functionId, request, ct) is { } result
+                    ? TypedResults.Ok(result)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
             "/functions/{functionId:guid}/invitations",
             async (
                 Guid functionId,

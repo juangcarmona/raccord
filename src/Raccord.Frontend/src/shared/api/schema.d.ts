@@ -295,6 +295,184 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/documents/templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentTemplateResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateDocumentTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentTemplateResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/documents/templates/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentTemplateResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateDocumentTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentTemplateResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/documents/templates/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentTemplatePreviewResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/customers": {
         parameters: {
             query?: never;
@@ -2844,6 +3022,17 @@ export interface components {
             actor: string;
             scanCode?: null | string;
         };
+        CreateDocumentTemplateRequest: {
+            name: string;
+            documentType: string;
+            letterhead: string;
+            bodyTemplate: string;
+            footer: string;
+            fontFamily: string;
+            accentColor: string;
+            logoStorageKey: null | string;
+            isDefault: boolean;
+        };
         CreateEquipmentItemRequest: {
             code: string;
             name: string;
@@ -2965,6 +3154,27 @@ export interface components {
          * @default 0
          */
         DepositStatus: number;
+        DocumentTemplatePreviewResponse: {
+            /** Format: uuid */
+            id: string;
+            documentType: string;
+            html: string;
+        };
+        DocumentTemplateResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            documentType: string;
+            letterhead: string;
+            bodyTemplate: string;
+            footer: string;
+            fontFamily: string;
+            accentColor: string;
+            logoStorageKey: null | string;
+            isDefault: boolean;
+            /** Format: date-time */
+            updatedAt: string;
+        };
         EquipmentInsightsResponse: {
             /** Format: uuid */
             equipmentId: string;
@@ -3736,6 +3946,16 @@ export interface components {
         UnauthorizedHttpResult: {
             /** Format: int32 */
             statusCode?: number;
+        };
+        UpdateDocumentTemplateRequest: {
+            name: string;
+            letterhead: string;
+            bodyTemplate: string;
+            footer: string;
+            fontFamily: string;
+            accentColor: string;
+            logoStorageKey: null | string;
+            isDefault: boolean;
         };
         /** @description Sets the legal issuer details used on future invoices. */
         UpdateIssuerProfileRequest: {

@@ -73,6 +73,7 @@ public static class DependencyInjection
         services.AddScoped<IProjectCoordinationStore, ProjectCoordinationRepository>();
         services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
         services.AddScoped<EquipmentCatalog>();
+        services.AddScoped<DocumentTemplateCatalog>();
         services.AddScoped<IEquipmentStock>(provider =>
             provider.GetRequiredService<EquipmentCatalog>()
         );

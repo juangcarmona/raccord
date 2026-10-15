@@ -219,6 +219,162 @@
         }
       }
     },
+    "/api/documents/templates": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentTemplateResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDocumentTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/documents/templates/{id}": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDocumentTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/documents/templates/{id}/preview": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplatePreviewResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/customers": {
       "get": {
         "tags": [
@@ -2636,6 +2792,52 @@
           }
         }
       },
+      "CreateDocumentTemplateRequest": {
+        "required": [
+          "name",
+          "documentType",
+          "letterhead",
+          "bodyTemplate",
+          "footer",
+          "fontFamily",
+          "accentColor",
+          "logoStorageKey",
+          "isDefault"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string"
+          },
+          "letterhead": {
+            "type": "string"
+          },
+          "bodyTemplate": {
+            "type": "string"
+          },
+          "footer": {
+            "type": "string"
+          },
+          "fontFamily": {
+            "type": "string"
+          },
+          "accentColor": {
+            "type": "string"
+          },
+          "logoStorageKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateEquipmentItemRequest": {
         "required": [
           "code",
@@ -2958,6 +3160,82 @@
         "type": "integer",
         "description": "Lifecycle status of a refundable project deposit.",
         "default": 0
+      },
+      "DocumentTemplatePreviewResponse": {
+        "required": [
+          "id",
+          "documentType",
+          "html"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentType": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          }
+        }
+      },
+      "DocumentTemplateResponse": {
+        "required": [
+          "id",
+          "name",
+          "documentType",
+          "letterhead",
+          "bodyTemplate",
+          "footer",
+          "fontFamily",
+          "accentColor",
+          "logoStorageKey",
+          "isDefault",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string"
+          },
+          "letterhead": {
+            "type": "string"
+          },
+          "bodyTemplate": {
+            "type": "string"
+          },
+          "footer": {
+            "type": "string"
+          },
+          "fontFamily": {
+            "type": "string"
+          },
+          "accentColor": {
+            "type": "string"
+          },
+          "logoStorageKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
       },
       "EquipmentInsightsResponse": {
         "required": [
@@ -4936,6 +5214,48 @@
           }
         }
       },
+      "UpdateDocumentTemplateRequest": {
+        "required": [
+          "name",
+          "letterhead",
+          "bodyTemplate",
+          "footer",
+          "fontFamily",
+          "accentColor",
+          "logoStorageKey",
+          "isDefault"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "letterhead": {
+            "type": "string"
+          },
+          "bodyTemplate": {
+            "type": "string"
+          },
+          "footer": {
+            "type": "string"
+          },
+          "fontFamily": {
+            "type": "string"
+          },
+          "accentColor": {
+            "type": "string"
+          },
+          "logoStorageKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdateIssuerProfileRequest": {
         "required": [
           "legalName",
@@ -5017,6 +5337,9 @@
     },
     {
       "name": "Audit"
+    },
+    {
+      "name": "Documents"
     },
     {
       "name": "Customers"

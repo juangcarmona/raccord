@@ -106,6 +106,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-15 · Foreign-language invoice documents
+
+- Observation: A new source file can pass touched-file formatting while failing the repository-wide formatter gate; language-specific regeneration also adds an expected audit event.
+- Action: Run the full formatter check after every change, and assert the complete audit trail when a new document rendition is generated from an issued representation.
+- Check: The final PR must pass repository-wide CSharpier, backend/web/E2E builds, the language-specific audit assertion, frontend contract drift, and hosted E2E evidence.
+
 ## 2026-10-13 · Project templates and rescheduling
 
 - Observation: Rescheduling must move project-owned planning lines with the aggregate, while availability should remain a derived read rather than duplicated state.

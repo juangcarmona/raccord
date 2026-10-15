@@ -121,6 +121,19 @@ public sealed record InvoiceDraftSummaryResponse(
     DateTimeOffset CreatedAt
 );
 
+/// <summary>One project currently eligible for the staged-invoicing queue (UC-FIN-WORK-INVOICING-QUEUE).</summary>
+public sealed record InvoiceQueueEntryResponse(
+    Guid ProjectId,
+    string ProjectName,
+    Guid CustomerId,
+    string CustomerName,
+    DateOnly DueDate,
+    bool Overdue,
+    int UnbilledLineCount,
+    decimal UnbilledNetAmount,
+    string Currency
+);
+
 /// <summary>An issued, immutable invoice.</summary>
 /// <param name="Id">Invoice identifier.</param>
 /// <param name="Number">Printed number.</param>

@@ -26,6 +26,13 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
             {
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
+
+                var queue = await page.APIRequest.GetAsync(
+                    "/api/invoicing/queue?from=2026-01-01&to=2026-12-31"
+                );
+                queue.Ok.ShouldBeTrue();
+                (await queue.TextAsync()).ShouldContain($"Promo E2E {RunStamp}");
+
                 await FinalizeDraftAsync(page);
 
                 var invoiceId = new Uri(page.Url).Segments[^1];

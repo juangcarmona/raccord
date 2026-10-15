@@ -47,7 +47,6 @@ public static class DependencyInjection
     )
     {
         ArgumentNullException.ThrowIfNull(builder);
-
         builder.AddNpgsqlDbContext<RaccordDbContext>(DatabaseConnectionName);
 
         var services = builder.Services;
@@ -74,6 +73,7 @@ public static class DependencyInjection
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
+        services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
         services.AddScoped<IInvoiceSeriesRepository, InvoiceSeriesRepository>();
         services.AddScoped<IIssuerProfileRepository, IssuerProfileRepository>();
         services.AddScoped<IFinancialSettingsRepository, FinancialSettingsRepository>();

@@ -51,6 +51,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                     }
                 );
                 payment.Status.ShouldBe(201);
+                await AssertPaymentReminderAsync(page, invoiceId);
                 await AssertDuplicateAndStandaloneAsync(page, invoiceId);
 
                 var englishDocument = await page.APIRequest.GetAsync(
@@ -73,6 +74,33 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 number.TrimStart('F').ShouldNotBeNullOrEmpty();
             }
         );
+    }
+
+    private static async Task AssertPaymentReminderAsync(IPage page, string invoiceId)
+    {
+        var overdue = await page.APIRequest.GetAsync("/api/invoices/overdue");
+        overdue.Ok.ShouldBeTrue();
+        (await overdue.TextAsync()).ShouldContain(invoiceId);
+
+        var newDueDate = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(30);
+        var reminder = await page.APIRequest.PostAsync(
+            $"/api/invoices/{invoiceId}/reminders",
+            new APIRequestContextOptions
+            {
+                Data =
+                    $"{{\"newDueDate\":\"{newDueDate:yyyy-MM-dd}\",\"template\":\"friendly\",\"letterhead\":\"default\"}}",
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        reminder.Status.ShouldBe(201);
+        (await reminder.TextAsync()).ShouldContain("\"number\":1");
+
+        var history = await page.APIRequest.GetAsync($"/api/invoices/{invoiceId}/reminders");
+        history.Ok.ShouldBeTrue();
+        (await history.TextAsync()).ShouldContain($"\"dueDate\":\"{newDueDate:yyyy-MM-dd}\"");
     }
 
     private async Task AssertDuplicateAndStandaloneAsync(IPage page, string invoiceId)

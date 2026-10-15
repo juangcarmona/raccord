@@ -273,3 +273,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Clock events are auditable operational records, but statutory workday compliance depends on jurisdiction-specific rules that are not selected yet.
 - Action: Implement only raw clock-in/out events with occurrence time, server recording time, actor and remark; make no legal compliance claim until the jurisdiction review is complete.
 - Check: The #161 journey records both events, reloads them in order, and verifies actor, remark and server audit timestamp with hosted screenshot/trace evidence.
+
+## 2026-10-15 · Scoped API access
+
+- Observation: Credential issuance must sit behind the existing administrator permission boundary; a public token endpoint would turn an integration feature into unauthenticated credential minting.
+- Action: Rebase or reconstruct from a known-good product tip when a long-lived stack crosses an architecture refactor, reuse the first-administrator/role policy, hash tokens at rest, return plaintext only on issue or rotation, and keep external routes scope-gated.
+- Check: The web and E2E projects compile, the migration is generated, the journey covers issue/read/rejected-write/rotation/revocation, and hosted CI must retain the screenshot and trace because local Aspire execution depends on a healthy Docker runtime.

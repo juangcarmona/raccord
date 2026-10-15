@@ -17,6 +17,8 @@ public static class PermissionCatalog
     public const string InvoicingRead = "invoicing:read";
     public const string InvoicingCreate = "invoicing:create";
     public const string InvoicingEdit = "invoicing:edit";
+    public const string ApiAccessRead = "integrations:api.read";
+    public const string ApiAccessManage = "integrations:api.manage";
     public const string ClaimType = "raccord:permission";
     public const string All = "*";
 
@@ -35,6 +37,8 @@ public static class PermissionCatalog
             InvoicingRead,
             InvoicingCreate,
             InvoicingEdit,
+            ApiAccessRead,
+            ApiAccessManage,
         ],
         StringComparer.Ordinal
     );
@@ -55,6 +59,8 @@ public static class PermissionCatalog
                     InvoicingRead,
                     InvoicingCreate,
                     InvoicingEdit,
+                    ApiAccessRead,
+                    ApiAccessManage,
                 ],
                 StringComparer.Ordinal
             ),

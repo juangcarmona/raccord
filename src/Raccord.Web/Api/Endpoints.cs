@@ -20,6 +20,7 @@ using Raccord.Infrastructure.Documents;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Equipment.Contracts;
+using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;
 
@@ -46,6 +47,7 @@ internal static class Endpoints
         MapFinance(api);
         MapCommercial(api);
         MapCrew(api);
+        IntegrationEndpoints.MapIntegrations(api);
         api.MapGet(
                 "/audit-events",
                 async (Guid entityId, AuditLog audit, CancellationToken ct) =>

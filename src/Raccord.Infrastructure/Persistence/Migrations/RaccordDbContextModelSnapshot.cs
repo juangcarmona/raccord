@@ -19,7 +19,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("workspace")
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -275,7 +275,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasIndex("Status")
                         .HasDatabaseName("ix_invoice_drafts_status");
 
-                    b.ToTable("invoice_drafts", (string)null);
+                    b.ToTable("invoice_drafts", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceNumberSequence", b =>
@@ -306,7 +306,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("SeriesCode", "Year")
                         .HasName("pk_invoice_number_sequences");
 
-                    b.ToTable("invoice_number_sequences", (string)null);
+                    b.ToTable("invoice_number_sequences", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoicePayment", b =>
@@ -350,7 +350,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasIndex("InvoiceId")
                         .HasDatabaseName("ix_invoice_payments_invoice_id");
 
-                    b.ToTable("invoice_payments", (string)null);
+                    b.ToTable("invoice_payments", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceReminder", b =>
@@ -393,7 +393,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_invoice_reminders_invoice_id_number");
 
-                    b.ToTable("invoice_reminders", (string)null);
+                    b.ToTable("invoice_reminders", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceSeries", b =>
@@ -416,7 +416,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Code")
                         .HasName("pk_invoice_series");
 
-                    b.ToTable("invoice_series", (string)null);
+                    b.ToTable("invoice_series", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Commercial.Quote", b =>
@@ -505,7 +505,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_quotes_number");
 
-                    b.ToTable("quotes", (string)null);
+                    b.ToTable("quotes", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Commercial.QuoteNumberSequence", b =>
@@ -526,7 +526,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("SeriesCode", "Year")
                         .HasName("pk_quote_number_sequences");
 
-                    b.ToTable("quote_number_sequences", (string)null);
+                    b.ToTable("quote_number_sequences", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Organization.FinancialSettings", b =>
@@ -563,7 +563,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_financial_settings");
 
-                    b.ToTable("financial_settings", (string)null);
+                    b.ToTable("financial_settings", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Organization.IssuerProfile", b =>
@@ -624,7 +624,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_issuer_profiles");
 
-                    b.ToTable("issuer_profiles", (string)null);
+                    b.ToTable("issuer_profiles", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
@@ -688,7 +688,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_projects");
 
-                    b.ToTable("projects", (string)null);
+                    b.ToTable("projects", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Projects.ProjectTemplate", b =>
@@ -715,7 +715,45 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_project_templates_name");
 
-                    b.ToTable("project_templates", (string)null);
+                    b.ToTable("project_templates", "workspace");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ApiAccessRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Scopes")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("scopes");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("token_hash");
+
+                    b.HasKey("Id")
+                        .HasName("pk_api_access_tokens");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique()
+                        .HasDatabaseName("ix_api_access_tokens_token_hash");
+
+                    b.ToTable("api_access_tokens", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CommunicationRow", b =>
@@ -818,7 +856,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_contact_persons_customer_id_is_default")
                         .HasFilter("is_default");
 
-                    b.ToTable("contact_persons", (string)null);
+                    b.ToTable("contact_persons", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
@@ -1438,7 +1476,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_issued_invoices_series_code_year_sequence");
 
-                    b.ToTable("issued_invoices", (string)null);
+                    b.ToTable("issued_invoices", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.LetterheadRow", b =>
@@ -1585,6 +1623,87 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("project_shifts", "crew");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.RaccordUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("access_failed_count");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockout_enabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockout_end");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_email");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_user_name");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("phone_number_confirmed");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text")
+                        .HasColumnName("security_stamp");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("two_factor_enabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("user_name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_users");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("email_index");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("user_name_index");
+
+                    b.ToTable("users", "workspace");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.VehicleAssignmentRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1697,87 +1816,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_workday_events_crew_member_id_occurred_at");
 
                     b.ToTable("workday_events", "crew");
-                });
-
-            modelBuilder.Entity("Raccord.Infrastructure.Persistence.RaccordUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("email");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_email");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_user_name");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("user_name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_users");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("email_index");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("user_name_index");
-
-                    b.ToTable("users", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>
@@ -2035,7 +2073,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.HasIndex("DraftId")
                                 .HasDatabaseName("ix_invoice_draft_lines_draft_id");
 
-                            b1.ToTable("invoice_draft_lines", (string)null);
+                            b1.ToTable("invoice_draft_lines", "workspace");
 
                             b1.WithOwner()
                                 .HasForeignKey("DraftId")
@@ -2110,7 +2148,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .IsUnique()
                                 .HasDatabaseName("ix_quote_lines_quote_id_position");
 
-                            b1.ToTable("quote_lines", (string)null);
+                            b1.ToTable("quote_lines", "workspace");
 
                             b1.WithOwner()
                                 .HasForeignKey("QuoteId")
@@ -2204,7 +2242,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .IsUnique()
                                 .HasDatabaseName("ix_billable_lines_project_id_position");
 
-                            b1.ToTable("billable_lines", (string)null);
+                            b1.ToTable("billable_lines", "workspace");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProjectId")
@@ -2298,7 +2336,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.HasIndex("ProjectId")
                                 .HasDatabaseName("ix_packing_lines_project_id");
 
-                            b1.ToTable("packing_lines", (string)null);
+                            b1.ToTable("packing_lines", "workspace");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProjectId")
@@ -2337,7 +2375,7 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                             b1.HasIndex("ProjectId")
                                 .HasDatabaseName("ix_planned_equipment_lines_project_id");
 
-                            b1.ToTable("planned_equipment_lines", (string)null);
+                            b1.ToTable("planned_equipment_lines", "workspace");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProjectId")

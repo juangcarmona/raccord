@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Billing;
 using Raccord.Domain.Organization;
@@ -13,7 +12,8 @@ namespace Raccord.Infrastructure.Persistence;
 public sealed class DatabaseMaintenance(
     RaccordDbContext db,
     IPartyDirectory parties,
-    IPartyWriter partyWriter
+    IPartyWriter partyWriter,
+    InstallationSetup installation
 )
 {
     /// <summary>
@@ -22,20 +22,18 @@ public sealed class DatabaseMaintenance(
     /// </summary>
     public async Task SeedDemoDataAsync(CancellationToken cancellationToken)
     {
-        if (!await users.Users.AnyAsync(cancellationToken).ConfigureAwait(false))
+        if (await installation.IsRequiredAsync(cancellationToken).ConfigureAwait(false))
         {
-            var demo = new RaccordUser
+            var result = await installation
+                .CreateFirstAdministratorAsync(
+                    "admin@example.com",
+                    "DemoPassword123!",
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (result.Kind != InstallationSetup.SetupResultKind.Created)
             {
-                UserName = "admin@example.com",
-                Email = "admin@example.com",
-                EmailConfirmed = true,
-            };
-            var result = await users.CreateAsync(demo, "DemoPassword123!").ConfigureAwait(false);
-            if (!result.Succeeded)
-            {
-                throw new InvalidOperationException(
-                    string.Join("; ", result.Errors.Select(error => error.Description))
-                );
+                throw new InvalidOperationException(string.Join("; ", result.Errors));
             }
         }
 

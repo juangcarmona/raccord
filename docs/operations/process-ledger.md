@@ -94,6 +94,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
 
+## 2026-10-15 · Delivery journeys must click the product surface
+
+- **Observation:** The delivery stack had API-level document tests, but the invoice download control had no browser journey, so a green API check could still leave the user journey unverified.
+- **Action:** Add one smoke journey per user-visible delivery path that follows the ProductShape journey and activates the real accessible control; keep generated screenshots, trace and video in the CI artifact rather than source control.
+- **Check:** The journey is listed in `per-pr-selection.txt`, asserts a usable non-empty download, and the PR links the exact hosted evidence artifact.
+
 ## 2026-10-14 · Project task board progress is status-driven
 
 - **Observation:** A shared board needs one source of truth for task ordering and completion semantics.

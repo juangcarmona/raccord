@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Application.Commercial;
+using Raccord.Application.Finance;
 using Raccord.Application.Invoicing;
 using Raccord.Application.Organization;
 using Raccord.Application.Projects;
@@ -10,6 +11,7 @@ using Raccord.Contracts.Commercial;
 using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Documents;
+using Raccord.Contracts.Finance;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
@@ -33,6 +35,7 @@ internal static class Endpoints
         MapDocuments(api);
         MapProjects(api);
         MapInvoicing(api);
+        MapFinance(api);
         MapCommercial(api);
         api.MapGet(
                 "/audit-events",
@@ -760,6 +763,34 @@ internal static class Endpoints
     {
         MapInvoiceDrafts(api);
         MapInvoices(api);
+    }
+
+    private static void MapFinance(RouteGroupBuilder api)
+    {
+        var finance = api.MapGroup("/finance").WithTags("Finance");
+        finance.MapGet(
+            "/summary",
+            async (
+                DateOnly from,
+                DateOnly to,
+                FinanceReportingWorkflow workflow,
+                CancellationToken ct
+            ) => TypedResults.Ok(await workflow.SummarizeAsync(from, to, ct))
+        );
+        finance.MapGet(
+            "/accounting-export",
+            async Task<FileContentHttpResult> (
+                DateOnly from,
+                DateOnly to,
+                FinanceReportingWorkflow workflow,
+                CancellationToken ct
+            ) =>
+                TypedResults.File(
+                    await workflow.ExportAccountingCsvAsync(from, to, ct),
+                    "text/csv; charset=utf-8",
+                    $"accounting-{from:yyyyMMdd}-{to:yyyyMMdd}.csv"
+                )
+        );
     }
 
 #pragma warning disable MA0051

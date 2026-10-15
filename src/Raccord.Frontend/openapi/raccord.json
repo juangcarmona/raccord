@@ -2719,6 +2719,77 @@
         }
       }
     },
+    "/api/finance/summary": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinanceSummaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finance/accounting-export": {
+      "get": {
+        "tags": [
+          "Finance"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/quotes/projects/{projectId}": {
       "post": {
         "tags": [
@@ -4179,6 +4250,54 @@
           }
         },
         "description": "Finalizes a draft."
+      },
+      "FinanceSummaryResponse": {
+        "required": [
+          "from",
+          "to",
+          "invoiceCount",
+          "invoicedTotal",
+          "vatTotal",
+          "paidTotal",
+          "outstandingTotal",
+          "overdueInvoiceCount"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "date"
+          },
+          "to": {
+            "type": "string",
+            "format": "date"
+          },
+          "invoiceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invoicedTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "vatTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "paidTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "outstandingTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "overdueInvoiceCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Current financial totals for a date range."
       },
       "FinancialSettingsResponse": {
         "required": [
@@ -6201,6 +6320,9 @@
     },
     {
       "name": "Projects"
+    },
+    {
+      "name": "Finance"
     },
     {
       "name": "Commercial"

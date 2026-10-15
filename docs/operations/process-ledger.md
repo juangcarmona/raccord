@@ -237,3 +237,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Dunning is a deliberate manual action; overdue status must be derived from the current outstanding balance and the latest effective due date.
 - Action: Keep reminder history append-only, expose overdue invoices separately, reject reminders for paid or not-yet-due invoices, and never send automatically.
 - Check: The Playwright invoice journey lists an overdue invoice, generates a reminder with a new deadline, and reads its retained history; hosted CI remains the evidence source for screenshots and traces.
+
+## 2026-10-15 · Finance reporting and accountant export
+
+- Observation: Reporting must read finalized invoice representations and append-only payment history; drafts and previews must never enter accountant output.
+- Action: Keep the first reporting slice live and query-based, expose a date-bounded summary, and emit a deterministic UTF-8 CSV containing invoice, VAT, and payment rows.
+- Check: The invoice journey verifies the summary and export include the finalized invoice and payment while frontend contract drift remains covered by generated OpenAPI checks.

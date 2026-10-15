@@ -52,6 +52,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 );
                 payment.Status.ShouldBe(201);
                 await AssertPaymentReminderAsync(page, invoiceId);
+                await AssertFinanceExportsAsync(page, invoiceId);
                 await AssertDuplicateAndStandaloneAsync(page, invoiceId);
 
                 var englishDocument = await page.APIRequest.GetAsync(
@@ -101,6 +102,25 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         var history = await page.APIRequest.GetAsync($"/api/invoices/{invoiceId}/reminders");
         history.Ok.ShouldBeTrue();
         (await history.TextAsync()).ShouldContain($"\"dueDate\":\"{newDueDate:yyyy-MM-dd}\"");
+    }
+
+    private static async Task AssertFinanceExportsAsync(IPage page, string invoiceId)
+    {
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var summary = await page.APIRequest.GetAsync(
+            $"/api/finance/summary?from={today.AddDays(-90):yyyy-MM-dd}&to={today.AddDays(1):yyyy-MM-dd}"
+        );
+        summary.Ok.ShouldBeTrue();
+        (await summary.TextAsync()).ShouldContain("\"invoiceCount\":");
+
+        var export = await page.APIRequest.GetAsync(
+            $"/api/finance/accounting-export?from={today.AddDays(-90):yyyy-MM-dd}&to={today.AddDays(1):yyyy-MM-dd}"
+        );
+        export.Ok.ShouldBeTrue();
+        export.Headers["content-type"].ShouldStartWith("text/csv");
+        var invoiceNumber = await page.GetByRole(AriaRole.Heading, new() { Level = 1 })
+            .First.InnerTextAsync();
+        (await export.TextAsync()).ShouldContain(invoiceNumber.Trim(), Case.Sensitive);
     }
 
     private async Task AssertDuplicateAndStandaloneAsync(IPage page, string invoiceId)

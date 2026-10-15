@@ -711,6 +711,55 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("crew_availability", "crew");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewHoursRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CrewMemberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("crew_member_id");
+
+                    b.Property<Guid?>("FunctionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("function_id");
+
+                    b.Property<decimal>("Hours")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)")
+                        .HasColumnName("hours");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("remark");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("source");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("status");
+
+                    b.Property<DateOnly>("WorkDate")
+                        .HasColumnType("date")
+                        .HasColumnName("work_date");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_hours");
+
+                    b.HasIndex("CrewMemberId", "WorkDate")
+                        .HasDatabaseName("ix_crew_hours_crew_member_id_work_date");
+
+                    b.ToTable("crew_hours", "crew");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewInvitationRow", b =>
                 {
                     b.Property<Guid>("Id")

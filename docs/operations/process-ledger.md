@@ -261,3 +261,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Availability, invitations and public sign-up are separate lifecycle records even when they converge on the same planned function.
 - Action: Keep availability windows append-only, invitations explicitly stateful, and job-board sign-ups unique per crew member; expose each transition through a small catalog and API slice.
 - Check: The #158 journey records availability, accepts an invitation, posts the function and signs the crew member up, with hosted screenshot/trace evidence retained.
+
+## 2026-10-15 · Crew hours and payroll
+
+- Observation: Payroll output must be derived from approved registrations, not from raw or pending time entries.
+- Action: Keep registrations append-only with an explicit source and approval status, and export a deterministic date-bounded CSV from approved rows only.
+- Check: The #160 journey registers 7.5 hours, approves them, proves pending data is not exported before approval, and verifies the approved payroll CSV with hosted screenshot/trace evidence.

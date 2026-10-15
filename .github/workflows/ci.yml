@@ -129,10 +129,12 @@ jobs:
       # filter syntax is xunit.v3's query language, matching the same Quarantine trait.
       # A bounded run; a hang fails the job instead of stalling it for hours.
       - name: Run journeys
+        env:
+          PLAYWRIGHT_CAPTURE_EVIDENCE: "true"
         run: |
           timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
-      - name: Upload journey artifacts on failure
-        if: failure()
+      - name: Upload journey artifacts
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-artifacts

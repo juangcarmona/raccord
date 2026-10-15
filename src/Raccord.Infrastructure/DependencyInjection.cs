@@ -90,6 +90,7 @@ public static class DependencyInjection
         services.AddScoped<ApplicationComplianceRecorder, PendingComplianceRecorder>();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
+        services.AddScoped<CommunicationCatalog>();
 
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);

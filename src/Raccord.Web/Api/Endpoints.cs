@@ -132,6 +132,37 @@ internal static class Endpoints
                     ? TypedResults.Ok(preview)
                     : TypedResults.NotFound()
         );
+        documents.MapGet(
+            "/communications",
+            async (string? search, CommunicationCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(search, ct))
+        );
+        documents.MapPost(
+            "/communications",
+            async Task<Results<Created<CommunicationSnapshot>, BadRequest<string>>> (
+                CreateCommunicationRequest request,
+                CommunicationCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.CreateAsync(request, ct) is { } communication
+                    ? TypedResults.Created(
+                        $"/api/documents/communications/{communication.Id}",
+                        communication
+                    )
+                    : TypedResults.BadRequest<string>("Recipient and subject are required.")
+        );
+        documents.MapPut(
+            "/communications/{id:guid}/delivery",
+            async Task<Results<Ok<CommunicationSnapshot>, NotFound>> (
+                Guid id,
+                RecordDeliveryOutcomeRequest request,
+                CommunicationCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.RecordOutcomeAsync(id, request, ct) is { } communication
+                    ? TypedResults.Ok(communication)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapGeneratedDocuments(RouteGroupBuilder api)

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Customers;
+using Raccord.Contracts.Documents;
 using Raccord.Contracts.Equipment;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
@@ -29,6 +30,7 @@ internal static class Endpoints
             api.RequireAuthorization();
         }
         MapOrganization(api);
+        MapDocuments(api);
         MapCustomers(api);
         MapEquipment(api);
         MapProjects(api);
@@ -71,6 +73,64 @@ internal static class Endpoints
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
             .WithTags("Organization");
+    }
+
+    private static void MapDocuments(RouteGroupBuilder api)
+    {
+        var documents = api.MapGroup("/documents").WithTags("Documents");
+        documents.MapGet(
+            "/templates",
+            async (DocumentTemplateCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(ct))
+        );
+        documents.MapGet(
+            "/templates/{id:guid}",
+            async Task<Results<Ok<DocumentTemplateResponse>, NotFound>> (
+                Guid id,
+                DocumentTemplateCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.FindAsync(id, ct) is { } template
+                    ? TypedResults.Ok(template)
+                    : TypedResults.NotFound()
+        );
+        documents.MapPost(
+            "/templates",
+            async (
+                CreateDocumentTemplateRequest request,
+                DocumentTemplateCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/documents/templates",
+                    await catalog.CreateAsync(request, clock.UtcNow, ct)
+                )
+        );
+        documents.MapPut(
+            "/templates/{id:guid}",
+            async Task<Results<Ok<DocumentTemplateResponse>, NotFound>> (
+                Guid id,
+                UpdateDocumentTemplateRequest request,
+                DocumentTemplateCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                await catalog.UpdateAsync(id, request, clock.UtcNow, ct) is { } template
+                    ? TypedResults.Ok(template)
+                    : TypedResults.NotFound()
+        );
+        documents.MapGet(
+            "/templates/{id:guid}/preview",
+            async Task<Results<Ok<DocumentTemplatePreviewResponse>, NotFound>> (
+                Guid id,
+                DocumentTemplateCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.PreviewAsync(id, ct) is { } preview
+                    ? TypedResults.Ok(preview)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapCustomers(RouteGroupBuilder api)

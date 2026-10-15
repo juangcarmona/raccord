@@ -157,3 +157,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Selling or retiring an item without preserving its project usage and stock history makes asset audit and traceability impossible.
 - **Action:** Model terminal sold/retired statuses, block disposition while booked out, and derive item insights and project history from existing movement, count and packing records.
 - **Check:** Integration and warehouse browser journeys must assert sold/retired status, project history and insight counts with hosted evidence.
+
+## 2026-10-15 · Branded templates keep preview output safe
+
+- **Observation:** Template configuration combines reusable user text, styling and image references; previewing raw content would turn administrator input into executable markup.
+- **Action:** Persist versioned template settings by document type, keep one default per type, and HTML-encode all preview fields while retaining the logo as a storage key.
+- **Check:** Integration and browser journeys must save a branded template, preview it, verify styling and confirm script content is not executable.

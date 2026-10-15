@@ -7,7 +7,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Documents;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
 public sealed class CommunicationJourney_Should_RecordDeliveryOutcomeThroughApi(
     DistributedAppFixture app

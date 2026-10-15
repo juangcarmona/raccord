@@ -76,6 +76,7 @@ internal static class Endpoints
             .WithTags("Organization");
     }
 
+#pragma warning disable MA0051
     private static void MapDocuments(RouteGroupBuilder api)
     {
         var documents = api.MapGroup("/documents").WithTags("Documents");
@@ -164,6 +165,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
     }
+#pragma warning restore MA0051
 
     private static void MapGeneratedDocuments(RouteGroupBuilder api)
     {

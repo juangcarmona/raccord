@@ -100,15 +100,7 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
             ).EnsureSuccessStatusCode();
         }
 
-        var response = await client.GetAsync($"/api/projects/{project!.Id}");
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new InvalidOperationException(
-                $"Project read failed with {(int)response.StatusCode}: {await response.Content.ReadAsStringAsync()}"
-            );
-        }
-
-        return (await response.Content.ReadFromJsonAsync<ProjectResponse>())!;
+        return (await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project!.Id}"))!;
     }
 
     public async Task<T?> QueryScalarAsync<T>(string sql)
@@ -129,7 +121,7 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("Development");
+        builder.UseEnvironment("Testing");
         builder.UseSetting("Raccord:TestingBypassAuth", "true");
         builder.UseSetting("ConnectionStrings:raccord", ConnectionString);
         builder.UseSetting("Storage:Provider", "FileSystem");

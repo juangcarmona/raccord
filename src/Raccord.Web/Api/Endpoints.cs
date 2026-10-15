@@ -212,6 +212,7 @@ internal static class Endpoints
                     ? TypedResults.Created($"/api/projects/{id}/packing-lines/{line.Id}", line)
                     : TypedResults.NotFound()
         );
+        MapPackingAdjustments(projects);
         projects.MapPost(
             "/{id:guid}/packing-lines/{lineId:guid}/pack",
             async Task<Results<Ok<PackingLineResponse>, NotFound>> (
@@ -248,6 +249,23 @@ internal static class Endpoints
                 CancellationToken ct
             ) =>
                 await workspace.ReceiveAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapPackingAdjustments(RouteGroupBuilder projects)
+    {
+        projects.MapPatch(
+            "/{id:guid}/packing-lines/{lineId:guid}",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                AdjustPackingLineRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.AdjustPackingLineAsync(id, lineId, request, ct) is { } line
                     ? TypedResults.Ok(line)
                     : TypedResults.NotFound()
         );

@@ -1366,6 +1366,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("character varying(200)")
                                 .HasColumnName("received_by");
 
+                            b1.Property<string>("Role")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("role");
+
                             b1.HasKey("Id")
                                 .HasName("pk_packing_lines");
 

@@ -707,6 +707,55 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/packing-lines/{lineId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    lineId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AdjustPackingLineRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PackingLineResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        trace?: never;
+    };
     "/api/projects/{id}/packing-lines/{lineId}/pack": {
         parameters: {
             query?: never;
@@ -1815,6 +1864,11 @@ export interface components {
             /** @description ISO 3166-1 alpha-2 country code. */
             countryCode: string;
         };
+        AdjustPackingLineRequest: {
+            /** Format: int32 */
+            quantity: number;
+            role: string;
+        };
         AssignEquipmentScanCodeRequest: {
             scanCode: string;
         };
@@ -2276,6 +2330,7 @@ export interface components {
             equipmentId: string;
             /** Format: int32 */
             quantity: number;
+            role: string;
             isPacked: boolean;
             isBookedOut: boolean;
             isReceived: boolean;
@@ -2299,6 +2354,8 @@ export interface components {
             equipmentId: string;
             /** Format: int32 */
             quantity: number;
+            /** @default required */
+            role: string;
         };
         ProblemDetails: {
             type?: null | string;

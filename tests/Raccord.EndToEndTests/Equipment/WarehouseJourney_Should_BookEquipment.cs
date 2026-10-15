@@ -26,6 +26,49 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         await RunJourneyAsync("warehouse-book-equipment", CompleteJourneyAsync);
     }
 
+    [Fact]
+    public async Task Journey_Should_AdjustAdditionalTemporaryAndOptionalLines()
+    {
+        await RunJourneyAsync(
+            "warehouse-adjust-packing-lines",
+            async page =>
+            {
+                await CreateCustomerAsync(page);
+                await CreateProjectWithBillableLineAsync(page);
+                var projectId = Guid.Parse(new Uri(page.Url).Segments[^1]);
+                var api = page.Context.APIRequest;
+                var itemId = await CreateEquipmentAsync(api, "ADJUST");
+                var additionalId = await CreatePackingLineAsync(
+                    api,
+                    projectId,
+                    itemId,
+                    "additional"
+                );
+                var temporaryId = await CreatePackingLineAsync(api, projectId, itemId, "temporary");
+
+                var adjustment = await api.PatchAsync(
+                    $"/api/projects/{projectId}/packing-lines/{additionalId}",
+                    new() { DataObject = new { quantity = 1, role = "optional" } }
+                );
+                adjustment.Status.ShouldBe(200);
+                (await adjustment.JsonAsync())!
+                    .Value.GetProperty("role")
+                    .GetString()
+                    .ShouldBe("optional");
+                var temporary = await api.GetAsync($"/api/projects/{projectId}");
+                temporary.Status.ShouldBe(200);
+                (await temporary.JsonAsync())!
+                    .Value.GetProperty("packingLines")
+                    .EnumerateArray()
+                    .Single(line => line.GetProperty("id").GetGuid() == temporaryId)
+                    .GetProperty("role")
+                    .GetString()
+                    .ShouldBe("temporary");
+                await page.SetContentAsync("<h1>Packing adjustments recorded</h1>");
+            }
+        );
+    }
+
     private async Task CompleteJourneyAsync(IPage page)
     {
         await CreateCustomerAsync(page);
@@ -40,7 +83,7 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         await page.SetContentAsync("<h1>Warehouse equipment returned</h1>");
     }
 
-    private async Task<Guid> CreateEquipmentAsync(IAPIRequestContext api)
+    private async Task<Guid> CreateEquipmentAsync(IAPIRequestContext api, string suffix = "CAM")
     {
         var itemResponse = await api.PostAsync(
             "/api/equipment/items",
@@ -48,7 +91,7 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
             {
                 DataObject = new
                 {
-                    code = $"CAM-{RunStamp}",
+                    code = $"{suffix}-{RunStamp}",
                     name = "Camera",
                     stockQuantity = 1,
                 },
@@ -68,12 +111,21 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
     private static async Task<Guid> CreatePackingLineAsync(
         IAPIRequestContext api,
         Guid projectId,
-        Guid itemId
+        Guid itemId,
+        string role = "required"
     )
     {
         var response = await api.PostAsync(
             $"/api/projects/{projectId}/packing-lines",
-            new() { DataObject = new { equipmentId = itemId, quantity = 1 } }
+            new()
+            {
+                DataObject = new
+                {
+                    equipmentId = itemId,
+                    quantity = 1,
+                    role,
+                },
+            }
         );
         response.Status.ShouldBe(201);
         var line = await response.JsonAsync();

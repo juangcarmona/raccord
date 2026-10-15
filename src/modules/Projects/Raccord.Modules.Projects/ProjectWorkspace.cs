@@ -146,7 +146,32 @@ public sealed class ProjectWorkspace(
         var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
         if (project is null)
             return null;
-        var line = project.AddPackingLine(request.EquipmentId, request.Quantity);
+        var line = project.AddPackingLine(
+            request.EquipmentId,
+            request.Quantity,
+            ParsePackingRole(request.Role)
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(line);
+    }
+
+    /// <summary>Adjusts a planned packing line before warehouse processing begins.</summary>
+    public async Task<PackingLineResponse?> AdjustPackingLineAsync(
+        Guid projectId,
+        Guid lineId,
+        AdjustPackingLineRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var line = project.AdjustPackingLine(
+            lineId,
+            request.Quantity,
+            ParsePackingRole(request.Role)
+        );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(line);
     }
@@ -243,6 +268,14 @@ public sealed class ProjectWorkspace(
         Receive,
     }
 
+    private static PackingLineRole ParsePackingRole(string role) =>
+        Enum.TryParse<PackingLineRole>(role, true, out var parsed)
+            ? parsed
+            : throw new BusinessRuleViolationException(
+                "projects.packing-role-invalid",
+                $"Unknown packing line role '{role}'."
+            );
+
     private static ProjectResponse ToResponse(Project project, string customerName) =>
         new(
             project.Id,
@@ -283,6 +316,7 @@ public sealed class ProjectWorkspace(
             line.Id,
             line.EquipmentId,
             line.Quantity,
+            line.Role.ToString().ToLowerInvariant(),
             line.IsPacked,
             line.IsBookedOut,
             line.IsReceived,

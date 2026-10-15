@@ -39,4 +39,26 @@ public sealed class PackingLineTests
             )
             .Code.ShouldBe("projects.book-out-already-complete");
     }
+
+    [Fact]
+    public void A_planned_line_Should_allow_role_and_quantity_adjustments()
+    {
+        var line = PackingLine.Create(Guid.CreateVersion7(), 1, PackingLineRole.Additional);
+
+        line.Adjust(2, PackingLineRole.Optional);
+
+        line.Quantity.ShouldBe(2);
+        line.Role.ShouldBe(PackingLineRole.Optional);
+    }
+
+    [Fact]
+    public void A_processed_line_Should_reject_adjustments()
+    {
+        var line = PackingLine.Create(Guid.CreateVersion7(), 1);
+        line.Pack("warehouse", DateTimeOffset.UtcNow);
+
+        Should
+            .Throw<BusinessRuleViolationException>(() => line.Adjust(2, PackingLineRole.Temporary))
+            .Code.ShouldBe("projects.packing-adjustment-locked");
+    }
 }

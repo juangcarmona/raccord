@@ -75,10 +75,22 @@ public sealed class Project
     public IReadOnlyList<PackingLine> PackingLines => [.. packingLines];
 
     /// <summary>Adds a quantity of equipment to the project's packing list.</summary>
-    public PackingLine AddPackingLine(Guid equipmentId, int quantity)
+    public PackingLine AddPackingLine(
+        Guid equipmentId,
+        int quantity,
+        PackingLineRole role = PackingLineRole.Required
+    )
     {
-        var line = PackingLine.Create(equipmentId, quantity);
+        var line = PackingLine.Create(equipmentId, quantity, role);
         packingLines.Add(line);
+        return line;
+    }
+
+    /// <summary>Adjusts an unlocked packing line's quantity and role.</summary>
+    public PackingLine AdjustPackingLine(Guid lineId, int quantity, PackingLineRole role)
+    {
+        var line = FindPackingLine(lineId);
+        line.Adjust(quantity, role);
         return line;
     }
 

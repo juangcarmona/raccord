@@ -554,6 +554,58 @@
         }
       }
     },
+    "/api/projects/{id}/packing-lines/{lineId}": {
+      "patch": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustPackingLineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/packing-lines/{lineId}/pack": {
       "post": {
         "tags": [
@@ -1564,6 +1616,22 @@
         },
         "description": "A postal address."
       },
+      "AdjustPackingLineRequest": {
+        "required": [
+          "quantity",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
       "AssignEquipmentScanCodeRequest": {
         "required": [
           "scanCode"
@@ -2489,6 +2557,7 @@
           "id",
           "equipmentId",
           "quantity",
+          "role",
           "isPacked",
           "isBookedOut",
           "isReceived",
@@ -2509,6 +2578,9 @@
           "quantity": {
             "type": "integer",
             "format": "int32"
+          },
+          "role": {
+            "type": "string"
           },
           "isPacked": {
             "type": "boolean"
@@ -2597,6 +2669,10 @@
           "quantity": {
             "type": "integer",
             "format": "int32"
+          },
+          "role": {
+            "type": "string",
+            "default": "required"
           }
         }
       },

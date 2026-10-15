@@ -36,6 +36,8 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<ProjectContextEntry> ProjectContextEntries => Set<ProjectContextEntry>();
 
+    internal DbSet<ProjectTimeEntry> ProjectTimeEntries => Set<ProjectTimeEntry>();
+
     internal DbSet<InvoiceDraft> InvoiceDrafts => Set<InvoiceDraft>();
 
     internal DbSet<InvoiceNumberSequence> InvoiceNumberSequences => Set<InvoiceNumberSequence>();

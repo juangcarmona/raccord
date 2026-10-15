@@ -199,3 +199,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A hosted E2E run can remain indefinitely in Playwright browser installation with no log progress, blocking the feedback loop before any journey executes.
 - **Action:** Treat an unchanged setup step as runner failure, cancel the run, and retrigger from a small process-ledger update; keep the application merge blocked until a fresh E2E artifact exists.
 - **Check:** A restarted run must reach journey execution and upload success evidence before merge.
+
+## 2026-10-15 · Time reporting stays append-only
+
+- **Observation:** Plan-versus-actual reporting becomes misleading if recording actual work mutates the planned source or stores a cached variance.
+- **Action:** Store each time record immutably with planned and actual hours, then derive variance and project totals when reporting.
+- **Check:** Domain and browser journeys must retain both source values, aggregate multiple entries, and expose the derived variance with hosted evidence.

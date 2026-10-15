@@ -899,6 +899,59 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("project_teams", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Projects.ProjectTimeEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Actor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("actor");
+
+                    b.Property<decimal>("ActualHours")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)")
+                        .HasColumnName("actual_hours");
+
+                    b.Property<decimal>("PlannedHours")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)")
+                        .HasColumnName("planned_hours");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_id");
+
+                    b.Property<DateTimeOffset>("RecordedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("recorded_at");
+
+                    b.Property<string>("Service")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("service");
+
+                    b.Property<Guid?>("TaskId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("task_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_time_entries");
+
+                    b.HasIndex("TaskId")
+                        .HasDatabaseName("ix_project_time_entries_task_id");
+
+                    b.HasIndex("ProjectId", "RecordedAt")
+                        .HasDatabaseName("ix_project_time_entries_project_id_recorded_at");
+
+                    b.ToTable("project_time_entries", "projects");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Projects.ProjectType", b =>
                 {
                     b.Property<Guid>("Id")

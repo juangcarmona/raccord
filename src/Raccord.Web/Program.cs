@@ -73,6 +73,7 @@ builder.Services.AddScoped<ICurrentUser, HttpCurrentActor>();
 builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<ProjectContext>();
+builder.Services.AddScoped<ProjectTimeTracking>();
 builder.Services.AddScoped<ProjectCoordination>();
 builder.Services.AddScoped<InvoicingWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();

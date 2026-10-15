@@ -104,7 +104,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             $"/api/projects/{projectId}/status",
             new APIRequestContextOptions
             {
-                Data = "{\"status\":\"active\"}",
+                Data = "{\"status\":2}",
                 Headers = new Dictionary<string, string>(StringComparer.Ordinal)
                 {
                     ["content-type"] = "application/json",

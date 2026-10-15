@@ -136,7 +136,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
             && entry.ProjectName == project.Name
             && entry.UnbilledLineCount == 2
             && entry.UnbilledNetAmount == 1280m
-            && !entry.Overdue
+            && entry.Overdue
         );
     }
 

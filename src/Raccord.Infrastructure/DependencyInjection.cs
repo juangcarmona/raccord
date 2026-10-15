@@ -85,6 +85,9 @@ public static class DependencyInjection
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
         RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
+        services.AddScoped<Raccord.Modules.Compliance.Contracts.IAuditTrail>(provider =>
+            provider.GetRequiredService<ApplicationAuditTrail>()
+        );
         services.AddScoped<IAuditAppender>(provider =>
             provider.GetRequiredService<ApplicationAuditTrail>()
         );

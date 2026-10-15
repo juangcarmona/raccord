@@ -606,6 +606,38 @@ public sealed class InvoicingWorkflow(
         return record?.Invoice.ToResponse(record.ContentHash);
     }
 
+    /// <summary>Exports an issued invoice as structured XML and records the export in the audit trail.</summary>
+    public async Task<byte[]?> ExportEInvoiceAsync(
+        Guid invoiceId,
+        string format,
+        CancellationToken cancellationToken
+    )
+    {
+        if (!string.Equals(format, EInvoiceExport.Format, StringComparison.OrdinalIgnoreCase))
+            throw new BusinessRuleViolationException(
+                "e-invoice.format-unsupported",
+                $"The e-invoice format '{format}' is not supported."
+            );
+
+        var record = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (record is null)
+            return null;
+
+        var content = EInvoiceExport.Build(record.Invoice);
+        Record(
+            "invoice.e-invoice.exported",
+            InvoiceEntity,
+            invoiceId,
+            ("format", EInvoiceExport.Format),
+            (
+                "contentHash",
+                Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(content))
+            )
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return content;
+    }
+
     /// <summary>Records a validated payment and recalculates the outstanding balance.</summary>
     public async Task<InvoicePaymentSummaryResponse?> RecordPaymentAsync(
         Guid invoiceId,

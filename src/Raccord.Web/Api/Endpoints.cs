@@ -1336,6 +1336,19 @@ internal static class Endpoints
                     ? TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft)
                     : TypedResults.NotFound()
         );
+        invoices.MapGet(
+            "/{id:guid}/e-invoice",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                string? format,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ExportEInvoiceAsync(id, format ?? EInvoiceExport.Format, ct)
+                    is { } content
+                    ? TypedResults.File(content, EInvoiceExport.ContentType, $"invoice-{id:N}.xml")
+                    : TypedResults.NotFound()
+        );
     }
 #pragma warning restore MA0051
 

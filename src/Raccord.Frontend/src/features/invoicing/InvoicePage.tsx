@@ -36,13 +36,17 @@ function Party({ title, party }: { title: string; party: Schemas["PartyResponse"
 }
 
 function InvoiceView({ invoice }: { invoice: Schemas["IssuedInvoiceResponse"] }) {
-    const { t, format } = useI18n();
+    const { t, format, locale } = useI18n();
     return (
         <>
             <PageHeader
                 title={invoice.number}
                 actions={
-                    <a className="button button--primary" href={`/api/invoices/${invoice.id}/document`} download>
+                    <a
+                        className="button button--primary"
+                        href={`/api/invoices/${invoice.id}/document?language=${locale}`}
+                        download
+                    >
                         {t("invoices.download")}
                     </a>
                 }

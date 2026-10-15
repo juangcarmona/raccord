@@ -291,3 +291,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: External payment reporting must reuse the existing invoice workflow and be constrained by explicit token scopes; inventing registry data would make an integration demo look like a real lookup.
 - Action: Add invoices.read and payments.write scopes and route public invoice reads through the existing payment workflow; keep registry lookup provider-backed and separate until a real provider contract is selected.
 - Check: The payment-reporting journey issues scoped credentials, reads invoices through the public interface, and captures hosted screenshot/trace evidence.
+
+## 2026-10-15 · Company registry lookup
+
+- Observation: Registry providers differ by country and response shape, while manual entry must remain available when no provider is configured or a search has no match.
+- Action: Add a narrow provider-backed HTTP adapter with explicit country/query inputs and return an empty match set when configuration is absent; do not fabricate company records.
+- Check: The registry journey verifies the safe no-match response and captures screenshot/trace evidence for the manual-entry path.

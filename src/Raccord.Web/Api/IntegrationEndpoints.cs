@@ -31,6 +31,7 @@ internal static class IntegrationEndpoints
         integrations.MapPost("/projects", CreateProjectAsync).AllowAnonymous();
         integrations.MapGet("/invoices", ListInvoicesAsync).AllowAnonymous();
         integrations.MapPost("/invoices/{id:guid}/payments", RecordPaymentAsync).AllowAnonymous();
+        integrations.MapGet("/company-registry", SearchCompanyRegistryAsync);
     }
 
     public static void MapCalendarFeed(IEndpointRouteBuilder app)
@@ -224,4 +225,13 @@ internal static class IntegrationEndpoints
         : await invoicing.RecordPaymentAsync(id, request, ct) is { } result
             ? TypedResults.Ok(result)
         : TypedResults.NotFound();
+
+    private static async Task<
+        Ok<IReadOnlyList<CompanyRegistryMatchResponse>>
+    > SearchCompanyRegistryAsync(
+        string country,
+        string query,
+        CompanyRegistryCatalog registry,
+        CancellationToken ct
+    ) => TypedResults.Ok(await registry.SearchAsync(country, query, ct));
 }

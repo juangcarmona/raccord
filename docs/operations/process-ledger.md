@@ -231,3 +231,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Payment status is derived data and must never be stored independently from the issued invoice total and payment history; deposit lifecycle has a separate security-liability meaning.
 - Action: Keep payments append-only, reject overpayment before persistence, derive unpaid/partially-paid/paid from the aggregate, and model deposits on projects with explicit not-paid/paid/returned transitions.
 - Check: Integration coverage settles an invoice through partial then full payment, while the Playwright journey exercises deposit configuration, receipt, return, and payment APIs with hosted screenshots/traces.
+
+## 2026-10-15 · Manual payment reminders
+
+- Observation: Dunning is a deliberate manual action; overdue status must be derived from the current outstanding balance and the latest effective due date.
+- Action: Keep reminder history append-only, expose overdue invoices separately, reject reminders for paid or not-yet-due invoices, and never send automatically.
+- Check: The Playwright invoice journey lists an overdue invoice, generates a reminder with a new deadline, and reads its retained history; hosted CI remains the evidence source for screenshots and traces.

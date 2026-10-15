@@ -59,6 +59,36 @@ public sealed record InvoicePaymentSummaryResponse(
     string Status
 );
 
+/// <summary>Generates a manual reminder for an overdue invoice.</summary>
+public sealed record CreateInvoiceReminderRequest(
+    DateOnly? NewDueDate,
+    string? Template = null,
+    string? Letterhead = null
+);
+
+/// <summary>A generated payment reminder.</summary>
+public sealed record InvoiceReminderResponse(
+    Guid Id,
+    Guid InvoiceId,
+    int Number,
+    DateOnly CreatedOn,
+    DateOnly DueDate,
+    string? Template,
+    string? Letterhead
+);
+
+/// <summary>An overdue invoice that can receive a manual reminder.</summary>
+public sealed record OverdueInvoiceResponse(
+    Guid InvoiceId,
+    string InvoiceNumber,
+    Guid CustomerId,
+    string CustomerName,
+    DateOnly DueDate,
+    decimal Outstanding,
+    int ReminderCount,
+    DateOnly? LastReminderDate
+);
+
 /// <summary>Starts a rectifying draft from one immutable issued invoice.</summary>
 public sealed record RectifyInvoiceRequest(string Kind, string Reason);
 

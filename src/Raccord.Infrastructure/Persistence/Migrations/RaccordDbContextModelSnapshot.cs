@@ -167,6 +167,49 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_payments", (string)null);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Billing.InvoiceReminder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateOnly>("CreatedOn")
+                        .HasColumnType("date")
+                        .HasColumnName("created_on");
+
+                    b.Property<DateOnly>("DueDate")
+                        .HasColumnType("date")
+                        .HasColumnName("due_date");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("invoice_id");
+
+                    b.Property<string>("Letterhead")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("letterhead");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<string>("Template")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("template");
+
+                    b.HasKey("Id")
+                        .HasName("pk_invoice_reminders");
+
+                    b.HasIndex("InvoiceId", "Number")
+                        .IsUnique()
+                        .HasDatabaseName("ix_invoice_reminders_invoice_id_number");
+
+                    b.ToTable("invoice_reminders", (string)null);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Billing.InvoiceSeries", b =>
                 {
                     b.Property<string>("Code")

@@ -954,6 +954,7 @@ internal static class Endpoints
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>
                 TypedResults.Ok(await invoicing.ListInvoicesAsync(ct))
         );
+        MapInvoiceReminders(invoices);
         invoices.MapPost(
             "/{id:guid}/rectifications",
             async Task<Results<Created<InvoiceDraftResponse>, NotFound>> (
@@ -1001,6 +1002,46 @@ internal static class Endpoints
                     ? TypedResults.File(document.Content, document.ContentType, document.FileName)
                     : TypedResults.NotFound()
         );
+    }
+
+    private static void MapInvoiceReminders(RouteGroupBuilder invoices)
+    {
+        invoices.MapGet(
+            "/overdue",
+            async (InvoicingWorkflow invoicing, CancellationToken ct) =>
+                TypedResults.Ok(await invoicing.ListOverdueInvoicesAsync(ct))
+        );
+        invoices.MapGet(
+            "/{id:guid}/reminders",
+            async Task<Results<Ok<IReadOnlyList<InvoiceReminderResponse>>, NotFound>> (
+                Guid id,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ListRemindersAsync(id, ct) is { } reminders
+                    ? TypedResults.Ok(reminders)
+                    : TypedResults.NotFound()
+        );
+        invoices
+            .MapPost(
+                "/{id:guid}/reminders",
+                async Task<Results<Created<InvoiceReminderResponse>, NotFound>> (
+                    Guid id,
+                    CreateInvoiceReminderRequest request,
+                    InvoicingWorkflow invoicing,
+                    CancellationToken ct
+                ) =>
+                {
+                    var reminder = await invoicing.CreateReminderAsync(id, request, ct);
+                    return reminder is null
+                        ? TypedResults.NotFound()
+                        : TypedResults.Created(
+                            $"/api/invoices/{id}/reminders/{reminder.Id}",
+                            reminder
+                        );
+                }
+            )
+            .ProducesProblem(StatusCodes.Status422UnprocessableEntity);
     }
 
     private static void MapInvoicePayments(RouteGroupBuilder invoices)

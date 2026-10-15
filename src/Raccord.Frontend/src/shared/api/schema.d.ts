@@ -2681,6 +2681,126 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/invoices/overdue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["OverdueInvoiceResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoices/{id}/reminders": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoiceReminderResponse"][];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateInvoiceReminderRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InvoiceReminderResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Unprocessable Entity */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["ProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoices/{id}/rectifications": {
         parameters: {
             query?: never;
@@ -3455,6 +3575,13 @@ export interface components {
             /** @description Series that will number the invoice; the default series when omitted. */
             seriesCode: null | string;
         };
+        /** @description Generates a manual reminder for an overdue invoice. */
+        CreateInvoiceReminderRequest: {
+            /** Format: date */
+            newDueDate: null | string;
+            template?: null | string;
+            letterhead?: null | string;
+        };
         CreatePackingListResponse: {
             lines: components["schemas"]["PackingLineResponse"][];
         };
@@ -3809,6 +3936,21 @@ export interface components {
             unbilledNetAmount: number;
             currency: string;
         };
+        /** @description A generated payment reminder. */
+        InvoiceReminderResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            invoiceId: string;
+            /** Format: int32 */
+            number: number;
+            /** Format: date */
+            createdOn: string;
+            /** Format: date */
+            dueDate: string;
+            template: null | string;
+            letterhead: null | string;
+        };
         /** @description An invoice numbering series. */
         InvoiceSeriesResponse: {
             /** @description Series code. */
@@ -3958,6 +4100,23 @@ export interface components {
             marginLeftMillimetres: number;
             isDefault: boolean;
             storageKey: string;
+        };
+        /** @description An overdue invoice that can receive a manual reminder. */
+        OverdueInvoiceResponse: {
+            /** Format: uuid */
+            invoiceId: string;
+            invoiceNumber: string;
+            /** Format: uuid */
+            customerId: string;
+            customerName: string;
+            /** Format: date */
+            dueDate: string;
+            /** Format: double */
+            outstanding: number;
+            /** Format: int32 */
+            reminderCount: number;
+            /** Format: date */
+            lastReminderDate: null | string;
         };
         PackingLineResponse: {
             /** Format: uuid */

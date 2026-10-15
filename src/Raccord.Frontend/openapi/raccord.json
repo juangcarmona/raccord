@@ -2397,6 +2397,115 @@
         }
       }
     },
+    "/api/invoices/overdue": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OverdueInvoiceResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}/reminders": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceReminderResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceReminderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceReminderResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/invoices/{id}/rectifications": {
       "post": {
         "tags": [
@@ -3510,6 +3619,34 @@
         },
         "description": "Creates an invoice draft from unbilled project lines."
       },
+      "CreateInvoiceReminderRequest": {
+        "required": [
+          "newDueDate"
+        ],
+        "type": "object",
+        "properties": {
+          "newDueDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "template": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "letterhead": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "Generates a manual reminder for an overdue invoice."
+      },
       "CreatePackingListResponse": {
         "required": [
           "lines"
@@ -4409,6 +4546,53 @@
         },
         "description": "One project currently eligible for the staged-invoicing queue (UC-FIN-WORK-INVOICING-QUEUE)."
       },
+      "InvoiceReminderResponse": {
+        "required": [
+          "id",
+          "invoiceId",
+          "number",
+          "createdOn",
+          "dueDate",
+          "template",
+          "letterhead"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "template": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "letterhead": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "description": "A generated payment reminder."
+      },
       "InvoiceSeriesResponse": {
         "required": [
           "code",
@@ -4717,6 +4901,55 @@
             "type": "string"
           }
         }
+      },
+      "OverdueInvoiceResponse": {
+        "required": [
+          "invoiceId",
+          "invoiceNumber",
+          "customerId",
+          "customerName",
+          "dueDate",
+          "outstanding",
+          "reminderCount",
+          "lastReminderDate"
+        ],
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "outstanding": {
+            "type": "number",
+            "format": "double"
+          },
+          "reminderCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastReminderDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          }
+        },
+        "description": "An overdue invoice that can receive a manual reminder."
       },
       "PackingLineResponse": {
         "required": [

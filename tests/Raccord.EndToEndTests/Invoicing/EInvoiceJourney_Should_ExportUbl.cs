@@ -40,10 +40,11 @@ public sealed class EInvoiceJourney_Should_ExportUbl(DistributedAppFixture app)
                 document.Root.Name.NamespaceName.ShouldContain("Invoice-2");
                 document
                     .Descendants()
-                    .Single(item =>
+                    .Where(item =>
                         string.Equals(item.Name.LocalName, "CompanyID", StringComparison.Ordinal)
                     )
-                    .Value.ShouldBe("B00000000");
+                    .Select(item => item.Value)
+                    .ShouldBe(["B00000000", "B87654321"]);
                 document
                     .Descendants()
                     .Count(item =>

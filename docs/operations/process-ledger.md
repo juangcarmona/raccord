@@ -315,3 +315,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: A feature can be implemented in an earlier stacked branch while the current feature tip still has no direct journey proving its operator-visible lifecycle.
 - Action: Before reimplementing an open issue, inspect the current tip and prior merged stacks; when behavior is already present, add the missing focused journey and screenshot evidence instead of duplicating domain code.
 - Check: The #152 journey sells one rental unit, archives the remaining stock, and verifies Sale and Archive movements in hosted CI.
+
+## 2026-10-15 · Warehouse packing evidence
+
+- Observation: Packing, dispatch and receipt are one stateful line lifecycle even when operators use either scan or manual selection.
+- Action: Keep the journey on the authoritative project packing-line API and assert each transition plus operator identity; leave device-specific scanning as an adapter concern.
+- Check: The #143 journey plans equipment, creates the packing list, and verifies packed → dispatched → received with hosted screenshot/trace evidence.

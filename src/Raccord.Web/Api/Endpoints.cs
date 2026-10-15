@@ -521,6 +521,58 @@ internal static class Endpoints
     {
         MapInvoiceDrafts(api);
         MapInvoices(api);
+        MapFinance(api);
+    }
+
+    private static void MapFinance(RouteGroupBuilder api)
+    {
+        var finance = api.MapGroup("/finance").WithTags("Finance");
+        finance.MapGet(
+            "/report",
+            async (
+                DateOnly? from,
+                DateOnly? to,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) => TypedResults.Ok(await invoicing.GetFinanceReportAsync(from, to, ct))
+        );
+        finance.MapGet(
+            "/ledger",
+            async (
+                DateOnly? from,
+                DateOnly? to,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) => TypedResults.Ok(await invoicing.ListFinanceLedgerAsync(from, to, ct))
+        );
+        finance.MapGet(
+            "/accounting-export",
+            async Task<FileContentHttpResult> (
+                DateOnly? from,
+                DateOnly? to,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                TypedResults.File(
+                    await invoicing.ExportFinanceLedgerAsync(from, to, ct),
+                    "text/csv",
+                    $"raccord-ledger-{from ?? DateOnly.MinValue:yyyyMMdd}-{to ?? DateOnly.MaxValue:yyyyMMdd}.csv"
+                )
+        );
+        finance.MapGet(
+            "/invoices-export",
+            async Task<FileContentHttpResult> (
+                DateOnly? from,
+                DateOnly? to,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                TypedResults.File(
+                    await invoicing.ExportInvoiceRegisterAsync(from, to, ct),
+                    "text/csv",
+                    $"raccord-invoices-{from ?? DateOnly.MinValue:yyyyMMdd}-{to ?? DateOnly.MaxValue:yyyyMMdd}.csv"
+                )
+        );
     }
 
     private static void MapInvoiceDrafts(RouteGroupBuilder api)

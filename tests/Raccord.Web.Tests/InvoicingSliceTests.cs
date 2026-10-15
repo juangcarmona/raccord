@@ -81,6 +81,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         reloaded!.ContentHash.ShouldBe(invoice.ContentHash);
 
         await AssertPaymentsAsync(invoice.Id);
+        await AssertFinanceReportingAsync(invoice.Id);
 
         var document = await client.GetAsync($"/api/invoices/{invoice.Id}/document");
         document.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
@@ -199,5 +200,47 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         var paidSummary = (await paid.Content.ReadFromJsonAsync<InvoicePaymentSummaryResponse>())!;
         paidSummary.Outstanding.ShouldBe(0m);
         paidSummary.Status.ShouldBe("paid");
+    }
+
+    private async Task AssertFinanceReportingAsync(Guid invoiceId)
+    {
+        var report = await client.GetFromJsonAsync<FinanceReportResponse>(
+            $"/api/finance/report?from={IssueDate:yyyy-MM-dd}&to={IssueDate:yyyy-MM-dd}"
+        );
+        report!.InvoiceCount.ShouldBe(1);
+        report.PaidInvoiceCount.ShouldBe(1);
+        report.InvoicedTotal.ShouldBe(1548.80m);
+        report.PaidTotal.ShouldBe(1548.80m);
+        report.OutstandingTotal.ShouldBe(0m);
+        report.OverdueTotal.ShouldBe(0m);
+
+        var ledger = await client.GetFromJsonAsync<List<FinanceLedgerEntryResponse>>(
+            $"/api/finance/ledger?from={IssueDate:yyyy-MM-dd}&to={IssueDate:yyyy-MM-dd}"
+        );
+        ledger!.Count.ShouldBe(3);
+        ledger.Count(entry => entry.InvoiceId == invoiceId).ShouldBe(3);
+        ledger.ShouldContain(entry => entry.EntryType == "invoice" && entry.Debit == 1548.80m);
+        ledger
+            .Count(entry => string.Equals(entry.EntryType, "payment", StringComparison.Ordinal))
+            .ShouldBe(2);
+
+        var export = await client.GetAsync(
+            $"/api/finance/accounting-export?from={IssueDate:yyyy-MM-dd}&to={IssueDate:yyyy-MM-dd}"
+        );
+        export.StatusCode.ShouldBe(HttpStatusCode.OK);
+        export.Content.Headers.ContentType!.MediaType.ShouldBe("text/csv");
+        var csv = await export.Content.ReadAsStringAsync();
+        csv.ShouldContain(
+            "invoiceId,invoiceNumber,date,entryType,debit,credit,balance,currency,description"
+        );
+        csv.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length.ShouldBe(4);
+
+        var invoiceExport = await client.GetAsync(
+            $"/api/finance/invoices-export?from={IssueDate:yyyy-MM-dd}&to={IssueDate:yyyy-MM-dd}"
+        );
+        invoiceExport.StatusCode.ShouldBe(HttpStatusCode.OK);
+        (await invoiceExport.Content.ReadAsStringAsync()).ShouldContain(
+            "invoiceId,invoiceNumber,issueDate,customer,total,currency"
+        );
     }
 }

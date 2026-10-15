@@ -72,6 +72,33 @@ public sealed record OverdueInvoiceResponse(
     DateOnly? LastReminderDate
 );
 
+/// <summary>A finance ledger entry derived from an issued invoice or received payment.</summary>
+public sealed record FinanceLedgerEntryResponse(
+    Guid InvoiceId,
+    string InvoiceNumber,
+    DateOnly Date,
+    string EntryType,
+    decimal Debit,
+    decimal Credit,
+    decimal Balance,
+    string Currency,
+    string Description
+);
+
+/// <summary>Period totals for finance operators and accountants.</summary>
+public sealed record FinanceReportResponse(
+    DateOnly From,
+    DateOnly To,
+    int InvoiceCount,
+    int PaidInvoiceCount,
+    int OverdueInvoiceCount,
+    decimal InvoicedTotal,
+    decimal PaidTotal,
+    decimal OutstandingTotal,
+    decimal OverdueTotal,
+    string Currency
+);
+
 /// <summary>A line of a draft or issued invoice.</summary>
 /// <param name="Id">Draft line identifier; null on issued invoices.</param>
 /// <param name="Position">One-based order.</param>

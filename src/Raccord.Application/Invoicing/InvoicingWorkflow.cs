@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Security.Cryptography;
+using System.Text;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
 using Raccord.Application.Compliance;
@@ -305,6 +306,183 @@ public sealed class InvoicingWorkflow(
                 item.ProjectId
             )),
         ];
+    }
+
+    /// <summary>Builds the finance ledger from immutable invoices and append-only payments.</summary>
+    public async Task<IReadOnlyList<FinanceLedgerEntryResponse>> ListFinanceLedgerAsync(
+        DateOnly? from,
+        DateOnly? to,
+        CancellationToken cancellationToken
+    )
+    {
+        var (start, end) = ResolveFinancePeriod(from, to);
+        var entries = new List<FinanceLedgerEntryResponse>();
+        foreach (var item in await invoices.ListAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var record = await invoices.FindAsync(item.Id, cancellationToken).ConfigureAwait(false);
+            if (record is null)
+                continue;
+            var invoicePayments = await payments
+                .ListAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            var outstanding =
+                record.Invoice.Totals.Total.Amount - invoicePayments.Sum(p => p.Amount);
+            if (item.IssueDate >= start && item.IssueDate <= end)
+            {
+                entries.Add(
+                    new(
+                        item.Id,
+                        item.Number,
+                        item.IssueDate,
+                        "invoice",
+                        item.Total,
+                        0m,
+                        outstanding,
+                        item.Currency,
+                        $"Issued invoice {item.Number}"
+                    )
+                );
+            }
+
+            entries.AddRange(
+                invoicePayments
+                    .Where(payment => payment.Date >= start && payment.Date <= end)
+                    .Select(payment => new FinanceLedgerEntryResponse(
+                        item.Id,
+                        item.Number,
+                        payment.Date,
+                        "payment",
+                        0m,
+                        payment.Amount,
+                        outstanding,
+                        item.Currency,
+                        payment.Description ?? $"Payment by {payment.Method}"
+                    ))
+            );
+        }
+
+        return entries
+            .OrderBy(entry => entry.Date)
+            .ThenBy(entry => entry.InvoiceNumber, StringComparer.Ordinal)
+            .ThenBy(entry => entry.EntryType, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    /// <summary>Summarizes issued, paid and overdue balances for a finance period.</summary>
+    public async Task<FinanceReportResponse> GetFinanceReportAsync(
+        DateOnly? from,
+        DateOnly? to,
+        CancellationToken cancellationToken
+    )
+    {
+        var (start, end) = ResolveFinancePeriod(from, to);
+        var invoicesInPeriod =
+            new List<(IssuedInvoiceListItem Item, decimal Outstanding, bool Overdue)>();
+        decimal paid = 0m;
+        foreach (var item in await invoices.ListAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var invoicePayments = await payments
+                .ListAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            paid += invoicePayments
+                .Where(payment => payment.Date >= start && payment.Date <= end)
+                .Sum(payment => payment.Amount);
+            if (item.IssueDate < start || item.IssueDate > end)
+                continue;
+
+            var outstanding = item.Total - invoicePayments.Sum(payment => payment.Amount);
+            var remindersForInvoice = await reminders
+                .ListAsync(item.Id, cancellationToken)
+                .ConfigureAwait(false);
+            var dueDate =
+                remindersForInvoice.Count > 0
+                    ? remindersForInvoice[^1].DueDate
+                    : DefaultDueDate(item.IssueDate);
+            invoicesInPeriod.Add((item, outstanding, outstanding > 0m && dueDate < clock.Today));
+        }
+
+        var currency = invoicesInPeriod.FirstOrDefault().Item?.Currency ?? Currency.Eur.Code;
+        return new(
+            start,
+            end,
+            invoicesInPeriod.Count,
+            invoicesInPeriod.Count(invoice => invoice.Outstanding <= 0m),
+            invoicesInPeriod.Count(invoice => invoice.Overdue),
+            invoicesInPeriod.Sum(invoice => invoice.Item.Total),
+            paid,
+            invoicesInPeriod.Sum(invoice => Math.Max(invoice.Outstanding, 0m)),
+            invoicesInPeriod
+                .Where(invoice => invoice.Overdue)
+                .Sum(invoice => Math.Max(invoice.Outstanding, 0m)),
+            currency
+        );
+    }
+
+    /// <summary>Exports the period ledger in a stable accountant-friendly CSV shape.</summary>
+    public async Task<byte[]> ExportFinanceLedgerAsync(
+        DateOnly? from,
+        DateOnly? to,
+        CancellationToken cancellationToken
+    )
+    {
+        var ledger = await ListFinanceLedgerAsync(from, to, cancellationToken)
+            .ConfigureAwait(false);
+        var csv = new StringBuilder(
+            "invoiceId,invoiceNumber,date,entryType,debit,credit,balance,currency,description\n"
+        );
+        foreach (var entry in ledger)
+        {
+            csv.Append(entry.InvoiceId)
+                .Append(',')
+                .Append(EscapeCsv(entry.InvoiceNumber))
+                .Append(',')
+                .Append(entry.Date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(entry.EntryType)
+                .Append(',')
+                .Append(entry.Debit.ToString(CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(entry.Credit.ToString(CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(entry.Balance.ToString(CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(EscapeCsv(entry.Currency))
+                .Append(',')
+                .Append(EscapeCsv(entry.Description))
+                .Append('\n');
+        }
+
+        return Encoding.UTF8.GetBytes(csv.ToString());
+    }
+
+    /// <summary>Exports issued invoices for spreadsheet and accountant reconciliation.</summary>
+    public async Task<byte[]> ExportInvoiceRegisterAsync(
+        DateOnly? from,
+        DateOnly? to,
+        CancellationToken cancellationToken
+    )
+    {
+        var (start, end) = ResolveFinancePeriod(from, to);
+        var csv = new StringBuilder("invoiceId,invoiceNumber,issueDate,customer,total,currency\n");
+        foreach (var item in await invoices.ListAsync(cancellationToken).ConfigureAwait(false))
+        {
+            if (item.IssueDate < start || item.IssueDate > end)
+                continue;
+            csv.Append(item.Id)
+                .Append(',')
+                .Append(EscapeCsv(item.Number))
+                .Append(',')
+                .Append(item.IssueDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(EscapeCsv(item.RecipientName))
+                .Append(',')
+                .Append(item.Total.ToString(CultureInfo.InvariantCulture))
+                .Append(',')
+                .Append(EscapeCsv(item.Currency))
+                .Append('\n');
+        }
+
+        return Encoding.UTF8.GetBytes(csv.ToString());
     }
 
     /// <summary>Reads an issued invoice after verifying its integrity.</summary>
@@ -645,6 +823,24 @@ public sealed class InvoicingWorkflow(
     }
 
     private static DateOnly DefaultDueDate(DateOnly issueDate) => issueDate.AddDays(30);
+
+    private (DateOnly Start, DateOnly End) ResolveFinancePeriod(DateOnly? from, DateOnly? to)
+    {
+        var end = to ?? clock.Today;
+        var start = from ?? end.AddMonths(-1);
+        if (start > end)
+            throw new BusinessRuleViolationException(
+                "finance.period-invalid",
+                "The finance period start cannot be after its end."
+            );
+        return (start, end);
+    }
+
+    private static string EscapeCsv(string value) =>
+        value.Contains(',', StringComparison.Ordinal)
+        || value.Contains('"', StringComparison.Ordinal)
+            ? $"\"{value.Replace("\"", "\"\"", StringComparison.Ordinal)}\""
+            : value;
 
     private static InvoiceReminderResponse ToReminderResponse(InvoiceReminder reminder) =>
         new(

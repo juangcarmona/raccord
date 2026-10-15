@@ -279,3 +279,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Credential issuance must sit behind the existing administrator permission boundary; a public token endpoint would turn an integration feature into unauthenticated credential minting.
 - Action: Rebase or reconstruct from a known-good product tip when a long-lived stack crosses an architecture refactor, reuse the first-administrator/role policy, hash tokens at rest, return plaintext only on issue or rotation, and keep external routes scope-gated.
 - Check: The web and E2E projects compile, the migration is generated, the journey covers issue/read/rejected-write/rotation/revocation, and hosted CI must retain the screenshot and trace because local Aspire execution depends on a healthy Docker runtime.
+
+## 2026-10-15 · Personal calendar feed
+
+- Observation: A clean E2E database has no identity or schedule data unless the AppHost migration resource seeds it explicitly; infrastructure readiness probes also must remain reachable after authentication is enabled.
+- Action: Make the feed one-way and token-addressed, bound its project stream to a six-month window, seed the documented E2E administrator, and keep readiness/liveness probes anonymous with bounded fixture startup and disposal.
+- Check: The journey issues a private feed, reads valid iCalendar, verifies a project event, captures a screenshot/trace, and rejects revoked or unknown feed addresses through the public endpoint.

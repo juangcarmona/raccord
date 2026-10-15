@@ -102,9 +102,9 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         report.Ok.ShouldBeTrue();
         var reportText = await report.TextAsync();
         reportText.ShouldContain($"\"invoiceCount\":1");
-        reportText.ShouldContain("\"invoicedTotal\":900");
+        reportText.ShouldContain("\"invoicedTotal\":1089");
         reportText.ShouldContain("\"paidTotal\":100");
-        reportText.ShouldContain("\"outstandingTotal\":800");
+        reportText.ShouldContain("\"outstandingTotal\":989");
 
         var ledger = await page.APIRequest.GetAsync(
             "/api/finance/ledger?from=2026-08-01&to=2026-10-31"

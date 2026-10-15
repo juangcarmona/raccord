@@ -175,3 +175,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Sending a document without a durable outcome and searchable failure reason leaves operators unable to investigate delivery problems.
 - **Action:** Record pending, sent and failed communication outcomes with recipient, subject, document key and failure reason; expose a filtered communication log.
 - **Check:** Integration and browser journeys must create a communication, record a failed delivery, and find it through the searchable log.
+
+## 2026-10-15 · Localized templates keep language selection explicit
+
+- **Observation:** Customer documents can share a document type while requiring independent wording, branding and default selection per locale.
+- **Action:** Store a normalized language tag on each template, scope uniqueness and defaults by document type plus language, and expose a language-filtered catalog.
+- **Check:** Integration and browser journeys must save a foreign-language variant, select it by locale, preview its translated content, and prove the default in another locale remains intact.

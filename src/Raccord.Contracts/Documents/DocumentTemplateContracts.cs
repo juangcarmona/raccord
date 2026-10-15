@@ -10,7 +10,8 @@ public sealed record CreateDocumentTemplateRequest(
     string FontFamily,
     string AccentColor,
     string? LogoStorageKey,
-    bool IsDefault
+    bool IsDefault,
+    string Language = "en"
 );
 
 public sealed record UpdateDocumentTemplateRequest(
@@ -21,13 +22,15 @@ public sealed record UpdateDocumentTemplateRequest(
     string FontFamily,
     string AccentColor,
     string? LogoStorageKey,
-    bool IsDefault
+    bool IsDefault,
+    string? Language = null
 );
 
 public sealed record DocumentTemplateResponse(
     Guid Id,
     string Name,
     string DocumentType,
+    string Language,
     string Letterhead,
     string BodyTemplate,
     string Footer,
@@ -38,5 +41,10 @@ public sealed record DocumentTemplateResponse(
     DateTimeOffset UpdatedAt
 );
 
-public sealed record DocumentTemplatePreviewResponse(Guid Id, string DocumentType, string Html);
+public sealed record DocumentTemplatePreviewResponse(
+    Guid Id,
+    string DocumentType,
+    string Language,
+    string Html
+);
 #pragma warning restore CS1591

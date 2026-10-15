@@ -12,6 +12,8 @@
     </ItemGroup>
 
     <ItemGroup Label="Aspire">
+        <!-- Pin Aspire's transitive MessagePack dependency to the patched 2.5 line. -->
+        <PackageVersion Include="MessagePack" Version="2.5.303" />
         <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.6.0" />
         <PackageVersion Include="Aspire.Hosting.Azure.Storage" Version="13.6.0" />
         <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.6.0" />

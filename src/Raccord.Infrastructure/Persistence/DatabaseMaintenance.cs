@@ -12,7 +12,8 @@ namespace Raccord.Infrastructure.Persistence;
 public sealed class DatabaseMaintenance(
     RaccordDbContext db,
     IPartyDirectory parties,
-    IPartyWriter partyWriter
+    IPartyWriter partyWriter,
+    InstallationSetup installation
 )
 {
     /// <summary>
@@ -21,6 +22,21 @@ public sealed class DatabaseMaintenance(
     /// </summary>
     public async Task SeedDemoDataAsync(CancellationToken cancellationToken)
     {
+        if (await installation.IsRequiredAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var result = await installation
+                .CreateFirstAdministratorAsync(
+                    "admin@example.com",
+                    "DemoPassword123!",
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (result.Kind != InstallationSetup.SetupResultKind.Created)
+            {
+                throw new InvalidOperationException(string.Join("; ", result.Errors));
+            }
+        }
+
         if ((await parties.ListAsync(cancellationToken).ConfigureAwait(false)).Count > 0)
         {
             return;

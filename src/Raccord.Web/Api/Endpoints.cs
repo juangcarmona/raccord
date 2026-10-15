@@ -20,15 +20,23 @@ using Raccord.Infrastructure.Documents;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Equipment.Contracts;
+using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;
 
 /// <summary>The public HTTP API. Endpoints only translate HTTP to use cases; they hold no business logic.</summary>
 internal static class Endpoints
 {
-    public static IEndpointRouteBuilder MapRaccordApi(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapRaccordApi(
+        this IEndpointRouteBuilder app,
+        bool requireAuthorization = true
+    )
     {
         var api = app.MapGroup("/api");
+        if (requireAuthorization)
+        {
+            api.RequireAuthorization();
+        }
         MapOrganization(api);
         MapCustomers(api);
         MapContacts(api);
@@ -39,6 +47,7 @@ internal static class Endpoints
         MapFinance(api);
         MapCommercial(api);
         MapCrew(api);
+        IntegrationEndpoints.MapIntegrations(api);
         api.MapGet(
                 "/audit-events",
                 async (Guid entityId, AuditLog audit, CancellationToken ct) =>
@@ -232,7 +241,8 @@ internal static class Endpoints
                 async (OrganizationSettings settings, CancellationToken ct) =>
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
-            .WithTags("Organization");
+            .WithTags("Organization")
+            .RequirePermission(PermissionCatalog.OrganizationRead);
     }
 
 #pragma warning disable MA0051
@@ -1231,7 +1241,9 @@ internal static class Endpoints
 
     private static void MapInvoices(RouteGroupBuilder api)
     {
-        var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
+        var invoices = api.MapGroup("/invoices")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
         invoices.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>

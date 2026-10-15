@@ -49,8 +49,8 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         ForceEphemeralPostgres(builder);
 
         Log("build+start app: starting");
-        app = await builder.BuildAsync();
-        await app.StartAsync();
+        app = await builder.BuildAsync().WaitAsync(StartupTimeout);
+        await app.StartAsync().WaitAsync(StartupTimeout);
         Log("build+start app: done");
 
         using var startupCts = new CancellationTokenSource(StartupTimeout);
@@ -67,8 +67,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         // the suite runnable with no manual setup beyond a Docker-capable machine.
         Log("playwright install: starting");
         var installExitCode = await Task.Run(() =>
-            Microsoft.Playwright.Program.Main(["install", "chromium"])
-        );
+                Microsoft.Playwright.Program.Main(["install", "chromium"])
+            )
+            .WaitAsync(StartupTimeout);
         Log($"playwright install: exit {installExitCode}");
         if (installExitCode != 0)
         {
@@ -132,14 +133,36 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     {
         if (browser is not null)
         {
-            await browser.DisposeAsync();
+            await DisposeWithTimeoutAsync(browser.DisposeAsync, "browser");
         }
 
-        playwright?.Dispose();
+        if (playwright is not null)
+        {
+            try
+            {
+                await Task.Run(playwright.Dispose).WaitAsync(TimeSpan.FromSeconds(30));
+            }
+            catch (TimeoutException)
+            {
+                Console.Error.WriteLine("[e2e-fixture] playwright disposal timed out");
+            }
+        }
 
         if (app is not null)
         {
-            await app.DisposeAsync();
+            await DisposeWithTimeoutAsync(app.DisposeAsync, "distributed application");
+        }
+    }
+
+    private static async Task DisposeWithTimeoutAsync(Func<ValueTask> dispose, string resource)
+    {
+        try
+        {
+            await dispose().AsTask().WaitAsync(TimeSpan.FromSeconds(30));
+        }
+        catch (TimeoutException)
+        {
+            Console.Error.WriteLine($"[e2e-fixture] {resource} disposal timed out");
         }
     }
 }

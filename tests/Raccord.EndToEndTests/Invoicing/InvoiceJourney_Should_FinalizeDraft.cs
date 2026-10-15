@@ -25,6 +25,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
             "invoice-finalize",
             async page =>
             {
+                await EnsureInvoiceIssuerAsync(page);
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
 

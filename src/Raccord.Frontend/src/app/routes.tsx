@@ -14,12 +14,17 @@ import { NotFoundPage } from "./NotFoundPage";
 import { ContactsPage } from "../features/contacts/ContactsPage";
 import { ContactPage } from "../features/contacts/ContactPage";
 import { NewContactPage } from "../features/contacts/NewContactPage";
+import { SignInPage } from "../features/auth/SignInPage";
+import { SetupPage } from "../features/auth/SetupPage";
+import { RolesPage } from "../features/organization/RolesPage";
 
 export const routes: RouteObject[] = [
+    { index: true, element: <Navigate to="/setup" replace /> },
+    { path: "setup", element: <SetupPage /> },
+    { path: "sign-in", element: <SignInPage /> },
     {
         element: <AppShell />,
         children: [
-            { index: true, element: <Navigate to="/projects" replace /> },
             { path: "projects", element: <ProjectsPage /> },
             { path: "projects/new", element: <NewProjectPage /> },
             { path: "projects/:id", element: <ProjectDetailPage /> },
@@ -33,6 +38,7 @@ export const routes: RouteObject[] = [
             { path: "invoices", element: <InvoicesPage /> },
             { path: "invoices/:id", element: <InvoicePage /> },
             { path: "settings/issuer", element: <IssuerSettingsPage /> },
+            { path: "settings/roles", element: <RolesPage /> },
             { path: "*", element: <NotFoundPage /> },
         ],
     },

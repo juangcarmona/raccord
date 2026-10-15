@@ -56,6 +56,8 @@ public static class E2ETraits
         public const string Invoicing = "invoicing";
         public const string Equipment = "equipment";
         public const string Documents = "documents";
+        public const string Integrations = "integrations";
+        public const string Workspace = "workspace";
     }
 
     public static class Depths

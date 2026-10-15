@@ -6,7 +6,15 @@ const generated = /(^|[\\/])\.(agents|claude)[\\/]/;
 const quote = (file) => JSON.stringify(file);
 
 export default {
-    "*.{ts,tsx}": ["eslint --fix --max-warnings=0", "prettier --write"],
+    "*.{ts,tsx,mjs}": (files) => {
+        const formatted = files.filter((file) => !file.endsWith("src/shared/api/schema.d.ts") && !generated.test(file));
+        return formatted.length
+            ? [
+                  `eslint --fix --max-warnings=0 ${formatted.map(quote).join(" ")}`,
+                  `prettier --write ${formatted.map(quote).join(" ")}`,
+              ]
+            : [];
+    },
     "*.{json,yml,yaml,css}": (files) => {
         const formatted = files.filter((file) => !generated.test(file));
         return formatted.length ? [`prettier --write ${formatted.map(quote).join(" ")}`] : [];

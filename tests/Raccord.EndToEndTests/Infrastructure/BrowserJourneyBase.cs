@@ -34,10 +34,17 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             }
         );
         var page = await context.NewPageAsync();
+        page.SetDefaultTimeout(30_000);
+        page.SetDefaultNavigationTimeout(30_000);
 
         try
         {
-            await journey(page);
+            await page.GotoAsync("/sign-in");
+            await page.GetByLabel("Email").FillAsync("admin@example.com");
+            await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+            await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+            await page.WaitForURLAsync(url => url.EndsWith("/projects", StringComparison.Ordinal));
+            await journey(page).WaitAsync(TimeSpan.FromMinutes(2));
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
         }
         catch
@@ -47,7 +54,14 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         }
         finally
         {
-            await context.CloseAsync();
+            try
+            {
+                await context.CloseAsync().WaitAsync(TimeSpan.FromSeconds(30));
+            }
+            catch (TimeoutException)
+            {
+                Console.Error.WriteLine($"[e2e] {artifactName} browser context disposal timed out");
+            }
         }
     }
 
@@ -71,6 +85,33 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         await page.WaitForURLAsync(url => url.EndsWith("/customers", StringComparison.Ordinal));
         await page.GetByText($"Productora E2E {RunStamp}").First.WaitForAsync();
+    }
+
+    protected static async Task EnsureInvoiceIssuerAsync(IPage page)
+    {
+        var response = await page.APIRequest.PutAsync(
+            "/api/organization/issuer",
+            new APIRequestContextOptions
+            {
+                DataObject = new
+                {
+                    legalName = "Raccord E2E S.L.",
+                    taxId = "B00000000",
+                    address = new
+                    {
+                        street = "Calle de pruebas 1",
+                        postalCode = "28001",
+                        city = "Madrid",
+                        province = "Madrid",
+                        countryCode = "ES",
+                    },
+                },
+            }
+        );
+        if (!response.Ok)
+        {
+            throw new InvalidOperationException(await response.TextAsync());
+        }
     }
 
     /// <summary>

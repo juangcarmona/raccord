@@ -31,6 +31,7 @@ builder
         options.Password.RequiredLength = 12;
     })
     .AddSignInManager()
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<RaccordDbContext>();
 if (requireAuthentication)
 {
@@ -122,6 +123,8 @@ app.UseAuthorization();
 app.MapOpenApi();
 app.MapDefaultEndpoints();
 app.MapRaccordAuthentication();
+app.MapRaccordSetup();
+app.MapRaccordRoles();
 app.MapRaccordApi(requireAuthentication);
 
 // Client-side routes fall back to the SPA; paths that look like files (assets) and server prefixes never do.

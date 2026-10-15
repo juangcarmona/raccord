@@ -59,4 +59,28 @@ public sealed class EquipmentDetailsTests(PostgresContainer postgres) : IAsyncLi
 
         withImage!.ImageKey.ShouldBe($"equipment/{item.Id:N}/camera.png");
     }
+
+    [Fact]
+    public async Task Equipment_Should_Generate_A_Printable_Label()
+    {
+        var item = await (
+            await client.PostAsJsonAsync(
+                "/api/equipment/items",
+                new CreateEquipmentItemRequest(
+                    "LABEL-01",
+                    "Label camera",
+                    EquipmentItemType.Rental,
+                    1
+                )
+            )
+        )
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<EquipmentItemSnapshot>();
+
+        var response = await client.GetAsync($"/api/equipment/items/{item!.Id}/label");
+
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        response.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
+        (await response.Content.ReadAsByteArrayAsync()).Take(8).ShouldBe("%PDF-1.7"u8.ToArray());
+    }
 }

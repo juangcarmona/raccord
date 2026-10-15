@@ -13,6 +13,7 @@ using Raccord.Contracts.Documents;
 using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
+using Raccord.Infrastructure.Documents;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Equipment.Contracts;
@@ -174,6 +175,21 @@ internal static class Endpoints
             "/items/{id:guid}/stock-movements",
             async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListStockMovementsAsync(id, ct))
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/label",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                EquipmentCatalog catalog,
+                CancellationToken ct
+            ) =>
+                await catalog.GetAsync(id, ct) is { } item
+                    ? TypedResults.File(
+                        EquipmentLabelRenderer.Render(item),
+                        "application/pdf",
+                        $"{item.Code}-label.pdf"
+                    )
+                    : TypedResults.NotFound()
         );
         equipment.MapPost(
             "/items/{id:guid}/stock-movements",

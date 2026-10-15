@@ -998,6 +998,29 @@
         }
       }
     },
+    "/api/equipment/items/{id}/label": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/equipment/items/{id}/stock-correction": {
       "post": {
         "tags": [

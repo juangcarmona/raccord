@@ -9,9 +9,7 @@ internal static class AuthenticationEndpoints
     public static IEndpointRouteBuilder MapRaccordAuthentication(this IEndpointRouteBuilder app)
     {
         var auth = app.MapGroup("/api/auth").WithTags("Authentication");
-        auth.MapPost("/sign-in", SignInAsync)
-            .AllowAnonymous()
-            .Produces<UnauthorizedHttpResult>(401);
+        auth.MapPost("/sign-in", SignInAsync).AllowAnonymous();
         auth.MapPost("/sign-out", SignOutAsync);
         auth.MapGet(
             "/me",

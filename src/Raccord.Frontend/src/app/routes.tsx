@@ -6,6 +6,7 @@ import { DraftsPage } from "../features/invoicing/DraftsPage";
 import { InvoicePage } from "../features/invoicing/InvoicePage";
 import { InvoicesPage } from "../features/invoicing/InvoicesPage";
 import { IssuerSettingsPage } from "../features/organization/IssuerSettingsPage";
+import { RolesPage } from "../features/organization/RolesPage";
 import { NewProjectPage } from "../features/projects/NewProjectPage";
 import { ProjectDetailPage } from "../features/projects/ProjectDetailPage";
 import { ProjectsPage } from "../features/projects/ProjectsPage";
@@ -33,6 +34,7 @@ export const routes: RouteObject[] = [
                     { path: "invoices", element: <InvoicesPage /> },
                     { path: "invoices/:id", element: <InvoicePage /> },
                     { path: "settings/issuer", element: <IssuerSettingsPage /> },
+                    { path: "settings/roles", element: <RolesPage /> },
                     { path: "*", element: <NotFoundPage /> },
                 ],
             },

@@ -14,6 +14,7 @@ using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
+using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;
 
@@ -38,6 +39,7 @@ internal static class Endpoints
         MapProjects(api);
         MapCrew(api);
         MapInvoicing(api);
+        IntegrationEndpoints.MapIntegrations(api);
         api.MapGet(
                 "/audit-events",
                 async (Guid entityId, AuditLog audit, CancellationToken ct) =>
@@ -218,7 +220,8 @@ internal static class Endpoints
                 async (OrganizationSettings settings, CancellationToken ct) =>
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
-            .WithTags("Organization");
+            .WithTags("Organization")
+            .RequirePermission(PermissionCatalog.OrganizationRead);
     }
 
 #pragma warning disable MA0051
@@ -1268,7 +1271,9 @@ internal static class Endpoints
 #pragma warning disable MA0051
     private static void MapInvoices(RouteGroupBuilder api)
     {
-        var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
+        var invoices = api.MapGroup("/invoices")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
         invoices.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>

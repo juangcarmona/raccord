@@ -52,6 +52,12 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
                 line.Property(packing => packing.EquipmentId).IsRequired();
                 line.Property(packing => packing.Quantity).IsRequired();
                 line.Property(packing => packing.Role).HasConversion<string>().HasMaxLength(20);
+                line.Property(packing => packing.Disposition)
+                    .HasConversion<string>()
+                    .HasMaxLength(20);
+                line.Property(packing => packing.ExceptionKind).HasMaxLength(50);
+                line.Property(packing => packing.ExceptionDescription).HasMaxLength(500);
+                line.Property(packing => packing.ExceptionReportedBy).HasMaxLength(200);
                 line.Property(packing => packing.PackedBy).HasMaxLength(200);
                 line.Property(packing => packing.BookedOutBy).HasMaxLength(200);
                 line.Property(packing => packing.ReceivedBy).HasMaxLength(200);

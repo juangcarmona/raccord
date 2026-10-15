@@ -1324,9 +1324,34 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("character varying(200)")
                                 .HasColumnName("booked_out_by");
 
+                            b1.Property<string>("Disposition")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("disposition");
+
                             b1.Property<Guid>("EquipmentId")
                                 .HasColumnType("uuid")
                                 .HasColumnName("equipment_id");
+
+                            b1.Property<string>("ExceptionDescription")
+                                .HasMaxLength(500)
+                                .HasColumnType("character varying(500)")
+                                .HasColumnName("exception_description");
+
+                            b1.Property<string>("ExceptionKind")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
+                                .HasColumnName("exception_kind");
+
+                            b1.Property<DateTimeOffset?>("ExceptionReportedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("exception_reported_at");
+
+                            b1.Property<string>("ExceptionReportedBy")
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("exception_reported_by");
 
                             b1.Property<bool>("IsBookedOut")
                                 .HasColumnType("boolean")

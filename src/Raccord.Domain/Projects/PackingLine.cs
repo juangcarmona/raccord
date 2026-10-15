@@ -31,6 +31,11 @@ public sealed class PackingLine
     public Guid EquipmentId { get; private set; }
     public int Quantity { get; private set; }
     public PackingLineRole Role { get; private set; }
+    public PackingLineDisposition Disposition { get; private set; }
+    public string? ExceptionKind { get; private set; }
+    public string? ExceptionDescription { get; private set; }
+    public string? ExceptionReportedBy { get; private set; }
+    public DateTimeOffset? ExceptionReportedAt { get; private set; }
     public bool IsPacked { get; private set; }
     public bool IsBookedOut { get; private set; }
     public bool IsReceived { get; private set; }
@@ -55,6 +60,40 @@ public sealed class PackingLine
             );
         Quantity = quantity;
         Role = role;
+    }
+
+    public void RecordException(string kind, string description, string actor, DateTimeOffset at)
+    {
+        if (string.IsNullOrWhiteSpace(kind) || string.IsNullOrWhiteSpace(description))
+            throw new BusinessRuleViolationException(
+                "projects.exception-details-required",
+                "Exception kind and description are required."
+            );
+        if (string.IsNullOrWhiteSpace(actor))
+            throw new BusinessRuleViolationException(
+                "projects.exception-actor-required",
+                "The exception reporter is required."
+            );
+        if (ExceptionKind is not null)
+            throw new BusinessRuleViolationException(
+                "projects.exception-already-recorded",
+                "This line already has an exception."
+            );
+        ExceptionKind = kind.Trim().ToLowerInvariant();
+        ExceptionDescription = description.Trim();
+        ExceptionReportedBy = actor.Trim();
+        ExceptionReportedAt = at;
+    }
+
+    public void SetDisposition(PackingLineDisposition disposition, string actor)
+    {
+        EnsureActor(actor, "projects.disposition-actor-required");
+        if (!IsBookedOut || IsReceived)
+            throw new BusinessRuleViolationException(
+                "projects.disposition-state-invalid",
+                "A disposition can only be reviewed after booking out and before receipt."
+            );
+        Disposition = disposition;
     }
 
     public void Pack(string actor, DateTimeOffset at)

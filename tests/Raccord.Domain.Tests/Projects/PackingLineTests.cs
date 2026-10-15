@@ -61,4 +61,40 @@ public sealed class PackingLineTests
             .Throw<BusinessRuleViolationException>(() => line.Adjust(2, PackingLineRole.Temporary))
             .Code.ShouldBe("projects.packing-adjustment-locked");
     }
+
+    [Fact]
+    public void A_received_line_Should_record_one_exception_with_trace_metadata()
+    {
+        var line = PackingLine.Create(Guid.CreateVersion7(), 1);
+        line.Pack("warehouse", DateTimeOffset.UtcNow);
+        line.BookOut("warehouse", DateTimeOffset.UtcNow);
+        line.Receive("warehouse", DateTimeOffset.UtcNow);
+
+        line.RecordException(
+            "lost",
+            "Missing on return count",
+            "coordinator",
+            DateTimeOffset.UtcNow
+        );
+
+        line.ExceptionKind.ShouldBe("lost");
+        line.ExceptionReportedBy.ShouldBe("coordinator");
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                line.RecordException("found", "Found later", "coordinator", DateTimeOffset.UtcNow)
+            )
+            .Code.ShouldBe("projects.exception-already-recorded");
+    }
+
+    [Fact]
+    public void A_booked_out_line_Should_record_cross_docking_disposition()
+    {
+        var line = PackingLine.Create(Guid.CreateVersion7(), 1);
+        line.Pack("warehouse", DateTimeOffset.UtcNow);
+        line.BookOut("warehouse", DateTimeOffset.UtcNow);
+
+        line.SetDisposition(PackingLineDisposition.CrossDocked, "coordinator");
+
+        line.Disposition.ShouldBe(PackingLineDisposition.CrossDocked);
+    }
 }

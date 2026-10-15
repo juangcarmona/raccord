@@ -606,6 +606,110 @@
         }
       }
     },
+    "/api/projects/{id}/packing-lines/{lineId}/exceptions": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordPackingExceptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/packing-lines/{lineId}/disposition": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewPackingDispositionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackingLineResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/packing-lines/{lineId}/pack": {
       "post": {
         "tags": [
@@ -2558,12 +2662,17 @@
           "equipmentId",
           "quantity",
           "role",
+          "disposition",
           "isPacked",
           "isBookedOut",
           "isReceived",
           "packedBy",
           "bookedOutBy",
-          "receivedBy"
+          "receivedBy",
+          "exceptionKind",
+          "exceptionDescription",
+          "exceptionReportedBy",
+          "exceptionReportedAt"
         ],
         "type": "object",
         "properties": {
@@ -2580,6 +2689,9 @@
             "format": "int32"
           },
           "role": {
+            "type": "string"
+          },
+          "disposition": {
             "type": "string"
           },
           "isPacked": {
@@ -2608,6 +2720,31 @@
               "null",
               "string"
             ]
+          },
+          "exceptionKind": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionReportedBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exceptionReportedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -3242,6 +3379,25 @@
         },
         "description": "Records incoming project work."
       },
+      "RecordPackingExceptionRequest": {
+        "required": [
+          "kind",
+          "description",
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          }
+        }
+      },
       "RegisterCustomerRequest": {
         "required": [
           "legalName",
@@ -3282,6 +3438,21 @@
           }
         },
         "description": "Registers a customer."
+      },
+      "ReviewPackingDispositionRequest": {
+        "required": [
+          "disposition",
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "disposition": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          }
+        }
       },
       "ShiftProjectScheduleRequest": {
         "required": [

@@ -150,6 +150,10 @@ public sealed record PlanEquipmentRequest(Guid EquipmentId, int Quantity, string
 
 public sealed record AdjustPackingLineRequest(int Quantity, string Role);
 
+public sealed record RecordPackingExceptionRequest(string Kind, string Description, string Actor);
+
+public sealed record ReviewPackingDispositionRequest(string Disposition, string Actor);
+
 public sealed record PlannedEquipmentResponse(Guid EquipmentId, int Quantity);
 
 public sealed record PackingLineResponse(
@@ -157,12 +161,17 @@ public sealed record PackingLineResponse(
     Guid EquipmentId,
     int Quantity,
     string Role,
+    string Disposition,
     bool IsPacked,
     bool IsBookedOut,
     bool IsReceived,
     string? PackedBy,
     string? BookedOutBy,
-    string? ReceivedBy
+    string? ReceivedBy,
+    string? ExceptionKind,
+    string? ExceptionDescription,
+    string? ExceptionReportedBy,
+    DateTimeOffset? ExceptionReportedAt
 );
 
 public sealed record PackLineRequest(string Actor);

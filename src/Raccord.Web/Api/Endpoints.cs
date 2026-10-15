@@ -213,6 +213,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         MapPackingAdjustments(projects);
+        MapPackingExceptions(projects);
         projects.MapPost(
             "/{id:guid}/packing-lines/{lineId:guid}/pack",
             async Task<Results<Ok<PackingLineResponse>, NotFound>> (
@@ -266,6 +267,36 @@ internal static class Endpoints
                 CancellationToken ct
             ) =>
                 await workspace.AdjustPackingLineAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapPackingExceptions(RouteGroupBuilder projects)
+    {
+        projects.MapPost(
+            "/{id:guid}/packing-lines/{lineId:guid}/exceptions",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                RecordPackingExceptionRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.RecordExceptionAsync(id, lineId, request, ct) is { } line
+                    ? TypedResults.Ok(line)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/packing-lines/{lineId:guid}/disposition",
+            async Task<Results<Ok<PackingLineResponse>, NotFound>> (
+                Guid id,
+                Guid lineId,
+                ReviewPackingDispositionRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ReviewDispositionAsync(id, lineId, request, ct) is { } line
                     ? TypedResults.Ok(line)
                     : TypedResults.NotFound()
         );

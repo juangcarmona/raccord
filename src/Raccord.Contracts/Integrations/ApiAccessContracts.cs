@@ -5,9 +5,11 @@ public static class ApiAccessScopes
 {
     public const string ProjectsRead = "projects.read";
     public const string ProjectsWrite = "projects.write";
+    public const string InvoicesRead = "invoices.read";
+    public const string PaymentsWrite = "payments.write";
 
     public static readonly IReadOnlySet<string> All = new HashSet<string>(
-        [ProjectsRead, ProjectsWrite],
+        [ProjectsRead, ProjectsWrite, InvoicesRead, PaymentsWrite],
         StringComparer.Ordinal
     );
 }

@@ -247,3 +247,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A calendar subscription must remain useful to the individual without exposing the project workspace or leaving an unrevocable URL behind.
 - **Action:** Store only a hash of each feed token, derive the ICS response from the authenticated user's relevant schedule, and rotate or revoke access through the integration boundary.
 - **Check:** The ProductShape-cited journey downloads a private ICS feed, verifies the relevant event, proves an old token is rejected after rotation, and links hosted browser evidence.
+
+## 2026-10-15 · External providers fail closed
+
+- **Observation:** Registry and payment integrations cross an external boundary where an unavailable provider or duplicated callback must not create false business state.
+- **Action:** Return an empty registry result when no provider is configured, validate payment scope and payloads at the API edge, and enforce idempotency at persistence boundaries.
+- **Check:** ProductShape-cited journeys prove safe no-match behavior, scoped payment reporting, duplicate rejection, and hosted evidence for both integration paths.
+
+## 2026-10-15 · Payment reporting reuses legal invoice state
+
+- **Observation:** External payment notifications must not invent a second invoice or payment model.
+- **Action:** Gate invoice reads and payment writes with explicit API scopes and delegate recording to the existing invoicing workflow, preserving its idempotency and validation rules.
+- **Check:** The ProductShape-cited payment journey proves the scoped invoice read and payment path, with hosted screenshot and trace evidence.

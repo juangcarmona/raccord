@@ -118,6 +118,12 @@ Every completed FF loop must review this ledger, add new observations and action
 - Action: Keep payments append-only, reject overpayment before persistence, derive unpaid/partially-paid/paid from the aggregate, and model deposits with explicit not-paid/paid/returned transitions.
 - Check: Integration coverage settles an invoice through partial then full payment, while the Playwright journey exercises deposit configuration, receipt, return, and payment APIs with hosted evidence.
 
+## 2026-10-15 · Reminder history owns the next due date
+
+- Observation: Overdue status must reflect the latest reminder deadline and current outstanding balance, not a cached flag.
+- Action: Derive overdue invoices from issued totals, recorded payments and the latest reminder; keep each generated reminder append-only and auditable.
+- Check: Integration and browser journeys list an unpaid overdue invoice, create reminder one with a new deadline, and read the retained history before settlement.
+
 ## 2026-10-15 · Delivery journeys must click the product surface
 
 - **Observation:** The delivery stack had API-level document tests, but the invoice download control had no browser journey, so a green API check could still leave the user journey unverified.

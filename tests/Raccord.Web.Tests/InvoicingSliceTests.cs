@@ -97,6 +97,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
                 "invoice.issued",
                 "invoice.document.stored",
                 "invoice.payment-recorded",
+                "invoice.payment-reminder-generated",
                 "invoice.payment-recorded",
             ]);
         audit![0].Details["contentHash"].ShouldBe(invoice.ContentHash);
@@ -173,6 +174,22 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         partialSummary.TotalPaid.ShouldBe(500m);
         partialSummary.Outstanding.ShouldBe(1048.80m);
         partialSummary.Status.ShouldBe("partially-paid");
+
+        var newDueDate = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(30);
+        var reminder = await client.PostAsJsonAsync(
+            $"/api/invoices/{invoiceId}/reminders",
+            new CreateInvoiceReminderRequest(newDueDate, "friendly", "default")
+        );
+        reminder.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var reminderResponse = (
+            await reminder.Content.ReadFromJsonAsync<InvoiceReminderResponse>()
+        )!;
+        reminderResponse.Number.ShouldBe(1);
+        reminderResponse.DueDate.ShouldBe(newDueDate);
+        var history = await client.GetFromJsonAsync<List<InvoiceReminderResponse>>(
+            $"/api/invoices/{invoiceId}/reminders"
+        );
+        history!.Count.ShouldBe(1);
 
         var paid = await client.PostAsJsonAsync(
             $"/api/invoices/{invoiceId}/payments",

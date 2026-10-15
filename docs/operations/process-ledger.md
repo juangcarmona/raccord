@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-15 · Structured e-invoice export
+
+- Observation: An e-invoice is structured XML, not a PDF, and the immutable invoice snapshot already contains the values needed for a deterministic export.
+- Action: Keep UBL generation pure, require both party identifiers, record each successful export in the audit trail, and render the payload in the E2E evidence screenshot.
+- Check: Validate XML namespace, identifiers, line count and payable amount in the Playwright journey; keep the format explicit so unsupported protocols fail rather than being mislabeled.
+
 ## 2026-10-13 · Warehouse exception slice
 
 - Observation: Loss and damage are operational exceptions, not implicit stock or invoice mutations.

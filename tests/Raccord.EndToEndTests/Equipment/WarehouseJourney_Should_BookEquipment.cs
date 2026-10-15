@@ -8,9 +8,12 @@ using Xunit;
 namespace Raccord.EndToEndTests.Equipment;
 
 /// <summary>
-/// JRN-WHS-DISPATCH-EQUIPMENT / UC-WHS-ASSIGN-SCAN-CODES / UC-WHS-BOOK-MANUALLY:
+/// JRN-WHS-DISPATCH-EQUIPMENT / JRN-EQP-KEEP-STOCK-ACCURATE / UC-WHS-ASSIGN-SCAN-CODES / UC-WHS-BOOK-MANUALLY:
 /// Given an equipment item and project, when the warehouse records its packing transitions,
-/// then the same persisted line reaches packed, dispatched and received states.
+/// then the same persisted line reaches packed, dispatched and received states while planned
+/// movements and physical count corrections remain traceable.
+/// ProductShape: UC-EQP-SCHEDULE-STOCK-MOVEMENT, UC-EQP-COUNT-SELECTED-EQUIPMENT,
+/// UC-EQP-CORRECT-STOCK.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
@@ -127,11 +130,42 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         var projectId = Guid.Parse(new Uri(page.Url).Segments[^1]);
         var api = page.Context.APIRequest;
         var itemId = await CreateEquipmentAsync(api);
+        await AssertStockTrackingAsync(api, itemId);
         var lineId = await CreatePackingLineAsync(api, projectId, itemId);
 
         await RunPackingTransitionsAsync(api, projectId, lineId);
         await AssertReturnedAsync(api, projectId, itemId);
         await page.SetContentAsync("<h1>Warehouse equipment returned</h1>");
+    }
+
+    private static async Task AssertStockTrackingAsync(IAPIRequestContext api, Guid itemId)
+    {
+        var movement = await api.PostAsync(
+            $"/api/equipment/items/{itemId}/movements",
+            new()
+            {
+                DataObject = new
+                {
+                    direction = "inbound",
+                    quantity = 2,
+                    scheduledDate = "2026-11-01",
+                    reference = "E2E supplier delivery",
+                },
+            }
+        );
+        movement.Status.ShouldBe(201);
+        (await movement.JsonAsync())!.Value.GetProperty("status").GetString().ShouldBe("planned");
+
+        var count = await api.PostAsync(
+            $"/api/equipment/items/{itemId}/counts",
+            new() { DataObject = new { countedQuantity = 2, reason = "E2E physical count" } }
+        );
+        count.Status.ShouldBe(201);
+        (await count.JsonAsync())!.Value.GetProperty("difference").GetInt32().ShouldBe(1);
+
+        var history = await api.GetAsync($"/api/equipment/items/{itemId}/counts");
+        history.Status.ShouldBe(200);
+        (await history.TextAsync()).ShouldContain("E2E physical count");
     }
 
     private async Task<Guid> CreateEquipmentAsync(IAPIRequestContext api, string suffix = "CAM")

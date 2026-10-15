@@ -145,3 +145,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Accountant views can become contradictory if reports, ledgers and exports each persist their own totals.
 - **Action:** Derive the finance report and CSV ledger from immutable issued invoices, append-only payments and reminder deadlines; keep one shared period normalization rule.
 - **Check:** Integration and browser journeys must compare report totals, ledger entries and export headers for the same period, with successful hosted Playwright evidence linked from the PR.
+
+## 2026-10-15 · Physical stock corrections preserve booked equipment
+
+- **Observation:** A stock count can otherwise overwrite equipment already committed to a project and make the availability figure physically impossible.
+- **Action:** Reconcile counts against booked quantity, record every correction with a reason, and keep planned movements as append-only history.
+- **Check:** Domain, integration and browser coverage must exercise movement scheduling, count history, and the booked-quantity guard.

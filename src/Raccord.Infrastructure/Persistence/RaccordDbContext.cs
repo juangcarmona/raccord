@@ -52,6 +52,10 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<EquipmentItem> EquipmentItems => Set<EquipmentItem>();
 
+    internal DbSet<StockMovement> StockMovements => Set<StockMovement>();
+
+    internal DbSet<StockCount> StockCounts => Set<StockCount>();
+
     internal DbSet<ComplianceRecordRow> ComplianceRecords => Set<ComplianceRecordRow>();
 
     /// <inheritdoc />

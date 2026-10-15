@@ -547,6 +547,144 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipment/items/{id}/movements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockMovementResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ScheduleStockMovementRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockMovementResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/equipment/items/{id}/counts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockCountResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReconcileStockCountRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StockCountResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -3289,6 +3427,11 @@ export interface components {
             /** Format: uuid */
             teamId: null | string;
         };
+        ReconcileStockCountRequest: {
+            /** Format: int32 */
+            countedQuantity: number;
+            reason: string;
+        };
         /** @description Records money received against an issued invoice. */
         RecordInvoicePaymentRequest: {
             /** Format: date */
@@ -3317,6 +3460,14 @@ export interface components {
             disposition: string;
             actor: string;
         };
+        ScheduleStockMovementRequest: {
+            direction: string;
+            /** Format: int32 */
+            quantity: number;
+            /** Format: date */
+            scheduledDate: string;
+            reference: null | string;
+        };
         SetDepositStatusRequest: {
             status: components["schemas"]["DepositStatus"];
         };
@@ -3334,6 +3485,36 @@ export interface components {
             password: string;
             /** @default false */
             rememberMe: boolean;
+        };
+        StockCountResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            equipmentId: string;
+            /** Format: int32 */
+            countedQuantity: number;
+            /** Format: int32 */
+            previousQuantity: number;
+            /** Format: int32 */
+            difference: number;
+            reason: string;
+            /** Format: date-time */
+            countedAt: string;
+        };
+        StockMovementResponse: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            equipmentId: string;
+            direction: string;
+            /** Format: int32 */
+            quantity: number;
+            /** Format: date */
+            scheduledDate: string;
+            reference: null | string;
+            status: string;
+            /** Format: date-time */
+            createdAt: string;
         };
         UnauthorizedHttpResult: {
             /** Format: int32 */

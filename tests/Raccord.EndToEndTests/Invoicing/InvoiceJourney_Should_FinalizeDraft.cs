@@ -38,7 +38,7 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 var projectId = new Uri(page.Url).Segments[^1];
                 await SetDepositAsync(page, projectId);
 
-                await FinalizeDraftAsync(page);
+                await FinalizeDraftAsync(page, "2026-09-18");
                 var invoiceId = new Uri(page.Url).Segments[^1];
                 var payment = await page.APIRequest.PostAsync(
                     $"/api/invoices/{invoiceId}/payments",

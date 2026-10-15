@@ -143,7 +143,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     /// issued invoice page. The customer select nuance: finalize validation requires an invoiceable
     /// customer (tax id + address), which <see cref="CreateCustomerAsync"/> supplies.
     /// </summary>
-    protected static async Task FinalizeDraftAsync(IPage page)
+    protected static async Task FinalizeDraftAsync(IPage page, string? issueDate = null)
     {
         await page.GetByLabel("Select “Camera kit with lenses”").CheckAsync();
         await page.GetByRole(AriaRole.Button, new() { Name = "Create draft with 1 line(s)" })
@@ -152,7 +152,9 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         await page.GetByText("The draft is ready to be issued.").WaitForAsync();
 
         await page.GetByLabel("Issue date")
-            .FillAsync(DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            .FillAsync(
+                issueDate ?? DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+            );
         await page.GetByRole(AriaRole.Button, new() { Name = "Issue invoice" }).ClickAsync();
 
         await page.WaitForURLAsync(url => url.Contains("/invoices/", StringComparison.Ordinal));

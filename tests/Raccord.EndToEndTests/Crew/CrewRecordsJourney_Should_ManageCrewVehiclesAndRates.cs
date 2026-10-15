@@ -64,7 +64,7 @@ public sealed class CrewRecordsJourney_Should_ManageCrewVehiclesAndRates(Distrib
                         DataObject = new
                         {
                             name = $"E2E cost {RunStamp}",
-                            kind = "Cost",
+                            kind = 1,
                             bands = new[]
                             {
                                 new

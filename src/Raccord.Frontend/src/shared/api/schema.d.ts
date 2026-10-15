@@ -3387,6 +3387,304 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/crew/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCrewMemberRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/members/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateCrewMemberRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewMemberResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/vehicles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/vehicles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateVehicleRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VehicleResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/crew/rates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewRateResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCrewRateRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CrewRateResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -3629,6 +3927,23 @@ export interface components {
             /** @default false */
             isDefault: boolean;
         };
+        CreateCrewMemberRequest: {
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: null | string[];
+            /** @default true */
+            isPlannable: boolean;
+        };
+        CreateCrewRateRequest: {
+            name: string;
+            kind: components["schemas"]["CrewRateKind"];
+            bands: components["schemas"]["CrewRateBand"][];
+            /** @default false */
+            isDefault: boolean;
+        };
         CreateEquipmentItemRequest: {
             code: string;
             name: string;
@@ -3701,6 +4016,43 @@ export interface components {
             operationDate: null | string;
             lines: components["schemas"]["StandaloneInvoiceLineRequest"][];
             seriesCode: null | string;
+        };
+        CreateVehicleRequest: {
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: null | string[];
+            /** @default true */
+            isShownInPlanning: boolean;
+        };
+        CrewMemberResponse: {
+            /** Format: uuid */
+            id: string;
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: string[];
+            isPlannable: boolean;
+        };
+        CrewRateBand: {
+            /** Format: double */
+            fromHour: number;
+            /** Format: double */
+            fixedAmount: number;
+            /** Format: double */
+            hourlyAmount: number;
+        };
+        CrewRateKind: number;
+        CrewRateResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            kind: components["schemas"]["CrewRateKind"];
+            bands: components["schemas"]["CrewRateBand"][];
+            isDefault: boolean;
         };
         /** @description A customer. */
         CustomerResponse: {
@@ -4581,6 +4933,15 @@ export interface components {
             /** @description Contact e-mail. */
             email: null | string;
         };
+        UpdateCrewMemberRequest: {
+            firstName: string;
+            role: string;
+            email: string;
+            lastName: null | string;
+            folder: null | string;
+            skills: null | string[];
+            isPlannable: boolean;
+        };
         UpdateEquipmentItemDetailsRequest: {
             details: null | string;
             accessoryIds: null | string[];
@@ -4610,6 +4971,14 @@ export interface components {
         UpdateQuoteReviewRequest: {
             status: string;
         };
+        UpdateVehicleRequest: {
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: null | string[];
+            isShownInPlanning: boolean;
+        };
         /** @description A reason an operation cannot proceed, identified by a stable code the UI can localize. */
         ValidationIssueResponse: {
             /** @description Stable rule code. */
@@ -4638,6 +5007,16 @@ export interface components {
             vatRegime: string;
             /** @description VAT exemption cause, when applicable. */
             exemptionCause: null | string;
+        };
+        VehicleResponse: {
+            /** Format: uuid */
+            id: string;
+            registrationNumber: string;
+            /** Format: int32 */
+            seats: number;
+            folder: null | string;
+            tags: string[];
+            isShownInPlanning: boolean;
         };
     };
     responses: never;

@@ -243,3 +243,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - Observation: Reporting must read finalized invoice representations and append-only payment history; drafts and previews must never enter accountant output.
 - Action: Keep the first reporting slice live and query-based, expose a date-bounded summary, and emit a deterministic UTF-8 CSV containing invoice, VAT, and payment rows.
 - Check: The invoice journey verifies the summary and export include the finalized invoice and payment while frontend contract drift remains covered by generated OpenAPI checks.
+
+## 2026-10-15 · Crew records, vehicles and rates
+
+- Observation: The crew MVP spans three related registries, but each has a small independent invariant: required crew identity, unique vehicle registration with a planning flag, and ordered non-negative rate bands with one default per kind.
+- Action: Keep the first slice as one focused catalog with explicit contracts, unique database constraints, and a single Playwright journey that creates and reloads all three records.
+- Check: The hosted E2E run must retain the journey trace and success screenshot; local builds must include the generated migration and OpenAPI contract checks.

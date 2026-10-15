@@ -87,15 +87,13 @@ public static class DependencyInjection
         services.AddComplianceSubmission();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
-        services.AddScoped<LetterheadCatalog>();
-        services.AddScoped<CommunicationCatalog>();
+        RegisterDocumentAndCrewCatalogs(services);
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);
         services.AddSingleton<IClock>(provider => new SystemClock(
             provider.GetRequiredService<TimeProvider>(),
             TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)
         ));
-
         var storage =
             builder.Configuration.GetSection(StorageOptions.Section).Get<StorageOptions>()
             ?? new StorageOptions();
@@ -106,5 +104,12 @@ public static class DependencyInjection
         services.AddDocumentStorage(storage);
 
         return builder;
+    }
+
+    private static void RegisterDocumentAndCrewCatalogs(IServiceCollection services)
+    {
+        services.AddScoped<LetterheadCatalog>();
+        services.AddScoped<CommunicationCatalog>();
+        services.AddScoped<CrewCatalog>();
     }
 }

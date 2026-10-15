@@ -11,7 +11,8 @@ namespace Raccord.EndToEndTests.Invoicing;
 /// asserts the numbering and immutability the domain guarantees. This is the deepest smoke
 /// journey; it exists so that "an invoice can be issued from the browser" is always true.
 /// ProductShape: JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE,
-/// UC-FIN-CONFIGURE-INVOICE-MOMENTS, UC-FIN-WORK-INVOICING-QUEUE.
+/// UC-FIN-CONFIGURE-INVOICE-MOMENTS, UC-FIN-WORK-INVOICING-QUEUE,
+/// UC-FIN-RECORD-PAYMENT, UC-FIN-MANAGE-REFUNDABLE-DEPOSIT.
 /// </summary>
 [Collection(E2ECollection.Name)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
@@ -34,8 +35,24 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 );
                 queue.Ok.ShouldBeTrue();
                 (await queue.TextAsync()).ShouldContain($"Promo E2E {RunStamp}");
+                var projectId = new Uri(page.Url).Segments[^1];
+                await SetDepositAsync(page, projectId);
 
                 await FinalizeDraftAsync(page);
+                var invoiceId = new Uri(page.Url).Segments[^1];
+                var payment = await page.APIRequest.PostAsync(
+                    $"/api/invoices/{invoiceId}/payments",
+                    new APIRequestContextOptions
+                    {
+                        Data =
+                            "{\"date\":\"2026-09-18\",\"method\":\"bank-transfer\",\"amount\":100,\"description\":\"E2E payment\"}",
+                        Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                        {
+                            ["content-type"] = "application/json",
+                        },
+                    }
+                );
+                payment.Status.ShouldBe(201);
 
                 // The invoice number comes from the domain's series sequence; asserting its presence
                 // (not exact digits — journeys share one database within a run) proves the final
@@ -46,5 +63,28 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
                 number.TrimStart('F').ShouldNotBeNullOrEmpty();
             }
         );
+    }
+
+    private static async Task SetDepositAsync(IPage page, string projectId)
+    {
+        var headers = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["content-type"] = "application/json",
+        };
+        var configure = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit",
+            new APIRequestContextOptions { Data = "{\"amount\":500}", Headers = headers }
+        );
+        configure.Ok.ShouldBeTrue();
+        var paid = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new APIRequestContextOptions { Data = "{\"status\":1}", Headers = headers }
+        );
+        paid.Ok.ShouldBeTrue();
+        var returned = await page.APIRequest.PutAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new APIRequestContextOptions { Data = "{\"status\":2}", Headers = headers }
+        );
+        returned.Ok.ShouldBeTrue();
     }
 }

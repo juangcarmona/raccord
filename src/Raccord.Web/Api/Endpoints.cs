@@ -150,6 +150,7 @@ internal static class Endpoints
         );
     }
 
+#pragma warning disable MA0051
     private static void MapProjects(RouteGroupBuilder api)
     {
         var projects = api.MapGroup("/projects").WithTags("Projects");
@@ -193,6 +194,30 @@ internal static class Endpoints
             ) =>
                 await workspace.AddBillableLineAsync(id, request, ct) is { } line
                     ? TypedResults.Created($"/api/projects/{id}", line)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/deposit",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                SetRefundableDepositRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.SetDepositAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/deposit/status",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                SetDepositStatusRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.SetDepositStatusAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
                     : TypedResults.NotFound()
         );
         MapPackingLines(projects);
@@ -254,6 +279,7 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
     }
+#pragma warning restore MA0051
 
     private static void MapPackingAdjustments(RouteGroupBuilder projects)
     {
@@ -610,6 +636,29 @@ internal static class Endpoints
             ) =>
                 await invoicing.GetInvoiceAsync(id, ct) is { } invoice
                     ? TypedResults.Ok(invoice)
+                    : TypedResults.NotFound()
+        );
+        invoices.MapGet(
+            "/{id:guid}/payments",
+            async Task<Results<Ok<InvoicePaymentSummaryResponse>, NotFound>> (
+                Guid id,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ListPaymentsAsync(id, ct) is { } payments
+                    ? TypedResults.Ok(payments)
+                    : TypedResults.NotFound()
+        );
+        invoices.MapPost(
+            "/{id:guid}/payments",
+            async Task<Results<Created<InvoicePaymentSummaryResponse>, NotFound>> (
+                Guid id,
+                RecordInvoicePaymentRequest request,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.RecordPaymentAsync(id, request, ct) is { } payments
+                    ? TypedResults.Created($"/api/invoices/{id}/payments", payments)
                     : TypedResults.NotFound()
         );
         invoices.MapGet(

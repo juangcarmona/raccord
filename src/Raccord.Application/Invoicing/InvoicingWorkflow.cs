@@ -23,6 +23,7 @@ namespace Raccord.Modules.Invoicing;
 public sealed class InvoicingWorkflow(
     IInvoiceDraftRepository drafts,
     IIssuedInvoiceRepository invoices,
+    IInvoicePaymentRepository payments,
     IInvoiceSeriesCatalog series,
     IInvoiceNumberSequenceRepository sequences,
     IBillableWork projects,
@@ -315,6 +316,58 @@ public sealed class InvoicingWorkflow(
         return record?.Invoice.ToResponse(record.ContentHash);
     }
 
+    /// <summary>Records a validated payment and recalculates the outstanding balance.</summary>
+    public async Task<InvoicePaymentSummaryResponse?> RecordPaymentAsync(
+        Guid invoiceId,
+        RecordInvoicePaymentRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var record = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (record is null)
+            return null;
+        var existing = await payments.ListAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        var outstanding =
+            record.Invoice.Totals.Total.Amount - existing.Sum(payment => payment.Amount);
+        if (request.Amount > outstanding)
+            throw new BusinessRuleViolationException(
+                "payment.exceeds-outstanding",
+                "The payment cannot exceed the invoice outstanding amount."
+            );
+        var payment = InvoicePayment.Create(
+            invoiceId,
+            request.Date,
+            request.Method,
+            request.Amount,
+            request.Description,
+            clock.UtcNow
+        );
+        payments.Add(payment);
+        Record(
+            "invoice.payment-recorded",
+            InvoiceEntity,
+            invoiceId,
+            ("paymentId", payment.Id.ToString()),
+            ("amount", Text(payment.Amount))
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return DescribePayments([.. existing, payment], record.Invoice.Totals.Total.Amount);
+    }
+
+    /// <summary>Reads payment history and the derived payment status.</summary>
+    public async Task<InvoicePaymentSummaryResponse?> ListPaymentsAsync(
+        Guid invoiceId,
+        CancellationToken cancellationToken
+    )
+    {
+        var record = await invoices.FindAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        if (record is null)
+            return null;
+        var existing = await payments.ListAsync(invoiceId, cancellationToken).ConfigureAwait(false);
+        return DescribePayments(existing, record.Invoice.Totals.Total.Amount);
+    }
+
     /// <summary>Returns the invoice document, regenerating and storing it from the issued representation when missing.</summary>
     public async Task<InvoiceDocument?> GetDocumentAsync(
         Guid invoiceId,
@@ -450,6 +503,32 @@ public sealed class InvoicingWorkflow(
             "projects.not-found",
             $"Project '{projectId}' does not exist."
         );
+
+    private static InvoicePaymentSummaryResponse DescribePayments(
+        IReadOnlyList<InvoicePayment> payments,
+        decimal invoiceTotal
+    )
+    {
+        var totalPaid = payments.Sum(payment => payment.Amount);
+        var outstanding = invoiceTotal - totalPaid;
+        return new(
+            [
+                .. payments.Select(payment => new InvoicePaymentResponse(
+                    payment.Id,
+                    payment.Date,
+                    payment.Method,
+                    payment.Amount,
+                    payment.Description,
+                    payment.RecordedAt
+                )),
+            ],
+            totalPaid,
+            outstanding,
+            outstanding == 0m ? "paid"
+                : totalPaid == 0m ? "unpaid"
+                : "partially-paid"
+        );
+    }
 
     private void Record(
         string action,

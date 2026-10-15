@@ -56,6 +56,40 @@ public sealed class Project
     /// <summary>Automatic completion percentage based on task statuses.</summary>
     public decimal ProgressPercent { get; private set; }
 
+    /// <summary>Fixed refundable security deposit, when requested.</summary>
+    public decimal? RefundableDepositAmount { get; private set; }
+
+    /// <summary>Current refundable deposit lifecycle status.</summary>
+    public DepositStatus DepositStatus { get; private set; }
+
+    /// <summary>Requests or changes the fixed refundable deposit.</summary>
+    public void SetRefundableDeposit(decimal amount)
+    {
+        if (amount <= 0m)
+            throw new BusinessRuleViolationException(
+                "deposit.amount-positive",
+                "A refundable deposit must be a positive fixed amount."
+            );
+        RefundableDepositAmount = amount;
+        DepositStatus = DepositStatus.NotPaid;
+    }
+
+    /// <summary>Moves a deposit through receipt and return.</summary>
+    public void SetDepositStatus(DepositStatus status)
+    {
+        if (RefundableDepositAmount is null)
+            throw new BusinessRuleViolationException(
+                "deposit.not-configured",
+                "Configure a deposit first."
+            );
+        if (status == DepositStatus.Returned && DepositStatus != DepositStatus.Paid)
+            throw new BusinessRuleViolationException(
+                "deposit.return-requires-paid",
+                "A deposit must be paid before it can be returned."
+            );
+        DepositStatus = status;
+    }
+
     /// <summary>Updates the automatic progress percentage.</summary>
     public void UpdateProgress(decimal progressPercent)
     {

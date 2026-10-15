@@ -10,6 +10,7 @@ namespace Raccord.Web.Tests;
 
 public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLifetime
 {
+#pragma warning disable MA0051
     private static readonly DateOnly IssueDate = new(2026, 5, 11);
     private static readonly AddBillableLineRequest Camera = new(
         "equipment",
@@ -48,6 +49,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);
 
+        await AssertDepositAsync(project.Id);
         await AssertQueueEntryAsync(project);
 
         var draft = await CreateDraftAsync(
@@ -78,6 +80,8 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         );
         reloaded!.ContentHash.ShouldBe(invoice.ContentHash);
 
+        await AssertPaymentsAsync(invoice.Id);
+
         var document = await client.GetAsync($"/api/invoices/{invoice.Id}/document");
         document.Content.Headers.ContentType?.MediaType.ShouldBe("application/pdf");
         System
@@ -87,7 +91,14 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         var audit = await client.GetFromJsonAsync<List<AuditEventResponse>>(
             $"/api/audit-events?entityId={invoice.Id}"
         );
-        audit!.Select(item => item.Action).ShouldBe(["invoice.issued", "invoice.document.stored"]);
+        audit!
+            .Select(item => item.Action)
+            .ShouldBe([
+                "invoice.issued",
+                "invoice.document.stored",
+                "invoice.payment-recorded",
+                "invoice.payment-recorded",
+            ]);
         audit![0].Details["contentHash"].ShouldBe(invoice.ContentHash);
 
         var billed = await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project.Id}");
@@ -111,6 +122,7 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
         return (await response.Content.ReadFromJsonAsync<InvoiceDraftResponse>())!;
     }
+#pragma warning restore MA0051
 
     private async Task AssertQueueEntryAsync(ProjectResponse project)
     {
@@ -124,5 +136,51 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
             && entry.UnbilledNetAmount == 1280m
             && entry.Overdue
         );
+    }
+
+    private async Task AssertDepositAsync(Guid projectId)
+    {
+        var configured = await client.PutAsJsonAsync(
+            $"/api/projects/{projectId}/deposit",
+            new SetRefundableDepositRequest(500m)
+        );
+        configured.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var paid = await client.PutAsJsonAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new SetDepositStatusRequest(DepositStatus.Paid)
+        );
+        paid.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var returned = await client.PutAsJsonAsync(
+            $"/api/projects/{projectId}/deposit/status",
+            new SetDepositStatusRequest(DepositStatus.Returned)
+        );
+        returned.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var response = (await returned.Content.ReadFromJsonAsync<ProjectResponse>())!;
+        response.RefundableDepositAmount.ShouldBe(500m);
+        response.DepositStatus.ShouldBe(DepositStatus.Returned);
+    }
+
+    private async Task AssertPaymentsAsync(Guid invoiceId)
+    {
+        var partial = await client.PostAsJsonAsync(
+            $"/api/invoices/{invoiceId}/payments",
+            new RecordInvoicePaymentRequest(IssueDate, "bank-transfer", 500m, "Deposit received")
+        );
+        partial.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var partialSummary = (
+            await partial.Content.ReadFromJsonAsync<InvoicePaymentSummaryResponse>()
+        )!;
+        partialSummary.TotalPaid.ShouldBe(500m);
+        partialSummary.Outstanding.ShouldBe(1048.80m);
+        partialSummary.Status.ShouldBe("partially-paid");
+
+        var paid = await client.PostAsJsonAsync(
+            $"/api/invoices/{invoiceId}/payments",
+            new RecordInvoicePaymentRequest(IssueDate, "card", 1048.80m, null)
+        );
+        paid.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var paidSummary = (await paid.Content.ReadFromJsonAsync<InvoicePaymentSummaryResponse>())!;
+        paidSummary.Outstanding.ShouldBe(0m);
+        paidSummary.Status.ShouldBe("paid");
     }
 }

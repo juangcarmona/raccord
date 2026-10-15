@@ -16,6 +16,32 @@ public sealed record CreateInvoiceDraftRequest(
 /// <param name="IssueDate">Legal issue date; today in the organization's time zone when omitted.</param>
 public sealed record FinalizeInvoiceDraftRequest(DateOnly? IssueDate);
 
+/// <summary>Records money received against an issued invoice.</summary>
+public sealed record RecordInvoicePaymentRequest(
+    DateOnly Date,
+    string Method,
+    decimal Amount,
+    string? Description
+);
+
+/// <summary>One payment received against an issued invoice.</summary>
+public sealed record InvoicePaymentResponse(
+    Guid Id,
+    DateOnly Date,
+    string Method,
+    decimal Amount,
+    string? Description,
+    DateTimeOffset RecordedAt
+);
+
+/// <summary>Payment history and outstanding balance for an issued invoice.</summary>
+public sealed record InvoicePaymentSummaryResponse(
+    IReadOnlyList<InvoicePaymentResponse> Payments,
+    decimal TotalPaid,
+    decimal Outstanding,
+    string Status
+);
+
 /// <summary>A line of a draft or issued invoice.</summary>
 /// <param name="Id">Draft line identifier; null on issued invoices.</param>
 /// <param name="Position">One-based order.</param>

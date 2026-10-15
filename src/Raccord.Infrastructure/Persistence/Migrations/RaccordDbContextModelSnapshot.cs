@@ -1035,6 +1035,98 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("communications", "documents");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewMemberRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("Folder")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("folder");
+
+                    b.Property<bool>("IsPlannable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_plannable");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("last_name");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("role");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("skills");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_members");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasDatabaseName("ix_crew_members_email");
+
+                    b.ToTable("crew_members", "crew");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewRateRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Bands")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("bands");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("kind");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("character varying(160)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_crew_rates");
+
+                    b.HasIndex("Name", "Kind")
+                        .IsUnique()
+                        .HasDatabaseName("ix_crew_rates_name_kind");
+
+                    b.ToTable("crew_rates", "crew");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1446,6 +1538,47 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("user_name_index");
 
                     b.ToTable("users", "workspace");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.VehicleRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Folder")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("folder");
+
+                    b.Property<bool>("IsShownInPlanning")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_shown_in_planning");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("registration_number");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("integer")
+                        .HasColumnName("seats");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("tags");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehicles");
+
+                    b.HasIndex("RegistrationNumber")
+                        .IsUnique()
+                        .HasDatabaseName("ix_vehicles_registration_number");
+
+                    b.ToTable("vehicles", "crew");
                 });
 
             modelBuilder.Entity("Raccord.Modules.Compliance.AuditEvent", b =>

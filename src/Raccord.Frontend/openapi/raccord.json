@@ -2488,6 +2488,248 @@
         }
       }
     },
+    "/api/crew/members": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CrewMemberResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCrewMemberRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewMemberResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/crew/members/{id}": {
+      "put": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCrewMemberRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewMemberResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/crew/vehicles": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVehicleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/crew/vehicles/{id}": {
+      "put": {
+        "tags": [
+          "Crew"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVehicleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/crew/rates": {
+      "get": {
+        "tags": [
+          "Crew"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CrewRateResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Crew"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCrewRateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrewRateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -3546,6 +3788,79 @@
           }
         }
       },
+      "CreateCrewMemberRequest": {
+        "required": [
+          "firstName",
+          "role",
+          "email",
+          "lastName",
+          "folder",
+          "skills"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "skills": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPlannable": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "CreateCrewRateRequest": {
+        "required": [
+          "name",
+          "kind",
+          "bands"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewRateKind"
+          },
+          "bands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrewRateBand"
+            }
+          },
+          "isDefault": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
       "CreateDocumentTemplateRequest": {
         "required": [
           "name",
@@ -3873,6 +4188,148 @@
           }
         },
         "description": "Creates an invoice draft that is not linked to a project."
+      },
+      "CreateVehicleRequest": {
+        "required": [
+          "registrationNumber",
+          "seats",
+          "folder",
+          "tags"
+        ],
+        "type": "object",
+        "properties": {
+          "registrationNumber": {
+            "type": "string"
+          },
+          "seats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "isShownInPlanning": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "CrewMemberResponse": {
+        "required": [
+          "id",
+          "firstName",
+          "role",
+          "email",
+          "lastName",
+          "folder",
+          "skills",
+          "isPlannable"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPlannable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CrewRateBand": {
+        "required": [
+          "fromHour",
+          "fixedAmount",
+          "hourlyAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "fromHour": {
+            "type": "number",
+            "format": "double"
+          },
+          "fixedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "hourlyAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "CrewRateKind": {
+        "type": "integer"
+      },
+      "CrewRateResponse": {
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "bands",
+          "isDefault"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CrewRateKind"
+          },
+          "bands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrewRateBand"
+            }
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
       },
       "CurrentUserResponse": {
         "required": [
@@ -6471,6 +6928,53 @@
           }
         }
       },
+      "UpdateCrewMemberRequest": {
+        "required": [
+          "firstName",
+          "role",
+          "email",
+          "lastName",
+          "folder",
+          "skills",
+          "isPlannable"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "skills": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPlannable": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdateDocumentTemplateRequest": {
         "required": [
           "name",
@@ -6542,6 +7046,43 @@
         },
         "description": "Sets the legal issuer details used on future invoices."
       },
+      "UpdateVehicleRequest": {
+        "required": [
+          "registrationNumber",
+          "seats",
+          "folder",
+          "tags",
+          "isShownInPlanning"
+        ],
+        "type": "object",
+        "properties": {
+          "registrationNumber": {
+            "type": "string"
+          },
+          "seats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "isShownInPlanning": {
+            "type": "boolean"
+          }
+        }
+      },
       "ValidationIssueResponse": {
         "required": [
           "code",
@@ -6585,6 +7126,45 @@
           }
         },
         "description": "Taxable base and VAT for one rate."
+      },
+      "VehicleResponse": {
+        "required": [
+          "id",
+          "registrationNumber",
+          "seats",
+          "folder",
+          "tags",
+          "isShownInPlanning"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "registrationNumber": {
+            "type": "string"
+          },
+          "seats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "folder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isShownInPlanning": {
+            "type": "boolean"
+          }
+        }
       }
     }
   },
@@ -6615,6 +7195,9 @@
     },
     {
       "name": "Project coordination"
+    },
+    {
+      "name": "Crew"
     },
     {
       "name": "Finance"

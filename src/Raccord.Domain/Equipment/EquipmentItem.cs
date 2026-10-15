@@ -80,6 +80,24 @@ public sealed class EquipmentItem
             );
         AvailableQuantity += quantity;
     }
+
+    public StockCount ReconcilePhysicalCount(
+        int countedQuantity,
+        string reason,
+        DateTimeOffset countedAt
+    )
+    {
+        var bookedQuantity = StockQuantity - AvailableQuantity;
+        if (countedQuantity < bookedQuantity)
+            throw new BusinessRuleViolationException(
+                "equipment.count-below-booked",
+                "A physical count cannot be lower than equipment already booked out."
+            );
+        var count = StockCount.Record(Id, countedQuantity, StockQuantity, reason, countedAt);
+        StockQuantity = countedQuantity;
+        AvailableQuantity = countedQuantity - bookedQuantity;
+        return count;
+    }
 }
 
 #pragma warning restore CS1591

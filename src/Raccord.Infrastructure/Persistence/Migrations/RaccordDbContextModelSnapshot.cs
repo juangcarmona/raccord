@@ -433,6 +433,93 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("equipment_items", "equipment");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Equipment.StockCount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CountedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("counted_at");
+
+                    b.Property<int>("CountedQuantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("counted_quantity");
+
+                    b.Property<int>("Difference")
+                        .HasColumnType("integer")
+                        .HasColumnName("difference");
+
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("equipment_id");
+
+                    b.Property<int>("PreviousQuantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("previous_quantity");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("reason");
+
+                    b.HasKey("Id")
+                        .HasName("pk_stock_counts");
+
+                    b.HasIndex("EquipmentId", "CountedAt")
+                        .HasDatabaseName("ix_stock_counts_equipment_id_counted_at");
+
+                    b.ToTable("stock_counts", "equipment");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Equipment.StockMovement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("Direction")
+                        .HasColumnType("integer")
+                        .HasColumnName("direction");
+
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("equipment_id");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.Property<string>("Reference")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("reference");
+
+                    b.Property<DateOnly>("ScheduledDate")
+                        .HasColumnType("date")
+                        .HasColumnName("scheduled_date");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id")
+                        .HasName("pk_stock_movements");
+
+                    b.HasIndex("EquipmentId", "ScheduledDate")
+                        .HasDatabaseName("ix_stock_movements_equipment_id_scheduled_date");
+
+                    b.ToTable("stock_movements", "equipment");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
                 {
                     b.Property<Guid>("Id")

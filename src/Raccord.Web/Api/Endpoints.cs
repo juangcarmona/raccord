@@ -11,6 +11,7 @@ using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
+using Raccord.SharedKernel.Abstractions;
 
 namespace Raccord.Web.Api;
 
@@ -147,6 +148,50 @@ internal static class Endpoints
                 await catalog.AssignScanCodeAsync(id, request, ct) is { } item
                     ? TypedResults.Ok(item)
                     : TypedResults.NotFound()
+        );
+        MapEquipmentStockActions(equipment);
+    }
+
+    private static void MapEquipmentStockActions(RouteGroupBuilder equipment)
+    {
+        equipment.MapPost(
+            "/items/{id:guid}/movements",
+            async Task<Results<Created<StockMovementResponse>, NotFound>> (
+                Guid id,
+                ScheduleStockMovementRequest request,
+                EquipmentCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                await catalog.ScheduleMovementAsync(id, request, clock.UtcNow, ct) is { } movement
+                    ? TypedResults.Created(
+                        $"/api/equipment/items/{id}/movements/{movement.Id}",
+                        movement
+                    )
+                    : TypedResults.NotFound()
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/movements",
+            async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListMovementsAsync(id, ct))
+        );
+        equipment.MapPost(
+            "/items/{id:guid}/counts",
+            async Task<Results<Created<StockCountResponse>, NotFound>> (
+                Guid id,
+                ReconcileStockCountRequest request,
+                EquipmentCatalog catalog,
+                IClock clock,
+                CancellationToken ct
+            ) =>
+                await catalog.ReconcileCountAsync(id, request, clock.UtcNow, ct) is { } count
+                    ? TypedResults.Created($"/api/equipment/items/{id}/counts/{count.Id}", count)
+                    : TypedResults.NotFound()
+        );
+        equipment.MapGet(
+            "/items/{id:guid}/counts",
+            async (Guid id, EquipmentCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListCountsAsync(id, ct))
         );
     }
 

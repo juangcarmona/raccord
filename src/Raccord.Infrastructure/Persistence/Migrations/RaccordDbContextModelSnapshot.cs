@@ -980,6 +980,44 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("project_types", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ApiAccessRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Scopes")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("scopes");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("token_hash");
+
+                    b.HasKey("Id")
+                        .HasName("pk_api_access_tokens");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique()
+                        .HasDatabaseName("ix_api_access_tokens_token_hash");
+
+                    b.ToTable("api_access_tokens", "workspace");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CommunicationRow", b =>
                 {
                     b.Property<Guid>("Id")

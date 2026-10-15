@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Http.HttpResults;
-using Raccord.Application.Projects;
 using Raccord.Contracts.Integrations;
 using Raccord.Contracts.Projects;
 using Raccord.Infrastructure.Persistence;
+using Raccord.Modules.Projects;
 using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;

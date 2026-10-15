@@ -35,15 +35,6 @@ export interface paths {
                         "application/json": components["schemas"]["CurrentUserResponse"];
                     };
                 };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UnauthorizedHttpResult"];
-                    };
-                };
             };
         };
         delete?: never;
@@ -4572,6 +4563,175 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/integrations/api-tokens": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ApiTokenResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["IssueApiTokenRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ApiTokenResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/integrations/api-tokens/{id}/regenerate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ApiTokenResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/integrations/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["IntegrationProjectResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateProjectRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["IntegrationProjectResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -4636,6 +4796,15 @@ export interface components {
             /** Format: int32 */
             quantity: number;
             role: string;
+        };
+        ApiTokenResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            scopes: string[];
+            /** Format: date-time */
+            createdAt: string;
+            token?: null | string;
         };
         ApproveCrewHoursRequest: {
             status: components["schemas"]["CrewHourStatus"];
@@ -5187,6 +5356,15 @@ export interface components {
             contentType: string;
             html: string;
         };
+        IntegrationProjectResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+        };
         InviteCrewRequest: {
             /** Format: uuid */
             crewMemberId: string;
@@ -5397,6 +5575,10 @@ export interface components {
             total: number;
             /** @description One entry per VAT rate. */
             vatBreakdown: components["schemas"]["VatGroupResponse"][];
+        };
+        IssueApiTokenRequest: {
+            name: string;
+            scopes: string[];
         };
         /** @description An issued, immutable invoice. */
         IssuedInvoiceResponse: {
@@ -6034,10 +6216,6 @@ export interface components {
             /** Format: uuid */
             recordId: null | string;
             actor: string;
-        };
-        UnauthorizedHttpResult: {
-            /** Format: int32 */
-            statusCode?: number;
         };
         UpdateCrewMemberRequest: {
             firstName: string;

@@ -29,6 +29,7 @@ internal static class IntegrationEndpoints
 
         integrations.MapGet("/projects", ListProjectsAsync).AllowAnonymous();
         integrations.MapPost("/projects", CreateProjectAsync).AllowAnonymous();
+        integrations.MapGet("/company-registry", SearchCompanyRegistryAsync);
     }
 
     public static void MapCalendarFeed(IEndpointRouteBuilder app)
@@ -209,4 +210,13 @@ internal static class IntegrationEndpoints
 
     private static string? GetToken(HttpContext context) =>
         context.Request.Headers["X-Api-Key"].FirstOrDefault();
+
+    private static async Task<
+        Ok<IReadOnlyList<CompanyRegistryMatchResponse>>
+    > SearchCompanyRegistryAsync(
+        string country,
+        string query,
+        CompanyRegistryCatalog registry,
+        CancellationToken ct
+    ) => TypedResults.Ok(await registry.SearchAsync(country, query, ct));
 }

@@ -119,7 +119,7 @@ export async function decideRun(baseUrl, sha, eventName, force) {
     const reports = Array.isArray(history.reports) ? history.reports : [];
     const latestSha = reports[0]?.sha ?? "";
     const runE2e =
-        eventName === "schedule"
+        eventName === "schedule" || eventName === "push"
             ? latestSha !== sha
             : eventName === "workflow_dispatch"
               ? force === "true"

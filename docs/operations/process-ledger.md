@@ -205,3 +205,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Plan-versus-actual reporting becomes misleading if recording actual work mutates the planned source or stores a cached variance.
 - **Action:** Store each time record immutably with planned and actual hours, then derive variance and project totals when reporting.
 - **Check:** Domain and browser journeys must retain both source values, aggregate multiple entries, and expose the derived variance with hosted evidence.
+
+## 2026-10-15 · Publish browser evidence after main advances
+
+- **Observation:** Waiting for the nightly schedule to publish browser evidence leaves a gap after a change has already passed PR E2E and merged.
+- **Action:** Run the public evidence journey on relevant pushes to `main`; use the tested commit SHA to let the nightly schedule skip work already evidenced for that revision.
+- **Check:** A new main SHA must trigger journey capture and site publication, while a duplicate push or nightly run for the same SHA must not repeat E2E.

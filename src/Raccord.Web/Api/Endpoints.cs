@@ -371,6 +371,7 @@ internal static class Endpoints
         var coordination = api.MapGroup("/project-coordination").WithTags("Project coordination");
         MapProjectCoordination(coordination);
         MapProjectContext(projects);
+        MapProjectTime(projects);
         projects.MapGet(
             "/",
             async (ProjectWorkspace workspace, CancellationToken ct) =>
@@ -436,6 +437,33 @@ internal static class Endpoints
                     : TypedResults.NotFound()
         );
         MapPackingLines(projects);
+    }
+
+    private static void MapProjectTime(RouteGroupBuilder projects)
+    {
+        projects.MapPost(
+            "/{id:guid}/time",
+            async Task<Results<Created<ProjectTimeEntryResponse>, NotFound>> (
+                Guid id,
+                RecordProjectTimeRequest request,
+                ProjectTimeTracking tracking,
+                CancellationToken ct
+            ) =>
+                await tracking.RecordAsync(id, request, ct) is { } entry
+                    ? TypedResults.Created($"/api/projects/{id}/time/{entry.Id}", entry)
+                    : TypedResults.NotFound()
+        );
+        projects.MapGet(
+            "/{id:guid}/time-report",
+            async Task<Results<Ok<ProjectTimeReportResponse>, NotFound>> (
+                Guid id,
+                ProjectTimeTracking tracking,
+                CancellationToken ct
+            ) =>
+                await tracking.GetReportAsync(id, ct) is { } report
+                    ? TypedResults.Ok(report)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapProjectContext(RouteGroupBuilder projects)

@@ -1359,6 +1359,82 @@
         }
       }
     },
+    "/api/projects/{id}/time": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordProjectTimeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimeEntryResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/time-report": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimeReportResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -5756,6 +5832,88 @@
         },
         "description": "Project team."
       },
+      "ProjectTimeEntryResponse": {
+        "required": [
+          "id",
+          "taskId",
+          "service",
+          "plannedHours",
+          "actualHours",
+          "varianceHours",
+          "actor",
+          "recordedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "taskId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "service": {
+            "type": "string"
+          },
+          "plannedHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "actualHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "varianceHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "recordedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProjectTimeReportResponse": {
+        "required": [
+          "projectId",
+          "plannedHours",
+          "actualHours",
+          "varianceHours",
+          "entries"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plannedHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "actualHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "varianceHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTimeEntryResponse"
+            }
+          }
+        }
+      },
       "ProjectTypeResponse": {
         "required": [
           "id",
@@ -5927,6 +6085,39 @@
           },
           "description": {
             "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          }
+        }
+      },
+      "RecordProjectTimeRequest": {
+        "required": [
+          "taskId",
+          "service",
+          "plannedHours",
+          "actualHours",
+          "actor"
+        ],
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "service": {
+            "type": "string"
+          },
+          "plannedHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "actualHours": {
+            "type": "number",
+            "format": "double"
           },
           "actor": {
             "type": "string"

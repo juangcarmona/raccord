@@ -1,10 +1,13 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Raccord.Infrastructure.Persistence;
 
 #nullable disable
 
 namespace Raccord.Infrastructure.Persistence.Migrations;
 
 /// <summary>Moves legacy workspace-owned tables into the workspace schema.</summary>
+[DbContext(typeof(RaccordDbContext))]
 [Migration("20261015090000_MoveLegacyWorkspaceTables")]
 public partial class MoveLegacyWorkspaceTables : Migration
 {

@@ -1297,6 +1297,24 @@ internal static class Endpoints
                     ? TypedResults.File(document.Content, document.ContentType, document.FileName)
                     : TypedResults.NotFound()
         );
+        MapInvoiceEInvoice(invoices);
+    }
+
+    private static void MapInvoiceEInvoice(RouteGroupBuilder invoices)
+    {
+        invoices.MapGet(
+            "/{id:guid}/e-invoice",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                string? format,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ExportEInvoiceAsync(id, format ?? EInvoiceExport.Format, ct)
+                    is { } content
+                    ? TypedResults.File(content, EInvoiceExport.ContentType, $"invoice-{id:N}.xml")
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapInvoiceReminders(RouteGroupBuilder invoices)

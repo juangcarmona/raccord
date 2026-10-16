@@ -121,11 +121,15 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         {
             BaseURL = FrontendBaseUrl.ToString(),
             Locale = "en-US",
+            IgnoreHTTPSErrors = true,
+            RecordVideoDir = PlaywrightArtifacts.VisualEvidenceEnabled
+                ? PlaywrightArtifacts.EvidenceDirectory
+                : null,
         };
         if (overrides is not null)
         {
-            options.RecordVideoDir = overrides.RecordVideoDir;
-            options.RecordVideoSize = overrides.RecordVideoSize;
+            options.RecordVideoDir = overrides.RecordVideoDir ?? options.RecordVideoDir;
+            options.RecordVideoSize = overrides.RecordVideoSize ?? options.RecordVideoSize;
         }
         return await Browser.NewContextAsync(options);
     }

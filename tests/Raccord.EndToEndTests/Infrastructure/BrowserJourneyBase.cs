@@ -16,9 +16,8 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected DistributedAppFixture App { get; } = app;
 
     /// <summary>
-    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; when visual
-    /// evidence capture is enabled, records a video and a final screenshot on success. On failure,
-    /// saves a trace and failure screenshot under <c>playwright-artifacts/</c> and rethrows. The
+    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; on failure,
+    /// saves trace and screenshot artifacts under <c>playwright-artifacts/</c> and rethrows. The
     /// locale is pinned because the SPA picks es/en from <c>navigator.language</c> and journeys
     /// assert on localized labels — leaving it to the runner's default would make the suite's
     /// meaning depend on where it runs.
@@ -29,19 +28,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         bool signIn = true
     )
     {
-        var evidenceEnabled = PlaywrightArtifacts.VisualEvidenceEnabled;
-        if (evidenceEnabled)
-        {
-            System.IO.Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
-        }
-        var contextOptions = new BrowserNewContextOptions { Locale = "en-US" };
-        if (evidenceEnabled)
-        {
-            contextOptions.RecordVideoDir = PlaywrightArtifacts.EvidenceDirectory;
-            contextOptions.RecordVideoSize = new RecordVideoSize { Width = 1280, Height = 720 };
-        }
-
-        var context = await App.NewContextAsync(contextOptions);
+        await using var context = await App.NewContextAsync();
         await context.Tracing.StartAsync(
             new TracingStartOptions
             {
@@ -51,6 +38,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             }
         );
         var page = await context.NewPageAsync();
+        var passed = false;
 
         try
         {
@@ -65,25 +53,31 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
                 );
             }
             await journey(page);
-            if (evidenceEnabled)
+            if (PlaywrightArtifacts.VisualEvidenceEnabled)
             {
                 await PlaywrightArtifacts.CaptureSuccessAsync(page, artifactName);
             }
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
-            PlaywrightArtifacts.WriteJourneyResult(artifactName, "passed");
+            passed = true;
         }
         catch
         {
             await PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
-            PlaywrightArtifacts.WriteJourneyResult(artifactName, "failed");
             throw;
         }
         finally
         {
-            await context.CloseAsync();
-            if (evidenceEnabled)
+            try
             {
-                await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
+                await context.CloseAsync();
+                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                {
+                    await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
+                }
+            }
+            finally
+            {
+                PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
             }
         }
     }
@@ -138,12 +132,12 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     }
 
     /// <summary>
-    /// Selects the journey's billable line, creates the draft, and finalizes it with today's date —
-    /// the seeded issuer profile makes the draft issueable as-is. Returns after landing on the
+    /// Selects the journey's billable line, creates the draft, and finalizes it with the requested
+    /// issue date — the seeded issuer profile makes the draft issueable as-is. Returns after landing on the
     /// issued invoice page. The customer select nuance: finalize validation requires an invoiceable
     /// customer (tax id + address), which <see cref="CreateCustomerAsync"/> supplies.
     /// </summary>
-    protected static async Task FinalizeDraftAsync(IPage page, string? issueDate = null)
+    protected static async Task FinalizeDraftAsync(IPage page, DateOnly? issueDate = null)
     {
         await page.GetByLabel("Select “Camera kit with lenses”").CheckAsync();
         await page.GetByRole(AriaRole.Button, new() { Name = "Create draft with 1 line(s)" })
@@ -153,7 +147,10 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         await page.GetByLabel("Issue date")
             .FillAsync(
-                issueDate ?? DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                (issueDate ?? DateOnly.FromDateTime(DateTime.UtcNow)).ToString(
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture
+                )
             );
         await page.GetByRole(AriaRole.Button, new() { Name = "Issue invoice" }).ClickAsync();
 

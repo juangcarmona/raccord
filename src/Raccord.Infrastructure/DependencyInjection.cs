@@ -82,6 +82,7 @@ public static class DependencyInjection
         );
         services.AddScoped<IInvoiceDraftRepository, InvoiceDraftRepository>();
         services.AddScoped<IIssuedInvoiceRepository, IssuedInvoiceRepository>();
+        services.AddScoped<IInboundEInvoiceRepository, InboundEInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
         RegisterWorkspaceServices(services);
@@ -100,6 +101,10 @@ public static class DependencyInjection
         services.AddScoped<CrewAvailabilityCatalog>();
         services.AddScoped<CrewPlanningCatalog>();
         services.AddScoped<CrewHoursCatalog>();
+        services.AddScoped<WorkdayEventCatalog>();
+        services.AddScoped<ApiAccessCatalog>();
+        services.AddScoped<CalendarFeedCatalog>();
+        services.AddHttpClient<CompanyRegistryCatalog>();
 
         var timeZoneId = builder.Configuration["Raccord:TimeZone"] ?? "Europe/Madrid";
         services.AddSingleton(TimeProvider.System);

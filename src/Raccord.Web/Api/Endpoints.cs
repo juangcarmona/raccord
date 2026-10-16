@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
+using Raccord.Application.Invoicing;
 using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;
@@ -14,6 +15,7 @@ using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
+using Raccord.Web.Authorization;
 
 namespace Raccord.Web.Api;
 
@@ -38,6 +40,7 @@ internal static class Endpoints
         MapProjects(api);
         MapCrew(api);
         MapInvoicing(api);
+        IntegrationEndpoints.MapIntegrations(api);
         api.MapGet(
                 "/audit-events",
                 async (Guid entityId, AuditLog audit, CancellationToken ct) =>
@@ -82,6 +85,23 @@ internal static class Endpoints
             "/hours",
             async (DateOnly? from, DateOnly? to, CrewHoursCatalog catalog, CancellationToken ct) =>
                 TypedResults.Ok(await catalog.ListAsync(from, to, ct))
+        );
+        crew.MapPost(
+            "/workday-events",
+            async (
+                RecordWorkdayEventRequest request,
+                WorkdayEventCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/crew/workday-events",
+                    await catalog.RecordAsync(request, ct)
+                )
+        );
+        crew.MapGet(
+            "/workday-events/{crewMemberId:guid}",
+            async (Guid crewMemberId, WorkdayEventCatalog catalog, CancellationToken ct) =>
+                TypedResults.Ok(await catalog.ListAsync(crewMemberId, ct))
         );
         crew.MapPut(
             "/hours/{id:guid}/approval",
@@ -201,7 +221,8 @@ internal static class Endpoints
                 async (OrganizationSettings settings, CancellationToken ct) =>
                     TypedResults.Ok(await settings.ListSeriesAsync(ct))
             )
-            .WithTags("Organization");
+            .WithTags("Organization")
+            .RequirePermission(PermissionCatalog.OrganizationRead);
     }
 
 #pragma warning disable MA0051
@@ -1086,7 +1107,44 @@ internal static class Endpoints
     {
         MapInvoiceDrafts(api);
         MapInvoices(api);
+        MapInboundEInvoices(api);
         MapFinance(api);
+    }
+
+    private static void MapInboundEInvoices(RouteGroupBuilder api)
+    {
+        var inbound = api.MapGroup("/e-invoices/inbound")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
+        inbound.MapGet(
+            "/",
+            async (InboundEInvoiceWorkflow workflow, CancellationToken ct) =>
+                TypedResults.Ok(await workflow.ListAsync(ct))
+        );
+        inbound.MapPost(
+            "/",
+            async (
+                ReceiveInboundEInvoiceRequest request,
+                InboundEInvoiceWorkflow workflow,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    "/api/e-invoices/inbound",
+                    await workflow.ReceiveAsync(request, ct)
+                )
+        );
+        inbound.MapPut(
+            "/{id:guid}/status",
+            async Task<Results<Ok<InboundEInvoiceResponse>, NotFound>> (
+                Guid id,
+                UpdateInboundEInvoiceStatusRequest request,
+                InboundEInvoiceWorkflow workflow,
+                CancellationToken ct
+            ) =>
+                await workflow.UpdateStatusAsync(id, request, ct) is { } invoice
+                    ? TypedResults.Ok(invoice)
+                    : TypedResults.NotFound()
+        );
     }
 
     private static void MapFinance(RouteGroupBuilder api)
@@ -1251,7 +1309,9 @@ internal static class Endpoints
 #pragma warning disable MA0051
     private static void MapInvoices(RouteGroupBuilder api)
     {
-        var invoices = api.MapGroup("/invoices").WithTags("Invoicing");
+        var invoices = api.MapGroup("/invoices")
+            .WithTags("Invoicing")
+            .RequirePermission(PermissionCatalog.InvoicingRead);
         invoices.MapGet(
             "/",
             async (InvoicingWorkflow invoicing, CancellationToken ct) =>
@@ -1312,6 +1372,19 @@ internal static class Endpoints
             ) =>
                 await invoicing.DuplicateInvoiceAsync(id, ct) is { } draft
                     ? TypedResults.Created($"/api/invoice-drafts/{draft.Id}", draft)
+                    : TypedResults.NotFound()
+        );
+        invoices.MapGet(
+            "/{id:guid}/e-invoice",
+            async Task<Results<FileContentHttpResult, NotFound>> (
+                Guid id,
+                string? format,
+                InvoicingWorkflow invoicing,
+                CancellationToken ct
+            ) =>
+                await invoicing.ExportEInvoiceAsync(id, format ?? EInvoiceExport.Format, ct)
+                    is { } content
+                    ? TypedResults.File(content, EInvoiceExport.ContentType, $"invoice-{id:N}.xml")
                     : TypedResults.NotFound()
         );
     }

@@ -10,7 +10,8 @@ namespace Raccord.Infrastructure.Persistence.Configurations;
 internal sealed class RecordConfiguration
     : IEntityTypeConfiguration<IssuedInvoiceRow>,
         IEntityTypeConfiguration<AuditEvent>,
-        IEntityTypeConfiguration<ComplianceRecordRow>
+        IEntityTypeConfiguration<ComplianceRecordRow>,
+        IEntityTypeConfiguration<InboundEInvoiceRow>
 {
     public void Configure(EntityTypeBuilder<IssuedInvoiceRow> builder)
     {
@@ -83,5 +84,22 @@ internal sealed class RecordConfiguration
         builder.Property(row => row.LastError).HasMaxLength(2000);
         builder.HasIndex(row => row.InvoiceId).IsUnique();
         builder.HasIndex(row => row.Status);
+    }
+
+    public void Configure(EntityTypeBuilder<InboundEInvoiceRow> builder)
+    {
+        builder.ToTable("inbound_e_invoices");
+        builder.HasKey(row => row.Id);
+        builder.Property(row => row.InvoiceNumber).HasMaxLength(64);
+        builder.Property(row => row.SupplierName).HasMaxLength(200);
+        builder.Property(row => row.SupplierTaxId).HasMaxLength(32);
+        builder.Property(row => row.Currency).HasMaxLength(3);
+        builder.Property(row => row.Status).HasMaxLength(20);
+        builder.Property(row => row.Reason).HasMaxLength(2000);
+        builder.Property(row => row.PayableAmount).HasPrecision(18, 2);
+        builder.Property(row => row.ContentHash).HasMaxLength(64).IsFixedLength();
+        builder.Property(row => row.Xml).HasColumnType("text");
+        builder.HasIndex(row => row.ContentHash).IsUnique();
+        builder.HasIndex(row => new { row.Status, row.StatusDueOn });
     }
 }

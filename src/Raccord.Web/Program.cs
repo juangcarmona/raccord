@@ -1,10 +1,12 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Application.Abstractions;
 using Raccord.Application.Auditing;
+using Raccord.Application.Invoicing;
 using Raccord.Infrastructure;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
@@ -13,6 +15,7 @@ using Raccord.Modules.Projects;
 using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Api;
+using Raccord.Web.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 var requireAuthentication = !builder.Configuration.GetValue<bool>("Raccord:TestingBypassAuth");
@@ -29,8 +32,18 @@ builder
         options.Password.RequiredLength = 12;
     })
     .AddSignInManager()
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<RaccordDbContext>();
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+if (requireAuthentication)
+{
+    builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+}
+else
+{
+    builder
+        .Services.AddAuthentication("Testing")
+        .AddScheme<AuthenticationSchemeOptions, TestingAuthenticationHandler>("Testing", _ => { });
+}
 builder.Services.Configure<CookieAuthenticationOptions>(
     IdentityConstants.ApplicationScheme,
     options =>
@@ -55,11 +68,12 @@ if (requireAuthentication)
 {
     builder
         .Services.AddAuthorizationBuilder()
+        .AddPermissionPolicies()
         .SetFallbackPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
 }
 else
 {
-    builder.Services.AddAuthorization();
+    builder.Services.AddAuthorizationBuilder().AddPermissionPolicies();
 }
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -76,8 +90,11 @@ builder.Services.AddScoped<ProjectContext>();
 builder.Services.AddScoped<ProjectTimeTracking>();
 builder.Services.AddScoped<ProjectCoordination>();
 builder.Services.AddScoped<InvoicingWorkflow>();
+builder.Services.AddScoped<InboundEInvoiceWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<AuditLog>();
+builder.Services.AddScoped<InstallationSetup>();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 var app = builder.Build();
 
@@ -107,7 +124,10 @@ app.UseAuthorization();
 
 app.MapOpenApi();
 app.MapDefaultEndpoints();
+IntegrationEndpoints.MapCalendarFeed(app);
 app.MapRaccordAuthentication();
+app.MapRaccordSetup();
+app.MapRaccordRoles();
 app.MapRaccordApi(requireAuthentication);
 
 // Client-side routes fall back to the SPA; paths that look like files (assets) and server prefixes never do.

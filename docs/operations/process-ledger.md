@@ -86,6 +86,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 ## Review rule
 
+## 2026-10-15 · Workday events preserve audit identity
+
+- **Observation:** Clock-in/out records can support regulated working-day review only when event time, recording time and actor remain distinct and immutable.
+- **Action:** Store append-only typed events with server recording timestamps, actor identity and a bounded future-time guard; leave jurisdiction-specific legal policy as an explicit follow-up.
+- **Check:** The workday journey cites the ProductShape Given/When/Then, verifies both event kinds and audit fields, stays in the per-PR manifest, and links hosted screenshot evidence.
+
 ## 2026-10-15 · Payroll exports contain only approved hours
 
 - **Observation:** Registered time is not payroll data until it has been reviewed; exporting pending registrations would turn an operational draft into a financial commitment.
@@ -235,3 +241,39 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Waiting for the nightly schedule to publish browser evidence leaves a gap after a change has already passed PR E2E and merged.
 - **Action:** Run the public evidence journey on relevant pushes to `main`; use the tested commit SHA to let the nightly schedule skip work already evidenced for that revision.
 - **Check:** A new main SHA must trigger journey capture and site publication, while a duplicate push or nightly run for the same SHA must not repeat E2E.
+
+## 2026-10-15 · Scoped API access keeps credentials revocable
+
+- **Observation:** External integrations need stable scope boundaries without exposing reusable plaintext credentials through storage or read APIs.
+- **Action:** Hash API keys at rest, return plaintext only on issue or rotation, enforce administrator permission for token management and explicit read/write scopes for integration routes.
+- **Check:** The ProductShape-cited journey issues and rotates a token, proves read access and rejected write access, and retains hosted screenshot and trace evidence.
+
+## 2026-10-15 · Personal calendar feeds are private, revocable projections
+
+- **Observation:** A calendar subscription must remain useful to the individual without exposing the project workspace or leaving an unrevocable URL behind.
+- **Action:** Store only a hash of each feed token, derive the ICS response from the authenticated user's relevant schedule, and rotate or revoke access through the integration boundary.
+- **Check:** The ProductShape-cited journey downloads a private ICS feed, verifies the relevant event, proves an old token is rejected after rotation, and links hosted browser evidence.
+
+## 2026-10-15 · External providers fail closed
+
+- **Observation:** Registry and payment integrations cross an external boundary where an unavailable provider or duplicated callback must not create false business state.
+- **Action:** Return an empty registry result when no provider is configured, validate payment scope and payloads at the API edge, and enforce idempotency at persistence boundaries.
+- **Check:** ProductShape-cited journeys prove safe no-match behavior, scoped payment reporting, duplicate rejection, and hosted evidence for both integration paths.
+
+## 2026-10-15 · Payment reporting reuses legal invoice state
+
+- **Observation:** External payment notifications must not invent a second invoice or payment model.
+- **Action:** Gate invoice reads and payment writes with explicit API scopes and delegate recording to the existing invoicing workflow, preserving its idempotency and validation rules.
+- **Check:** The ProductShape-cited payment journey proves the scoped invoice read and payment path, with hosted screenshot and trace evidence.
+
+## 2026-10-15 · Inbound e-invoice status is an auditable local boundary
+
+- **Observation:** Inbound e-invoice protocol and legal exchange requirements are not selected yet, so pretending to implement a public-platform connector would create false compliance confidence.
+- **Action:** Preserve the received XML and content hash locally, expose explicit pending/accepted/paid transitions, and leave external exchange behind a future adapter boundary.
+- **Check:** The ProductShape-cited journey receives a UBL document, verifies acceptance and payment transitions, lists the final state, and links hosted browser evidence.
+
+## 2026-10-15 · Structured exports derive from immutable invoices
+
+- **Observation:** A structured e-invoice must be a reproducible legal projection, not a second editable invoice representation.
+- **Action:** Build the supported UBL document from the issued invoice aggregate, validate the required party and amount fields, and record the export hash in the audit trail.
+- **Check:** The ProductShape-cited journey parses the UBL namespace, parties, lines and payable amount, captures hosted evidence, and leaves no pending model changes.

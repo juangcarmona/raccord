@@ -283,3 +283,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A ZAP baseline report exposed missing browser security headers on both the SPA shell and static assets.
 - **Action:** Apply the response policy at the web pipeline boundary so every response receives the same CSP, cross-origin, permissions, referrer and MIME protections.
 - **Check:** Web tests assert the complete header contract; the hosted security scan must show the baseline findings resolved before merge.
+
+## 2026-10-16 · Browser policy and production bundles are checked together
+
+- **Observation:** The Aspire browser drives Vite in development, while the production SPA and Content-Security-Policy are served by the web resource; a source-map URL in the production bundle also exposes source metadata.
+- **Action:** Assert the policy on the web resource in the browser journey, then continue the existing SPA workflow; restrict styles and connections to same-origin and disable production source maps when neither is required.
+- **Check:** The frontend build must publish no source maps, the hosted E2E artifact must show the seeded SPA journey passing, web hosting tests must pin the full CSP, and scanner request-metadata notices must not be mistaken for missing response headers.

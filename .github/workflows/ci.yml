@@ -189,6 +189,10 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Production bundle excludes source maps
+        run: |
+          test -z "$(find dist -type f -name '*.map' -print -quit)"
+          ! rg -n 'sourceMappingURL=' dist/assets --glob '*.js'
       - name: Dependency audit
         run: npm audit --audit-level=high
       - name: API contract is up to date

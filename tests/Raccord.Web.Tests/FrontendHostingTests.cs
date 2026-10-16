@@ -60,7 +60,9 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
         response
             .Headers.GetValues("Content-Security-Policy")
             .Single()
-            .ShouldStartWith("default-src 'self'");
+            .ShouldBe(
+                "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'"
+            );
         response
             .Headers.GetValues("Cross-Origin-Embedder-Policy")
             .Single()

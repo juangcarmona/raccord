@@ -117,6 +117,25 @@ a:focus-visible {
     flex: 0 0 auto;
 }
 
+.language-switcher {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.language-switcher a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.language-switcher a[aria-current="page"] {
+    color: var(--cyan);
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
 .hero {
     padding: clamp(5rem, 12vw, 10rem) clamp(1.25rem, 12vw, 12rem);
     color: var(--white);
@@ -281,9 +300,8 @@ h3 {
 
 .product-shot {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr);
-    align-items: center;
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
     margin: 0 0 2.5rem;
     padding: 1rem;
     border: 1px solid #d0d5dd;
@@ -394,10 +412,6 @@ h3 {
     }
 
     .workflow {
-        grid-template-columns: 1fr;
-    }
-
-    .product-shot {
         grid-template-columns: 1fr;
     }
 

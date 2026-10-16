@@ -3,7 +3,6 @@ set -euo pipefail
 
 previous_image="${1:?Provide the previous image reference}"
 candidate_image="${2:?Provide the candidate image reference}"
-broken_image="${3:?Provide the deliberately failing image reference}"
 backup_directory="${RUNNER_TEMP:-/tmp}/raccord-release-rehearsal-backups"
 repository_directory="$(pwd)"
 cd "$repository_directory/deploy"
@@ -83,11 +82,16 @@ docker run --rm -v "${COMPOSE_PROJECT_NAME}_documents:/data:ro" alpine:3.22 \
 upgraded_web_container="$(docker compose ps -q web)"
 
 sleep 1
+echo "Making the test database read-only so the real migration process fails..."
+docker compose exec -T postgres psql -v ON_ERROR_STOP=1 -U raccord -d postgres \
+  -c "ALTER DATABASE ${POSTGRES_DB:-raccord} SET default_transaction_read_only = on"
 echo "Checking that a failed migration leaves the current web container running and can be restored..."
-if RACCORD_IMAGE="$broken_image" bash scripts/upgrade.sh "$backup_directory"; then
-  echo "The deliberately failing migration unexpectedly succeeded." >&2
+if RACCORD_IMAGE="$candidate_image" bash scripts/upgrade.sh "$backup_directory"; then
+  echo "The migration unexpectedly succeeded against the read-only test database." >&2
   exit 1
 fi
+docker compose exec -T postgres psql -v ON_ERROR_STOP=1 -U raccord -d postgres \
+  -c "ALTER DATABASE ${POSTGRES_DB:-raccord} RESET default_transaction_read_only"
 web_after_failed_migration="$(docker compose ps -q web)"
 [[ "$web_after_failed_migration" == "$upgraded_web_container" ]]
 

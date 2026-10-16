@@ -327,9 +327,14 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
 
 
-
 ## 2026-10-16 · Rehearsal migration failures must reach the application
 
 - **Observation:** The deliberate Alpine failure image had no application entrypoint, so Docker failed before the migration command ran and the rehearsal did not cover migration recovery.
 - **Action:** Use the candidate application image with a read-only test database to make EF migration writes fail, then restore database writability before testing recovery.
 - **Check:** The rehearsal confirms the migration process exits unsuccessfully, the existing web container remains running, and restore returns database, documents and readiness to the backed-up state.
+
+## 2026-10-16 · Restore waits for application readiness
+
+- **Observation:** The restore rehearsal started the web container and probed readiness immediately, before the application had finished starting.
+- **Action:** Make the restore command wait for the Compose health check before reporting completion.
+- **Check:** The rehearsal confirms the restored application is ready and retains its database records and document files before cleanup.

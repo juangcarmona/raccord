@@ -136,7 +136,7 @@ jobs:
         run: |
           echo "## Public engineering snapshot site" >> "$GITHUB_STEP_SUMMARY"
           echo "- Main revision: `${{ steps.head.outputs.sha }}`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Nightly E2E required: `${{ steps.decision.outputs.run_e2e }}`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Browser E2E evidence refresh required: `${{ steps.decision.outputs.run_e2e }}`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Architecture snapshot refresh: `${{ steps.snapshots.outputs.architecture }}`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Product model snapshot refresh: `${{ steps.snapshots.outputs.model }}`" >> "$GITHUB_STEP_SUMMARY"
 

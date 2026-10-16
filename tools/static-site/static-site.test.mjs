@@ -137,8 +137,9 @@ test("groups passing, failing, and flaky journeys with linked evidence", () => {
     }
 });
 
-test("runs nightly only when main has advanced beyond the last report", async () => {
+test("runs scheduled and post-merge E2E only when main has advanced beyond the last report", async () => {
     const now = new Date().toISOString();
+    let latestSha = "same-sha";
     const server = await import("node:http").then(({ createServer }) =>
         createServer((request, response) => {
             if (request.url === "/site-manifest.json") {
@@ -148,7 +149,7 @@ test("runs nightly only when main has advanced beyond the last report", async ()
                 response.writeHead(200, { "content-type": "application/json" });
                 response.end(
                     JSON.stringify({
-                        reports: [{ sha: "same-sha", date: now }],
+                        reports: [{ sha: latestSha, date: now }],
                     }),
                 );
             } else {
@@ -176,6 +177,34 @@ test("runs nightly only when main has advanced beyond the last report", async ()
         assert.equal(unchanged.publish, false);
         assert.equal(advanced.runE2e, true);
         assert.equal(advanced.publish, true);
+
+        const mergedCommit = await decideRun(
+            baseUrl,
+            "merged-sha",
+            "push",
+            "false",
+        );
+        assert.equal(mergedCommit.runE2e, true);
+        assert.equal(mergedCommit.publish, true);
+
+        latestSha = "merged-sha";
+        const duplicatePush = await decideRun(
+            baseUrl,
+            "merged-sha",
+            "push",
+            "false",
+        );
+        assert.equal(duplicatePush.runE2e, false);
+        assert.equal(duplicatePush.publish, true);
+
+        const alreadyReported = await decideRun(
+            baseUrl,
+            "merged-sha",
+            "schedule",
+            "false",
+        );
+        assert.equal(alreadyReported.runE2e, false);
+        assert.equal(alreadyReported.publish, false);
     } finally {
         await new Promise((resolve, reject) =>
             server.close((error) => (error ? reject(error) : resolve())),

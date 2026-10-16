@@ -38,6 +38,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             }
         );
         var page = await context.NewPageAsync();
+        var passed = false;
 
         try
         {
@@ -52,7 +53,12 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
                 );
             }
             await journey(page);
+            if (PlaywrightArtifacts.VisualEvidenceEnabled)
+            {
+                await PlaywrightArtifacts.CaptureSuccessAsync(page, artifactName);
+            }
             await PlaywrightArtifacts.SaveTraceAsync(context, artifactName);
+            passed = true;
         }
         catch
         {
@@ -61,7 +67,18 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         }
         finally
         {
-            await context.CloseAsync();
+            try
+            {
+                await context.CloseAsync();
+                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                {
+                    await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
+                }
+            }
+            finally
+            {
+                PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
+            }
         }
     }
 

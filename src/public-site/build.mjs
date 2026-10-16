@@ -15,5 +15,10 @@ await cp(
     path.join(sourceDirectory, "styles.css"),
     path.join(outputDirectory, "styles.css"),
 );
+await cp(
+    path.join(sourceDirectory, "images"),
+    path.join(outputDirectory, "images"),
+    { recursive: true },
+);
 
 console.log(`Static homepage built at ${outputDirectory}`);

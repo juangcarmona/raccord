@@ -11,7 +11,7 @@ describe("public site build", () => {
     it("emits only the public homepage and its stylesheet", async () => {
         const files = (await readdir(outputDirectory)).sort();
 
-        assert.deepEqual(files, ["index.html", "styles.css"]);
+        assert.deepEqual(files, ["images", "index.html", "styles.css"]);
         const configText = await readFile(
             path.join(siteDirectory, "wrangler.jsonc"),
             "utf8",
@@ -32,5 +32,13 @@ describe("public site build", () => {
             (await readFile(path.join(outputDirectory, "styles.css"), "utf8"))
                 .length > 0,
         );
+        const imageFiles = await readdir(path.join(outputDirectory, "images"));
+        assert.deepEqual(imageFiles, ["invoice-issued.png"]);
+        const homepage = await readFile(
+            path.join(outputDirectory, "index.html"),
+            "utf8",
+        );
+        assert.match(homepage, /src="\/images\/invoice-issued\.png"/);
+        assert.match(homepage, /alt="Factura emitida de ejemplo/);
     });
 });

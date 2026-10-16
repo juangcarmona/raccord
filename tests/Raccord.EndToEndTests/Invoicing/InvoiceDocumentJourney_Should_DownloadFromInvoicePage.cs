@@ -37,6 +37,31 @@ public sealed class InvoiceDocumentJourney_Should_DownloadFromInvoicePage(Distri
                 var path = await download.PathAsync();
                 path.ShouldNotBeNullOrWhiteSpace();
                 new FileInfo(path!).Length.ShouldBeGreaterThan(0);
+
+                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                {
+                    System.IO.Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+                    await page.ScreenshotAsync(
+                        new PageScreenshotOptions
+                        {
+                            Path = Path.Combine(
+                                PlaywrightArtifacts.EvidenceDirectory,
+                                "invoice-publication.png"
+                            ),
+                            FullPage = true,
+                            Mask =
+                            [
+                                page.GetByText("admin@example.com", new() { Exact = true }),
+                                page.GetByText(
+                                    $"Productora E2E {RunStamp}",
+                                    new() { Exact = true }
+                                ),
+                                page.GetByText("Tax ID: B87654321", new() { Exact = true }),
+                            ],
+                            MaskColor = "#e5e7eb",
+                        }
+                    );
+                }
             }
         );
     }

@@ -14,9 +14,12 @@ internal sealed class TestingAuthenticationHandler(
 {
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
+        var userId = Guid.TryParse(Request.Headers["X-Test-UserId"], out var requestedUserId)
+            ? requestedUserId
+            : Guid.Empty;
         var identity = new ClaimsIdentity(
             [
-                new Claim(ClaimTypes.NameIdentifier, Guid.Empty.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, "test-admin@example.com"),
                 new Claim(PermissionCatalog.ClaimType, PermissionCatalog.All),
             ],

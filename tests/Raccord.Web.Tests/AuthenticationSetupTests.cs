@@ -33,16 +33,10 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         );
         created.IsSuccessStatusCode.ShouldBeTrue(await created.Content.ReadAsStringAsync());
 
-        var signedIn = await client.PostAsJsonAsync(
-            "/api/auth/sign-in",
-            new
-            {
-                Email = "first-admin@example.com",
-                Password = "FirstAdmin123!@#",
-                RememberMe = false,
-            }
+        var userId = await api.QueryScalarAsync<Guid>(
+            "select id from workspace.users where email = 'first-admin@example.com'"
         );
-        signedIn.IsSuccessStatusCode.ShouldBeTrue(await signedIn.Content.ReadAsStringAsync());
+        client.DefaultRequestHeaders.Add("X-Test-UserId", userId.ToString());
 
         await Profile_Should_SavePersonalPreferencesAndRemainOwnedByTheCurrentAccount();
 

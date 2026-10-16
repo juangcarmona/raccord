@@ -361,6 +361,7 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The #290 commit hook failed because the TypeScript/TSX staged-file handler ran `prettier --write` without the staged paths, after ESLint had succeeded.
 - **Action:** Build the Prettier command from the same filtered staged-file list used by ESLint in `src/Raccord.Frontend/.lintstagedrc.mjs`.
 - **Check:** Commit a staged TypeScript change and confirm the hook formats the named files and reaches commitlint without a parser or missing-file error.
+
 ## 2026-10-16 · API tests select a persisted user in the test auth scheme
 
 - **Observation:** The WebApplicationFactory test host uses a fake authentication scheme with a dummy user ID, so real Identity sign-in is not configured there and the current-user endpoint could not resolve the seeded administrator.

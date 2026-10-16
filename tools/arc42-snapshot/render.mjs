@@ -5,6 +5,7 @@ import { Marked } from 'marked';
 import GithubSlugger from 'github-slugger';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
+import { getPuppeteerLaunchOptions } from './browser-options.mjs';
 
 const window = new JSDOM('').window;
 const purifier = createDOMPurify(window);
@@ -132,6 +133,7 @@ export async function renderMermaid(sources) {
       await run(inFile, outFile, {
         quiet: true,
         outputFormat: 'svg',
+        puppeteerConfig: getPuppeteerLaunchOptions(),
         parseMMDOptions: {
           backgroundColor: 'transparent',
           mermaidConfig: MERMAID_CONFIG,

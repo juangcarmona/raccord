@@ -3,6 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer';
+import { getPuppeteerLaunchOptions } from './browser-options.mjs';
 
 const [snapshotArgument, outputArgument] = process.argv.slice(2);
 if (!snapshotArgument || !outputArgument) {
@@ -15,7 +16,7 @@ const output = resolve(outputArgument);
 await mkdir(output, { recursive: true });
 const browser = await puppeteer.launch({
   headless: true,
-  args: process.env.CI === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
+  ...getPuppeteerLaunchOptions(),
 });
 
 const views = [

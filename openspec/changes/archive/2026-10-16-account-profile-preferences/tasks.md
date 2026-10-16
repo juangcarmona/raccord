@@ -11,8 +11,8 @@
 - [x] Add API/web and frontend tests for ownership, validation, permission visibility, saved preferences, and language restoration.
 - [x] Add and select an AppHost Playwright journey that edits profile details, reloads/signs in again, and verifies language and access behavior.
 - [x] Update relevant Workspace architecture and operation documentation if the implementation changes the documented API or identity persistence behavior.
-- [ ] Run `prodshape validate`, `openspec validate --all`, citation verification, generated-contract drift checks, focused tests, the per-PR E2E selection, and the project CI-derived deterministic lane.
-- [ ] Capture and inspect runtime evidence for the account page and its permission-aware navigation.
+- [x] Run `prodshape validate`, `openspec validate --all`, citation verification, generated-contract drift checks, focused tests, the per-PR E2E selection, and the project CI-derived deterministic lane; hosted CI run 38939793348 passed.
+- [x] Capture and inspect runtime evidence for the account page and its permission-aware navigation in the [hosted Playwright artifact](https://github.com/juangcarmona/raccord/actions/runs/38939793348/artifacts/12062408372).
 - [x] Review `docs/operations/process-ledger.md` and record durable process lessons from the feature loop.
 
 <!-- pdac:cite id="ACT-CREW-MEMBER" digest="sha256:7e8350f158cc4ac6c30857753bcf74655a043878f28b0d5561343b7092ecfdbe" -->

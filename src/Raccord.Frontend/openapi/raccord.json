@@ -93,6 +93,43 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/setup/status": {
@@ -6077,12 +6114,27 @@
       },
       "CurrentUserResponse": {
         "required": [
-          "email"
+          "email",
+          "displayName",
+          "preferredLanguage",
+          "canManageRoles"
         ],
         "type": "object",
         "properties": {
           "email": {
             "type": "string"
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "preferredLanguage": {
+            "type": "string"
+          },
+          "canManageRoles": {
+            "type": "boolean"
           }
         }
       },
@@ -9253,6 +9305,27 @@
           }
         },
         "description": "Sets the legal issuer details used on future invoices."
+      },
+      "UpdateProfileRequest": {
+        "required": [
+          "displayName",
+          "preferredLanguage"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "preferredLanguage": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       },
       "UpdateVehicleRequest": {
         "required": [

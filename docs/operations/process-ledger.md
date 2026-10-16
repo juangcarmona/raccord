@@ -349,3 +349,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Applying an approved Product Change updates artifact digests and makes citations in existing OpenSpec documents stale.
 - **Action:** Regenerate citations for every changed artifact across all consumers and run citation verification with the pinned OpenSpec CLI available on PATH before opening the PR.
 - **Check:** ProductShape validation passes, OpenSpec validation passes, and citation verification reports zero stale, tampered or unresolved citations.
+
+## 2026-10-16 · Container-backed feature checks preflight the local runtime
+
+- **Observation:** The profile API test and browser journey compiled, but local execution stopped before application startup because the Docker daemon socket was unavailable.
+- **Action:** Check Docker availability before starting container-backed tests; continue compile, contract and frontend checks, then rely on a fresh hosted E2E artifact for runtime approval when the local daemon is unavailable.
+- **Check:** The PR records the local runtime limitation and CI must pass the selected AppHost journey with captured browser evidence before the feature is considered done.
+
+## 2026-10-16 · Staged frontend formatting receives its file list
+
+- **Observation:** The #290 commit hook failed because the TypeScript/TSX staged-file handler ran `prettier --write` without the staged paths, after ESLint had succeeded.
+- **Action:** Build the Prettier command from the same filtered staged-file list used by ESLint in `src/Raccord.Frontend/.lintstagedrc.mjs`.
+- **Check:** Commit a staged TypeScript change and confirm the hook formats the named files and reaches commitlint without a parser or missing-file error.

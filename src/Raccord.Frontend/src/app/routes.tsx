@@ -14,6 +14,7 @@ import { AppShell } from "./AppShell";
 import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
 import { RequireAuth } from "../features/auth/RequireAuth";
+import { AccountPage } from "../features/auth/AccountPage";
 
 export const routes: RouteObject[] = [
     { path: "sign-in", element: <SignInPage /> },
@@ -35,6 +36,7 @@ export const routes: RouteObject[] = [
                     { path: "invoices/:id", element: <InvoicePage /> },
                     { path: "settings/issuer", element: <IssuerSettingsPage /> },
                     { path: "settings/roles", element: <RolesPage /> },
+                    { path: "account", element: <AccountPage /> },
                     { path: "*", element: <NotFoundPage /> },
                 ],
             },

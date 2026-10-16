@@ -25,7 +25,7 @@ description: Shows the runtime interactions for the system's important scenarios
 
 ## R-0 Sign in and authorize the application
 
-1. The frontend restores the session through `GET /api/auth/me`.
+1. The frontend restores the session through `GET /api/auth/me`. The response includes the account display name, personal language preference and a role-management capability derived from the user's current role claims. `PUT /api/auth/me` updates only the authenticated user's display name and supported personal language.
 2. If no cookie session exists, `RequireAuth` redirects the browser to `/sign-in`.
 3. `POST /api/auth/sign-in` validates the local Identity password and establishes the `raccord.session` cookie; the sign-out endpoint clears it.
 4. The `/api` group requires an authenticated user. The sign-in endpoint and infrastructure health endpoints are anonymous; test bypass authentication is explicit configuration.

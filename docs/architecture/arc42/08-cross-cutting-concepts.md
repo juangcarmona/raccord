@@ -34,6 +34,7 @@ Issued representation + SHA-256 verified on every read (ADR-0005); documents reg
 ## Security
 
 - Local ASP.NET Identity creates cookie sessions named `raccord.session`; `/api` requires an authenticated user, while sign-in and infrastructure health endpoints are anonymous. The frontend restores the session and guards the application shell through `AuthProvider` and `RequireAuth`.
+- The identity user stores an optional display name and a personal preferred language (`es` or `en`). Profile updates resolve the user from the authenticated principal; login email remains read-only in the profile flow. This identity profile is separate from crew-member records.
 - Role-based authorization is not implemented yet; all authenticated users currently share the same application authorization boundary. Keep the deployment protected and record `unauthenticated` only when the explicit test bypass is enabled.
 - Secrets only through environment variables, user secrets or Key Vault; `.env` files are git-ignored; Azure uses managed identity.
 - Containers run as non-root; health endpoints reveal only a status word.

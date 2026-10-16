@@ -33,6 +33,8 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         );
         created.IsSuccessStatusCode.ShouldBeTrue(await created.Content.ReadAsStringAsync());
 
+        await Profile_Should_SavePersonalPreferencesAndRemainOwnedByTheCurrentAccount();
+
         var after = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");
         after!.Required.ShouldBeFalse();
         (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
@@ -61,9 +63,58 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
     }
 
+    private async Task Profile_Should_SavePersonalPreferencesAndRemainOwnedByTheCurrentAccount()
+    {
+        var current = await client.GetFromJsonAsync<CurrentUserResponse>("/api/auth/me");
+        current.ShouldNotBeNull();
+        current.Email.ShouldBe("first-admin@example.com");
+        current.PreferredLanguage.ShouldBe("es");
+        current.CanManageRoles.ShouldBeTrue();
+
+        var profile = await client.PutAsJsonAsync(
+            "/api/auth/me",
+            new
+            {
+                DisplayName = "First Admin",
+                PreferredLanguage = "en",
+                Email = "changed@example.com",
+            }
+        );
+        profile.IsSuccessStatusCode.ShouldBeTrue(await profile.Content.ReadAsStringAsync());
+        var updated = await profile.Content.ReadFromJsonAsync<CurrentUserResponse>();
+        updated!.DisplayName.ShouldBe("First Admin");
+        updated.PreferredLanguage.ShouldBe("en");
+
+        var invalidProfile = await client.PutAsJsonAsync(
+            "/api/auth/me",
+            new UpdateProfileRequest(" ", "en")
+        );
+        invalidProfile.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+        var invalidLanguage = await client.PutAsJsonAsync(
+            "/api/auth/me",
+            new UpdateProfileRequest("First Admin", "fr")
+        );
+        invalidLanguage.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+        var restored = await client.GetFromJsonAsync<CurrentUserResponse>("/api/auth/me");
+        restored!.Email.ShouldBe("first-admin@example.com");
+        restored.DisplayName.ShouldBe("First Admin");
+        restored.PreferredLanguage.ShouldBe("en");
+    }
+
     private sealed record SetupRequest(string Email, string Password);
 
     private sealed record SetupStatusResponse(bool Required);
+
+    private sealed record UpdateProfileRequest(string DisplayName, string PreferredLanguage);
+
+    private sealed record CurrentUserResponse(
+        string Email,
+        string? DisplayName,
+        string PreferredLanguage,
+        bool CanManageRoles
+    );
 
     private sealed record RoleResponse(
         string Name,

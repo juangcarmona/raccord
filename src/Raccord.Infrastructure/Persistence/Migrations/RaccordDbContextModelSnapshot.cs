@@ -1560,29 +1560,6 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("document_templates", "workspace");
                 });
 
-            modelBuilder.Entity("Raccord.Infrastructure.Persistence.InvoiceSeriesRow", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("code");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("IsDefault")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_default");
-
-                    b.HasKey("Code")
-                        .HasName("pk_invoice_series");
-
-                    b.ToTable("invoice_series", "workspace");
-                });
-
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.InboundEInvoiceRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1669,6 +1646,29 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_inbound_e_invoices_status_status_due_on");
 
                     b.ToTable("inbound_e_invoices", "workspace");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.InvoiceSeriesRow", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.HasKey("Code")
+                        .HasName("pk_invoice_series");
+
+                    b.ToTable("invoice_series", "workspace");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.IssuedInvoiceRow", b =>
@@ -1925,6 +1925,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("concurrency_stamp");
 
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("text")
+                        .HasColumnName("display_name");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
@@ -1963,6 +1967,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean")
                         .HasColumnName("phone_number_confirmed");
+
+                    b.Property<string>("PreferredLanguage")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("preferred_language");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text")

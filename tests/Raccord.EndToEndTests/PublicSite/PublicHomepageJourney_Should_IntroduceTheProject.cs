@@ -149,6 +149,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         {
             (
                 href.StartsWith('#')
+                || href.StartsWith("/images/", StringComparison.Ordinal)
                 || href.StartsWith(
                     "https://github.com/juangcarmona/raccord",
                     StringComparison.Ordinal

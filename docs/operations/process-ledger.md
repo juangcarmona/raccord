@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-16 · OpenSpec-only CI routing
+
+- Observation: OpenSpec-only pull requests started application and runtime checks that could not exercise the changed files.
+- Action: Route only non-empty diffs wholly under `openspec/` through documentation and security validation; mixed or ambiguous diffs retain the full CI route.
+- Check: Classifier fixtures cover OpenSpec-only, mixed, non-OpenSpec and empty diffs, and the post-merge runtime probe ignores OpenSpec-only pushes.
+
 ## 2026-10-14 · Project request conversion preserves source context
 
 - Observation: Project creation had no durable intake state, so converting incoming work could lose the requester context and classification decisions.

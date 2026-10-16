@@ -8,6 +8,8 @@ name: Post-merge runtime probing
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "openspec/**"
   workflow_dispatch:
 
 permissions:

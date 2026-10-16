@@ -114,7 +114,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         (await page.Locator("html").GetAttributeAsync("lang")).ShouldBe("es");
         (
             await page.GetByRole(AriaRole.Heading, new() { Level = 1 }).InnerTextAsync()
-        ).ShouldContain("Del trabajo de producción a la factura");
+        ).ShouldContain("Organiza tus proyectos y prepara sus facturas");
         var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
         content.ShouldContain("productoras audiovisuales");
         content.ShouldContain("empresas de alquiler de equipos");
@@ -123,16 +123,22 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         content.ShouldContain("trabajo facturable");
         content.ShouldContain("descarga su PDF");
         content.ShouldContain("iniciar sesión");
-        content.ShouldContain("No hay registro abierto ni una demo alojada");
+        content.ShouldContain("No hay demo alojada ni registro público");
         content.ShouldContain("no afirma cumplir requisitos legales o fiscales");
+        content.ShouldContain("Raccord está en desarrollo");
+        content.ShouldContain("No hay demo alojada ni registro público");
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Leer la guía de autoalojamiento" })
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver Raccord en GitHub" })
+                .CountAsync()
+        ).ShouldBe(1);
+        (
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver la guía de instalación" })
                 .GetAttributeAsync("href")
         ).ShouldBe(
             "https://github.com/juangcarmona/raccord/blob/main/docs/operations/self-hosting.md"
         );
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Explorar lo que ya funciona" })
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver qué puedes hacer" })
                 .GetAttributeAsync("href")
         ).ShouldBe("#estado");
         (await page.GetByRole(AriaRole.Combobox).CountAsync()).ShouldBe(0);

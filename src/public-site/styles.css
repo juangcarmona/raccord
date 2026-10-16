@@ -104,6 +104,19 @@ a:focus-visible {
     color: var(--cyan);
 }
 
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.github-link svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: 0 0 auto;
+}
+
 .hero {
     padding: clamp(5rem, 12vw, 10rem) clamp(1.25rem, 12vw, 12rem);
     color: var(--white);

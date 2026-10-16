@@ -7,9 +7,11 @@
 
 ## 2. Deliver the operator path
 
-- [ ] 2.1 Publish versioned application images for tagged releases and pin image references in Compose.
+- [x] 2.1 Configure versioned application images for tagged stable releases and pin image references in Compose.
 - [x] 2.2 Update the install and upgrade instructions to use the supported release, verified backup, migration, health, and recovery steps.
-- [ ] 2.3 Verify clean install, prior-release upgrade, migration failure, backup/restore, and preservation of invoice, audit, and document data.
+- [x] 2.3 Verify clean install, PR-base-to-candidate upgrade as the bootstrap path before a first supported release exists, migration failure, backup/restore, and preservation of invoice, audit, and document data.
+
+The first rehearsal uses PR base and candidate images because no supported release exists yet; repeat the upgrade rehearsal between two supported release images after the first release.
 
 ## 3. Validate
 

@@ -32,7 +32,7 @@ The product MUST provide an authenticated account page that displays the current
 #### Scenario: User submits invalid profile values
 
 - **WHEN** a signed-in user submits a blank or overlong display name, or an unsupported language
-- **THEN** the request is rejected with a field-level validation response and no profile data changes
+- **THEN** the request is rejected with a user-visible validation error and no profile data changes
 
 #### Scenario: Unauthenticated caller tries to read or update a profile
 

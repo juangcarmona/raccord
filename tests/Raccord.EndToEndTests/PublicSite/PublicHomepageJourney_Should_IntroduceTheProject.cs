@@ -151,6 +151,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 href.StartsWith('#')
                 || href.StartsWith("/images/", StringComparison.Ordinal)
                 || href.StartsWith("../", StringComparison.Ordinal)
+                || href == "index.html"
                 || href.StartsWith("producto/", StringComparison.Ordinal)
                 || href.StartsWith("manuales/", StringComparison.Ordinal)
                 || href.StartsWith("autoalojamiento/", StringComparison.Ordinal)
@@ -159,7 +160,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                     "https://github.com/juangcarmona/raccord",
                     StringComparison.Ordinal
                 )
-            ).ShouldBeTrue();
+            ).ShouldBeTrue($"Unexpected homepage link: {href}");
         }
         (
             await page.GetByRole(AriaRole.Link, new() { Name = "English" })

@@ -57,17 +57,21 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
 
         var response = await client.GetAsync("/projects/123");
 
-        response.Headers.GetValues("Content-Security-Policy").ShouldContain("default-src 'self'");
-        response.Headers.GetValues("Cross-Origin-Embedder-Policy").ShouldContain("require-corp");
-        response.Headers.GetValues("Cross-Origin-Opener-Policy").ShouldContain("same-origin");
-        response.Headers.GetValues("Cross-Origin-Resource-Policy").ShouldContain("same-origin");
+        response
+            .Headers.GetValues("Content-Security-Policy")
+            .Single()
+            .ShouldStartWith("default-src 'self'");
+        response
+            .Headers.GetValues("Cross-Origin-Embedder-Policy")
+            .Single()
+            .ShouldBe("require-corp");
+        response.Headers.GetValues("Cross-Origin-Opener-Policy").Single().ShouldBe("same-origin");
+        response.Headers.GetValues("Cross-Origin-Resource-Policy").Single().ShouldBe("same-origin");
         response
             .Headers.GetValues("Permissions-Policy")
-            .ShouldContain("camera=(), geolocation=(), microphone=()");
-        response
-            .Headers.GetValues("Referrer-Policy")
-            .ShouldContain("strict-origin-when-cross-origin");
-        response.Headers.GetValues("X-Content-Type-Options").ShouldContain("nosniff");
-        response.Headers.GetValues("X-Frame-Options").ShouldContain("DENY");
+            .ShouldBe("camera=(), geolocation=(), microphone=()");
+        response.Headers.GetValues("Referrer-Policy").ShouldBe("strict-origin-when-cross-origin");
+        response.Headers.GetValues("X-Content-Type-Options").Single().ShouldBe("nosniff");
+        response.Headers.GetValues("X-Frame-Options").Single().ShouldBe("DENY");
     }
 }

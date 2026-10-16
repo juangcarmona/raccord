@@ -11,11 +11,19 @@ All paths use the same container image built by `deploy/docker/Dockerfile` (ADR-
 
 ## Docker Compose (self-hosting)
 
-```text
-host
-├── postgres (postgres:17-alpine)       volume postgres-data
-├── migrate  (raccord image, "migrate") runs once, exits 0
-└── web      (raccord image)            port ${RACCORD_HTTP_PORT:-8080} → 8080, volume documents
+```mermaid
+flowchart TB
+    accTitle: Self-hosted container deployment
+    operator["Operator"] -->|compose up| web["web<br/>Raccord image"]
+    user["Browser"] -->|HTTP 8080 requests| web
+    migrate["migrate<br/>one-shot Raccord image"] -->|schema migration| postgres[("PostgreSQL")]
+    web -->|application state| postgres
+    web -->|generated and received documents| volume[("documents volume")]
+    postgres --> postgresVolume[("postgres-data volume")]
+    classDef current fill:#e6f4ea,stroke:#1b5e36,color:#163b25,stroke-width:1.5px
+    classDef boundary fill:#eaf2f8,stroke:#245679,color:#123045,stroke-width:1.5px
+    class web,migrate,postgres,volume,postgresVolume current
+    class operator,user boundary
 ```
 
 Configuration: `deploy/.env` (from `.env.example`) pins `RACCORD_IMAGE` to a release tag or digest. The host-side upgrade script pulls that image, verifies a database and document backup, applies migrations and replaces `web` only after the migration succeeds. Backup sets record the running image reference, so restore can recover the database, documents and compatible web image together. Operations: [self-hosting](../../operations/self-hosting.md), [backup and restore](../../operations/backup-and-restore.md). Put a TLS-terminating reverse proxy in front for anything beyond a trusted LAN.
@@ -26,16 +34,34 @@ Configuration: `deploy/.env` (from `.env.example`) pins `RACCORD_IMAGE` to a rel
 
 ## Azure (Bicep)
 
-```text
-Resource group
-├── Container Apps environment ── Log Analytics
-│   ├── Container App ca-raccord-<env>  (1 replica, ingress HTTPS, probes /health/live, /health/ready)
-│   └── Container Apps Job caj-raccord-migrate-<env> (manual, args: migrate)
-├── User-assigned managed identity ── Key Vault Secrets User, Storage Blob Data Contributor
-├── Key Vault (RBAC, purge protection) ── secret: database connection string
-├── PostgreSQL Flexible Server 17 (B1ms, 14-day backups) ── database raccord
-└── Storage account (ZRS, no shared key, no public blobs, soft delete, versioning) ── container documents
+```mermaid
+flowchart TB
+    accTitle: Azure deployment resources and access paths
+    subgraph cloud["Azure resource group"]
+        app["Container App<br/>Raccord.Web"]
+        migration["Container Apps Job<br/>migrate"]
+        database[("PostgreSQL Flexible Server")]
+        storage[("Blob storage")]
+        vault["Key Vault<br/>database connection"]
+        identity["Managed identity"]
+        logs["Log Analytics"]
+        app --> database
+        migration --> database
+        app --> storage
+        app --> vault
+        identity -->|authorizes| storage
+        identity -->|authorizes| vault
+        app -->|telemetry| logs
+        style cloud fill:#eaf2f8,stroke:#245679,color:#123045
+    end
+    operator["Deployment operator"] -->|starts migration job| migration
+    classDef current fill:#e6f4ea,stroke:#1b5e36,color:#163b25,stroke-width:1.5px
+    classDef boundary fill:#eaf2f8,stroke:#245679,color:#123045,stroke-width:1.5px
+    class app,migration,database,storage,vault,identity,logs current
+    class operator boundary
 ```
+
+The Bicep modules own the Azure resource definitions. The migration job runs as a separate deployment step; it is not a continuously running application container.
 
 See [Azure deployment](../../operations/azure-deployment.md).
 

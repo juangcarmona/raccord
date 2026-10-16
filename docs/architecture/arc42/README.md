@@ -18,4 +18,4 @@ This folder follows the arc42 structure and describes the system as implemented 
 - [11 Risks and technical debt](11-risks-and-technical-debt.md)
 - [12 Glossary](12-glossary.md)
 
-Related: [architecture rules](../architecture-rules.md), [compliance seam](../compliance-seam.md).
+Related: [diagram visual language and review checklist](https://github.com/juangcarmona/raccord/blob/main/docs/architecture/arc42/diagrams/visual-language.md), [architecture rules](../architecture-rules.md), [compliance seam](../compliance-seam.md).

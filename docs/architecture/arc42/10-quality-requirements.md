@@ -9,14 +9,28 @@ description: Defines measurable quality scenarios and how the architecture reali
 
 ## Quality tree
 
-```text
-Quality
-├── Correctness ───── Q-1 totals, Q-2 numbering
-├── Integrity ─────── Q-3 immutability, Q-4 tamper detection, Q-5 double billing
-├── Operability ───── Q-6 install, Q-7 restore
-├── Maintainability ─ Q-8 boundaries
-├── Portability ───── Q-9 storage/hosting choice
-└── Security ──────── Q-10 secrets and access
+```mermaid
+mindmap
+    accTitle: Quality tree and verification scenario groups
+  root((Quality))
+    Correctness
+      Q-1 Totals
+      Q-2 Numbering
+    Integrity
+      Q-3 Immutability
+      Q-4 Tamper detection
+      Q-5 Billing conflicts
+    Operability
+      Q-6 Installation
+      Q-7 Restore
+    Maintainability
+      Q-8 Architecture boundaries
+    Portability
+      Q-9 Storage and hosting
+    Security
+      Q-10 Secrets and access
+      Q-11 Authentication
+      Q-12 Coordination
 ```
 
 ## Scenarios

@@ -337,3 +337,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The restore rehearsal started the web container and probed readiness immediately, before the application had finished starting.
 - **Action:** Make the restore command wait for the Compose health check before reporting completion.
 - **Check:** The rehearsal confirms the restored application is ready and retains its database records and document files before cleanup.
+
+## 2026-10-16 · Architecture diagrams need generated evidence and source checks
+
+- **Observation:** The arc42 page already renders sanitized SVGs, but the pull-request job tested only helper scripts and reviewers had no artifact covering diagram layout or accessibility names.
+- **Action:** Keep Markdown diagrams canonical, follow the [arc42 diagram pull-request checklist](../architecture/arc42/diagrams/visual-language.md), require accessible titles and source evidence, render the complete static snapshot in the focused PR job, and attach the HTML plus diagram screenshots; use a human visual review instead of a fragile pixel baseline. Agent-assisted drafts must pin a clean source revision, carry evidence to each claimed node, pass a renderer's artifact and browser checks, receive visual review, and be transferred into reviewed Mermaid only after each relationship is verified.
+- **Check:** Broken diagram source or a missing title fails validation, and the PR artifact contains rendered sections 03, 05, 06, 07 and 10 without invoking the application E2E pipeline.

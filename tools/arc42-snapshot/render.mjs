@@ -5,9 +5,47 @@ import { Marked } from 'marked';
 import GithubSlugger from 'github-slugger';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
+import { getPuppeteerLaunchOptions } from './browser-options.mjs';
 
 const window = new JSDOM('').window;
 const purifier = createDOMPurify(window);
+
+export const MERMAID_CONFIG = Object.freeze({
+  securityLevel: 'strict',
+  htmlLabels: false,
+  theme: 'base',
+  themeVariables: {
+    fontFamily: 'system-ui, sans-serif',
+    fontSize: '16px',
+    primaryColor: '#e6f4ea',
+    primaryTextColor: '#163b25',
+    primaryBorderColor: '#1b5e36',
+    lineColor: '#334e5c',
+    secondaryColor: '#eaf2f8',
+    secondaryTextColor: '#123045',
+    secondaryBorderColor: '#245679',
+    tertiaryColor: '#fff4d6',
+    tertiaryTextColor: '#3c2900',
+    tertiaryBorderColor: '#805500',
+    background: '#ffffff',
+  },
+});
+
+export function getDiagramAccessibleTitle(source) {
+  return /^\s*accTitle:\s*(.+?)\s*$/mi.exec(source)?.[1]?.trim() ?? '';
+}
+
+export function stripDiagramAccessibilityTitle(source) {
+  return String(source).replace(/^\s*accTitle:\s*.+?\s*\r?\n/im, '');
+}
+
+export function validateDiagramTitles(sources) {
+  return sources.flatMap((source, index) =>
+    getDiagramAccessibleTitle(source)
+      ? []
+      : [`Diagram ${index + 1} is missing an accTitle accessibility name`],
+  );
+}
 
 /** Escape text for safe interpolation into HTML. */
 export function escapeHtml(text) {
@@ -80,6 +118,10 @@ export function normalizeMermaidSvg(svg, index) {
  */
 export async function renderMermaid(sources) {
   if (sources.length === 0) return [];
+  const titleIssues = validateDiagramTitles(sources);
+  if (titleIssues.length > 0) {
+    throw new Error(`Mermaid accessibility contract violations:\n  - ${titleIssues.join('\n  - ')}`);
+  }
   const { run } = await import('@mermaid-js/mermaid-cli');
   const staging = await mkdtemp(join(tmpdir(), 'arc42-mermaid-'));
   try {
@@ -87,13 +129,14 @@ export async function renderMermaid(sources) {
     for (let i = 0; i < sources.length; i += 1) {
       const inFile = join(staging, `d${i}.mmd`);
       const outFile = join(staging, `d${i}.svg`);
-      await writeFile(inFile, sources[i], 'utf8');
+      await writeFile(inFile, stripDiagramAccessibilityTitle(sources[i]), 'utf8');
       await run(inFile, outFile, {
         quiet: true,
         outputFormat: 'svg',
+        puppeteerConfig: getPuppeteerLaunchOptions(),
         parseMMDOptions: {
           backgroundColor: 'transparent',
-          mermaidConfig: { securityLevel: 'strict', htmlLabels: false },
+          mermaidConfig: MERMAID_CONFIG,
         },
       });
       const raw = await readFile(outFile, 'utf8');
@@ -136,7 +179,7 @@ export function stripDuplicateTitle(body, title) {
   return body;
 }
 
-function createMarked(fileToRoute, svgs, currentRoute) {
+function createMarked(fileToRoute, svgs, diagramTitles, currentRoute) {
   const marked = new Marked({ gfm: true });
   const slugger = new GithubSlugger();
   let mermaidCount = 0;
@@ -157,9 +200,12 @@ function createMarked(fileToRoute, svgs, currentRoute) {
       },
       code({ text, lang }) {
         if (isMermaid(lang)) {
-          const svg = svgs[mermaidCount++];
+          const index = mermaidCount++;
+          const svg = svgs[index];
           if (!svg) throw new Error('Mermaid diagram count does not match parsed Markdown');
-          return `<figure class="diagram">${svg}</figure>`;
+          const title = diagramTitles[index];
+          if (!title) throw new Error(`Mermaid diagram ${index + 1} is missing an accTitle accessibility name`);
+          return `<figure class="diagram" role="img" aria-label="${escapeHtml(title)}">${svg}</figure>`;
         }
         const escaped = escapeHtml(text);
         return `<pre><code${lang ? ` class="language-${escapeHtml(lang)}"` : ''}>${escaped}</code></pre>\n`;
@@ -208,7 +254,13 @@ function createMarked(fileToRoute, svgs, currentRoute) {
  * @param {string} opts.svgClass css class for inline svg wrappers
  */
 export async function renderMarkdown(body, { fileToRoute, svgs = [], currentRoute = '#/', title = '' }) {
-  const renderer = createMarked(fileToRoute, svgs, currentRoute);
+  const diagramSources = extractMermaidSources(body);
+  const titleIssues = validateDiagramTitles(diagramSources);
+  if (titleIssues.length > 0) {
+    throw new Error(`Mermaid accessibility contract violations:\n  - ${titleIssues.join('\n  - ')}`);
+  }
+  const diagramTitles = diagramSources.map(getDiagramAccessibleTitle);
+  const renderer = createMarked(fileToRoute, svgs, diagramTitles, currentRoute);
   const html = await renderer.marked.parse(stripDuplicateTitle(body, title));
   if (renderer.count() !== svgs.length) throw new Error('Unused Mermaid SVGs: Markdown extraction and rendering disagree');
   return { html, mermaidCount: renderer.count() };

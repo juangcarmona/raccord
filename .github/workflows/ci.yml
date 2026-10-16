@@ -13,8 +13,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    name: Classify changed paths
+    runs-on: ubuntu-26.04
+    outputs:
+      non_app_only: ${{ steps.classify.outputs.non_app_only }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Test changed-path and workflow routing
+        run: bash .github/ci/test-site-workflow-routing.sh
+      - name: Classify the pull request or push diff
+        id: classify
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            non_app_only=false
+          else
+            non_app_only=$(git diff --name-only -z "$BASE_SHA" "$HEAD_SHA" | bash .github/ci/classify-changes.sh)
+          fi
+          echo "non_app_only=$non_app_only" >> "$GITHUB_OUTPUT"
+          echo "Only documentation/public-site paths: $non_app_only"
+
   backend:
     name: .NET restore, analyzers, format, tests, vulnerabilities
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -41,12 +68,13 @@ jobs:
           dotnet build src/Raccord.Infrastructure -c Release --no-restore
           dotnet ef migrations has-pending-model-changes --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --no-build --configuration Release
 
-  # Mirrors the commit-time gates (.husky/pre-commit + .husky/commit-msg) in --check mode, so a
-  # local bypass (HUSKY=0 or --no-verify) is still caught before merge. CSharpier and Prettier run
-  # in check mode; commitlint lints every commit in the PR range. ESLint is deliberately not
-  # duplicated here: the frontend job already fails on it.
+  # Mirrors the commit-time format and commit-message gates in --check mode. Markdown lint stays
+  # separate so OpenSpec/public-site-only changes do not install frontend dependencies. ESLint is covered by
+  # the frontend job.
   lint:
     name: Lint mirror (format, commit messages)
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -70,12 +98,21 @@ jobs:
       - name: Prettier check
         run: npx prettier --check "**/*.{ts,tsx,json,yml,yaml,css}"
         working-directory: src/Raccord.Frontend
-      - name: Markdown lint (one paragraph per line; markdownlint-cli2 owns Markdown style)
-        run: npx -y markdownlint-cli2@0.23.3
       - name: Commitlint over PR commits
         if: github.event_name == 'pull_request'
         run: npx commitlint --config ../../.config/commitlint.config.cjs --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
         working-directory: src/Raccord.Frontend
+
+  markdown:
+    name: Markdown lint
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Markdown lint (one paragraph per line; markdownlint-cli2 owns Markdown style)
+        run: npx -y markdownlint-cli2@0.23.3
 
   openspec:
     name: OpenSpec changes
@@ -96,6 +133,8 @@ jobs:
   # committed manifest, so a narrowed filter is a red build, not a quieter suite.
   e2e:
     name: E2E journeys (Playwright over the Aspire AppHost)
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -113,6 +152,8 @@ jobs:
         run: |
           dotnet restore Raccord.slnx
           dotnet tool restore
+      - name: Build public homepage
+        run: node src/public-site/build.mjs
       - name: Build (Release, so discovery matches the manifest's configuration)
         run: dotnet build Raccord.slnx -c Release --no-restore
       # Installing chromium with --with-deps here means the fixture's own `install chromium`
@@ -168,6 +209,8 @@ jobs:
 
   frontend:
     name: Frontend lint, types, tests, build, audit, contract drift
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     defaults:
       run:
@@ -247,6 +290,8 @@ jobs:
   # the SBOM artifact.
   sbom:
     name: SBOM and license policy
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -275,6 +320,8 @@ jobs:
 
   deployment:
     name: Container image, Compose and Bicep
+    needs: changes
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5

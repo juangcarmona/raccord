@@ -86,6 +86,7 @@ Each completed integration loop includes a review of `docs/operations/process-le
 | Deployment artifacts  | `docker build -f deploy/docker/Dockerfile .`, `docker compose config`, Bicep build and lint                                                                       | `deployment` job                      |
 | Mutation testing      | Stryker over the domain, nightly                                                                                                                                  | `mutation.yml`, not a per-PR gate     |
 | Runtime probing       | ZAP baseline against the Compose stack, after merge to `main`                                                                                                     | `post-merge.yml`, not a per-PR gate   |
+| Site routing          | Keep docs and security checks; skip app jobs for OpenSpec/public-site-only diffs. Mixed/empty diffs use full CI; the site has its own build workflow.             | Classifier and workflow path checks   |
 
 ## Lifecycle stages and states
 

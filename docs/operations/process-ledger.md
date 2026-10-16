@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-16 · Documentation and public-site workflow routing
+
+- Observation: OpenSpec-only and public-site-only updates started application, browser, and packaging work that could not exercise the changed files, while the engineering publisher watched every path under `src/`.
+- Action: Keep docs/security checks active, skip unrelated app jobs only for non-empty diffs wholly under `openspec/` or `src/public-site/`, and route the public homepage through its own static build and Cloudflare Pages setup.
+- Check: Classifier fixtures cover OpenSpec-only, public-site-only, mixed, and empty changes; workflow routing fixtures assert separate public and engineering paths; the post-merge runtime probe ignores docs/public-site-only pushes.
+
 ## 2026-10-14 · Project request conversion preserves source context
 
 - Observation: Project creation had no durable intake state, so converting incoming work could lose the requester context and classification decisions.
@@ -290,8 +296,14 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Assert the policy on the web resource in the browser journey, then continue the existing SPA workflow; restrict styles and connections to same-origin and disable production source maps when neither is required.
 - **Check:** The frontend build must publish no source maps, the hosted E2E artifact must show the seeded SPA journey passing, web hosting tests must pin the full CSP, and scanner request-metadata notices must not be mistaken for missing response headers.
 
-## 2026-10-16 · Accounting policy can be resolved from public requirements
+## 2026-10-16 · Technical VAT policy does not substitute for accountant review
 
-- **Observation:** Issue #60 was blocked on an accountant that the project does not have, although the public Spanish and EU sources specify the required invoice data without prescribing line-level VAT rounding.
-- **Action:** Record the selected per-rate rounding algorithm as an explicit product convention, cite the primary sources, and state the limits of the research instead of inventing professional sign-off.
-- **Check:** ADR-0006, BR-VAT-PER-RATE and the existing disputed-cent domain test agree; issue #60 can close once the documentation change is merged.
+- **Observation:** Public Spanish and EU sources specify the required invoice data without prescribing line-level VAT rounding, while issue #60 explicitly requires an accountant to review the practical policy.
+- **Action:** Record the per-rate algorithm and its legal-source limits as technical policy, without presenting research or implementation as accountant approval.
+- **Check:** ADR-0006, BR-VAT-PER-RATE and the disputed-cent domain test agree; #60 stays open until an accountant's confirmation or amendment is recorded, and #24 stays open until every child is complete.
+
+## 2026-10-16 · Full-tree formatting includes project files
+
+- **Observation:** A focused CSharpier check on the new browser test passed locally, but hosted full-repository CSharpier caught the test project file's long content include.
+- **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
+- **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.

@@ -8,6 +8,10 @@ name: Post-merge runtime probing
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "openspec/**"
+      - "src/public-site/**"
+      - ".github/workflows/public-site.yml"
   workflow_dispatch:
 
 permissions:

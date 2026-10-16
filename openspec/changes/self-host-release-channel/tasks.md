@@ -3,7 +3,7 @@
 ## 1. Record the release policy
 
 - [x] 1.1 Write ADR-0026 with the supported Compose and official-image policy, rejected alternatives, migration recovery limits, and support window.
-- [ ] 1.2 Review and accept the ADR before implementing the release mechanism.
+- [x] 1.2 Owner accepted ADR-0026 on 2026-10-16 before implementation began.
 
 ## 2. Deliver the operator path
 

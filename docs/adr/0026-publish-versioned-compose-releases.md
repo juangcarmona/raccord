@@ -1,9 +1,9 @@
 ---
 name: publish-versioned-compose-releases
 description: Distribute supported self-hosted releases as versioned application images through Docker Compose.
-status: Proposed
+status: Accepted
 date: 2026-10-16
-deciders: []
+deciders: ["Juan G. Carmona"]
 tags: ["deployment", "releases", "docker", "compose"]
 ---
 

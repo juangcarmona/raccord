@@ -69,8 +69,12 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
         response.Headers.GetValues("Cross-Origin-Resource-Policy").Single().ShouldBe("same-origin");
         response
             .Headers.GetValues("Permissions-Policy")
+            .Single()
             .ShouldBe("camera=(), geolocation=(), microphone=()");
-        response.Headers.GetValues("Referrer-Policy").ShouldBe("strict-origin-when-cross-origin");
+        response
+            .Headers.GetValues("Referrer-Policy")
+            .Single()
+            .ShouldBe("strict-origin-when-cross-origin");
         response.Headers.GetValues("X-Content-Type-Options").Single().ShouldBe("nosniff");
         response.Headers.GetValues("X-Frame-Options").Single().ShouldBe("DENY");
     }

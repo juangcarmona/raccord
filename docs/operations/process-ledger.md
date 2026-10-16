@@ -313,3 +313,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A focused CSharpier check on the new browser test passed locally, but hosted full-repository CSharpier caught the test project file's long content include.
 - **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
+
+## 2026-10-16 · Public screenshots need pixel-level privacy review
+
+- **Observation:** A successful browser journey and text-based Playwright mask can still leave account data visible or obscure an oversized parent region in a public screenshot.
+- **Action:** Mask the smallest rendered text node, inspect the actual uploaded CI image at publication size, and only then copy it into the static site.
+- **Check:** The journey result is `passed`, sensitive text is visibly obscured, unrelated content remains legible, and the committed image is the inspected CI artifact.

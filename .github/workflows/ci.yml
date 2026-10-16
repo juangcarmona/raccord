@@ -17,13 +17,13 @@ jobs:
     name: Classify changed paths
     runs-on: ubuntu-26.04
     outputs:
-      openspec_only: ${{ steps.classify.outputs.openspec_only }}
+      non_app_only: ${{ steps.classify.outputs.non_app_only }}
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Test the path classifier
-        run: bash .github/ci/test-classify-changes.sh
+      - name: Test changed-path and workflow routing
+        run: bash .github/ci/test-site-workflow-routing.sh
       - name: Classify the pull request or push diff
         id: classify
         env:
@@ -31,17 +31,17 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
-            openspec_only=false
+            non_app_only=false
           else
-            openspec_only=$(git diff --name-only -z "$BASE_SHA" "$HEAD_SHA" | bash .github/ci/classify-changes.sh)
+            non_app_only=$(git diff --name-only -z "$BASE_SHA" "$HEAD_SHA" | bash .github/ci/classify-changes.sh)
           fi
-          echo "openspec_only=$openspec_only" >> "$GITHUB_OUTPUT"
-          echo "OpenSpec-only diff: $openspec_only"
+          echo "non_app_only=$non_app_only" >> "$GITHUB_OUTPUT"
+          echo "Only documentation/public-site paths: $non_app_only"
 
   backend:
     name: .NET restore, analyzers, format, tests, vulnerabilities
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -69,12 +69,12 @@ jobs:
           dotnet ef migrations has-pending-model-changes --project src/Raccord.Infrastructure --startup-project src/Raccord.Infrastructure --no-build --configuration Release
 
   # Mirrors the commit-time format and commit-message gates in --check mode. Markdown lint stays
-  # separate so OpenSpec-only changes do not install frontend dependencies. ESLint is covered by
+  # separate so OpenSpec/public-site-only changes do not install frontend dependencies. ESLint is covered by
   # the frontend job.
   lint:
     name: Lint mirror (format, commit messages)
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -134,7 +134,7 @@ jobs:
   e2e:
     name: E2E journeys (Playwright over the Aspire AppHost)
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -210,7 +210,7 @@ jobs:
   frontend:
     name: Frontend lint, types, tests, build, audit, contract drift
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     defaults:
       run:
@@ -291,7 +291,7 @@ jobs:
   sbom:
     name: SBOM and license policy
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5
@@ -321,7 +321,7 @@ jobs:
   deployment:
     name: Container image, Compose and Bicep
     needs: changes
-    if: needs.changes.outputs.openspec_only != 'true'
+    if: needs.changes.outputs.non_app_only != 'true'
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v5

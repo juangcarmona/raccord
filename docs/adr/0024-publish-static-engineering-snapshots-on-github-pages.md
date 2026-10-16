@@ -17,7 +17,7 @@ The repository is public and the E2E AppHost uses fictional demo data. Browser v
 
 ## Decision
 
-We will publish these regenerable static views together through the repository's GitHub Pages site: an arc42 snapshot, a ProductShape model snapshot, and per-run nightly Playwright galleries. One serialized workflow owns all site publication. It rebuilds the architecture and product snapshots only when their canonical source paths change, runs E2E nightly only when `main` has advanced since the latest published E2E run, and retains at most 14 reports and 30 days of history within an 800 MiB report budget.
+We will publish these regenerable static views together through the repository's GitHub Pages site: an arc42 snapshot, a ProductShape model snapshot, and per-run nightly Playwright galleries. One serialized workflow owns all publication to the engineering GitHub Pages artifact. It rebuilds the architecture and product snapshots only when their canonical source paths change, runs E2E nightly only when `main` has advanced since the latest published E2E run, and retains at most 14 reports and 30 days of history within an 800 MiB report budget.
 
 The canonical sources remain in Git. GitHub Pages is a read-only public rendering, not a system of record. The workflow runs with least-privilege Pages deployment permissions and publishes only the fictional seeded E2E data.
 

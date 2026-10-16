@@ -1,0 +1,37 @@
+name: Public site
+
+on:
+  pull_request:
+    paths:
+      - "src/public-site/**"
+      - ".github/workflows/public-site.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/public-site/**"
+      - ".github/workflows/public-site.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('raccord-public-site-pr-{0}', github.event.pull_request.number) || 'raccord-public-site' }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Build and validate public site
+    runs-on: ubuntu-26.04
+    defaults:
+      run:
+        working-directory: src/public-site
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Test workflow path routing
+        working-directory: .
+        run: bash .github/ci/test-site-workflow-routing.sh
+      - name: Build and verify the deployable site output
+        run: npm run verify

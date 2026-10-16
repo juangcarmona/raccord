@@ -6,7 +6,7 @@ while IFS= read -r -d '' path; do
   [ -n "$path" ] || continue
   has_path=true
   case "$path" in
-    openspec/*) ;;
+    openspec/*|src/public-site/*|.github/workflows/public-site.yml) ;;
     *) printf 'false\n'; exit 0 ;;
   esac
 done

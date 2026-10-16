@@ -1,24 +1,27 @@
-<!-- pdac-scope: none reason="This CI design does not depend on or change product requirements; this exemption is approved by the Owner for issue #247." -->
+<!-- pdac-scope: none reason="This CI and static delivery design does not depend on or change product requirements; this exemption is approved by the Owner for issue #247." -->
 
 ## Context
 
-See [proposal.md](proposal.md). The main CI workflow currently starts all jobs for every pull request and push to `main`. Its security job is an explicit every-PR guardrail in `docs/architecture/architecture-rules.md`. The post-merge workflow builds and probes the runtime on every push to `main`.
+See [proposal.md](proposal.md). The repository has a GitHub Pages publisher for architecture snapshots, the product model, and nightly E2E reports. Its broad `src/**` trigger would couple the new public homepage to that publisher. The main CI workflow also performs application, browser, and packaging checks for changes that never touch the application.
 
 ## Goals / Non-Goals
 
-**Goals:** Keep documentation correctness and PR security checks active while avoiding application and runtime work for OpenSpec-only diffs. Keep mixed diffs on the full relevant CI path.
+**Goals:** Keep documentation correctness and PR security checks active while skipping unrelated application work for OpenSpec-only and public-site-only diffs. Keep mixed application diffs on the full relevant CI path. Give engineering evidence and the public homepage independent source, validation, and hosting paths.
 
-**Non-Goals:** Change branch protection, weaken security gates, change product behavior, or alter public-site hosting and deployment.
+**Non-Goals:** Change branch protection, weaken security gates, change product behavior, publish the public site to `raccord.dev`, or bind the purchased domain.
 
 ## Decisions
 
-- Classify the complete changed-file list as OpenSpec-only only when it is non-empty and every path begins with `openspec/`. Any mixed or empty diff takes the full CI path. This avoids brittle allowlists that could misclassify newly added files.
-- Produce the changed-file list from the PR base/head SHAs or the push before/after SHAs, then pass it to a small repository script. Test the classifier with OpenSpec-only, mixed, non-OpenSpec, and empty input fixtures.
-- Keep Markdown lint, OpenSpec validation, ProductShape baseline/change validation, ProductShape citation verification, and the existing security job active. Gate only backend build/tests, code formatter and commit checks, E2E, frontend, SBOM/container, and deployment jobs.
-- Add `openspec/**` to the push path-ignore for the post-merge runtime probe. Keep manual runs available and do not change the specialized static-site workflow's existing triggers.
+- Treat only non-empty diffs wholly under `openspec/`, `src/public-site/`, or the public-site workflow as app-free. Mixed paths and empty diffs use the full application CI route. Keep Markdown lint, OpenSpec, ProductShape, and security validation active for both lightweight routes.
+- Rename the current publisher to `engineering-site.yml` and keep watching `src/**` while explicitly excluding `src/public-site/**`. Keep E2E tests, engineering snapshots, the GitHub Pages artifact, and its non-cancelling concurrency behavior in that workflow.
+- Use a separate `public-site.yml` path-filtered to `src/public-site/**` and its own workflow file. Build the site with its dependency-free Node script, run its output assertions, and do not upload to GitHub Pages.
+- Use a Cloudflare Pages Git integration for static hosting. Keep `src/public-site/` as the project root, watch only `src/public-site/*` in Cloudflare Build watch paths, and set `dist/` as the Pages build output. Non-production branches produce previews; `main` is the production branch. Keep production branch deployments disabled until Owner approval and leave custom-domain binding out of this change.
+- Use the Pages Git integration instead of a GitHub Actions Wrangler deployment so builds and previews do not require a stored Cloudflare API token. The checked-in Wrangler configuration records project identity and output directory; Cloudflare account connection and branch controls remain dashboard setup.
+- Do not watch OpenSpec paths in the engineering-site workflow. Ignore `openspec/**`, `src/public-site/**`, and the public-site workflow in the post-merge runtime probe, preserving the probe for mixed or application-source pushes.
 
 ## Risks / Trade-offs
 
-- A path classifier regression could skip required application checks. → Exercise all-file classification cases in a deterministic script test; default empty or mixed input to the full CI path.
-- OpenSpec-only changes still run repository security scans by design. → This preserves the documented every-PR security requirement while removing unrelated application and runtime jobs.
-- CI job names will appear as skipped for OpenSpec-only changes. → No required check contexts are configured for branch protection; retain the existing workflow and job names for normal changes.
+- Workflow path filters can drift from route tests. → Keep deterministic classifier cases for OpenSpec-only, public-site-only, mixed, and empty diffs, and assert both workflow path sets.
+- Cloudflare Git integration, Build watch paths, and branch controls require one-time account configuration. → Document the repository root, build command, output directory, preview behavior, and production-disablement state without storing credentials.
+- A mistaken production toggle could publish the site before domain review. → Keep production branch deployments disabled until the Owner approves publication; do not configure the custom domain here.
+- Engineering snapshots and the public site live on separate hosts. → Keep their workflow triggers, artifacts, documentation, and deployment setup explicitly separate.

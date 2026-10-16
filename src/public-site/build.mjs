@@ -7,7 +7,13 @@ const outputDirectory = path.join(sourceDirectory, "dist");
 
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
-await cp(path.join(sourceDirectory, "index.html"), path.join(outputDirectory, "index.html"));
-await cp(path.join(sourceDirectory, "styles.css"), path.join(outputDirectory, "styles.css"));
+await cp(
+    path.join(sourceDirectory, "index.html"),
+    path.join(outputDirectory, "index.html"),
+);
+await cp(
+    path.join(sourceDirectory, "styles.css"),
+    path.join(outputDirectory, "styles.css"),
+);
 
 console.log(`Static homepage built at ${outputDirectory}`);

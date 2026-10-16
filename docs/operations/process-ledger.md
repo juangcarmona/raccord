@@ -2,11 +2,11 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
-## 2026-10-16 · OpenSpec-only CI routing
+## 2026-10-16 · Documentation and public-site workflow routing
 
-- Observation: OpenSpec-only pull requests started application and runtime checks that could not exercise the changed files.
-- Action: Route only non-empty diffs wholly under `openspec/` through documentation and security validation; mixed or ambiguous diffs retain the full CI route.
-- Check: Classifier fixtures cover OpenSpec-only, mixed, non-OpenSpec and empty diffs, and the post-merge runtime probe ignores OpenSpec-only pushes.
+- Observation: OpenSpec-only and public-site-only updates started application, browser, and packaging work that could not exercise the changed files, while the engineering publisher watched every path under `src/`.
+- Action: Keep docs/security checks active, skip unrelated app jobs only for non-empty diffs wholly under `openspec/` or `src/public-site/`, and route the public homepage through its own static build and Cloudflare Pages setup.
+- Check: Classifier fixtures cover OpenSpec-only, public-site-only, mixed, and empty changes; workflow routing fixtures assert separate public and engineering paths; the post-merge runtime probe ignores docs/public-site-only pushes.
 
 ## 2026-10-14 · Project request conversion preserves source context
 

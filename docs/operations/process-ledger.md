@@ -325,3 +325,11 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A focused CSharpier check on the new browser test passed locally, but hosted full-repository CSharpier caught the test project file's long content include.
 - **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
+
+
+
+## 2026-10-16 · Rehearsal migration failures must reach the application
+
+- **Observation:** The deliberate Alpine failure image had no application entrypoint, so Docker failed before the migration command ran and the rehearsal did not cover migration recovery.
+- **Action:** Use the candidate application image with a read-only test database to make EF migration writes fail, then restore database writability before testing recovery.
+- **Check:** The rehearsal confirms the migration process exits unsuccessfully, the existing web container remains running, and restore returns database, documents and readiness to the backed-up state.

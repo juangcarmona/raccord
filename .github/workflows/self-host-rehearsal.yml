@@ -62,11 +62,5 @@ jobs:
           docker build --file deploy/docker/Dockerfile --tag localhost:5000/raccord:candidate .
           docker push localhost:5000/raccord:candidate
 
-      - name: Build and push a deliberate migration-failure image
-        run: |
-          printf 'FROM alpine:3.22\n' > "$RUNNER_TEMP/Dockerfile.failure"
-          docker build --file "$RUNNER_TEMP/Dockerfile.failure" --tag localhost:5000/raccord:broken .
-          docker push localhost:5000/raccord:broken
-
       - name: Rehearse install, upgrade, migration failure and restore
-        run: bash .github/scripts/rehearse-self-host-release.sh localhost:5000/raccord:previous localhost:5000/raccord:candidate localhost:5000/raccord:broken
+        run: bash .github/scripts/rehearse-self-host-release.sh localhost:5000/raccord:previous localhost:5000/raccord:candidate

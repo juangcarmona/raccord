@@ -1,72 +1,197 @@
 import assert from "node:assert/strict";
-import { readdir, readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { routes } from "./render.mjs";
 import { resolveLocale, rootLocalePath } from "./locale.mjs";
 
 const siteDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.join(siteDirectory, "dist");
+const pageKeys = Object.keys(routes);
+
+async function fileExists(file) {
+    try {
+        await access(file);
+        return true;
+    } catch {
+        return false;
+    }
+}
 
 describe("public site build", () => {
-    it("emits the root page and complete Spanish and English locales", async () => {
-        const files = (await readdir(outputDirectory)).sort();
+    it("emits every page in Spanish and English", async () => {
+        for (const locale of ["es", "en"]) {
+            for (const key of pageKeys) {
+                const pagePath = path.join(
+                    outputDirectory,
+                    locale,
+                    routes[key],
+                    "index.html",
+                );
+                assert.equal(
+                    await fileExists(pagePath),
+                    true,
+                    `${locale}/${routes[key]} exists`,
+                );
+                const html = await readFile(pagePath, "utf8");
+                assert.match(html, new RegExp(`<html lang="${locale}">`));
+                assert.match(html, /<main id="contenido">/);
+                assert.match(html, /class="skip-link"/);
+                assert.match(html, /hreflang="es"/);
+                assert.match(html, /hreflang="en"/);
+                assert.match(
+                    html,
+                    /aria-label="(?:Selector de idioma|Language selector)"/,
+                );
 
-        assert.deepEqual(files, ["en", "es", "images", "index.html", "locale.mjs", "styles.css"]);
-        const configText = await readFile(
-            path.join(siteDirectory, "wrangler.jsonc"),
-            "utf8",
-        );
-        const hostingConfig = JSON.parse(configText.replace(/,\s*(?=})/g, ""));
+                for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+                    const href = match[1];
+                    if (
+                        href.startsWith("#") ||
+                        href.startsWith("https://") ||
+                        href.startsWith("mailto:")
+                    ) {
+                        continue;
+                    }
+                    const destination = path.resolve(
+                        path.dirname(pagePath),
+                        href,
+                    );
+                    const normalized = href.endsWith("/")
+                        ? path.join(destination, "index.html")
+                        : destination;
+                    assert.equal(
+                        await fileExists(normalized),
+                        true,
+                        `${locale}/${routes[key]} -> ${href}`,
+                    );
+                }
+            }
+        }
+    });
 
-        assert.equal(hostingConfig.name, "raccord");
-        assert.equal(hostingConfig.pages_build_output_dir, "./dist");
-        assert.match(
-            await readFile(path.join(outputDirectory, "index.html"), "utf8"),
-            /<html lang="es">/,
-        );
-        assert.match(
-            await readFile(path.join(outputDirectory, "index.html"), "utf8"),
-            /src="\.\/locale\.mjs"/,
-        );
-        assert.ok(
-            (await readFile(path.join(outputDirectory, "styles.css"), "utf8"))
-                .length > 0,
-        );
-        const imageFiles = await readdir(path.join(outputDirectory, "images"));
-        assert.deepEqual(imageFiles, ["invoice-issued.png"]);
-        const homepage = await readFile(
-            path.join(outputDirectory, "index.html"),
-            "utf8",
-        );
-        assert.match(homepage, /src="\.\.\/images\/invoice-issued\.png"/);
-        assert.match(homepage, /alt="Factura emitida de ejemplo/);
+    it("presents all ten product areas and the evidence boundary in both locales", async () => {
+        const labels = {
+            es: [
+                "Contactos",
+                "Proyectos",
+                "Comercial",
+                "Facturación",
+                "Equipos",
+                "Almacén",
+                "Equipo humano y transporte",
+                "Documentos y comunicación",
+                "Espacio de trabajo",
+                "Control y trazabilidad",
+            ],
+            en: [
+                "Contacts",
+                "Projects",
+                "Commercial",
+                "Invoicing",
+                "Equipment",
+                "Warehouse",
+                "Crew and transport",
+                "Documents and communication",
+                "Workspace",
+                "Compliance and audit",
+            ],
+        };
+        for (const locale of ["es", "en"]) {
+            const product = await readFile(
+                path.join(
+                    outputDirectory,
+                    locale,
+                    routes.product,
+                    "index.html",
+                ),
+                "utf8",
+            );
+            for (const label of labels[locale])
+                assert.ok(
+                    product.includes(label),
+                    `${locale} product page contains ${label}`,
+                );
+            assert.match(product, /invoice-issued\.png/);
+            assert.match(product, /fictional|ficticios/i);
+            assert.match(product, /full-size image|imagen completa/i);
+            assert.match(product, /availability|disponibilidad/i);
+            assert.doesNotMatch(
+                product,
+                /VERI\*FACTU compliance|cumple VERI\*FACTU/i,
+            );
+            assert.equal(
+                [...product.matchAll(/class="area-features"/g)].length,
+                10,
+            );
+            assert.equal([...product.matchAll(/<li>/g)].length, 30);
+            assert.equal(
+                [...product.matchAll(/Product model scope|Ámbito del modelo/g)]
+                    .length,
+                10,
+            );
+        }
+    });
 
-        const spanishPage = await readFile(
+    it("keeps the value proposition and maturity disclosure accurate in both locales", async () => {
+        const spanish = await readFile(
             path.join(outputDirectory, "es", "index.html"),
             "utf8",
         );
-        const englishPage = await readFile(
+        const english = await readFile(
             path.join(outputDirectory, "en", "index.html"),
             "utf8",
         );
-        assert.match(spanishPage, /<html lang="es">/);
-        assert.match(englishPage, /<html lang="en">/);
-        assert.match(spanishPage, /hreflang="en" href="https:\/\/raccord\.dev\/en\/"/);
-        assert.match(englishPage, /hreflang="es" href="https:\/\/raccord\.dev\/es\/"/);
-        assert.match(spanishPage, /href="\.\.\/en\/" lang="en"/);
-        assert.match(englishPage, /href="\.\.\/es\/" lang="es"/);
-        assert.match(spanishPage, /aria-label="Selector de idioma"/);
-        assert.match(englishPage, /aria-label="Language selector"/);
-        assert.match(spanishPage, /Raccord no afirma cumplir/);
-        assert.match(englishPage, /Raccord does not claim legal or/);
-        assert.doesNotMatch(spanishPage, /locale\.mjs/);
-        assert.doesNotMatch(englishPage, /locale\.mjs/);
-        assert.deepEqual(await readdir(path.join(outputDirectory, "es")), ["index.html"]);
-        assert.deepEqual(await readdir(path.join(outputDirectory, "en")), ["index.html"]);
+        assert.match(spanish, /Sin cuota de licencia/);
+        assert.match(spanish, /pueden tener un coste/);
+        assert.match(english, /no licence fee/i);
+        assert.match(english, /may still cost money/i);
+        assert.match(spanish, /MVP está implementado/);
+        assert.match(english, /MVP is implemented/i);
+        assert.match(spanish, /No hay demo alojada/);
+        assert.match(english, /There is no hosted demo/i);
+        assert.match(
+            spanish,
+            /no afirma cumplir requisitos legales o fiscales/i,
+        );
+        assert.match(english, /does not claim legal or tax compliance/i);
     });
 
-    it("selects the first supported browser language and falls back to Spanish", () => {
+    it("keeps every tutorial in both languages and labels the development path", async () => {
+        for (const locale of ["es", "en"]) {
+            for (const key of ["invoice", "install", "azure", "backup"]) {
+                const page = await readFile(
+                    path.join(
+                        outputDirectory,
+                        locale,
+                        routes[key],
+                        "index.html",
+                    ),
+                    "utf8",
+                );
+                assert.match(page, /<ol class="numbered-steps">/);
+                if (key !== "invoice")
+                    assert.match(
+                        page,
+                        /Maintained technical references|Referencias técnicas mantenidas/,
+                    );
+            }
+            const architecture = await readFile(
+                path.join(
+                    outputDirectory,
+                    locale,
+                    routes.engineering,
+                    "index.html",
+                ),
+                "utf8",
+            );
+            assert.match(architecture, /PostgreSQL/);
+            assert.match(architecture, /NET Aspire/);
+        }
+    });
+
+    it("keeps the root locale selector behavior", () => {
         assert.equal(resolveLocale(["en-GB", "es-ES"]), "en");
         assert.equal(resolveLocale(["fr-FR", "es-ES", "en-US"]), "es");
         assert.equal(resolveLocale(["fr-FR", "de-DE"]), "es");

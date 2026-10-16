@@ -369,6 +369,6 @@ Every completed FF loop must review this ledger, add new observations and action
 
 ## 2026-10-16 · Browser journeys normalize the signed-in profile language
 
-- **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence.
-- **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify that it survives reload and sign-in.
+- **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence, and sign-in resumes the previously requested protected route.
+- **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify persistence after reload and return to the account route on sign-in.
 - **Check:** The hosted AppHost run completes the warehouse customer form with English labels and captures the account journey in Spanish after reauthentication.

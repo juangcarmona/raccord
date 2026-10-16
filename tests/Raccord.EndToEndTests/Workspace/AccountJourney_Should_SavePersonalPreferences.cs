@@ -46,9 +46,9 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
                 await page.GetByRole(AriaRole.Button, new() { Name = "Iniciar sesión" })
                     .ClickAsync();
                 await page.WaitForURLAsync(url =>
-                    url.EndsWith("/projects", StringComparison.Ordinal)
+                    url.EndsWith("/account", StringComparison.Ordinal)
                 );
-                await page.GetByRole(AriaRole.Heading, new() { Name = "Proyectos" }).WaitForAsync();
+                await page.GetByRole(AriaRole.Heading, new() { Name = "Mi cuenta" }).WaitForAsync();
 
                 var current = await page.EvaluateAsync<string>(
                     "async () => JSON.stringify(await (await fetch('/api/auth/me')).json())"

@@ -1,12 +1,10 @@
 # Self-hosted Raccord: PostgreSQL, a one-shot migration job and the web application (API + UI).
-# Usage (from the deploy/ folder):  cp .env.example .env  &&  edit .env  &&  docker compose up -d --build
+# Usage (from the deploy/ folder): copy .env.example to .env, select a published RACCORD_IMAGE,
+# set POSTGRES_PASSWORD, then run `docker compose pull && docker compose up -d`.
 name: raccord
 
 x-app: &app
-  image: ${RACCORD_IMAGE:-raccord:local}
-  build:
-    context: ..
-    dockerfile: deploy/docker/Dockerfile
+  image: ${RACCORD_IMAGE:?Set RACCORD_IMAGE in deploy/.env to a published release tag or digest}
   environment: &app-environment
     ConnectionStrings__raccord: Host=postgres;Port=5432;Database=${POSTGRES_DB:-raccord};Username=${POSTGRES_USER:-raccord};Password=${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in deploy/.env}
     Raccord__TimeZone: ${RACCORD_TIME_ZONE:-Europe/Madrid}

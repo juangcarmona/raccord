@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-16 · Release mechanics need a pre-release upgrade rehearsal
+
+- Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
+- Action: Rehearse the Compose install, upgrade, migration-failure and restore mechanics with images built from the PR base and candidate revisions; label this as a pre-release rehearsal until two supported releases exist.
+- Check: CI confirms the upgrade preserves seeded database records and document-volume content, and the release notes do not claim backward compatibility with an unpublished release.
+
 ## 2026-10-16 · Each E2E entry point prepares the static homepage
 
 - Observation: PR CI built `src/public-site/dist/` before E2E and passed, but the separate post-merge engineering E2E job did not; its homepage journey failed with `ERR_FILE_NOT_FOUND` in run [38853228885](https://github.com/juangcarmona/raccord/actions/runs/38853228885).

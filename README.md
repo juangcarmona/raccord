@@ -12,7 +12,7 @@ Sign-in is implemented and required to use the application. There is no hosted d
 
 ## Quick start (Docker Compose)
 
-Choose a published image digest from [GitHub Releases](https://github.com/juangcarmona/raccord/releases), then run these commands from the repository root:
+When a stable release is available, choose its image digest from [GitHub Releases](https://github.com/juangcarmona/raccord/releases) and run these commands from the repository root. If the release list is empty, there is no supported official image to install yet.
 
 ```bash
 cd deploy

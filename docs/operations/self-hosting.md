@@ -4,7 +4,7 @@ Raccord runs as three services: PostgreSQL, a one-shot migration job and the web
 
 ## Choose a release
 
-Docker Compose is the supported self-host installation path. Stable releases are published as versioned container images in [GitHub Releases](https://github.com/juangcarmona/raccord/releases) and GitHub Container Registry. Use the latest stable release and copy its immutable `ghcr.io/juangcarmona/raccord@sha256:...` image reference from the release notes into `RACCORD_IMAGE`. The `latest` image tag is a convenience alias; pinning by digest keeps an installation on the exact image it selected.
+Docker Compose is the supported self-host installation path. Stable releases will be published as versioned container images in [GitHub Releases](https://github.com/juangcarmona/raccord/releases) and GitHub Container Registry. If the release list is empty, no supported official image is available yet. Once a stable release is published, use it and copy its immutable `ghcr.io/juangcarmona/raccord@sha256:...` image reference from the release notes into `RACCORD_IMAGE`. The `latest` image tag is a convenience alias; pinning by digest keeps an installation on the exact image it selected.
 
 Only the latest stable release receives support and security fixes. Source-built and modified images are available for development and customization, but do not receive the official release support promise. .NET Aspire is the development workflow; Azure is a separate deployment topology.
 

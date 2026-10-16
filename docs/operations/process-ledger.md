@@ -326,7 +326,6 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
 
-
 ## 2026-10-16 · Rehearsal migration failures must reach the application
 
 - **Observation:** The deliberate Alpine failure image had no application entrypoint, so Docker failed before the migration command ran and the rehearsal did not cover migration recovery.

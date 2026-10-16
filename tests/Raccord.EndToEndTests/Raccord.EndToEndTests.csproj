@@ -12,5 +12,10 @@
 
     <ItemGroup>
         <None Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+        <None
+            Include="..\..\src\public-site\dist\**"
+            Link="public-site\%(RecursiveDir)%(Filename)%(Extension)"
+            CopyToOutputDirectory="PreserveNewest"
+        />
     </ItemGroup>
 </Project>

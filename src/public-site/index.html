@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Raccord ayuda a productoras audiovisuales y empresas de alquiler de equipos a organizar proyectos y facturar el trabajo realizado."
+        />
+        <meta name="theme-color" content="#0b1020" />
+        <title>Raccord — Operaciones y facturación audiovisual</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <a class="skip-link" href="#contenido">Saltar al contenido</a>
+        <header class="site-header">
+            <a class="wordmark" href="#inicio" aria-label="Raccord, inicio">Raccord<span>.</span></a>
+            <nav aria-label="Navegación principal">
+                <a href="#que-es">Qué es</a>
+                <a href="#estado">Estado actual</a>
+                <a href="#adopcion">Autoalojamiento</a>
+            </nav>
+            <a class="header-link" href="https://github.com/juangcarmona/raccord">Ver el código</a>
+        </header>
+
+        <main id="contenido">
+            <section class="hero" id="inicio" aria-labelledby="hero-title">
+                <p class="eyebrow">Operaciones audiovisuales, con continuidad</p>
+                <h1 id="hero-title">Del trabajo de producción a la factura, con todo en su sitio.</h1>
+                <p class="hero-copy">
+                    Raccord es una plataforma de código abierto y autoalojable para productoras audiovisuales y empresas
+                    de alquiler de equipos. Reúne proyectos, trabajo facturable y facturas en un mismo sistema.
+                </p>
+                <div class="actions">
+                    <a class="button button-primary" href="#estado">Explorar lo que ya funciona</a>
+                    <a class="button button-secondary" href="https://github.com/juangcarmona/raccord">
+                        Ver el proyecto en GitHub
+                    </a>
+                </div>
+                <p class="hero-note">Proyecto en etapa inicial · Sin cuenta pública ni demo abierta</p>
+            </section>
+
+            <section class="content-section" id="que-es" aria-labelledby="what-title">
+                <div class="section-heading">
+                    <p class="eyebrow">Una continuidad más clara</p>
+                    <h2 id="what-title">Qué es Raccord</h2>
+                </div>
+                <div class="section-copy">
+                    <p>
+                        Un rodaje conecta planificación, equipo, trabajo realizado y administración. Raccord está
+                        construyendo una herramienta para que las productoras y empresas de alquiler puedan seguir ese
+                        trabajo desde el proyecto hasta la facturación.
+                    </p>
+                    <p>
+                        El código y las instrucciones para ejecutar el proyecto están disponibles para que cada equipo
+                        pueda revisar cómo funciona y decidir si encaja en su forma de trabajar.
+                    </p>
+                </div>
+            </section>
+
+            <section class="status-section" id="estado" aria-labelledby="status-title">
+                <div class="section-heading">
+                    <p class="eyebrow">Estado del proyecto</p>
+                    <h2 id="status-title">Una primera parte ya se puede probar</h2>
+                    <p>
+                        El primer flujo implementado enlaza proyectos, trabajo facturable y emisión de facturas. El
+                        proyecto sigue en una etapa temprana y continúa creciendo.
+                    </p>
+                </div>
+                <ol class="workflow" aria-label="Flujo implementado">
+                    <li>
+                        <span>01</span><strong>Organizar</strong>
+                        <p>Crear un proyecto y registrar trabajo facturable.</p>
+                    </li>
+                    <li>
+                        <span>02</span><strong>Preparar</strong>
+                        <p>Crear un borrador y validar sus datos antes de emitirlo.</p>
+                    </li>
+                    <li>
+                        <span>03</span><strong>Emitir</strong>
+                        <p>Conservar la factura emitida, su PDF y el registro de auditoría.</p>
+                    </li>
+                </ol>
+                <div class="maturity-note">
+                    <h3>Lo que todavía no está listo</h3>
+                    <p>
+                        La autenticación aún no está implementada: no expongas una instalación de Raccord en Internet.
+                        Los pagos, las facturas rectificativas y el envío VERI*FACTU tampoco están implementados.
+                        Raccord no afirma cumplir requisitos legales o fiscales.
+                    </p>
+                    <a href="https://github.com/juangcarmona/raccord/blob/main/README.md">
+                        Consultar el estado detallado en el repositorio
+                    </a>
+                </div>
+            </section>
+
+            <section class="adoption-section" id="adopcion" aria-labelledby="adoption-title">
+                <div>
+                    <p class="eyebrow">Código abierto y autoalojable</p>
+                    <h2 id="adoption-title">Revisa el proyecto y sus requisitos antes de instalarlo.</h2>
+                    <p>
+                        La guía explica cómo ejecutarlo con Docker Compose y recuerda las precauciones de seguridad que
+                        exige su estado actual.
+                    </p>
+                </div>
+                <div class="actions">
+                    <a
+                        class="button button-primary"
+                        href="https://github.com/juangcarmona/raccord/blob/main/docs/operations/self-hosting.md"
+                    >
+                        Leer la guía de autoalojamiento
+                    </a>
+                    <a class="button button-secondary" href="https://github.com/juangcarmona/raccord">
+                        Explorar el código fuente
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <a class="wordmark" href="#inicio">Raccord<span>.</span></a>
+            <p>Proyecto de código abierto para las operaciones de producción audiovisual.</p>
+            <a href="https://github.com/juangcarmona/raccord">Repositorio y contribuciones en GitHub</a>
+        </footer>
+    </body>
+</html>

@@ -5,7 +5,7 @@
 - [x] 1.1 Align the Pages project name with the Owner-reported `raccord.pages.dev` deployment and verify the build configuration.
 - [x] 1.2 Document current Pages project settings, apex DNS prerequisites, custom-domain association, HTTPS verification and rollback.
 - [ ] 1.3 Verify the static site build, locale links, maturity and security disclosures in the production-ready preview.
-- [ ] 1.4 Record the exact account-specific DNS and nameserver values for Owner approval before applying production changes.
+- [ ] 1.4 Confirm the Pages dashboard binding and exact flattened DNS record; record any proposed changes for Owner approval before applying them.
 
 ## 2. Validate
 

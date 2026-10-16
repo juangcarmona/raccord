@@ -319,3 +319,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A successful browser journey and text-based Playwright mask can still leave account data visible or obscure an oversized parent region in a public screenshot.
 - **Action:** Mask the smallest rendered text node, inspect the actual uploaded CI image at publication size, and only then copy it into the static site.
 - **Check:** The journey result is `passed`, sensitive text is visibly obscured, unrelated content remains legible, and the committed image is the inspected CI artifact.
+
+## 2026-10-16 · Verify public routing before changing DNS
+
+- **Observation:** The apex domain was reported as unbound, but read-only DNS and HTTPS checks showed it already served byte-identical Cloudflare Pages content at the `pages.dev` hostname; the deployed content was simply stale.
+- **Action:** Check nameservers and HTTP responses for both the custom and provider hostnames, compare their content, and inspect the Pages custom-domain binding before proposing a DNS mutation.
+- **Check:** Record the current public response and DNS state, identify the actual missing step (content deployment or domain binding), and retain a rollback record before any approved zone change.

@@ -2,7 +2,7 @@
 
 ## Context
 
-The Owner reports that the public site is available at `raccord.pages.dev`. The exact DNS zone, nameservers and current deployment type must be checked in Cloudflare before the apex domain is attached. The repo can document the sequence but cannot infer account-specific nameserver values or safely replace existing DNS records.
+The Owner reports that the public site is available at `raccord.pages.dev`. A read-only probe also found that `raccord.dev` returns identical current HTML through Cloudflare, so the apex appears routed to the same published deployment even though the Pages dashboard binding has not been inspected. The repo can document the sequence but cannot infer the account's flattened CNAME record or safely replace existing DNS records.
 
 ## Decisions
 

@@ -33,6 +33,17 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         );
         created.IsSuccessStatusCode.ShouldBeTrue(await created.Content.ReadAsStringAsync());
 
+        var signedIn = await client.PostAsJsonAsync(
+            "/api/auth/sign-in",
+            new
+            {
+                Email = "first-admin@example.com",
+                Password = "FirstAdmin123!@#",
+                RememberMe = false,
+            }
+        );
+        signedIn.IsSuccessStatusCode.ShouldBeTrue(await signedIn.Content.ReadAsStringAsync());
+
         await Profile_Should_SavePersonalPreferencesAndRemainOwnedByTheCurrentAccount();
 
         var after = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");

@@ -361,3 +361,8 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The #290 commit hook failed because the TypeScript/TSX staged-file handler ran `prettier --write` without the staged paths, after ESLint had succeeded.
 - **Action:** Build the Prettier command from the same filtered staged-file list used by ESLint in `src/Raccord.Frontend/.lintstagedrc.mjs`.
 - **Check:** Commit a staged TypeScript change and confirm the hook formats the named files and reaches commitlint without a parser or missing-file error.
+## 2026-10-16 · Authenticated API tests establish a session explicitly
+
+- **Observation:** The first-run setup endpoint created the admin but did not sign the test client in, so the new current-user profile test received 401 before exercising its behavior.
+- **Action:** Authenticate the retained test client through the sign-in endpoint before calling protected profile routes.
+- **Check:** The API test verifies the profile round trip after sign-in, including that submitted email data cannot change the account's sign-in address.

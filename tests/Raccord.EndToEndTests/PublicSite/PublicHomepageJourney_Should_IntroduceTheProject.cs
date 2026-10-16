@@ -109,41 +109,38 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
 
     private static async Task AssertHomepageContentAsync(IPage page)
     {
-        (await page.TitleAsync()).ShouldBe("Raccord — Operaciones y facturación audiovisual");
+        (await page.TitleAsync()).ShouldBe(
+            "Raccord — Para productoras audiovisuales y empresas de alquiler"
+        );
         (await page.Locator("html").GetAttributeAsync("lang")).ShouldBe("es");
-        (
-            await page.GetByRole(AriaRole.Heading, new() { Level = 1 }).InnerTextAsync()
-        ).ShouldContain("Organiza tus proyectos y prepara sus facturas");
+        (await page.GetByRole(AriaRole.Heading, new() { Level = 1 }).InnerTextAsync()).ShouldBe(
+            "Tu producción y tus facturas, bajo tu control."
+        );
         var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
         content.ShouldContain("productoras audiovisuales");
-        content.ShouldContain("empresas de alquiler de equipos");
-        content.ShouldContain("Ya puedes llevar un proyecto hasta su factura");
-        content.ShouldContain("Registra un cliente");
+        content.ShouldContain("empresas de alquiler");
+        content.ShouldContain("De un trabajo a su factura");
+        content.ShouldContain("Registra el cliente y el proyecto");
         content.ShouldContain("trabajo facturable");
-        content.ShouldContain("descarga su PDF");
-        content.ShouldContain("iniciar sesión");
-        content.ShouldContain("No hay demo alojada ni registro público");
+        content.ShouldContain("Emite la factura y descarga su PDF");
+        content.ShouldContain("El MVP está implementado");
+        content.ShouldContain("No ofrecemos una instancia alojada ni un registro público");
         content.ShouldContain("no afirma cumplir requisitos legales o fiscales");
-        content.ShouldContain("Raccord está en desarrollo");
-        content.ShouldContain("No hay demo alojada ni registro público");
         (
             await page.Locator(".product-shot img")
                 .EvaluateAsync<bool>("image => image.complete && image.naturalWidth > 0")
         ).ShouldBeTrue();
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Ver Raccord en GitHub" })
-                .CountAsync()
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver el proyecto" }).CountAsync()
         ).ShouldBe(1);
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Ver la guía de instalación" })
+            await page.GetByRole(AriaRole.Link, new() { Name = "Aprender a instalarlo" })
                 .GetAttributeAsync("href")
-        ).ShouldBe(
-            "https://github.com/juangcarmona/raccord/blob/main/docs/operations/self-hosting.md"
-        );
+        ).ShouldBe("../manuales/");
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Ver qué puedes hacer" })
+            await page.GetByRole(AriaRole.Link, new() { Name = "Explorar el producto" })
                 .GetAttributeAsync("href")
-        ).ShouldBe("#estado");
+        ).ShouldBe("../producto/");
         (await page.GetByRole(AriaRole.Combobox).CountAsync()).ShouldBe(0);
         foreach (
             var href in await page.Locator("a")
@@ -172,11 +169,13 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         var englishPath = Path.Combine(AppContext.BaseDirectory, "public-site", "en", "index.html");
         await page.GotoAsync(new Uri(englishPath).AbsoluteUri);
         (await page.Locator("html").GetAttributeAsync("lang")).ShouldBe("en");
-        (await page.TitleAsync()).ShouldBe("Raccord — Audiovisual operations and invoicing");
+        (await page.TitleAsync()).ShouldBe(
+            "Raccord — For audiovisual production and equipment-rental teams"
+        );
         var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
-        content.ShouldContain("Register a customer, create a project");
-        content.ShouldContain("There is no hosted demo or public registration");
-        content.ShouldContain("Raccord does not claim legal or");
+        content.ShouldContain("The MVP is implemented");
+        content.ShouldContain("There is no hosted instance or public sign-up");
+        content.ShouldContain("Raccord does not claim legal or tax compliance");
         (
             await page.Locator(".product-shot img")
                 .EvaluateAsync<bool>("image => image.complete && image.naturalWidth > 0")
@@ -226,7 +225,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
     private static async Task AssertDesktopLayoutAsync(IPage page)
     {
         await page.SetViewportSizeAsync(1440, 900);
-        await page.Locator("#hero-title").ClickAsync();
+        (await page.GetByRole(AriaRole.Heading, new() { Level = 1 }).CountAsync()).ShouldBe(1);
         (
             await page.EvaluateAsync<bool>(
                 "() => document.documentElement.scrollWidth > window.innerWidth"

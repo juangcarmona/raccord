@@ -117,6 +117,27 @@ if (args.Contains("migrate", StringComparer.Ordinal))
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();
+app.Use(
+    async (context, next) =>
+    {
+        context.Response.OnStarting(() =>
+        {
+            var headers = context.Response.Headers;
+            headers["Content-Security-Policy"] =
+                "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ws: wss:";
+            headers["Cross-Origin-Embedder-Policy"] = "require-corp";
+            headers["Cross-Origin-Opener-Policy"] = "same-origin";
+            headers["Cross-Origin-Resource-Policy"] = "same-origin";
+            headers["Permissions-Policy"] = "camera=(), geolocation=(), microphone=()";
+            headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+            headers["X-Content-Type-Options"] = "nosniff";
+            headers["X-Frame-Options"] = "DENY";
+            return Task.CompletedTask;
+        });
+
+        await next();
+    }
+);
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseAuthentication();

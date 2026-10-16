@@ -31,7 +31,7 @@ The repository already has a GitHub Pages workflow named `static-site.yml` that 
 ## Risks / Trade-offs
 
 - [Risk] Homepage copy may describe planned features as available → [Mitigation] Limit claims to the implemented slice and link visitors to current project documentation.
-- [Risk] Public copy may be read as a security or compliance assurance → [Mitigation] State that application authentication is not implemented and do not claim legal or VERI*FACTU compliance.
+- [Risk] Public copy may be read as a security or compliance assurance → [Mitigation] State that application authentication is not implemented and do not claim legal or VERI\*FACTU compliance.
 - [Risk] `src/**` continues to trigger engineering-site workflows until issue #247 lands → [Mitigation] Coordinate merge order so the workflow exclusion is in place before public-site-only changes are merged to `main`.
 
 ## Migration Plan

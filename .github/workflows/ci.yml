@@ -113,6 +113,8 @@ jobs:
         run: |
           dotnet restore Raccord.slnx
           dotnet tool restore
+      - name: Build public homepage
+        run: node src/public-site/build.mjs
       - name: Build (Release, so discovery matches the manifest's configuration)
         run: dotnet build Raccord.slnx -c Release --no-restore
       # Installing chromium with --with-deps here means the fixture's own `install chromium`

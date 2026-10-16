@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-16 · Each E2E entry point prepares the static homepage
+
+- Observation: PR CI built `src/public-site/dist/` before E2E and passed, but the separate post-merge engineering E2E job did not; its homepage journey failed with `ERR_FILE_NOT_FOUND` in run [38853228885](https://github.com/juangcarmona/raccord/actions/runs/38853228885).
+- Action: Build the public homepage in the engineering E2E job and assert that both CI E2E entry points build the assets before compiling the suite.
+- Check: The workflow-routing fixture fails if either workflow removes or moves its homepage build after the E2E compile step; the post-merge engineering E2E run must pass on this fix.
+
 ## 2026-10-16 · Documentation and public-site workflow routing
 
 - Observation: OpenSpec-only and public-site-only updates started application, browser, and packaging work that could not exercise the changed files, while the engineering publisher watched every path under `src/`.

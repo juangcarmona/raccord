@@ -29,7 +29,7 @@ Set `RACCORD_BACKUP_RETENTION_DAYS` to control local retention; it defaults to 3
 bash scripts/restore.sh ./backups <stamp>
 ```
 
-The script verifies checksums, stops `web`, recreates the database schema from the dump (which also restores the append-only triggers), restores the documents, and starts `web` using the image reference recorded in the backup when available. Older backup sets without image metadata continue to use the configured `RACCORD_IMAGE`.
+The script verifies checksums, stops `web`, drops all application schemas so the custom-format dump can recreate its module tables and append-only triggers, restores the documents, and starts `web` using the image reference recorded in the backup when available. Older backup sets without image metadata continue to use the configured `RACCORD_IMAGE`.
 
 ### Rehearsal (performed 2026-10-14)
 

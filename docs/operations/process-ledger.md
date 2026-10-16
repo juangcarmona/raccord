@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 7845)
+Total output lines: 327
+
 # Process ledger
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
@@ -7,6 +10,12 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 - Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
 - Action: Rehearse the Compose install, upgrade, migration-failure and restore mechanics with images built from the PR base and candidate revisions; label this as a pre-release rehearsal until two supported releases exist.
 - Check: CI confirms the upgrade preserves seeded database records and document-volume content, and the release notes do not claim backward compatibility with an unpublished release.
+
+## 2026-10-16 · Restore every module schema from a database dump
+
+- Observation: The first live restore rehearsal dropped only `public`, leaving module schemas behind; `pg_restore` then failed when it tried to recreate an existing schema.
+- Action: Drop all application schemas before restoring a full PostgreSQL custom-format dump, then recreate the schema objects and append-only triggers from the dump.
+- Check: The release rehearsal restores into a populated database and verifies the preserved customer and project rows, document file, and application readiness.
 
 ## 2026-10-16 · Each E2E entry point prepares the static homepage
 
@@ -79,164 +88,7 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 - Check: The E2E job must boot the AppHost, pass health checks, and complete the selected journeys.
 
 - Observation: Implemented child issues remained open because merged PRs did not consistently carry closing references.
-- Action: Reconcile every child issue during the integration review and close stale implementation issues with links to the merged PRs.
-- Check: The review records the final state of the epic and every delivered child issue.
-
-- Observation: The local merge command could not check out `main` because another worktree owned it.
-- Action: Use a worktree-safe merge path and never disturb another agent's checkout.
-- Check: Verify the remote merge result and worktree status after integration.
-
-## 2026-10-12 · Authentication delivery review
-
-- Observation: The authentication change initially protected the test factory and the Aspire health probe through the global fallback policy, so the first CI attempts failed or waited for a host that could not become healthy.
-- Action: Keep production authorization enabled in the real AppHost, make the test bypass explicit, and mark infrastructure health endpoints anonymous. Add a browser journey for the anonymous API boundary so this distinction remains executable.
-- Check: The backend test job and the AppHost E2E job must both pass, including the authentication journey, before merging.
-
-- Observation: UI functionality is difficult to review from a mobile PR view without visual evidence, while reproducing the full AppHost locally is expensive when Docker is unavailable.
-- Action: Capture a representative sign-in screenshot as versioned PR evidence and reuse the shared browser context for E2E journeys. Do not replace required security, acceptance, or contract gates; reduce cost through shared setup and by avoiding redundant local reruns after the same CI head is green.
-- Check: Every PR that adds UI behavior links a screenshot in its description, and the E2E selection manifest names the new journey explicitly.
-
-## 2026-10-13 · Public static evidence publication
-
-- Observation: Static-site deployments replace the whole Pages artifact; independent documentation and E2E publishers could silently erase each other's content or lose reports during overlapping runs.
-- Action: Route all static snapshots through one serialized publisher, restore retained files from the published manifest, and test source-path refreshes separately from nightly report updates.
-- Check: The workflow has one non-cancelling concurrency group; report tests cover the stable index and retention, and snapshot refreshes preserve unrelated site paths.
-
-## Review rule
-
-## 2026-10-15 · Workday events preserve audit identity
-
-- **Observation:** Clock-in/out records can support regulated working-day review only when event time, recording time and actor remain distinct and immutable.
-- **Action:** Store append-only typed events with server recording timestamps, actor identity and a bounded future-time guard; leave jurisdiction-specific legal policy as an explicit follow-up.
-- **Check:** The workday journey cites the ProductShape Given/When/Then, verifies both event kinds and audit fields, stays in the per-PR manifest, and links hosted screenshot evidence.
-
-## 2026-10-15 · Payroll exports contain only approved hours
-
-- **Observation:** Registered time is not payroll data until it has been reviewed; exporting pending registrations would turn an operational draft into a financial commitment.
-- **Action:** Persist source and approval status separately, make approval explicit, and generate deterministic CSV only from approved registrations in the requested period.
-- **Check:** The payroll journey cites the ProductShape Given/When/Then, asserts pending exclusion and approved inclusion, stays in the per-PR manifest, and links hosted screenshot evidence.
-
-## 2026-10-15 · Planning assignments are typed by function kind
-
-- **Observation:** Crew and vehicle planning share a project-function boundary but have different valid resources; accepting either resource for every function hides staffing conflicts.
-- **Action:** Persist functions, shifts and assignments separately, enforce kind-specific assignment rules and uniqueness, and calculate staffing from the assigned resource type.
-- **Check:** The planning journey cites the ProductShape Given/When/Then, verifies crew and transport staffing, stays in the per-PR manifest, and links hosted screenshot evidence before merge.
-
-## 2026-10-15 · Crew availability keeps planning responses durable
-
-- **Observation:** Availability, invitations and job-board signups are separate responses to the same planning function and need independent status and duplicate constraints.
-- **Action:** Persist each response as a typed record, keep invitation and signup uniqueness at the database boundary, and exercise the complete journey with ProductShape citations and hosted visual evidence.
-- **Check:** The availability journey remains in the per-PR manifest, invalid date ranges are rejected, duplicate participation is rejected, and the hosted artifact is linked before merge.
-
-## 2026-10-15 · Crew records keep planning inputs explicit
-
-- **Observation:** Crew, vehicle and rate data are planning inputs with different validation and defaulting rules; treating them as untyped settings would allow invalid identities, capacity and cost bands into later scheduling flows.
-- **Action:** Keep typed contracts and a focused catalog with unique identities, positive vehicle capacity, non-negative ordered rate bands and one default rate per kind. Cover the complete save/list journey with a ProductShape citation and hosted screenshot artifact.
-- **Check:** The crew E2E journey remains in the PR selection manifest, API and migration checks pass, and the PR links the hosted Playwright artifact.
-
-## 2026-10-15 · Static evidence uses viewer-local time and test-result truth
-
-- **Observation:** Engineering snapshot timestamps rendered as raw UTC and a green workflow status could imply browser journeys passed even when no journey result had been recorded.
-- **Action:** Retain the ISO instant in machine-readable markup, format it with the viewer's browser locale/time zone, and display journey totals and explicit no-results state from the retained report manifest. Share the snapshot appearance preference across pages.
-- **Check:** Static-site tests cover generated local-time hooks, shared theme persistence, responsive breakpoints and the successful-workflow/zero-journey edge case; OpenSpec validation and the PR workflow must pass before merge.
-
-## 2026-10-14 · Product behaviors drive E2E journey contracts
-
-- **Observation:** Product structure behaviors already provide the canonical user-facing Given/When/Then semantics.
-- **Action:** Every new browser journey must reference its ProductShape behavior ID in the journey docstring and preserve those Given/When/Then steps; API-only slices use domain/integration and contract tests until a browser surface exists.
-- **Check:** PR review verifies the behavior citation, the three modeled steps, and the journey’s entry in the E2E selection manifest when applicable.
-
-Every completed FF loop must review this ledger, add new observations and actions when useful, and verify that existing actions were followed. The ledger is process memory for future agents; it is not a substitute for CI or product documentation.
-
-## 2026-10-15 · Standalone and duplicated invoices
-
-- Observation: Making project linkage optional affects the draft aggregate, immutable invoice representation, indexed persistence rows, generated API types, and existing draft UI assumptions; an API-only change leaves nullable values unsafe in the frontend.
-- Action: Model nullable project identity end-to-end, regenerate the OpenAPI client, and add explicit standalone/duplicate assertions to both the integration slice and the existing Playwright money journey.
-- Check: The migration, repository-wide CSharpier check, frontend typecheck/tests, PostgreSQL-backed integration test, and Playwright trace/screenshot artifact all pass before merge.
-
-## 2026-10-15 · Generated API contracts stay outside source lint
-
-- Observation: Generated API schema files are intentionally ignored by ESLint, but lint-staged still passed them to ESLint and failed every contract-only commit.
-- Action: Filter generated API schemas from the source lint-staged task while retaining the repository-wide frontend lint and generated-contract checks in CI.
-- Check: A staged schema change must pass the commit hook, and `npm run lint` plus API generation remain required in CI.
-
-## 2026-10-15 · Queue eligibility stays derived from billable state
-
-- Observation: A staged-invoicing queue can drift if it stores a second copy of invoice eligibility.
-- Action: Derive queue entries from project billable state, with an explicit date window and overdue flag.
-- Check: The queue endpoint and browser journey assert that newly created work appears before draft creation.
-
-## 2026-10-15 · Payments and refundable deposits
-
-- Observation: Payment status is derived data and must never be stored independently from the issued invoice total and payment history; deposit lifecycle has a separate security-liability meaning.
-- Action: Keep payments append-only, reject overpayment before persistence, derive unpaid/partially-paid/paid from the aggregate, and model deposits with explicit not-paid/paid/returned transitions.
-- Check: Integration coverage settles an invoice through partial then full payment, while the Playwright journey exercises deposit configuration, receipt, return, and payment APIs with hosted evidence.
-
-## 2026-10-15 · Reminder history owns the next due date
-
-- Observation: Overdue status must reflect the latest reminder deadline and current outstanding balance, not a cached flag.
-- Action: Derive overdue invoices from issued totals, recorded payments and the latest reminder; keep each generated reminder append-only and auditable.
-- Check: Integration and browser journeys list an unpaid overdue invoice, create reminder one with a new deadline, and read the retained history before settlement.
-
-## 2026-10-15 · Delivery journeys must click the product surface
-
-- **Observation:** The delivery stack had API-level document tests, but the invoice download control had no browser journey, so a green API check could still leave the user journey unverified.
-- **Action:** Add one smoke journey per user-visible delivery path that follows the ProductShape journey and activates the real accessible control; keep generated screenshots, trace and video in the CI artifact rather than source control.
-- **Check:** The journey is listed in `per-pr-selection.txt`, asserts a usable non-empty download, and the PR links the exact hosted evidence artifact.
-
-- **Observation:** The first integration workflow uploaded Playwright output only after a failure and did not enable success capture, leaving successful UI behavior without mobile-reviewable evidence.
-- **Action:** Enable success capture for the blocking E2E run and upload its artifacts with `always()`; retain a short artifact lifetime so evidence remains cheap and attached to the exact CI run.
-- **Check:** Every successful UI integration run exposes the screenshot, trace and video artifact before merge.
-
-## 2026-10-14 · Project task board progress is status-driven
-
-- **Observation:** A shared board needs one source of truth for task ordering and completion semantics.
-- **Action:** Store status completion rules with the task status and recalculate project progress in the coordination service after every task transition.
-- **Check:** Domain and CI tests must cover status validation, task movement, and the resulting progress percentage.
-
-## 2026-10-15 · Finance reports stay derived from legal records
-
-- **Observation:** Accountant views can become contradictory if reports, ledgers and exports each persist their own totals.
-- **Action:** Derive the finance report and CSV ledger from immutable issued invoices, append-only payments and reminder deadlines; keep one shared period normalization rule.
-- **Check:** Integration and browser journeys must compare report totals, ledger entries and export headers for the same period, with successful hosted Playwright evidence linked from the PR.
-
-## 2026-10-15 · Physical stock corrections preserve booked equipment
-
-- **Observation:** A stock count can otherwise overwrite equipment already committed to a project and make the availability figure physically impossible.
-- **Action:** Reconcile counts against booked quantity, record every correction with a reason, and keep planned movements as append-only history.
-- **Check:** Domain, integration and browser coverage must exercise movement scheduling, count history, and the booked-quantity guard.
-
-## 2026-10-15 · Equipment lifecycle keeps history after disposition
-
-- **Observation:** Selling or retiring an item without preserving its project usage and stock history makes asset audit and traceability impossible.
-- **Action:** Model terminal sold/retired statuses, block disposition while booked out, and derive item insights and project history from existing movement, count and packing records.
-- **Check:** Integration and warehouse browser journeys must assert sold/retired status, project history and insight counts with hosted evidence.
-
-## 2026-10-15 · Branded templates keep preview output safe
-
-- **Observation:** Template configuration combines reusable user text, styling and image references; previewing raw content would turn administrator input into executable markup.
-- **Action:** Persist versioned template settings by document type, keep one default per type, and HTML-encode all preview fields while retaining the logo as a storage key.
-- **Check:** Integration and browser journeys must save a branded template, preview it, verify styling and confirm script content is not executable.
-
-## 2026-10-15 · Generated documents expose printable outputs
-
-- **Observation:** A document configuration is not useful to operators until project and warehouse data can be turned into a concrete printable artifact.
-- **Action:** Keep generation endpoints derived from persisted project/equipment records, return stable filenames and content types, and HTML-encode all printable fields.
-- **Check:** Integration and browser journeys must generate a project summary or equipment label and assert identifiers are present in the output.
-
-## 2026-10-15 · Delivery outcomes remain searchable and append-only
-
-- **Observation:** Sending a document without a durable outcome and searchable failure reason leaves operators unable to investigate delivery problems.
-- **Action:** Record pending, sent and failed communication outcomes with recipient, subject, document key and failure reason; expose a filtered communication log.
-- **Check:** Integration and browser journeys must create a communication, record a failed delivery, and find it through the searchable log.
-
-## 2026-10-15 · Localized templates keep language selection explicit
-
-- **Observation:** Customer documents can share a document type while requiring independent wording, branding and default selection per locale.
-- **Action:** Store a normalized language tag on each template, scope uniqueness and defaults by document type plus language, and expose a language-filtered catalog.
-- **Check:** Integration and browser journeys must save a foreign-language variant, select it by locale, preview its translated content, and prove the default in another locale remains intact.
-
-## 2026-10-15 · Project context uses one auditable record stream
+- Action: Re…3845 tokens truncated…le record stream
 
 - **Observation:** Notes, files, folders, fields, tags and saved views all need project scoping and history; separate MVP tables would duplicate ordering and audit behavior.
 - **Action:** Persist a typed project-context entry with optional payload fields, append a shared audit event for every addition, and expose one context read model for the project page.

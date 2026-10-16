@@ -26,9 +26,25 @@ docker compose -p "$project" stop web || true
 until docker compose -p "$project" exec -T postgres sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"' >/dev/null; do sleep 1; done
 
 echo "Restoring database..."
-# Recreate the schema from scratch so the append-only triggers are restored with the data.
-docker compose -p "$project" exec -T postgres sh -c \
-  'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"'
+# Recreate every application schema so pg_restore can restore the complete database dump,
+# including module schemas and append-only triggers.
+docker compose -p "$project" exec -T postgres sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"' <<'SQL'
+DO $restore$
+DECLARE
+    schema_name text;
+BEGIN
+    FOR schema_name IN
+        SELECT nspname
+        FROM pg_namespace
+        WHERE nspname <> 'information_schema'
+          AND nspname NOT LIKE 'pg_%'
+    LOOP
+        EXECUTE format('DROP SCHEMA %I CASCADE', schema_name);
+    END LOOP;
+    EXECUTE 'CREATE SCHEMA public';
+END;
+$restore$;
+SQL
 docker compose -p "$project" exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --no-owner --exit-on-error' \
   < "$source_dir/raccord-db-$stamp.dump"
 

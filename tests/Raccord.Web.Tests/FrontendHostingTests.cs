@@ -48,4 +48,34 @@ public sealed class FrontendHostingTests(PostgresContainer postgres) : IAsyncLif
         clientRoute.Content.Headers.ContentType?.MediaType.ShouldBe("text/html");
         missingAsset.StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
+
+    [Fact]
+    public async Task Responses_Should_include_browser_security_headers()
+    {
+        using var client = api.WithWebHostBuilder(builder => builder.UseWebRoot(webRoot))
+            .CreateClient();
+
+        var response = await client.GetAsync("/projects/123");
+
+        response
+            .Headers.GetValues("Content-Security-Policy")
+            .Single()
+            .ShouldStartWith("default-src 'self'");
+        response
+            .Headers.GetValues("Cross-Origin-Embedder-Policy")
+            .Single()
+            .ShouldBe("require-corp");
+        response.Headers.GetValues("Cross-Origin-Opener-Policy").Single().ShouldBe("same-origin");
+        response.Headers.GetValues("Cross-Origin-Resource-Policy").Single().ShouldBe("same-origin");
+        response
+            .Headers.GetValues("Permissions-Policy")
+            .Single()
+            .ShouldBe("camera=(), geolocation=(), microphone=()");
+        response
+            .Headers.GetValues("Referrer-Policy")
+            .Single()
+            .ShouldBe("strict-origin-when-cross-origin");
+        response.Headers.GetValues("X-Content-Type-Options").Single().ShouldBe("nosniff");
+        response.Headers.GetValues("X-Frame-Options").Single().ShouldBe("DENY");
+    }
 }

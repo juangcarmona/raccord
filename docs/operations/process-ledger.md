@@ -271,3 +271,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A structured e-invoice must be a reproducible legal projection, not a second editable invoice representation.
 - **Action:** Build the supported UBL document from the issued invoice aggregate, validate the required party and amount fields, and record the export hash in the audit trail.
 - **Check:** The ProductShape-cited journey parses the UBL namespace, parties, lines and payable amount, captures hosted evidence, and leaves no pending model changes.
+
+## 2026-10-16 · Security findings become executable response policy
+
+- **Observation:** A ZAP baseline report exposed missing browser security headers on both the SPA shell and static assets.
+- **Action:** Apply the response policy at the web pipeline boundary so every response receives the same CSP, cross-origin, permissions, referrer and MIME protections.
+- **Check:** Web tests assert the complete header contract; the hosted security scan must show the baseline findings resolved before merge.

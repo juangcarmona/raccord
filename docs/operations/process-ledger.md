@@ -6,13 +6,13 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 - Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
 - Action: Rehearse the Compose install, upgrade, migration-failure and restore mechanics with images built from the PR base and candidate revisions; label this as a pre-release rehearsal until two supported releases exist.
-- Check: CI confirms the upgrade preserves seeded database records and document-volume content, and the release notes do not claim backward compatibility with an unpublished release.
+- Check: CI confirms the upgrade and restore preserve customer, project, issued-invoice and audit-event rows plus document-volume content; release notes do not claim compatibility with an unpublished release.
 
 ## 2026-10-16 · Restore every module schema from a database dump
 
 - Observation: The first live restore rehearsal dropped only `public`, leaving module schemas behind; `pg_restore` then failed when it tried to recreate an existing schema.
 - Action: Drop all application schemas before restoring a full PostgreSQL custom-format dump, then recreate the schema objects and append-only triggers from the dump.
-- Check: The release rehearsal restores into a populated database and verifies the preserved customer and project rows, document file, and application readiness.
+- Check: The release rehearsal restores into a populated database and verifies the customer, project, issued-invoice and audit-event rows, document file, and application readiness.
 
 ## 2026-10-16 · Each E2E entry point prepares the static homepage
 

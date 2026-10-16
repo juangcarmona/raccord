@@ -51,7 +51,7 @@ public sealed class InvoiceDocumentJourney_Should_DownloadFromInvoicePage(Distri
                             FullPage = true,
                             Mask =
                             [
-                                page.GetByText("admin@example.com", new() { Exact = true }),
+                                page.GetByText("admin@example.com"),
                                 page.GetByText(
                                     $"Productora E2E {RunStamp}",
                                     new() { Exact = true }

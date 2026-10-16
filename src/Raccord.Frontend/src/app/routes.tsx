@@ -15,6 +15,7 @@ import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
 import { RequireAuth } from "../features/auth/RequireAuth";
 import { AccountPage } from "../features/auth/AccountPage";
+import { RequireRoleManagement } from "../features/auth/RequireRoleManagement";
 
 export const routes: RouteObject[] = [
     { path: "sign-in", element: <SignInPage /> },
@@ -35,7 +36,10 @@ export const routes: RouteObject[] = [
                     { path: "invoices", element: <InvoicesPage /> },
                     { path: "invoices/:id", element: <InvoicePage /> },
                     { path: "settings/issuer", element: <IssuerSettingsPage /> },
-                    { path: "settings/roles", element: <RolesPage /> },
+                    {
+                        element: <RequireRoleManagement />,
+                        children: [{ path: "settings/roles", element: <RolesPage /> }],
+                    },
                     { path: "account", element: <AccountPage /> },
                     { path: "*", element: <NotFoundPage /> },
                 ],

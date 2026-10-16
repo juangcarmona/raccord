@@ -12,17 +12,21 @@ Sign-in is implemented and required to use the application. There is no hosted d
 
 ## Quick start (Docker Compose)
 
-```bash
-cp deploy/.env.example deploy/.env
-```
-
-Set `POSTGRES_PASSWORD` in `deploy/.env` (and `RACCORD_SEED_DEMO_DATA=true` for fictional demo data), then:
+Choose a published image digest from [GitHub Releases](https://github.com/juangcarmona/raccord/releases), then run these commands from the repository root:
 
 ```bash
-docker compose -f deploy/docker-compose.yml up -d --build
+cd deploy
+cp .env.example .env
 ```
 
-Open <http://localhost:8080>. Details: [self-hosting](docs/operations/self-hosting.md).
+Set `RACCORD_IMAGE` to the selected digest and `POSTGRES_PASSWORD` in `.env`, then pull and start the stack:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+Open <http://localhost:8080>. Follow the [self-hosting guide](docs/operations/self-hosting.md) to create the first administrator and to upgrade or restore an installation.
 
 ## Development
 

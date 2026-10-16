@@ -7,7 +7,7 @@ description: Maps Raccord's deployable components onto self-hosted, development,
 
 # 7. Deployment view
 
-All paths use the same container image built by `deploy/docker/Dockerfile` (ADR-0013).
+All paths use the same container image built by `deploy/docker/Dockerfile` (ADR-0013). Stable `vMAJOR.MINOR.PATCH` tags publish official images to GitHub Container Registry through `.github/workflows/release.yml`; GitHub Releases record the image digest. Self-hosted Compose deployments pin that digest. Development and custom builds do not carry the official release support promise (ADR-0026).
 
 ## Docker Compose (self-hosting)
 
@@ -18,7 +18,7 @@ host
 └── web      (raccord image)            port ${RACCORD_HTTP_PORT:-8080} → 8080, volume documents
 ```
 
-Configuration: `deploy/.env` (from `.env.example`). The host-side backup and restore tooling owns the database dump, document volume archive, checksum manifest and configurable retention; the backup set is external to the running containers. Operations: [self-hosting](../../operations/self-hosting.md), [backup and restore](../../operations/backup-and-restore.md). Put a TLS-terminating reverse proxy in front for anything beyond a trusted LAN.
+Configuration: `deploy/.env` (from `.env.example`) pins `RACCORD_IMAGE` to a release tag or digest. The host-side upgrade script pulls that image, verifies a database and document backup, applies migrations and replaces `web` only after the migration succeeds. Backup sets record the running image reference, so restore can recover the database, documents and compatible web image together. Operations: [self-hosting](../../operations/self-hosting.md), [backup and restore](../../operations/backup-and-restore.md). Put a TLS-terminating reverse proxy in front for anything beyond a trusted LAN.
 
 ## .NET Aspire (development)
 

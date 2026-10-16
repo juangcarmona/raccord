@@ -4,11 +4,22 @@
 # The web service is stopped during the restore and started again afterwards.
 set -euo pipefail
 
+if (($# != 2)); then
+  echo "Usage: bash scripts/restore.sh <backup-directory> <stamp>" >&2
+  exit 2
+fi
+
 project="${COMPOSE_PROJECT_NAME:-raccord}"
 source_dir="$(cd "$1" && pwd)"
 stamp="$2"
 
 ( cd "$source_dir" && sha256sum --check "raccord-$stamp.sha256" )
+
+image_file="$source_dir/raccord-image-$stamp.txt"
+if [[ -s "$image_file" ]]; then
+  export RACCORD_IMAGE="$(<"$image_file")"
+  echo "Restoring application image: $RACCORD_IMAGE"
+fi
 
 docker compose -p "$project" up -d postgres
 docker compose -p "$project" stop web || true

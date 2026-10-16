@@ -118,7 +118,12 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
         content.ShouldContain("productoras audiovisuales");
         content.ShouldContain("empresas de alquiler de equipos");
-        content.ShouldContain("no está implementada");
+        content.ShouldContain("Ya puedes llevar un proyecto hasta su factura");
+        content.ShouldContain("Registra un cliente");
+        content.ShouldContain("trabajo facturable");
+        content.ShouldContain("descarga su PDF");
+        content.ShouldContain("iniciar sesión");
+        content.ShouldContain("No hay registro abierto ni una demo alojada");
         content.ShouldContain("no afirma cumplir requisitos legales o fiscales");
         (
             await page.GetByRole(AriaRole.Link, new() { Name = "Leer la guía de autoalojamiento" })

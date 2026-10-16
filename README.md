@@ -6,11 +6,9 @@ Licensed under AGPLv3 (see [COPYRIGHT.md](COPYRIGHT.md) for the brand boundary).
 
 ## Status
 
-Greenfield, first vertical slice implemented:
+The current interface lets a team register customers, create projects, record billable work, prepare invoice drafts and issue invoices with a downloadable PDF and audit history.
 
-The slice runs: project → billable lines → invoice draft → validation → finalization → immutable issued representation → PDF → audit event → compliance record.
-
-Not yet implemented: authentication (do not expose installations publicly), rectifying invoices, payments, VERI*FACTU submission (a seam exists; see [compliance seam](docs/architecture/compliance-seam.md)). Raccord makes **no legal compliance claim**.
+Sign-in is implemented and required to use the application. There is no hosted demo or public registration. The interface does not yet support payment management; rectifying invoices and VERI*FACTU submission are also unavailable. See the [compliance seam](docs/architecture/compliance-seam.md). Raccord makes **no legal compliance claim**.
 
 ## Quick start (Docker Compose)
 

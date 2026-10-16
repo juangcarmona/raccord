@@ -9,11 +9,13 @@ The repository already has a GitHub Pages workflow named `static-site.yml` that 
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Keep the homepage's editable source under `src/public-site/`.
 - Deliver Spanish copy while keeping page content separable for later translations.
 - Clearly state the current first-slice maturity and avoid implying authentication or legal compliance is implemented.
 
 **Non-Goals:**
+
 - Split or rename the engineering publisher in this issue; issue #247 owns workflow names, triggers, validation and publishing boundaries.
 - Deploy to `raccord.dev` or modify DNS, certificates, or live hosting configuration.
 - Add a product demo, application access, analytics, or a contact form.

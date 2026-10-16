@@ -9,51 +9,64 @@
         />
         <meta name="theme-color" content="#0b1020" />
         <title>Raccord — Operaciones y facturación audiovisual</title>
-        <link rel="stylesheet" href="./styles.css" />
+        <link rel="canonical" href="https://raccord.dev/es/" />
+        <link rel="alternate" hreflang="es" href="https://raccord.dev/es/" />
+        <link rel="alternate" hreflang="en" href="https://raccord.dev/en/" />
+        <link rel="alternate" hreflang="x-default" href="https://raccord.dev/" />
+        <link rel="stylesheet" href="../styles.css" />
     </head>
     <body>
         <a class="skip-link" href="#contenido">Saltar al contenido</a>
         <header class="site-header">
             <a class="wordmark" href="#inicio" aria-label="Raccord, inicio">Raccord<span>.</span></a>
             <nav aria-label="Navegación principal">
-                <a href="#que-es">Qué es</a>
-                <a href="#estado">Estado actual</a>
-                <a href="#adopcion">Autoalojamiento</a>
+                <a href="#que-es">Qué es Raccord</a>
+                <a href="#estado">Estado del proyecto</a>
+                <a href="#adopcion">Instalación</a>
             </nav>
-            <a class="header-link" href="https://github.com/juangcarmona/raccord">Ver el código</a>
+            <a class="header-link github-link" href="https://github.com/juangcarmona/raccord">
+                <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                    <path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.68-3.76-1.31-3.76-1.31-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.81 2.07 2.64 1.57.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.21.43-2.2 1.15-2.98-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.12-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.98 0 4.27-2.6 5.21-5.08 5.49.4.34.76 1.02.76 2.06v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z" />
+                </svg>
+                Ver Raccord en GitHub
+            </a>
+            <nav class="language-switcher" aria-label="Selector de idioma">
+                <a href="../es/" lang="es" aria-current="page">Español</a>
+                <a href="../en/" lang="en">English</a>
+            </nav>
         </header>
 
         <main id="contenido">
             <section class="hero" id="inicio" aria-labelledby="hero-title">
-                <p class="eyebrow">Operaciones audiovisuales, con continuidad</p>
-                <h1 id="hero-title">Del trabajo de producción a la factura, con todo en su sitio.</h1>
+                <p class="eyebrow">Para productoras audiovisuales y empresas de alquiler de equipos</p>
+                <h1 id="hero-title">Organiza tus proyectos y prepara sus facturas en el mismo lugar.</h1>
                 <p class="hero-copy">
-                    Raccord es una plataforma de código abierto y autoalojable para productoras audiovisuales y empresas
-                    de alquiler de equipos. Reúne proyectos, trabajo facturable y facturas en un mismo sistema.
+                    Registra clientes, proyectos y trabajo facturable. Después, prepara la factura y conserva a mano el
+                    documento emitido y su historial.
                 </p>
                 <div class="actions">
-                    <a class="button button-primary" href="#estado">Explorar lo que ya funciona</a>
+                    <a class="button button-primary" href="#estado">Ver qué puedes hacer</a>
                     <a class="button button-secondary" href="https://github.com/juangcarmona/raccord">
-                        Ver el proyecto en GitHub
+                        Explorar el proyecto
                     </a>
                 </div>
-                <p class="hero-note">Proyecto en etapa inicial · Sin cuenta pública ni demo abierta</p>
+                <p class="hero-note">Raccord está en desarrollo. No hay servicio alojado ni registro público.</p>
             </section>
 
             <section class="content-section" id="que-es" aria-labelledby="what-title">
                 <div class="section-heading">
-                    <p class="eyebrow">Una continuidad más clara</p>
+                    <p class="eyebrow">Proyectos y facturación</p>
                     <h2 id="what-title">Qué es Raccord</h2>
                 </div>
                 <div class="section-copy">
                     <p>
-                        Un rodaje conecta planificación, equipo, trabajo realizado y administración. Raccord está
-                        construyendo una herramienta para que las productoras y empresas de alquiler puedan seguir ese
-                        trabajo desde el proyecto hasta la facturación.
+                        Cada proyecto reúne trabajos que después hay que revisar y facturar. Raccord relaciona los
+                        clientes, los proyectos, el trabajo facturable y las facturas para que puedas consultar ese
+                        recorrido en un mismo sistema.
                     </p>
                     <p>
-                        El código y las instrucciones para ejecutar el proyecto están disponibles para que cada equipo
-                        pueda revisar cómo funciona y decidir si encaja en su forma de trabajar.
+                        Puedes consultar el código y comprobar qué incluye hoy. Raccord sigue en desarrollo; revisa sus
+                        límites antes de usarlo en tu empresa.
                     </p>
                 </div>
             </section>
@@ -61,32 +74,46 @@
             <section class="status-section" id="estado" aria-labelledby="status-title">
                 <div class="section-heading">
                     <p class="eyebrow">Estado del proyecto</p>
-                    <h2 id="status-title">Una primera parte ya se puede probar</h2>
+                    <h2 id="status-title">Ya puedes llevar un proyecto hasta su factura</h2>
                     <p>
-                        El primer flujo implementado enlaza proyectos, trabajo facturable y emisión de facturas. El
-                        proyecto sigue en una etapa temprana y continúa creciendo.
+                        Registra un cliente, crea un proyecto, añade el trabajo que vas a facturar y emite la factura
+                        con su PDF y su registro de auditoría.
                     </p>
                 </div>
                 <ol class="workflow" aria-label="Flujo implementado">
                     <li>
-                        <span>01</span><strong>Organizar</strong>
-                        <p>Crear un proyecto y registrar trabajo facturable.</p>
+                        <span>01</span><strong>Crear el proyecto</strong>
+                        <p>Registra al cliente, crea el proyecto y añade el trabajo facturable.</p>
                     </li>
                     <li>
-                        <span>02</span><strong>Preparar</strong>
-                        <p>Crear un borrador y validar sus datos antes de emitirlo.</p>
+                        <span>02</span><strong>Revisar la factura</strong>
+                        <p>Prepara un borrador y comprueba sus datos antes de emitirlo.</p>
                     </li>
                     <li>
-                        <span>03</span><strong>Emitir</strong>
-                        <p>Conservar la factura emitida, su PDF y el registro de auditoría.</p>
+                        <span>03</span><strong>Emitir y guardar</strong>
+                        <p>Emite la factura, descarga su PDF y consulta el registro de auditoría.</p>
                     </li>
                 </ol>
+                <figure class="product-shot">
+                    <a href="../images/invoice-issued.png" aria-label="Abrir la captura de la factura emitida a tamaño completo">
+                        <img
+                            src="../images/invoice-issued.png"
+                            alt="Factura emitida de ejemplo con una línea de trabajo, total, descarga del PDF y registro de auditoría. Los datos son ficticios."
+                            loading="eager"
+                            decoding="async"
+                        />
+                    </a>
+                    <figcaption>
+                        <strong>Una factura emitida, con su PDF y su historial.</strong>
+                        <span>Captura del producto con datos de prueba ficticios. <a href="../images/invoice-issued.png">Abrir imagen a tamaño completo</a>.</span>
+                    </figcaption>
+                </figure>
                 <div class="maturity-note">
-                    <h3>Lo que todavía no está listo</h3>
+                    <h3>Lo que falta</h3>
                     <p>
-                        La autenticación aún no está implementada: no expongas una instalación de Raccord en Internet.
-                        Los pagos, las facturas rectificativas y el envío VERI*FACTU tampoco están implementados.
-                        Raccord no afirma cumplir requisitos legales o fiscales.
+                        Para usar Raccord hay que iniciar sesión. No hay demo alojada ni registro público. La interfaz
+                        todavía no permite gestionar cobros ni enviar facturas a VERI*FACTU. Raccord no afirma cumplir
+                        requisitos legales o fiscales.
                     </p>
                     <a href="https://github.com/juangcarmona/raccord/blob/main/README.md">
                         Consultar el estado detallado en el repositorio
@@ -96,11 +123,11 @@
 
             <section class="adoption-section" id="adopcion" aria-labelledby="adoption-title">
                 <div>
-                    <p class="eyebrow">Código abierto y autoalojable</p>
-                    <h2 id="adoption-title">Revisa el proyecto y sus requisitos antes de instalarlo.</h2>
+                    <p class="eyebrow">Instalación propia</p>
+                    <h2 id="adoption-title">Prueba Raccord en tu propio entorno.</h2>
                     <p>
-                        La guía explica cómo ejecutarlo con Docker Compose y recuerda las precauciones de seguridad que
-                        exige su estado actual.
+                        La guía explica cómo ponerlo en marcha con Docker Compose y qué debes revisar antes de hacerlo
+                        accesible a otras personas.
                     </p>
                 </div>
                 <div class="actions">
@@ -108,10 +135,10 @@
                         class="button button-primary"
                         href="https://github.com/juangcarmona/raccord/blob/main/docs/operations/self-hosting.md"
                     >
-                        Leer la guía de autoalojamiento
+                        Ver la guía de instalación
                     </a>
                     <a class="button button-secondary" href="https://github.com/juangcarmona/raccord">
-                        Explorar el código fuente
+                        Código y contribuciones
                     </a>
                 </div>
             </section>

@@ -32,7 +32,7 @@ jobs:
         working-directory: deploy
         run: |
           # CI-only values; nothing here touches any real environment.
-          POSTGRES_PASSWORD=ci-only RACCORD_SEED_DEMO_DATA=true docker compose up --detach --wait
+          POSTGRES_PASSWORD=ci-only RACCORD_IMAGE=raccord:ci RACCORD_SEED_DEMO_DATA=true docker compose up --detach --wait
       - name: ZAP baseline scan (blocking on FAIL)
         uses: zaproxy/action-baseline@v0.15.0
         with:
@@ -48,4 +48,5 @@ jobs:
         # string even when only tearing down, so the variable must be set here too.
         env:
           POSTGRES_PASSWORD: ci-only
+          RACCORD_IMAGE: raccord:ci
         run: docker compose down --volumes

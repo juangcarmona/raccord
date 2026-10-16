@@ -2,6 +2,18 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-16 · Release mechanics need a pre-release upgrade rehearsal
+
+- Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
+- Action: Rehearse the Compose install, upgrade, migration-failure and restore mechanics with images built from the PR base and candidate revisions; label this as a pre-release rehearsal until two supported releases exist.
+- Check: CI confirms the upgrade and restore preserve customer, project, issued-invoice and audit-event rows plus document-volume content; release notes do not claim compatibility with an unpublished release.
+
+## 2026-10-16 · Restore every module schema from a database dump
+
+- Observation: The first live restore rehearsal dropped only `public`, leaving module schemas behind; `pg_restore` then failed when it tried to recreate an existing schema.
+- Action: Drop all application schemas before restoring a full PostgreSQL custom-format dump, then recreate the schema objects and append-only triggers from the dump.
+- Check: The release rehearsal restores into a populated database and verifies the customer, project, issued-invoice and audit-event rows, document file, and application readiness.
+
 ## 2026-10-16 · Each E2E entry point prepares the static homepage
 
 - Observation: PR CI built `src/public-site/dist/` before E2E and passed, but the separate post-merge engineering E2E job did not; its homepage journey failed with `ERR_FILE_NOT_FOUND` in run [38853228885](https://github.com/juangcarmona/raccord/actions/runs/38853228885).
@@ -313,3 +325,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A focused CSharpier check on the new browser test passed locally, but hosted full-repository CSharpier caught the test project file's long content include.
 - **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
+
+## 2026-10-16 · Rehearsal migration failures must reach the application
+
+- **Observation:** The deliberate Alpine failure image had no application entrypoint, so Docker failed before the migration command ran and the rehearsal did not cover migration recovery.
+- **Action:** Use the candidate application image with a read-only test database to make EF migration writes fail, then restore database writability before testing recovery.
+- **Check:** The rehearsal confirms the migration process exits unsuccessfully, the existing web container remains running, and restore returns database, documents and readiness to the backed-up state.
+
+## 2026-10-16 · Restore waits for application readiness
+
+- **Observation:** The restore rehearsal started the web container and probed readiness immediately, before the application had finished starting.
+- **Action:** Make the restore command wait for the Compose health check before reporting completion.
+- **Check:** The rehearsal confirms the restored application is ready and retains its database records and document files before cleanup.

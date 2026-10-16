@@ -37,7 +37,49 @@ public sealed class InvoiceDocumentJourney_Should_DownloadFromInvoicePage(Distri
                 var path = await download.PathAsync();
                 path.ShouldNotBeNullOrWhiteSpace();
                 new FileInfo(path!).Length.ShouldBeGreaterThan(0);
+
+                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                {
+                    System.IO.Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+                    await MaskEmailTextAsync(page);
+                    await page.ScreenshotAsync(
+                        new PageScreenshotOptions
+                        {
+                            Path = Path.Combine(
+                                PlaywrightArtifacts.EvidenceDirectory,
+                                "invoice-publication.png"
+                            ),
+                            FullPage = true,
+                            Mask =
+                            [
+                                page.Locator("[data-public-mask='email']"),
+                                page.GetByText(
+                                    $"Productora E2E {RunStamp}",
+                                    new() { Exact = true }
+                                ),
+                                page.GetByText("Tax ID: B87654321", new() { Exact = true }),
+                            ],
+                            MaskColor = "#e5e7eb",
+                        }
+                    );
+                }
             }
         );
+    }
+
+    private static async Task MaskEmailTextAsync(IPage page)
+    {
+        await page.Locator("body")
+            .EvaluateAsync(
+                "body => { const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT); "
+                    + "const nodes = []; let node; while ((node = walker.nextNode())) "
+                    + "if (node.nodeValue.includes('admin@example.com')) nodes.push(node); "
+                    + "for (const textNode of nodes) { const parts = textNode.nodeValue.split('admin@example.com'); "
+                    + "const fragment = document.createDocumentFragment(); parts.forEach((part, index) => { "
+                    + "if (part) fragment.append(document.createTextNode(part)); if (index < parts.length - 1) { "
+                    + "const mask = document.createElement('span'); mask.dataset.publicMask = 'email'; "
+                    + "mask.textContent = 'admin@example.com'; fragment.append(mask); } }); "
+                    + "textNode.replaceWith(fragment); } }"
+            );
     }
 }

@@ -70,13 +70,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             await AssertMobileKeyboardNavigationAsync(page);
             if (shouldCaptureEvidence)
             {
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = Path.Combine(evidenceDirectory, "public-homepage-mobile.png"),
-                        FullPage = true,
-                    }
-                );
+                await CaptureMobileScreenshotAsync(page, evidenceDirectory);
             }
             await AssertDesktopLayoutAsync(page);
             if (shouldCaptureEvidence)
@@ -104,7 +98,12 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
 
     private static async Task OpenHomepageAsync(IPage page)
     {
-        var homepagePath = Path.Combine(AppContext.BaseDirectory, "public-site", "index.html");
+        var homepagePath = Path.Combine(
+            AppContext.BaseDirectory,
+            "public-site",
+            "es",
+            "index.html"
+        );
         await page.GotoAsync(new Uri(homepagePath).AbsoluteUri);
     }
 
@@ -114,20 +113,35 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         (await page.Locator("html").GetAttributeAsync("lang")).ShouldBe("es");
         (
             await page.GetByRole(AriaRole.Heading, new() { Level = 1 }).InnerTextAsync()
-        ).ShouldContain("Del trabajo de producción a la factura");
+        ).ShouldContain("Organiza tus proyectos y prepara sus facturas");
         var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
         content.ShouldContain("productoras audiovisuales");
         content.ShouldContain("empresas de alquiler de equipos");
-        content.ShouldContain("no está implementada");
+        content.ShouldContain("Ya puedes llevar un proyecto hasta su factura");
+        content.ShouldContain("Registra un cliente");
+        content.ShouldContain("trabajo facturable");
+        content.ShouldContain("descarga su PDF");
+        content.ShouldContain("iniciar sesión");
+        content.ShouldContain("No hay demo alojada ni registro público");
         content.ShouldContain("no afirma cumplir requisitos legales o fiscales");
+        content.ShouldContain("Raccord está en desarrollo");
+        content.ShouldContain("No hay demo alojada ni registro público");
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Leer la guía de autoalojamiento" })
+            await page.Locator(".product-shot img")
+                .EvaluateAsync<bool>("image => image.complete && image.naturalWidth > 0")
+        ).ShouldBeTrue();
+        (
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver Raccord en GitHub" })
+                .CountAsync()
+        ).ShouldBe(1);
+        (
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver la guía de instalación" })
                 .GetAttributeAsync("href")
         ).ShouldBe(
             "https://github.com/juangcarmona/raccord/blob/main/docs/operations/self-hosting.md"
         );
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "Explorar lo que ya funciona" })
+            await page.GetByRole(AriaRole.Link, new() { Name = "Ver qué puedes hacer" })
                 .GetAttributeAsync("href")
         ).ShouldBe("#estado");
         (await page.GetByRole(AriaRole.Combobox).CountAsync()).ShouldBe(0);
@@ -138,12 +152,59 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         {
             (
                 href.StartsWith('#')
+                || href.StartsWith("/images/", StringComparison.Ordinal)
+                || href.StartsWith("../", StringComparison.Ordinal)
                 || href.StartsWith(
                     "https://github.com/juangcarmona/raccord",
                     StringComparison.Ordinal
                 )
             ).ShouldBeTrue();
         }
+        (
+            await page.GetByRole(AriaRole.Link, new() { Name = "English" })
+                .GetAttributeAsync("href")
+        ).ShouldBe("../en/");
+        await AssertEnglishLocaleAsync(page);
+    }
+
+    private static async Task AssertEnglishLocaleAsync(IPage page)
+    {
+        var englishPath = Path.Combine(AppContext.BaseDirectory, "public-site", "en", "index.html");
+        await page.GotoAsync(new Uri(englishPath).AbsoluteUri);
+        (await page.Locator("html").GetAttributeAsync("lang")).ShouldBe("en");
+        (await page.TitleAsync()).ShouldBe("Raccord — Audiovisual operations and invoicing");
+        var content = await page.GetByRole(AriaRole.Main).InnerTextAsync();
+        content.ShouldContain("Register a customer, create a project");
+        content.ShouldContain("There is no hosted demo or public registration");
+        content.ShouldContain("Raccord does not claim legal or");
+        (
+            await page.Locator(".product-shot img")
+                .EvaluateAsync<bool>("image => image.complete && image.naturalWidth > 0")
+        ).ShouldBeTrue();
+        await page.SetViewportSizeAsync(375, 812);
+        (
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            )
+        ).ShouldBeFalse();
+        (
+            await page.GetByRole(AriaRole.Link, new() { Name = "Español" })
+                .GetAttributeAsync("href")
+        ).ShouldBe("../es/");
+        await OpenHomepageAsync(page);
+    }
+
+    private static async Task CaptureMobileScreenshotAsync(IPage page, string evidenceDirectory)
+    {
+        await page.Locator(".product-shot img").EvaluateAsync("image => image.decode()");
+        await page.EvaluateAsync("() => document.activeElement?.blur()");
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(evidenceDirectory, "public-homepage-mobile.png"),
+                FullPage = true,
+            }
+        );
     }
 
     private static async Task AssertMobileKeyboardNavigationAsync(IPage page)

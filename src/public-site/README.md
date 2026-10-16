@@ -1,23 +1,21 @@
-# Public homepage
+# Public site assets
 
-The homepage is a dependency-free static site. It is separate from the Raccord application, so previewing it never starts or exposes an application instance.
+Product screenshots must come from a successful Playwright journey in `.github/workflows/ci.yml`. The job sets `PLAYWRIGHT_CAPTURE_EVIDENCE=true` and uploads `playwright-artifacts/` for seven days, including successful checkpoints. `InvoiceDocumentJourney_Should_DownloadFromInvoicePage` issues a synthetic invoice and downloads its PDF; it saves the publication-safe screenshot as `invoice-publication.png` after masking the account email, recipient name and tax identifier. The committed invoice screenshot came from [CI run 38889875378](https://github.com/juangcarmona/raccord/actions/runs/38889875378), at `tests/Raccord.EndToEndTests/bin/Release/net10.0/playwright-artifacts/invoice-publication.png`; its `invoice-document-download.json` result says `passed`.
 
-Build the site from the repository root:
+Before publishing an image, confirm its matching `invoice-document-download.json` result says `passed`, inspect the image for fictional data and legibility, and check that it contains no secrets, traces or failure state. Commit the reviewed image under `src/public-site/images/` so the asset remains available after the CI artifact expires.
 
-```sh
-node src/public-site/build.mjs
-```
+To refresh a screenshot locally, follow the E2E instructions in `docs/operations/local-development.md`, run that focused journey with `PLAYWRIGHT_CAPTURE_EVIDENCE=true`, inspect the checkpoint, and replace the committed image only after the journey passes. If Docker is unavailable locally, use the matching successful CI artifact.
 
-Preview the generated files locally:
+## Locales and translation review
 
-```sh
-python3 -m http.server 4173 --directory src/public-site/dist
-```
+The Spanish page in `index.html` is the source for public-site copy. English lives in `locales/en/index.html`; `build.mjs` emits `/es/` and `/en/`, and the root URL directs visitors to Spanish unless their browser language matches an available locale. Keep the language selector, page metadata, canonical and `hreflang` links, navigation, image descriptions, and every maturity or safety notice complete in each locale. A locale is not ready to publish while any page is incomplete or mixes languages.
 
-Open <http://localhost:4173>. The generated `dist/` directory is a build artifact; edit the source files in this directory instead.
+When Spanish product claims, security guidance, or legal and tax disclosures change, update English in the same pull request. A fluent human reviewer checks each translation, and the product owner checks capability statements and disclosures against the verified inventory in issue [#245](https://github.com/juangcarmona/raccord/issues/245). Machine translation can help draft wording, but it does not replace review. Run the public-site build and locale journey before merging.
 
-## Hosting
+## Language rollout
 
-The planned production and preview host is Cloudflare Pages, connected to this repository through Cloudflare's Git integration. Configure the repository root directory as `src/public-site`, the build command as `npm run build`, and the build output directory as `dist`; the checked-in `wrangler.jsonc` records the Pages project name and output directory. The `main` branch is the production branch and other branches use Pages preview deployments. The Git integration builds this subtree only and does not use a repository deployment token.
+The initial rollout is Spanish first, then English. French is the next candidate, followed by German. The 2024 EU language survey reports French as the most commonly spoken EU foreign language after English (11%) and German next (10%). Global estimates also put French farther ahead: the Organisation internationale de la Francophonie counted 321 million French speakers in 2022, while the Goethe-Institut estimates roughly 130 million German speakers. These global counts use different source methods, so use them as directional evidence; revisit priorities using visitor demand and translation review capacity.
 
-The Git integration must be connected once in the Cloudflare dashboard. Bind `raccord.dev` to the production project only after the Owner approves the production domain change. Pull-request previews and the checked-in GitHub Actions build can be used before that binding; see [the deployment guide](../../docs/operations/public-site-deployment.md).
+After French and German, phase the remaining official EU languages by the latest EU survey on language knowledge and use, then by visitor demand and the availability of a fluent reviewer. Recheck the order when a phase is planned. The official-language set is listed by the [European Union](https://european-union.europa.eu/principles-countries-history/languages_en).
+
+Sources: [European Commission, 2024 Eurobarometer results](https://ec.europa.eu/commission/presscorner/api/files/document/print/fen/ip_24_2686/IP_24_2686_EN.pdf), [Organisation internationale de la Francophonie, French speakers worldwide](https://observatoireancien.francophonie.org/qui-parle-francais-dans-le-monde/), and [Goethe-Institut, German speakers worldwide](https://www.goethe.de/prj/dlp/en/magazin-sprache/22772878.html).

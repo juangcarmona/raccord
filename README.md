@@ -6,25 +6,27 @@ Licensed under AGPLv3 (see [COPYRIGHT.md](COPYRIGHT.md) for the brand boundary).
 
 ## Status
 
-Greenfield, first vertical slice implemented:
+The current interface lets a team register customers, create projects, record billable work, prepare invoice drafts and issue invoices with a downloadable PDF and audit history.
 
-The slice runs: project → billable lines → invoice draft → validation → finalization → immutable issued representation → PDF → audit event → compliance record.
-
-Not yet implemented: authentication (do not expose installations publicly), rectifying invoices, payments, VERI*FACTU submission (a seam exists; see [compliance seam](docs/architecture/compliance-seam.md)). Raccord makes **no legal compliance claim**.
+Sign-in is implemented and required to use the application. There is no hosted demo or public registration. The interface does not yet support payment management; rectifying invoices and VERI*FACTU submission are also unavailable. See the [compliance seam](docs/architecture/compliance-seam.md). Raccord makes **no legal compliance claim**.
 
 ## Quick start (Docker Compose)
 
-```bash
-cp deploy/.env.example deploy/.env
-```
-
-Set `POSTGRES_PASSWORD` in `deploy/.env` (and `RACCORD_SEED_DEMO_DATA=true` for fictional demo data), then:
+When a stable release is available, choose its image digest from [GitHub Releases](https://github.com/juangcarmona/raccord/releases) and run these commands from the repository root. If the release list is empty, there is no supported official image to install yet.
 
 ```bash
-docker compose -f deploy/docker-compose.yml up -d --build
+cd deploy
+cp .env.example .env
 ```
 
-Open <http://localhost:8080>. Details: [self-hosting](docs/operations/self-hosting.md).
+Set `RACCORD_IMAGE` to the selected digest and `POSTGRES_PASSWORD` in `.env`, then pull and start the stack:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+Open <http://localhost:8080>. Follow the [self-hosting guide](docs/operations/self-hosting.md) to create the first administrator and to upgrade or restore an installation.
 
 ## Development
 

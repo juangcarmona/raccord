@@ -329,7 +329,7 @@ jobs:
         run: docker build -f deploy/docker/Dockerfile -t raccord:ci .
       - name: Validate Compose file
         working-directory: deploy
-        run: POSTGRES_PASSWORD=ci-only docker compose config --quiet
+        run: POSTGRES_PASSWORD=ci-only RACCORD_IMAGE=raccord:ci docker compose config --quiet
       - name: Build and lint Bicep
         run: |
           az bicep install

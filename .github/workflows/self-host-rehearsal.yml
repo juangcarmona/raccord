@@ -1,0 +1,66 @@
+name: Self-host release rehearsal
+
+on:
+  pull_request:
+    paths:
+      - "deploy/**"
+      - ".github/scripts/rehearse-self-host-release.sh"
+      - ".github/workflows/release.yml"
+      - ".github/workflows/self-host-rehearsal.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: self-host-rehearsal-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compose-upgrade:
+    name: Clean install, upgrade, failure recovery and restore
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Resolve the PR base revision
+        id: refs
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [[ -n "$PR_BASE_SHA" ]]; then
+            base_sha="$PR_BASE_SHA"
+          else
+            base_sha="$(git rev-parse HEAD^)"
+          fi
+          echo "base_sha=$base_sha" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ steps.refs.outputs.base_sha }}
+          path: base
+
+      - name: Start a local image registry
+        run: |
+          docker run --detach --name raccord-release-registry --publish 5000:5000 registry:2
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:5000/v2/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "Local image registry did not become ready." >&2
+          exit 1
+
+      - name: Build and push the PR base image
+        run: |
+          docker build --file base/deploy/docker/Dockerfile --tag localhost:5000/raccord:previous base
+          docker push localhost:5000/raccord:previous
+
+      - name: Build and push the PR candidate image
+        run: |
+          docker build --file deploy/docker/Dockerfile --tag localhost:5000/raccord:candidate .
+          docker push localhost:5000/raccord:candidate
+
+      - name: Rehearse install, upgrade, migration failure and restore
+        run: bash .github/scripts/rehearse-self-host-release.sh localhost:5000/raccord:previous localhost:5000/raccord:candidate

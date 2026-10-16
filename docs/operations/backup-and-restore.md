@@ -19,7 +19,7 @@ From `deploy/`, with the stack running:
 bash scripts/backup.sh ./backups
 ```
 
-This writes `raccord-db-<stamp>.dump`, `raccord-documents-<stamp>.tgz` and a `.sha256` file. The files are assembled in a hidden temporary directory and published only after both exports and the checksum manifest succeed, so a failed export does not leave a backup set that looks complete. Copy successful sets off the host (encrypted) and schedule the script (for example nightly via cron). `deploy/backups*/` is git-ignored.
+This writes `raccord-db-<stamp>.dump`, `raccord-documents-<stamp>.tgz`, the running web image reference when available, and a `.sha256` file covering the set. The files are assembled in a hidden temporary directory and published only after the exports and checksum manifest succeed, so a failed export does not leave a backup set that looks complete. Copy successful sets off the host (encrypted) and schedule the script (for example nightly via cron). `deploy/backups*/` is git-ignored.
 
 Set `RACCORD_BACKUP_RETENTION_DAYS` to control local retention; it defaults to 30 days. The cleanup runs only after the new manifest is published. The manifest timestamp is the recovery point used by `restore.sh`.
 
@@ -29,7 +29,7 @@ Set `RACCORD_BACKUP_RETENTION_DAYS` to control local retention; it defaults to 3
 bash scripts/restore.sh ./backups <stamp>
 ```
 
-The script verifies checksums, stops `web`, recreates the database schema from the dump (which also restores the append-only triggers), restores the documents, and starts `web`.
+The script verifies checksums, stops `web`, drops all application schemas so the custom-format dump can recreate its module tables and append-only triggers, restores the documents, and starts `web` using the image reference recorded in the backup when available. Older backup sets without image metadata continue to use the configured `RACCORD_IMAGE`.
 
 ### Rehearsal (performed 2026-10-14)
 

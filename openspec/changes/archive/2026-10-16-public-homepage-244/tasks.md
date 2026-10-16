@@ -17,5 +17,5 @@
 ## 3. Review readiness
 
 - [x] 3.1 Capture a local rendered preview and verify the homepage spec scenarios against it.
-- [ ] 3.2 Confirm issue #247's workflow path exclusion and validation plan are coordinated before merging website source to main.
+- [x] 3.2 Confirm issue #247's workflow path exclusion and validation plan are coordinated before merging website source to main.
 - [x] 3.3 Run repository formatting and relevant website checks, then record the evidence in the pull request.

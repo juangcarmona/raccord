@@ -10,4 +10,4 @@
 - [x] Add Cloudflare Pages project/output configuration and document the repository integration, preview and production roles, and production approval boundary without a stored deployment token.
 - [x] Update the architecture and operations records to describe the split publishers and site ownership.
 - [x] Pass workflow path-routing fixtures, static-site tests, public-site build checks, Markdown lint, OpenSpec validation, and ProductShape citation verification.
-- [ ] Obtain a green hosted CI run on the complete change.
+- [x] Obtain a green hosted CI run on the complete change.

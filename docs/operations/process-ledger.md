@@ -366,3 +366,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The WebApplicationFactory test host uses a fake authentication scheme with a dummy user ID, so real Identity sign-in is not configured there and the current-user endpoint could not resolve the seeded administrator.
 - **Action:** Let the test-only authentication handler take a user ID from an explicit test header; use the seeded administrator's ID when exercising profile routes.
 - **Check:** The API test verifies profile persistence and that submitted email data cannot change the account's sign-in address; production authentication remains on the Identity cookie scheme.
+
+## 2026-10-16 · Browser journeys normalize the signed-in profile language
+
+- **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence.
+- **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify that it survives reload and sign-in.
+- **Check:** The hosted AppHost run completes the warehouse customer form with English labels and captures the account journey in Spanish after reauthentication.

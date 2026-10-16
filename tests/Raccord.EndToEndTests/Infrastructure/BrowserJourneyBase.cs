@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using Microsoft.Playwright;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -16,7 +17,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected DistributedAppFixture App { get; } = app;
 
     /// <summary>
-    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; on failure,
+    /// Runs <paramref name="journey"/> with the demo user's profile language set to English and tracing on; on failure,
     /// saves trace and screenshot artifacts under <c>playwright-artifacts/</c> and rethrows. The
     /// locale is pinned because the SPA picks es/en from <c>navigator.language</c> and journeys
     /// assert on localized labels — leaving it to the runner's default would make the suite's
@@ -51,6 +52,10 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
                 await page.WaitForURLAsync(url =>
                     url.EndsWith("/projects", StringComparison.Ordinal)
                 );
+
+                await NormalizeProfileLanguageAsync(page);
+                await page.ReloadAsync();
+                await page.GetByRole(AriaRole.Heading, new() { Name = "Projects" }).WaitForAsync();
             }
             await journey(page);
             if (PlaywrightArtifacts.VisualEvidenceEnabled)
@@ -79,6 +84,35 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             {
                 PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
             }
+        }
+    }
+
+    private static async Task NormalizeProfileLanguageAsync(IPage page)
+    {
+        var current = await page.APIRequest.GetAsync("/api/auth/me");
+        if (!current.Ok)
+        {
+            throw new InvalidOperationException("The signed-in E2E user could not be loaded.");
+        }
+
+        using var profile = JsonDocument.Parse(await current.TextAsync());
+        var displayName = profile.RootElement.GetProperty("displayName").GetString() ?? "E2E Admin";
+        var normalized = await page.APIRequest.PutAsync(
+            "/api/auth/me",
+            new APIRequestContextOptions
+            {
+                Data = JsonSerializer.Serialize(new { displayName, preferredLanguage = "en" }),
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        if (!normalized.Ok)
+        {
+            throw new InvalidOperationException(
+                "The signed-in E2E user's language could not be normalized to English."
+            );
         }
     }
 

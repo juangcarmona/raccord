@@ -13,7 +13,10 @@ if (!snapshotArgument || !outputArgument) {
 const snapshot = resolve(snapshotArgument);
 const output = resolve(outputArgument);
 await mkdir(output, { recursive: true });
-const browser = await puppeteer.launch({ headless: true });
+const browser = await puppeteer.launch({
+  headless: true,
+  args: process.env.CI === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
+});
 
 const views = [
   { section: '03', diagram: 0, name: 'context-business' },

@@ -1,4 +1,4 @@
 {
-    "name": "raccord-public-site",
+    "name": "raccord",
     "pages_build_output_dir": "./dist",
 }

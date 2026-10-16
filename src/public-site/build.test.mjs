@@ -19,7 +19,7 @@ describe("public site build", () => {
         );
         const hostingConfig = JSON.parse(configText.replace(/,\s*(?=})/g, ""));
 
-        assert.equal(hostingConfig.name, "raccord-public-site");
+        assert.equal(hostingConfig.name, "raccord");
         assert.equal(hostingConfig.pages_build_output_dir, "./dist");
         assert.match(
             await readFile(path.join(outputDirectory, "index.html"), "utf8"),

@@ -343,3 +343,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The arc42 page already renders sanitized SVGs, but the pull-request job tested only helper scripts and reviewers had no artifact covering diagram layout or accessibility names.
 - **Action:** Keep Markdown diagrams canonical, follow the [arc42 diagram pull-request checklist](../architecture/arc42/diagrams/visual-language.md), require accessible titles and source evidence, render the complete static snapshot in the focused PR job, and attach the HTML plus diagram screenshots; use a human visual review instead of a fragile pixel baseline. Agent-assisted drafts must pin a clean source revision, carry evidence to each claimed node, pass a renderer's artifact and browser checks, receive visual review, and be transferred into reviewed Mermaid only after each relationship is verified.
 - **Check:** Broken diagram source or a missing title fails validation, and the PR artifact contains rendered sections 03, 05, 06, 07 and 10 without invoking the application E2E pipeline.
+
+## 2026-10-16 · Applied Product Changes refresh citations across consumers
+
+- **Observation:** Applying an approved Product Change updates artifact digests and makes citations in existing OpenSpec documents stale.
+- **Action:** Regenerate citations for every changed artifact across all consumers and run citation verification with the pinned OpenSpec CLI available on PATH before opening the PR.
+- **Check:** ProductShape validation passes, OpenSpec validation passes, and citation verification reports zero stale, tampered or unresolved citations.

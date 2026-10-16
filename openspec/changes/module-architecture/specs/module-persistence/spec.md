@@ -23,7 +23,7 @@ Each module SHALL have one DbContext mapping only its own tables, in a PostgreSQ
 
 <!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
 
-<!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:a29bab7607c529ef8b86f34e32758cf8557927cf7e71812bded9aac01c3ef469" -->
+<!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
 
 <!-- pdac:cite id="QR-CONCURRENCY-CONSISTENCY" digest="sha256:320945ebf06be10006380b4e183377f48569c75224692b903f3cf093887736a2" -->
 

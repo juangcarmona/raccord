@@ -168,6 +168,9 @@ jobs:
           dotnet restore Raccord.slnx
           dotnet tool restore
 
+      - name: Build public homepage
+        run: node src/public-site/build.mjs
+
       - name: Build E2E suite
         run: dotnet build Raccord.slnx -c Release --no-restore
 

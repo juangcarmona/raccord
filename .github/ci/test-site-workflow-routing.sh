@@ -28,6 +28,25 @@ fi
 require_path "$post_merge_workflow" 'openspec/**'
 require_path "$post_merge_workflow" 'src/public-site/**'
 require_path "$post_merge_workflow" '.github/workflows/public-site.yml'
+
+require_before() {
+  local workflow="$1"
+  local earlier="$2"
+  local later="$3"
+  local earlier_line
+  local later_line
+  earlier_line="$(awk -v marker="$earlier" 'index($0, marker) { print NR; exit }' "$workflow")"
+  later_line="$(awk -v marker="$later" 'index($0, marker) { print NR; exit }' "$workflow")"
+  if [ -z "$earlier_line" ] || [ -z "$later_line" ] || [ "$earlier_line" -ge "$later_line" ]; then
+    printf 'Expected %s before %s in %s\n' "$earlier" "$later" "$workflow" >&2
+    exit 1
+  fi
+  printf 'PASS %s precedes %s in %s\n' "$earlier" "$later" "$workflow"
+}
+
+require_before .github/workflows/ci.yml 'run: node src/public-site/build.mjs' 'name: Build (Release, so discovery matches the manifest'
+require_before "$engineering_workflow" 'run: node src/public-site/build.mjs' 'name: Build E2E suite'
+
 app_job_conditions="$(grep -Fc "if: needs.changes.outputs.non_app_only != 'true'" "$ci_workflow")"
 if [ "$app_job_conditions" -ne 6 ]; then
   printf 'Expected six application jobs gated for documentation/public-site-only diffs, found %s\n' "$app_job_conditions" >&2

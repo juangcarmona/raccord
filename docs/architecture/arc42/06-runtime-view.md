@@ -40,14 +40,28 @@ description: Shows the runtime interactions for the system's important scenarios
 6. Render the PDF, store it in object storage, audit `invoice.document.stored` with the PDF hash.
 7. Commit everything in one transaction. If the commit fails, the stored PDF is an orphan under a deterministic key and no invoice exists.
 
-```text
-Web ─► InvoicingWorkflow ─► Domain (validate, allocate, snapshot)
-                         ├─► IssuedInvoiceRepository.Add
-                         ├─► ComplianceRecorder.Register
-                         ├─► AuditTrail.Append ×2
-                         ├─► Renderer.Render ─► DocumentStore.Save
-                         └─► UnitOfWork.SaveChanges (single DB transaction)
+```mermaid
+sequenceDiagram
+    accTitle: Invoice finalization runtime flow
+    actor User
+    participant Web as Web API
+    participant Workflow as Invoice workflow
+    participant Domain as Invoice model
+    participant Adapters as Storage adapters
+    User->>Web: Finalize draft
+    Web->>Workflow: Validate and load records
+    Workflow->>Domain: Validate and allocate number
+    Domain-->>Workflow: Issued invoice snapshot
+    Workflow->>Adapters: Persist invoice and project state
+    Workflow->>Adapters: Record compliance and audit events
+    Workflow->>Adapters: Render and store PDF
+    Workflow->>Adapters: Commit unit of work
+    Adapters-->>Workflow: Committed
+    Workflow-->>Web: Finalization result
+    Web-->>User: Invoice and document
 ```
+
+This flow follows `src/Raccord.Application/Invoicing/InvoicingWorkflow.cs` and the web endpoint mapping in `src/Raccord.Web/Api/Endpoints.cs`; a failed validation returns before number allocation or persistence.
 
 ## R-3 Read an invoice / download its document
 

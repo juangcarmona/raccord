@@ -207,12 +207,10 @@ body.nav-collapsed aside.nav .nav-code { display:block; }
 .doc hr { border: none; border-top: 1px solid var(--line); margin: 1.4rem 0; }
 .xref-dead code { word-break: break-all; }
 figure.diagram {
-  margin: 1rem 0; padding: 0.7rem; border: 1px solid var(--line); border-radius: 4px;
-  /* Diagrams keep mermaid's light palette: dark text on a light paper ground,
-     so they stay readable in both appearances. */
-  background: #ffffff; color: #333; overflow-x: auto; text-align: center;
+  margin: 1rem 0; padding: 0.85rem; border: 1px solid var(--line); border-radius: 6px;
+  background: #ffffff; color: #183b56; overflow-x: auto; overscroll-behavior-x: contain;
 }
-figure.diagram svg { max-width: 100%; height: auto; }
+figure.diagram svg { display: block; width: auto; max-width: min(100%, 72rem); height: auto; margin-inline: auto; }
 .diagram-missing { color: var(--muted); font-style: italic; }
 mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 0.05em; }
 

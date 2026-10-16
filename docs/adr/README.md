@@ -32,3 +32,4 @@ Records are immutable in spirit. To reverse or replace a decision, write a new r
 | ADR-0024 | [Publish static engineering snapshots through GitHub Pages](0024-publish-static-engineering-snapshots-on-github-pages.md)                                          | Accepted               | 2026-10-13 |
 | ADR-0025 | [Host the public site through Cloudflare Pages](0025-host-the-public-site-on-cloudflare-pages.md)                                                                  | Accepted               | 2026-10-16 |
 | ADR-0026 | [Distribute versioned application images through Docker Compose](0026-publish-versioned-compose-releases.md)                                                       | Accepted               | 2026-10-16 |
+| ADR-0027 | [Keep architecture diagram sources beside arc42 prose](0027-keep-architecture-diagram-sources-with-arc42.md)                                                       | Accepted               | 2026-10-16 |

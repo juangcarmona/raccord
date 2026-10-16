@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { renderMarkdown, stripDuplicateTitle } from '../render.mjs';
+import {
+  getDiagramAccessibleTitle,
+  MERMAID_CONFIG,
+  normalizeMermaidSvg,
+  renderMarkdown,
+  stripDiagramAccessibilityTitle,
+  stripDuplicateTitle,
+  validateDiagramTitles,
+} from '../render.mjs';
 
 const fileToRoute = new Map();
 
@@ -14,6 +22,61 @@ test('removes a leading section H1 that repeats frontmatter title', () => {
 test('does not remove a non-matching H1', () => {
   const source = '# Different heading\n\nContent.\n';
   assert.equal(stripDuplicateTitle(source, 'Glossary'), source);
+});
+
+test('validates a descriptive accessibility title for each diagram', () => {
+  const sources = [
+    'flowchart LR\naccTitle: Invoice data flow\na --> b',
+    'sequenceDiagram\naccTitle: Sign-in sequence\nUser->>Web: Sign in',
+  ];
+  assert.deepEqual(validateDiagramTitles(sources), []);
+  assert.equal(getDiagramAccessibleTitle(sources[0]), 'Invoice data flow');
+  assert.deepEqual(validateDiagramTitles([...sources, 'flowchart TB\na --> b']), [
+    'Diagram 3 is missing an accTitle accessibility name',
+  ]);
+});
+
+test('removes the source accessibility directive before Mermaid parsing', () => {
+  assert.equal(
+    stripDiagramAccessibilityTitle('mindmap\naccTitle: Quality tree\n  root((Quality))'),
+    'mindmap\n  root((Quality))',
+  );
+});
+
+test('uses a shared high-contrast base theme with strict SVG security', () => {
+  assert.equal(MERMAID_CONFIG.securityLevel, 'strict');
+  assert.equal(MERMAID_CONFIG.htmlLabels, false);
+  assert.equal(MERMAID_CONFIG.theme, 'base');
+  assert.equal(MERMAID_CONFIG.themeVariables.primaryColor, '#e6f4ea');
+  assert.equal(MERMAID_CONFIG.themeVariables.secondaryColor, '#eaf2f8');
+  assert.equal(MERMAID_CONFIG.themeVariables.tertiaryColor, '#fff4d6');
+});
+
+test('renders the authored title as an accessible figure name', async () => {
+  const source = 'flowchart LR\naccTitle: Current module boundary\na --> b';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10" viewBox="0 0 20 10"><text>diagram</text></svg>';
+  const { html } = await renderMarkdown(`\`\`\`mermaid\n${source}\n\`\`\``, {
+    fileToRoute,
+    svgs: [svg],
+  });
+  assert.match(html, /<figure class="diagram" role="img" aria-label="Current module boundary">/);
+});
+
+test('refuses to render an inaccessible diagram', async () => {
+  await assert.rejects(
+    renderMarkdown('```mermaid\nflowchart LR\na --> b\n```', { fileToRoute, svgs: ['<svg></svg>'] }),
+    /Diagram 1 is missing an accTitle/,
+  );
+});
+
+test('sanitizes SVG content and rewrites internal references to stable IDs', () => {
+  const source = '<svg xmlns="http://www.w3.org/2000/svg" id="root" width="20px" height="10px" style="max-width: 20px"><defs><linearGradient id="gradient"><stop offset="0%" /></linearGradient></defs><rect id="shape" fill="url(#gradient)" onclick="alert(1)" /></svg>';
+  const normalized = normalizeMermaidSvg(source, 2);
+  assert.match(normalized, /id="mmd-2"/);
+  assert.match(normalized, /id="mmd-2-x1"/);
+  assert.match(normalized, /fill="url\(#mmd-2-x1\)"/);
+  assert.doesNotMatch(normalized, /onclick/);
+  assert.match(normalized, /max-width: 20px/);
 });
 
 test('suppresses HTML comment directives while preserving fenced examples', async () => {

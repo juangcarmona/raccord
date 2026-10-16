@@ -64,8 +64,35 @@ jobs:
       - name: Check engineering-site scripts
         run: |
           node --check tools/static-site/static-site.mjs
+          node --check tools/arc42-snapshot/capture-evidence.mjs
+          node --check tools/arc42-snapshot/validate-diagrams.mjs
           node --test tools/static-site/static-site.test.mjs
           bash .github/ci/test-site-workflow-routing.sh
+
+      - name: Install the pinned arc42 snapshot renderer
+        run: npm ci --ignore-scripts --prefix tools/arc42-snapshot
+
+      - name: Test and validate arc42 diagrams
+        run: |
+          npm test --prefix tools/arc42-snapshot
+          node tools/arc42-snapshot/validate-diagrams.mjs docs/architecture/arc42
+
+      - name: Install Chromium for deterministic SVG rendering
+        run: npm exec --offline --prefix tools/arc42-snapshot -- puppeteer browsers install chrome
+
+      - name: Generate the pull-request architecture snapshot
+        run: |
+          mkdir -p "$RUNNER_TEMP/arc42-visual-evidence"
+          node tools/arc42-snapshot/generate.mjs docs/architecture/arc42 --out "$RUNNER_TEMP/arc42-visual-evidence/index.html" --title "Raccord architecture"
+          node tools/arc42-snapshot/capture-evidence.mjs "$RUNNER_TEMP/arc42-visual-evidence/index.html" "$RUNNER_TEMP/arc42-visual-evidence/screenshots"
+
+      - name: Upload architecture visual evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: arc42-visual-evidence-${{ github.event.pull_request.number }}
+          path: ${{ runner.temp }}/arc42-visual-evidence
+          if-no-files-found: error
+          retention-days: 14
 
   prepare:
     if: github.event_name != 'pull_request'

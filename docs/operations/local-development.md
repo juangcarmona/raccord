@@ -9,7 +9,7 @@
 ## Run everything with .NET Aspire
 
 ```bash
-dotnet run --project src/root/Raccord.Aspire --launch-profile http
+dotnet run --project src/Raccord.Aspire --launch-profile http
 ```
 
 The AppHost starts PostgreSQL and Azurite (with volumes), runs the `migrations` resource (`migrate --seed-demo`, fictional demo data), then the API and the Vite dev server. Open the dashboard link printed in the console to reach the frontend, logs and traces. The `http` profile sets `ASPIRE_ALLOW_UNSECURED_TRANSPORT` for local use only.

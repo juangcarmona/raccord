@@ -6,7 +6,13 @@ This ledger records repeatable improvements discovered during delivery reviews. 
 
 - Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
 - Action: Rehearse the Compose install, upgrade, migration-failure and restore mechanics with images built from the PR base and candidate revisions; label this as a pre-release rehearsal until two supported releases exist.
-- Check: CI confirms the upgrade preserves seeded database records and document-volume content, and the release notes do not claim backward compatibility with an unpublished release.
+- Check: CI confirms the upgrade and restore preserve customer, project, issued-invoice and audit-event rows plus document-volume content; release notes do not claim compatibility with an unpublished release.
+
+## 2026-10-16 · Restore every module schema from a database dump
+
+- Observation: The first live restore rehearsal dropped only `public`, leaving module schemas behind; `pg_restore` then failed when it tried to recreate an existing schema.
+- Action: Drop all application schemas before restoring a full PostgreSQL custom-format dump, then recreate the schema objects and append-only triggers from the dump.
+- Check: The release rehearsal restores into a populated database and verifies the customer, project, issued-invoice and audit-event rows, document file, and application readiness.
 
 ## 2026-10-16 · Each E2E entry point prepares the static homepage
 
@@ -319,15 +325,3 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A focused CSharpier check on the new browser test passed locally, but hosted full-repository CSharpier caught the test project file's long content include.
 - **Action:** Format every changed C# and project file, then run `dotnet csharpier check .` before pushing instead of checking only the edited C# source.
 - **Check:** The complete repository formatter check exits successfully on the same tree that CI will verify.
-
-## 2026-10-16 · Public screenshots need pixel-level privacy review
-
-- **Observation:** A successful browser journey and text-based Playwright mask can still leave account data visible or obscure an oversized parent region in a public screenshot.
-- **Action:** Mask the smallest rendered text node, inspect the actual uploaded CI image at publication size, and only then copy it into the static site.
-- **Check:** The journey result is `passed`, sensitive text is visibly obscured, unrelated content remains legible, and the committed image is the inspected CI artifact.
-
-## 2026-10-16 · Verify public routing before changing DNS
-
-- **Observation:** The apex domain was reported as unbound, but read-only DNS and HTTPS checks showed it already served byte-identical Cloudflare Pages content at the `pages.dev` hostname; the deployed content was simply stale.
-- **Action:** Check nameservers and HTTP responses for both the custom and provider hostnames, compare their content, and inspect the Pages custom-domain binding before proposing a DNS mutation.
-- **Check:** Record the current public response and DNS state, identify the actual missing step (content deployment or domain binding), and retain a rollback record before any approved zone change.

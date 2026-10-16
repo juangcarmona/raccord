@@ -53,5 +53,5 @@ docker volume create "${project}_documents" >/dev/null
 docker run --rm -v "${project}_documents:/data" -v "$source_dir:/backup:ro" alpine:3 \
   sh -c "find /data -mindepth 1 -delete && tar xzf /backup/raccord-documents-$stamp.tgz -C /data && chown -R 1654:1654 /data"
 
-docker compose -p "$project" up -d web
-echo "Restore complete. Verify with: curl -fsS http://localhost:\${RACCORD_HTTP_PORT:-8080}/health/ready"
+docker compose -p "$project" up -d --wait web
+echo "Restore complete: the web service passed its configured readiness check."

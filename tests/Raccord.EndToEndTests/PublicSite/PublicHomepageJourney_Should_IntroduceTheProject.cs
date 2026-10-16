@@ -136,11 +136,11 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         (
             await page.GetByRole(AriaRole.Link, new() { Name = "Aprender a instalarlo" })
                 .GetAttributeAsync("href")
-        ).ShouldBe("../manuales/");
+        ).ShouldBe("manuales/");
         (
             await page.GetByRole(AriaRole.Link, new() { Name = "Explorar el producto" })
                 .GetAttributeAsync("href")
-        ).ShouldBe("../producto/");
+        ).ShouldBe("producto/");
         (await page.GetByRole(AriaRole.Combobox).CountAsync()).ShouldBe(0);
         foreach (
             var href in await page.Locator("a")
@@ -151,6 +151,10 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 href.StartsWith('#')
                 || href.StartsWith("/images/", StringComparison.Ordinal)
                 || href.StartsWith("../", StringComparison.Ordinal)
+                || href.StartsWith("producto/", StringComparison.Ordinal)
+                || href.StartsWith("manuales/", StringComparison.Ordinal)
+                || href.StartsWith("autoalojamiento/", StringComparison.Ordinal)
+                || href.StartsWith("arquitectura/", StringComparison.Ordinal)
                 || href.StartsWith(
                     "https://github.com/juangcarmona/raccord",
                     StringComparison.Ordinal

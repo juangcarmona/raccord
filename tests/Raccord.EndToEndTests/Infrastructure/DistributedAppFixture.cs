@@ -31,6 +31,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     /// <summary>The frontend (Vite) resource's external base URL — what the browser drives.</summary>
     public Uri FrontendBaseUrl { get; private set; } = null!;
 
+    /// <summary>The web resource's external base URL — where production serves the SPA and CSP.</summary>
+    public Uri WebBaseUrl { get; private set; } = null!;
+
     public async ValueTask InitializeAsync()
     {
         // The 90-minute CI hang had no visible output because the default console logger
@@ -60,6 +63,7 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         );
         // The frontend (Vite) resource waits for web in Program.cs, so web healthy means the Vite
         // dev server is coming up; healthy here is confirmed by the first journey's navigation.
+        WebBaseUrl = app.GetEndpoint(WebResourceName, "http");
         FrontendBaseUrl = app.GetEndpoint(FrontendResourceName, "http");
         Log($"web healthy; frontend at {FrontendBaseUrl}");
 

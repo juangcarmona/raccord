@@ -80,7 +80,7 @@ The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selec
 bash .github/scripts/check-e2e-selection.sh --update
 ```
 
-Set `PLAYWRIGHT_CAPTURE_EVIDENCE=true` when running the E2E assembly directly to save a success checkpoint and a video per journey alongside the normal trace/failure evidence under `playwright-artifacts/`. CI enables this only for the nightly report run so ordinary PR evidence stays small.
+Set `PLAYWRIGHT_CAPTURE_EVIDENCE=true` when running the E2E assembly directly to save a success checkpoint and a video per journey alongside the normal trace/failure evidence under `playwright-artifacts/`. Both PR CI and the hosted evidence workflow enable capture and upload the artifacts.
 
 ### Security and license gates
 

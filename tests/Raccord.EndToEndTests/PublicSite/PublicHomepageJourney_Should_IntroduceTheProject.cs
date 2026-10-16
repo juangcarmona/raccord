@@ -151,7 +151,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 href.StartsWith('#')
                 || href.StartsWith("/images/", StringComparison.Ordinal)
                 || href.StartsWith("../", StringComparison.Ordinal)
-                || href == "index.html"
+                || string.Equals(href, "index.html", StringComparison.Ordinal)
                 || href.StartsWith("producto/", StringComparison.Ordinal)
                 || href.StartsWith("manuales/", StringComparison.Ordinal)
                 || href.StartsWith("autoalojamiento/", StringComparison.Ordinal)

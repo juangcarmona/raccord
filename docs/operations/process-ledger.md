@@ -289,3 +289,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The Aspire browser drives Vite in development, while the production SPA and Content-Security-Policy are served by the web resource; a source-map URL in the production bundle also exposes source metadata.
 - **Action:** Assert the policy on the web resource in the browser journey, then continue the existing SPA workflow; restrict styles and connections to same-origin and disable production source maps when neither is required.
 - **Check:** The frontend build must publish no source maps, the hosted E2E artifact must show the seeded SPA journey passing, web hosting tests must pin the full CSP, and scanner request-metadata notices must not be mistaken for missing response headers.
+
+## 2026-10-16 · Accounting policy can be resolved from public requirements
+
+- **Observation:** Issue #60 was blocked on an accountant that the project does not have, although the public Spanish and EU sources specify the required invoice data without prescribing line-level VAT rounding.
+- **Action:** Record the selected per-rate rounding algorithm as an explicit product convention, cite the primary sources, and state the limits of the research instead of inventing professional sign-off.
+- **Check:** ADR-0006, BR-VAT-PER-RATE and the existing disputed-cent domain test agree; issue #60 can close once the documentation change is merged.

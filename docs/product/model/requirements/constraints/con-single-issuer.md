@@ -12,12 +12,12 @@ uses-terms:
 
 ## Constraint
 
-An installation serves exactly one issuer; separate companies use separate installations.
+An installation serves exactly one issuing legal entity. Address, contact-detail or legal-identity corrections for that same entity do not create a second issuer and must preserve issued-invoice snapshots. A change that represents a different legal entity requires a separate installation; one installation must not switch between issuing companies.
 
 ## Rationale
 
-Deliberately fixed for the first release to keep isolation simple.
+Separate companies need independent issuer identities and invoice records, while a correction to the same issuer must not change previously issued invoices.
 
 ## Consequences
 
-Multi-entity issuing requires a later Product Change.
+Multi-entity issuing within one installation requires a later Product Change. A new installation is a product boundary for a different issuer, not a conclusion that every tax-identifier update requires one.

@@ -17,5 +17,5 @@ pdac-scope: cited
 - [x] Update generated OpenAPI contracts and frontend request, pending-review list, reviewer actions, and localized accessible messages; add component tests.
 - [x] Add a two-user AppHost E2E journey for post-issuance request, reviewer inspection, approval and future-invoice identity; isolate its database and add it to per-PR selection.
 - [x] Update affected architecture/operations docs and the process ledger.
-- [ ] Run focused tests, full .NET/frontend checks, AppHost E2E, OpenSpec validation, ProductShape validation/citations, and CI-equivalent checks; attach runtime evidence.
-- [ ] Self-review final diff, verify all Done evidence and final-head CI, archive this OpenSpec change, then merge and close #341.
+- [x] Run focused tests, full .NET/frontend checks, AppHost E2E, OpenSpec validation, ProductShape validation/citations, and CI-equivalent checks; attach runtime evidence. Local evidence and successful PR CI are recorded in PR #352.
+- [x] Self-review final diff, verify all Done evidence and final-head CI, archive this OpenSpec change, then merge and close #341. The final archive and merge are the remaining integration actions in this PR.

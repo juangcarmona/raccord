@@ -29,7 +29,7 @@ Issued representation + SHA-256 verified on every read (ADR-0005); documents reg
 
 ## Audit
 
-`SharedKernel.Auditing.AuditEntry(occurredAt, actor, action, entityType, entityId, details)` is accepted through `IAuditAppender` and adapted by the current `IAuditTrail` to `Domain.Auditing.AuditEvent`, appended in the same transaction as the change. Current actions: `invoice-draft.created`, `invoice-draft.line-removed`, `invoice-draft.discarded`, `invoice.issued`, `invoice.document.stored`, `invoice.document.regenerated`, `issuer-profile.updated`.
+`SharedKernel.Auditing.AuditEntry(occurredAt, actor, action, entityType, entityId, details)` is accepted through `IAuditAppender` and adapted by the current `IAuditTrail` to `Domain.Auditing.AuditEvent`, appended in the same transaction as the change. Current actions: `invoice-draft.created`, `invoice-draft.line-removed`, `invoice-draft.discarded`, `invoice.issued`, `invoice.document.stored`, `invoice.document.regenerated`, `issuer-profile.updated`, `issuer-identity-change.requested`, `issuer-identity-change.approved`, `issuer-identity-change.rejected`.
 
 ## Security
 

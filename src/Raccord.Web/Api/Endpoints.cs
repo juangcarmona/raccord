@@ -198,24 +198,8 @@ internal static class Endpoints
     private static void MapOrganization(RouteGroupBuilder api)
     {
         var organization = api.MapGroup("/organization").WithTags("Organization");
-        organization.MapGet(
-            "/issuer",
-            async Task<Results<Ok<IssuerProfileResponse>, NotFound>> (
-                OrganizationSettings settings,
-                CancellationToken ct
-            ) =>
-                await settings.GetIssuerAsync(ct) is { } issuer
-                    ? TypedResults.Ok(issuer)
-                    : TypedResults.NotFound()
-        );
-        organization.MapPut(
-            "/issuer",
-            async (
-                UpdateIssuerProfileRequest request,
-                OrganizationSettings settings,
-                CancellationToken ct
-            ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
-        );
+        MapIssuerProfile(organization);
+        MapIssuerIdentityChanges(organization);
         api.MapGet(
                 "/invoice-series",
                 async (OrganizationSettings settings, CancellationToken ct) =>
@@ -223,6 +207,71 @@ internal static class Endpoints
             )
             .WithTags("Organization")
             .RequirePermission(PermissionCatalog.OrganizationRead);
+    }
+
+    private static void MapIssuerProfile(RouteGroupBuilder organization)
+    {
+        organization
+            .MapGet(
+                "/issuer",
+                async Task<Results<Ok<IssuerProfileResponse>, NotFound>> (
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) =>
+                    await settings.GetIssuerAsync(ct) is { } issuer
+                        ? TypedResults.Ok(issuer)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.OrganizationRead);
+        organization
+            .MapPut(
+                "/issuer",
+                async (
+                    UpdateIssuerProfileRequest request,
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) => TypedResults.Ok(await settings.UpdateIssuerAsync(request, ct))
+            )
+            .RequirePermission(PermissionCatalog.OrganizationEdit);
+    }
+
+    private static void MapIssuerIdentityChanges(RouteGroupBuilder organization)
+    {
+        organization
+            .MapGet(
+                "/issuer-identity-changes",
+                async (OrganizationSettings settings, CancellationToken ct) =>
+                    TypedResults.Ok(await settings.ListIssuerIdentityChangesAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.OrganizationRead);
+        organization
+            .MapPost(
+                "/issuer-identity-changes",
+                async (
+                    CreateIssuerIdentityChangeRequest request,
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) =>
+                    TypedResults.Created(
+                        "/api/organization/issuer-identity-changes",
+                        await settings.RequestIssuerIdentityChangeAsync(request, ct)
+                    )
+            )
+            .RequirePermission(PermissionCatalog.OrganizationEdit);
+        organization
+            .MapPut(
+                "/issuer-identity-changes/{id:guid}",
+                async Task<Results<Ok<IssuerIdentityChangeResponse>, NotFound>> (
+                    Guid id,
+                    DecideIssuerIdentityChangeRequest request,
+                    OrganizationSettings settings,
+                    CancellationToken ct
+                ) =>
+                    await settings.DecideIssuerIdentityChangeAsync(id, request, ct) is { } response
+                        ? TypedResults.Ok(response)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.OrganizationEdit);
     }
 
 #pragma warning disable MA0051

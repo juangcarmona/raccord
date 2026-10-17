@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { api, unwrap } from "../../shared/api/client";
 
 export type CurrentUser = {
+    id: string;
     email: string;
     displayName: string | null;
     preferredLanguage: string;

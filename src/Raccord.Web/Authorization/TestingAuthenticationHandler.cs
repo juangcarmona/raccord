@@ -17,14 +17,14 @@ internal sealed class TestingAuthenticationHandler(
         var userId = Guid.TryParse(Request.Headers["X-Test-UserId"], out var requestedUserId)
             ? requestedUserId
             : Guid.Empty;
-        var identity = new ClaimsIdentity(
-            [
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Name, "test-admin@example.com"),
-                new Claim(PermissionCatalog.ClaimType, PermissionCatalog.All),
-            ],
-            Scheme.Name
-        );
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, userId.ToString()),
+            new(ClaimTypes.Name, "test-admin@example.com"),
+        };
+        if (!Request.Headers.ContainsKey("X-Test-NoPermissions"))
+            claims.Add(new Claim(PermissionCatalog.ClaimType, PermissionCatalog.All));
+        var identity = new ClaimsIdentity(claims, Scheme.Name);
         return Task.FromResult(
             AuthenticateResult.Success(
                 new AuthenticationTicket(new ClaimsPrincipal(identity), Scheme.Name)

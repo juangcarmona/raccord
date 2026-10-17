@@ -18,6 +18,25 @@ The app, public site, and engineering site SHALL consume one canonical set of Ra
 - **WHEN** a consumer redefines a canonical token or diverges from the shared token source
 - **THEN** the design-system verification check fails and identifies the consumer and token
 
+### Requirement: Design-system drift is checked locally and in CI
+
+The repository SHALL provide one dependency-free design-system verification check. The Husky pre-commit hook SHALL run it for local feedback. CI SHALL run the same check for every pull request and every push to main, independently of the changed-path classifier, and report a failure when shared tokens drift.
+
+#### Scenario: Contributor commits a change that introduces token drift
+
+- **WHEN** the design-system check finds a shared token redefined or mismatched in the working tree
+- **THEN** the pre-commit hook rejects the commit and identifies the affected surface and token
+
+#### Scenario: Pull request changes only the public site
+
+- **WHEN** a pull request changes only public-site, engineering-site, or design documentation paths
+- **THEN** the independent CI job still runs the design-system check and reports its result
+
+#### Scenario: Contributor bypasses local hooks
+
+- **WHEN** a contributor skips Husky hooks and pushes a change with token drift
+- **THEN** the CI check still runs and reports the drift on the pull request
+
 ### Requirement: Shared interaction patterns
 
 Navigation, links, buttons, surfaces, visible keyboard focus, and semantic status treatments SHALL use the shared visual language across the app and both sites while retaining each surface's information architecture and existing behavior. Status meaning MUST remain identifiable without color alone.

@@ -1,1 +1,81 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí×muN‹Z–‹­¦ëeŠw¬Ô´´´)Á‘…ŒµÍ½Á”è¥Ñ•(´´´((Œ%ÍÍÕ•È±•…°µ¥‘•¹Ñ¥ÑäÉ•Ù¥•ÜMÁ•¥™¥…Ñ¥½¸((ŒŒAÕÉÁ½Í”()AÉ½Ñ•ÑÌÑ¡”¥ÍÍÕ•È¥‘•¹Ñ¥ÑäÕÍ•™½È™ÕÑÕÉ”¥¹Ù½¥•Ì‰äÉ•ÅÕ¥É¥¹œ…¸…ÕÑ¡½É¥é•Í•½¹…‘µ¥¹¥ÍÑÉ…Ñ½ÈÑ¼É•Ù¥•Ü±•…°µ¹…µ”½ÈÑ…àµ%¡…¹•Ì…™Ñ•È¥¹Ù½¥¥¹œ‰•¥¹Ì¸((ŒŒI•ÅÕ¥É•µ•¹ÑÌ((ŒŒŒI•ÅÕ¥É•µ•¹ĞèI•Ù¥•Ü±•…°µ¥‘•¹Ñ¥Ñä¡…¹•Ì…™Ñ•È¥¹Ù½¥¥¹œ‰•¥¹Ì()™Ñ•È…¹ä¥¹Ù½¥”¡…Ì‰••¸¥ÍÍÕ•°„¡…¹”Ñ¼¥ÍÍÕ•È±•…°¹…µ”½ÈÑ…à%5UMPÉ•µ…¥¸Õ¹…ÁÁ±¥•Õ¹Ñ¥°„‘¥ÍÑ¥¹Ğ…ÕÑ¡½É¥é•…‘µ¥¹¥ÍÑÉ…Ñ½È…ÁÁÉ½Ù•ÌÑ¡”É•ÅÕ•ÍĞ¸… É•ÅÕ•ÍĞ5UMP½¹Ñ…¥¸„É•…Í½¸…¹ÁÉ½Á½Í•Ù…±Õ•Ì¸Q¡”É•Ù¥•İ•È5UMP‰”…‰±”Ñ¼¥¹ÍÁ•Ğ½±Ù…±Õ•Ì°ÁÉ½Á½Í•Ù…±Õ•Ì°É•…Í½¸°…¹É•ÅÕ•ÍÑ•È¸((ğ„´´Á‘…Œé¥Ñ”¥ô‰Hµ%MMUH´ÀÀÄˆ‘¥•ÍĞô‰Í¡„ÈÔØèÅĞĞÍ‘…‘”Ñ„Õ…˜å‘”ĞİÜÕ„ÌàÍ„ÈĞÍ„Èäá‘Ìİ‘”Õ„ÉÅ‰”ÈÉ‰ŒàÁÕ‘™”ÄÜÄÈˆ€´´ø(ğ„´´Á‘…Œé¥Ñ”¥ô‰Uµ%9µ%MMUHµAI=%1ˆ‘¥•ÍĞô‰Í¡„ÈÔØé™ÀÔá„ÀÉ„å˜Ù˜äÁ‘”ÄØÈĞå•„ÈäÄÌÌÙŒÀÄäÍ™•™”ĞÈÌÙ”ÀÀàÅ„ÀÁ˜Ù‘„ÌÈÈÍˆÌĞˆ€´´ø(ğ„´´Á‘…Œé¥Ñ”¥ô‰	HµAIQdµM9AM!=Pˆ‘¥•ÍĞô‰Í¡„ÈÔØé˜ÈÜáŒÙ„ÄÅ„äå™”ØÍ™•…‘˜ÀÄÀÕˆÁ”ÌÔå”ÜÑŒÜÄÔàÁˆåˆÀÜÁ„Ñ™‰˜äÕŒÍˆÌÑˆÄØÀĞˆ€´´ø(ğ„´´Á‘…Œé¥Ñ”¥ô‰	HµU%QµQ%=9Lˆ‘¥•ÍĞô‰Í¡„ÈÔØèÌÍ„Ù„ÜÙ˜ÄÅ™˜Í•ÄÕ‘‰ÈÈÜäá•„ÙˆØÕ„ÀÕØÕĞÄÌÁˆÄİŒÜÜÔÅ•ˆÔÄØÈØÙ”ÔÑŒˆ€´´ø(ğ„´´Á‘…Œé¥Ñ”¥ô‰=8µM%91µ%MMUHˆ‘¥•ÍĞô‰Í¡„ÈÔØé˜ĞÅÑ‰„á‘„äĞÅ”ÜØÉˆÍ•”ÔØá™„ÄÕˆĞÜá˜Å„ØÀĞĞÍˆÉ•„äÀÕĞàÈÙˆÄÍ‘ˆÅ”Åˆ€´´ø((ŒŒŒŒM•¹…É¥¼è%¹¥Ñ¥…°¥‘•¹Ñ¥ÑäÍ•ÑÕÀ((´%Y8¹¼¥¹Ù½¥”¡…Ì‰••¸¥ÍÍÕ•(´]!8…¸…ÕÑ¡½É¥é•…‘µ¥¹¥ÍÑÉ…Ñ½ÈÍ…Ù•Ì¥ÍÍÕ•È¥‘•¹Ñ¥Ñä(´Q!8Ñ¡”¥‘•¹Ñ¥Ñä¥Ì…ÁÁ±¥•¥µµ•‘¥…Ñ•±äÕÍ¥¹œÑ¡”•á¥ÍÑ¥¹œÍ•ÑÑ¥¹Ì™±½Ü((ŒŒŒŒM•¹…É¥¼èA½ÍĞµ¥ÍÍÕ…»mu¶‰ËkºwµçR–çfö–6W2W6RF†R66WFVB–FVçF—G’æBF†RFV6—6–öâ—2VF—FV@ ¢222266Væ&–ó¢6VÆbÖ&÷fÂ÷"VæWF†÷&—¦VBFV6—6–öà ¢Òt•dTâVæF–ær&WVW7@¢Òt„Tâ—G2&WVW7FW"GFV×G2Fò&÷fR—BÂ÷"W6W"v—F†÷WB—77VW"×6WGF–æw2W&Ö—76–öâGFV×G2FV6—6–öà¢ÒD„TâF†R&WVW7B&VÖ–ç2VæF–æræBF†R7F—fR–FVçF—G’&VÖ–ç2Væ6†ævV@ ¢222266Væ&–ó¢&V¦V7F–öâæB&æFöæVB&WVW7@ ¢Òt•dTâVæF–ær&WVW7@¢Òt„TââWF†÷&—¦VBF—7F–æ7BFÖ–æ—7G&F÷"&V¦V7G2—B÷"—B—2ÆVgBVæFV6–FV@¢ÒD„TâF†R7F—fR–FVçF—G’&VÖ–ç2Væ6†ævVBæB&WVW7B†—7F÷'’&VÖ–ç2&WF–æVBæBVF—F&ÆP ¢222266Væ&–ó¢6öæ7W'&VçBFV6—6–öç0 ¢Òt•dTâVæF–ær&WVW7@¢Òt„TâGvò&Wf–WvW'2GFV×BFòFV6–FR—B6öæ7W'&VçFÇ¢ÒD„TâBÖ÷7BöæRFV6—6–öâ—2Æ–VBæB&V6÷&FVB27V66W76gVÀ ¢222266Væ&–ó¢öæÇ’öæR÷Vâ&WVW7@ ¢Òt•dTââ—77VW"Ç&VG’†2VæF–ær–FVçF—G’&WVW7@¢Òt„TââFÖ–æ—7G&F÷"7V&Ö—G2æ÷F†W"ÆVvÂÖ–FVçF—G’&WVW7Bf÷"F†B—77VW ¢ÒD„TâF†R6V6öæB&WVW7B—2&V¦V7FVBæBF†R÷&–v–æÂ&WVW7B&VÖ–ç2VæF–æp ¢222266Væ&–ó¢FG&W72æB6öçF7B6†ævW0 ¢Òt•dTââ—77VW"&öf–ÆRæBç’–çfö–6R†—7F÷'¢Òt„TââWF†÷&—¦VBFÖ–æ—7G&F÷"6†ævW2öæÇ’FG&W72÷"6öçF7BFWF–Ç0¢ÒD„TâF†R6†ævRÆ–W2–ÖÖVF–FVÇ’FògWGW&R–çfö–6W2v—F†÷WB6V6öæB×W'6öâ&Wf–Wp ¢222266Væ&–ó¢—77VVB–çfö–6R6æ6†÷G0 ¢Òt•dTââ–çfö–6R—77VVB&Vf÷&Râ&÷fVB–FVçF—G’6†ævP¢Òt„TâF†R—77VW"&öf–ÆR6†ævW0¢ÒD„TâF†R&Wf–÷W6Ç’—77VVB–çfö–6RæB7F÷&VB&W&W6VçFF–öâ&VÖ–âVæ6†ævV@ 
+---
+pdac-scope: cited
+---
+
+# Issuer legal-identity review Specification
+
+## Purpose
+
+Protects the issuer identity used for future invoices by requiring an authorized second administrator to review legal-name or tax-ID changes after invoicing begins.
+
+## Requirements
+
+### Requirement: Review legal-identity changes after invoicing begins
+
+After any invoice has been issued, a change to issuer legal name or tax ID MUST remain unapplied until a distinct authorized administrator approves the request. Each request MUST contain a reason and proposed values. The reviewer MUST be able to inspect old values, proposed values, reason, and requester.
+
+<!-- pdac:cite id="FR-ISSUER-001" digest="sha256:1d443dcade4a5af9dce47d75a383a243a298dd37de5a2d1be22bc80d5dfe1712" -->
+<!-- pdac:cite id="UC-DEFINE-ISSUER-PROFILE" digest="sha256:fd058a02a9f6f90de16249ea291336c0193cfefce4236e0081a00f6da3223b34" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:f278c6a11a99fe63feadf0105b0ce359e74c71580b9b070a4fbf95c3b34b1604" -->
+<!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
+<!-- pdac:cite id="CON-SINGLE-ISSUER" digest="sha256:f41d4ba8da941e762b3ee568fa15b478f1a60443cb2ea905d4826b13cdb1e1cd" -->
+
+#### Scenario: Initial identity setup
+
+- GIVEN no invoice has been issued
+- WHEN an authorized administrator saves issuer identity
+- THEN the identity is applied immediately using the existing settings flow
+
+#### Scenario: Post-issuance identity change
+
+- GIVEN an invoice has been issued
+- WHEN an administrator changes legal name or tax ID with a reason
+- THEN the change is recorded as pending and the active issuer identity is unchanged
+
+#### Scenario: Missing reason
+
+- GIVEN an invoice has been issued
+- WHEN an administrator submits a legal-identity change without a non-empty reason
+- THEN the request is rejected and the active identity remains unchanged
+
+#### Scenario: Authorized second-person approval
+
+- GIVEN a pending request created by one administrator
+- WHEN a different administrator with issuer-settings permission approves it
+- THEN only future invoices use the accepted identity and the decision is audited
+
+#### Scenario: Self-approval or unauthorized decision
+
+- GIVEN a pending request
+- WHEN its requester attempts to approve it, or a user without issuer-settings permission attempts a decision
+- THEN the request remains pending and the active identity remains unchanged
+
+#### Scenario: Rejection and abandoned request
+
+- GIVEN a pending request
+- WHEN an authorized distinct administrator rejects it or it is left undecided
+- THEN the active identity remains unchanged and request history remains retained and auditable
+
+#### Scenario: Concurrent decisions
+
+- GIVEN a pending request
+- WHEN two reviewers attempt to decide it concurrently
+- THEN at most one decision is applied and recorded as successful
+
+#### Scenario: Only one open request
+
+- GIVEN an issuer already has a pending identity request
+- WHEN an administrator submits another legal-identity request for that issuer
+- THEN the second request is rejected and the original request remains pending
+
+#### Scenario: Address and contact changes
+
+- GIVEN an issuer profile and any invoice history
+- WHEN an authorized administrator changes only address or contact details
+- THEN the change applies immediately to future invoices without a second-person review
+
+#### Scenario: Issued invoice snapshots
+
+- GIVEN an invoice issued before an approved identity change
+- WHEN the issuer profile changes
+- THEN the previously issued invoice and stored representation remain unchanged

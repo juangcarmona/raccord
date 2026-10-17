@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-17 · Keep public-site browser assertions aligned with the rendered navigation
+
+- Observation: The public-site build passed while the existing browser journey still asserted the previous homepage copy, routes, logo link and locale-switch labels; only full CI exposed the drift.
+- Action: Update the rendered homepage journey alongside public-site information-architecture changes, and report the failing `href` when a link contract breaks.
+- Check: The final PR head must pass the AppHost E2E journey against the generated Spanish and English pages, including locale switching, responsive layout and keyboard navigation.
+
 ## 2026-10-16 · Release mechanics need a pre-release upgrade rehearsal
 
 - Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.

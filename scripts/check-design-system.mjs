@@ -104,6 +104,11 @@ export async function checkDesignSystem(
             /@import\s+url\(["']?\.\.\/\.\.\/\.\.\/docs\/design\/tokens\.css["']?\)/,
         ],
         [
+            "app container",
+            "deploy/docker/Dockerfile",
+            /COPY\s+docs\/design\/tokens\.css\s+\/docs\/design\/tokens\.css/,
+        ],
+        [
             "public site",
             "src/public-site/build.mjs",
             /docs\/design\/tokens\.css/,

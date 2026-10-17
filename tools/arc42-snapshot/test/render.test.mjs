@@ -47,9 +47,9 @@ test('uses a shared high-contrast base theme with strict SVG security', () => {
   assert.equal(MERMAID_CONFIG.securityLevel, 'strict');
   assert.equal(MERMAID_CONFIG.htmlLabels, false);
   assert.equal(MERMAID_CONFIG.theme, 'base');
-  assert.equal(MERMAID_CONFIG.themeVariables.primaryColor, '#e6f4ea');
-  assert.equal(MERMAID_CONFIG.themeVariables.secondaryColor, '#eaf2f8');
-  assert.equal(MERMAID_CONFIG.themeVariables.tertiaryColor, '#fff4d6');
+  assert.equal(MERMAID_CONFIG.themeVariables.primaryColor, '#edf6fc');
+  assert.equal(MERMAID_CONFIG.themeVariables.secondaryColor, '#e3f5ee');
+  assert.equal(MERMAID_CONFIG.themeVariables.tertiaryColor, '#fff3d6');
 });
 
 test('renders the authored title as an accessible figure name', async () => {

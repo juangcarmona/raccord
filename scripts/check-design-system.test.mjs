@@ -14,6 +14,8 @@ beforeEach(async () => {
             ":root { --raccord-ink: #0b1020; --raccord-cloud: #f5f7fa; --raccord-slate: #667085; --raccord-white: #ffffff; --raccord-selected: #0b7fbf; --raccord-selected-soft: #edf6fc; --raccord-action: #075a88; --raccord-action-hover: #08699e; --raccord-font-sans: system-ui; --raccord-space-4: 1rem; --raccord-radius-md: .5rem; --raccord-focus-width: 3px; --raccord-success: #1d7a4f; --raccord-success-soft: #e3f5ee; --raccord-warning: #8a5a00; --raccord-warning-soft: #fff3d6; --raccord-error: #b3261e; --raccord-error-soft: #fde3e0; }",
         "src/Raccord.Frontend/src/styles.css":
             '@import url("../../../docs/design/tokens.css"); :root { --bg: var(--raccord-cloud); --surface: var(--raccord-white); --text: var(--raccord-ink); --muted: var(--raccord-slate); --border: var(--raccord-border); --accent: var(--raccord-action); --danger: var(--raccord-error); --accent-text: var(--raccord-white); --warning-bg: var(--raccord-warning-soft); --warning-border: var(--raccord-warning); --ok: var(--raccord-success); --focus: var(--raccord-selected); --focus-width: var(--raccord-focus-width); --focus-offset: var(--raccord-focus-offset); --space-4: var(--raccord-space-4); --radius: var(--raccord-radius-sm); }',
+        "deploy/docker/Dockerfile":
+            "COPY docs/design/tokens.css /docs/design/tokens.css",
         "src/public-site/build.mjs": 'readFile("docs/design/tokens.css")',
         "src/public-site/styles.css":
             ":root { --ink: var(--raccord-ink); --paper: var(--raccord-cloud); --paper-raised: var(--raccord-white); --line: var(--raccord-border); --accent: var(--raccord-action); --accent-hover: var(--raccord-action-hover); --focus-width: var(--raccord-focus-width); --focus-offset: var(--raccord-focus-offset); --space-4: var(--raccord-space-4); --radius-md: var(--raccord-radius-md); }",
@@ -44,6 +46,15 @@ test("rejects a missing surface token import", async () => {
     assert.ok(
         (await checkDesignSystem(root)).some((error) =>
             error.includes("public site: does not load"),
+        ),
+    );
+});
+
+test("rejects an app container that omits the canonical token file", async () => {
+    await writeFile(path.join(root, "deploy/docker/Dockerfile"), "FROM node:24-alpine");
+    assert.ok(
+        (await checkDesignSystem(root)).some((error) =>
+            error.includes("app container: does not load"),
         ),
     );
 });

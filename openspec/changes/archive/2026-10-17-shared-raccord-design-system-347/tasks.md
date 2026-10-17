@@ -13,13 +13,13 @@
 
 ## 3. Engineering site
 
-- [ ] 3.1 Map the engineering report shell, generated architecture snapshot, and diagram theme to canonical tokens while keeping static output self-contained; verify the existing static-site and architecture snapshot checks pass and generated output contains no external style dependency.
+- [x] 3.1 Map the engineering report shell, generated architecture snapshot, and diagram theme to canonical tokens while keeping static output self-contained; verify the existing static-site and architecture snapshot checks pass and generated output contains no external style dependency.
 
 ## 4. Cross-surface verification
 
-- [ ] 4.1 Run the CI-equivalent checks for the touched Node and frontend projects, both design-system check entry points, OpenSpec validation, and ProductShape citation verification; verify every command passes on the final plan and implementation branch and confirm whether repository required-check settings make the CI result a merge gate.
-- [ ] 4.2 Capture representative app, public-site, and engineering-site pages at desktop and narrow widths, in both available locales; verify keyboard focus, readable semantic statuses, and attach the evidence for Owner review.
-- [ ] 4.3 Review the Definition of Done evidence with the Owner and record the accepted visual direction and any surface-specific exceptions in the pull request before integration.
+- [x] 4.1 Run the CI-equivalent checks for the touched Node and frontend projects, both design-system check entry points, OpenSpec validation, and ProductShape citation verification; verify every command passes on the final plan and implementation branch and confirm whether repository required-check settings make the CI result a merge gate.
+- [x] 4.2 Capture representative app, public-site, and engineering-site pages at desktop and narrow widths, in both available locales; verify keyboard focus, readable semantic statuses, and attach the evidence for Owner review.
+- [x] 4.3 Review the Definition of Done evidence with the Owner and record the accepted visual direction and any surface-specific exceptions in the pull request before integration.
 <!-- pdac:cite id="QR-ACCESSIBILITY" digest="sha256:65d1d92daf2189c837030c9eaaf7d0ba18a28a0f52cea624e919f6fbc80ac882" -->
 <!-- pdac:cite id="QR-LOCALIZATION" digest="sha256:defb01ff947a5d42bdc3b6b2fe7d58c7d3aead62e91f759c0118f40749654ddf" -->
 <!-- pdac:cite id="QR-MOBILE-WEB-APP" digest="sha256:ba2d4a17bef47a1512bec2d45e4c9f8fdd6e2fab7a438280959a62ba70bdb18b" -->

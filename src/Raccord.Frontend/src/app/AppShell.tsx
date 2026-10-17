@@ -69,6 +69,7 @@ export function AppShell() {
                         </Link>
                         <button
                             type="button"
+                            className="button"
                             onClick={() => void auth.signOut().then(() => navigate("/sign-in", { replace: true }))}
                         >
                             {t("auth.signOut")}

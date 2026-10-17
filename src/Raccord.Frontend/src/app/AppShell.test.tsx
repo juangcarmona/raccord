@@ -5,9 +5,19 @@ import { describe, expect, it } from "vitest";
 import { I18nProvider } from "../shared/i18n/I18nProvider";
 import { AppShell } from "./AppShell";
 import { AuthProvider } from "../features/auth/AuthProvider";
+import { json, stubApi } from "../test/render";
 
 describe("AppShell", () => {
-    it("exposes the current section, skip link, and named locale selector", async () => {
+    it("exposes the current section, account entry, and skip link", async () => {
+        stubApi({
+            "GET /api/auth/me": () =>
+                json({
+                    email: "person@example.com",
+                    displayName: "Alex",
+                    preferredLanguage: "en",
+                    canManageRoles: true,
+                }),
+        });
         const router = createMemoryRouter(
             [
                 {
@@ -29,7 +39,8 @@ describe("AppShell", () => {
         expect(screen.getByRole("link", { name: "Skip to content" })).toHaveAttribute("href", "#main");
         expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute("aria-current", "page");
         expect(screen.getByRole("navigation", { name: "Main navigation" })).toBeInTheDocument();
-        expect(screen.getByRole("combobox", { name: "Language" })).toHaveValue("en");
+        expect(await screen.findByRole("link", { name: "My account" })).toHaveAttribute("href", "/account");
+        expect(screen.getByRole("navigation", { name: "Main navigation" })).toHaveTextContent("Roles and permissions");
         expect(document.querySelector(".brand img")).toHaveAttribute("src", "/raccord-mark.svg");
         expect(document.querySelector(".brand img")).toHaveAttribute("aria-hidden", "true");
 

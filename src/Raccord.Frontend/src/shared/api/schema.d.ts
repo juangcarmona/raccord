@@ -139,7 +139,39 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateProfileRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CurrentUserResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
         post?: never;
         delete?: never;
         options?: never;
@@ -5874,6 +5906,9 @@ export interface components {
         };
         CurrentUserResponse: {
             email: string;
+            displayName: null | string;
+            preferredLanguage: string;
+            canManageRoles: boolean;
         };
         /** @description A customer. */
         CustomerResponse: {
@@ -6981,6 +7016,10 @@ export interface components {
             taxId: string;
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
+        };
+        UpdateProfileRequest: {
+            displayName: null | string;
+            preferredLanguage: null | string;
         };
         UpdateVehicleRequest: {
             registrationNumber: string;

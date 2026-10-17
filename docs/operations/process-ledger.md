@@ -356,6 +356,30 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Regenerate citations for every changed artifact across all consumers and run citation verification with the pinned OpenSpec CLI available on PATH before opening the PR.
 - **Check:** ProductShape validation passes, OpenSpec validation passes, and citation verification reports zero stale, tampered or unresolved citations.
 
+## 2026-10-16 · Container-backed feature checks preflight the local runtime
+
+- **Observation:** The profile API test and browser journey compiled, but local execution stopped before application startup because the Docker daemon socket was unavailable.
+- **Action:** Check Docker availability before starting container-backed tests; continue compile, contract and frontend checks, then rely on a fresh hosted E2E artifact for runtime approval when the local daemon is unavailable.
+- **Check:** The PR records the local runtime limitation and CI must pass the selected AppHost journey with captured browser evidence before the feature is considered done.
+
+## 2026-10-16 · Staged frontend formatting receives its file list
+
+- **Observation:** The #290 commit hook failed because the TypeScript/TSX staged-file handler ran `prettier --write` without the staged paths, after ESLint had succeeded.
+- **Action:** Build the Prettier command from the same filtered staged-file list used by ESLint in `src/Raccord.Frontend/.lintstagedrc.mjs`.
+- **Check:** Commit a staged TypeScript change and confirm the hook formats the named files and reaches commitlint without a parser or missing-file error.
+
+## 2026-10-16 · API tests select a persisted user in the test auth scheme
+
+- **Observation:** The WebApplicationFactory test host uses a fake authentication scheme with a dummy user ID, so real Identity sign-in is not configured there and the current-user endpoint could not resolve the seeded administrator.
+- **Action:** Let the test-only authentication handler take a user ID from an explicit test header; use the seeded administrator's ID when exercising profile routes.
+- **Check:** The API test verifies profile persistence and that submitted email data cannot change the account's sign-in address; production authentication remains on the Identity cookie scheme.
+
+## 2026-10-16 · Browser journeys normalize the signed-in profile language
+
+- **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence, and sign-in resumes the previously requested protected route.
+- **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify persistence after reload and return to the account route on sign-in.
+- **Check:** The hosted AppHost run completes the warehouse customer form with English labels and captures the account journey in Spanish after reauthentication.
+
 ## 2026-10-16 · Static route checks resolve nested links
 
 - **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.

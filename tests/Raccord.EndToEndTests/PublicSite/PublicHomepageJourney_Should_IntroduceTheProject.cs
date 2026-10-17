@@ -163,7 +163,9 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             ).ShouldBeTrue($"Unexpected homepage link: {href}");
         }
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "EN" }).GetAttributeAsync("href")
+            await page.Locator(".language-switcher")
+                .GetByRole(AriaRole.Link, new() { Name = "EN", Exact = true })
+                .GetAttributeAsync("href")
         ).ShouldBe("../en/");
         await AssertEnglishLocaleAsync(page);
     }
@@ -191,7 +193,9 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             )
         ).ShouldBeFalse();
         (
-            await page.GetByRole(AriaRole.Link, new() { Name = "ES" }).GetAttributeAsync("href")
+            await page.Locator(".language-switcher")
+                .GetByRole(AriaRole.Link, new() { Name = "ES", Exact = true })
+                .GetAttributeAsync("href")
         ).ShouldBe("../es/");
         await OpenHomepageAsync(page);
     }

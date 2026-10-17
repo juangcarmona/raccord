@@ -10,7 +10,7 @@
 ## 2. Verification and integration
 
 - [x] 2.1 Run both targeted AppHost journeys and the complete per-PR AppHost battery; verify synthetic evidence records both as passed (31/31 passed; journey results, screenshots, videos, and traces saved under `/tmp/raccord-337-evidence`).
-- [ ] 2.2 Run the full CI-equivalent deterministic checks and OpenSpec/ProductShape validation; verify all required checks pass on the current main base.
+- [x] 2.2 Run the full CI-equivalent deterministic checks and OpenSpec/ProductShape validation; verify all required checks pass on the current main base (CI run 472 passed on head `b409c3613168a216eef0473cc264985ad6d7d263`: https://github.com/juangcarmona/raccord/actions/runs/39028885746; local OpenSpec, ProductShape citations and deterministic checks passed).
 - [x] 2.3 Review the implementation diff and process ledger; record any durable process lesson before merge (final review and local checks complete; hosted CI remains required by 2.2).
 
 <!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->

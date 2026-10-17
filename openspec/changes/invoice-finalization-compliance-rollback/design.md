@@ -6,7 +6,7 @@
 
 Extend the existing isolated-PostgreSQL API integration tests. Arrange a valid synthetic issuer, customer, project, billable line and invoice draft through the existing test API. Install a database trigger on the compliance-record table that raises a deterministic error for the test database. The trigger exercises the actual persistence boundary without replacing the recorder or bypassing the shared connection and transaction.
 
-Attempt finalization, then inspect the API and database directly. The failure must leave the draft open, its billable line unbilled, and no issued invoice, compliance row or invoice-issuance audit event. The draft-creation audit event must remain unchanged. Drop the trigger and retry the same draft; it must issue successfully with the first number in the isolated series/year, demonstrating that the failed attempt consumed none.
+Attempt finalization, then inspect the API and database directly. The failure must leave the draft open and its billable line reserved in `in-draft`, with no issued invoice, compliance row or invoice-issuance audit event. The draft-creation audit event must remain unchanged. Drop the trigger and retry the same draft; it must issue successfully, mark the line `invoiced`, and receive the first number in the isolated series/year, demonstrating that the failed attempt consumed none.
 
 ## Transaction boundary
 

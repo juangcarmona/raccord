@@ -397,3 +397,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The E2E fixture gave PostgreSQL a session lifetime, but the AppHost's named development volume remained attached; a local run then reused old database credentials and never reached browser journeys.
 - **Action:** Remove only the named development volume mount from the E2E resource model before starting the session container, leaving the developer volume and its data untouched.
 - **Check:** AppHost health checks pass with the isolated database, and the complete committed per-PR browser battery reports every selected journey passed.
+
+## 2026-10-17 · Invoice rollback assertions start from the post-draft state
+
+- **Observation:** Creating an invoice draft already reserves its project billable line as `in-draft`; expecting `unbilled` after a failed finalization confuses rollback of issuance with rollback of draft creation.
+- **Action:** Failure-injection tests assert the state established before the transaction under test, then verify only a successful retry advances the line to `invoiced`.
+- **Check:** The compliance-persistence failure test requires `in-draft` after rollback and `invoiced` after successful retry.

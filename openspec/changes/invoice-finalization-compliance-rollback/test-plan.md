@@ -3,8 +3,8 @@
 # Test plan
 
 1. Add the PostgreSQL failure-injection integration test before changing production code.
-2. Confirm the test reaches compliance persistence, fails finalization, and verifies all persisted state through a fresh connection and the public API.
-3. Drop the database trigger and retry the same draft; verify the expected gapless invoice number and normal success state.
+2. Confirm the test reaches compliance persistence, fails finalization, and verifies all persisted state through a fresh connection and the public API; the draft's billable line must remain reserved in `in-draft`.
+3. Drop the database trigger and retry the same draft; verify the expected gapless invoice number and the line's transition to `invoiced`.
 4. Run the focused test, the full non-E2E backend suite, the selected invoice-finalization AppHost journey, the per-PR E2E battery, and all CI gates on the final head.
 
 <!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->

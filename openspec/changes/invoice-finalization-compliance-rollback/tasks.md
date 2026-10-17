@@ -2,12 +2,12 @@
 
 ## Integration evidence
 
-- [ ] 1.1 Add a deterministic compliance-persistence failure test to the isolated PostgreSQL API test lane; first run it against unchanged production code.
-- [ ] 1.2 Assert the failed attempt leaves the draft open, project line unbilled, no issued invoice, no issuance audit event, no compliance row, and the pre-existing draft audit intact.
-- [ ] 1.3 Remove the failure injection and retry; assert successful issuance receives the first expected invoice number for the isolated series and year.
-- [ ] 1.4 Run focused invoicing integration tests, the complete backend test suite, and the existing selected invoice-finalization AppHost journey.
-- [ ] 1.5 If the test exposes a transaction defect, fix only the minimum required behavior and add a failing regression assertion before the fix.
-- [ ] 1.6 Review the full diff and process ledger; record and verify any durable process improvement before integration.
+- [x] 1.1 Add a deterministic compliance-persistence failure test to the isolated PostgreSQL API test lane; first run it against unchanged production code (focused test passed).
+- [x] 1.2 Assert the failed attempt leaves the draft open, project line reserved in `in-draft`, no issued invoice, no issuance audit event, no compliance row, and the pre-existing draft audit intact; assert a successful retry marks the line `invoiced` (focused test passed).
+- [x] 1.3 Remove the failure injection and retry; assert successful issuance receives the first expected invoice number for the isolated series and year (retry issued `F2026-00001`).
+- [x] 1.4 Run focused invoicing integration tests, the complete backend test suite, and the existing selected invoice-finalization AppHost journey (14 invoicing rules tests, 138 backend tests, and 3 invoice-finalization AppHost journeys passed).
+- [x] 1.5 Not needed: the focused test passes against the current transaction implementation; no runtime correction was required.
+- [x] 1.6 Review the full diff and process ledger; record and verify the durable assertion lesson in `docs/operations/process-ledger.md`.
 
 ## Definition of Done
 

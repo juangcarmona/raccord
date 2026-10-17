@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-17 · Keep public-site browser assertions aligned with the rendered navigation
+
+- Observation: The public-site build passed while the existing browser journey still asserted the previous homepage copy, routes, logo link and locale-switch labels; only full CI exposed the drift.
+- Action: Update the rendered homepage journey alongside public-site information-architecture changes, and report the failing `href` when a link contract breaks.
+- Check: The final PR head must pass the AppHost E2E journey against the generated Spanish and English pages, including locale switching, responsive layout and keyboard navigation.
+
 ## 2026-10-16 · Release mechanics need a pre-release upgrade rehearsal
 
 - Observation: The repository has no published stable application release yet, so the first release implementation cannot honestly claim an upgrade from a preceding supported release.
@@ -373,3 +379,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence, and sign-in resumes the previously requested protected route.
 - **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify persistence after reload and return to the account route on sign-in.
 - **Check:** The hosted AppHost run completes the warehouse customer form with English labels and captures the account journey in Spanish after reauthentication.
+
+## 2026-10-16 · Static route checks resolve nested links
+
+- **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.
+- **Action:** Enumerate generated routes in both locales and resolve each local `href` and `src` against its generated page directory in the site test.
+- **Check:** The public-site verification fails when any locale route, local navigation target or nested asset is absent.

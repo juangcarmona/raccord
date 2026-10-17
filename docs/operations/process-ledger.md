@@ -349,3 +349,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Applying an approved Product Change updates artifact digests and makes citations in existing OpenSpec documents stale.
 - **Action:** Regenerate citations for every changed artifact across all consumers and run citation verification with the pinned OpenSpec CLI available on PATH before opening the PR.
 - **Check:** ProductShape validation passes, OpenSpec validation passes, and citation verification reports zero stale, tampered or unresolved citations.
+
+## 2026-10-16 · Static route checks resolve nested links
+
+- **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.
+- **Action:** Enumerate generated routes in both locales and resolve each local `href` and `src` against its generated page directory in the site test.
+- **Check:** The public-site verification fails when any locale route, local navigation target or nested asset is absent.

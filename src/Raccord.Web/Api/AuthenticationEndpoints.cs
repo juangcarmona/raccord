@@ -113,6 +113,7 @@ internal static class AuthenticationEndpoints
         RoleManager<IdentityRole<Guid>> roles
     ) =>
         new(
+            user.Id.ToString(),
             user.Email ?? string.Empty,
             user.DisplayName,
             user.PreferredLanguage,
@@ -165,6 +166,7 @@ internal static class AuthenticationEndpoints
     private sealed record UpdateProfileRequest(string? DisplayName, string? PreferredLanguage);
 
     private sealed record CurrentUserResponse(
+        string Id,
         string Email,
         string? DisplayName,
         string PreferredLanguage,

@@ -495,6 +495,112 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/organization/issuer-identity-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["IssuerIdentityChangeResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateIssuerIdentityChangeRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["IssuerIdentityChangeResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/organization/issuer-identity-changes/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["DecideIssuerIdentityChangeRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["IssuerIdentityChangeResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-series": {
         parameters: {
             query?: never;
@@ -5696,6 +5802,12 @@ export interface components {
             template?: null | string;
             letterhead?: null | string;
         };
+        /** @description Requests a reviewed change to the issuer legal identity. */
+        CreateIssuerIdentityChangeRequest: {
+            legalName: string;
+            taxId: string;
+            reason: string;
+        };
         /** @description Creates a reusable project type or team. */
         CreateProjectClassificationRequest: {
             name: string;
@@ -5905,6 +6017,7 @@ export interface components {
             signedUpAt: string;
         };
         CurrentUserResponse: {
+            id: string;
             email: string;
             displayName: null | string;
             preferredLanguage: string;
@@ -5926,6 +6039,10 @@ export interface components {
             email: null | string;
             /** @description Whether the legal details required on an invoice are complete. */
             isInvoiceable: boolean;
+        };
+        /** @description Decides a pending issuer legal-identity change. */
+        DecideIssuerIdentityChangeRequest: {
+            approve: boolean;
         };
         /** @description Declines an incoming project request. */
         DeclineProjectRequest: {
@@ -6403,6 +6520,27 @@ export interface components {
              */
             projectId: null | string;
         };
+        /** @description Issuer identity change request and its decision history. */
+        IssuerIdentityChangeResponse: {
+            /** Format: uuid */
+            id: string;
+            oldLegalName: string;
+            oldTaxId: string;
+            proposedLegalName: string;
+            proposedTaxId: string;
+            reason: string;
+            requestedById: string;
+            requestedByName: string;
+            /** Format: date-time */
+            requestedAt: string;
+            status: string;
+            decidedById: null | string;
+            decidedByName: null | string;
+            /** Format: date-time */
+            decidedAt: null | string;
+            /** @default false */
+            isRequester: boolean;
+        };
         /** @description The legal issuer of invoices. */
         IssuerProfileResponse: {
             /** @description Registered legal name. */
@@ -6411,6 +6549,11 @@ export interface components {
             taxId: string;
             /** @description Registered address. */
             address: components["schemas"]["AddressDto"];
+            /**
+             * @description Whether at least one invoice has been issued for this profile.
+             * @default false
+             */
+            hasIssuedInvoice: boolean;
         };
         /** @description An overdue invoice that can receive a manual reminder. */
         OverdueInvoiceResponse: {

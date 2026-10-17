@@ -379,6 +379,98 @@
         }
       }
     },
+    "/api/organization/issuer-identity-changes": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IssuerIdentityChangeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssuerIdentityChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerIdentityChangeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/organization/issuer-identity-changes/{id}": {
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecideIssuerIdentityChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerIdentityChangeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoice-series": {
       "get": {
         "tags": [
@@ -5482,6 +5574,26 @@
         },
         "description": "Generates a manual reminder for an overdue invoice."
       },
+      "CreateIssuerIdentityChangeRequest": {
+        "required": [
+          "legalName",
+          "taxId",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "description": "Requests a reviewed change to the issuer legal identity."
+      },
       "CreateProjectClassificationRequest": {
         "required": [
           "name",
@@ -6114,6 +6226,7 @@
       },
       "CurrentUserResponse": {
         "required": [
+          "id",
           "email",
           "displayName",
           "preferredLanguage",
@@ -6121,6 +6234,9 @@
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "email": {
             "type": "string"
           },
@@ -6189,6 +6305,18 @@
           }
         },
         "description": "A customer."
+      },
+      "DecideIssuerIdentityChangeRequest": {
+        "required": [
+          "approve"
+        ],
+        "type": "object",
+        "properties": {
+          "approve": {
+            "type": "boolean"
+          }
+        },
+        "description": "Decides a pending issuer legal-identity change."
       },
       "DeclineProjectRequest": {
         "required": [
@@ -7375,6 +7503,82 @@
         },
         "description": "An issued invoice in a list."
       },
+      "IssuerIdentityChangeResponse": {
+        "required": [
+          "id",
+          "oldLegalName",
+          "oldTaxId",
+          "proposedLegalName",
+          "proposedTaxId",
+          "reason",
+          "requestedById",
+          "requestedByName",
+          "requestedAt",
+          "status",
+          "decidedById",
+          "decidedByName",
+          "decidedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "oldLegalName": {
+            "type": "string"
+          },
+          "oldTaxId": {
+            "type": "string"
+          },
+          "proposedLegalName": {
+            "type": "string"
+          },
+          "proposedTaxId": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "requestedById": {
+            "type": "string"
+          },
+          "requestedByName": {
+            "type": "string"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "decidedById": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "decidedByName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "decidedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "isRequester": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "Issuer identity change request and its decision history."
+      },
       "IssuerProfileResponse": {
         "required": [
           "legalName",
@@ -7394,6 +7598,11 @@
           "address": {
             "description": "Registered address.",
             "$ref": "#/components/schemas/AddressDto"
+          },
+          "hasIssuedInvoice": {
+            "type": "boolean",
+            "description": "Whether at least one invoice has been issued for this profile.",
+            "default": false
           }
         },
         "description": "The legal issuer of invoices."

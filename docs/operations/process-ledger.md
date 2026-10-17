@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-17 · Cross-user approval needs stable actor identity and a real second session
+
+- Observation: A second-person review can appear correct in a single-user test while the backend still permits self-approval or the browser never exercises a distinct authenticated session.
+- Action: Carry the stable authenticated user id into application commands, enforce distinct actors at the server boundary, and run this mutating browser journey against its own ephemeral AppHost database rather than the suite's shared database.
+- Check: Integration tests reject self-review and race concurrent decisions; the selected isolated E2E signs in as a second administrator, approves the request, and confirms previously issued invoice identity is unchanged without changing data seen by other journeys.
+
 ## 2026-10-17 · Keep public-site browser assertions aligned with the rendered navigation
 
 - Observation: The public-site build passed while the existing browser journey still asserted the previous homepage copy, routes, logo link and locale-switch labels; only full CI exposed the drift.

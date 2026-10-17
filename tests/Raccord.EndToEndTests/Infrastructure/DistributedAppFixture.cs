@@ -1,7 +1,10 @@
 using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Playwright;
+using Npgsql;
+using Raccord.Infrastructure.Persistence;
 using Xunit;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -157,6 +160,87 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             options.RecordVideoSize = overrides.RecordVideoSize ?? options.RecordVideoSize;
         }
         return await Browser.NewContextAsync(options);
+    }
+
+    /// <summary>Seeds a second administrator only in the ephemeral E2E database.</summary>
+    public async Task<(string Email, string Password)> CreateSecondAdministratorAsync()
+    {
+        const string password = "E2EReviewerPassword123!";
+        var email = $"reviewer-{Guid.NewGuid():N}@example.test";
+        var user = CreateE2EReviewer(email);
+        var connectionString = await app!.GetConnectionStringAsync("raccord");
+        await using var connection = new NpgsqlConnection(connectionString);
+        await connection.OpenAsync();
+        await using var transaction = await connection.BeginTransactionAsync();
+        await using (
+            var insertUser = new NpgsqlCommand(
+                """
+                INSERT INTO workspace.users
+                    (id, user_name, normalized_user_name, email, normalized_email, email_confirmed,
+                     password_hash, security_stamp, concurrency_stamp, phone_number_confirmed,
+                     two_factor_enabled, lockout_enabled, access_failed_count, display_name, preferred_language)
+                VALUES
+                    (@id, @user_name, @normalized_user_name, @email, @normalized_email, TRUE,
+                     @password_hash, @security_stamp, @concurrency_stamp, FALSE, FALSE, TRUE, 0,
+                     @display_name, 'en')
+                """,
+                connection,
+                transaction
+            )
+        )
+        {
+            insertUser.Parameters.AddWithValue("id", user.Id);
+            insertUser.Parameters.AddWithValue("user_name", email);
+            insertUser.Parameters.AddWithValue("normalized_user_name", user.NormalizedUserName!);
+            insertUser.Parameters.AddWithValue("email", email);
+            insertUser.Parameters.AddWithValue("normalized_email", user.NormalizedEmail!);
+            insertUser.Parameters.AddWithValue("password_hash", user.PasswordHash!);
+            insertUser.Parameters.AddWithValue("security_stamp", user.SecurityStamp!);
+            insertUser.Parameters.AddWithValue("concurrency_stamp", user.ConcurrencyStamp!);
+            insertUser.Parameters.AddWithValue("display_name", user.DisplayName!);
+            await insertUser.ExecuteNonQueryAsync();
+        }
+        await using (
+            var assignAdmin = new NpgsqlCommand(
+                """
+                INSERT INTO workspace.user_roles (user_id, role_id)
+                SELECT @user_id, id FROM workspace.roles WHERE normalized_name = 'ADMIN'
+                """,
+                connection,
+                transaction
+            )
+        )
+        {
+            assignAdmin.Parameters.AddWithValue("user_id", user.Id);
+            if (await assignAdmin.ExecuteNonQueryAsync() != 1)
+                throw new InvalidOperationException(
+                    "The Admin role was not seeded in the E2E database."
+                );
+        }
+        await transaction.CommitAsync();
+        return (email, password);
+    }
+
+    private static RaccordUser CreateE2EReviewer(string email)
+    {
+        var normalizedEmail = email.ToUpperInvariant();
+        var user = new RaccordUser
+        {
+            UserName = email,
+            NormalizedUserName = normalizedEmail,
+            Email = email,
+            NormalizedEmail = normalizedEmail,
+            EmailConfirmed = true,
+            DisplayName = "E2E Reviewer",
+            PreferredLanguage = "en",
+            SecurityStamp = Guid.NewGuid().ToString("N"),
+            ConcurrencyStamp = Guid.NewGuid().ToString("N"),
+        };
+        user.PasswordHash = new PasswordHasher<RaccordUser>().HashPassword(
+            user,
+            "E2EReviewerPassword123!"
+        );
+        return user;
     }
 
     private IBrowser Browser =>

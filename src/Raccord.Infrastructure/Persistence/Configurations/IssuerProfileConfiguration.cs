@@ -12,6 +12,7 @@ internal sealed class IssuerProfileConfiguration : IEntityTypeConfiguration<Issu
         builder.HasKey(profile => profile.Id);
         builder.Property(profile => profile.LegalName).HasMaxLength(200);
         builder.Property(profile => profile.TaxId).HasMaxLength(32);
+        builder.Property(profile => profile.IssuedInvoiceCount).HasDefaultValue(0);
         builder.ComplexProperty(profile => profile.Address, AddressMapping.Configure);
         builder.HasConcurrencyToken();
     }

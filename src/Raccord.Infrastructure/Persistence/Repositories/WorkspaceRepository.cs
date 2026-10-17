@@ -50,7 +50,8 @@ internal sealed class WorkspaceRepository(RaccordDbContext db)
                 issuer.Id,
                 issuer.LegalName,
                 issuer.TaxId,
-                issuer.Address.ToAddress()!
+                issuer.Address.ToAddress()!,
+                issuer.IssuedInvoiceCount
             );
     }
 
@@ -61,6 +62,7 @@ internal sealed class WorkspaceRepository(RaccordDbContext db)
             Id = issuer.Id,
             LegalName = issuer.LegalName,
             TaxId = issuer.TaxId,
+            IssuedInvoiceCount = issuer.IssuedInvoiceCount,
         };
         row.Address.Set(issuer.Address);
         db.IssuerProfiles.Add(row);
@@ -76,8 +78,112 @@ internal sealed class WorkspaceRepository(RaccordDbContext db)
 
         row.LegalName = issuer.LegalName;
         row.TaxId = issuer.TaxId;
+        row.IssuedInvoiceCount = issuer.IssuedInvoiceCount;
         row.Address.Set(issuer.Address);
     }
+
+    public void MarkInvoiceIssued()
+    {
+        var issuer = db.IssuerProfiles.OrderBy(profile => profile.Id).FirstOrDefault();
+        if (issuer is null)
+        {
+            throw new InvalidOperationException(
+                "An issuer profile is required before issuing an invoice."
+            );
+        }
+        issuer.IssuedInvoiceCount++;
+    }
+
+    public async Task<IReadOnlyList<IssuerIdentityChangeSnapshot>> ListIssuerIdentityChangesAsync(
+        CancellationToken cancellationToken
+    ) =>
+        await db
+            .IssuerIdentityChanges.AsNoTracking()
+            .OrderByDescending(request => request.RequestedAt)
+            .Select(request => new IssuerIdentityChangeSnapshot(
+                request.Id,
+                request.IssuerId,
+                request.OldLegalName,
+                request.OldTaxId,
+                request.ProposedLegalName,
+                request.ProposedTaxId,
+                request.Reason,
+                request.RequestedById,
+                request.RequestedByName,
+                request.RequestedAt,
+                request.Status,
+                request.DecidedById,
+                request.DecidedByName,
+                request.DecidedAt
+            ))
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+    public async Task<IssuerIdentityChangeSnapshot?> FindIssuerIdentityChangeAsync(
+        Guid id,
+        CancellationToken cancellationToken
+    )
+    {
+        var request = await db
+            .IssuerIdentityChanges.FirstOrDefaultAsync(item => item.Id == id, cancellationToken)
+            .ConfigureAwait(false);
+        return request is null ? null : ToSnapshot(request);
+    }
+
+    public void AddIssuerIdentityChange(IssuerIdentityChangeSnapshot request) =>
+        db.IssuerIdentityChanges.Add(ToRow(request));
+
+    public void UpdateIssuerIdentityChange(IssuerIdentityChangeSnapshot request)
+    {
+        var row = db.IssuerIdentityChanges.Local.FirstOrDefault(item => item.Id == request.Id);
+        if (row is null)
+        {
+            throw new InvalidOperationException(
+                "The issuer identity request was not loaded for update."
+            );
+        }
+        row.Status = request.Status;
+        row.DecidedById = request.DecidedById;
+        row.DecidedByName = request.DecidedByName;
+        row.DecidedAt = request.DecidedAt;
+    }
+
+    private static IssuerIdentityChangeRow ToRow(IssuerIdentityChangeSnapshot request) =>
+        new()
+        {
+            Id = request.Id,
+            IssuerId = request.IssuerId,
+            OldLegalName = request.OldLegalName,
+            OldTaxId = request.OldTaxId,
+            ProposedLegalName = request.ProposedLegalName,
+            ProposedTaxId = request.ProposedTaxId,
+            Reason = request.Reason,
+            RequestedById = request.RequestedById,
+            RequestedByName = request.RequestedByName,
+            RequestedAt = request.RequestedAt,
+            Status = request.Status,
+            DecidedById = request.DecidedById,
+            DecidedByName = request.DecidedByName,
+            DecidedAt = request.DecidedAt,
+        };
+
+    private static IssuerIdentityChangeSnapshot ToSnapshot(IssuerIdentityChangeRow request) =>
+        new(
+            request.Id,
+            request.IssuerId,
+            request.OldLegalName,
+            request.OldTaxId,
+            request.ProposedLegalName,
+            request.ProposedTaxId,
+            request.Reason,
+            request.RequestedById,
+            request.RequestedByName,
+            request.RequestedAt,
+            request.Status,
+            request.DecidedById,
+            request.DecidedByName,
+            request.DecidedAt
+        );
 
     public void AddSeries(InvoiceSeriesSnapshot series) =>
         db.InvoiceSeries.Add(

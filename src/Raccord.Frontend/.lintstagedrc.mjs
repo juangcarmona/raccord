@@ -9,7 +9,10 @@ export default {
     "*.{ts,tsx}": (files) => {
         const source = files.filter((file) => !generated.test(file));
         return source.length
-            ? [`eslint --fix --max-warnings=0 ${source.map(quote).join(" ")}`, "prettier --write"]
+            ? [
+                  `eslint --fix --max-warnings=0 ${source.map(quote).join(" ")}`,
+                  `prettier --write ${source.map(quote).join(" ")}`,
+              ]
             : [];
     },
     "*.{json,yml,yaml,css}": (files) => {

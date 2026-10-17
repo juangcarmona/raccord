@@ -1,11 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { api, unwrap } from "../../shared/api/client";
 
-export type CurrentUser = { email: string };
+export type CurrentUser = {
+    email: string;
+    displayName: string | null;
+    preferredLanguage: string;
+    canManageRoles: boolean;
+};
 type AuthState = { status: "loading" | "signed-out" | "signed-in"; user: CurrentUser | null };
 type AuthContextValue = AuthState & {
     signIn: (email: string, password: string, rememberMe: boolean) => Promise<void>;
     signOut: () => Promise<void>;
+    updateProfile: (displayName: string, preferredLanguage: "es" | "en") => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -33,6 +39,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             async signOut() {
                 await unwrap(api.POST("/api/auth/sign-out"));
                 setState({ status: "signed-out", user: null });
+            },
+            async updateProfile(displayName, preferredLanguage) {
+                const user = await unwrap(api.PUT("/api/auth/me", { body: { displayName, preferredLanguage } }));
+                setState({ status: "signed-in", user });
             },
         }),
         [state],

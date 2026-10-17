@@ -148,10 +148,34 @@ body {
 .shell__toolbar {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
     min-height: 4.5rem;
     padding: 0.75rem clamp(1rem, 3vw, 2.5rem);
     border-bottom: 1px solid var(--border);
     background: var(--surface);
+}
+.account-entry {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.3;
+}
+.account-entry:hover .account-entry__name {
+    text-decoration: underline;
+}
+.account-entry__name {
+    font-weight: 600;
+}
+.account-entry__email {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+.account-form {
+    display: grid;
+    gap: 1.25rem;
 }
 .shell__toolbar select {
     color: var(--text);

@@ -70,6 +70,10 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             await AssertMobileKeyboardNavigationAsync(page);
             if (shouldCaptureEvidence)
             {
+                await CaptureResponsiveEvidenceAsync(page, "es");
+            }
+            if (shouldCaptureEvidence)
+            {
                 await CaptureMobileScreenshotAsync(page, evidenceDirectory);
             }
             await AssertDesktopLayoutAsync(page);
@@ -192,7 +196,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 "() => document.documentElement.scrollWidth > window.innerWidth"
             )
         ).ShouldBeFalse();
-        await CaptureEnglishResponsiveEvidenceAsync(page);
+        await CaptureResponsiveEvidenceAsync(page, "en");
         (
             await page.Locator(".language-switcher")
                 .GetByRole(AriaRole.Link, new() { Name = "ES", Exact = true })
@@ -201,7 +205,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
         await OpenHomepageAsync(page);
     }
 
-    private static async Task CaptureEnglishResponsiveEvidenceAsync(IPage page)
+    private static async Task CaptureResponsiveEvidenceAsync(IPage page, string locale)
     {
         Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
         await page.EvaluateAsync("() => document.activeElement?.blur()");
@@ -211,7 +215,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             {
                 Path = Path.Combine(
                     PlaywrightArtifacts.EvidenceDirectory,
-                    "design-system-public-en-desktop.png"
+                    $"design-system-public-{locale}-desktop.png"
                 ),
                 FullPage = true,
             }
@@ -227,7 +231,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             {
                 Path = Path.Combine(
                     PlaywrightArtifacts.EvidenceDirectory,
-                    "design-system-public-en-mobile.png"
+                    $"design-system-public-{locale}-mobile.png"
                 ),
                 FullPage = true,
             }

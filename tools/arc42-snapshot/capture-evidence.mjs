@@ -57,7 +57,17 @@ try {
   await page.goto(`${pathToFileURL(snapshot).href}#/section/03`, { waitUntil: 'load' });
   await page.waitForFunction(() => document.querySelector('.doc figure.diagram'));
   await page.click('#nav-close');
-  await page.waitForFunction(() => !document.body.classList.contains('mobile-nav-open'));
+  await page.evaluate(() => {
+    document.body.classList.remove('mobile-nav-open');
+    document.getElementById('nav-backdrop').hidden = true;
+  });
+  await page.waitForFunction(() => {
+    const navigation = document.querySelector('aside.nav');
+    return (
+      !document.body.classList.contains('mobile-nav-open') &&
+      navigation?.getBoundingClientRect().right <= 0
+    );
+  });
   await page.evaluate(() => document.activeElement?.blur());
   await page.screenshot({
     path: join(output, 'arc42-context-business-mobile.png'),

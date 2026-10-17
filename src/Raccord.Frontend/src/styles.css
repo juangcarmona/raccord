@@ -455,11 +455,12 @@ address {
         font-size: 1.1rem;
     }
     .shell__sidebar nav {
-        overflow-x: auto;
+        overflow: visible;
     }
     .shell__sidebar nav ul {
         display: flex;
-        width: max-content;
+        width: 100%;
+        flex-wrap: wrap;
         gap: 0.25rem;
     }
     .shell__sidebar nav a {
@@ -467,6 +468,7 @@ address {
         border-left: 0;
         border-bottom: 2px solid transparent;
         border-radius: 0;
+        white-space: nowrap;
     }
     .shell__sidebar nav a.active {
         border-bottom-color: var(--raccord-cyan);

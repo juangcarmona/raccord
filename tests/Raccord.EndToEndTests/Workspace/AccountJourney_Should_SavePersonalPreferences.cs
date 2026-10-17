@@ -93,6 +93,12 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
             ),
             $"The {name} account page overflows at a narrow viewport."
         );
+        Assert.True(
+            await page.EvaluateAsync<bool>(
+                "() => { const nav = document.querySelector('.shell__sidebar nav'); return nav && nav.scrollWidth <= nav.clientWidth; }"
+            ),
+            $"The {name} account navigation is clipped at a narrow viewport."
+        );
         await page.Keyboard.PressAsync("Tab");
         Assert.NotEqual(
             "none",

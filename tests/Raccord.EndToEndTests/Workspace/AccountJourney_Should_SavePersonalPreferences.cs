@@ -65,7 +65,7 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
                 );
 
                 await page.GetByLabel("Idioma preferido").SelectOptionAsync("en");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Guardar" }).ClickAsync();
                 await page.GetByText("Preferences saved.").WaitForAsync();
                 await page.GetByRole(AriaRole.Heading, new() { Name = "My account" })
                     .WaitForAsync();

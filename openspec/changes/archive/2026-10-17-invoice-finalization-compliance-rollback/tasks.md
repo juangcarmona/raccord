@@ -11,12 +11,12 @@
 
 ## Definition of Done
 
-- [ ] DoD 1, 2 and 3: each criterion maps to passing test evidence; the task list is reconciled; CI tests are green and provide the required coverage.
-- [ ] DoD 4: CSharpier, analyzers, Prettier/ESLint/typecheck, commitlint, EF model and contract-drift checks pass as applicable.
-- [ ] DoD 5: security, package, license and SBOM gates pass; no authentication, authorization, personal-data or network surface changes are introduced.
-- [ ] DoD 6 and 7: architecture conforms to the accepted plan; no architecture or operations docs require runtime updates for a test-only change.
-- [ ] DoD 8 and 9: OpenSpec and ProductShape validations pass, citations are current, and final-head CI evidence is linked.
-- [ ] DoD 10 and 11: Owner review is recorded; known limitations and their follow-up issue are stated in the PR.
+- [x] DoD 1, 2 and 3: each acceptance criterion maps to the passing failure/retry test; all implementation tasks are complete; backend CI passed on `527a275` (138 tests), including 24 web integration tests.
+- [x] DoD 4: CI passed CSharpier, analyzers, Prettier/ESLint/typecheck, commitlint, EF model and API contract-drift checks; local Markdown and OpenSpec validation also passed.
+- [x] DoD 5: security, package vulnerability, license and SBOM gates passed; the test-only change adds no authentication, authorization, personal-data or network surface.
+- [x] DoD 6 and 7: implementation matches the accepted transaction-boundary plan; no runtime architecture or operator documentation changes are needed.
+- [x] DoD 8 and 9: OpenSpec validation and ProductShape citation verification passed; implementation-head CI and E2E evidence: [run 477](https://github.com/juangcarmona/raccord/actions/runs/39030947778).
+- [x] DoD 10 and 11: the Owner delegated autonomous review and integration in this session; self-review found no blocking issue, and the PR records the test-only scope and remaining audit #285.
 
 <!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
 <!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->

@@ -27,6 +27,7 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
                 await page.GetByText("Preferencias guardadas.").WaitForAsync();
                 await page.GetByRole(AriaRole.Link, new() { Name = "Administrar roles y permisos" })
                     .WaitForAsync();
+                await CaptureResponsiveEvidenceAsync(page, "design-system-app-es");
 
                 await page.ReloadAsync();
                 await page.GetByLabel("Nombre para mostrar").WaitForAsync();
@@ -62,6 +63,48 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
                     "es",
                     currentDocument.RootElement.GetProperty("preferredLanguage").GetString()
                 );
+
+                await page.GetByLabel("Idioma preferido").SelectOptionAsync("en");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+                await page.GetByText("Preferences saved.").WaitForAsync();
+                await page.GetByRole(AriaRole.Heading, new() { Name = "My account" })
+                    .WaitForAsync();
+                await CaptureResponsiveEvidenceAsync(page, "design-system-app-en");
+            }
+        );
+    }
+
+    private static async Task CaptureResponsiveEvidenceAsync(IPage page, string name)
+    {
+        Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+        await page.EvaluateAsync("() => document.activeElement?.blur()");
+        await page.SetViewportSizeAsync(1440, 900);
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(PlaywrightArtifacts.EvidenceDirectory, $"{name}-desktop.png"),
+                FullPage = true,
+            }
+        );
+        await page.SetViewportSizeAsync(375, 812);
+        Assert.False(
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            ),
+            $"The {name} account page overflows at a narrow viewport."
+        );
+        await page.Keyboard.PressAsync("Tab");
+        Assert.NotEqual(
+            "none",
+            await page.EvaluateAsync<string>(
+                "() => getComputedStyle(document.activeElement).outlineStyle"
+            )
+        );
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(PlaywrightArtifacts.EvidenceDirectory, $"{name}-mobile.png"),
+                FullPage = true,
             }
         );
     }

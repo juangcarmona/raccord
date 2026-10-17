@@ -192,12 +192,46 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 "() => document.documentElement.scrollWidth > window.innerWidth"
             )
         ).ShouldBeFalse();
+        await CaptureEnglishResponsiveEvidenceAsync(page);
         (
             await page.Locator(".language-switcher")
                 .GetByRole(AriaRole.Link, new() { Name = "ES", Exact = true })
                 .GetAttributeAsync("href")
         ).ShouldBe("../es/");
         await OpenHomepageAsync(page);
+    }
+
+    private static async Task CaptureEnglishResponsiveEvidenceAsync(IPage page)
+    {
+        Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+        await page.EvaluateAsync("() => document.activeElement?.blur()");
+        await page.SetViewportSizeAsync(1440, 900);
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    "design-system-public-en-desktop.png"
+                ),
+                FullPage = true,
+            }
+        );
+        await page.SetViewportSizeAsync(375, 812);
+        (
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            )
+        ).ShouldBeFalse();
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    "design-system-public-en-mobile.png"
+                ),
+                FullPage = true,
+            }
+        );
     }
 
     private static async Task CaptureMobileScreenshotAsync(IPage page, string evidenceDirectory)

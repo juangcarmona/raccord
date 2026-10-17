@@ -2,14 +2,14 @@
 
 ## 1. Canonical tokens and drift guard
 
-- [ ] 1.1 Define the canonical CSS tokens for color, typography, spacing, shape, focus, and semantic status; update `docs/design/color-tokens.md`, `docs/design/visual-direction.md`, and `docs/design/README.md` with approved values, usage, and contrast evidence, then verify the design guidance no longer labels the active system exploratory.
-- [ ] 1.2 Add a dependency-free design-system check and focused tests for missing imports, redefined shared tokens, mismatched values, and documented surface-specific exceptions; verify the check passes on the three current consumers and fails on each drift fixture.
-- [ ] 1.3 Invoke the same check from Husky pre-commit and add a dedicated CI job that runs on every pull request and push to main without depending on changed-path classification; verify the local hook rejects a drift fixture and the CI job runs for a public-site-only change.
+- [x] 1.1 Define the canonical CSS tokens for color, typography, spacing, shape, focus, and semantic status; update `docs/design/color-tokens.md`, `docs/design/visual-direction.md`, and `docs/design/README.md` with approved values, usage, and contrast evidence, then verify the design guidance no longer labels the active system exploratory.
+- [x] 1.2 Add a dependency-free design-system check and focused tests for missing imports, redefined shared tokens, mismatched values, contrast regressions, and documented surface-specific exceptions; verify the check passes on the three current consumers and fails on each drift fixture.
+- [x] 1.3 Invoke the same check from Husky pre-commit and add a dedicated CI job that runs on every pull request and push to main without depending on changed-path classification; verify the local hook rejects a drift fixture and the CI job runs for a public-site-only change.
 
 ## 2. App and public site
 
-- [ ] 2.1 Make the React app consume the canonical token file and map its existing shared colors, typography, spacing, shape, focus, and status aliases to it; verify frontend lint, typecheck, unit tests, build, and format checks pass and existing routes retain their behavior.
-- [ ] 2.2 Update the public site styles and generated root locale handoff to use the canonical tokens, retain both full locale pages, and provide functional Spanish and English links without JavaScript; verify its build/test output includes shared tokens and root/locale route assertions pass.
+- [x] 2.1 Make the React app consume the canonical token file and map its existing shared colors, typography, spacing, shape, focus, and status aliases to it; verify frontend lint, typecheck, unit tests, build, and format checks pass and existing routes retain their behavior.
+- [x] 2.2 Update the public site styles and generated root locale handoff to use the canonical tokens, retain both full locale pages, and provide functional Spanish and English links without JavaScript; verify its build/test output includes shared tokens and root/locale route assertions pass.
 
 ## 3. Engineering site
 

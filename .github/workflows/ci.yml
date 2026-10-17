@@ -13,6 +13,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  design-system:
+    name: Design system alignment
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Check canonical tokens and consumers
+        run: node scripts/check-design-system.mjs
+      - name: Check drift guard behavior
+        run: node --test scripts/check-design-system.test.mjs
+
   changes:
     name: Classify changed paths
     runs-on: ubuntu-26.04

@@ -9,7 +9,7 @@ Issue #347 asks the authenticated app, the public site, and the engineering site
 - Promote the existing app token values as the proposed canonical base, complete the token set for typography, spacing, shape, focus, and semantic status, and replace the exploratory status in the design guidance.
 - Make the app, public site, and engineering site consume one CSS token source while retaining surface-specific page structure and content.
 - Apply common brand patterns to navigation, links, buttons, surfaces, focus, and status presentation. Give the public root route a styled, accessible locale handoff that remains usable without JavaScript.
-- Add a deterministic check for token drift, run it from the Husky pre-commit hook for local feedback, and run the same check in a CI job on every pull request and push to main, independent of changed-path classification.
+- Add a deterministic check for token drift and contrast, run it from the Husky pre-commit hook for local feedback, and run the same check in a CI job on every pull request and push to main, independent of changed-path classification. The current `main` ruleset does not require status checks, so CI reports drift without blocking merge until the Owner changes that setting.
 - Review representative routes from all three surfaces at desktop and narrow widths, in English and Spanish where applicable, and attach visual evidence.
 
 ## Capabilities

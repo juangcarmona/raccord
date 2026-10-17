@@ -13,41 +13,26 @@ import { createHash } from 'node:crypto';
 /* ------------------------------------------------------------------ */
 /* Design tokens: a calm engineering instrument in two appearances.   */
 /* ------------------------------------------------------------------ */
-const lightBlock = `  --bg: #fbfbfa;
-  --panel: #f2f2ef;
-  --raise: #ffffff;
-  --ink: #1c1e21;
-  --text: #33373d;
-  --muted: #6b7078;
-  --line: #dcdcd6;
-  --line-strong: #b9bab2;
-  --accent: #0b5cad;
-  --accent-soft: #e3edf7;
-  --mark: #ffe9a8;
-  --code-bg: #f0efe9;`;
+const lightBlock = `  --bg: var(--raccord-cloud);
+  --panel: var(--raccord-selected-soft);
+  --raise: var(--raccord-white);
+  --ink: var(--raccord-ink);
+  --text: var(--raccord-ink);
+  --muted: var(--raccord-slate);
+  --line: var(--raccord-border);
+  --line-strong: var(--raccord-slate);
+  --accent: var(--raccord-action);
+  --accent-soft: var(--raccord-selected-soft);
+  --mark: var(--raccord-warning-soft);
+  --code-bg: var(--raccord-cloud);`;
 
-const darkBlock = `  --bg: #16181b;
-  --panel: #1d2024;
-  --raise: #24272c;
-  --ink: #e8eaed;
-  --text: #c6cad0;
-  --muted: #8d939c;
-  --line: #33373d;
-  --line-strong: #4a4f57;
-  --accent: #6cb2eb;
-  --accent-soft: #22303c;
-  --mark: #6a5b1e;
-  --code-bg: #22252a;
-  --cat-quality: #f27ec2;
-  --cat-views: #43c4da;
-  --cat-concepts: #e3b544;
-  --cat-other: #a9b2c5;`;
+const darkBlock = lightBlock;
 
 const lightBlockWithSectionColors = `${lightBlock}
-  --cat-quality: #b0287a;
-  --cat-views: #0b7285;
-  --cat-concepts: #8a6100;
-  --cat-other: #56607a;`;
+  --cat-quality: var(--raccord-error);
+  --cat-views: var(--raccord-info);
+  --cat-concepts: var(--raccord-warning);
+  --cat-other: var(--raccord-slate);`;
 
 const SECTION_ICONS = [
   '<circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="2"/><path d="M8 1v2M15 8h-2M8 15v-2M1 8h2"/>',
@@ -82,9 +67,19 @@ function sectionIcon(number) {
 const style = `
 :root {
 ${lightBlockWithSectionColors}
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, 'SF Mono', 'Cascadia Mono', Consolas, 'Liberation Mono', Menlo, monospace;
-  color-scheme: light;
+  --sans: var(--raccord-font-sans);
+  --mono: var(--raccord-font-mono);
+  --space-1: var(--raccord-space-1);
+  --space-2: var(--raccord-space-2);
+  --space-3: var(--raccord-space-3);
+  --space-4: var(--raccord-space-4);
+  --space-6: var(--raccord-space-6);
+  --space-8: var(--raccord-space-8);
+  --radius-sm: var(--raccord-radius-sm);
+  --radius-md: var(--raccord-radius-md);
+  --radius-lg: var(--raccord-radius-lg);
+  --focus-width: var(--raccord-focus-width);
+  --focus-offset: var(--raccord-focus-offset);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-appearance='light']) {
@@ -101,7 +96,7 @@ ${darkBlock}
 html, body { height: 100%; }
 body {
   margin: 0; display: flex; flex-direction: column; overflow: hidden;
-  font: 15px/1.6 var(--sans); color: var(--text); background: var(--bg);
+  font: var(--raccord-text-base)/var(--raccord-leading) var(--sans); color: var(--text); background: var(--bg);
   -webkit-text-size-adjust: 100%;
 }
 h1, h2, h3, h4, h5, h6 { color: var(--ink); line-height: 1.3; }
@@ -109,10 +104,10 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 button { font: inherit; color: inherit; }
 code, kbd, .rev { font-family: var(--mono); font-size: 0.88em; }
-code { background: var(--code-bg); border: 1px solid var(--line); border-radius: 3px; padding: 0.05em 0.35em; }
-pre { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 0.6rem 0.8rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+code { background: var(--code-bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.05em 0.35em; }
+pre { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
 pre code { background: none; border: none; padding: 0; font-size: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+:focus-visible { outline: var(--focus-width) solid var(--accent); outline-offset: var(--focus-offset); }
 
 .skip {
   position: absolute; left: -9999px; top: 0; z-index: 20;
@@ -130,17 +125,17 @@ header.site {
 header.site h1 { margin: 0; min-width: 0; font-size: 0.98rem; overflow-wrap: anywhere; }
 .revshort {
   font-family: var(--mono); font-size: 0.74rem; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 3px; padding: 0.05rem 0.4rem; white-space: nowrap;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.05rem 0.4rem; white-space: nowrap;
 }
 header.site .spacer { flex: 1; }
 .iconbtn {
   display: inline-flex; align-items: center; justify-content: center;
   flex: none;
-  width: 1.7rem; height: 1.7rem; border: 1px solid var(--line-strong); border-radius: 4px;
+  width: 1.7rem; height: 1.7rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
   background: var(--raise); cursor: pointer; color: var(--muted);
 }
 .iconbtn:hover { color: var(--ink); border-color: var(--accent); }
-.appearance { display: inline-flex; flex: none; border: 1px solid var(--line-strong); border-radius: 4px; overflow: hidden; }
+.appearance { display: inline-flex; flex: none; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; }
 .appearance button {
   border: none; background: var(--raise); color: var(--muted); cursor: pointer;
   padding: 0.15rem 0.5rem; font-size: 0.78rem;
@@ -207,18 +202,18 @@ body.nav-collapsed aside.nav .nav-code { display:block; }
 .doc hr { border: none; border-top: 1px solid var(--line); margin: 1.4rem 0; }
 .xref-dead code { word-break: break-all; }
 figure.diagram {
-  margin: 1rem 0; padding: 0.85rem; border: 1px solid var(--line); border-radius: 6px;
-  background: #ffffff; color: #183b56; overflow-x: auto; overscroll-behavior-x: contain;
+  margin: 1rem 0; padding: 0.85rem; border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--raccord-white); color: var(--raccord-ink); overflow-x: auto; overscroll-behavior-x: contain;
 }
 figure.diagram svg { display: block; width: auto; max-width: min(100%, 72rem); height: auto; margin-inline: auto; }
 .diagram-missing { color: var(--muted); font-style: italic; }
-mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 0.05em; }
+mark { background: var(--mark); color: inherit; border-radius: var(--radius-sm); padding: 0 0.05em; }
 
 /* ---- Search dialog ---- */
-.dlg { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: flex-start; justify-content: center; padding-top: 12vh; z-index: 30; }
+.dlg { position: fixed; inset: 0; background: color-mix(in srgb, var(--raccord-ink) 35%, transparent); display: flex; align-items: flex-start; justify-content: center; padding-top: 12vh; z-index: 30; }
 .dlgbox {
   width: min(38rem, 92vw); background: var(--raise); border: 1px solid var(--line-strong);
-  border-radius: 6px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); overflow: hidden;
+  border-radius: var(--radius-md); box-shadow: 0 12px 40px color-mix(in srgb, var(--raccord-ink) 25%, transparent); overflow: hidden;
 }
 .dlgbox input {
   width: 100%; border: none; border-bottom: 1px solid var(--line); padding: 0.7rem 0.9rem;
@@ -230,7 +225,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 0
 .dlgbox .where { display: block; font-size: 0.76rem; color: var(--muted); }
 .dlgbox .empty { padding: 0.7rem 0.9rem; color: var(--muted); font-size: 0.88rem; }
 kbd {
-  border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 3px;
+  border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: var(--radius-sm);
   padding: 0 0.3em; font-size: 0.8em; background: var(--raise); color: var(--muted);
 }
 
@@ -243,7 +238,7 @@ kbd {
 /* ---- Toast ---- */
 .toast {
   position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
-  background: var(--raise); border: 1px solid var(--line-strong); border-radius: 4px;
+  background: var(--raise); border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
   padding: 0.35rem 0.8rem; font-size: 0.85rem; color: var(--ink); z-index: 40;
   opacity: 0; transition: opacity 0.15s; pointer-events: none;
 }
@@ -253,10 +248,10 @@ kbd {
 @media (max-width: 900px) {
   header.site .mobile-nav-toggle { display:inline-flex; }
   #shell { position:relative; }
-  aside.nav { position:absolute; z-index:25; inset:0 auto 0 0; width:min(19rem,86vw); transform:translateX(-105%); transition:transform .2s ease; box-shadow:0 12px 36px rgba(0,0,0,.28); }
+  aside.nav { position:absolute; z-index:25; inset:0 auto 0 0; width:min(19rem,86vw); transform:translateX(-105%); transition:transform .2s ease; box-shadow:0 12px 36px color-mix(in srgb, var(--raccord-ink) 28%, transparent); }
   body.mobile-nav-open aside.nav { transform:translateX(0); }
   #nav-close { display:inline-flex; }
-  #nav-backdrop { position:absolute; z-index:24; inset:0; display:block; border:0; background:rgba(0,0,0,.48); }
+  #nav-backdrop { position:absolute; z-index:24; inset:0; display:block; border:0; background:color-mix(in srgb, var(--raccord-ink) 48%, transparent); }
   body.nav-collapsed aside.nav { width:min(19rem,86vw); padding:.9rem .75rem; }
   body.nav-collapsed aside.nav .nav-heading { justify-content:space-between; }
   body.nav-collapsed aside.nav h2, body.nav-collapsed aside.nav .nav-title, body.nav-collapsed aside.nav .nav-foot { display:block; }
@@ -281,7 +276,7 @@ kbd {
 .section-card[data-category="views"] { --category:var(--cat-views); }
 .section-card[data-category="concepts"] { --category:var(--cat-concepts); }
 .section-card[data-category="other"] { --category:var(--cat-other); }
-.section-card .card-number { display:grid; place-items:center; width:2rem; height:2rem; flex:none; border-radius:50%; background:var(--category); color:#fff; font-weight:700; }
+.section-card .card-number { display:grid; place-items:center; width:2rem; height:2rem; flex:none; border-radius:50%; background:var(--category); color:var(--raccord-white); font-weight:700; }
 .section-card strong { display:block; color:var(--ink); font-size:1rem; }
 .section-card small { display:block; margin-top:.2rem; color:var(--muted); font-size:.83rem; }
 @media(max-width:650px) { .section-cards { grid-auto-flow:row; grid-template-columns:1fr; grid-template-rows:none; } }
@@ -641,7 +636,7 @@ function stableJson(value) {
  * @param {string} input.stackName
  * @param {string|undefined} input.revision
  */
-export function buildSnapshotHtml({ readme, sections, stackName, revision }) {
+export function buildSnapshotHtml({ readme, sections, stackName, revision, designTokens = '' }) {
   const revisionShort = revision
     ? `<span class="revshort" title="revision ${esc(revision)}">${esc(revision.slice(0, 7))}</span>`
     : '<span class="revshort" title="Not generated from a Git checkout">no revision</span>';
@@ -654,7 +649,11 @@ export function buildSnapshotHtml({ readme, sections, stackName, revision }) {
     .join('\n');
 
   const data = {
-    readme: { title: readme.title, description: readme.description, html: readme.html },
+    readme: {
+      title: readme.title,
+      description: readme.description,
+      html: readme.html,
+    },
     sections: sections.map((s) => ({
       number: s.number,
       title: s.title,
@@ -673,7 +672,7 @@ export function buildSnapshotHtml({ readme, sections, stackName, revision }) {
     `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-${createHash('sha256').update(`\n${script}\n`).digest('base64')}'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">`,
     '<meta name="color-scheme" content="light dark">',
     `<title>${esc(stackName)} — arc42 Architecture Snapshot</title>`,
-    `<style>\n${style}\n</style>`,
+    `<style>\n${designTokens}\n${style}\n</style>`,
     '</head>',
     '<body>',
     '<a class="skip" href="#main">Skip to content</a>',

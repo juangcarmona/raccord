@@ -47,6 +47,10 @@ Aspire service defaults: OpenTelemetry logs, traces and metrics (ASP.NET Core, H
 
 Typed message catalogs (es, en); `Intl` formatting; semantic HTML, labelled controls, skip link, focus moved to the page heading after navigation, live regions for status, `jsx-a11y` strict linting. Invoice PDFs use Spanish labels.
 
+## Cross-surface visual tokens
+
+`docs/design/tokens.css` owns the shared color, typography, spacing, shape, focus and semantic-status values consumed by the React app, public site and static engineering pages. `scripts/check-design-system.mjs` checks consumer imports and aliases, forbids shared-token redefinitions, verifies contrast floors in both themes, and validates the renderer's documented literal-color exception. Husky runs the check before commits; a separate job in `.github/workflows/ci.yml` runs on every pull request and push to `main`, independent of the changed-path classifier. Static-site generators embed the token stylesheet so published pages do not fetch styling from another host.
+
 ## Configuration
 
 | Key | Default | Purpose |

@@ -52,5 +52,15 @@ if [ "$app_job_conditions" -ne 6 ]; then
   printf 'Expected six application jobs gated for documentation/public-site-only diffs, found %s\n' "$app_job_conditions" >&2
   exit 1
 fi
+if ! awk '
+  /^  design-system:/ { found=1; next }
+  found && /^  [[:alnum:]_-]+:/ { exit }
+  found && /^(    if:|    needs:)/ { blocked=1 }
+  END { exit !(found && !blocked) }
+' "$ci_workflow"; then
+  printf 'The design-system check must run without changed-path conditions or job dependencies\n' >&2
+  exit 1
+fi
+printf 'PASS design-system job is independent of changed-path classification\n'
 printf 'PASS engineering workflow excludes public-site paths and main CI gates six app jobs\n'
 bash .github/ci/test-classify-changes.sh

@@ -28,6 +28,10 @@ Avoid:
 - tiny low-contrast metadata;
 - visual metaphors that hide operational meaning.
 
+## Shared visual system
+
+The authenticated app, public site, and engineering site use the shared values in [`tokens.css`](tokens.css) for color, typography, spacing, shape, focus, and semantic status. Their information architecture and page-specific layout may differ, while shared patterns such as links, buttons, surfaces, status labels, and keyboard focus use the same roles. Document any renderer-specific color literal in [`token-exceptions.md`](token-exceptions.md) and keep it aligned with the canonical token values.
+
 ## Typography
 
 Use a highly legible sans-serif with strong tabular numerals. The final font choice must be checked for licensing, Spanish glyph coverage, number readability, and rendering across Windows and macOS.

@@ -47,12 +47,16 @@ test("builds an empty report that explains missing journey evidence", () => {
         assert.equal(report.workflowStatus, "success");
         assert.equal(report.overallStatus, "failure");
         assert.match(html, /No journey result was recorded/);
-        assert.match(html, /Workflow result: <strong class="status failure">failure/);
+        assert.match(
+            html,
+            /Workflow result: <strong class="status failure">failure/,
+        );
         assert.match(html, /No journey evidence captured/);
         assert.match(html, /id="journey-nav"/);
         assert.match(html, /mobile-nav-toggle/);
         assert.match(html, /data-appearance="dark"/);
         assert.match(html, /data-appearance="light"/);
+        assert.match(html, /--raccord-ink:\s*#0b1020/);
         assert.match(html, /abc123/);
     } finally {
         rmSync(root, { recursive: true, force: true });
@@ -71,6 +75,7 @@ test("escapes report metadata before inserting it into the page", () => {
             },
         });
         const html = readFileSync(join(root, "report", "index.html"), "utf8");
+        assert.match(html, /--raccord-success:\s*#1d7a4f/);
         assert.match(html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
         assert.doesNotMatch(html, /<script>alert\(1\)/);
         assert.match(html, /a=1&amp;b=2/);
@@ -226,7 +231,10 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 viewport: "mobile",
             }),
         );
-        writeFileSync(join(artifacts, "customer-register-checkpoint.png"), "png");
+        writeFileSync(
+            join(artifacts, "customer-register-checkpoint.png"),
+            "png",
+        );
         buildReport({
             artifactsDirectory: artifacts,
             outputDirectory: join(root, "e2e", "reports", "22"),
@@ -238,7 +246,10 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 date: new Date().toISOString(),
             },
         });
-        writeFileSync(join(root, "e2e", "reports", "22", "index.html"), "legacy report page");
+        writeFileSync(
+            join(root, "e2e", "reports", "22", "index.html"),
+            "legacy report page",
+        );
         const olderArtifacts = join(root, "artifacts-21");
         mkdirSync(olderArtifacts, { recursive: true });
         writeFileSync(
@@ -285,6 +296,7 @@ test("finalizes a stable latest link and bounds retained report history", () => 
             readFileSync(join(root, "site-manifest.json"), "utf8"),
         );
         assert.match(latest, /Raccord · E2E/);
+        assert.match(latest, /--raccord-ink:\s*#0b1020/);
         assert.match(latest, /data-appearance/);
         assert.match(latest, /mobile-nav-toggle/);
         assert.match(latest, /reports\/21\/index\.html/);
@@ -301,6 +313,7 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(landing, /How Raccord is built, in the open/);
         assert.match(landing, /href="e2e\/latest\.html"/);
         assert.match(landing, /assets\/raccord-mark\.svg/);
+        assert.match(landing, /--raccord-ink:\s*#0b1020/);
         assert.match(landing, /data-local-time datetime="/);
         assert.match(landing, /data-appearance-set="auto"/);
         assert.match(landing, /data-appearance-set="dark"/);
@@ -309,7 +322,9 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(landing, /max-width:900px/);
         assert.match(landing, /max-width:600px/);
         assert.match(landing, /prefers-reduced-motion:reduce/);
-        const landingScript = landing.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+        const landingScript = landing.match(
+            /<script>([\s\S]*?)<\/script>/,
+        )?.[1];
         assert.ok(landingScript);
         assert.doesNotThrow(() => new Function(landingScript));
         const reportsIndex = readFileSync(

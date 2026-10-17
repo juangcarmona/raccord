@@ -1,23 +1,31 @@
 :root {
-    color-scheme: dark;
-    --ink: #f1f2e9;
-    --muted: #a8b1ac;
-    --subtle: #78827e;
-    --paper: #111917;
-    --paper-raised: #18221f;
-    --paper-bright: #202d29;
-    --line: rgba(227, 238, 229, 0.13);
-    --lime: #c5eb68;
-    --lime-dark: #9bc23b;
-    --peach: #e89d76;
-    --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    --sans:
-        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-    --display:
-        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
+    --ink: var(--raccord-ink);
+    --muted: var(--raccord-slate);
+    --subtle: var(--raccord-slate);
+    --paper: var(--raccord-cloud);
+    --paper-raised: var(--raccord-white);
+    --paper-bright: var(--raccord-selected-soft);
+    --line: var(--raccord-border);
+    --accent: var(--raccord-action);
+    --accent-hover: var(--raccord-action-hover);
+    --caution: var(--raccord-warning);
+    --mono: var(--raccord-font-mono);
+    --sans: var(--raccord-font-sans);
+    --display: var(--raccord-font-sans);
+    --space-1: var(--raccord-space-1);
+    --space-2: var(--raccord-space-2);
+    --space-3: var(--raccord-space-3);
+    --space-4: var(--raccord-space-4);
+    --space-6: var(--raccord-space-6);
+    --space-8: var(--raccord-space-8);
+    --radius-sm: var(--raccord-radius-sm);
+    --radius-md: var(--raccord-radius-md);
+    --radius-lg: var(--raccord-radius-lg);
+    --focus-width: var(--raccord-focus-width);
+    --focus-offset: var(--raccord-focus-offset);
     font-family: var(--sans);
+    font-size: var(--raccord-text-base);
+    line-height: var(--raccord-leading);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     background: var(--paper);
@@ -32,17 +40,45 @@ body {
     min-width: 320px;
     background: var(--paper);
 }
+.locale-handoff {
+    width: min(100% - 2rem, 42rem);
+    margin: 12vh auto;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+.locale-handoff h1 {
+    margin-block: var(--raccord-space-8);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+}
+.locale-handoff nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--raccord-space-4);
+}
+.locale-handoff nav a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    padding: var(--raccord-space-2) var(--raccord-space-4);
+    border: 1px solid var(--raccord-border);
+    border-radius: var(--radius-sm);
+    background: var(--raccord-action);
+    color: var(--raccord-white);
+    font-weight: 700;
+}
 a {
     color: inherit;
 }
 a:focus-visible {
-    outline: 3px solid var(--lime);
-    outline-offset: 4px;
+    outline: var(--focus-width) solid var(--accent);
+    outline-offset: var(--focus-offset);
     border-radius: 3px;
 }
 ::selection {
-    color: #152016;
-    background: var(--lime);
+    color: var(--raccord-white);
+    background: var(--accent);
 }
 .skip-link {
     position: fixed;
@@ -51,8 +87,8 @@ a:focus-visible {
     left: 0.5rem;
     transform: translateY(-150%);
     padding: 0.75rem 1rem;
-    color: #152016;
-    background: var(--lime);
+    color: var(--raccord-white);
+    background: var(--accent);
 }
 .skip-link:focus {
     transform: translateY(0);
@@ -73,7 +109,7 @@ a:focus-visible {
     text-decoration: none;
 }
 .wordmark span {
-    color: var(--lime);
+    color: var(--accent);
 }
 .primary-nav {
     display: flex;
@@ -92,7 +128,7 @@ a:focus-visible {
 .primary-nav a:hover,
 .header-cta:hover,
 .language-switcher a:hover {
-    color: var(--lime);
+    color: var(--accent);
 }
 .header-cta {
     color: var(--ink);
@@ -113,7 +149,7 @@ a:focus-visible {
 }
 .language-switcher a[aria-current="page"] {
     color: var(--paper);
-    background: var(--lime);
+    background: var(--accent);
 }
 .hero,
 .page-hero,
@@ -137,7 +173,7 @@ a:focus-visible {
 }
 .eyebrow {
     margin: 0 0 19px;
-    color: var(--lime);
+    color: var(--accent);
     font: 500 0.69rem var(--mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -149,8 +185,9 @@ a:focus-visible {
     height: 8px;
     margin-right: 9px;
     border-radius: 50%;
-    background: var(--lime);
-    box-shadow: 0 0 14px rgba(197, 235, 104, 0.7);
+    background: var(--accent);
+    box-shadow: 0 0 14px
+        color-mix(in srgb, var(--raccord-selected) 70%, transparent);
 }
 h1,
 h2,
@@ -207,11 +244,11 @@ h1 {
     transform: translateY(-2px);
 }
 .button-primary {
-    color: #142014;
-    background: var(--lime);
+    color: var(--raccord-white);
+    background: var(--accent);
 }
 .button-primary:hover {
-    background: #d8f48c;
+    background: var(--raccord-action-hover);
 }
 .button-secondary,
 .button-quiet {
@@ -221,7 +258,7 @@ h1 {
 }
 .button-secondary:hover,
 .button-quiet:hover {
-    border-color: var(--lime);
+    border-color: var(--accent);
 }
 .hero-note {
     margin: 20px 0 0;
@@ -235,34 +272,38 @@ h1 {
     width: 100%;
     margin-inline: auto;
     overflow: hidden;
-    border: 1px solid rgba(197, 235, 104, 0.22);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 22%, transparent);
     border-radius: 50%;
     background:
         radial-gradient(
             circle at 52% 49%,
-            rgba(197, 235, 104, 0.12),
+            color-mix(in srgb, var(--raccord-selected) 12%, transparent),
             transparent 33%
         ),
-        linear-gradient(140deg, #1c2824, #121a18 62%);
-    box-shadow: inset 0 0 70px rgba(197, 235, 104, 0.06);
+        linear-gradient(140deg, var(--raccord-cloud), var(--raccord-cloud) 62%);
+    box-shadow: inset 0 0 70px
+        color-mix(in srgb, var(--raccord-selected) 6%, transparent);
 }
 .hero-art::before {
     position: absolute;
     inset: 12%;
-    border: 1px dashed rgba(197, 235, 104, 0.16);
+    border: 1px dashed
+        color-mix(in srgb, var(--raccord-selected) 16%, transparent);
     border-radius: 50%;
     content: "";
 }
 .orbit {
     position: absolute;
     inset: 23%;
-    border: 1px solid rgba(197, 235, 104, 0.25);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 25%, transparent);
     border-radius: 50%;
     transform: rotate(-28deg) scaleX(1.5);
 }
 .orbit-two {
     inset: 32%;
-    border-color: rgba(232, 157, 118, 0.25);
+    border-color: color-mix(in srgb, var(--raccord-warning) 25%, transparent);
     transform: rotate(33deg) scaleX(1.65);
 }
 .hero-art-core {
@@ -274,11 +315,17 @@ h1 {
     height: 94px;
     place-items: center;
     transform: translate(-50%, -50%);
-    border: 1px solid rgba(197, 235, 104, 0.65);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 65%, transparent);
     border-radius: 26px;
-    background: linear-gradient(145deg, #c5eb68, #a3c949);
-    color: #132016;
-    box-shadow: 0 0 65px rgba(197, 235, 104, 0.24);
+    background: linear-gradient(
+        145deg,
+        var(--raccord-selected),
+        var(--raccord-action-hover)
+    );
+    color: var(--raccord-ink);
+    box-shadow: 0 0 65px
+        color-mix(in srgb, var(--raccord-selected) 24%, transparent);
     font: 800 3.6rem var(--display);
     letter-spacing: -0.12em;
 }
@@ -290,14 +337,14 @@ h1 {
     padding: 9px 11px;
     border: 1px solid var(--line);
     border-radius: 3px;
-    background: #1b2622;
+    background: var(--raccord-white);
     color: var(--ink);
     font: 500 0.58rem var(--mono);
     letter-spacing: 0.04em;
-    box-shadow: 0 12px 32px #09100e;
+    box-shadow: 0 12px 32px var(--raccord-ink);
 }
 .orbit-label i {
-    color: var(--lime);
+    color: var(--accent);
     font-style: normal;
 }
 .label-project {
@@ -335,9 +382,10 @@ h1 {
     width: 60px;
     height: 60px;
     place-items: center;
-    border: 1px solid rgba(197, 235, 104, 0.4);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 40%, transparent);
     border-radius: 50%;
-    color: var(--lime);
+    color: var(--accent);
     font: 2.1rem var(--display);
 }
 .value-band .eyebrow {
@@ -361,13 +409,13 @@ h1 {
     gap: 11px;
     width: fit-content;
     margin-top: 24px;
-    color: var(--lime);
+    color: var(--accent);
     font-size: 0.84rem;
     font-weight: 700;
     text-decoration: none;
 }
 .text-link:hover {
-    color: #e0f5a9;
+    color: var(--raccord-selected-soft);
 }
 .section {
     padding-block: 106px 22px;
@@ -416,19 +464,19 @@ h1 {
 .step-number,
 .area-index,
 .guide-step-number {
-    color: var(--lime);
+    color: var(--accent);
     font: 500 0.7rem var(--mono);
 }
 .product-shot {
     margin: 0;
     overflow: hidden;
     border: 1px solid var(--line);
-    background: #1a2220;
+    background: var(--raccord-white);
 }
 .screenshot-link {
     display: block;
     padding: 14px;
-    background: #edf0ec;
+    background: var(--raccord-cloud);
 }
 .product-shot img {
     display: block;
@@ -451,7 +499,7 @@ h1 {
     font-size: 0.8rem;
 }
 .product-shot figcaption a {
-    color: var(--lime);
+    color: var(--accent);
 }
 .area-grid {
     display: grid;
@@ -464,7 +512,7 @@ h1 {
     padding: 24px;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.012);
+    background: color-mix(in srgb, var(--raccord-white) 1.2%, transparent);
 }
 .area-index {
     display: block;
@@ -485,8 +533,8 @@ h1 {
 .scope-note {
     margin: 22px 0 0;
     padding: 17px 20px;
-    border-left: 2px solid var(--peach);
-    background: rgba(232, 157, 118, 0.07);
+    border-left: 2px solid var(--caution);
+    background: color-mix(in srgb, var(--raccord-warning) 7%, transparent);
     color: var(--muted);
     font-size: 0.79rem;
     line-height: 1.7;
@@ -494,7 +542,7 @@ h1 {
 .scope-note strong {
     display: block;
     margin-bottom: 5px;
-    color: var(--peach);
+    color: var(--caution);
     font: 500 0.69rem var(--mono);
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -521,12 +569,12 @@ h1 {
 }
 .guide-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(197, 235, 104, 0.55);
+    border-color: color-mix(in srgb, var(--raccord-selected) 55%, transparent);
 }
 .card-eyebrow {
     display: block;
     margin-bottom: 18px;
-    color: var(--lime);
+    color: var(--accent);
     font: 500 0.63rem var(--mono);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -548,7 +596,7 @@ h1 {
     position: absolute;
     top: 24px;
     right: 25px;
-    color: var(--lime);
+    color: var(--accent);
 }
 .final-cta {
     display: flex;
@@ -558,11 +606,12 @@ h1 {
     margin-top: 100px;
     margin-bottom: 80px;
     padding: 42px;
-    border: 1px solid rgba(197, 235, 104, 0.28);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 28%, transparent);
     background:
         radial-gradient(
             ellipse at 100% 0%,
-            rgba(197, 235, 104, 0.1),
+            color-mix(in srgb, var(--raccord-selected) 10%, transparent),
             transparent 46%
         ),
         var(--paper-raised);
@@ -588,8 +637,9 @@ h1 {
 }
 .maturity-strip .status-dot {
     margin-top: 5px;
-    background: var(--peach);
-    box-shadow: 0 0 14px rgba(232, 157, 118, 0.5);
+    background: var(--caution);
+    box-shadow: 0 0 14px
+        color-mix(in srgb, var(--raccord-warning) 50%, transparent);
 }
 .maturity-strip strong {
     display: block;
@@ -604,7 +654,7 @@ h1 {
     line-height: 1.7;
 }
 .maturity-strip a {
-    color: var(--lime);
+    color: var(--accent);
     font-size: 0.76rem;
     text-decoration: none;
 }
@@ -702,11 +752,12 @@ h1 {
     max-width: 750px;
     margin-top: 32px;
     padding: 20px 24px;
-    border: 1px solid rgba(197, 235, 104, 0.3);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 30%, transparent);
     background: var(--paper-raised);
 }
 .cost-callout strong {
-    color: var(--lime);
+    color: var(--accent);
     font-size: 0.88rem;
 }
 .cost-callout p {
@@ -765,7 +816,7 @@ h1 {
     background:
         radial-gradient(
             ellipse at center,
-            rgba(197, 235, 104, 0.06),
+            color-mix(in srgb, var(--raccord-selected) 6%, transparent),
             transparent 70%
         ),
         var(--paper-raised);
@@ -777,22 +828,23 @@ h1 {
     justify-content: center;
     gap: 12px;
     padding: 18px;
-    border: 1px solid rgba(197, 235, 104, 0.3);
-    background: #1c2823;
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-selected) 30%, transparent);
+    background: var(--raccord-white);
 }
 .diagram-node span {
-    color: var(--lime);
+    color: var(--accent);
     font: 500 0.65rem var(--mono);
 }
 .diagram-node strong {
     font: 600 0.88rem var(--display);
 }
 .node-web {
-    border-color: var(--lime);
-    background: #283620;
+    border-color: var(--accent);
+    background: var(--raccord-selected-soft);
 }
 .diagram-arrow {
-    color: var(--lime);
+    color: var(--accent);
     text-align: center;
     font-size: 1.4rem;
 }
@@ -801,7 +853,7 @@ h1 {
     display: flex;
     justify-content: space-around;
     height: 44px;
-    color: var(--lime);
+    color: var(--accent);
     font-size: 1.1rem;
 }
 .node-db,
@@ -819,7 +871,7 @@ h1 {
 .diagram-caption {
     max-width: 850px;
     padding: 14px 17px;
-    border-left: 2px solid var(--peach);
+    border-left: 2px solid var(--caution);
     color: var(--muted);
     font-size: 0.79rem;
     line-height: 1.7;
@@ -866,7 +918,7 @@ h1 {
     height: 42px;
     place-items: center;
     border: 1px solid var(--line);
-    color: var(--lime);
+    color: var(--accent);
 }
 .development-note h2 {
     font-size: 1.1rem;
@@ -888,7 +940,7 @@ h1 {
     text-decoration: none;
 }
 .back-link:hover {
-    color: var(--lime);
+    color: var(--accent);
 }
 .guide-hero h1 {
     font-size: clamp(2.7rem, 5vw, 4.1rem);
@@ -903,7 +955,7 @@ h1 {
 .prerequisite strong {
     display: block;
     margin-bottom: 8px;
-    color: var(--lime);
+    color: var(--accent);
     font: 500 0.68rem var(--mono);
     text-transform: uppercase;
 }
@@ -940,12 +992,13 @@ h1 {
     max-width: 800px;
     margin-top: 35px;
     padding: 24px;
-    border: 1px solid rgba(232, 157, 118, 0.35);
-    background: rgba(232, 157, 118, 0.06);
+    border: 1px solid
+        color-mix(in srgb, var(--raccord-warning) 35%, transparent);
+    background: color-mix(in srgb, var(--raccord-warning) 6%, transparent);
 }
 .warning-callout h2 {
     margin-bottom: 8px;
-    color: var(--peach);
+    color: var(--caution);
     font-size: 1rem;
 }
 .warning-callout p {
@@ -964,7 +1017,7 @@ h1 {
     font-size: 1rem;
 }
 .source-links a {
-    color: var(--lime);
+    color: var(--accent);
     font-size: 0.82rem;
 }
 .human-note {

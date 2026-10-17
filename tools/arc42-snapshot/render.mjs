@@ -15,24 +15,24 @@ export const MERMAID_CONFIG = Object.freeze({
   htmlLabels: false,
   theme: 'base',
   themeVariables: {
-    fontFamily: 'system-ui, sans-serif',
+    fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
     fontSize: '16px',
-    primaryColor: '#e6f4ea',
-    primaryTextColor: '#163b25',
-    primaryBorderColor: '#1b5e36',
-    lineColor: '#334e5c',
-    secondaryColor: '#eaf2f8',
-    secondaryTextColor: '#123045',
-    secondaryBorderColor: '#245679',
-    tertiaryColor: '#fff4d6',
-    tertiaryTextColor: '#3c2900',
-    tertiaryBorderColor: '#805500',
+    primaryColor: '#edf6fc',
+    primaryTextColor: '#0b1020',
+    primaryBorderColor: '#0b7fbf',
+    lineColor: '#667085',
+    secondaryColor: '#e3f5ee',
+    secondaryTextColor: '#1d7a4f',
+    secondaryBorderColor: '#b5e3d0',
+    tertiaryColor: '#fff3d6',
+    tertiaryTextColor: '#8a5a00',
+    tertiaryBorderColor: '#8a5a00',
     background: '#ffffff',
   },
 });
 
 export function getDiagramAccessibleTitle(source) {
-  return /^\s*accTitle:\s*(.+?)\s*$/mi.exec(source)?.[1]?.trim() ?? '';
+  return /^\s*accTitle:\s*(.+?)\s*$/im.exec(source)?.[1]?.trim() ?? '';
 }
 
 export function stripDiagramAccessibilityTitle(source) {
@@ -41,9 +41,7 @@ export function stripDiagramAccessibilityTitle(source) {
 
 export function validateDiagramTitles(sources) {
   return sources.flatMap((source, index) =>
-    getDiagramAccessibleTitle(source)
-      ? []
-      : [`Diagram ${index + 1} is missing an accTitle accessibility name`],
+    getDiagramAccessibleTitle(source) ? [] : [`Diagram ${index + 1} is missing an accTitle accessibility name`],
   );
 }
 
@@ -61,7 +59,22 @@ export function normalizeMermaidSvg(svg, index) {
   const clean = purifier.sanitize(svg, {
     USE_PROFILES: { html: true, svg: true, svgFilters: true },
     ADD_TAGS: ['foreignObject'],
-    FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'image', 'img', 'audio', 'video', 'link', 'use', 'animate', 'set', 'animateMotion', 'animateTransform'],
+    FORBID_TAGS: [
+      'script',
+      'iframe',
+      'object',
+      'embed',
+      'image',
+      'img',
+      'audio',
+      'video',
+      'link',
+      'use',
+      'animate',
+      'set',
+      'animateMotion',
+      'animateTransform',
+    ],
   });
   const document = new window.DOMParser().parseFromString(clean, 'image/svg+xml');
   const root = document.documentElement;
@@ -76,8 +89,10 @@ export function normalizeMermaidSvg(svg, index) {
     if (oldId) idMap.set(oldId, newId);
     element.setAttribute('id', newId);
   }
-  const rewriteReferences = (value) => value.replace(/url\(\s*["']?#([^\s)"']+)["']?\s*\)/g,
-    (match, id) => idMap.has(id) ? `url(#${idMap.get(id)})` : match);
+  const rewriteReferences = (value) =>
+    value.replace(/url\(\s*["']?#([^\s)"']+)["']?\s*\)/g, (match, id) =>
+      idMap.has(id) ? `url(#${idMap.get(id)})` : match,
+    );
   const unsafeCss = (value) => /@import|(?:https?:|data:|file:|\/\/)|url\(\s*["']?(?!#)/i.test(value);
   for (const element of [root, ...root.querySelectorAll('*')]) {
     for (const attribute of [...element.attributes]) {
@@ -89,7 +104,13 @@ export function normalizeMermaidSvg(svg, index) {
           element.removeAttribute(name);
         }
       } else if (name === 'aria-labelledby' || name === 'aria-describedby') {
-        element.setAttribute(name, value.split(/\s+/).map((id) => idMap.get(id) ?? id).join(' '));
+        element.setAttribute(
+          name,
+          value
+            .split(/\s+/)
+            .map((id) => idMap.get(id) ?? id)
+            .join(' '),
+        );
       } else if (unsafeCss(value)) {
         element.removeAttribute(name);
       } else {
@@ -101,8 +122,9 @@ export function normalizeMermaidSvg(svg, index) {
     if (unsafeCss(style.textContent)) {
       style.remove();
     } else {
-      style.textContent = rewriteReferences(style.textContent)
-        .replace(/#([a-zA-Z_][\w:.-]*)/g, (match, id) => idMap.has(id) ? `#${idMap.get(id)}` : match);
+      style.textContent = rewriteReferences(style.textContent).replace(/#([a-zA-Z_][\w:.-]*)/g, (match, id) =>
+        idMap.has(id) ? `#${idMap.get(id)}` : match,
+      );
     }
   }
   const width = /max-width:\s*([\d.]+)px/.exec(root.getAttribute('style') ?? '');
@@ -149,7 +171,11 @@ export async function renderMermaid(sources) {
 }
 
 function isMermaid(lang) {
-  return String(lang ?? '').trim().split(/\s+/)[0] === 'mermaid';
+  return (
+    String(lang ?? '')
+      .trim()
+      .split(/\s+/)[0] === 'mermaid'
+  );
 }
 
 function normalizedHeading(text) {
@@ -262,7 +288,8 @@ export async function renderMarkdown(body, { fileToRoute, svgs = [], currentRout
   const diagramTitles = diagramSources.map(getDiagramAccessibleTitle);
   const renderer = createMarked(fileToRoute, svgs, diagramTitles, currentRoute);
   const html = await renderer.marked.parse(stripDuplicateTitle(body, title));
-  if (renderer.count() !== svgs.length) throw new Error('Unused Mermaid SVGs: Markdown extraction and rendering disagree');
+  if (renderer.count() !== svgs.length)
+    throw new Error('Unused Mermaid SVGs: Markdown extraction and rendering disagree');
   return { html, mermaidCount: renderer.count() };
 }
 

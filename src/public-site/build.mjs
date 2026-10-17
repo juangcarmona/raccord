@@ -1,16 +1,25 @@
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { renderPage, routes } from "./render.mjs";
 
 const sourceDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.join(sourceDirectory, "dist");
+const repositoryRoot = path.resolve(sourceDirectory, "../..");
+const sharedTokens = await readFile(
+    path.join(repositoryRoot, "docs/design/tokens.css"),
+    "utf8",
+);
+const siteStyles = await readFile(
+    path.join(sourceDirectory, "styles.css"),
+    "utf8",
+);
 
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
-await cp(
-    path.join(sourceDirectory, "styles.css"),
+await writeFile(
     path.join(outputDirectory, "styles.css"),
+    `${sharedTokens}\n${siteStyles}`,
 );
 await cp(
     path.join(sourceDirectory, "images"),
@@ -36,7 +45,7 @@ await cp(
 
 await writeFile(
     path.join(outputDirectory, "index.html"),
-    `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raccord</title><script type="module" src="./locale.mjs"></script></head><body><a href="/es/">Raccord</a></body></html>`,
+    `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>Raccord · Idioma / Language</title><link rel="stylesheet" href="./styles.css"><script type="module" src="./locale.mjs"></script></head><body><main class="locale-handoff"><a class="wordmark" href="/es/" aria-label="Raccord">Raccord<span>.</span></a><h1>Elige tu idioma <span aria-hidden="true">/</span> Choose your language</h1><nav aria-label="Idioma / Language"><a lang="es" href="/es/">Español</a><a lang="en" href="/en/">English</a></nav></main></body></html>`,
 );
 
 console.log(`Static homepage built at ${outputDirectory}`);

@@ -1,31 +1,31 @@
+@import url("../../../docs/design/tokens.css");
+
 :root {
-    --raccord-ink: #0b1020;
-    --raccord-cyan: #2de2e6;
-    --raccord-coral: #ff6b5e;
-    --raccord-cloud: #f5f7fa;
-    --raccord-slate: #667085;
-    --raccord-white: #fff;
-    --raccord-selected: #0b7fbf;
     --bg: var(--raccord-cloud);
     --surface: var(--raccord-white);
     --text: var(--raccord-ink);
     --muted: var(--raccord-slate);
-    --border: #d0d5dd;
-    --accent: var(--raccord-selected);
+    --border: var(--raccord-border);
+    --accent: var(--raccord-action);
     --accent-text: var(--raccord-white);
-    --danger: #b3261e;
-    --warning-bg: #fff3d6;
-    --warning-border: #8a5a00;
-    --ok: #1d7a4f;
+    --danger: var(--raccord-error);
+    --warning-bg: var(--raccord-warning-soft);
+    --warning-border: var(--raccord-warning);
+    --ok: var(--raccord-success);
     --focus: var(--raccord-selected);
-    --radius: 4px;
-    font-family:
-        system-ui,
-        -apple-system,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
-    line-height: 1.5;
+    --focus-width: var(--raccord-focus-width);
+    --focus-offset: var(--raccord-focus-offset);
+    --space-1: var(--raccord-space-1);
+    --space-2: var(--raccord-space-2);
+    --space-3: var(--raccord-space-3);
+    --space-4: var(--raccord-space-4);
+    --space-6: var(--raccord-space-6);
+    --space-8: var(--raccord-space-8);
+    --radius: var(--raccord-radius-sm);
+    --radius-md: var(--raccord-radius-md);
+    --radius-lg: var(--raccord-radius-lg);
+    font-family: var(--raccord-font-sans);
+    line-height: var(--raccord-leading);
     color: var(--text);
     background: var(--bg);
 }
@@ -66,8 +66,8 @@ body {
 }
 
 :focus-visible {
-    outline: 3px solid var(--focus);
-    outline-offset: 2px;
+    outline: var(--focus-width) solid var(--focus);
+    outline-offset: var(--focus-offset);
 }
 
 .visually-hidden {
@@ -359,7 +359,7 @@ input[type="checkbox"] {
     color: var(--accent-text);
 }
 .button--primary:hover:not(:disabled) {
-    background: #08699e;
+    background: var(--raccord-action-hover);
 }
 .button--danger {
     color: var(--danger);
@@ -384,13 +384,13 @@ input[type="checkbox"] {
 }
 .badge--invoiced {
     color: var(--ok);
-    border-color: #b5e3d0;
-    background: #e3f5ee;
+    border-color: var(--raccord-success-border);
+    background: var(--raccord-success-soft);
 }
 .badge--in-draft {
-    color: #075a88;
-    border-color: #b8dcee;
-    background: #edf6fc;
+    color: var(--raccord-info);
+    border-color: var(--raccord-info-border);
+    background: var(--raccord-selected-soft);
 }
 .badge--warning {
     background: var(--warning-bg);
@@ -455,11 +455,12 @@ address {
         font-size: 1.1rem;
     }
     .shell__sidebar nav {
-        overflow-x: auto;
+        overflow: visible;
     }
     .shell__sidebar nav ul {
         display: flex;
-        width: max-content;
+        width: 100%;
+        flex-wrap: wrap;
         gap: 0.25rem;
     }
     .shell__sidebar nav a {
@@ -467,6 +468,7 @@ address {
         border-left: 0;
         border-bottom: 2px solid transparent;
         border-radius: 0;
+        white-space: nowrap;
     }
     .shell__sidebar nav a.active {
         border-bottom-color: var(--raccord-cyan);

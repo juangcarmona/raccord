@@ -70,6 +70,10 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             await AssertMobileKeyboardNavigationAsync(page);
             if (shouldCaptureEvidence)
             {
+                await CaptureResponsiveEvidenceAsync(page, "es");
+            }
+            if (shouldCaptureEvidence)
+            {
                 await CaptureMobileScreenshotAsync(page, evidenceDirectory);
             }
             await AssertDesktopLayoutAsync(page);
@@ -192,12 +196,46 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 "() => document.documentElement.scrollWidth > window.innerWidth"
             )
         ).ShouldBeFalse();
+        await CaptureResponsiveEvidenceAsync(page, "en");
         (
             await page.Locator(".language-switcher")
                 .GetByRole(AriaRole.Link, new() { Name = "ES", Exact = true })
                 .GetAttributeAsync("href")
         ).ShouldBe("../es/");
         await OpenHomepageAsync(page);
+    }
+
+    private static async Task CaptureResponsiveEvidenceAsync(IPage page, string locale)
+    {
+        Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+        await page.EvaluateAsync("() => document.activeElement?.blur()");
+        await page.SetViewportSizeAsync(1440, 900);
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    $"design-system-public-{locale}-desktop.png"
+                ),
+                FullPage = true,
+            }
+        );
+        await page.SetViewportSizeAsync(375, 812);
+        (
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            )
+        ).ShouldBeFalse();
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    $"design-system-public-{locale}-mobile.png"
+                ),
+                FullPage = true,
+            }
+        );
     }
 
     private static async Task CaptureMobileScreenshotAsync(IPage page, string evidenceDirectory)

@@ -53,6 +53,26 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 500));
     await page.screenshot({ path: join(output, `arc42-${view.name}.png`) });
   }
+  await page.setViewport({ width: 375, height: 812, deviceScaleFactor: 1 });
+  await page.goto(`${pathToFileURL(snapshot).href}#/section/03`, { waitUntil: 'load' });
+  await page.waitForFunction(() => document.querySelector('.doc figure.diagram'));
+  await page.click('#nav-close');
+  await page.evaluate(() => {
+    document.body.classList.remove('mobile-nav-open');
+    document.getElementById('nav-backdrop').hidden = true;
+  });
+  await page.waitForFunction(() => {
+    const navigation = document.querySelector('aside.nav');
+    return (
+      !document.body.classList.contains('mobile-nav-open') &&
+      navigation?.getBoundingClientRect().right <= 0
+    );
+  });
+  await page.evaluate(() => document.activeElement?.blur());
+  await page.screenshot({
+    path: join(output, 'arc42-context-business-mobile.png'),
+    fullPage: true,
+  });
 } finally {
   await browser.close();
 }

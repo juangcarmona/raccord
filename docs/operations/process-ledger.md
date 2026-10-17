@@ -385,3 +385,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.
 - **Action:** Enumerate generated routes in both locales and resolve each local `href` and `src` against its generated page directory in the site test.
 - **Check:** The public-site verification fails when any locale route, local navigation target or nested asset is absent.
+
+## 2026-10-17 · Responsive evidence normalizes navigation and covers each locale
+
+- **Observation:** A narrow architecture snapshot captured its mobile drawer over the page, and the first public-site evidence set omitted the Spanish locale even though the journey visited it.
+- **Action:** Close mobile navigation deterministically, assert that the drawer is outside the viewport, and capture each supported locale at desktop and narrow widths.
+- **Check:** The hosted artifacts show unobstructed engineering content and app/public pages for Spanish and English; any drawer or viewport overflow fails the evidence capture.

@@ -200,4 +200,25 @@ describe("public site build", () => {
         assert.equal(rootLocalePath(["fr-FR", "es-ES"]), "/es/");
         assert.equal(rootLocalePath(["fr-FR"]), "/es/");
     });
+
+    it("emits a styled language handoff with both no-script destinations and shared tokens", async () => {
+        const root = await readFile(
+            path.join(outputDirectory, "index.html"),
+            "utf8",
+        );
+        const styles = await readFile(
+            path.join(outputDirectory, "styles.css"),
+            "utf8",
+        );
+        assert.match(root, /href="\.\/styles\.css"/);
+        assert.match(root, /href="\/es\/"/);
+        assert.match(root, /href="\/en\/"/);
+        assert.match(root, /lang="es"/);
+        assert.match(root, /lang="en"/);
+        assert.match(styles, /--raccord-ink:\s*#0b1020/);
+        assert.match(
+            root,
+            /<nav aria-label="Idioma \/ Language">[\s\S]*?<\/nav>/,
+        );
+    });
 });

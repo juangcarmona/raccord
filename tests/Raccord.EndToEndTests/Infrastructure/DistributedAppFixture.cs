@@ -110,6 +110,27 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             builder.Resources.Single(resource =>
                 string.Equals(resource.Name, PostgresResourceName, StringComparison.Ordinal)
             );
+
+        // The AppHost names a persistent volume for local development. A session-lifetime
+        // container alone still reuses that volume, including its old credentials and data.
+        // Keep the development volume untouched and let each E2E container start with fresh data.
+        foreach (
+            var mount in postgres
+                .Annotations.OfType<ContainerMountAnnotation>()
+                .Where(mount =>
+                    mount.Type == ContainerMountType.Volume
+                    && string.Equals(
+                        mount.Source,
+                        "raccord-postgres-data",
+                        StringComparison.Ordinal
+                    )
+                )
+                .ToArray()
+        )
+        {
+            postgres.Annotations.Remove(mount);
+        }
+
         builder.CreateResourceBuilder(postgres).WithLifetime(ContainerLifetime.Session);
     }
 

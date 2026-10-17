@@ -9,6 +9,7 @@ Issue #337 records that the browser-level regression for the server-authoritativ
 - Add an AppHost journey that freezes the browser clock on a clearly different date, leaves the issue date blank, asserts that finalization sends `null`, and verifies the issued date against `IssuedAt` in the organization's configured time zone.
 - Add a companion AppHost journey that explicitly selects a date and verifies both the finalize request and issued invoice preserve it.
 - Select both journeys in the committed Invoicing per-PR battery.
+- Make the E2E Postgres resource omit the AppHost development volume so each session-lifetime test database starts with fresh credentials and data while the developer volume remains untouched.
 - Change no invoice behavior, API contract, validation, or product-model semantics.
 
 ## Capabilities
@@ -26,4 +27,4 @@ The tests exercise the invoice issue-date choice and immutable invoice result go
 
 ## Impact
 
-Only `tests/Raccord.EndToEndTests/Invoicing/InvoiceJourney_Should_FinalizeDraft.cs` and `tests/Raccord.EndToEndTests/per-pr-selection.txt` change. There are no API, database, dependency, deployment, or production changes. Runtime evidence is synthetic and captured through the existing AppHost harness.
+Only the invoice E2E journey, its selection manifest, and E2E-only PostgreSQL fixture configuration change. There are no API, domain, dependency, deployment, or production changes. Runtime evidence is synthetic and captured through the existing AppHost harness; the persistent development volume is preserved.

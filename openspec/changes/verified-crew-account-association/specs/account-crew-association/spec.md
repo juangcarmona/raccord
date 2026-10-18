@@ -6,77 +6,77 @@
 
 Define product behavior for associating an existing personal profile with an existing crew record while preserving them as distinct records.
 
-## Requirements
+## ADDED Requirements
 
-### Requirement: An authorized planner proposes one crew association
+### Requirement: The person confirms a planner-selected crew record
 
-The product SHALL allow an authorized planner to select one existing crew record and send an expiring invitation to its current email address for the person to consider associating an existing personal profile.
+An authorized planner MAY invite a person to associate an existing profile with one selected crew record. The association SHALL take effect only after the authenticated person explicitly accepts the record-specific invitation.
 
 #### Scenario: Person accepts selected association
 
-- **GIVEN** the planner has permission to manage crew login access and selects an unlinked crew record
+- **GIVEN** the planner has permission and selects an unlinked crew record
 - **AND** the invitation is current and the person has authenticated to a personal profile
-- **WHEN** the person reviews and accepts the invitation for that specific crew record
+- **WHEN** the person reviews and accepts the invitation for that record
 - **THEN** the product associates that profile with the selected crew record
 - **AND** records the actor, time, workspace, affected record identifiers and outcome
-- **AND** keeps the profile and crew record distinct with their existing history
+- **AND** preserves both records and their histories
 
-### Requirement: Email equality alone never establishes identity
+### Requirement: Email equality alone never proves identity
 
-The product SHALL NOT create or prove a profile-to-crew association solely because their email addresses match.
+The product SHALL NOT create or prove an association solely because email addresses match.
 
-#### Scenario: Duplicate or matching email
+#### Scenario: Matching email addresses
 
 - **GIVEN** a profile and one or more crew records have matching email addresses
 - **WHEN** the product evaluates a requested association
-- **THEN** it SHALL require the person's explicit acceptance of a record-specific invitation
-- **AND** SHALL NOT automatically associate records based on the email match
+- **THEN** it SHALL require explicit acceptance of a record-specific invitation
+- **AND** SHALL NOT associate records automatically
 
 ### Requirement: Ambiguous and conflicting records are refused
 
-The product SHALL refuse an association when there is no plausible crew record, more than one plausible record, or either record is already associated with another record of the opposite type.
+The product SHALL refuse an association if no plausible crew record exists, more than one plausible record exists, or either record is already associated with another record of the opposite type.
 
-#### Scenario: Ambiguous candidate or existing link
+#### Scenario: Candidate is ambiguous or already linked
 
-- **GIVEN** a profile request has zero or multiple plausible crew records, or a profile or crew record is already linked elsewhere
+- **GIVEN** the request has zero or multiple plausible crew records, or either record is already linked elsewhere
 - **WHEN** the product evaluates the association
-- **THEN** it SHALL create no association and preserve both records
-- **AND** SHALL require authorized planner resolution without exposing data from another workspace
-- **AND** SHALL audit the refusal and its reason
+- **THEN** it SHALL create no link and preserve both records
+- **AND** require authorized planner resolution without disclosing another workspace's data
+- **AND** audit the refusal and reason
 
-### Requirement: Association changes require authorization and audit
+### Requirement: Association changes are authorized and audited
 
-The product SHALL authorize every create or remove action within the workspace and SHALL audit successful, rejected and removed attempts with actor, time, workspace, affected record identifiers, outcome and reason.
+The product SHALL authorize each create or remove action within its workspace and audit successful, rejected and removed attempts with actor, time, workspace, affected record identifiers, outcome and reason.
 
 #### Scenario: Unauthorized request
 
 - **GIVEN** an actor lacks permission to manage crew login access
-- **WHEN** the actor attempts to create or remove a profile-to-crew association
-- **THEN** the product SHALL refuse without changing either record or disclosing another workspace's data
+- **WHEN** the actor attempts to create or remove an association
+- **THEN** the product SHALL refuse without changing either record or disclosing other-workspace data
 
 #### Scenario: Planner removes a link
 
 - **GIVEN** an association exists and an authorized planner has a reason to remove it
 - **WHEN** the planner removes the link and records that reason
-- **THEN** the product SHALL remove the association and stop granting access through that link
-- **AND** SHALL preserve both records and their histories
+- **THEN** the association is removed and no longer grants access
+- **AND** both records and their histories are preserved
 
 ### Requirement: Email changes and deactivation preserve association semantics
 
-A verified profile email change SHALL update the linked crew record under the existing email-propagation rule without changing the association. Deactivating crew login access SHALL block sign-in while preserving the link and crew history.
+A verified profile-email change SHALL update the linked crew record under the existing email-propagation rule without changing the association. Deactivating crew login access SHALL block sign-in while preserving the association and crew history.
 
 #### Scenario: Verified email changes
 
 - **GIVEN** a profile is associated with a crew record
 - **WHEN** its owner verifies a new profile email
-- **THEN** the new address SHALL propagate to the linked crew record
-- **AND** the association SHALL remain unchanged
+- **THEN** the new address propagates to the linked crew record
+- **AND** the association remains unchanged
 
-#### Scenario: Crew login deactivated
+#### Scenario: Crew login is deactivated
 
 - **GIVEN** a profile is associated with a crew record
 - **WHEN** an authorized planner deactivates login access
-- **THEN** the profile cannot sign in through that crew association
+- **THEN** the person cannot sign in through that crew association
 - **AND** the association and crew history remain
 
 <!-- pdac:cite id="TERM-USER-ACCOUNT" digest="sha256:e35b221d981e03d6c106ca25ff26ff507b9a616cd8e01ca80a9f6ee598b44d9c" -->

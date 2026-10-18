@@ -451,3 +451,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Static markup and a successful deployment did not reveal that a narrow grid track clipped the PostgreSQL label into the document-storage node.
 - **Action:** Give every architecture node an explicit grid track, check generated asset paths in both locales, and inspect browser rectangles at desktop and mobile widths.
 - **Check:** Public-site tests cover the brand asset, localized routes and grid placement; Chromium evidence reports no node intersections or horizontal overflow in either locale.
+
+## 2026-10-18 · ProductShape citation verification needs the pinned OpenSpec CLI on PATH
+
+- **Observation:** Running the pinned OpenSpec CLI through `npx` did not make its `openspec` executable discoverable by ProductShape, so citation verification reported PRODUCT069 and could only enumerate documents by filesystem convention.
+- **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
+- **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.

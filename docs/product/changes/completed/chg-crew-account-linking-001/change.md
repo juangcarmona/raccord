@@ -2,7 +2,7 @@
 id: CHG-CREW-ACCOUNT-LINKING-001
 type: product-change
 title: Define verified association between crew records and personal profiles
-status: proposed
+status: applied
 base-revision: "25dddc0cdb6f5453a78086daaca059512fbbf203"
 operations:
     add:
@@ -26,11 +26,11 @@ The current Product Definition treats a personal profile and a crew record as di
 
 The Product Definition describes a safe, auditable process for associating a personal profile with the correct existing crew record, keeps those records distinct, and defines outcomes for ambiguous matches, conflicting links, email changes, unlinking and deactivation.
 
-The proposed default is a two-sided confirmation: an authorized planner initiates an invitation scoped to one existing crew record, and the authenticated profile holder explicitly accepts it. Email equality alone never creates or proves the association. The invitation should go to the crew record's current email, and an existing profile must authenticate before accepting.
+The approved policy is two-sided confirmation: an authorized planner initiates an invitation scoped to one existing crew record, and the authenticated profile holder explicitly accepts it. This is sufficient confirmation; no second planner approval is required. Email equality alone never creates or proves the association. The invitation goes to the crew record's current email, and an existing profile must authenticate before accepting.
 
 ## Rationale
 
-A crew record carries planning and work history, while a personal profile grants access. Linking them based only on an email match risks exposing another person's records. Requiring a planner to choose the specific record and the profile holder to accept provides a reviewable confirmation without collecting identity documents.
+A crew record carries planning and work history, while a personal profile grants access. Linking them based only on an email match risks exposing another person's records. Requiring a planner to choose the specific record and the profile holder to accept provides a reviewable confirmation without collecting identity documents. The initiating planner's existing permission is sufficient; a second approval would add friction without changing the person's explicit acceptance.
 
 ## Affected Product Areas
 
@@ -41,12 +41,11 @@ A crew record carries planning and work history, while a personal profile grants
 
 ## Open Questions
 
-- Does the recommended two-sided confirmation (planner invitation to a specific crew record plus acceptance by the authenticated profile holder) provide sufficient identity evidence, or should the product require another confirmation step?
-- Should an accepted association require a second planner approval, or is the initiating planner's existing permission sufficient?
+None. The approved policy uses the planner's record-specific invitation plus the authenticated profile holder's explicit acceptance as sufficient confirmation. A second planner approval is not required.
 
 ## Product Acceptance
 
-- The human resolves the identity-proof and approval questions before this change is approved.
+- The approved decision records that record-specific planner invitation plus authenticated acceptance is sufficient confirmation and does not require a second planner approval.
 - The accepted Product Definition states that email equality alone never associates a profile with a crew record.
 - Only an authorized actor may initiate or remove a link; the person must confirm the proposed association before it takes effect.
 - Ambiguous, conflicting, unauthorized, rejected, changed-email, unlinked and deactivated cases have explicit outcomes and auditable events.

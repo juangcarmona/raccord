@@ -7,9 +7,9 @@ The current Product Definition distinguishes a personal profile from a crew reco
 ## What Changes
 
 - Propose a Product Change defining account-to-crew association, confirmation, conflict handling, unlinking, audit and deactivation behavior.
-- Use a planner's invitation to one selected crew record plus the authenticated person's explicit acceptance as the recommended confirmation.
+- Use a planner's invitation to one selected crew record plus the authenticated person's explicit acceptance as sufficient confirmation; no second planner approval is required.
 - Keep email equality insufficient as proof and leave the sufficiency of the proposed confirmation and need for second-planner approval as explicit Owner questions.
-- Keep runtime implementation out of scope until the Product Change is approved; track it in a separate issue.
+- Apply the approved Product Change in this policy change and track runtime implementation in the separate #369 work item.
 
 ## Capabilities
 
@@ -37,3 +37,6 @@ Product Definition artifacts in Workspace and Crew; a future account-to-crew run
 <!-- pdac:cite id="BR-CRW-ACCOUNT-INVITATION-EXPIRY" digest="sha256:0b7b348c641e79d8d97ff46b53c5f869b08f5d042d360429810ee6cc67f3c5c1" -->
 <!-- pdac:cite id="BR-CRW-PROFILE-OWNERSHIP" digest="sha256:8b7c288163c50c7481acce8b6d361ec6ff7cd1e5beea0018ee097e71e7fb1e5f" -->
 <!-- pdac:cite id="QR-ACCESS-CONTROL" digest="sha256:71b7d808829672b6a0bd8d67df1d1748c5a143970b1030480b0d2351be15f0fb" -->
+
+<!-- pdac:cite id="BR-WSP-ACCOUNT-CREW-ASSOCIATION" digest="sha256:7b1c7b7971ae29810b6f4999edf899302fd7fa738a8bc2b7cbf2d6d8ad70ee6f" -->
+<!-- pdac:cite id="UC-WSP-LINK-EXISTING-CREW-RECORD" digest="sha256:641960ffc7fd8228156b926012c0ab2edae42b2e0e4fbb4111e1c52e44635462" -->

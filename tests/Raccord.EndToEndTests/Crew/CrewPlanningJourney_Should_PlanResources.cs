@@ -9,8 +9,8 @@ namespace Raccord.EndToEndTests.Crew;
 /// Given a project, crew and vehicle, when a coordinator creates functions, shifts and assignments, then staffing status and conflicts remain visible.
 /// ProductShape: BC-CREW-TRANSPORT, JRN-CRW-STAFF-A-PROJECT, JRN-CRW-PLAN-INTERNAL-WORK, UC-CRW-ADD-FUNCTION-TO-PROJECT, UC-CRW-PLAN-RESOURCE-ON-FUNCTION, UC-CRW-CREATE-SHIFT, UC-CRW-PLAN-RESOURCE-ON-SHIFT, UC-CRW-RESOLVE-PLANNING-CONFLICTS.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Crew)]
 public sealed class CrewPlanningJourney_Should_PlanResources(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

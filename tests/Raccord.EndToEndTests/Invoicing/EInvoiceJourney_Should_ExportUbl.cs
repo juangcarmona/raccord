@@ -9,8 +9,9 @@ using Xunit;
 namespace Raccord.EndToEndTests.Invoicing;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Compliance)]
 public sealed class EInvoiceJourney_Should_ExportUbl(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

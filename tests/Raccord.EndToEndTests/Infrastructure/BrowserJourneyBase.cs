@@ -26,7 +26,8 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected async Task RunJourneyAsync(
         string artifactName,
         Func<IPage, Task> journey,
-        bool signIn = true
+        bool signIn = true,
+        string[]? supplementalAssets = null
     )
     {
         await using var context = await App.NewContextAsync();
@@ -40,9 +41,11 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         );
         var page = await context.NewPageAsync();
         var passed = false;
+        var areas = PlaywrightArtifacts.AreasFor(GetType());
 
         try
         {
+            EnsureAreaDeclared(areas);
             if (signIn)
             {
                 await page.GotoAsync("/sign-in");
@@ -82,8 +85,31 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             }
             finally
             {
-                PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
+                WriteJourneyResult(artifactName, passed, areas, supplementalAssets);
             }
+        }
+    }
+
+    private static void WriteJourneyResult(
+        string artifactName,
+        bool passed,
+        string[] areas,
+        string[]? supplementalAssets
+    ) =>
+        PlaywrightArtifacts.WriteJourneyResult(
+            artifactName,
+            passed ? "passed" : "failed",
+            areas,
+            supplementalAssets
+        );
+
+    private void EnsureAreaDeclared(string[] areas)
+    {
+        if (areas.Length == 0)
+        {
+            throw new InvalidOperationException(
+                $"E2E journey '{GetType().Name}' must declare at least one bounded-context Area trait."
+            );
         }
     }
 

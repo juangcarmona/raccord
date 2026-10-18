@@ -11,8 +11,8 @@ namespace Raccord.EndToEndTests.PublicSite;
 /// ProductShape: ACT-OPERATIONS-COORDINATOR, ACT-BILLING-ADMINISTRATOR,
 /// JRN-BILL-FINISHED-PROJECT, JRN-SET-UP-INVOICING.
 /// </summary>
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.CrossCutting)]
 public sealed class PublicHomepageJourney_Should_IntroduceTheProject
 {
     [Fact]
@@ -96,9 +96,22 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             {
                 await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
             }
-            PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
+            WriteHomepageResult(artifactName, passed);
         }
     }
+
+    private static void WriteHomepageResult(string artifactName, bool passed) =>
+        PlaywrightArtifacts.WriteJourneyResult(
+            artifactName,
+            passed ? "passed" : "failed",
+            PlaywrightArtifacts.AreasFor(typeof(PublicHomepageJourney_Should_IntroduceTheProject)),
+            [
+                "design-system-public-en-desktop.png",
+                "design-system-public-en-mobile.png",
+                "design-system-public-es-desktop.png",
+                "design-system-public-es-mobile.png",
+            ]
+        );
 
     private static async Task OpenHomepageAsync(IPage page)
     {

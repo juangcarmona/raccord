@@ -6,13 +6,13 @@ using Shouldly;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Integrations)]
 /// <summary>
 /// Given an administrator issues a scoped integration token, when external requests read and write
 /// project records and the token is regenerated, then only the granted scope remains usable and the
 /// previous credential is rejected.
 /// ProductShape: BC-WORKSPACE, JRN-INT-BUILD-API-INTEGRATION, UC-INT-ENABLE-API-ACCESS, UC-INT-READ-RECORDS-THROUGH-API, UC-INT-WRITE-RECORDS-THROUGH-API, UC-INT-REGENERATE-API-TOKEN.
 /// </summary>
+[Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
 public sealed class ApiAccessJourney_Should_EnforceScopes(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

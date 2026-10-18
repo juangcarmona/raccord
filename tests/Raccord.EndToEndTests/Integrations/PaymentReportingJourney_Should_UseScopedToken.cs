@@ -8,8 +8,9 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
 public sealed class PaymentReportingJourney_Should_UseScopedToken(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

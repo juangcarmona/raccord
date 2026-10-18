@@ -9,8 +9,8 @@ namespace Raccord.EndToEndTests.Crew;
 /// Given a crew member's registered hours, when a coordinator approves them, then the approved hours appear in the payroll export.
 /// ProductShape: BC-CREW-TRANSPORT, JRN-CRW-HOURS-TO-PAYROLL, UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES, UC-CRW-REGISTER-HOURS-MANUALLY, UC-CRW-APPROVE-TIME-REGISTRATIONS, UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME, UC-CRW-EXPORT-PAYROLL-DATA.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Crew)]
 public sealed class CrewHoursJourney_Should_ApproveAndExportPayroll(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

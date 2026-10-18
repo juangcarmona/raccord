@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Playwright;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -30,9 +31,23 @@ internal static class PlaywrightArtifacts
             StringComparison.OrdinalIgnoreCase
         );
 
+    internal static string[] AreasFor(Type journeyType) =>
+        journeyType
+            .GetCustomAttributes(typeof(Xunit.TraitAttribute), inherit: false)
+            .Cast<Xunit.TraitAttribute>()
+            .Where(trait => string.Equals(trait.Name, E2ETraits.Area, StringComparison.Ordinal))
+            .Select(trait => trait.Value)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+
     private static string ArtifactPath(string name) => Path.Combine(EvidenceDirectory, name);
 
-    internal static void WriteJourneyResult(string name, string status)
+    internal static void WriteJourneyResult(
+        string name,
+        string status,
+        IReadOnlyCollection<string>? areas = null,
+        IReadOnlyCollection<string>? supplementalAssets = null
+    )
     {
         try
         {
@@ -45,6 +60,11 @@ internal static class PlaywrightArtifacts
                         name,
                         status,
                         viewport = "desktop",
+                        areas = areas?.Distinct(StringComparer.Ordinal).ToArray() ?? [],
+                        supplementalAssets = supplementalAssets
+                            ?.Distinct(StringComparer.Ordinal)
+                            .ToArray()
+                            ?? [],
                     }
                 )
             );

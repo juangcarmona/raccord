@@ -11,8 +11,8 @@ namespace Raccord.EndToEndTests.Crew;
 /// Given crew, vehicle and rate records, when an operator saves them, then they remain available for planning and costing.
 /// ProductShape: BC-CREW-TRANSPORT, UC-CREW-MAINTAIN-RECORDS, JRN-CREW-MAINTAIN-CREW-VEHICLES-RATES.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Crew)]
 public sealed class CrewRecordsJourney_Should_ManageCrewVehiclesAndRates(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

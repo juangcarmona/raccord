@@ -11,6 +11,14 @@ namespace Raccord.EndToEndTests.Workspace;
 public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
+    private static readonly string[] ResponsiveEvidenceAssets =
+    [
+        "design-system-app-en-desktop.png",
+        "design-system-app-en-mobile.png",
+        "design-system-app-es-desktop.png",
+        "design-system-app-es-mobile.png",
+    ];
+
     [Fact]
     public async Task Journey_Should_SaveProfileAndRestorePreferredLanguageAfterSignIn()
     {
@@ -70,7 +78,8 @@ public sealed class AccountJourney_Should_SavePersonalPreferences(DistributedApp
                 await page.GetByRole(AriaRole.Heading, new() { Name = "My account" })
                     .WaitForAsync();
                 await CaptureResponsiveEvidenceAsync(page, "design-system-app-en");
-            }
+            },
+            supplementalAssets: ResponsiveEvidenceAssets
         );
     }
 

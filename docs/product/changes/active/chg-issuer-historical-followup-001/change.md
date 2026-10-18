@@ -24,6 +24,8 @@ An accepted issuer-profile change applies only to future invoices. It does not a
 
 The issuer-profile change alone does not establish that a particular issued invoice is wrong or requires correction. Keeping the decision case-specific preserves immutable invoice history and avoids implying a blanket legal or accounting conclusion.
 
+The Owner selected the product behaviour: profile changes do not trigger automatic historical corrections, and any correction is handled individually through the existing flow. No jurisdiction-specific accounting/legal answer is available. This change deliberately leaves that determination outside the product and does not make it a prerequisite for defining this product behaviour.
+
 ## Affected Product Areas
 
 - Issuer-profile changes and the details used on future invoices.
@@ -32,14 +34,15 @@ The issuer-profile change alone does not establish that a particular issued invo
 
 ## Open Questions
 
-- Which circumstances and jurisdictions require a historical invoice to be corrected after an issuer-identity change? A qualified accounting/legal review must answer this before the product claims to guide that determination or adds an automated workflow.
+None. Whether a specific historical invoice requires correction is outside this Product Change; the product neither determines nor gives advice on that question.
 
 ## Product Acceptance
 
 - The business rule states that accepted issuer-profile changes affect future invoices only and do not automatically initiate historical-invoice corrections.
 - A structured behaviour shows one historical invoice being corrected through the existing rectifying-invoice flow while other historical invoices remain unaffected.
 - The proposed definition does not determine which real invoices require correction or claim legal/accounting compliance.
+- The absence of jurisdiction-specific accounting/legal advice does not change the defined product response and is not represented as settled legal guidance.
 
 ## Out of Scope
 
-This change does not alter or delete issued invoices, determine legal treatment for any invoice or jurisdiction, implement a historical-invoice review queue, change the rectifying-invoice flow, or make a legal or tax compliance claim.
+This change does not alter or delete issued invoices, determine legal treatment for any invoice or jurisdiction, advise operators which invoices require correction, implement a historical-invoice review queue, change the rectifying-invoice flow, or make a legal or tax compliance claim. Operators seek appropriate advice for individual circumstances outside the product.

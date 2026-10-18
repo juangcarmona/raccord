@@ -20,6 +20,25 @@ async function fileExists(file) {
 }
 
 describe("public site build", () => {
+    it("renders homepage guide links as responsive cards in both locales", async () => {
+        for (const locale of ["es", "en"]) {
+            const homepage = await readFile(
+                path.join(outputDirectory, locale, "index.html"),
+                "utf8",
+            );
+            const manualsSection = homepage.match(
+                /<section class="section section-manuals">([\s\S]*?)<\/section>/,
+            )?.[1];
+            assert.ok(manualsSection, `${locale} homepage has a manuals section`);
+            assert.match(manualsSection, /<div class="guide-grid">/);
+            assert.equal(
+                [...manualsSection.matchAll(/class="guide-card"/g)].length,
+                3,
+                `${locale} homepage renders three guide cards`,
+            );
+        }
+    });
+
     it("publishes the brand mark and uses it on localized architecture pages", async () => {
         assert.equal(
             await fileExists(path.join(outputDirectory, "raccord-mark.svg")),

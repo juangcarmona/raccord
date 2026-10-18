@@ -67,6 +67,7 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             );
             await OpenHomepageAsync(page);
             await AssertHomepageContentAsync(page);
+            await AssertGuideCardLayoutAsync(page);
             await AssertMobileKeyboardNavigationAsync(page);
             if (shouldCaptureEvidence)
             {
@@ -278,6 +279,30 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 "() => document.activeElement?.getAttribute('href') ?? ''"
             )
         ).ShouldBe("#contenido");
+    }
+
+    private static async Task AssertGuideCardLayoutAsync(IPage page)
+    {
+        var guideGrid = page.Locator(".section-manuals .guide-grid");
+        (await guideGrid.CountAsync()).ShouldBe(1);
+        (await guideGrid.Locator(":scope > .guide-card").CountAsync()).ShouldBe(3);
+
+        await page.SetViewportSizeAsync(1440, 900);
+        var desktopColumns = await guideGrid.EvaluateAsync<string>(
+            "element => getComputedStyle(element).gridTemplateColumns"
+        );
+        desktopColumns.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length.ShouldBe(2);
+
+        await page.SetViewportSizeAsync(375, 812);
+        var mobileColumns = await guideGrid.EvaluateAsync<string>(
+            "element => getComputedStyle(element).gridTemplateColumns"
+        );
+        mobileColumns.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length.ShouldBe(1);
+        (
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            )
+        ).ShouldBeFalse();
     }
 
     private static async Task AssertDesktopLayoutAsync(IPage page)

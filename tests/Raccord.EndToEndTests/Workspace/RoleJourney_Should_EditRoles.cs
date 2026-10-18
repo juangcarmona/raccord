@@ -27,10 +27,14 @@ public sealed class RoleJourney_Should_EditRoles(DistributedAppFixture app)
                 await page.ScreenshotAsync(
                     new PageScreenshotOptions
                     {
-                        Path = "docs/product/design/evidence/issue-40/role-editor.png",
+                        Path = Path.Combine(
+                            PlaywrightArtifacts.EvidenceDirectory,
+                            "role-editor-settings.png"
+                        ),
                         FullPage = true,
                     }
                 );
-            }
+            },
+            supplementalAssets: ["role-editor-settings.png"]
         );
 }

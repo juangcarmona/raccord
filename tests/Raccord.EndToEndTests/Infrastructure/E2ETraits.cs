@@ -49,12 +49,21 @@ public static class E2ETraits
     /// <summary>Distinguishes non-journey verification tests from reportable E2E journeys.</summary>
     public const string TestKind = "TestKind";
 
+    /// <summary>Identifies whether a journey's public evidence represents browser UI or API output.</summary>
+    public const string EvidenceMode = "EvidenceMode";
+
     /// <summary>The only value <see cref="Quarantine"/> takes — xUnit filters match a name/value pair.</summary>
     public const string Quarantined = "true";
 
     public static class TestKinds
     {
         public const string Metadata = "metadata";
+    }
+
+    public static class EvidenceModes
+    {
+        public const string Browser = "browser";
+        public const string Api = "api";
     }
 
     public static class Areas

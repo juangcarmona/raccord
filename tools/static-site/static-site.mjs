@@ -259,6 +259,7 @@ export function buildReport({
             assets: [],
         };
         groups.set(journeyName, group);
+        if (group.evidenceMode === "api" && extension !== "zip") continue;
         const assetName = explicitJourney
             ? filename
             : `${journeyName}${variant}.${extension}`;

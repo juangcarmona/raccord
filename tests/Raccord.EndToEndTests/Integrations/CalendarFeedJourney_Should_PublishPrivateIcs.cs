@@ -7,6 +7,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
@@ -39,15 +40,6 @@ public sealed class CalendarFeedJourney_Should_PublishPrivateIcs(DistributedAppF
                 calendar.ShouldContain("BEGIN:VCALENDAR");
                 calendar.ShouldContain("Rodaje campaña primavera");
                 calendar.ShouldContain("END:VCALENDAR");
-
-                await page.SetContentAsync($"<pre>{WebUtility.HtmlEncode(calendar)}</pre>");
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = $"playwright-artifacts/calendar-feed-{RunStamp}.png",
-                        FullPage = true,
-                    }
-                );
 
                 var rotate = await page.APIRequest.PostAsync(
                     $"/api/integrations/calendar-feeds/{feed.Id}/regenerate"

@@ -71,8 +71,11 @@ Every commit-time gate is mirrored in CI's `lint` job, so bypassing locally (`HU
 `tests/Raccord.EndToEndTests` boots the whole Aspire AppHost (fresh session Postgres) and drives the real SPA with Playwright. Docker must be running:
 
 ```bash
+node src/public-site/build.mjs
 dotnet test tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj -c Release --filter "Quarantine!=true"
 ```
+
+Build the public homepage first so the E2E project can copy `src/public-site/dist/` into its output directory before the AppHost starts.
 
 The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selection.txt`; regenerate it after adding or renaming journeys:
 
@@ -80,7 +83,7 @@ The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selec
 bash .github/scripts/check-e2e-selection.sh --update
 ```
 
-Set `PLAYWRIGHT_CAPTURE_EVIDENCE=true` when running the E2E assembly directly to save a success checkpoint and a video per journey alongside the normal trace/failure evidence under `playwright-artifacts/`. Both PR CI and the hosted evidence workflow enable capture and upload the artifacts.
+Set `PLAYWRIGHT_CAPTURE_EVIDENCE=true` when running the E2E assembly directly to save a success checkpoint and a video for browser journeys alongside the normal trace/failure evidence under `playwright-artifacts/`. API-only journeys retain their result and trace without unrelated screenshots or video. Both PR CI and the hosted evidence workflow enable capture and upload the artifacts grouped by bounded context.
 
 ### Security and license gates
 

@@ -7,6 +7,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Contacts)]
 public sealed class CompanyRegistryJourney_Should_HandleUnavailableProvider(
@@ -25,17 +26,6 @@ public sealed class CompanyRegistryJourney_Should_HandleUnavailableProvider(
                 );
                 response.Status.ShouldBe((int)HttpStatusCode.OK);
                 (await response.JsonAsync<JsonElement>()).GetArrayLength().ShouldBe(0);
-
-                await page.SetContentAsync(
-                    "<h1>Company registry</h1><p>No configured provider; enter details manually.</p>"
-                );
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = $"playwright-artifacts/company-registry-{RunStamp}.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
     }

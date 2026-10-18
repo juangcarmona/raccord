@@ -11,6 +11,7 @@ namespace Raccord.EndToEndTests.Documents;
 /// ProductShape: BC-DOCUMENTS, UC-DOC-CONFIGURE-TEMPLATE-SETTINGS, UC-DOC-SAVE-TEXT-TEMPLATE,
 /// UC-DOC-STYLE-TEMPLATE, UC-DOC-INSERT-IMAGE.
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
 public sealed class DocumentTemplateJourney_Should_ConfigureBranding(DistributedAppFixture app)
@@ -51,9 +52,6 @@ public sealed class DocumentTemplateJourney_Should_ConfigureBranding(Distributed
                 body.ShouldContain("E2E Studio");
                 body.ShouldContain("#0f766e");
                 body.ShouldNotContain("<script>");
-                await page.SetContentAsync(
-                    "<h1>Branded document template preview</h1><p>E2E Studio · invoice · #0f766e</p>"
-                );
             }
         );
     }

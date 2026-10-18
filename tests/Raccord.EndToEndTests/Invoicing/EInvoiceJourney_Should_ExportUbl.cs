@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text;
 using System.Xml.Linq;
 using Microsoft.Playwright;
@@ -66,17 +65,6 @@ public sealed class EInvoiceJourney_Should_ExportUbl(DistributedAppFixture app)
                         )
                     )
                     .Value.ShouldBe("1089.00");
-
-                await page.SetContentAsync(
-                    $"<h1>UBL e-invoice</h1><pre>{WebUtility.HtmlEncode(Encoding.UTF8.GetString(xml))}</pre>"
-                );
-                await page.ScreenshotAsync(
-                    new PageScreenshotOptions
-                    {
-                        Path = "docs/product/design/evidence/issue-165/ubl-einvoice.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
     }

@@ -361,3 +361,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.
 - **Action:** Enumerate generated routes in both locales and resolve each local `href` and `src` against its generated page directory in the site test.
 - **Check:** The public-site verification fails when any locale route, local navigation target or nested asset is absent.
+
+## 2026-10-18 · Public-site component classes need layout coverage
+
+- **Observation:** The homepage reused the guide-card component inside a default `card-grid` wrapper that had no stylesheet rule, while the manuals page used the existing responsive `guide-grid` class. Static link checks did not catch the resulting broken layout.
+- **Action:** When a page renders reusable visual components, verify that the parent layout class is styled and add generated-page assertions for the component and its layout wrapper in every locale.
+- **Check:** The public-site build test asserts that both homepage locales render the expected guide grid and all three cards; the Aspire-hosted Playwright journey checks two desktop columns, one mobile column, no horizontal overflow, and retains desktop and mobile screenshots.

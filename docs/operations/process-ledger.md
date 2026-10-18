@@ -439,3 +439,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The homepage reused the guide-card component inside a default `card-grid` wrapper that had no stylesheet rule, while the manuals page used the existing responsive `guide-grid` class. Static link checks did not catch the resulting broken layout.
 - **Action:** When a page renders reusable visual components, verify that the parent layout class is styled and add generated-page assertions for the component and its layout wrapper in every locale.
 - **Check:** The public-site build test asserts that both homepage locales render the expected guide grid and all three cards; the Aspire-hosted Playwright journey checks two desktop columns, one mobile column, no horizontal overflow, and retains desktop and mobile screenshots.
+
+## 2026-10-18 · Static report disclosures use native controls
+
+- **Observation:** Long bounded-context evidence groups need folding, while a custom disclosure control would duplicate browser keyboard and accessibility behavior.
+- **Action:** Use native `<details>` and `<summary>` for static report groups, keep them expanded initially, and preserve the platform marker and focus style.
+- **Check:** Report-builder tests verify each context group, the expanded initial state, and retained grouped content; the generated report remains usable without additional JavaScript.

@@ -65,6 +65,7 @@ public sealed class E2EJourneyMetadata_Should_BeComplete
             typeof(Integrations.CompanyRegistryJourney_Should_HandleUnavailableProvider),
             typeof(Integrations.PaymentReportingJourney_Should_UseScopedToken),
             typeof(Invoicing.InboundEInvoiceJourney_Should_TrackStatus),
+            typeof(Invoicing.InvoiceCollectionsJourney_Should_RecordAndReportPayments),
             typeof(Projects.ProjectContextJourney_Should_KeepWorkingRecordsTogether),
             typeof(Projects.ProjectTimeJourney_Should_ReportPlannedAndActualWork),
         };

@@ -10,8 +10,9 @@ namespace Raccord.EndToEndTests.Documents;
 /// Given an equipment item, when the operator generates its printable label, then the code and scan identifier are present.
 /// ProductShape: UC-DOC-GENERATE-DOCUMENT, UC-DOC-DESIGN-EQUIPMENT-LABEL, JRN-DOC-LABEL-EQUIPMENT.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Equipment)]
 public sealed class DocumentGenerationJourney_Should_CreateLabels(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

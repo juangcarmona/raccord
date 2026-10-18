@@ -12,8 +12,8 @@ namespace Raccord.EndToEndTests.Projects;
 /// ProductShape: BC-PROJECTS, JRN-PRJ-COORDINATE-PROJECT, UC-PRJ-COORDINATE-PROJECT.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 public sealed class ProjectTimeJourney_Should_ReportPlannedAndActualWork(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

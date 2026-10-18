@@ -9,8 +9,8 @@ namespace Raccord.EndToEndTests.Customers;
 /// the customer leg of the smoke set, and the setup leg every other journey reuses.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Customers)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Contacts)]
 public sealed class CustomerJourney_Should_RegisterAndAppear(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

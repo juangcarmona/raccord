@@ -409,3 +409,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Creating an invoice draft already reserves its project billable line as `in-draft`; expecting `unbilled` after a failed finalization confuses rollback of issuance with rollback of draft creation.
 - **Action:** Failure-injection tests assert the state established before the transaction under test, then verify only a successful retry advances the line to `invoiced`.
 - **Check:** The compliance-persistence failure test requires `in-draft` after rollback and `invoiced` after successful retry.
+
+## 2026-10-18 · E2E evidence assets declare their owning journey
+
+- **Observation:** Responsive and publication screenshots with independent filenames were rendered as unknown journeys even though a passing browser journey captured them.
+- **Action:** Include explicit supplemental asset filenames in the journey result manifest and assign each captured file to that manifest's owning bounded context.
+- **Check:** The generated report contains the screenshots under their owning journey, retains the ten context headings and explicit empty contexts, and reports zero unknown rows.
+
+## 2026-10-18 · Isolated AppHost collections run serially
+
+- **Observation:** A second xUnit collection started a parallel AppHost and collided with the main suite's database and frontend installer resources.
+- **Action:** Disable parallel execution for the isolated issuer collection and detach only the named development volume from each test AppHost.
+- **Check:** Run the committed E2E selection with both collections and require all selected journeys to pass without touching the developer volume.

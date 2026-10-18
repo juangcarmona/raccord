@@ -9,8 +9,8 @@ namespace Raccord.EndToEndTests.Projects;
 /// project leg of the smoke set, and the setup leg the invoice journey reuses.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 public sealed class ProjectJourney_Should_AcceptBillableLine(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

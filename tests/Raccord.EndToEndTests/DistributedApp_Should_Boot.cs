@@ -13,8 +13,8 @@ namespace Raccord.EndToEndTests;
 /// This security-hardening journey has no ProductShape citation because it does not define product behavior.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.CrossCutting)]
 public sealed class DistributedApp_Should_Boot(DistributedAppFixture app) : BrowserJourneyBase(app)
 {
     [Fact]

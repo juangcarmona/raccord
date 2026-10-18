@@ -15,8 +15,8 @@ namespace Raccord.EndToEndTests.Invoicing;
 /// ProductShape: BC-INVOICING, JRN-FIN-STAGED-BILLING, UC-FIN-GENERATE-PROJECT-INVOICE.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

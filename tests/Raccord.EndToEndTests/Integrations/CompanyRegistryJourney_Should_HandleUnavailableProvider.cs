@@ -7,8 +7,8 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Customers)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Contacts)]
 public sealed class CompanyRegistryJourney_Should_HandleUnavailableProvider(
     DistributedAppFixture app
 ) : BrowserJourneyBase(app)

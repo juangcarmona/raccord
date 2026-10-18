@@ -5,8 +5,8 @@ using Xunit;
 namespace Raccord.EndToEndTests.Authentication;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Authentication)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
 public sealed class AuthenticationJourney_Should_ProtectApi(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

@@ -7,8 +7,9 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 public sealed class CalendarFeedJourney_Should_PublishPrivateIcs(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

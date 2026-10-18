@@ -12,8 +12,9 @@ namespace Raccord.EndToEndTests.Invoicing;
 /// and chooses its document action, then a non-empty PDF is downloaded.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
 public sealed class InvoiceDocumentJourney_Should_DownloadFromInvoicePage(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
@@ -63,7 +64,8 @@ public sealed class InvoiceDocumentJourney_Should_DownloadFromInvoicePage(Distri
                         }
                     );
                 }
-            }
+            },
+            supplementalAssets: ["invoice-publication.png"]
         );
     }
 

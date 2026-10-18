@@ -17,8 +17,9 @@ namespace Raccord.EndToEndTests.Equipment;
 /// UC-EQP-VIEW-EQUIPMENT-PROJECT-HISTORY, UC-EQP-VIEW-ITEM-INSIGHTS.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Equipment)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Warehouse)]
 public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {

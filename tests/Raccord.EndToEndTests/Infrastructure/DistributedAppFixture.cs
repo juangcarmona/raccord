@@ -101,11 +101,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     private static void Log(string stage) => Console.Error.WriteLine($"[e2e-fixture] {stage}");
 
     /// <summary>
-    /// Program.cs gives postgres a persistent data volume so `aspire run` reuses the same
-    /// container across local dev sessions. That is wrong for E2E: a persistent container
-    /// carries the previous run's customers and invoices into this one, risking
-    /// number-sequence and unique-constraint collisions. A session-lifetime container gives
-    /// every run a clean, freshly-migrated-and-seeded database.
+    /// AppHost gives postgres a persistent data volume for local development. E2E detaches it
+    /// before assigning session lifetime, so parallel runs use fresh storage and developer data
+    /// stays in the named volume.
     /// </summary>
     private static void ForceEphemeralPostgres(IDistributedApplicationTestingBuilder builder)
     {
@@ -113,10 +111,8 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             builder.Resources.Single(resource =>
                 string.Equals(resource.Name, PostgresResourceName, StringComparison.Ordinal)
             );
-
-        // The AppHost names a persistent volume for local development. A session-lifetime
-        // container alone still reuses that volume, including its old credentials and data.
-        // Keep the development volume untouched and let each E2E container start with fresh data.
+        // Detach the persistent development volume before assigning session lifetime.
+        // Each parallel E2E AppHost gets fresh storage; developer data remains untouched.
         foreach (
             var mount in postgres
                 .Annotations.OfType<ContainerMountAnnotation>()

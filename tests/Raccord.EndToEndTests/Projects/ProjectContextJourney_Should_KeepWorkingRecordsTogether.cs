@@ -12,8 +12,8 @@ namespace Raccord.EndToEndTests.Projects;
 /// ProductShape: BC-PROJECTS, JRN-PRJ-CREATE-PROJECT, UC-PRJ-COORDINATE-PROJECT.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
 public sealed class ProjectContextJourney_Should_KeepWorkingRecordsTogether(
     DistributedAppFixture app
 ) : BrowserJourneyBase(app)

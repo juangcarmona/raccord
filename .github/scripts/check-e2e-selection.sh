@@ -19,7 +19,7 @@ set -euo pipefail
 
 PROJECT="tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj"
 MANIFEST="tests/Raccord.EndToEndTests/per-pr-selection.txt"
-FILTER="Quarantine!=true"
+FILTER="Quarantine!=true&TestKind!=metadata"
 
 # Release and --no-build, matching the workflow exactly: a manifest generated from a different
 # configuration would either disagree with CI or, worse, look for build output CI never produced.

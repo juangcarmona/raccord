@@ -47,12 +47,19 @@ test("builds an empty report that explains missing journey evidence", () => {
         assert.equal(report.workflowStatus, "success");
         assert.equal(report.overallStatus, "failure");
         assert.match(html, /No journey result was recorded/);
-        assert.match(html, /Workflow result: <strong class="status failure">failure/);
+        assert.match(
+            html,
+            /Workflow result: <strong class="status failure">failure/,
+        );
         assert.match(html, /No journey evidence captured/);
         assert.match(html, /id="journey-nav"/);
+        assert.match(html, /<h3>Contacts<\/h3>/);
+        assert.match(html, /<h3>Commercial<\/h3>/);
+        assert.match(html, /No evidence in this run/);
         assert.match(html, /mobile-nav-toggle/);
         assert.match(html, /data-appearance="dark"/);
         assert.match(html, /data-appearance="light"/);
+        assert.match(html, /--raccord-ink:\s*#0b1020/);
         assert.match(html, /abc123/);
     } finally {
         rmSync(root, { recursive: true, force: true });
@@ -71,6 +78,7 @@ test("escapes report metadata before inserting it into the page", () => {
             },
         });
         const html = readFileSync(join(root, "report", "index.html"), "utf8");
+        assert.match(html, /--raccord-success:\s*#1d7a4f/);
         assert.match(html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
         assert.doesNotMatch(html, /<script>alert\(1\)/);
         assert.match(html, /a=1&amp;b=2/);
@@ -85,27 +93,31 @@ test("groups passing, failing, and flaky journeys with linked evidence", () => {
         const artifacts = join(root, "artifacts");
         const output = join(root, "report");
         mkdirSync(artifacts);
-        for (const [name, status] of [
-            ["customer-register", "passed"],
-            ["invoice-finalize", "failed"],
-            ["project-billable-line", "flaky"],
+        for (const [name, status, areas] of [
+            ["customer-register", "passed", ["contacts"]],
+            ["invoice-finalize", "failed", ["invoicing", "compliance"]],
+            ["project-billable-line", "flaky", ["projects"]],
+            ["platform-boot", "passed", ["cross-cutting"]],
         ]) {
             writeFileSync(
                 join(artifacts, `${name}.json`),
-                JSON.stringify({ name, status }),
+                JSON.stringify({
+                    name,
+                    status,
+                    areas,
+                    ...(name === "project-billable-line" ? { evidenceMode: "api" } : {}),
+                }),
             );
         }
         writeFileSync(
             join(artifacts, "customer-register-checkpoint.png"),
             "png",
         );
+        writeFileSync(join(artifacts, "customer-register-mobile.png"), "png");
         writeFileSync(join(artifacts, "customer-register.webm"), "webm");
         writeFileSync(join(artifacts, "invoice-finalize-failure.png"), "png");
         writeFileSync(join(artifacts, "invoice-finalize-failure.zip"), "zip");
-        writeFileSync(
-            join(artifacts, "project-billable-line-checkpoint.png"),
-            "png",
-        );
+        writeFileSync(join(artifacts, "invoice-finalize-publication.png"), "png");
 
         const report = buildReport({
             artifactsDirectory: artifacts,
@@ -114,7 +126,7 @@ test("groups passing, failing, and flaky journeys with linked evidence", () => {
         });
         const html = readFileSync(join(output, "index.html"), "utf8");
         assert.deepEqual(report.counts, {
-            passed: 1,
+            passed: 2,
             failed: 1,
             flaky: 1,
             unknown: 0,
@@ -124,7 +136,27 @@ test("groups passing, failing, and flaky journeys with linked evidence", () => {
         assert.match(html, /journey-search/);
         assert.match(html, /\(desktop\)/);
         assert.match(html, /assets\/invoice-finalize-failure\.png/);
+        assert.match(html, /assets\/customer-register-mobile\.png/);
+        assert.match(html, /assets\/invoice-finalize-publication\.png/);
         assert.match(html, /Playwright trace/);
+        assert.match(html, /<h3>Contacts<\/h3>[\s\S]*customer-register/);
+        assert.match(html, /<h3>Compliance and audit<\/h3>[\s\S]*invoice-finalize/);
+        assert.match(html, /<h3>Projects<\/h3>[\s\S]*project-billable-line/);
+        assert.match(html, /<h3>Cross-cutting<\/h3>[\s\S]*platform-boot/);
+        assert.match(html, /API journey: assertions exercise the AppHost API/);
+        assert.equal(
+            (html.match(/id="journey-1"/g) ?? []).length,
+            1,
+            "a multi-context journey keeps one report section",
+        );
+        assert.deepEqual(report.journeys[1].areas, ["invoicing", "compliance"]);
+        assert.equal(
+            report.journeys.find((journey) => journey.name === "project-billable-line")
+                .evidenceMode,
+            "api",
+        );
+        assert.equal(report.journeys[0].assets.length, 3);
+        assert.equal(report.journeys[1].assets.length, 3);
         assert.equal(
             readFileSync(
                 join(output, "assets", "customer-register.webm"),
@@ -132,6 +164,101 @@ test("groups passing, failing, and flaky journeys with linked evidence", () => {
             ),
             "webm",
         );
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
+test("attaches explicitly listed supplemental screenshots to their owning journey", () => {
+    const root = temporaryDirectory();
+    try {
+        const artifacts = join(root, "artifacts");
+        mkdirSync(artifacts);
+        writeFileSync(
+            join(artifacts, "account-profile.json"),
+            JSON.stringify({
+                name: "account-profile",
+                status: "passed",
+                areas: ["workspace"],
+                supplementalAssets: ["design-system-app-es-desktop.png"],
+            }),
+        );
+        writeFileSync(join(artifacts, "design-system-app-es-desktop.png"), "png");
+        const report = buildReport({
+            artifactsDirectory: artifacts,
+            outputDirectory: join(root, "report"),
+            metadata: { overallStatus: "success" },
+        });
+        assert.equal(report.journeys.length, 1);
+        assert.equal(report.counts.unknown, 0);
+        assert.equal(report.journeys[0].name, "account-profile");
+        assert.deepEqual(report.journeys[0].areas, ["workspace"]);
+        assert.deepEqual(report.journeys[0].assets.map((asset) => asset.name), [
+            "design-system-app-es-desktop.png",
+        ]);
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
+test("keeps API-only evidence textual and links its trace instead of product screenshots", () => {
+    const root = temporaryDirectory();
+    try {
+        const artifacts = join(root, "artifacts");
+        const output = join(root, "report");
+        mkdirSync(artifacts);
+        writeFileSync(
+            join(artifacts, "calendar-feed.json"),
+            JSON.stringify({
+                name: "calendar-feed",
+                status: "passed",
+                areas: ["workspace", "projects"],
+                evidenceMode: "api",
+            }),
+        );
+        writeFileSync(join(artifacts, "calendar-feed-checkpoint.png"), "synthetic page");
+        writeFileSync(join(artifacts, "calendar-feed.webm"), "unrelated homepage");
+        writeFileSync(join(artifacts, "calendar-feed.zip"), "trace");
+
+        const report = buildReport({ artifactsDirectory: artifacts, outputDirectory: output, metadata: {} });
+        const html = readFileSync(join(output, "index.html"), "utf8");
+        const journey = report.journeys[0];
+
+        assert.equal(journey.evidenceMode, "api");
+        assert.deepEqual(journey.areas, ["workspace", "projects"]);
+        assert.deepEqual(journey.assets.map((asset) => asset.type), ["trace"]);
+        assert.match(html, /API journey: assertions exercise the AppHost API/);
+        assert.match(html, /Playwright trace: calendar-feed\.zip/);
+        assert.doesNotMatch(html, /calendar-feed-checkpoint\.png/);
+        assert.doesNotMatch(html, /<video controls/);
+        assert.equal(existsSync(join(output, "assets", "calendar-feed-checkpoint.png")), false);
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
+test("keeps old journeys under an unclassified navigation group", () => {
+    const root = temporaryDirectory();
+    try {
+        buildReport({
+            artifactsDirectory: join(root, "missing"),
+            outputDirectory: join(root, "report"),
+            metadata: {},
+            existingReport: {
+                journeys: [
+                    {
+                        name: "legacy-contact-flow",
+                        status: "passed",
+                        viewport: "desktop",
+                        assets: [],
+                    },
+                ],
+                counts: { passed: 1, failed: 0, flaky: 0, unknown: 0 },
+            },
+        });
+        const html = readFileSync(join(root, "report", "index.html"), "utf8");
+        assert.match(html, /<h3>Unclassified<\/h3>[\s\S]*legacy-contact-flow/);
+        assert.match(html, /<h3>Warehouse<\/h3>[\s\S]*No evidence in this run/);
     } finally {
         rmSync(root, { recursive: true, force: true });
     }
@@ -226,7 +353,10 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 viewport: "mobile",
             }),
         );
-        writeFileSync(join(artifacts, "customer-register-checkpoint.png"), "png");
+        writeFileSync(
+            join(artifacts, "customer-register-checkpoint.png"),
+            "png",
+        );
         buildReport({
             artifactsDirectory: artifacts,
             outputDirectory: join(root, "e2e", "reports", "22"),
@@ -238,7 +368,10 @@ test("finalizes a stable latest link and bounds retained report history", () => 
                 date: new Date().toISOString(),
             },
         });
-        writeFileSync(join(root, "e2e", "reports", "22", "index.html"), "legacy report page");
+        writeFileSync(
+            join(root, "e2e", "reports", "22", "index.html"),
+            "legacy report page",
+        );
         const olderArtifacts = join(root, "artifacts-21");
         mkdirSync(olderArtifacts, { recursive: true });
         writeFileSync(
@@ -285,6 +418,7 @@ test("finalizes a stable latest link and bounds retained report history", () => 
             readFileSync(join(root, "site-manifest.json"), "utf8"),
         );
         assert.match(latest, /Raccord · E2E/);
+        assert.match(latest, /--raccord-ink:\s*#0b1020/);
         assert.match(latest, /data-appearance/);
         assert.match(latest, /mobile-nav-toggle/);
         assert.match(latest, /reports\/21\/index\.html/);
@@ -301,6 +435,7 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(landing, /How Raccord is built, in the open/);
         assert.match(landing, /href="e2e\/latest\.html"/);
         assert.match(landing, /assets\/raccord-mark\.svg/);
+        assert.match(landing, /--raccord-ink:\s*#0b1020/);
         assert.match(landing, /data-local-time datetime="/);
         assert.match(landing, /data-appearance-set="auto"/);
         assert.match(landing, /data-appearance-set="dark"/);
@@ -309,7 +444,9 @@ test("finalizes a stable latest link and bounds retained report history", () => 
         assert.match(landing, /max-width:900px/);
         assert.match(landing, /max-width:600px/);
         assert.match(landing, /prefers-reduced-motion:reduce/);
-        const landingScript = landing.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+        const landingScript = landing.match(
+            /<script>([\s\S]*?)<\/script>/,
+        )?.[1];
         assert.ok(landingScript);
         assert.doesNotThrow(() => new Function(landingScript));
         const reportsIndex = readFileSync(

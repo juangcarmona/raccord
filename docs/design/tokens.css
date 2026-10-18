@@ -1,0 +1,92 @@
+/* Canonical Raccord design tokens. Consumers may add layout tokens, not redefine these. */
+:root {
+    color-scheme: light;
+    --raccord-ink: #0b1020;
+    --raccord-cyan: #2de2e6;
+    --raccord-coral: #ff6b5e;
+    --raccord-cloud: #f5f7fa;
+    --raccord-slate: #667085;
+    --raccord-white: #ffffff;
+    --raccord-selected: #0b7fbf;
+    --raccord-selected-soft: #edf6fc;
+    --raccord-selected-badge: #d6ebf7;
+    --raccord-border: #d0d5dd;
+    --raccord-action-hover: #08699e;
+    --raccord-action: #075a88;
+    --raccord-success: #1d7a4f;
+    --raccord-success-soft: #e3f5ee;
+    --raccord-success-border: #b5e3d0;
+    --raccord-warning: #8a5a00;
+    --raccord-warning-soft: #fff3d6;
+    --raccord-error: #b3261e;
+    --raccord-error-soft: #fde3e0;
+    --raccord-info: #075a88;
+    --raccord-info-border: #b8dcee;
+    --raccord-font-sans:
+        system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --raccord-font-mono:
+        ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+    --raccord-text-xs: 0.75rem;
+    --raccord-text-sm: 0.875rem;
+    --raccord-text-base: 1rem;
+    --raccord-text-lg: 1.25rem;
+    --raccord-text-xl: 1.5rem;
+    --raccord-leading: 1.5;
+    --raccord-space-1: 0.25rem;
+    --raccord-space-2: 0.5rem;
+    --raccord-space-3: 0.75rem;
+    --raccord-space-4: 1rem;
+    --raccord-space-6: 1.5rem;
+    --raccord-space-8: 2rem;
+    --raccord-radius-sm: 0.25rem;
+    --raccord-radius-md: 0.5rem;
+    --raccord-radius-lg: 0.75rem;
+    --raccord-focus-width: 3px;
+    --raccord-focus-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-appearance="light"]) {
+        color-scheme: dark;
+        --raccord-ink: #f5f7fa;
+        --raccord-cloud: #0b1020;
+        --raccord-slate: #b8c0ce;
+        --raccord-white: #161d2c;
+        --raccord-border: #485366;
+        --raccord-selected: #6fc8f3;
+        --raccord-action-hover: #6fc8f3;
+        --raccord-action: #91d7f4;
+        --raccord-selected-soft: #183347;
+        --raccord-selected-badge: #23465f;
+        --raccord-success: #82d5aa;
+        --raccord-success-soft: #18362b;
+        --raccord-success-border: #376a52;
+        --raccord-warning: #ffd47c;
+        --raccord-warning-soft: #42351b;
+        --raccord-error: #ff9c93;
+        --raccord-error-soft: #452624;
+        --raccord-info: #91d7f4;
+        --raccord-info-border: #315b71;
+    }
+}
+
+:root[data-appearance="dark"] {
+    color-scheme: dark;
+    --raccord-ink: #f5f7fa;
+    --raccord-cloud: #0b1020;
+    --raccord-slate: #b8c0ce;
+    --raccord-white: #161d2c;
+    --raccord-border: #485366;
+    --raccord-selected: #6fc8f3;
+    --raccord-selected-soft: #183347;
+    --raccord-selected-badge: #23465f;
+    --raccord-success: #82d5aa;
+    --raccord-success-soft: #18362b;
+    --raccord-success-border: #376a52;
+    --raccord-warning: #ffd47c;
+    --raccord-warning-soft: #42351b;
+    --raccord-error: #ff9c93;
+    --raccord-error-soft: #452624;
+    --raccord-info: #91d7f4;
+    --raccord-info-border: #315b71;
+}

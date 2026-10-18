@@ -20,9 +20,9 @@ namespace Raccord.EndToEndTests.Infrastructure;
 public static class E2ETraits
 {
     /// <summary>
-    /// What the journey is about. Repeatable: a finalize journey is genuinely an invoicing journey
-    /// <i>and</i> a projects journey, and forcing one value would make one of the two selections
-    /// wrong. Absent means the journey is never excluded by an area selection.
+    /// The product bounded context a journey exercises. Repeatable: a finalize journey is genuinely
+    /// an invoicing journey <i>and</i> a projects journey, and forcing one value would misclassify it.
+    /// Use <see cref="Areas.CrossCutting"/> for platform journeys with no product context.
     /// </summary>
     public const string Area = "Area";
 
@@ -46,17 +46,39 @@ public static class E2ETraits
     /// </summary>
     public const string Quarantine = "Quarantine";
 
+    /// <summary>Distinguishes non-journey verification tests from reportable E2E journeys.</summary>
+    public const string TestKind = "TestKind";
+
+    /// <summary>Identifies whether a journey's public evidence represents browser UI or API output.</summary>
+    public const string EvidenceMode = "EvidenceMode";
+
     /// <summary>The only value <see cref="Quarantine"/> takes — xUnit filters match a name/value pair.</summary>
     public const string Quarantined = "true";
 
+    public static class TestKinds
+    {
+        public const string Metadata = "metadata";
+    }
+
+    public static class EvidenceModes
+    {
+        public const string Browser = "browser";
+        public const string Api = "api";
+    }
+
     public static class Areas
     {
-        public const string Authentication = "authentication";
-        public const string Customers = "customers";
+        public const string Contacts = "contacts";
         public const string Projects = "projects";
+        public const string Equipment = "equipment";
+        public const string Warehouse = "warehouse";
+        public const string Crew = "crew";
+        public const string Commercial = "commercial";
         public const string Invoicing = "invoicing";
-        public const string Integrations = "integrations";
+        public const string Compliance = "compliance";
+        public const string Documents = "documents";
         public const string Workspace = "workspace";
+        public const string CrossCutting = "cross-cutting";
     }
 
     public static class Depths

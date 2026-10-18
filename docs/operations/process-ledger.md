@@ -2,6 +2,18 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-18 · Audit-trail evidence checks the displayed actor and event time
+
+- Observation: Persistence tests can prove an audit row exists without proving the administrator sees the correct actor and timestamp in the record's UI; the browser's displayed actor may also differ from an internal test identity.
+- Action: Keep append-only, hash and transaction proofs in database/domain tests, and add a selected Aspire browser journey for the user-visible trail that asserts each displayed action, actor and chronological timestamp.
+- Check: The invoice audit journey passes against Aspire and appears in both Compliance and Invoicing evidence groups.
+
+## 2026-10-17 · Cross-user approval needs stable actor identity and a real second session
+
+- Observation: A second-person review can appear correct in a single-user test while the backend still permits self-approval or the browser never exercises a distinct authenticated session.
+- Action: Carry the stable authenticated user id into application commands, enforce distinct actors at the server boundary, and run this mutating browser journey against its own ephemeral AppHost database rather than the suite's shared database.
+- Check: Integration tests reject self-review and race concurrent decisions; the selected isolated E2E signs in as a second administrator, approves the request, and confirms previously issued invoice identity is unchanged without changing data seen by other journeys.
+
 ## 2026-10-17 · Keep public-site browser assertions aligned with the rendered navigation
 
 - Observation: The public-site build passed while the existing browser journey still asserted the previous homepage copy, routes, logo link and locale-switch labels; only full CI exposed the drift.
@@ -356,11 +368,71 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Regenerate citations for every changed artifact across all consumers and run citation verification with the pinned OpenSpec CLI available on PATH before opening the PR.
 - **Check:** ProductShape validation passes, OpenSpec validation passes, and citation verification reports zero stale, tampered or unresolved citations.
 
+## 2026-10-16 · Container-backed feature checks preflight the local runtime
+
+- **Observation:** The profile API test and browser journey compiled, but local execution stopped before application startup because the Docker daemon socket was unavailable.
+- **Action:** Check Docker availability before starting container-backed tests; continue compile, contract and frontend checks, then rely on a fresh hosted E2E artifact for runtime approval when the local daemon is unavailable.
+- **Check:** The PR records the local runtime limitation and CI must pass the selected AppHost journey with captured browser evidence before the feature is considered done.
+
+## 2026-10-16 · Staged frontend formatting receives its file list
+
+- **Observation:** The #290 commit hook failed because the TypeScript/TSX staged-file handler ran `prettier --write` without the staged paths, after ESLint had succeeded.
+- **Action:** Build the Prettier command from the same filtered staged-file list used by ESLint in `src/Raccord.Frontend/.lintstagedrc.mjs`.
+- **Check:** Commit a staged TypeScript change and confirm the hook formats the named files and reaches commitlint without a parser or missing-file error.
+
+## 2026-10-16 · API tests select a persisted user in the test auth scheme
+
+- **Observation:** The WebApplicationFactory test host uses a fake authentication scheme with a dummy user ID, so real Identity sign-in is not configured there and the current-user endpoint could not resolve the seeded administrator.
+- **Action:** Let the test-only authentication handler take a user ID from an explicit test header; use the seeded administrator's ID when exercising profile routes.
+- **Check:** The API test verifies profile persistence and that submitted email data cannot change the account's sign-in address; production authentication remains on the Identity cookie scheme.
+
+## 2026-10-16 · Browser journeys normalize the signed-in profile language
+
+- **Observation:** Pinning Playwright's browser locale did not control the authenticated UI language because the seeded administrator's saved profile preference takes precedence, and sign-in resumes the previously requested protected route.
+- **Action:** Normalize the demo account's language after each shared journey sign-in, and have the account journey change it and verify persistence after reload and return to the account route on sign-in.
+- **Check:** The hosted AppHost run completes the warehouse customer form with English labels and captures the account journey in Spanish after reauthentication.
+
 ## 2026-10-16 · Static route checks resolve nested links
 
 - **Observation:** A static-site build can succeed while a page generated below a locale root points its stylesheet, screenshot or navigation at the wrong relative path.
 - **Action:** Enumerate generated routes in both locales and resolve each local `href` and `src` against its generated page directory in the site test.
 - **Check:** The public-site verification fails when any locale route, local navigation target or nested asset is absent.
+
+## 2026-10-17 · Responsive evidence normalizes navigation and covers each locale
+
+- **Observation:** A narrow architecture snapshot captured its mobile drawer over the page, and the first public-site evidence set omitted the Spanish locale even though the journey visited it.
+- **Action:** Close mobile navigation deterministically, assert that the drawer is outside the viewport, and capture each supported locale at desktop and narrow widths.
+- **Check:** The hosted artifacts show unobstructed engineering content and app/public pages for Spanish and English; any drawer or viewport overflow fails the evidence capture.
+
+## 2026-10-17 · Session-lifetime AppHost databases must not inherit development storage
+
+- **Observation:** The E2E fixture gave PostgreSQL a session lifetime, but the AppHost's named development volume remained attached; a local run then reused old database credentials and never reached browser journeys.
+- **Action:** Remove only the named development volume mount from the E2E resource model before starting the session container, leaving the developer volume and its data untouched.
+- **Check:** AppHost health checks pass with the isolated database, and the complete committed per-PR browser battery reports every selected journey passed.
+
+## 2026-10-17 · Invoice rollback assertions start from the post-draft state
+
+- **Observation:** Creating an invoice draft already reserves its project billable line as `in-draft`; expecting `unbilled` after a failed finalization confuses rollback of issuance with rollback of draft creation.
+- **Action:** Failure-injection tests assert the state established before the transaction under test, then verify only a successful retry advances the line to `invoiced`.
+- **Check:** The compliance-persistence failure test requires `in-draft` after rollback and `invoiced` after successful retry.
+
+## 2026-10-18 · E2E evidence assets declare their owning journey
+
+- **Observation:** Responsive and publication screenshots with independent filenames were rendered as unknown journeys even though a passing browser journey captured them.
+- **Action:** Include explicit supplemental asset filenames in the journey result manifest and assign each captured file to that manifest's owning bounded context.
+- **Check:** The generated report contains the screenshots under their owning journey, retains the ten context headings and explicit empty contexts, and reports zero unknown rows.
+
+## 2026-10-18 · Isolated AppHost collections run serially
+
+- **Observation:** A second xUnit collection started a parallel AppHost and collided with the main suite's database and frontend installer resources.
+- **Action:** Disable parallel execution for the isolated issuer collection and detach only the named development volume from each test AppHost.
+- **Check:** Run the committed E2E selection with both collections and require all selected journeys to pass without touching the developer volume.
+
+## 2026-10-18 · E2E evidence must match the tested interaction
+
+- **Observation:** API-only journeys could pass while reporting synthetic success pages, unrelated homepage screenshots, or misleading browser video as if those assets demonstrated the tested behavior.
+- **Action:** Declare each journey's evidence mode; keep API-only results textual with a failure trace, and reserve screenshots and video for journeys that exercise the browser. Keep mixed journeys in browser mode and capture the real product screen.
+- **Check:** Metadata tests require API-only journeys to declare their mode, static report tests hide visual assets for API results, and the complete per-PR E2E report groups passing results by bounded context with zero unknown rows.
 
 ## 2026-10-18 · Public-site component classes need layout coverage
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useI18n } from "../shared/i18n/I18nProvider";
-import { locales, type Locale } from "../shared/i18n/messages";
 import { useAuth } from "../features/auth/AuthProvider";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const navigation = [
     { to: "/projects", key: "nav.projects" },
@@ -11,11 +11,10 @@ const navigation = [
     { to: "/invoices", key: "nav.invoices" },
     { to: "/customers", key: "nav.customers" },
     { to: "/settings/issuer", key: "nav.settings" },
-    { to: "/settings/roles", key: "nav.roles" },
 ] as const;
 
 export function AppShell() {
-    const { t, locale, setLocale } = useI18n();
+    const { t } = useI18n();
     const location = useLocation();
     const main = useRef<HTMLElement>(null);
     const firstRender = useRef(true);
@@ -54,29 +53,23 @@ export function AppShell() {
                                     <NavLink to={item.to}>{t(item.key)}</NavLink>
                                 </li>
                             ))}
+                            {auth.user?.canManageRoles && (
+                                <li>
+                                    <NavLink to="/settings/roles">{t("nav.roles")}</NavLink>
+                                </li>
+                            )}
                         </ul>
                     </nav>
                 </aside>
                 <div className="shell__content">
                     <header className="shell__toolbar">
-                        <label className="locale">
-                            <span className="visually-hidden">{t("app.language")}</span>
-                            <select
-                                value={locale}
-                                onChange={(event) => {
-                                    setLocale(event.target.value as Locale);
-                                }}
-                            >
-                                {locales.map((option) => (
-                                    <option key={option} value={option}>
-                                        {option.toUpperCase()}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                        <span>{auth.user?.email}</span>
+                        <Link className="account-entry" to="/account" aria-label={t("account.title")}>
+                            <span className="account-entry__name">{auth.user?.displayName || auth.user?.email}</span>
+                            {auth.user?.displayName && <span className="account-entry__email">{auth.user.email}</span>}
+                        </Link>
                         <button
                             type="button"
+                            className="button"
                             onClick={() => void auth.signOut().then(() => navigate("/sign-in", { replace: true }))}
                         >
                             {t("auth.signOut")}

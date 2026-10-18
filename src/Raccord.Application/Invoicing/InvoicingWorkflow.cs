@@ -320,6 +320,7 @@ public sealed class InvoicingWorkflow(
         project?.MarkInvoiced(draft.Id, invoice.Id);
         var representation = IssuedInvoiceRepresentation.From(invoice);
         invoices.Add(invoice, representation);
+        workspace.MarkInvoiceIssued();
         compliance.RegisterIssuedInvoice(invoice, representation);
         Record(
             "invoice.issued",

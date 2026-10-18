@@ -25,6 +25,7 @@ mindmap
       Q-7 Restore
     Maintainability
       Q-8 Architecture boundaries
+      Q-13 Design tokens remain aligned
     Portability
       Q-9 Storage and hosting
     Security
@@ -49,5 +50,6 @@ mindmap
 | Q-10 | Repository is scanned for secrets | No credentials; `.env` ignored; Azure secrets in Key Vault | Review; CI vulnerability checks |
 | Q-11 | An anonymous request reaches a protected API | 401 without a session; sign-in establishes a cookie session; health remains probeable | `AuthenticationJourney` and web authorization tests |
 | Q-12 | A request is converted into a project | Source request remains resolved, project keeps period/type/team, and no partial conversion is committed | `ProjectRequestTests`; `ProjectCoordination` integration path |
+| Q-13 | A contributor changes a shared visual token or submits a public-site-only pull request | The local hook or unconditional CI job detects drift; CI still checks public-site-only changes | `scripts/check-design-system.test.mjs`; `.github/ci/test-site-workflow-routing.sh` |
 
 Also tenant-related scenarios from the initial draft are reframed by ADR-0012: isolation between companies is per deployment.

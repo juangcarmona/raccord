@@ -140,6 +140,108 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
     }
 
     [Fact]
+    public async Task A_compliance_persistence_failure_Should_roll_back_invoice_finalization()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client, lines: Camera);
+        var billableLineId = project.BillableLines.Single().Id;
+        var draft = await CreateDraftAsync(project, billableLineId);
+        await InstallComplianceFailureAsync();
+
+        try
+        {
+            await AssertFinalizationRolledBackAsync(project, draft.Id, billableLineId);
+        }
+        finally
+        {
+            await RemoveComplianceFailureAsync();
+        }
+
+        using var retry = await FinalizeAsync(draft.Id, new DateOnly(2026, 5, 11));
+        retry.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var issued = (await retry.Content.ReadFromJsonAsync<IssuedInvoiceResponse>())!;
+        issued.Number.ShouldBe("F2026-00001");
+        var issuedProject = await client.GetFromJsonAsync<ProjectResponse>(
+            $"/api/projects/{project.Id}"
+        );
+        issuedProject!
+            .BillableLines.Single(line => line.Id == billableLineId)
+            .BillingState.ShouldBe("invoiced");
+        (
+            await api.QueryScalarAsync<long>(
+                $"SELECT count(*) FROM compliance.compliance_records WHERE invoice_id = '{issued.Id}'"
+            )
+        ).ShouldBe(1L);
+        (
+            await api.QueryScalarAsync<long>(
+                $"SELECT count(*) FROM compliance.audit_events WHERE entity_id = '{issued.Id}' "
+                    + "AND action = 'invoice.issued'"
+            )
+        ).ShouldBe(1L);
+    }
+
+    private Task InstallComplianceFailureAsync() =>
+        api.ExecuteAsync(
+            "CREATE FUNCTION compliance.fail_compliance_record_insert() RETURNS trigger "
+                + "LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'forced compliance persistence failure'; "
+                + "END; $$; CREATE TRIGGER fail_compliance_record_insert "
+                + "BEFORE INSERT ON compliance.compliance_records FOR EACH ROW "
+                + "EXECUTE FUNCTION compliance.fail_compliance_record_insert();"
+        );
+
+    private Task RemoveComplianceFailureAsync() =>
+        api.ExecuteAsync(
+            "DROP TRIGGER fail_compliance_record_insert ON compliance.compliance_records; "
+                + "DROP FUNCTION compliance.fail_compliance_record_insert();"
+        );
+
+    private async Task AssertFinalizationRolledBackAsync(
+        ProjectResponse project,
+        Guid draftId,
+        Guid billableLineId
+    )
+    {
+        using var failedFinalization = await FinalizeAsync(draftId, new DateOnly(2026, 5, 11));
+        failedFinalization.IsSuccessStatusCode.ShouldBeFalse();
+
+        var unchangedDraft = await client.GetFromJsonAsync<InvoiceDraftResponse>(
+            $"/api/invoice-drafts/{draftId}"
+        );
+        unchangedDraft!.Status.ShouldBe("open");
+        unchangedDraft.IssuedInvoiceId.ShouldBeNull();
+
+        var unchangedProject = await client.GetFromJsonAsync<ProjectResponse>(
+            $"/api/projects/{project.Id}"
+        );
+        unchangedProject!
+            .BillableLines.Single(line => line.Id == billableLineId)
+            .BillingState.ShouldBe("in-draft");
+
+        (
+            await api.QueryScalarAsync<long>("SELECT count(*) FROM invoicing.issued_invoices")
+        ).ShouldBe(0L);
+        (
+            await api.QueryScalarAsync<long>(
+                "SELECT count(*) FROM invoicing.invoice_number_sequences"
+            )
+        ).ShouldBe(0L);
+        (
+            await api.QueryScalarAsync<long>("SELECT count(*) FROM compliance.compliance_records")
+        ).ShouldBe(0L);
+        (
+            await api.QueryScalarAsync<long>(
+                "SELECT count(*) FROM compliance.audit_events "
+                    + "WHERE action IN ('invoice.issued', 'invoice.document.stored')"
+            )
+        ).ShouldBe(0L);
+        (
+            await api.QueryScalarAsync<long>(
+                $"SELECT count(*) FROM compliance.audit_events WHERE entity_id = '{draftId}' "
+                    + "AND action = 'invoice-draft.created'"
+            )
+        ).ShouldBe(1L);
+    }
+
+    [Fact]
     public async Task Numbers_Should_follow_issue_order_and_reject_earlier_dates()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client, lines: [Camera, Gaffer]);

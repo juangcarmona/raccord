@@ -9,8 +9,9 @@ namespace Raccord.EndToEndTests.Crew;
 /// Given a crew member's working day, when clock-in and clock-out events are recorded, then both retain actor and recording timestamps for auditability.
 /// ProductShape: BC-CREW-TRANSPORT, JRN-RECORD-WORKING-DAY, CON-WORKDAY-RECORD-REGULATION, UC-CRW-CLOCK-IN-AND-OUT.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Crew)]
 public sealed class WorkdayJourney_Should_RecordAuditableEvents(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
@@ -75,14 +76,6 @@ public sealed class WorkdayJourney_Should_RecordAuditableEvents(DistributedAppFi
                     && item.RecordedAt != default
                 );
                 events.ShouldContain(item => item.Kind == 1 && item.Remark == "End of shift");
-                await page.GotoAsync("/");
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = $"playwright-artifacts/workday-events-{RunStamp}.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
     }

@@ -50,4 +50,5 @@ Module contracts -> SharedKernel and other module contracts only
 - No secrets, customer data, generated PDFs or local state in Git.
 - New production dependencies require an ADR.
 - Frontend imports follow `app → features → shared`; app may compose features, features may use shared, and shared/peer features may not import upward or sideways **(enforced: `npm run architecture:check` and its fixture suite)**.
+- Shared visual tokens live in `docs/design/tokens.css`; app, public-site, and engineering-site styles consume that source. The dependency-free drift check runs from Husky pre-commit and an unconditional CI job **(enforced: `node scripts/check-design-system.mjs`)**.
 - Agent red lines (AGENTS.md): credentials, shared history, production — stop and ask a person first.

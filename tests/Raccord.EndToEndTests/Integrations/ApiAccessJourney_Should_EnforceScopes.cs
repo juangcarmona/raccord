@@ -6,13 +6,14 @@ using Shouldly;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Integrations)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 /// <summary>
 /// Given an administrator issues a scoped integration token, when external requests read and write
 /// project records and the token is regenerated, then only the granted scope remains usable and the
 /// previous credential is rejected.
 /// ProductShape: BC-WORKSPACE, JRN-INT-BUILD-API-INTEGRATION, UC-INT-ENABLE-API-ACCESS, UC-INT-READ-RECORDS-THROUGH-API, UC-INT-WRITE-RECORDS-THROUGH-API, UC-INT-REGENERATE-API-TOKEN.
 /// </summary>
+[Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
 public sealed class ApiAccessJourney_Should_EnforceScopes(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
@@ -29,14 +30,6 @@ public sealed class ApiAccessJourney_Should_EnforceScopes(DistributedAppFixture 
                 await AssertWriteIsRejectedAsync(page, token);
                 var rotatedToken = await RotateAsync(page, tokenId);
                 await AssertOldTokenIsRejectedAsync(page, token, rotatedToken);
-                await page.GotoAsync("/projects");
-                await page.ScreenshotAsync(
-                    new PageScreenshotOptions
-                    {
-                        Path = "docs/product/design/evidence/issue-162/api-access.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
 

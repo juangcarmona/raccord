@@ -13,6 +13,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  design-system:
+    name: Design system alignment
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Check canonical tokens and consumers
+        run: node scripts/check-design-system.mjs
+      - name: Check drift guard behavior
+        run: node --test scripts/check-design-system.test.mjs
+
   changes:
     name: Classify changed paths
     runs-on: ubuntu-26.04
@@ -164,16 +177,18 @@ jobs:
       - name: Per-PR selection matches the manifest
         run: bash .github/scripts/check-e2e-selection.sh
         working-directory: .
+      - name: Verify E2E journey metadata
+        run: dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[TestKind=metadata]"
       # The test assembly runs through its own xunit.v3 executable host rather than
       # `dotnet test`: the VSTest host captures stdout/stderr, which hid every fixture
       # stage marker during the 90-minute CI hang; the MTP host streams them live. The
-      # filter syntax is xunit.v3's query language, matching the same Quarantine trait.
+      # filter syntax is xunit.v3's query language; metadata checks run separately from journeys.
       # A bounded run; a hang fails the job instead of stalling it for hours.
       - name: Run journeys
         env:
           PLAYWRIGHT_CAPTURE_EVIDENCE: "true"
         run: |
-          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true&TestKind!=metadata]" -stopOnFail
       - name: Upload journey artifacts
         if: always()
         uses: actions/upload-artifact@v7

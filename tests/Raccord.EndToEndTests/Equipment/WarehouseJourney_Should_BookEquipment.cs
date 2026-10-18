@@ -17,8 +17,10 @@ namespace Raccord.EndToEndTests.Equipment;
 /// UC-EQP-VIEW-EQUIPMENT-PROJECT-HISTORY, UC-EQP-VIEW-ITEM-INSIGHTS.
 /// </summary>
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Equipment)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Warehouse)]
 public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
@@ -68,7 +70,6 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
                     .GetProperty("role")
                     .GetString()
                     .ShouldBe("temporary");
-                await page.SetContentAsync("<h1>Packing adjustments recorded</h1>");
             }
         );
     }
@@ -119,7 +120,6 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
                 var trace = await exception.JsonAsync();
                 trace!.Value.GetProperty("disposition").GetString().ShouldBe("cross-docked");
                 trace.Value.GetProperty("exceptionKind").GetString().ShouldBe("delayed");
-                await page.SetContentAsync("<h1>Warehouse exception trace recorded</h1>");
             }
         );
     }
@@ -137,7 +137,6 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
         await RunPackingTransitionsAsync(api, projectId, lineId);
         await AssertReturnedAsync(api, projectId, itemId);
         await AssertLifecycleAsync(api, projectId, itemId);
-        await page.SetContentAsync("<h1>Warehouse equipment returned</h1>");
     }
 
     private static async Task AssertStockTrackingAsync(IAPIRequestContext api, Guid itemId)

@@ -11,8 +11,8 @@ namespace Raccord.EndToEndTests.PublicSite;
 /// ProductShape: ACT-OPERATIONS-COORDINATOR, ACT-BILLING-ADMINISTRATOR,
 /// JRN-BILL-FINISHED-PROJECT, JRN-SET-UP-INVOICING.
 /// </summary>
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.CrossCutting)]
 public sealed class PublicHomepageJourney_Should_IntroduceTheProject
 {
     [Fact]
@@ -71,6 +71,10 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             await AssertMobileKeyboardNavigationAsync(page);
             if (shouldCaptureEvidence)
             {
+                await CaptureResponsiveEvidenceAsync(page, "es");
+            }
+            if (shouldCaptureEvidence)
+            {
                 await CaptureMobileScreenshotAsync(page, evidenceDirectory);
             }
             await AssertDesktopLayoutAsync(page);
@@ -93,9 +97,22 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
             {
                 await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
             }
-            PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
+            WriteHomepageResult(artifactName, passed);
         }
     }
+
+    private static void WriteHomepageResult(string artifactName, bool passed) =>
+        PlaywrightArtifacts.WriteJourneyResult(
+            artifactName,
+            passed ? "passed" : "failed",
+            PlaywrightArtifacts.AreasFor(typeof(PublicHomepageJourney_Should_IntroduceTheProject)),
+            [
+                "design-system-public-en-desktop.png",
+                "design-system-public-en-mobile.png",
+                "design-system-public-es-desktop.png",
+                "design-system-public-es-mobile.png",
+            ]
+        );
 
     private static async Task OpenHomepageAsync(IPage page)
     {
@@ -193,12 +210,46 @@ public sealed class PublicHomepageJourney_Should_IntroduceTheProject
                 "() => document.documentElement.scrollWidth > window.innerWidth"
             )
         ).ShouldBeFalse();
+        await CaptureResponsiveEvidenceAsync(page, "en");
         (
             await page.Locator(".language-switcher")
                 .GetByRole(AriaRole.Link, new() { Name = "ES", Exact = true })
                 .GetAttributeAsync("href")
         ).ShouldBe("../es/");
         await OpenHomepageAsync(page);
+    }
+
+    private static async Task CaptureResponsiveEvidenceAsync(IPage page, string locale)
+    {
+        Directory.CreateDirectory(PlaywrightArtifacts.EvidenceDirectory);
+        await page.EvaluateAsync("() => document.activeElement?.blur()");
+        await page.SetViewportSizeAsync(1440, 900);
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    $"design-system-public-{locale}-desktop.png"
+                ),
+                FullPage = true,
+            }
+        );
+        await page.SetViewportSizeAsync(375, 812);
+        (
+            await page.EvaluateAsync<bool>(
+                "() => document.documentElement.scrollWidth > window.innerWidth"
+            )
+        ).ShouldBeFalse();
+        await page.ScreenshotAsync(
+            new()
+            {
+                Path = Path.Combine(
+                    PlaywrightArtifacts.EvidenceDirectory,
+                    $"design-system-public-{locale}-mobile.png"
+                ),
+                FullPage = true,
+            }
+        );
     }
 
     private static async Task CaptureMobileScreenshotAsync(IPage page, string evidenceDirectory)

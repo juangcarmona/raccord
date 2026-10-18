@@ -6,6 +6,7 @@ WORKDIR /src/frontend
 COPY src/Raccord.Frontend/package.json src/Raccord.Frontend/package-lock.json ./
 RUN npm ci --no-fund --no-audit
 COPY src/Raccord.Frontend/ ./
+COPY docs/design/tokens.css /docs/design/tokens.css
 RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS backend

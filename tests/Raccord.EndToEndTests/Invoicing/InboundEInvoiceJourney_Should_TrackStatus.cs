@@ -7,8 +7,10 @@ using Xunit;
 namespace Raccord.EndToEndTests.Invoicing;
 
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Compliance)]
 public sealed class InboundEInvoiceJourney_Should_TrackStatus(DistributedAppFixture app)
     : BrowserJourneyBase(app)
 {
@@ -63,17 +65,6 @@ public sealed class InboundEInvoiceJourney_Should_TrackStatus(DistributedAppFixt
                 var list = await page.APIRequest.GetAsync("/api/e-invoices/inbound/");
                 list.Ok.ShouldBeTrue();
                 (await list.TextAsync()).ShouldContain("\"status\":\"paid\"");
-
-                await page.SetContentAsync(
-                    $"<h1>Inbound e-invoice</h1><p>SUP-2026-001 · ACME Supplier S.L. · €1,089.00</p><p>Status: paid</p><p>Accepted then paid on 2026-09-18</p><pre>{WebUtility.HtmlEncode(Ubl)}</pre>"
-                );
-                await page.ScreenshotAsync(
-                    new PageScreenshotOptions
-                    {
-                        Path = "docs/product/design/evidence/issue-166/inbound-einvoice.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
     }

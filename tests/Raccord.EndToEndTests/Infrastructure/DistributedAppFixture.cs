@@ -1,7 +1,10 @@
 using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Playwright;
+using Npgsql;
+using Raccord.Infrastructure.Persistence;
 using Xunit;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -98,11 +101,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     private static void Log(string stage) => Console.Error.WriteLine($"[e2e-fixture] {stage}");
 
     /// <summary>
-    /// Program.cs gives postgres a persistent data volume so `aspire run` reuses the same
-    /// container across local dev sessions. That is wrong for E2E: a persistent container
-    /// carries the previous run's customers and invoices into this one, risking
-    /// number-sequence and unique-constraint collisions. A session-lifetime container gives
-    /// every run a clean, freshly-migrated-and-seeded database.
+    /// AppHost gives postgres a persistent data volume for local development. E2E detaches it
+    /// before assigning session lifetime, so parallel runs use fresh storage and developer data
+    /// stays in the named volume.
     /// </summary>
     private static void ForceEphemeralPostgres(IDistributedApplicationTestingBuilder builder)
     {
@@ -110,6 +111,25 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             builder.Resources.Single(resource =>
                 string.Equals(resource.Name, PostgresResourceName, StringComparison.Ordinal)
             );
+        // Detach the persistent development volume before assigning session lifetime.
+        // Each parallel E2E AppHost gets fresh storage; developer data remains untouched.
+        foreach (
+            var mount in postgres
+                .Annotations.OfType<ContainerMountAnnotation>()
+                .Where(mount =>
+                    mount.Type == ContainerMountType.Volume
+                    && string.Equals(
+                        mount.Source,
+                        "raccord-postgres-data",
+                        StringComparison.Ordinal
+                    )
+                )
+                .ToArray()
+        )
+        {
+            postgres.Annotations.Remove(mount);
+        }
+
         builder.CreateResourceBuilder(postgres).WithLifetime(ContainerLifetime.Session);
     }
 
@@ -119,16 +139,20 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     /// assert on localized labels; leaving it to the runner's default would make the suite's
     /// meaning depend on where it runs.
     /// </summary>
-    public async Task<IBrowserContext> NewContextAsync(BrowserNewContextOptions? overrides = null)
+    public async Task<IBrowserContext> NewContextAsync(
+        BrowserNewContextOptions? overrides = null,
+        bool captureVideo = true
+    )
     {
         var options = new BrowserNewContextOptions
         {
             BaseURL = FrontendBaseUrl.ToString(),
             Locale = "en-US",
             IgnoreHTTPSErrors = true,
-            RecordVideoDir = PlaywrightArtifacts.VisualEvidenceEnabled
-                ? PlaywrightArtifacts.EvidenceDirectory
-                : null,
+            RecordVideoDir =
+                captureVideo && PlaywrightArtifacts.VisualEvidenceEnabled
+                    ? PlaywrightArtifacts.EvidenceDirectory
+                    : null,
         };
         if (overrides is not null)
         {
@@ -136,6 +160,87 @@ public sealed class DistributedAppFixture : IAsyncLifetime
             options.RecordVideoSize = overrides.RecordVideoSize ?? options.RecordVideoSize;
         }
         return await Browser.NewContextAsync(options);
+    }
+
+    /// <summary>Seeds a second administrator only in the ephemeral E2E database.</summary>
+    public async Task<(string Email, string Password)> CreateSecondAdministratorAsync()
+    {
+        const string password = "E2EReviewerPassword123!";
+        var email = $"reviewer-{Guid.NewGuid():N}@example.test";
+        var user = CreateE2EReviewer(email);
+        var connectionString = await app!.GetConnectionStringAsync("raccord");
+        await using var connection = new NpgsqlConnection(connectionString);
+        await connection.OpenAsync();
+        await using var transaction = await connection.BeginTransactionAsync();
+        await using (
+            var insertUser = new NpgsqlCommand(
+                """
+                INSERT INTO workspace.users
+                    (id, user_name, normalized_user_name, email, normalized_email, email_confirmed,
+                     password_hash, security_stamp, concurrency_stamp, phone_number_confirmed,
+                     two_factor_enabled, lockout_enabled, access_failed_count, display_name, preferred_language)
+                VALUES
+                    (@id, @user_name, @normalized_user_name, @email, @normalized_email, TRUE,
+                     @password_hash, @security_stamp, @concurrency_stamp, FALSE, FALSE, TRUE, 0,
+                     @display_name, 'en')
+                """,
+                connection,
+                transaction
+            )
+        )
+        {
+            insertUser.Parameters.AddWithValue("id", user.Id);
+            insertUser.Parameters.AddWithValue("user_name", email);
+            insertUser.Parameters.AddWithValue("normalized_user_name", user.NormalizedUserName!);
+            insertUser.Parameters.AddWithValue("email", email);
+            insertUser.Parameters.AddWithValue("normalized_email", user.NormalizedEmail!);
+            insertUser.Parameters.AddWithValue("password_hash", user.PasswordHash!);
+            insertUser.Parameters.AddWithValue("security_stamp", user.SecurityStamp!);
+            insertUser.Parameters.AddWithValue("concurrency_stamp", user.ConcurrencyStamp!);
+            insertUser.Parameters.AddWithValue("display_name", user.DisplayName!);
+            await insertUser.ExecuteNonQueryAsync();
+        }
+        await using (
+            var assignAdmin = new NpgsqlCommand(
+                """
+                INSERT INTO workspace.user_roles (user_id, role_id)
+                SELECT @user_id, id FROM workspace.roles WHERE normalized_name = 'ADMIN'
+                """,
+                connection,
+                transaction
+            )
+        )
+        {
+            assignAdmin.Parameters.AddWithValue("user_id", user.Id);
+            if (await assignAdmin.ExecuteNonQueryAsync() != 1)
+                throw new InvalidOperationException(
+                    "The Admin role was not seeded in the E2E database."
+                );
+        }
+        await transaction.CommitAsync();
+        return (email, password);
+    }
+
+    private static RaccordUser CreateE2EReviewer(string email)
+    {
+        var normalizedEmail = email.ToUpperInvariant();
+        var user = new RaccordUser
+        {
+            UserName = email,
+            NormalizedUserName = normalizedEmail,
+            Email = email,
+            NormalizedEmail = normalizedEmail,
+            EmailConfirmed = true,
+            DisplayName = "E2E Reviewer",
+            PreferredLanguage = "en",
+            SecurityStamp = Guid.NewGuid().ToString("N"),
+            ConcurrencyStamp = Guid.NewGuid().ToString("N"),
+        };
+        user.PasswordHash = new PasswordHasher<RaccordUser>().HashPassword(
+            user,
+            "E2EReviewerPassword123!"
+        );
+        return user;
     }
 
     private IBrowser Browser =>

@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using Microsoft.Playwright;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -16,7 +17,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected DistributedAppFixture App { get; } = app;
 
     /// <summary>
-    /// Runs <paramref name="journey"/> on a fresh, English-locale page with tracing on; on failure,
+    /// Runs <paramref name="journey"/> with the demo user's profile language set to English and tracing on; on failure,
     /// saves trace and screenshot artifacts under <c>playwright-artifacts/</c> and rethrows. The
     /// locale is pinned because the SPA picks es/en from <c>navigator.language</c> and journeys
     /// assert on localized labels — leaving it to the runner's default would make the suite's
@@ -25,10 +26,17 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected async Task RunJourneyAsync(
         string artifactName,
         Func<IPage, Task> journey,
-        bool signIn = true
+        bool signIn = true,
+        string[]? supplementalAssets = null
     )
     {
-        await using var context = await App.NewContextAsync();
+        var evidenceMode = PlaywrightArtifacts.EvidenceModeFor(GetType());
+        await using var context = await App.NewContextAsync(
+            captureVideo: PlaywrightArtifacts.ShouldCaptureVideo(
+                evidenceMode,
+                PlaywrightArtifacts.VisualEvidenceEnabled
+            )
+        );
         await context.Tracing.StartAsync(
             new TracingStartOptions
             {
@@ -39,21 +47,17 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         );
         var page = await context.NewPageAsync();
         var passed = false;
+        var areas = PlaywrightArtifacts.AreasFor(GetType());
 
         try
         {
+            EnsureAreaDeclared(areas);
             if (signIn)
             {
-                await page.GotoAsync("/sign-in");
-                await page.GetByLabel("Email").FillAsync("admin@example.com");
-                await page.GetByLabel("Password").FillAsync("DemoPassword123!");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
-                await page.WaitForURLAsync(url =>
-                    url.EndsWith("/projects", StringComparison.Ordinal)
-                );
+                await SignInAsDemoUserAsync(page);
             }
             await journey(page);
-            if (PlaywrightArtifacts.VisualEvidenceEnabled)
+            if (ShouldCaptureVisualEvidence(evidenceMode))
             {
                 await PlaywrightArtifacts.CaptureSuccessAsync(page, artifactName);
             }
@@ -62,7 +66,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         }
         catch
         {
-            await PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
+            await CaptureFailureAsync(context, page, artifactName, evidenceMode);
             throw;
         }
         finally
@@ -70,16 +74,99 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             try
             {
                 await context.CloseAsync();
-                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                if (ShouldCaptureVisualEvidence(evidenceMode))
                 {
                     await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
                 }
             }
             finally
             {
-                PlaywrightArtifacts.WriteJourneyResult(artifactName, passed ? "passed" : "failed");
+                WriteJourneyResult(artifactName, passed, areas, supplementalAssets, evidenceMode);
             }
         }
+    }
+
+    private static void WriteJourneyResult(
+        string artifactName,
+        bool passed,
+        string[] areas,
+        string[]? supplementalAssets,
+        string evidenceMode
+    ) =>
+        PlaywrightArtifacts.WriteJourneyResult(
+            artifactName,
+            passed ? "passed" : "failed",
+            areas,
+            supplementalAssets,
+            evidenceMode
+        );
+
+    private static bool ShouldCaptureVisualEvidence(string evidenceMode) =>
+        PlaywrightArtifacts.ShouldCaptureVideo(
+            evidenceMode,
+            PlaywrightArtifacts.VisualEvidenceEnabled
+        );
+
+    private static Task CaptureFailureAsync(
+        IBrowserContext context,
+        IPage page,
+        string artifactName,
+        string evidenceMode
+    ) =>
+        string.Equals(evidenceMode, E2ETraits.EvidenceModes.Api, StringComparison.Ordinal)
+            ? PlaywrightArtifacts.CaptureApiFailureAsync(context, artifactName)
+            : PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
+
+    private void EnsureAreaDeclared(string[] areas)
+    {
+        if (areas.Length == 0)
+        {
+            throw new InvalidOperationException(
+                $"E2E journey '{GetType().Name}' must declare at least one bounded-context Area trait."
+            );
+        }
+    }
+
+    private static async Task NormalizeProfileLanguageAsync(IPage page)
+    {
+        var current = await page.APIRequest.GetAsync("/api/auth/me");
+        if (!current.Ok)
+        {
+            throw new InvalidOperationException("The signed-in E2E user could not be loaded.");
+        }
+
+        using var profile = JsonDocument.Parse(await current.TextAsync());
+        var displayName = profile.RootElement.GetProperty("displayName").GetString() ?? "E2E Admin";
+        var normalized = await page.APIRequest.PutAsync(
+            "/api/auth/me",
+            new APIRequestContextOptions
+            {
+                Data = JsonSerializer.Serialize(new { displayName, preferredLanguage = "en" }),
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        if (!normalized.Ok)
+        {
+            throw new InvalidOperationException(
+                "The signed-in E2E user's language could not be normalized to English."
+            );
+        }
+    }
+
+    private static async Task SignInAsDemoUserAsync(IPage page)
+    {
+        await page.GotoAsync("/sign-in");
+        await page.GetByLabel("Email").FillAsync("admin@example.com");
+        await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+        await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+        await page.WaitForURLAsync(url => url.EndsWith("/projects", StringComparison.Ordinal));
+
+        await NormalizeProfileLanguageAsync(page);
+        await page.ReloadAsync();
+        await page.GetByRole(AriaRole.Heading, new() { Name = "Projects" }).WaitForAsync();
     }
 
     /// <summary>

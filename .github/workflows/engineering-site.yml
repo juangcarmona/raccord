@@ -207,6 +207,9 @@ jobs:
       - name: Verify the complete E2E selection
         run: bash .github/scripts/check-e2e-selection.sh
 
+      - name: Verify E2E journey metadata
+        run: dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[TestKind=metadata]"
+
       - name: Run the non-quarantined journeys with visual evidence
         id: test
         continue-on-error: true
@@ -215,7 +218,7 @@ jobs:
           PLAYWRIGHT_ARTIFACTS_DIR: ${{ github.workspace }}/playwright-artifacts
         run: |
           set +e
-          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true]" -stopOnFail
+          timeout --kill-after=10s 30m dotnet tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll -filter "/[Quarantine!=true&TestKind!=metadata]" -stopOnFail
           test_status=$?
           set -e
           evidence_count=$(find "$PLAYWRIGHT_ARTIFACTS_DIR" -maxdepth 1 -type f -name '*.json' 2>/dev/null | wc -l)

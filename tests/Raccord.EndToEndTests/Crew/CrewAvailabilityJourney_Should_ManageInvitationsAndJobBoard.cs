@@ -9,8 +9,9 @@ namespace Raccord.EndToEndTests.Crew;
 /// Given a crew member and a planning function, when availability, an invitation and a job-board signup are recorded, then the crew response remains available to the planner.
 /// ProductShape: BC-CREW-TRANSPORT, JRN-CRW-FILL-VIA-JOB-BOARD, UC-CRW-DECLARE-OWN-AVAILABILITY, UC-CRW-INVITE-CREW-FOR-FUNCTION, UC-CRW-RESPOND-TO-INVITATION, UC-CRW-POST-JOB-ON-BOARD, UC-CRW-SIGN-UP-FOR-POSTED-JOB.
 [Collection(E2ECollection.Name)]
-[Trait(E2ETraits.Area, E2ETraits.Areas.Projects)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
+[Trait(E2ETraits.Area, E2ETraits.Areas.Crew)]
 public sealed class CrewAvailabilityJourney_Should_ManageInvitationsAndJobBoard(
     DistributedAppFixture app
 ) : BrowserJourneyBase(app)
@@ -79,14 +80,6 @@ public sealed class CrewAvailabilityJourney_Should_ManageInvitationsAndJobBoard(
                 listed.Status.ShouldBe((int)HttpStatusCode.OK);
                 (await listed.JsonAsync<AvailabilityResponse[]>())!.ShouldContain(item =>
                     item.CrewMemberId == crew.Id
-                );
-                await page.GotoAsync("/");
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = $"playwright-artifacts/crew-availability-{RunStamp}.png",
-                        FullPage = true,
-                    }
                 );
             }
         );

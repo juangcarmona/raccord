@@ -13,7 +13,7 @@
  *
  * Default output: <docsDir>/../arc42-snapshot.html  (sibling of the docs folder)
  */
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve, join, dirname } from 'node:path';
@@ -60,7 +60,9 @@ function parseArgs(argv) {
 /** Best-effort git revision of the repository containing docsDir. */
 async function gitRevision(docsDir) {
   try {
-    const { stdout } = await run('git', ['rev-parse', 'HEAD'], { cwd: docsDir });
+    const { stdout } = await run('git', ['rev-parse', 'HEAD'], {
+      cwd: docsDir,
+    });
     return stdout.trim();
   } catch {
     return undefined;
@@ -84,9 +86,7 @@ async function main() {
   }
 
   const stackName = flags.title ?? docs.stackName;
-  const outFile = flags.out
-    ? resolve(flags.out)
-    : join(dirname(docsDir), 'arc42-snapshot.html');
+  const outFile = flags.out ? resolve(flags.out) : join(dirname(docsDir), 'arc42-snapshot.html');
   if (!/\.html?$/i.test(outFile)) {
     throw new Diagnostic('--out must name an .html or .htm file; authored Markdown is never an output target');
   }
@@ -99,9 +99,7 @@ async function main() {
   const readmeMermaid = extractMermaidSources(docs.readme.body);
   const sectionMermaid = docs.sections.map((s) => extractMermaidSources(s.body));
   const allMermaid = [...readmeMermaid, ...sectionMermaid.flat()];
-  process.stdout.write(
-    `arc42-snapshot: ${docs.sections.length} sections, ${allMermaid.length} mermaid diagram(s)\n`,
-  );
+  process.stdout.write(`arc42-snapshot: ${docs.sections.length} sections, ${allMermaid.length} mermaid diagram(s)\n`);
   const svgs = await renderMermaid(allMermaid);
 
   // Distribute the rendered SVGs back to their documents.
@@ -135,6 +133,7 @@ async function main() {
   }
 
   const revision = await gitRevision(docsDir);
+  const designTokens = await readFile(resolve(docsDir, '../../design/tokens.css'), 'utf8');
   const html = buildSnapshotHtml({
     readme: {
       title: docs.readme.title,
@@ -144,6 +143,7 @@ async function main() {
     sections: sectionsRendered,
     stackName,
     revision,
+    designTokens,
   });
 
   await mkdir(dirname(outFile), { recursive: true });

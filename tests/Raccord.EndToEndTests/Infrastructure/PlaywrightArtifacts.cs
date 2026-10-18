@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Playwright;
 
 namespace Raccord.EndToEndTests.Infrastructure;
@@ -30,9 +31,58 @@ internal static class PlaywrightArtifacts
             StringComparison.OrdinalIgnoreCase
         );
 
+    internal static bool ShouldCaptureVideo(string evidenceMode, bool visualEvidenceEnabled) =>
+        visualEvidenceEnabled
+        && string.Equals(evidenceMode, E2ETraits.EvidenceModes.Browser, StringComparison.Ordinal);
+
+    internal static string[] AreasFor(Type journeyType) =>
+        journeyType
+            .GetCustomAttributes(typeof(Xunit.TraitAttribute), inherit: false)
+            .Cast<Xunit.TraitAttribute>()
+            .Where(trait => string.Equals(trait.Name, E2ETraits.Area, StringComparison.Ordinal))
+            .Select(trait => trait.Value)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+
+    internal static string EvidenceModeFor(Type journeyType)
+    {
+        var declaredMode = journeyType
+            .GetCustomAttributes(typeof(Xunit.TraitAttribute), inherit: false)
+            .Cast<Xunit.TraitAttribute>()
+            .SingleOrDefault(trait =>
+                string.Equals(trait.Name, E2ETraits.EvidenceMode, StringComparison.Ordinal)
+            )
+            ?.Value;
+
+        if (declaredMode is null)
+        {
+            return E2ETraits.EvidenceModes.Browser;
+        }
+
+        if (string.Equals(declaredMode, E2ETraits.EvidenceModes.Api, StringComparison.Ordinal))
+        {
+            return E2ETraits.EvidenceModes.Api;
+        }
+
+        if (string.Equals(declaredMode, E2ETraits.EvidenceModes.Browser, StringComparison.Ordinal))
+        {
+            return E2ETraits.EvidenceModes.Browser;
+        }
+
+        throw new InvalidOperationException(
+            $"E2E journey '{journeyType.Name}' declares unsupported evidence mode '{declaredMode}'."
+        );
+    }
+
     private static string ArtifactPath(string name) => Path.Combine(EvidenceDirectory, name);
 
-    internal static void WriteJourneyResult(string name, string status)
+    internal static void WriteJourneyResult(
+        string name,
+        string status,
+        IReadOnlyCollection<string>? areas = null,
+        IReadOnlyCollection<string>? supplementalAssets = null,
+        string evidenceMode = E2ETraits.EvidenceModes.Browser
+    )
     {
         try
         {
@@ -45,6 +95,12 @@ internal static class PlaywrightArtifacts
                         name,
                         status,
                         viewport = "desktop",
+                        areas = areas?.Distinct(StringComparer.Ordinal).ToArray() ?? [],
+                        supplementalAssets = supplementalAssets
+                            ?.Distinct(StringComparer.Ordinal)
+                            .ToArray()
+                            ?? [],
+                        evidenceMode,
                     }
                 )
             );
@@ -130,4 +186,8 @@ internal static class PlaywrightArtifacts
             Console.WriteLine($"Saving failure screenshot for '{name}' failed: {ex.Message}");
         }
     }
+
+    /// <summary>Saves a failure trace for an API-only journey without capturing an unrelated page.</summary>
+    internal static Task CaptureApiFailureAsync(IBrowserContext context, string name) =>
+        SaveTraceAsync(context, $"{name}-failure");
 }

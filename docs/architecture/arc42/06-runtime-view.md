@@ -25,7 +25,7 @@ description: Shows the runtime interactions for the system's important scenarios
 
 ## R-0 Sign in and authorize the application
 
-1. The frontend restores the session through `GET /api/auth/me`.
+1. The frontend restores the session through `GET /api/auth/me`. The response includes the account display name, personal language preference and a role-management capability derived from the user's current role claims. `PUT /api/auth/me` updates only the authenticated user's display name and supported personal language.
 2. If no cookie session exists, `RequireAuth` redirects the browser to `/sign-in`.
 3. `POST /api/auth/sign-in` validates the local Identity password and establishes the `raccord.session` cookie; the sign-out endpoint clears it.
 4. The `/api` group requires an authenticated user. The sign-in endpoint and infrastructure health endpoints are anonymous; test bypass authentication is explicit configuration.
@@ -39,6 +39,16 @@ description: Shows the runtime interactions for the system's important scenarios
 5. Build `IssuedInvoiceRepresentation` (JSON + SHA-256); store it append-only; register the compliance record; audit `invoice.issued`.
 6. Render the PDF, store it in object storage, audit `invoice.document.stored` with the PDF hash.
 7. Commit everything in one transaction. If the commit fails, the stored PDF is an orphan under a deterministic key and no invoice exists.
+
+## R-2a Change issuer legal identity after issuance
+
+1. Before any invoice has been issued, an authorized administrator may update the issuer legal name and tax id directly.
+2. After issuance, the administrator submits a reasoned identity-change request; address and contact changes remain direct profile updates.
+3. The request stores the current and proposed legal identity, requester and timestamp. A partial unique index permits only one pending request per issuer.
+4. A distinct authorized administrator approves or rejects the request. `xmin` concurrency ensures only one decision wins; the requester cannot decide their own request.
+5. Approval updates the issuer profile for future invoices. Previously issued invoice snapshots remain unchanged. Request and decision audit records commit with their state changes; rejected requests remain in history.
+
+<!-- pdac:cite id="FR-ISSUER-001" digest="sha256:1d443dcade4a5af9dce47d75a383a243a298dd37de5a2d1be22bc80d5dfe1712" -->
 
 ```mermaid
 sequenceDiagram

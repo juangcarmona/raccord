@@ -39,6 +39,48 @@ describe("public site build", () => {
         }
     });
 
+    it("publishes the brand mark and uses it on localized architecture pages", async () => {
+        assert.equal(
+            await fileExists(path.join(outputDirectory, "raccord-mark.svg")),
+            true,
+        );
+
+        for (const locale of ["es", "en"]) {
+            const architecturePath = path.join(
+                outputDirectory,
+                locale,
+                routes.engineering,
+                "index.html",
+            );
+            const html = await readFile(architecturePath, "utf8");
+            assert.match(
+                html,
+                /<img class="brand-mark" src="\.\.\/\.\.\/raccord-mark\.svg" alt="" aria-hidden="true"\s*\/>/,
+            );
+            assert.match(html, /class="diagram-node node-db"/);
+            assert.match(html, /class="diagram-node node-files"/);
+        }
+    });
+
+    it("keeps architecture nodes on distinct desktop and mobile grid tracks", async () => {
+        const styles = await readFile(
+            path.join(outputDirectory, "styles.css"),
+            "utf8",
+        );
+        assert.match(
+            styles,
+            /\.node-db\s*\{\s*grid-column:\s*3;\s*grid-row:\s*3;/,
+        );
+        assert.match(
+            styles,
+            /\.node-files\s*\{\s*grid-column:\s*4;\s*grid-row:\s*3;/,
+        );
+        assert.match(
+            styles,
+            /\.node-web,\s*\.node-db,\s*\.node-files\s*\{\s*grid-column:\s*1;\s*grid-row:\s*auto;/,
+        );
+    });
+
     it("emits every page in Spanish and English", async () => {
         for (const locale of ["es", "en"]) {
             for (const key of pageKeys) {
@@ -232,6 +274,7 @@ describe("public site build", () => {
         assert.match(root, /href="\.\/styles\.css"/);
         assert.match(root, /href="\/es\/"/);
         assert.match(root, /href="\/en\/"/);
+        assert.match(root, /src="\/raccord-mark\.svg"/);
         assert.match(root, /lang="es"/);
         assert.match(root, /lang="en"/);
         assert.match(styles, /--raccord-ink:\s*#0b1020/);

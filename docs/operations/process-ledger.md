@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-18 · Audit-trail evidence checks the displayed actor and event time
+
+- Observation: Persistence tests can prove an audit row exists without proving the administrator sees the correct actor and timestamp in the record's UI; the browser's displayed actor may also differ from an internal test identity.
+- Action: Keep append-only, hash and transaction proofs in database/domain tests, and add a selected Aspire browser journey for the user-visible trail that asserts each displayed action, actor and chronological timestamp.
+- Check: The invoice audit journey passes against Aspire and appears in both Compliance and Invoicing evidence groups.
+
 ## 2026-10-17 · Cross-user approval needs stable actor identity and a real second session
 
 - Observation: A second-person review can appear correct in a single-user test while the backend still permits self-approval or the browser never exercises a distinct authenticated session.

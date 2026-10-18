@@ -201,6 +201,42 @@ test("attaches explicitly listed supplemental screenshots to their owning journe
     }
 });
 
+test("keeps API-only evidence textual and links its trace instead of product screenshots", () => {
+    const root = temporaryDirectory();
+    try {
+        const artifacts = join(root, "artifacts");
+        const output = join(root, "report");
+        mkdirSync(artifacts);
+        writeFileSync(
+            join(artifacts, "calendar-feed.json"),
+            JSON.stringify({
+                name: "calendar-feed",
+                status: "passed",
+                areas: ["workspace", "projects"],
+                evidenceMode: "api",
+            }),
+        );
+        writeFileSync(join(artifacts, "calendar-feed-checkpoint.png"), "synthetic page");
+        writeFileSync(join(artifacts, "calendar-feed.webm"), "unrelated homepage");
+        writeFileSync(join(artifacts, "calendar-feed.zip"), "trace");
+
+        const report = buildReport({ artifactsDirectory: artifacts, outputDirectory: output, metadata: {} });
+        const html = readFileSync(join(output, "index.html"), "utf8");
+        const journey = report.journeys[0];
+
+        assert.equal(journey.evidenceMode, "api");
+        assert.deepEqual(journey.areas, ["workspace", "projects"]);
+        assert.deepEqual(journey.assets.map((asset) => asset.type), ["trace"]);
+        assert.match(html, /API journey: assertions exercise the AppHost API/);
+        assert.match(html, /Playwright trace: calendar-feed\.zip/);
+        assert.doesNotMatch(html, /calendar-feed-checkpoint\.png/);
+        assert.doesNotMatch(html, /<video controls/);
+        assert.equal(existsSync(join(output, "assets", "calendar-feed-checkpoint.png")), false);
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
 test("keeps old journeys under an unclassified navigation group", () => {
     const root = temporaryDirectory();
     try {

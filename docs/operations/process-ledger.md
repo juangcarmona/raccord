@@ -421,3 +421,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A second xUnit collection started a parallel AppHost and collided with the main suite's database and frontend installer resources.
 - **Action:** Disable parallel execution for the isolated issuer collection and detach only the named development volume from each test AppHost.
 - **Check:** Run the committed E2E selection with both collections and require all selected journeys to pass without touching the developer volume.
+
+## 2026-10-18 · E2E evidence must match the tested interaction
+
+- **Observation:** API-only journeys could pass while reporting synthetic success pages, unrelated homepage screenshots, or misleading browser video as if those assets demonstrated the tested behavior.
+- **Action:** Declare each journey's evidence mode; keep API-only results textual with a failure trace, and reserve screenshots and video for journeys that exercise the browser. Keep mixed journeys in browser mode and capture the real product screen.
+- **Check:** Metadata tests require API-only journeys to declare their mode, static report tests hide visual assets for API results, and the complete per-PR E2E report groups passing results by bounded context with zero unknown rows.

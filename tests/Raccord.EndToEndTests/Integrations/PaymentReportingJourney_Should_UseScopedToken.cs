@@ -8,6 +8,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Integrations;
 
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Invoicing)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Workspace)]
@@ -54,17 +55,6 @@ public sealed class PaymentReportingJourney_Should_UseScopedToken(DistributedApp
                 );
                 invoices.Status.ShouldBe((int)HttpStatusCode.OK);
                 (await invoices.JsonAsync<JsonElement>()).ValueKind.ShouldBe(JsonValueKind.Array);
-
-                await page.SetContentAsync(
-                    "<h1>Payment reporting</h1><p>Scoped invoice read access is active.</p>"
-                );
-                await page.ScreenshotAsync(
-                    new()
-                    {
-                        Path = $"playwright-artifacts/payment-reporting-{RunStamp}.png",
-                        FullPage = true,
-                    }
-                );
             }
         );
     }

@@ -10,6 +10,7 @@ namespace Raccord.EndToEndTests.Documents;
 /// then the matching language variant is listed and previewed without replacing another locale.
 /// ProductShape: BC-DOCUMENTS, UC-DOC-CONFIGURE-TEMPLATE-SETTINGS, UC-DOC-SAVE-TEXT-TEMPLATE.
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Smoke)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
 public sealed class DocumentTemplateJourney_Should_PrepareForeignLanguage(DistributedAppFixture app)
@@ -52,9 +53,6 @@ public sealed class DocumentTemplateJourney_Should_PrepareForeignLanguage(Distri
                 );
                 preview.Status.ShouldBe(200);
                 (await preview.TextAsync()).ShouldContain("Facture");
-                await page.SetContentAsync(
-                    "<h1>French invoice template</h1><p>Facture · fr-FR · Studio Raccord</p>"
-                );
             }
         );
     }

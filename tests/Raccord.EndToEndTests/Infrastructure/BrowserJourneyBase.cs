@@ -30,7 +30,13 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         string[]? supplementalAssets = null
     )
     {
-        await using var context = await App.NewContextAsync();
+        var evidenceMode = PlaywrightArtifacts.EvidenceModeFor(GetType());
+        await using var context = await App.NewContextAsync(
+            captureVideo: PlaywrightArtifacts.ShouldCaptureVideo(
+                evidenceMode,
+                PlaywrightArtifacts.VisualEvidenceEnabled
+            )
+        );
         await context.Tracing.StartAsync(
             new TracingStartOptions
             {
@@ -48,20 +54,10 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             EnsureAreaDeclared(areas);
             if (signIn)
             {
-                await page.GotoAsync("/sign-in");
-                await page.GetByLabel("Email").FillAsync("admin@example.com");
-                await page.GetByLabel("Password").FillAsync("DemoPassword123!");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
-                await page.WaitForURLAsync(url =>
-                    url.EndsWith("/projects", StringComparison.Ordinal)
-                );
-
-                await NormalizeProfileLanguageAsync(page);
-                await page.ReloadAsync();
-                await page.GetByRole(AriaRole.Heading, new() { Name = "Projects" }).WaitForAsync();
+                await SignInAsDemoUserAsync(page);
             }
             await journey(page);
-            if (PlaywrightArtifacts.VisualEvidenceEnabled)
+            if (ShouldCaptureVisualEvidence(evidenceMode))
             {
                 await PlaywrightArtifacts.CaptureSuccessAsync(page, artifactName);
             }
@@ -70,7 +66,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         }
         catch
         {
-            await PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
+            await CaptureFailureAsync(context, page, artifactName, evidenceMode);
             throw;
         }
         finally
@@ -78,14 +74,14 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             try
             {
                 await context.CloseAsync();
-                if (PlaywrightArtifacts.VisualEvidenceEnabled)
+                if (ShouldCaptureVisualEvidence(evidenceMode))
                 {
                     await PlaywrightArtifacts.SaveVideoAsync(page, artifactName);
                 }
             }
             finally
             {
-                WriteJourneyResult(artifactName, passed, areas, supplementalAssets);
+                WriteJourneyResult(artifactName, passed, areas, supplementalAssets, evidenceMode);
             }
         }
     }
@@ -94,14 +90,32 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         string artifactName,
         bool passed,
         string[] areas,
-        string[]? supplementalAssets
+        string[]? supplementalAssets,
+        string evidenceMode
     ) =>
         PlaywrightArtifacts.WriteJourneyResult(
             artifactName,
             passed ? "passed" : "failed",
             areas,
-            supplementalAssets
+            supplementalAssets,
+            evidenceMode
         );
+
+    private static bool ShouldCaptureVisualEvidence(string evidenceMode) =>
+        PlaywrightArtifacts.ShouldCaptureVideo(
+            evidenceMode,
+            PlaywrightArtifacts.VisualEvidenceEnabled
+        );
+
+    private static Task CaptureFailureAsync(
+        IBrowserContext context,
+        IPage page,
+        string artifactName,
+        string evidenceMode
+    ) =>
+        string.Equals(evidenceMode, E2ETraits.EvidenceModes.Api, StringComparison.Ordinal)
+            ? PlaywrightArtifacts.CaptureApiFailureAsync(context, artifactName)
+            : PlaywrightArtifacts.CaptureAsync(context, page, artifactName);
 
     private void EnsureAreaDeclared(string[] areas)
     {
@@ -140,6 +154,19 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
                 "The signed-in E2E user's language could not be normalized to English."
             );
         }
+    }
+
+    private static async Task SignInAsDemoUserAsync(IPage page)
+    {
+        await page.GotoAsync("/sign-in");
+        await page.GetByLabel("Email").FillAsync("admin@example.com");
+        await page.GetByLabel("Password").FillAsync("DemoPassword123!");
+        await page.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+        await page.WaitForURLAsync(url => url.EndsWith("/projects", StringComparison.Ordinal));
+
+        await NormalizeProfileLanguageAsync(page);
+        await page.ReloadAsync();
+        await page.GetByRole(AriaRole.Heading, new() { Name = "Projects" }).WaitForAsync();
     }
 
     /// <summary>

@@ -7,6 +7,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Documents;
 
 [Collection(E2ECollection.Name)]
+[Trait(E2ETraits.EvidenceMode, E2ETraits.EvidenceModes.Api)]
 [Trait(E2ETraits.Depth, E2ETraits.Depths.Full)]
 [Trait(E2ETraits.Area, E2ETraits.Areas.Documents)]
 public sealed class CommunicationJourney_Should_RecordDeliveryOutcomeThroughApi(

@@ -439,3 +439,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Long bounded-context evidence groups need folding, while a custom disclosure control would duplicate browser keyboard and accessibility behavior.
 - **Action:** Use native `<details>` and `<summary>` for static report groups, keep them expanded initially, and preserve the platform marker and focus style.
 - **Check:** Report-builder tests verify each context group, the expanded initial state, and retained grouped content; the generated report remains usable without additional JavaScript.
+
+## 2026-10-18 · Public architecture diagrams need measured responsive evidence
+
+- **Observation:** Static markup and a successful deployment did not reveal that a narrow grid track clipped the PostgreSQL label into the document-storage node.
+- **Action:** Give every architecture node an explicit grid track, check generated asset paths in both locales, and inspect browser rectangles at desktop and mobile widths.
+- **Check:** Public-site tests cover the brand asset, localized routes and grid placement; Chromium evidence reports no node intersections or horizontal overflow in either locale.

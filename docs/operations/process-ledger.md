@@ -433,3 +433,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** API-only journeys could pass while reporting synthetic success pages, unrelated homepage screenshots, or misleading browser video as if those assets demonstrated the tested behavior.
 - **Action:** Declare each journey's evidence mode; keep API-only results textual with a failure trace, and reserve screenshots and video for journeys that exercise the browser. Keep mixed journeys in browser mode and capture the real product screen.
 - **Check:** Metadata tests require API-only journeys to declare their mode, static report tests hide visual assets for API results, and the complete per-PR E2E report groups passing results by bounded context with zero unknown rows.
+
+## 2026-10-18 · Static report disclosures use native controls
+
+- **Observation:** Long bounded-context evidence groups need folding, while a custom disclosure control would duplicate browser keyboard and accessibility behavior.
+- **Action:** Use native `<details>` and `<summary>` for static report groups, keep them expanded initially, and preserve the platform marker and focus style.
+- **Check:** Report-builder tests verify each context group, the expanded initial state, and retained grouped content; the generated report remains usable without additional JavaScript.

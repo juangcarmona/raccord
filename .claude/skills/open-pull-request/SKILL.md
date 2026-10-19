@@ -1,20 +1,20 @@
 ---
 name: open-pull-request
-description: "Open a pull request from the current branch, linked to its work item. Use when a stage needs a pull request raised, in draft or ready for review. Opens one GitHub pull request against main in juangcarmona/raccord."
-metadata:
-    adapted-from: "agentic-sdlc role template open-pull-request, reference github"
+description: "Open a pull request from the current branch, linked to its work item. Use when a stage needs a pull request raised, in draft or ready for review."
 ---
+
+> **Template.** The `adopt` capability adapts this into a role capability the project owns. Adapt *how* the role is performed; never change *what* it guarantees to its callers.
 
 One responsibility: create one pull request for the current branch and link it to its work item.
 
 ## Contract
 
-|                  |                                                                                         |
-| ---------------- | --------------------------------------------------------------------------------------- |
-| **Input**        | The source branch, the target branch, a title, a body, and whether it opens as a draft. |
-| **Output**       | The pull request's identifier and URL, and its draft state.                             |
-| **Writes**       | Creates a pull request in the forge.                                                    |
-| **Confirmation** | **Required.** Confirm before creating.                                                  |
+| | |
+| --- | --- |
+| **Input** | The source branch, the target branch, a title, a body, and whether it opens as a draft. |
+| **Output** | The pull request's identifier and URL, and its draft state. |
+| **Writes** | Creates a pull request in the forge. |
+| **Confirmation** | **Required.** Confirm before creating. |
 
 **Guarantees to the caller**
 
@@ -28,65 +28,18 @@ One responsibility: create one pull request for the current branch and link it t
 - Mark a pull request ready for review; that is a separate role.
 - Add reviewers the project's configuration does not name.
 
-## Project bindings
+## Adapting this template
 
-|               |                                                                           |
-| ------------- | ------------------------------------------------------------------------- |
-| Forge         | GitHub, repository `juangcarmona/raccord`, via the authenticated `gh` CLI |
-| Target branch | `main`                                                                    |
-| Source branch | `<type>/<issue>-<slug>`, so the issue number is recoverable from it       |
-| Linking       | The body contains `Closes #<issue>`                                       |
-| Template      | None; the repository has no pull request template                         |
+1. Pick the reference below matching this project's tooling.
+2. Replace every `<placeholder>` with a value **resolved from live tooling in the adoption session**: an identifier transcribed from a diagram or from memory breaks the loop a month later.
+3. Keep the contract above intact. A command calling `open-pull-request` must get the same shape back on every stack.
+4. No reference matches → author against the contract and **record that it was authored, not adapted**. A fabricated reference is worse than a missing one, because everything downstream trusts it.
 
-## Workflow
+## References
 
-### 1. Check for an existing pull request
+- [`references/azure-devops.md`](references/azure-devops.md): Azure DevOps Repos
+- [`references/github.md`](references/github.md): GitHub
 
-```bash
-gh pr list -R juangcarmona/raccord --head <branch> --state open --json number,url,isDraft
-gh api graphql -f query='query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){issue(number:$number){closedByPullRequestsReferences(first:10){nodes{number url state isDraft headRefName}}}}}' -F owner=juangcarmona -F repo=raccord -F number=<issue>
-```
+## Fast Forward authorization
 
-An open pull request from this branch, or an open one already linked to the issue, is reported and returned with its number, URL and draft state. Nothing is created. A duplicate splits the review and the history.
-
-_Done when:_ both queries ran and returned no open pull request, or the existing one was returned.
-
-### 2. Check the branch is on the remote
-
-```bash
-git ls-remote --heads origin <branch>
-```
-
-An empty result means the branch was never pushed. Stop and say so; pushing is `create-branch`'s act, and `gh pr create` would otherwise prompt to push.
-
-_Done when:_ the remote branch exists and its head is the commit the caller expects.
-
-### 3. Compose
-
-Target `main`. Write the body to a temporary file and make sure it contains `Closes #<issue>`: the body keyword is what closes the issue on merge, and it keeps the closing keyword out of the title. Add reviewers only where `docs/engineering-lifecycle.md` names them.
-
-_Done when:_ title, body file, base `main`, draft flag and any configured reviewers are fixed, and the body contains `Closes #<issue>`.
-
-### 4. Confirm
-
-Show the base, head, title, body, draft flag and reviewers.
-
-_Done when:_ the human has confirmed this exact pull request.
-
-### 5. Create
-
-```bash
-gh pr create -R juangcarmona/raccord --base main --head <branch> --title "<title>" --body-file <path> [--draft] [--reviewer <login>]
-```
-
-Pass `--draft` exactly when the caller asked for a draft. The draft state is the review gate: GitHub refuses to merge a draft. It does **not** stop CI: the `CI` workflow triggers on `pull_request` with the default activity types and no draft filter, so CI runs on drafts here. Whether validation ran is read from the check state, never assumed from the draft flag.
-
-_Done when:_ the command printed one pull request URL.
-
-### 6. Verify and return
-
-```bash
-gh pr view <url> -R juangcarmona/raccord --json number,url,isDraft,baseRefName,headRefName,body --jq '{number, url, isDraft, baseRefName, headRefName, links_issue: (.body | contains("Closes #<issue>"))}'
-```
-
-_Done when:_ the number, URL and draft state are returned as read back, the draft state equals what the caller asked, and `links_issue` is true.
+When called inside an enabled Fast Forward run, the invocation authorizes this role's routine lifecycle write without per-write confirmation. Re-read the configured state immediately before writing and verify the result afterward. Stop at a human-only decision, required human approval, protected forge rule, deployment, or repository red line.

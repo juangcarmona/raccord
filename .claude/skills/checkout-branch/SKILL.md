@@ -1,20 +1,20 @@
 ---
 name: checkout-branch
 description: "Switch the working copy to a branch, fetching when needed, refusing when uncommitted changes would be lost. Use when resuming work on an item."
-metadata:
-    adapted-from: "agentic-sdlc role template checkout-branch, reference convention"
 ---
+
+> **Template.** The `adopt` capability adapts this into a role capability the project owns. Adapt *how* the role is performed; never change *what* it guarantees to its callers.
 
 One responsibility: move the working copy to a branch without losing anything.
 
 ## Contract
 
-|                  |                                                         |
-| ---------------- | ------------------------------------------------------- |
-| **Input**        | A branch name.                                          |
-| **Output**       | The branch now checked out, and whether it was fetched. |
-| **Writes**       | The working copy's checked-out branch.                  |
-| **Confirmation** | Confirm when uncommitted changes must be stashed.       |
+| | |
+| --- | --- |
+| **Input** | A branch name. |
+| **Output** | The branch now checked out, and whether it was fetched. |
+| **Writes** | The working copy's checked-out branch. |
+| **Confirmation** | Confirm when uncommitted changes must be stashed. |
 
 **Guarantees to the caller**
 
@@ -26,62 +26,17 @@ One responsibility: move the working copy to a branch without losing anything.
 - Discard, reset, or clean the working tree.
 - Check out a branch already checked out in another worktree: report where it is instead.
 
-## Project bindings
+## Adapting this template
 
-|              |                                                                                                   |
-| ------------ | ------------------------------------------------------------------------------------------------- |
-| Remote       | `origin`                                                                                          |
-| Branch names | `<type>/<issue>-<slug>`; given only an issue number, the branch is the one matching `*/<issue>-*` |
+1. Pick the reference below matching this project's tooling.
+2. Replace every `<placeholder>` with a value **resolved from live tooling in the adoption session**: an identifier transcribed from a diagram or from memory breaks the loop a month later.
+3. Keep the contract above intact. A command calling `checkout-branch` must get the same shape back on every stack.
+4. No reference matches → author against the contract and **record that it was authored, not adapted**. A fabricated reference is worse than a missing one, because everything downstream trusts it.
 
-## Workflow
+## References
 
-### 1. Resolve the branch name
+- [`references/convention.md`](references/convention.md): switching safely
 
-If the caller passed an issue number rather than a name:
+## Fast Forward authorization
 
-```bash
-git fetch origin --prune
-git branch --list '*/<issue>-*'
-git branch -r --list 'origin/*/<issue>-*'
-```
-
-More than one match is reported and the caller chooses; none is reported as not found.
-
-_Done when:_ exactly one branch name is fixed, or the ambiguity or absence is reported.
-
-### 2. Check other worktrees
-
-```bash
-git worktree list --porcelain
-```
-
-If a `branch refs/heads/<branch>` line belongs to a worktree other than this one, report that worktree's path and stop. Two checkouts of one branch is how a commit gets lost.
-
-_Done when:_ the branch is checked out nowhere else, or its worktree path is reported.
-
-### 3. Protect uncommitted work
-
-```bash
-git status --porcelain
-```
-
-Empty: continue. Not empty: show the changes and stop, unless the human explicitly confirms stashing them:
-
-```bash
-git stash push --include-untracked -m "checkout-branch: <current-branch> -> <branch>"
-```
-
-_Done when:_ the working tree is clean, either because it was or because the changes are in a named stash whose reference (`git stash list`, first entry) is reported.
-
-### 4. Fetch and switch
-
-```bash
-git fetch origin
-git show-ref --verify --quiet refs/heads/<branch> && git switch <branch>
-# only on the remote:
-git switch -c <branch> --track origin/<branch>
-```
-
-If neither `refs/heads/<branch>` nor `refs/remotes/origin/<branch>` exists after the fetch, report not found. If the local branch is behind or has diverged from `origin/<branch>` (`git status -sb`), report it; never reset it.
-
-_Done when:_ `git branch --show-current` prints `<branch>`, and the output says whether a fetch brought it in, whether it tracks `origin/<branch>`, and any stash created.
+When called inside an enabled Fast Forward run, the invocation authorizes this role's routine lifecycle write without per-write confirmation. Re-read the configured state immediately before writing and verify the result afterward. Stop at a human-only decision, required human approval, protected forge rule, deployment, or repository red line.

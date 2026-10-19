@@ -92,21 +92,21 @@ Each completed integration loop includes a review of `docs/operations/process-le
 
 The lifecycle state is exactly one canonical `status:*` label on each open GitHub issue, separate from GitHub's open/closed state. New issues receive `status:backlog`.
 
-| Stage       | State on entry                                                 | State on exit               | Transition                                                                                 | Fired by               |
-| ----------- | -------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------ | ---------------------- |
-| `refine`    | `status:backlog`                                               | `status:ready`              | Set Ready after the gate passes                                                            | `refine`               |
-| `propose`   | `status:ready`                                                 | `status:proposed`           | Set after the plan passes review                                                          | `propose`              |
+| Stage       | State on entry                                                 | State on exit                             | Transition                                                                   | Fired by    |
+| ----------- | -------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
+| `refine`    | `status:backlog`                                               | `status:ready`                            | Set Ready after the gate passes                                              | `refine`    |
+| `propose`   | `status:ready`                                                 | `status:proposed`                         | Set after the plan passes review                                             | `propose`   |
 | `implement` | `status:proposed` (plan approved by the Owner in the draft PR) | `status:in-progress` → `status:in-review` | Set in-progress on entry; set in-review when Done passes and the PR is ready | `implement` |
-| `integrate` | `status:in-review`                                             | `status:done`, issue closed | Merge the linked PR; verify issue closure, then set done                                  | `integrate`            |
-| `review`    | `status:done`                                                  | `status:done`               | Create the per-item retrospective; no lifecycle transition                                | `review`               |
+| `integrate` | `status:in-review`                                             | `status:done`, issue closed               | Merge the linked PR; verify issue closure, then set done                     | `integrate` |
+| `review`    | `status:done`                                                  | `status:done`                             | Create the per-item retrospective; no lifecycle transition                   | `review`    |
 
 ### Transitions no capability ever fires
 
-| Transition                     | Meaning                                                   | Who fires it |
-| ------------------------------ | --------------------------------------------------------- | ------------ |
+| Transition                      | Meaning                                                   | Who fires it |
+| ------------------------------- | --------------------------------------------------------- | ------------ |
 | Add or remove `blocked` overlay | The item cannot progress until something external changes | human only   |
-| Close as not planned           | The item is rejected or deprioritised                     | human only   |
-| Reopen                         | A closed item comes back                                  | human only   |
+| Close as not planned            | The item is rejected or deprioritised                     | human only   |
+| Reopen                          | A closed item comes back                                  | human only   |
 
 ## Work item fields
 
@@ -128,13 +128,13 @@ Post-merge retrospectives use one file per issue at `docs/reviews/issue-<number>
 
 ## Fast Forward
 
-| Setting | This project requires |
-| --- | --- |
-| Enabled | Yes when the active harness can attest a distinct reviewer model |
-| Executor and reviewer | Resolve at run time; reviewer must be a different model |
-| Maximum correction rounds | 3 per gate |
-| Substitutable judgement items | None by default; Owner remains responsible for every Done judgement item |
-| Durable evidence | `docs/delivery/ff/<work-item-id>/<run-id>/run.json` and `summary.md` |
+| Setting                       | This project requires                                                                                                                         |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Enabled                       | Yes when the active harness can attest a distinct reviewer model                                                                              |
+| Executor and reviewer         | Resolve at run time; reviewer must be a different model                                                                                       |
+| Maximum correction rounds     | 3 per gate                                                                                                                                    |
+| Substitutable judgement items | None by default; Owner remains responsible for every Done judgement item                                                                      |
+| Durable evidence              | `docs/delivery/ff/<work-item-id>/<run-id>/run.json` and `summary.md`                                                                          |
 | Human-only or protected gates | Owner-only product, security, and compliance decisions; required forge approvals; production deployment; credentials and repository red lines |
 
 Invoke `/agentic-sdlc:ff <work-item-id>` in Claude Code or `ff <work-item-id>` in portable skill hosts. It may prepare and update a PR, push its branch, and merge only after all configured gates pass and repository protection permits it.
@@ -153,21 +153,21 @@ Invoke `/agentic-sdlc:ff <work-item-id>` in Claude Code or `ff <work-item-id>` i
 
 Role sources are in `.agents/skills/`; `.claude/skills/` contains generated copies. These roles were reset to Agentic SDLC 0.2.2 defaults on 2026-10-19.
 
-| Role skill             | Adapted from                                            | Installed  | Projected to       |
-| ---------------------- | ------------------------------------------------------- | ---------- | ------------------ |
-| `read-work-item`       | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `read-work-item-links` | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `create-work-item`     | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `update-work-item`     | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `comment-work-item`    | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `transition-work-item` | Agentic SDLC GitHub Issues template | 2026-10-19 | Codex, Claude Code |
-| `create-branch`        | Agentic SDLC branch template | 2026-10-19 | Codex, Claude Code |
-| `checkout-branch`      | Agentic SDLC branch template | 2026-10-19 | Codex, Claude Code |
-| `open-pull-request`    | Agentic SDLC GitHub template | 2026-10-19 | Codex, Claude Code |
-| `update-pull-request`  | Agentic SDLC GitHub template | 2026-10-19 | Codex, Claude Code |
-| `inspect-pull-request` | Agentic SDLC GitHub template | 2026-10-19 | Codex, Claude Code |
+| Role skill             | Adapted from                         | Installed  | Projected to       |
+| ---------------------- | ------------------------------------ | ---------- | ------------------ |
+| `read-work-item`       | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `read-work-item-links` | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `create-work-item`     | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `update-work-item`     | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `comment-work-item`    | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `transition-work-item` | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
+| `create-branch`        | Agentic SDLC branch template         | 2026-10-19 | Codex, Claude Code |
+| `checkout-branch`      | Agentic SDLC branch template         | 2026-10-19 | Codex, Claude Code |
+| `open-pull-request`    | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
+| `update-pull-request`  | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
+| `inspect-pull-request` | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
 | `inspect-ci-result`    | Agentic SDLC GitHub Actions template | 2026-10-19 | Codex, Claude Code |
-| `merge-pull-request`   | Agentic SDLC GitHub template | 2026-10-19 | Codex, Claude Code |
+| `merge-pull-request`   | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
 
 Not installed, by decision:
 
@@ -191,9 +191,9 @@ OpenSpec 1.12.0 generates these skills; `openspec init --tools claude,codex` was
 
 ## Amendment log
 
-| Date       | Section                                      | Change                                                                                                                                                                                                   | Why                                                                                              |
-| ---------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| 2026-10-12 | All                                          | Bootstrapped by `adopt`                                                                                                                                                                                  | Onboarding onto agentic-sdlc                                                                     |
-| 2026-10-12 | Definition of Done (8), Deterministic checks | Added the OpenSpec citation gate and moved ProductShape to 0.22.0                                                                                                                                        | ProductShape's OpenSpec integration was adopted, so product grounding became checkable in CI     |
-| 2026-10-12 | Installed roles                              | Replaced the APM install of agentic-sdlc with the Claude Code plugin (project settings) plus the skills CLI for Codex; the missing `rebase-safely` skill and `done-gate-auditor` agent are now delivered | The package could not be used without APM; agent-toolkit now publishes a Claude Code marketplace |
-| 2026-10-19 | Lifecycle labels, retrospective baseline, Fast Forward | Reset issue status to the shared `status:*` set, established per-item review records, and configured bounded `/ff` | Align issue handling and PR integration across repositories while preserving Owner gates |
+| Date       | Section                                                | Change                                                                                                                                                                                                   | Why                                                                                              |
+| ---------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| 2026-10-12 | All                                                    | Bootstrapped by `adopt`                                                                                                                                                                                  | Onboarding onto agentic-sdlc                                                                     |
+| 2026-10-12 | Definition of Done (8), Deterministic checks           | Added the OpenSpec citation gate and moved ProductShape to 0.22.0                                                                                                                                        | ProductShape's OpenSpec integration was adopted, so product grounding became checkable in CI     |
+| 2026-10-12 | Installed roles                                        | Replaced the APM install of agentic-sdlc with the Claude Code plugin (project settings) plus the skills CLI for Codex; the missing `rebase-safely` skill and `done-gate-auditor` agent are now delivered | The package could not be used without APM; agent-toolkit now publishes a Claude Code marketplace |
+| 2026-10-19 | Lifecycle labels, retrospective baseline, Fast Forward | Reset issue status to the shared `status:*` set, established per-item review records, and configured bounded `/ff`                                                                                       | Align issue handling and PR integration across repositories while preserving Owner gates         |

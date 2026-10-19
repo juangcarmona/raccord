@@ -3,6 +3,7 @@ title: Architecture decisions
 arc42-section: "09"
 description: Indexes the accepted architectural decisions and the views they affect.
 ---
+
 <!-- markdownlint-disable MD025 -->
 
 # 9. Architecture decisions
@@ -36,3 +37,4 @@ Decision records live in [`../../adr/`](../../adr/). This section lists the acce
 | Publish static engineering snapshots through GitHub Pages                                    | [ADR-0024](../../adr/0024-publish-static-engineering-snapshots-on-github-pages.md)       | §7 deployment, §8 testing evidence                                |
 | Host the public site through Cloudflare Pages                                                | [ADR-0025](../../adr/0025-host-the-public-site-on-cloudflare-pages.md)                   | §7 deployment, §8 build and quality gates                         |
 | Keep architecture diagram sources beside arc42 prose                                         | [ADR-0027](../../adr/0027-keep-architecture-diagram-sources-with-arc42.md)               | §3, §5–7, §10                                                     |
+| Deliver application email through configured SMTP                                            | [ADR-0028](../../adr/0028-configure-smtp-email-delivery-through-mailkit.md)              | §5 building blocks, §7 deployment, §8 security and configuration  |

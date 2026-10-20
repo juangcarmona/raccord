@@ -25,7 +25,7 @@ public sealed class ProjectCancellationJourney_Should_PreserveInvoiceHistory(
                 await CreateProjectWithBillableLineAsync(page);
                 var projectUrl = page.Url;
 
-                await FinalizeDraftAsync(page, new DateOnly(2026, 9, 18));
+                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow));
                 var invoiceUrl = page.Url;
                 var projectId = new Uri(projectUrl).Segments[^1];
                 await CreateOpenTaskAsync(page, projectId);
@@ -176,6 +176,50 @@ public sealed class ProjectCancellationJourney_Should_PreserveInvoiceHistory(
                 previewJson.RootElement.GetProperty("plannedTransportCount").GetInt32().ShouldBe(0);
                 (await page.GetByRole(AriaRole.Alert).CountAsync()).ShouldBe(0);
                 await page.GotoAsync(projectUrl);
+            }
+        );
+    }
+
+    [Fact]
+    public async Task Journey_Should_LeaveUnselectedCancellationActionsUntouched()
+    {
+        await RunJourneyAsync(
+            "project-cancellation-selected-actions",
+            async page =>
+            {
+                await CreateCustomerAsync(page);
+                await CreateProjectWithBillableLineAsync(page);
+                var projectId = new Uri(page.Url).Segments[^1];
+                await CreateCancellationPlanningAsync(page, projectId);
+
+                await page.ReloadAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Cancel project" })
+                    .ClickAsync();
+                var dialog = page.GetByRole(AriaRole.Dialog);
+                var removeResources = dialog.GetByRole(
+                    AriaRole.Checkbox,
+                    new() { Name = "Remove 1 crew members and 1 vehicles from planning" }
+                );
+                await removeResources.CheckAsync();
+                var withdrawInvitations = dialog.GetByRole(
+                    AriaRole.Checkbox,
+                    new() { Name = "Withdraw 1 active invitations" }
+                );
+                (await withdrawInvitations.IsCheckedAsync()).ShouldBeFalse();
+                await dialog
+                    .GetByRole(AriaRole.Button, new() { Name = "Confirm cancellation" })
+                    .ClickAsync();
+                await dialog.WaitForAsync(new() { State = WaitForSelectorState.Hidden });
+
+                var preview = await page.APIRequest.GetAsync(
+                    $"/api/projects/{projectId}/cancellation-preview"
+                );
+                preview.Status.ShouldBe(200);
+                using var previewJson = JsonDocument.Parse(await preview.TextAsync());
+                previewJson.RootElement.GetProperty("activeInvitationCount").GetInt32().ShouldBe(1);
+                previewJson.RootElement.GetProperty("plannedCrewCount").GetInt32().ShouldBe(0);
+                previewJson.RootElement.GetProperty("plannedTransportCount").GetInt32().ShouldBe(0);
+                (await page.GetByRole(AriaRole.Alert).CountAsync()).ShouldBe(1);
             }
         );
     }

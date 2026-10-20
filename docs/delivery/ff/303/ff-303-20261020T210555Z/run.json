@@ -28,7 +28,20 @@
       "findings": "Plan revision addressed round-one findings and received independent approval from gpt-6-astra. One Transport-function wording detail will be resolved during implementation.",
       "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
     },
-    { "name": "implement", "result": "pending" },
+    {
+      "name": "implement",
+      "startedAt": "2026-10-20T21:43:41Z",
+      "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
+      "result": "running",
+      "findings": "Implementation is underway. Project time periods now have persistence, API and browser management; internal and external documents honor period visibility; Complete blocks operational writes and explicit reopening restores them; selected cancellation actions are covered. Linked equipment/function propagation, period-based function generation, full accepted project-detail fields and the final Done evidence remain unfinished.",
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectScheduleJourney_Should_ManagePeriods.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectCompleteJourney_Should_ReopenOperations.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs"
+      ]
+    },
     { "name": "integrate", "result": "pending" },
     { "name": "review", "result": "pending" }
   ],

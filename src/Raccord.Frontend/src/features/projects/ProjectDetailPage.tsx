@@ -7,6 +7,7 @@ import { Field, FormError, SelectField } from "../../shared/ui/Form";
 import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
 import { AddBillableLineForm } from "./AddBillableLineForm";
+import { ProjectTimeSchedule } from "./ProjectTimeSchedule";
 import { formText } from "../../shared/ui/formText";
 
 const projectStatuses = [
@@ -174,6 +175,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         required
                         maxLength={200}
                         defaultValue={project.name}
+                        disabled={busy || project.status === "complete"}
                     />
                     <Async query={customers}>
                         {(list) => (
@@ -182,6 +184,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                                 name="customerId"
                                 required
                                 defaultValue={project.customerId}
+                                disabled={busy || project.status === "complete"}
                             >
                                 {list.map((customer) => (
                                     <option key={customer.id} value={customer.id}>
@@ -197,6 +200,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         type="date"
                         required
                         defaultValue={project.startDate}
+                        disabled={busy || project.status === "complete"}
                     />
                     <Field
                         label={t("projects.endDate")}
@@ -204,15 +208,22 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         type="date"
                         required
                         defaultValue={project.endDate}
+                        disabled={busy || project.status === "complete"}
                     />
                     <div className="actions">
-                        <button type="submit" className="button button--primary" disabled={busy}>
+                        <button
+                            type="submit"
+                            className="button button--primary"
+                            disabled={busy || project.status === "complete"}
+                        >
                             {t("projects.saveDetails")}
                         </button>
                     </div>
                     <FormError error={detailsError} />
                 </form>
             </section>
+
+            <ProjectTimeSchedule projectId={project.id} readOnly={project.status === "complete"} />
 
             <section aria-labelledby="project-status-heading" className="panel">
                 <h2 id="project-status-heading">{t("projects.status")}</h2>
@@ -437,7 +448,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                 <FormError error={error} />
             </section>
 
-            <AddBillableLineForm projectId={project.id} onAdded={onChanged} />
+            <AddBillableLineForm projectId={project.id} onAdded={onChanged} readOnly={project.status === "complete"} />
         </>
     );
 }

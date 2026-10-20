@@ -14,6 +14,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         CancellationToken ct
     )
     {
+        await EnsureOperationalProjectAsync(projectId, ct);
         if (
             string.IsNullOrWhiteSpace(request.Name)
             || request.RequiredResources < 1
@@ -74,6 +75,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (
             request.EndTime <= request.StartTime
             || request.Date < function.StartDate
@@ -106,6 +108,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (function.Kind != CrewFunctionKind.Crew)
             throw new BusinessRuleViolationException(
                 "crew.function-kind-mismatch",
@@ -146,6 +149,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (function.Kind != CrewFunctionKind.Transport)
             throw new BusinessRuleViolationException(
                 "crew.function-kind-mismatch",
@@ -180,6 +184,21 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
             .Include(row => row.Crew)
             .Include(row => row.Vehicles)
             .SingleOrDefaultAsync(row => row.Id == id, ct);
+
+    private async Task EnsureOperationalProjectAsync(Guid projectId, CancellationToken ct)
+    {
+        var status = await db
+            .Projects.Where(project => project.Id == projectId)
+            .Select(project => (Raccord.Domain.Projects.ProjectStatus?)project.Status)
+            .SingleOrDefaultAsync(ct);
+        if (status is null)
+            throw new BusinessRuleViolationException("projects.not-found", "Project not found.");
+        if (status == Raccord.Domain.Projects.ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational planning."
+            );
+    }
 
     private static string? Clean(string? value) =>
         string.IsNullOrWhiteSpace(value) ? null : value.Trim();

@@ -42,6 +42,37 @@ public sealed record UpdateProjectDetailsRequest(
     Guid? TeamId = null
 );
 
+/// <summary>Creates a named period in the project schedule.</summary>
+public sealed record AddProjectTimePeriodRequest(string Name);
+
+/// <summary>Updates a period's name, range and document visibility.</summary>
+public sealed record UpdateProjectTimePeriodRequest(
+    string Name,
+    DateTimeOffset? Start,
+    DateTimeOffset? End,
+    bool ShowOnInternalDocuments,
+    bool ShowOnExternalDocuments
+);
+
+/// <summary>Assigns the planning role, usage role or both to a period.</summary>
+public sealed record DesignateProjectTimePeriodRequest(bool IsDefaultPlanning, bool IsDefaultUsage);
+
+/// <summary>Sets the complete project time-period order.</summary>
+public sealed record ReorderProjectTimePeriodsRequest(IReadOnlyList<Guid> PeriodIds);
+
+/// <summary>A named, optionally timed period in a project schedule.</summary>
+public sealed record ProjectTimePeriodResponse(
+    Guid Id,
+    string Name,
+    int Position,
+    bool IsDefaultPlanning,
+    bool IsDefaultUsage,
+    DateTimeOffset? Start,
+    DateTimeOffset? End,
+    bool ShowOnInternalDocuments,
+    bool ShowOnExternalDocuments
+);
+
 /// <summary>Confirms project cancellation and the selected applicable actions.</summary>
 public sealed record CancelProjectRequest(
     bool Confirm,

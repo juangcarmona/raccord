@@ -2693,6 +2693,18 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("uuid")
                                 .HasColumnName("project_id");
 
+                            b1.Property<bool>("ShowOnExternalDocuments")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("boolean")
+                                .HasDefaultValue(false)
+                                .HasColumnName("show_on_external_documents");
+
+                            b1.Property<bool>("ShowOnInternalDocuments")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("boolean")
+                                .HasDefaultValue(true)
+                                .HasColumnName("show_on_internal_documents");
+
                             b1.Property<DateTimeOffset?>("Start")
                                 .HasColumnType("timestamp with time zone")
                                 .HasColumnName("start");

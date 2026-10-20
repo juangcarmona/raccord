@@ -195,6 +195,7 @@ public sealed class Project
     /// <summary>Sets a period range when it preserves the usage-within-planning rule.</summary>
     public void SetTimePeriod(Guid periodId, DateTimeOffset? start, DateTimeOffset? end)
     {
+        EnsureOperationalEditable();
         var period = timePeriods.Find(candidate => candidate.Id == periodId);
         if (period is null)
             throw new BusinessRuleViolationException(
@@ -209,10 +210,162 @@ public sealed class Project
 
         var planning = timePeriods.Single(candidate => candidate.IsDefaultPlanning);
         var usage = timePeriods.Single(candidate => candidate.IsDefaultUsage);
-        var planningStart = planning == period ? start : planning.Start;
-        var planningEnd = planning == period ? end : planning.End;
-        var usageStart = usage == period ? start : usage.Start;
-        var usageEnd = usage == period ? end : usage.End;
+        ValidateUsageWithinPlanning(
+            planning == period ? start : planning.Start,
+            planning == period ? end : planning.End,
+            usage == period ? start : usage.Start,
+            usage == period ? end : usage.End
+        );
+
+        period.SetRange(start, end);
+    }
+
+    /// <summary>Adds an untimed period to the end of the schedule.</summary>
+    public ProjectTimePeriod AddTimePeriod(string name)
+    {
+        EnsureOperationalEditable();
+        var normalizedName = ValidateTimePeriodName(name);
+        var period = new ProjectTimePeriod(
+            normalizedName,
+            timePeriods.Count,
+            isDefaultPlanning: false,
+            isDefaultUsage: false
+        );
+        timePeriods.Add(period);
+        return period;
+    }
+
+    /// <summary>Updates a named period, its range and document visibility.</summary>
+    public void UpdateTimePeriod(
+        Guid periodId,
+        string name,
+        DateTimeOffset? start,
+        DateTimeOffset? end,
+        bool showOnInternalDocuments,
+        bool showOnExternalDocuments
+    )
+    {
+        EnsureOperationalEditable();
+        var period = FindTimePeriod(periodId);
+        var normalizedName = ValidateTimePeriodName(name);
+        ValidateRange(start, end);
+
+        var planning = timePeriods.Single(candidate => candidate.IsDefaultPlanning);
+        var usage = timePeriods.Single(candidate => candidate.IsDefaultUsage);
+        ValidateUsageWithinPlanning(
+            planning == period ? start : planning.Start,
+            planning == period ? end : planning.End,
+            usage == period ? start : usage.Start,
+            usage == period ? end : usage.End
+        );
+        period.Update(normalizedName, start, end, showOnInternalDocuments, showOnExternalDocuments);
+    }
+
+    /// <summary>Duplicates a period immediately after its source without its default designations.</summary>
+    public ProjectTimePeriod DuplicateTimePeriod(Guid periodId)
+    {
+        EnsureOperationalEditable();
+        var source = FindTimePeriod(periodId);
+        var insertAt = source.Position + 1;
+        foreach (var period in timePeriods.Where(period => period.Position >= insertAt))
+            period.SetPosition(period.Position + 1);
+        var duplicate = source.Duplicate(insertAt);
+        timePeriods.Add(duplicate);
+        return duplicate;
+    }
+
+    /// <summary>Sets the schedule order using every project period exactly once.</summary>
+    public void ReorderTimePeriods(IReadOnlyList<Guid> orderedPeriodIds)
+    {
+        EnsureOperationalEditable();
+        ValidateTimePeriodOrder(orderedPeriodIds);
+
+        for (var position = 0; position < orderedPeriodIds.Count; position++)
+            FindTimePeriod(orderedPeriodIds[position]).SetPosition(position);
+    }
+
+    /// <summary>Validates that an order contains every project period exactly once.</summary>
+    public void ValidateTimePeriodOrder(IReadOnlyList<Guid> orderedPeriodIds)
+    {
+        EnsureOperationalEditable();
+        ArgumentNullException.ThrowIfNull(orderedPeriodIds);
+        if (
+            orderedPeriodIds.Count != timePeriods.Count
+            || orderedPeriodIds.Distinct().Count() != timePeriods.Count
+            || orderedPeriodIds.Any(id => timePeriods.All(period => period.Id != id))
+        )
+            throw new BusinessRuleViolationException(
+                "projects.time-period-order-invalid",
+                "The order must include every project time period exactly once."
+            );
+    }
+
+    /// <summary>Moves the requested default planning or usage role to a period.</summary>
+    public void DesignateTimePeriod(Guid periodId, bool isDefaultPlanning, bool isDefaultUsage)
+    {
+        EnsureOperationalEditable();
+        var selected = FindTimePeriod(periodId);
+        if (!isDefaultPlanning && !isDefaultUsage)
+            throw new BusinessRuleViolationException(
+                "projects.time-period-designation-required",
+                "Choose the planning period, usage period or both."
+            );
+
+        var planning = isDefaultPlanning
+            ? selected
+            : timePeriods.Single(period => period.IsDefaultPlanning);
+        var usage = isDefaultUsage ? selected : timePeriods.Single(period => period.IsDefaultUsage);
+        ValidateUsageWithinPlanning(planning.Start, planning.End, usage.Start, usage.End);
+
+        if (isDefaultPlanning)
+        {
+            foreach (var period in timePeriods)
+                period.SetDesignation(false, period.IsDefaultUsage);
+        }
+        if (isDefaultUsage)
+        {
+            foreach (var period in timePeriods)
+                period.SetDesignation(period.IsDefaultPlanning, false);
+        }
+        selected.SetDesignation(
+            isDefaultPlanning || selected.IsDefaultPlanning,
+            isDefaultUsage || selected.IsDefaultUsage
+        );
+    }
+
+    private ProjectTimePeriod FindTimePeriod(Guid periodId) =>
+        timePeriods.Find(candidate => candidate.Id == periodId)
+        ?? throw new BusinessRuleViolationException(
+            "projects.time-period-not-found",
+            "The time period does not belong to this project."
+        );
+
+    private static string ValidateTimePeriodName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name) || name.Trim().Length > 120)
+            throw new BusinessRuleViolationException(
+                "projects.time-period-name-invalid",
+                "A time period needs a name of at most 120 characters."
+            );
+        return name.Trim();
+    }
+
+    private static void ValidateRange(DateTimeOffset? start, DateTimeOffset? end)
+    {
+        if (start.HasValue != end.HasValue || (start.HasValue && end <= start))
+            throw new BusinessRuleViolationException(
+                "projects.time-period-invalid",
+                "A time period needs both boundaries, and its end must follow its start."
+            );
+    }
+
+    private static void ValidateUsageWithinPlanning(
+        DateTimeOffset? planningStart,
+        DateTimeOffset? planningEnd,
+        DateTimeOffset? usageStart,
+        DateTimeOffset? usageEnd
+    )
+    {
         if (
             planningStart.HasValue
             && usageStart.HasValue
@@ -226,8 +379,15 @@ public sealed class Project
                 "projects.usage-period-outside-planning",
                 "The usage period must be shorter than and contained by the planning period."
             );
+    }
 
-        period.SetRange(start, end);
+    private void EnsureOperationalEditable()
+    {
+        if (Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before editing its operational details."
+            );
     }
 
     /// <summary>Adds a quantity of equipment to the project's packing list.</summary>
@@ -237,6 +397,7 @@ public sealed class Project
         PackingLineRole role = PackingLineRole.Required
     )
     {
+        EnsureOperationalEditable();
         var line = PackingLine.Create(equipmentId, quantity, role);
         packingLines.Add(line);
         return line;
@@ -245,6 +406,7 @@ public sealed class Project
     /// <summary>Adjusts an unlocked packing line's quantity and role.</summary>
     public PackingLine AdjustPackingLine(Guid lineId, int quantity, PackingLineRole role)
     {
+        EnsureOperationalEditable();
         var line = FindPackingLine(lineId);
         line.Adjust(quantity, role);
         return line;
@@ -253,6 +415,7 @@ public sealed class Project
     /// <summary>Marks a packing line as prepared.</summary>
     public PackingLine Pack(Guid lineId, string actor, DateTimeOffset at)
     {
+        EnsureOperationalEditable();
         var line = FindPackingLine(lineId);
         line.Pack(actor, at);
         return line;
@@ -261,6 +424,7 @@ public sealed class Project
     /// <summary>Marks a prepared line as dispatched.</summary>
     public PackingLine BookOut(Guid lineId, string actor, DateTimeOffset at)
     {
+        EnsureOperationalEditable();
         var line = FindPackingLine(lineId);
         line.BookOut(actor, at);
         return line;
@@ -269,6 +433,7 @@ public sealed class Project
     /// <summary>Marks a dispatched line as received.</summary>
     public PackingLine Receive(Guid lineId, string actor, DateTimeOffset at)
     {
+        EnsureOperationalEditable();
         var line = FindPackingLine(lineId);
         line.Receive(actor, at);
         return line;
@@ -310,6 +475,7 @@ public sealed class Project
         LinePricing pricing
     )
     {
+        EnsureOperationalEditable();
         ArgumentNullException.ThrowIfNull(pricing);
         if (string.IsNullOrWhiteSpace(description))
         {

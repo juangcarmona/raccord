@@ -13,6 +13,7 @@ public sealed class ProjectWorkspace(
     IPartyDirectory parties,
     IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork,
+    IProjectScheduleStore projectScheduleStore,
     ProjectCoordination coordination,
     IProjectCancellationOperations cancellationOperations
 )
@@ -161,6 +162,125 @@ public sealed class ProjectWorkspace(
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Lists the named periods in a project's schedule.</summary>
+    public async Task<IReadOnlyList<ProjectTimePeriodResponse>?> GetTimePeriodsAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        return project is null
+            ? null
+            : [.. project.TimePeriods.Select(period => ToResponse(period))];
+    }
+
+    /// <summary>Adds a named period to a project's schedule.</summary>
+    public async Task<ProjectTimePeriodResponse?> AddTimePeriodAsync(
+        Guid projectId,
+        AddProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var period = project.AddTimePeriod(request.Name);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(period);
+    }
+
+    /// <summary>Updates a project's period, including its internal and external visibility.</summary>
+    public async Task<ProjectTimePeriodResponse?> UpdateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        UpdateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.UpdateTimePeriod(
+            periodId,
+            request.Name,
+            request.Start,
+            request.End,
+            request.ShowOnInternalDocuments,
+            request.ShowOnExternalDocuments
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(project.TimePeriods.Single(period => period.Id == periodId));
+    }
+
+    /// <summary>Duplicates a period and inserts it directly after its source.</summary>
+    public async Task<ProjectTimePeriodResponse?> DuplicateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var duplicate = project.DuplicateTimePeriod(periodId);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(duplicate);
+    }
+
+    /// <summary>Reorders all project periods.</summary>
+    public async Task<IReadOnlyList<ProjectTimePeriodResponse>?> ReorderTimePeriodsAsync(
+        Guid projectId,
+        ReorderProjectTimePeriodsRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+                    if (project is null)
+                        return null;
+                    project.ValidateTimePeriodOrder(request.PeriodIds);
+                    await projectScheduleStore
+                        .ReorderAsync(projectId, request.PeriodIds, ct)
+                        .ConfigureAwait(false);
+                    return (IReadOnlyList<ProjectTimePeriodResponse>)
+                        [
+                            .. request.PeriodIds.Select(
+                                (id, position) =>
+                                    ToResponse(
+                                        project.TimePeriods.Single(period => period.Id == id),
+                                        position
+                                    )
+                            ),
+                        ];
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>Moves one or both default schedule roles to a period.</summary>
+    public async Task<ProjectTimePeriodResponse?> DesignateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        DesignateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.DesignateTimePeriod(periodId, request.IsDefaultPlanning, request.IsDefaultUsage);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(project.TimePeriods.Single(period => period.Id == periodId));
     }
 
     /// <summary>Cancels a project after confirmation and records whether open work remains.</summary>
@@ -407,6 +527,7 @@ public sealed class ProjectWorkspace(
         var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
         if (line is null)
             return null;
+        EnsureOperationalProject(project);
         line.RecordException(
             request.Kind,
             request.Description,
@@ -432,6 +553,7 @@ public sealed class ProjectWorkspace(
         var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
         if (line is null)
             return null;
+        EnsureOperationalProject(project);
         var dispositionName = request.Disposition.Replace(
             "-",
             string.Empty,
@@ -539,6 +661,15 @@ public sealed class ProjectWorkspace(
         Receive,
     }
 
+    private static void EnsureOperationalProject(Project project)
+    {
+        if (project.Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational records."
+            );
+    }
+
     private static PackingLineRole ParsePackingRole(string role) =>
         Enum.TryParse<PackingLineRole>(role, true, out var parsed)
             ? parsed
@@ -565,6 +696,22 @@ public sealed class ProjectWorkspace(
             ToStatusText(project.Status),
             project.HasCancellationWarning,
             project.CancelledAt
+        );
+
+    private static ProjectTimePeriodResponse ToResponse(
+        ProjectTimePeriod period,
+        int? position = null
+    ) =>
+        new(
+            period.Id,
+            period.Name,
+            position ?? period.Position,
+            period.IsDefaultPlanning,
+            period.IsDefaultUsage,
+            period.Start,
+            period.End,
+            period.ShowOnInternalDocuments,
+            period.ShowOnExternalDocuments
         );
 
     private static string ToStatusText(ProjectStatus status) =>

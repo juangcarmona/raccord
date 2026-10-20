@@ -295,6 +295,8 @@ public sealed class ProjectCoordination(
             .ConfigureAwait(false);
         if (task is null)
             return null;
+        await EnsureOperationalProjectAsync(task.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         await EnsureStatusAsync(request.StatusId, cancellationToken).ConfigureAwait(false);
         task.Progress(request.StatusId, request.Position);
         await RecalculateProgressAsync(task.ProjectId, cancellationToken).ConfigureAwait(false);
@@ -304,10 +306,35 @@ public sealed class ProjectCoordination(
 
     private async Task EnsureProjectAsync(Guid projectId, CancellationToken cancellationToken)
     {
-        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
             throw new BusinessRuleViolationException(
                 "projects.not-found",
                 $"Project '{projectId}' does not exist."
+            );
+        EnsureOperationalProject(project);
+    }
+
+    private async Task EnsureOperationalProjectAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            throw new BusinessRuleViolationException(
+                "projects.not-found",
+                $"Project '{projectId}' does not exist."
+            );
+        EnsureOperationalProject(project);
+    }
+
+    private static void EnsureOperationalProject(Project project)
+    {
+        if (project.Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational planning."
             );
     }
 
@@ -369,14 +396,8 @@ public sealed class ProjectCoordination(
     )
     {
         ArgumentNullException.ThrowIfNull(request);
-        if (
-            await projects.FindAsync(request.ProjectId, cancellationToken).ConfigureAwait(false)
-            is null
-        )
-            throw new BusinessRuleViolationException(
-                "projects.not-found",
-                $"Project '{request.ProjectId}' does not exist."
-            );
+        await EnsureOperationalProjectAsync(request.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         var schedule = ProjectSchedule.Create(
             request.ProjectId,
             request.Title,
@@ -416,6 +437,8 @@ public sealed class ProjectCoordination(
             .ConfigureAwait(false);
         if (schedule is null)
             return null;
+        await EnsureOperationalProjectAsync(schedule.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         schedule.Shift(request.Days);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(schedule);

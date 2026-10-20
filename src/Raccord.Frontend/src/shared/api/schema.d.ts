@@ -645,7 +645,9 @@ export interface paths {
         };
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    audience?: string;
+                };
                 header?: never;
                 path: {
                     id: string;
@@ -1989,6 +1991,273 @@ export interface paths {
                 };
             };
         };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/periods": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"][];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddProjectTimePeriodRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/periods/{periodId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    periodId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateProjectTimePeriodRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/periods/{periodId}/duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    periodId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/periods/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReorderProjectTimePeriodsRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"][];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/periods/{periodId}/designation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    periodId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["DesignateProjectTimePeriodRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectTimePeriodResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -5754,6 +6023,10 @@ export interface components {
             body: string;
             actor: string;
         };
+        /** @description Creates a named period in the project schedule. */
+        AddProjectTimePeriodRequest: {
+            name: string;
+        };
         /** @description A postal address. */
         AddressDto: {
             /** @description Street, number and unit. */
@@ -6245,6 +6518,11 @@ export interface components {
          * @default 0
          */
         DepositStatus: number;
+        /** @description Assigns the planning role, usage role or both to a period. */
+        DesignateProjectTimePeriodRequest: {
+            isDefaultPlanning: boolean;
+            isDefaultUsage: boolean;
+        };
         DocumentTemplatePreviewResponse: {
             /** Format: uuid */
             id: string;
@@ -7113,6 +7391,22 @@ export interface components {
             /** Format: date-time */
             recordedAt: string;
         };
+        /** @description A named, optionally timed period in a project schedule. */
+        ProjectTimePeriodResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** Format: int32 */
+            position: number;
+            isDefaultPlanning: boolean;
+            isDefaultUsage: boolean;
+            /** Format: date-time */
+            start: null | string;
+            /** Format: date-time */
+            end: null | string;
+            showOnInternalDocuments: boolean;
+            showOnExternalDocuments: boolean;
+        };
         ProjectTimeReportResponse: {
             /** Format: uuid */
             projectId: string;
@@ -7218,6 +7512,10 @@ export interface components {
             address: null | components["schemas"]["AddressDto"];
             /** @description Billing e-mail. */
             email: null | string;
+        };
+        /** @description Sets the complete project time-period order. */
+        ReorderProjectTimePeriodsRequest: {
+            periodIds: string[];
         };
         RespondToCrewInvitationRequest: {
             status: components["schemas"]["CrewInvitationStatus"];
@@ -7395,6 +7693,16 @@ export interface components {
             projectTypeId?: null | string;
             /** Format: uuid */
             teamId?: null | string;
+        };
+        /** @description Updates a period's name, range and document visibility. */
+        UpdateProjectTimePeriodRequest: {
+            name: string;
+            /** Format: date-time */
+            start: null | string;
+            /** Format: date-time */
+            end: null | string;
+            showOnInternalDocuments: boolean;
+            showOnExternalDocuments: boolean;
         };
         UpdateVehicleRequest: {
             registrationNumber: string;

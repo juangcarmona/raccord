@@ -41,7 +41,10 @@ const customerResponse = [
     { id: "c1", legalName: "Productora Ejemplo S.A." },
     { id: "c2", legalName: "Productora Alternativa S.A." },
 ];
-const customerApi = { "GET /api/customers": () => json(customerResponse) };
+const customerApi = {
+    "GET /api/customers": () => json(customerResponse),
+    "GET /api/projects/p1/periods": () => json([]),
+};
 
 describe("ProjectDetailPage", () => {
     afterEach(() => {

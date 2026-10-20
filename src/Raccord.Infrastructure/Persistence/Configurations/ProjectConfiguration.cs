@@ -96,6 +96,14 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
                 period.Property(timePeriod => timePeriod.Name).HasMaxLength(120).IsRequired();
                 period.Property(timePeriod => timePeriod.Start);
                 period.Property(timePeriod => timePeriod.End);
+                period
+                    .Property(timePeriod => timePeriod.ShowOnInternalDocuments)
+                    .HasDefaultValue(true)
+                    .IsRequired();
+                period
+                    .Property(timePeriod => timePeriod.ShowOnExternalDocuments)
+                    .HasDefaultValue(false)
+                    .IsRequired();
                 period.HasIndex("ProjectId", nameof(ProjectTimePeriod.Position)).IsUnique();
                 period
                     .HasIndex("ProjectId", nameof(ProjectTimePeriod.IsDefaultPlanning))

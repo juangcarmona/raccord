@@ -136,7 +136,8 @@ public sealed class ProjectContext(
         CancellationToken cancellationToken
     )
     {
-        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
             return null;
         var entries = await context.ListAsync(projectId, cancellationToken).ConfigureAwait(false);
         var history = await audit
@@ -173,8 +174,14 @@ public sealed class ProjectContext(
         string? label = null
     )
     {
-        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
             return null;
+        if (project.Status == ProjectStatus.Complete)
+            throw new Raccord.SharedKernel.Common.BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational records."
+            );
         var entry = ProjectContextEntry.Create(
             projectId,
             kind,

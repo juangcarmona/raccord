@@ -499,3 +499,21 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** PostgreSQL inferred bare `NULL` values in a migration `INSERT ... SELECT` as `text`, so the new `timestamp with time zone` columns rejected the period backfill and prevented the API and E2E AppHost from starting.
 - **Action:** Cast nullable timestamp expressions to `timestamp with time zone` in each branch of migration backfills and exercise the migration through the repository database-backed test lane.
 - **Check:** The full Web integration suite applies the migration successfully, then the PR E2E AppHost starts and the selected journeys pass.
+
+## 2026-10-20 · Reordering rows with a unique position index must break EF update cycles
+
+- **Observation:** EF Core found a circular update dependency when a schedule reorder permuted rows under the unique `(project_id, position)` index; moving only the tracked values could not order the generated updates safely.
+- **Action:** Validate the complete requested order first, then update persisted positions through the owning schedule store inside one shared database transaction by staging rows outside the active range before assigning final positions.
+- **Check:** The database-backed project schedule test reorders a multi-row permutation, reloads it, and verifies each row has the requested unique position; invalid requests leave the saved order unchanged.
+
+## 2026-10-20 · Browser journeys wait for fire-and-forget mutation requests
+
+- **Observation:** React event handlers intentionally start async mutations without returning their promises, so Playwright can continue and reload before a reorder or designation request has committed.
+- **Action:** Register a response wait before clicking any action whose handler starts an async API mutation, then assert the persisted state after the response and reload.
+- **Check:** The project schedule journey waits for designation, ordering, duplication and invalid-range responses before checking the reloaded schedule.
+
+## 2026-10-20 · Invoice-numbering journeys use a date accepted by the active sequence
+
+- **Observation:** A fixed past invoice date became earlier than the last issued invoice in the shared E2E sequence and caused a valid invoice finalization to return 422.
+- **Action:** Use the current UTC date when the journey verifies invoice history and does not test historical-date behavior.
+- **Check:** Run the cancellation invoice-history journey alongside the other project lifecycle journeys and require the issued invoice route and immutable content to load.

@@ -79,6 +79,7 @@ public static class DependencyInjection
         services.AddScoped<IProjectCancellationOperations, ProjectCancellationOperations>();
         services.AddScoped<IProjectContextStore, ProjectContextRepository>();
         services.AddScoped<IProjectTimeStore, ProjectTimeRepository>();
+        services.AddScoped<IProjectScheduleStore, ProjectScheduleRepository>();
         services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();
         services.AddScoped<EquipmentCatalog>();
         services.AddScoped<DocumentTemplateCatalog>();

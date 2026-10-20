@@ -14,14 +14,14 @@
 - [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
 - [ ] Add project detail UI for all accepted editable fields and named periods; prove each period's internal/external visibility setting is reflected in document rendering.
 - [ ] Enforce Complete as a read-only operational state for edits and new planning, and prove explicit reopening restores those operations through API and browser journeys.
-- [ ] Add selection of one or more periods to generate exactly one linked Crew function per selected period and the applicable Transport function through existing module application interfaces; verify eligibility, links and failure atomicity.
+- [ ] Add selection of one or more periods to generate Crew and/or Transport functions through the existing application boundary; for each requested kind, create exactly one linked function per selected period and verify eligibility, links and failure atomicity.
 - [x] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.
 - [x] Prove status and cancellation leave issued invoices and invoiced work unchanged.
 - [x] Add project edit and manual status journeys to the PR E2E selection.
 - [x] Add Playwright cancellation journeys for open tasks, crew and vehicle assignments, invitations, persistent warnings and issued invoice history.
 - [ ] Add Playwright journeys for schedule validation, period ordering and linked/unlinked propagation, including dates outside planning and invalid usage ranges.
 - [ ] Add Playwright journeys for Complete blocking edits and new planning, reopening and status-dependent availability across the project areas.
-- [ ] Add a Playwright journey that selects multiple periods and verifies the matching generated Crew and Transport functions, plus internal/external document rendering for visible and hidden periods.
+- [ ] Add a Playwright journey that selects multiple periods and a function kind, then verifies exactly one linked function per selected period, plus internal/external document rendering for visible and hidden periods.
 - [ ] Add a cancellation journey that selects only a subset of applicable actions and proves unselected actions are untouched; preserve the existing persistent-warning and invoice-history assertions.
 - [ ] Ensure every PR E2E selection includes the required synthetic data, `Area=projects` metadata and manifest registration.
 - [ ] Update affected architecture and operations documentation.

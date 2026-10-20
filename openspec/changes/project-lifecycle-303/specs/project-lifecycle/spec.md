@@ -39,7 +39,7 @@ The system MUST create default planning and usage periods, validate usage within
 #### Scenario: Generate functions from selected periods
 
 - **WHEN** an operator selects multiple periods and requests function generation
-- **THEN** exactly one Crew function and the applicable Transport function are created for each selected period and linked to that period
+- **THEN** exactly one function of each requested kind is created per selected period and linked to that period
 
 #### Scenario: Show periods according to internal and external document settings
 

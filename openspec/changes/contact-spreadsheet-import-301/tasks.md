@@ -27,6 +27,6 @@ pdac-scope: cited
 - [x] Add the authenticated Contacts import flow with an accessible upload, field mapping, preview table, confirmation action, and rejection report.
 - [x] Add a synthetic CSV fixture and a Playwright journey that uploads it, previews and confirms the valid row, shows the rejected row, and reads the audit outcome without exposing raw values there.
 - [x] Add the journey to `tests/Raccord.EndToEndTests/per-pr-selection.txt` with `Area=contacts` and cite `SB-CON-IMPORT-VALID-AND-INVALID-ROWS` in its docstring.
-- [ ] Update the process ledger with any durable lesson and verify its existing checks; run formatters, focused tests, contract generation, selected Aspire E2E, and the full CI-equivalent checks on the final PR head.
+- [x] Update the process ledger with any durable lesson and verify its existing checks; run formatters, focused tests, contract generation, selected Aspire E2E, and the full CI-equivalent checks on the final PR head.
 <!-- pdac:cite id="SB-CON-IMPORT-VALID-AND-INVALID-ROWS" digest="sha256:0af65b9f6849d2276fdcebb26929b5378c86ddf31c4f84452b5ae5c57a813d9a" -->
 <!-- pdac:cite id="FR-CON-003" digest="sha256:4d08fb6282312db4988c5987bc65d9677fe56edf51b8e63547711008185ffd00" -->

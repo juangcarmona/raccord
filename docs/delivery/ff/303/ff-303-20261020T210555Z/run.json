@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "runId": "ff-303-20261020T210555Z",
+  "workItem": "#303",
+  "branch": "codex/303-project-lifecycle",
+  "startedAt": "2026-10-20T21:05:55Z",
+  "executorModel": "GPT-6 (system-reported)",
+  "reviewerModel": "gpt-6-astra",
+  "maxCorrectionRounds": 3,
+  "status": "running",
+  "stages": [
+    {
+      "name": "refine",
+      "startedAt": "2026-10-20T21:05:55Z",
+      "completedAt": "2026-10-20T21:06:49Z",
+      "inputCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
+      "result": "ready",
+      "findings": "All required Ready dimensions are satisfied after adding explicit Product Change scope, BR citations, E2E selection details, quality expectations, risks and red lines. Issue remains status:in-progress because lifecycle has no valid rollback transition from implementation to ready.",
+      "evidence": ["https://github.com/juangcarmona/raccord/issues/303"]
+    },
+    {
+      "name": "propose",
+      "startedAt": "2026-10-20T21:06:49Z",
+      "result": "request-changes",
+      "findings": "Independent plan review identified missing traceable coverage for period designation, function generation, document visibility, Complete/reopen, selected cancellation actions, linked versus unlinked propagation, API coverage and E2E selection metadata. Plan corrected; re-review pending.",
+      "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+    },
+    { "name": "implement", "result": "pending" },
+    { "name": "integrate", "result": "pending" },
+    { "name": "review", "result": "pending" }
+  ],
+  "reviews": [
+    {
+      "reviewerModel": "gpt-6-astra",
+      "kind": "plan",
+      "reviewedCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
+      "decision": "request-changes",
+      "findings": [
+        "Added explicit tasks and scenarios for period designation and linked/unlinked propagation.",
+        "Added module ownership and failure-handling details for Projects, Contacts, Commercial, Documents, Crew, Transport and Warehouse boundaries.",
+        "Added API and browser coverage for Complete/reopen, status-dependent visibility, document rendering, selected cancellation actions, synthetic data and Area=projects selection metadata."
+      ],
+      "evidence": ["openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+    }
+  ],
+  "corrections": [
+    {
+      "gate": "plan review and CI",
+      "round": 1,
+      "requestedChanges": "Complete plan traceability and failure coverage; fix PostgreSQL migration NULL type inference reported by both integration and E2E CI jobs.",
+      "resultingCommit": null,
+      "rerunChecks": {
+        "openspecValidateAll": "passed (37 items)",
+        "webIntegrationTests": "passed (26 passed, 0 failed)",
+        "openspecChangeValidation": "passed",
+        "productshapeCitations": "passed after expanded citations (145 documents, 531 current citations)",
+        "markdownlint": "passed",
+        "csharpier": "passed",
+        "gitDiffCheck": "passed"
+      }
+    }
+  ],
+  "stopReason": null,
+  "pullRequest": "https://github.com/juangcarmona/raccord/pull/401",
+  "links": [
+    "openspec/changes/project-lifecycle-303/proposal.md",
+    "openspec/changes/project-lifecycle-303/design.md",
+    "openspec/changes/project-lifecycle-303/tasks.md"
+  ]
+}

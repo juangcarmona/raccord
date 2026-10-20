@@ -493,3 +493,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The invoice issue journey reached the SPA route but Playwright's default `WaitForURLAsync` load condition timed out in CI.
 - **Action:** Wait for the URL at navigation commit, then assert the destination content separately.
 - **Check:** Run the affected invoice and cancellation journeys and require the issued-invoice content to be visible.
+
+## 2026-10-20 · PostgreSQL migration backfills type nullable timestamps explicitly
+
+- **Observation:** PostgreSQL inferred bare `NULL` values in a migration `INSERT ... SELECT` as `text`, so the new `timestamp with time zone` columns rejected the period backfill and prevented the API and E2E AppHost from starting.
+- **Action:** Cast nullable timestamp expressions to `timestamp with time zone` in each branch of migration backfills and exercise the migration through the repository database-backed test lane.
+- **Check:** The full Web integration suite applies the migration successfully, then the PR E2E AppHost starts and the selected journeys pass.

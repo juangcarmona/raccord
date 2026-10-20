@@ -57,10 +57,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                 """
                 INSERT INTO projects.project_time_periods
                     (id, name, position, is_default_planning, is_default_usage, start, "end", project_id)
-                SELECT gen_random_uuid(), 'Planning', 0, true, false, NULL, NULL, id
+                SELECT gen_random_uuid(), 'Planning', 0, true, false,
+                    NULL::timestamp with time zone, NULL::timestamp with time zone, id
                 FROM projects.projects
                 UNION ALL
-                SELECT gen_random_uuid(), 'Usage', 1, false, true, NULL, NULL, id
+                SELECT gen_random_uuid(), 'Usage', 1, false, true,
+                    NULL::timestamp with time zone, NULL::timestamp with time zone, id
                 FROM projects.projects;
                 """
             );

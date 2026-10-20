@@ -8,6 +8,7 @@ public sealed class Project
 {
     private readonly List<BillableLine> billableLines = [];
     private readonly List<PackingLine> packingLines = [];
+    private readonly List<ProjectTimePeriod> timePeriods = [];
 
     private Project()
     {
@@ -30,6 +31,8 @@ public sealed class Project
         EndDate = endDate;
         ProjectTypeId = projectTypeId;
         TeamId = teamId;
+        timePeriods.Add(new ProjectTimePeriod("Planning", 0, isDefaultPlanning: true, false));
+        timePeriods.Add(new ProjectTimePeriod("Usage", 1, false, isDefaultUsage: true));
     }
 
     /// <summary>Project identifier.</summary>
@@ -184,6 +187,48 @@ public sealed class Project
 
     /// <summary>Equipment lines currently handled by the warehouse.</summary>
     public IReadOnlyList<PackingLine> PackingLines => [.. packingLines];
+
+    /// <summary>Named periods on the project time schedule.</summary>
+    public IReadOnlyList<ProjectTimePeriod> TimePeriods =>
+        [.. timePeriods.OrderBy(period => period.Position)];
+
+    /// <summary>Sets a period range when it preserves the usage-within-planning rule.</summary>
+    public void SetTimePeriod(Guid periodId, DateTimeOffset? start, DateTimeOffset? end)
+    {
+        var period = timePeriods.Find(candidate => candidate.Id == periodId);
+        if (period is null)
+            throw new BusinessRuleViolationException(
+                "projects.time-period-not-found",
+                "The time period does not belong to this project."
+            );
+        if (start.HasValue != end.HasValue || (start.HasValue && end <= start))
+            throw new BusinessRuleViolationException(
+                "projects.time-period-invalid",
+                "A time period needs both boundaries, and its end must follow its start."
+            );
+
+        var planning = timePeriods.Single(candidate => candidate.IsDefaultPlanning);
+        var usage = timePeriods.Single(candidate => candidate.IsDefaultUsage);
+        var planningStart = planning == period ? start : planning.Start;
+        var planningEnd = planning == period ? end : planning.End;
+        var usageStart = usage == period ? start : usage.Start;
+        var usageEnd = usage == period ? end : usage.End;
+        if (
+            planningStart.HasValue
+            && usageStart.HasValue
+            && (
+                usageStart < planningStart
+                || usageEnd > planningEnd
+                || (usageStart == planningStart && usageEnd == planningEnd)
+            )
+        )
+            throw new BusinessRuleViolationException(
+                "projects.usage-period-outside-planning",
+                "The usage period must be shorter than and contained by the planning period."
+            );
+
+        period.SetRange(start, end);
+    }
 
     /// <summary>Adds a quantity of equipment to the project's packing list.</summary>
     public PackingLine AddPackingLine(

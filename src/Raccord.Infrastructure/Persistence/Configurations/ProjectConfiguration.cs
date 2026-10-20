@@ -76,6 +76,40 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder
             .Navigation(project => project.PackingLines)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.OwnsMany(
+            project => project.TimePeriods,
+            period =>
+            {
+                period.ToTable(
+                    "project_time_periods",
+                    "projects",
+                    table =>
+                        table.HasCheckConstraint(
+                            "CK_project_time_periods_complete_range",
+                            "(\"start\" IS NULL AND \"end\" IS NULL) OR (\"start\" IS NOT NULL AND \"end\" IS NOT NULL AND \"end\" > \"start\")"
+                        )
+                );
+                period.WithOwner().HasForeignKey("ProjectId");
+                period.HasKey(timePeriod => timePeriod.Id);
+                period.Property(timePeriod => timePeriod.Id).ValueGeneratedNever();
+                period.Property(timePeriod => timePeriod.Name).HasMaxLength(120).IsRequired();
+                period.Property(timePeriod => timePeriod.Start);
+                period.Property(timePeriod => timePeriod.End);
+                period.HasIndex("ProjectId", nameof(ProjectTimePeriod.Position)).IsUnique();
+                period
+                    .HasIndex("ProjectId", nameof(ProjectTimePeriod.IsDefaultPlanning))
+                    .IsUnique()
+                    .HasFilter("is_default_planning");
+                period
+                    .HasIndex("ProjectId", nameof(ProjectTimePeriod.IsDefaultUsage))
+                    .IsUnique()
+                    .HasFilter("is_default_usage");
+            }
+        );
+        builder
+            .Navigation(project => project.TimePeriods)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 #pragma warning restore MA0051
 }

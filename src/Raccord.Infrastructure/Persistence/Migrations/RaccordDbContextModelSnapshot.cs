@@ -2661,9 +2661,74 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasConstraintName("fk_packing_lines_projects_project_id");
                         });
 
+                    b.OwnsMany("Raccord.Domain.Projects.ProjectTimePeriod", "TimePeriods", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<DateTimeOffset?>("End")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("end");
+
+                            b1.Property<bool>("IsDefaultPlanning")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_default_planning");
+
+                            b1.Property<bool>("IsDefaultUsage")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_default_usage");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(120)
+                                .HasColumnType("character varying(120)")
+                                .HasColumnName("name");
+
+                            b1.Property<int>("Position")
+                                .HasColumnType("integer")
+                                .HasColumnName("position");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("project_id");
+
+                            b1.Property<DateTimeOffset?>("Start")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("start");
+
+                            b1.HasKey("Id")
+                                .HasName("pk_project_time_periods");
+
+                            b1.HasIndex("ProjectId", "IsDefaultPlanning")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_is_default_planning")
+                                .HasFilter("is_default_planning");
+
+                            b1.HasIndex("ProjectId", "IsDefaultUsage")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_is_default_usage")
+                                .HasFilter("is_default_usage");
+
+                            b1.HasIndex("ProjectId", "Position")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_position");
+
+                            b1.ToTable("project_time_periods", "projects", t =>
+                                {
+                                    t.HasCheckConstraint("CK_project_time_periods_complete_range", "(\"start\" IS NULL AND \"end\" IS NULL) OR (\"start\" IS NOT NULL AND \"end\" IS NOT NULL AND \"end\" > \"start\")");
+                                });
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId")
+                                .HasConstraintName("fk_project_time_periods_projects_project_id");
+                        });
+
                     b.Navigation("BillableLines");
 
                     b.Navigation("PackingLines");
+
+                    b.Navigation("TimePeriods");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>

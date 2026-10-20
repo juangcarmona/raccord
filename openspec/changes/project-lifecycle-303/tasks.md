@@ -10,7 +10,7 @@
 - [x] Edit a project's name and date range through the project detail API and screen, with domain validation and a reloadable browser journey.
 - [x] Allow changing the selected customer on a project and prove persistence through a browser reload.
 - [ ] Add contact person, commercial and account manager fields, plus duplicate project number validation.
-- [ ] Add domain and persistence models for planning and usage periods with invariant tests.
+- [x] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period create/edit/order/display operations and linked-period propagation through the Projects module.
 - [ ] Add project detail UI for the accepted editable fields and schedule.
 - [x] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.

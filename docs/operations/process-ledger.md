@@ -463,3 +463,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Running the pinned OpenSpec CLI through `npx` did not make its `openspec` executable discoverable by ProductShape, so citation verification reported PRODUCT069 and could only enumerate documents by filesystem convention.
 - **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
 - **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.
+
+## 2026-10-20 · Project lifecycle browser checks use role-specific selectors
+
+- **Observation:** The first status journey matched both a labelled section and its labelled select when it used `GetByLabel("Status")`; parallel project builds also contended while trying to install Git hooks into the shared worktree config.
+- **Action:** Select form controls by their semantic role when a section shares the same accessible name, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
+- **Check:** The status Playwright journey passes after reload using the named combobox, and a Release solution build passes with zero warnings under `HUSKY=0`.

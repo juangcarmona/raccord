@@ -53,6 +53,9 @@ public sealed class Project
     /// <summary>Assigned project team, when assigned.</summary>
     public Guid? TeamId { get; private set; }
 
+    /// <summary>Commercial lifecycle status, independent of equipment warehouse status.</summary>
+    public ProjectStatus Status { get; private set; } = ProjectStatus.Draft;
+
     /// <summary>Automatic completion percentage based on task statuses.</summary>
     public decimal ProgressPercent { get; private set; }
 
@@ -99,6 +102,17 @@ public sealed class Project
                 "Project progress must be between 0 and 100."
             );
         ProgressPercent = progressPercent;
+    }
+
+    /// <summary>Changes the project lifecycle status manually.</summary>
+    public void ChangeStatus(ProjectStatus status)
+    {
+        if (!Enum.IsDefined(status))
+            throw new BusinessRuleViolationException(
+                "projects.status-invalid",
+                "Project status must be one of the fixed lifecycle statuses."
+            );
+        Status = status;
     }
 
     /// <summary>Billable work recorded for the project.</summary>

@@ -1864,6 +1864,49 @@
         }
       }
     },
+    "/api/projects/{id}/status": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeProjectStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/functions": {
       "post": {
         "tags": [
@@ -5257,6 +5300,18 @@
           }
         }
       },
+      "ChangeProjectStatusRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "description": "Changes a project's fixed lifecycle status."
+      },
       "CommunicationSnapshot": {
         "required": [
           "id",
@@ -8292,6 +8347,11 @@
           "depositStatus": {
             "description": "Current deposit lifecycle status.",
             "$ref": "#/components/schemas/DepositStatus"
+          },
+          "status": {
+            "type": "string",
+            "description": "Commercial lifecycle status of the project.",
+            "default": "draft"
           }
         },
         "description": "A project with its billable lines."
@@ -8446,6 +8506,11 @@
           "depositStatus": {
             "description": "Current deposit lifecycle status.",
             "$ref": "#/components/schemas/DepositStatus"
+          },
+          "status": {
+            "type": "string",
+            "description": "Commercial lifecycle status of the project.",
+            "default": "draft"
           }
         },
         "description": "A project in a list."

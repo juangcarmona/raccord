@@ -598,6 +598,18 @@ internal static class Endpoints
                 return TypedResults.Created($"/api/projects/{project.Id}", project);
             }
         );
+        projects.MapPut(
+            "/{id:guid}/status",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                ChangeProjectStatusRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ChangeStatusAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
         projects.MapPost(
             "/{id:guid}/functions",
             async (

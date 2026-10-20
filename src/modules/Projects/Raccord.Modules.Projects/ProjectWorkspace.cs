@@ -75,7 +75,8 @@ public sealed class ProjectWorkspace(
                     project.ProjectTypeId,
                     project.TeamId,
                     project.RefundableDepositAmount,
-                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
+                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
+                    ToStatusText(project.Status)
                 );
             }),
         ];
@@ -90,6 +91,39 @@ public sealed class ProjectWorkspace(
             return null;
         }
 
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Changes a project's lifecycle status without changing warehouse statuses.</summary>
+    public async Task<ProjectResponse?> ChangeStatusAsync(
+        Guid projectId,
+        ChangeProjectStatusRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        var normalizedStatus = request.Status.Replace("-", string.Empty, StringComparison.Ordinal);
+        if (!Enum.TryParse<ProjectStatus>(normalizedStatus, true, out var status))
+            throw new BusinessRuleViolationException(
+                "projects.status-invalid",
+                $"Unknown project status '{request.Status}'."
+            );
+
+        if (status == ProjectStatus.Cancelled)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-confirmation-required",
+                "Use the cancellation workflow to cancel a project."
+            );
+
+        project.ChangeStatus(status);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         var customer = await parties
             .FindAsync(project.CustomerId, cancellationToken)
             .ConfigureAwait(false);
@@ -385,8 +419,17 @@ public sealed class ProjectWorkspace(
             project.TeamId,
             [.. project.PackingLines.Select(ToResponse)],
             project.RefundableDepositAmount,
-            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
+            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
+            ToStatusText(project.Status)
         );
+
+    private static string ToStatusText(ProjectStatus status) =>
+        status switch
+        {
+            ProjectStatus.InProgress => "in-progress",
+            ProjectStatus.ExecutionDone => "execution-done",
+            _ => status.ToString().ToLowerInvariant(),
+        };
 
     private static BillableLineResponse ToResponse(BillableLine line) =>
         new(

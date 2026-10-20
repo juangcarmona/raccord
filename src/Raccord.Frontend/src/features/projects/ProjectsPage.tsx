@@ -2,8 +2,20 @@ import { Link } from "react-router";
 import { api, unwrap } from "../../shared/api/client";
 import { useQuery } from "../../shared/hooks/useQuery";
 import { useI18n } from "../../shared/i18n/I18nProvider";
+import type { MessageKey } from "../../shared/i18n/messages";
 import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
+
+const projectStatusLabels: Record<string, MessageKey> = {
+    inquiry: "projects.status.inquiry",
+    draft: "projects.status.draft",
+    pending: "projects.status.pending",
+    confirmed: "projects.status.confirmed",
+    "in-progress": "projects.status.in-progress",
+    "execution-done": "projects.status.execution-done",
+    complete: "projects.status.complete",
+    cancelled: "projects.status.cancelled",
+};
 
 export function ProjectsPage() {
     const { t, format } = useI18n();
@@ -30,6 +42,7 @@ export function ProjectsPage() {
                                     <tr>
                                         <th scope="col">{t("common.project")}</th>
                                         <th scope="col">{t("common.customer")}</th>
+                                        <th scope="col">{t("projects.status")}</th>
                                         <th scope="col">{t("projects.period")}</th>
                                         <th scope="col" className="num">
                                             {t("projects.unbilled")}
@@ -43,6 +56,7 @@ export function ProjectsPage() {
                                                 <Link to={`/projects/${project.id}`}>{project.name}</Link>
                                             </th>
                                             <td>{project.customerName}</td>
+                                            <td>{t(projectStatusLabels[project.status] ?? "projects.status.draft")}</td>
                                             <td>
                                                 {format.date(project.startDate)} – {format.date(project.endDate)}
                                             </td>

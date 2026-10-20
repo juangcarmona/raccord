@@ -3,10 +3,20 @@ import { useNavigate, useParams } from "react-router";
 import { api, unwrap, type Schemas } from "../../shared/api/client";
 import { useQuery } from "../../shared/hooks/useQuery";
 import { useI18n } from "../../shared/i18n/I18nProvider";
-import { FormError } from "../../shared/ui/Form";
+import { FormError, SelectField } from "../../shared/ui/Form";
 import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
 import { AddBillableLineForm } from "./AddBillableLineForm";
+
+const projectStatuses = [
+    { value: "inquiry", label: "projects.status.inquiry" },
+    { value: "draft", label: "projects.status.draft" },
+    { value: "pending", label: "projects.status.pending" },
+    { value: "confirmed", label: "projects.status.confirmed" },
+    { value: "in-progress", label: "projects.status.in-progress" },
+    { value: "execution-done", label: "projects.status.execution-done" },
+    { value: "complete", label: "projects.status.complete" },
+] as const;
 
 export function ProjectDetailPage() {
     const { id = "" } = useParams();
@@ -19,6 +29,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const navigate = useNavigate();
     const [selected, setSelected] = useState<ReadonlySet<string>>(new Set());
     const [busy, setBusy] = useState(false);
+    const [status, setStatus] = useState(project.status);
     const [error, setError] = useState<unknown>(null);
 
     function toggle(lineId: string) {
@@ -45,6 +56,24 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
         }
     }
 
+    async function saveStatus() {
+        setBusy(true);
+        setError(null);
+        try {
+            await unwrap(
+                api.PUT("/api/projects/{id}/status", {
+                    params: { path: { id: project.id } },
+                    body: { status },
+                }),
+            );
+            onChanged();
+        } catch (failure) {
+            setError(failure);
+        } finally {
+            setBusy(false);
+        }
+    }
+
     return (
         <>
             <PageHeader title={project.name}>
@@ -52,6 +81,35 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                     {project.customerName} · {format.date(project.startDate)} – {format.date(project.endDate)}
                 </p>
             </PageHeader>
+
+            <section aria-labelledby="project-status-heading" className="panel">
+                <h2 id="project-status-heading">{t("projects.status")}</h2>
+                <div className="actions">
+                    <SelectField
+                        label={t("projects.status")}
+                        name="projectStatus"
+                        value={status}
+                        onChange={(event) => {
+                            setStatus(event.target.value);
+                        }}
+                    >
+                        {projectStatuses.map(({ value, label }) => (
+                            <option key={value} value={value}>
+                                {t(label)}
+                            </option>
+                        ))}
+                    </SelectField>
+                    <button
+                        type="button"
+                        className="button button--primary"
+                        disabled={busy || status === project.status}
+                        onClick={() => void saveStatus()}
+                    >
+                        {t("common.save")}
+                    </button>
+                </div>
+                <FormError error={error} />
+            </section>
 
             <section aria-labelledby="lines-heading">
                 <h2 id="lines-heading">{t("projects.lines")}</h2>

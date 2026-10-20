@@ -29,6 +29,9 @@ public sealed record CreateProjectRequest(
     Guid? TeamId = null
 );
 
+/// <summary>Changes a project's fixed lifecycle status.</summary>
+public sealed record ChangeProjectStatusRequest(string Status);
+
 /// <summary>Records incoming project work.</summary>
 public sealed record ReceiveProjectRequest(
     string Name,
@@ -213,6 +216,7 @@ public sealed record SetDepositStatusRequest(DepositStatus Status);
 /// <param name="TeamId">Assigned team.</param>
 /// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
+/// <param name="Status">Commercial lifecycle status of the project.</param>
 public sealed record ProjectSummaryResponse(
     Guid Id,
     string Name,
@@ -226,7 +230,8 @@ public sealed record ProjectSummaryResponse(
     Guid? ProjectTypeId = null,
     Guid? TeamId = null,
     decimal? RefundableDepositAmount = null,
-    DepositStatus DepositStatus = DepositStatus.NotPaid
+    DepositStatus DepositStatus = DepositStatus.NotPaid,
+    string Status = "draft"
 );
 
 /// <summary>A project with its billable lines.</summary>
@@ -243,6 +248,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="PackingLines">Warehouse packing lines.</param>
 /// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
+/// <param name="Status">Commercial lifecycle status of the project.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -256,7 +262,8 @@ public sealed record ProjectResponse(
     Guid? TeamId = null,
     IReadOnlyList<PackingLineResponse>? PackingLines = null,
     decimal? RefundableDepositAmount = null,
-    DepositStatus DepositStatus = DepositStatus.NotPaid
+    DepositStatus DepositStatus = DepositStatus.NotPaid,
+    string Status = "draft"
 );
 
 /// <summary>A billable line.</summary>

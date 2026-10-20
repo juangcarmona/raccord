@@ -28,6 +28,7 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     endDate: "2026-09-18",
     currency: "EUR",
     billableLines,
+    status: "draft",
 });
 
 const routes = [
@@ -82,6 +83,20 @@ describe("ProjectDetailPage", () => {
         renderAt("/projects/p1", routes);
 
         expect(await screen.findByText("Este proyecto no tiene líneas facturables.")).toBeInTheDocument();
+    });
+
+    it("changes a project's lifecycle status", async () => {
+        const requests = stubApi({
+            "GET /api/projects/p1": () => json(project([])),
+            "PUT /api/projects/p1/status": () => json({ ...project([]), status: "confirmed" }),
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.selectOptions(await screen.findByRole("combobox", { name: "Estado" }), "confirmed");
+        await user.click(screen.getByRole("button", { name: "Guardar" }));
+
+        expect(requests.find((request) => request.method === "PUT")?.body).toEqual({ status: "confirmed" });
     });
 
     it("reports a missing project instead of an empty page", async () => {

@@ -2189,6 +2189,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ChangeProjectStatusRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/functions": {
         parameters: {
             query?: never;
@@ -5721,6 +5769,10 @@ export interface components {
             stream: string;
             url: string;
         };
+        /** @description Changes a project's fixed lifecycle status. */
+        ChangeProjectStatusRequest: {
+            status: string;
+        };
         CommunicationSnapshot: {
             /** Format: uuid */
             id: string;
@@ -6767,6 +6819,11 @@ export interface components {
             refundableDepositAmount?: null | number;
             /** @description Current deposit lifecycle status. */
             depositStatus?: components["schemas"]["DepositStatus"];
+            /**
+             * @description Commercial lifecycle status of the project.
+             * @default draft
+             */
+            status: string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -6847,6 +6904,11 @@ export interface components {
             refundableDepositAmount?: null | number;
             /** @description Current deposit lifecycle status. */
             depositStatus?: components["schemas"]["DepositStatus"];
+            /**
+             * @description Commercial lifecycle status of the project.
+             * @default draft
+             */
+            status: string;
         };
         /** @description A project task. */
         ProjectTaskResponse: {

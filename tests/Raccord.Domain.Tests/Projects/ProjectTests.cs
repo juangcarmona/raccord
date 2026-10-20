@@ -39,6 +39,48 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void A_new_project_Should_start_in_draft_status()
+    {
+        NewProject().Status.ShouldBe(ProjectStatus.Draft);
+    }
+
+    [Fact]
+    public void A_project_Should_allow_manual_status_changes_without_changing_warehouse_state()
+    {
+        var project = NewProject();
+        var line = project.AddPackingLine(Guid.CreateVersion7(), 1);
+
+        project.ChangeStatus(ProjectStatus.InProgress);
+
+        project.Status.ShouldBe(ProjectStatus.InProgress);
+        line.IsPacked.ShouldBeFalse();
+        line.IsBookedOut.ShouldBeFalse();
+        line.IsReceived.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Cancelling_a_project_Should_preserve_its_invoiced_work()
+    {
+        var project = NewProject();
+        var line = project.AddBillableLine(
+            BillableLineKind.Service,
+            "Colour grading",
+            Pricing(8m, 95m)
+        );
+        var draftId = Guid.CreateVersion7();
+        var invoiceId = Guid.CreateVersion7();
+        project.ReserveForDraft([line.Id], draftId);
+        project.MarkInvoiced(draftId, invoiceId);
+
+        project.ChangeStatus(ProjectStatus.Cancelled);
+
+        project.Status.ShouldBe(ProjectStatus.Cancelled);
+        line.State.ShouldBe(BillingState.Invoiced);
+        line.InvoiceId.ShouldBe(invoiceId);
+        line.Description.ShouldBe("Colour grading");
+    }
+
+    [Fact]
     public void Reserving_lines_for_a_draft_Should_move_them_out_of_the_unbilled_pool()
     {
         var project = NewProject();

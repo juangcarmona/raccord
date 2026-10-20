@@ -6,9 +6,10 @@ status: active
 illustrates:
   - "BR-CON-CONTACT-PERSON-DESIGNATIONS"
 given:
-  - "A contact has two contact persons and the first is the current default"
-when: "An authorized coordinator marks the second person as default and administrative"
+  - "A contact has one contact person, who is its current default"
+when: "An authorized coordinator creates a second contact person, then marks the new person as default and administrative"
 then:
+  - "The new contact person is saved under the selected contact"
   - "The second contact person has both selected designations"
   - "The first contact person is no longer the default"
   - "The contact has exactly one default contact person"

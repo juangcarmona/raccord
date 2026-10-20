@@ -20,6 +20,22 @@ internal sealed class ContactPerson
         Phone = phone;
     }
 
+    private ContactPerson(
+        Guid id,
+        Guid contactId,
+        string name,
+        string? email,
+        string? phone,
+        bool isDefault,
+        bool isAdministrative
+    )
+        : this(contactId, name, email, phone)
+    {
+        Id = id;
+        IsDefault = isDefault;
+        IsAdministrative = isAdministrative;
+    }
+
     internal Guid Id { get; private set; }
 
     internal Guid ContactId { get; private set; }
@@ -47,6 +63,28 @@ internal sealed class ContactPerson
         var details = ValidateDetails(name, email, phone);
 
         return new ContactPerson(contactId, details.Name, details.Email, details.Phone);
+    }
+
+    internal static ContactPerson Restore(
+        Guid id,
+        Guid contactId,
+        string name,
+        string? email,
+        string? phone,
+        bool isDefault,
+        bool isAdministrative
+    )
+    {
+        var details = ValidateDetails(name, email, phone);
+        return new ContactPerson(
+            id,
+            contactId,
+            details.Name,
+            details.Email,
+            details.Phone,
+            isDefault,
+            isAdministrative
+        );
     }
 
     internal void Update(Guid contactId, string name, string? email, string? phone)

@@ -35,3 +35,23 @@ public sealed record ContactPageResponse(
     bool HasNextPage,
     bool HasPreviousPage
 );
+
+/// <summary>Creates or updates a person under the contact in the route.</summary>
+public sealed record SaveContactPersonRequest(
+    string Name,
+    string? Email,
+    string? Phone,
+    bool IsDefault = false,
+    bool IsAdministrative = false
+);
+
+/// <summary>A person and their designations within one contact.</summary>
+public sealed record ContactPersonResponse(
+    Guid Id,
+    Guid ContactId,
+    string Name,
+    string? Email,
+    string? Phone,
+    bool IsDefault,
+    bool IsAdministrative
+);

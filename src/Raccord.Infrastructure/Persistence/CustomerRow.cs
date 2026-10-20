@@ -1,3 +1,4 @@
+using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Parties;
 
 namespace Raccord.Infrastructure.Persistence;
@@ -14,4 +15,10 @@ internal sealed class CustomerRow
     public AddressFields BillingAddress { get; set; } = new();
 
     public string? Email { get; set; }
+
+    public ContactType Type { get; set; }
+
+    public string? ContactNumber { get; set; }
+
+    public List<ContactRoleRow> Roles { get; set; } = [];
 }

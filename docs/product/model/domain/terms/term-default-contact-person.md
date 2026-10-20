@@ -2,7 +2,7 @@
 id: TERM-DEFAULT-CONTACT-PERSON
 type: domain-term
 title: "Default contact person"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
@@ -15,12 +15,12 @@ provenance:
 
 ## Definition
 
-The contact person automatically chosen when the contact is selected as client of a project.
+The contact person designated as the default for a contact. A contact may have no default or one default contact person.
 
 ## Distinguish From
 
-Administrative contact person: invoice recipient.
+Administrative contact person: a separate designation for administrative work.
 
 ## Usage
 
-Saves selection effort on new projects.
+The designation is maintained in Contacts. Any automatic use when creating a project is defined by the project workflow.

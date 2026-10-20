@@ -89,6 +89,9 @@ public sealed class ContactsDirectory(IContactDirectory contacts, IContactsUnitO
         int page,
         int pageSize,
         string? role,
+        Guid? folderId,
+        IReadOnlyList<Guid>? tagIds,
+        string? tagMatch,
         CancellationToken cancellationToken
     )
     {
@@ -109,8 +112,27 @@ public sealed class ContactsDirectory(IContactDirectory contacts, IContactsUnitO
         }
 
         ContactRole? roleFilter = string.IsNullOrWhiteSpace(role) ? null : ParseRole(role);
+        var requireAllTags = tagMatch switch
+        {
+            null or "" or "any" => false,
+            "all" => true,
+            _ => throw new BusinessRuleViolationException(
+                "contacts.tag-match-unsupported",
+                "Tag match must be either any or all."
+            ),
+        };
         var result = await contacts
-            .ListContactsAsync(page, pageSize, roleFilter, cancellationToken)
+            .ListContactsAsync(
+                new ContactDirectoryFilter(
+                    page,
+                    pageSize,
+                    roleFilter,
+                    folderId,
+                    tagIds?.Distinct().ToArray() ?? [],
+                    requireAllTags
+                ),
+                cancellationToken
+            )
             .ConfigureAwait(false);
         return new ContactPageResponse(
             result.Items.Select(item => ToResponse(item)!).ToArray(),

@@ -505,3 +505,21 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Directory journeys run against shared E2E data while other browser journeys execute in parallel. Reading rows immediately after changing a role or page can observe stale or incomplete results, and exact page counts can depend on unrelated contacts.
 - **Action:** Await the filtered API response and rendered page indicator before reading rows; traverse the available pages and assert the journey's own records, role exclusions, stable previous-page results and no duplicate rows.
 - **Check:** Run the contact journeys with the in-process E2E runner and require the directory journey to find its company and venue across all pages despite concurrent fixture data.
+
+## 2026-10-20 · Synchronize browser journeys with mutation refreshes
+
+- **Observation:** Contacts organization mutations reload their query-backed form, so a browser assertion can race the server response or read rows while the view is between loading and success states.
+- **Action:** Register a response wait before each state-changing interaction, then wait for the resulting accessible control or row before continuing; use a click for server-controlled checkboxes and assert the persisted outcome after reload.
+- **Check:** The Contacts tags and folders journey creates two contacts, verifies assignment, any/all tag filtering, folder filtering and refusal to delete a nonempty folder against the Aspire AppHost.
+
+## 2026-10-20 · Keep directory assertions scoped to the primary record link
+
+- **Observation:** Adding an action link to each Contacts row doubled the anchor count in a directory journey and made pagination assertions report twenty “contacts” on a ten-row page.
+- **Action:** Select the record-name link in the row heading when asserting directory membership; address a known contact by its returned API id when a journey needs to reopen its detail route amid shared test data.
+- **Check:** The full selected Playwright run passes with the organization action link present and parallel journeys creating their own synthetic records.
+
+## 2026-10-20 · Keep ProductShape model files out of generic formatters
+
+- **Observation:** Prettier rewrites ProductShape-owned YAML front matter, which changes ProductShape content digests and makes OpenSpec citations stale even when product behavior is unchanged.
+- **Action:** Exclude `docs/product/model/**` from generic Prettier runs and use ProductShape commands for model changes; regenerate consumer citations with `prodshape cite` whenever an approved model change alters a referenced artifact.
+- **Check:** `prodshape citations verify --provider openspec` reports zero stale, tampered or unresolved citations after model and formatter changes.

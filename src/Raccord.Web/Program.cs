@@ -88,6 +88,7 @@ builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ContactsDirectory>();
 builder.Services.AddScoped<ContactImportDirectory>();
 builder.Services.AddScoped<ContactPeopleDirectory>();
+builder.Services.AddScoped<ContactOrganizationDirectory>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<ProjectContext>();
 builder.Services.AddScoped<ProjectTimeTracking>();

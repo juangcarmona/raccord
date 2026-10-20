@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { json, renderAt, stubApi } from "../../test/render";
 import { ContactFormPage } from "./ContactFormPage";
+import { ContactOrganizationPage } from "./ContactOrganizationPage";
 import { ContactsPage } from "./ContactsPage";
 
 const company = {
@@ -17,9 +18,15 @@ const company = {
     isInvoiceable: false,
 };
 
+const emptyOrganization = {
+    "GET /api/contacts/tags": () => json([]),
+    "GET /api/contacts/folders": () => json([]),
+};
+
 describe("contacts directory", () => {
     it("shows the empty state and create action", async () => {
         stubApi({
+            ...emptyOrganization,
             "GET /api/contacts": () =>
                 json({ items: [], page: 1, pageSize: 10, totalCount: 0, hasNextPage: false, hasPreviousPage: false }),
         });
@@ -56,6 +63,7 @@ describe("contacts directory", () => {
     it("shows and retries the directory error state", async () => {
         let calls = 0;
         stubApi({
+            ...emptyOrganization,
             "GET /api/contacts": () => {
                 calls += 1;
                 return calls === 1
@@ -79,6 +87,7 @@ describe("contacts directory", () => {
 
     it("filters a paged directory by role and shows the next page", async () => {
         const requests = stubApi({
+            ...emptyOrganization,
             "GET /api/contacts": (request) => {
                 const url = new URL(request.url);
                 const isSupplier = url.searchParams.get("role") === "Supplier";
@@ -103,6 +112,44 @@ describe("contacts directory", () => {
             expect(requests.filter((request) => request.path === "/api/contacts")).toHaveLength(3);
         });
         expect(screen.getByText("Northlight Films")).toBeInTheDocument();
+    });
+
+    it("filters contacts by folder and tag matching mode", async () => {
+        const queries: URLSearchParams[] = [];
+        stubApi({
+            "GET /api/contacts/tags": () =>
+                json([
+                    { id: "tag-venue", name: "venue" },
+                    { id: "tag-customer", name: "customer" },
+                ]),
+            "GET /api/contacts/folders": () =>
+                json([{ id: "folder-1", name: "Priority", parentId: null, position: 0 }]),
+            "GET /api/contacts": (request) => {
+                queries.push(new URL(request.url).searchParams);
+                return json({
+                    items: [company],
+                    page: 1,
+                    pageSize: 10,
+                    totalCount: 1,
+                    hasNextPage: false,
+                    hasPreviousPage: false,
+                });
+            },
+        });
+        renderAt("/contacts", [{ path: "/contacts", element: <ContactsPage /> }]);
+
+        await screen.findByRole("link", { name: "Northlight Films" });
+        await userEvent.click(screen.getByLabelText("venue"));
+        await userEvent.click(screen.getByLabelText("customer"));
+        await userEvent.selectOptions(screen.getByLabelText("Coincidencia de etiquetas"), "all");
+        await userEvent.selectOptions(screen.getByLabelText("Filtrar por carpeta"), "folder-1");
+
+        await waitFor(() => {
+            const filtered = queries.at(-1);
+            expect(filtered?.get("tagMatch")).toBe("all");
+            expect(filtered?.get("folderId")).toBe("folder-1");
+            expect(filtered?.getAll("tagIds")).toEqual(["tag-venue", "tag-customer"]);
+        });
     });
 
     it("creates a company with multiple roles and optional fields", async () => {
@@ -143,6 +190,73 @@ describe("contacts directory", () => {
         await userEvent.click(screen.getByRole("button", { name: "Guardar" }));
 
         expect(await screen.findByRole("alert")).toHaveTextContent("Duplicated.");
+    });
+});
+
+describe("contact organization", () => {
+    it("creates tags and folders, assigns both and reorders folders", async () => {
+        const createdTag = { id: "tag-venue", name: "venue" };
+        const folder = { id: "folder-1", name: "Venues", parentId: null, position: 0 };
+        const calls = {
+            tags: [] as { id: string; name: string }[],
+            folders: [] as (typeof folder)[],
+            assigned: false,
+        };
+        const requests = stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/organization": () =>
+                json({
+                    contactId: "contact-1",
+                    folderId: calls.folders[0]?.id ?? null,
+                    tags: calls.assigned ? calls.tags : [],
+                }),
+            "GET /api/contacts/tags": () => json(calls.tags),
+            "GET /api/contacts/folders": () => json(calls.folders),
+            "POST /api/contacts/tags": () => {
+                calls.tags.push(createdTag);
+                return json(createdTag, 201);
+            },
+            "POST /api/contacts/folders": () => {
+                calls.folders.push(folder);
+                return json(folder, 201);
+            },
+            "PUT /api/contacts/contact-1/tags/tag-venue": () => {
+                calls.assigned = true;
+                return new Response(null, { status: 204 });
+            },
+            "PUT /api/contacts/contact-1/folder": () => new Response(null, { status: 204 }),
+            "PUT /api/contacts/folders/folder-1": () => json(folder),
+        });
+        renderAt("/contacts/contact-1/organization", [
+            {
+                path: "/contacts/:id/organization",
+                element: <ContactOrganizationPage />,
+            },
+        ]);
+
+        await userEvent.type(await screen.findByLabelText("Nueva etiqueta"), "venue");
+        await userEvent.click(screen.getByRole("button", { name: "Crear etiqueta" }));
+        await userEvent.click(await screen.findByLabelText("venue"));
+        await userEvent.type(await screen.findByLabelText("Nombre de carpeta"), "Venues");
+        await userEvent.click(screen.getByRole("button", { name: "Crear carpeta" }));
+        await userEvent.selectOptions(await screen.findByLabelText("Asignar carpeta"), "folder-1");
+        await userEvent.click(await screen.findByRole("button", { name: "Mover Venues hacia abajo" }));
+
+        await waitFor(() => {
+            expect(
+                requests.some((request) => request.method === "PUT" && request.path.endsWith("/tags/tag-venue")),
+            ).toBe(true);
+            expect(requests.some((request) => request.method === "PUT" && request.path.endsWith("/folder"))).toBe(true);
+            expect(
+                requests.some((request) => request.method === "PUT" && request.path.endsWith("/folders/folder-1")),
+            ).toBe(true);
+        });
+        expect(requests.find((request) => request.method === "POST" && request.path.endsWith("/tags"))?.body).toEqual({
+            name: "venue",
+        });
+        expect(
+            requests.find((request) => request.method === "POST" && request.path.endsWith("/folders"))?.body,
+        ).toMatchObject({ name: "Venues", parentId: null });
     });
 });
 

@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Modules.Contacts.Contracts;
 using Raccord.SharedKernel.Parties;
@@ -9,7 +11,8 @@ internal sealed class CustomerRepository(RaccordDbContext db)
     : IPartyDirectory,
         IPartyWriter,
         IContactDirectory,
-        IContactPeopleDirectory
+        IContactPeopleDirectory,
+        IContactOrganizationDirectory
 {
     public async Task<bool> LockContactAsync(Guid contactId, CancellationToken cancellationToken) =>
         await db
@@ -154,32 +157,52 @@ internal sealed class CustomerRepository(RaccordDbContext db)
         );
 
     public async Task<ContactPage> ListContactsAsync(
-        int page,
-        int pageSize,
-        ContactRole? role,
+        ContactDirectoryFilter filter,
         CancellationToken cancellationToken
     )
     {
         var contacts = db.Customers.Include(customer => customer.Roles).AsQueryable();
-        if (role is not null)
+        if (filter.Role is not null)
         {
             contacts = contacts.Where(customer =>
-                customer.Roles.Any(contactRole => contactRole.Role == role)
+                customer.Roles.Any(contactRole => contactRole.Role == filter.Role)
             );
+        }
+
+        if (filter.FolderId is not null)
+        {
+            contacts = contacts.Where(customer => customer.FolderId == filter.FolderId);
+        }
+
+        if (filter.TagIds.Count > 0)
+        {
+            contacts = filter.RequireAllTags
+                ? contacts.Where(customer =>
+                    db.ContactTagAssignments.Count(assignment =>
+                        assignment.ContactId == customer.Id
+                        && filter.TagIds.Contains(assignment.TagId)
+                    ) == filter.TagIds.Count
+                )
+                : contacts.Where(customer =>
+                    db.ContactTagAssignments.Any(assignment =>
+                        assignment.ContactId == customer.Id
+                        && filter.TagIds.Contains(assignment.TagId)
+                    )
+                );
         }
 
         var totalCount = await contacts.CountAsync(cancellationToken).ConfigureAwait(false);
         var rows = await contacts
             .OrderBy(customer => customer.ContactNumber)
             .ThenBy(customer => customer.Id)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
+            .Skip((filter.Page - 1) * filter.PageSize)
+            .Take(filter.PageSize)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
         return new ContactPage(
             rows.Select(row => ToContactSnapshot(row)!).ToArray(),
-            page,
-            pageSize,
+            filter.Page,
+            filter.PageSize,
             totalCount
         );
     }
@@ -230,6 +253,326 @@ internal sealed class CustomerRepository(RaccordDbContext db)
             row.Roles.Add(new ContactRoleRow { ContactId = row.Id, Role = role });
         }
     }
+
+    public async Task<IReadOnlyList<ContactTagSnapshot>> ListTagsAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (
+                await db
+                    .ContactTags.AsNoTracking()
+                    .OrderBy(tag => tag.Name)
+                    .ThenBy(tag => tag.Id)
+                    .ToListAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(tag => new ContactTagSnapshot(tag.Id, tag.Name)),
+        ];
+
+    public async Task<ContactTagSnapshot?> CreateTagAsync(
+        string name,
+        CancellationToken cancellationToken
+    )
+    {
+        var key = TagNameKey(name);
+        if (
+            await db
+                .ContactTags.AnyAsync(tag => tag.NameKey == key, cancellationToken)
+                .ConfigureAwait(false)
+        )
+        {
+            return null;
+        }
+
+        var tag = new ContactTagRow
+        {
+            Id = Guid.CreateVersion7(),
+            Name = name,
+            NameKey = key,
+        };
+        db.ContactTags.Add(tag);
+        return new ContactTagSnapshot(tag.Id, tag.Name);
+    }
+
+    public async Task<bool> DeleteTagAsync(Guid tagId, CancellationToken cancellationToken)
+    {
+        var tag = await db
+            .ContactTags.Include(candidate => candidate.Assignments)
+            .FirstOrDefaultAsync(candidate => candidate.Id == tagId, cancellationToken)
+            .ConfigureAwait(false);
+        if (tag is null || tag.Assignments.Count > 0)
+        {
+            return false;
+        }
+
+        db.ContactTags.Remove(tag);
+        return true;
+    }
+
+    public async Task<IReadOnlyList<ContactFolderSnapshot>> ListFoldersAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (
+                await db
+                    .ContactFolders.AsNoTracking()
+                    .OrderBy(folder => folder.ParentId)
+                    .ThenBy(folder => folder.Position)
+                    .ThenBy(folder => folder.Name)
+                    .ThenBy(folder => folder.Id)
+                    .ToListAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(ToFolderSnapshot),
+        ];
+
+    public async Task<ContactFolderSnapshot?> CreateFolderAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken
+    )
+    {
+        var parentExists =
+            parentId is null
+            || await db
+                .ContactFolders.AnyAsync(folder => folder.Id == parentId, cancellationToken)
+                .ConfigureAwait(false);
+        if (!parentExists)
+        {
+            return null;
+        }
+
+        var position =
+            await db
+                .ContactFolders.Where(folder => folder.ParentId == parentId)
+                .Select(folder => (int?)folder.Position)
+                .MaxAsync(cancellationToken)
+                .ConfigureAwait(false)
+            ?? -1;
+        var folder = new ContactFolderRow
+        {
+            Id = Guid.CreateVersion7(),
+            Name = name,
+            ParentId = parentId,
+            Position = position + 1,
+        };
+        db.ContactFolders.Add(folder);
+        return ToFolderSnapshot(folder);
+    }
+
+    public async Task<ContactFolderSnapshot?> UpdateFolderAsync(
+        Guid folderId,
+        string name,
+        Guid? parentId,
+        int position,
+        CancellationToken cancellationToken
+    )
+    {
+        var folder = await db
+            .ContactFolders.FirstOrDefaultAsync(
+                candidate => candidate.Id == folderId,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var parentExists =
+            parentId is null
+            || await db
+                .ContactFolders.AnyAsync(candidate => candidate.Id == parentId, cancellationToken)
+                .ConfigureAwait(false);
+        var createsCycle =
+            folder is not null
+            && await WouldCreateFolderCycleAsync(folderId, parentId, cancellationToken)
+                .ConfigureAwait(false);
+        if (folder is null || position < 0 || !parentExists || createsCycle)
+        {
+            return null;
+        }
+
+        var previousParentId = folder.ParentId;
+        var previousSiblings = await db
+            .ContactFolders.Where(candidate => candidate.ParentId == previousParentId)
+            .Where(candidate => candidate.Id != folderId)
+            .OrderBy(candidate => candidate.Position)
+            .ThenBy(candidate => candidate.Name)
+            .ThenBy(candidate => candidate.Id)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+        for (var index = 0; index < previousSiblings.Count; index++)
+        {
+            previousSiblings[index].Position = index;
+        }
+
+        var targetSiblings =
+            previousParentId == parentId
+                ? previousSiblings
+                : await db
+                    .ContactFolders.Where(candidate => candidate.ParentId == parentId)
+                    .Where(candidate => candidate.Id != folderId)
+                    .OrderBy(candidate => candidate.Position)
+                    .ThenBy(candidate => candidate.Name)
+                    .ThenBy(candidate => candidate.Id)
+                    .ToListAsync(cancellationToken)
+                    .ConfigureAwait(false);
+        var insertionIndex = Math.Min(position, targetSiblings.Count);
+        targetSiblings.Insert(insertionIndex, folder);
+        for (var index = 0; index < targetSiblings.Count; index++)
+        {
+            targetSiblings[index].Position = index;
+        }
+
+        folder.Name = name;
+        folder.ParentId = parentId;
+        return ToFolderSnapshot(folder);
+    }
+
+    public async Task<bool> DeleteFolderAsync(Guid folderId, CancellationToken cancellationToken)
+    {
+        var folder = await db
+            .ContactFolders.FirstOrDefaultAsync(
+                candidate => candidate.Id == folderId,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var containsContacts = await db
+            .Customers.AnyAsync(customer => customer.FolderId == folderId, cancellationToken)
+            .ConfigureAwait(false);
+        var containsFolders = await db
+            .ContactFolders.AnyAsync(child => child.ParentId == folderId, cancellationToken)
+            .ConfigureAwait(false);
+        if (folder is null || containsContacts || containsFolders)
+        {
+            return false;
+        }
+
+        db.ContactFolders.Remove(folder);
+        return true;
+    }
+
+    public async Task<ContactOrganizationSnapshot?> GetContactOrganizationAsync(
+        Guid contactId,
+        CancellationToken cancellationToken
+    )
+    {
+        var contact = await db
+            .Customers.AsNoTracking()
+            .Where(customer => customer.Id == contactId)
+            .Select(customer => new { customer.Id, customer.FolderId })
+            .FirstOrDefaultAsync(cancellationToken)
+            .ConfigureAwait(false);
+        if (contact is null)
+        {
+            return null;
+        }
+
+        var tags = await db
+            .ContactTagAssignments.AsNoTracking()
+            .Where(assignment => assignment.ContactId == contactId)
+            .OrderBy(assignment => assignment.Tag.Name)
+            .Select(assignment => new ContactTagSnapshot(assignment.Tag.Id, assignment.Tag.Name))
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return new ContactOrganizationSnapshot(contact.Id, contact.FolderId, tags);
+    }
+
+    public async Task<bool> SetContactTagAsync(
+        Guid contactId,
+        Guid tagId,
+        bool assigned,
+        CancellationToken cancellationToken
+    )
+    {
+        var contactExists = await db
+            .Customers.AnyAsync(contact => contact.Id == contactId, cancellationToken)
+            .ConfigureAwait(false);
+        var tagExists = await db
+            .ContactTags.AnyAsync(tag => tag.Id == tagId, cancellationToken)
+            .ConfigureAwait(false);
+        if (!contactExists || !tagExists)
+        {
+            return false;
+        }
+
+        var assignment = await db
+            .ContactTagAssignments.FirstOrDefaultAsync(
+                candidate => candidate.ContactId == contactId && candidate.TagId == tagId,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (assigned && assignment is null)
+        {
+            db.ContactTagAssignments.Add(
+                new ContactTagAssignmentRow { ContactId = contactId, TagId = tagId }
+            );
+        }
+        else if (!assigned && assignment is not null)
+        {
+            db.ContactTagAssignments.Remove(assignment);
+        }
+
+        return true;
+    }
+
+    public async Task<bool> SetContactFolderAsync(
+        Guid contactId,
+        Guid? folderId,
+        CancellationToken cancellationToken
+    )
+    {
+        var contact = await db
+            .Customers.FirstOrDefaultAsync(
+                candidate => candidate.Id == contactId,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (contact is null)
+        {
+            return false;
+        }
+
+        var folderExists =
+            folderId is null
+            || await db
+                .ContactFolders.AnyAsync(folder => folder.Id == folderId, cancellationToken)
+                .ConfigureAwait(false);
+        if (!folderExists)
+        {
+            return false;
+        }
+
+        contact.FolderId = folderId;
+        return true;
+    }
+
+    private async Task<bool> WouldCreateFolderCycleAsync(
+        Guid folderId,
+        Guid? parentId,
+        CancellationToken cancellationToken
+    )
+    {
+        var ancestors = await db
+            .ContactFolders.AsNoTracking()
+            .ToDictionaryAsync(folder => folder.Id, folder => folder.ParentId, cancellationToken)
+            .ConfigureAwait(false);
+        var current = parentId;
+        while (current is not null)
+        {
+            if (current == folderId)
+            {
+                return true;
+            }
+
+            if (!ancestors.TryGetValue(current.Value, out current))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static string TagNameKey(string name) =>
+        Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(name.ToUpperInvariant())));
+
+    private static ContactFolderSnapshot ToFolderSnapshot(ContactFolderRow folder) =>
+        new(folder.Id, folder.Name, folder.ParentId, folder.Position);
 
     private async Task<string> NextContactNumberAsync(CancellationToken cancellationToken)
     {

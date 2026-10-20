@@ -22,6 +22,12 @@ public sealed class RaccordDbContext(DbContextOptions<RaccordDbContext> options)
 
     internal DbSet<ContactPersonRow> ContactPersons => Set<ContactPersonRow>();
 
+    internal DbSet<ContactTagRow> ContactTags => Set<ContactTagRow>();
+
+    internal DbSet<ContactTagAssignmentRow> ContactTagAssignments => Set<ContactTagAssignmentRow>();
+
+    internal DbSet<ContactFolderRow> ContactFolders => Set<ContactFolderRow>();
+
     internal DbSet<Project> Projects => Set<Project>();
 
     internal DbSet<ProjectRequest> ProjectRequests => Set<ProjectRequest>();

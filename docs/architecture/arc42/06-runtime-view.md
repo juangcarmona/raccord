@@ -3,6 +3,7 @@ title: Runtime view
 arc42-section: "06"
 description: Shows the runtime interactions for the system's important scenarios.
 ---
+
 <!-- markdownlint-disable MD025 -->
 
 # 6. Runtime view
@@ -58,6 +59,7 @@ description: Shows the runtime interactions for the system's important scenarios
 4. `GET /api/customers` remains a customer-role projection over the same records so project and invoice consumers keep their current contract and cannot see supplier-only or venue-only contacts.
 5. Invoice issuance snapshots current party details. Editing a contact changes future invoice inputs but does not update any already issued invoice representation.
 6. `POST /api/contacts/import/inspect` reads a bounded CSV/XLSX file for column mapping; `/preview` validates every row without writes and returns a digest; `/import` recomputes that digest, persists valid contacts independently, reports rejected rows and appends start/completion audit events containing counts and file type without row values (`UC-CON-IMPORT-CONTACTS`, `BR-CON-IMPORT-ROW-ATOMICITY`, `BR-CON-IMPORT-AUDIT`).
+7. Administrators create deployment-scoped tags and hierarchical folders, assign them to contacts, and filter the directory with folder membership or any/all tag matching. Tag assignments and folder membership use restrictive foreign keys; folders with contacts or child folders and tags with assignments cannot be deleted. This uses the existing database-per-deployment boundary from ADR-0012 and does not implement workspace selection or multi-tenant row partitioning (`UC-CON-TAG-CONTACTS`, `UC-CON-MANAGE-CONTACT-FOLDERS`, `UC-CON-FILTER-CONTACT-DIRECTORY`, `BR-CON-FOLDER-DELETE-NONEMPTY`, `BR-CON-TAG-FILTER-MODES`).
 
 ```mermaid
 sequenceDiagram
@@ -100,7 +102,7 @@ This flow follows `src/Raccord.Application/Invoicing/InvoicingWorkflow.cs` and t
 3. The restore script verifies the manifest before stopping `web`, recreates the database schema, restores documents and starts the migration gate before `web`.
 4. Readiness verification confirms the restored application can reach the database; a checksum mismatch exits before the installation is changed.
 
-## R-5 Future: VERI*FACTU submission
+## R-5 Future: VERI\*FACTU submission
 
 A background worker claims pending compliance records per issuer in order, builds/sends batches, stores evidence, and handles outages and rejections (see [compliance seam](../compliance-seam.md)).
 

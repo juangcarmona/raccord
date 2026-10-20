@@ -2,7 +2,7 @@
 id: CHG-CONTACT-ORGANIZATION-302
 type: product-change
 title: Accept contact tags, folders and filtering
-status: proposed
+status: applied
 base-revision: "769edf87e11dec97b23de000741c2f745545256b"
 operations:
   add:
@@ -42,18 +42,19 @@ Contacts directory, contact tags, Contacts folder structure, directory filters, 
 
 ## Open Questions
 
-- Are tags shared across module types or scoped to Contacts? Recommendation: scoped to Contacts only, consistent with #302's explicit exclusion of other record types.
-- Must every contact belong to exactly one folder, or may it be unfiled? Recommendation: allow zero or one folder so the existing directory create flow remains usable without folder setup.
-- Which folder operations are required: create roots/subfolders, rename, reorder, move and delete? Recommendation: support create, rename, reorder and move; refuse deletion while the folder contains contacts or child folders.
-- Who can manage tags/folders? Recommendation: users authorized to manage Contacts may organize contact records; workspace-level administration remains governed by existing authorization rules.
-- Confirm that multi-tag filtering supports both “any” and “all”. Recommendation: support both modes as described by the draft behavior model.
+None. The recommendations below are accepted.
 
 ## Product Acceptance
 
-- The Product Owner confirms Contacts-only tag scope and workspace isolation.
-- The Product Owner confirms whether folder assignment is optional and which hierarchy operations are supported.
-- The Product Owner confirms the existing any/all tag matching behavior.
-- The Product Owner confirms which Contacts permissions allow managing tags, folders and assignments.
+- Tags and folders apply only to Contacts and are isolated by workspace.
+- Contacts may remain unfiled or belong to at most one folder.
+- Contact folders support creating roots and subfolders, renaming, reordering, moving, and deletion only when empty of contacts and child folders.
+- Users with existing Contacts management permissions may manage tags, folders, and assignments; no additional workspace-level role is introduced.
+- Multi-tag filters support both any-match and all-match modes.
+
+## Approval
+
+Approved by the product owner on 2026-10-20 under the explicit authorization to proceed unattended with the Contact backlog implementation. The recommended decisions in the proposal are accepted as written.
 
 ## Out of Scope
 

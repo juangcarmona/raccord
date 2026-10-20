@@ -8,6 +8,7 @@ derived-from:
   - "BR-CON-CONTACT-PERSON-DESIGNATIONS"
   - "BR-PRJ-CONTACT-PERSON-NOT-MOVABLE"
 verification:
+  - scenario-ref: "SB-CON-CHANGE-DEFAULT-CONTACT-PERSON"
   - scenario: "A coordinator sets a new default contact person"
   - scenario: "A coordinator creates a person under another contact"
   - scenario: "The contact persons feature does not change an issued invoice"

@@ -2,7 +2,7 @@
 id: BR-PRJ-CONTACT-ROLES-BY-TAG
 type: business-rule
 title: "Contact roles are expressed with tags, not folders"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-ADD-CONTACT"
 uses-terms:

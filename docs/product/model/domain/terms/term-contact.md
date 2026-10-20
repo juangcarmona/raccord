@@ -2,7 +2,7 @@
 id: TERM-CONTACT
 type: domain-term
 title: "Contact"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:

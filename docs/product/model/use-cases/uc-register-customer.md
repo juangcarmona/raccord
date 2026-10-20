@@ -2,7 +2,7 @@
 id: UC-REGISTER-CUSTOMER
 type: use-case
 title: "Register a customer"
-status: draft
+status: active
 primary-actor: "ACT-BILLING-ADMINISTRATOR"
 supporting-actors:
   - "ACT-OPERATIONS-COORDINATOR"

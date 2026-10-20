@@ -2,7 +2,7 @@
 id: FR-CUSTOMER-001
 type: functional-requirement
 title: "Register customers and show invoice readiness"
-status: draft
+status: active
 derived-from:
   - "UC-REGISTER-CUSTOMER"
   - "BR-TAX-ID-NORMALIZATION"

@@ -1,6 +1,8 @@
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using Raccord.Contracts.Common;
@@ -14,9 +16,10 @@ namespace Raccord.Web.Tests.Infrastructure;
 /// <summary>The Raccord web host running against its own migrated database and document folder.</summary>
 public sealed class RaccordApi : WebApplicationFactory<Program>
 {
-    private RaccordApi(string connectionString)
+    private RaccordApi(string connectionString, bool testingAuthBypass = true)
     {
         ConnectionString = connectionString;
+        TestingAuthBypass = testingAuthBypass;
         DocumentRoot = Path.Combine(
             Path.GetTempPath(),
             "raccord-web-tests",
@@ -25,6 +28,8 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     }
 
     public string ConnectionString { get; }
+
+    private bool TestingAuthBypass { get; }
 
     public string DocumentRoot { get; }
 
@@ -51,6 +56,28 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
         await scope
             .ServiceProvider.GetRequiredService<DatabaseMaintenance>()
             .MigrateAsync(CancellationToken.None);
+        return api;
+    }
+
+    public static async Task<RaccordApi> StartWithoutAuthBypassAsync(PostgresContainer postgres)
+    {
+        var api = new RaccordApi(await postgres.CreateDatabaseAsync(), testingAuthBypass: false);
+        await using var scope = api.Services.CreateAsyncScope();
+        await scope
+            .ServiceProvider.GetRequiredService<DatabaseMaintenance>()
+            .MigrateAsync(CancellationToken.None);
+        return api;
+    }
+
+    public static async Task<RaccordApi> StartAtMigrationAsync(
+        PostgresContainer postgres,
+        string migrationId
+    )
+    {
+        var api = new RaccordApi(await postgres.CreateDatabaseAsync());
+        await using var scope = api.Services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<RaccordDbContext>();
+        await db.Database.GetService<IMigrator>().MigrateAsync(migrationId);
         return api;
     }
 
@@ -122,7 +149,7 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
-        builder.UseSetting("Raccord:TestingBypassAuth", "true");
+        builder.UseSetting("Raccord:TestingBypassAuth", TestingAuthBypass ? "true" : "false");
         builder.UseSetting("ConnectionStrings:raccord", ConnectionString);
         builder.UseSetting("Storage:Provider", "FileSystem");
         builder.UseSetting("Storage:FileSystemRoot", DocumentRoot);

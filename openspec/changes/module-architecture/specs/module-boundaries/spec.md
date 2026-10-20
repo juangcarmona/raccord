@@ -12,7 +12,7 @@ Every module SHALL be an assembly `src/modules/<Module>/Raccord.Modules.<Module>
 
 <!-- pdac:cite id="BC-WORKSPACE" digest="sha256:013841dd37789974afef821eb2c071a85acaa72c083abd2285b7c406db95f8a5" -->
 
-<!-- pdac:cite id="BC-CONTACTS" digest="sha256:c9c5f006e7a0904b8ac8303a008358ba52bc1203747dba3e03340500cd2f86d7" -->
+<!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->
 
 <!-- pdac:cite id="BC-PROJECTS" digest="sha256:11cadbc8906365210716689609d66738e29fc576822aa2e8e7a925a8bae0933e" -->
 

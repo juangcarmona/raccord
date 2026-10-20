@@ -201,9 +201,29 @@ public sealed class ProjectWorkspace(
     )
     {
         ArgumentNullException.ThrowIfNull(request);
+        return await unitOfWork
+            .ExecuteAsync(
+                ct => UpdateTimePeriodInTransactionAsync(projectId, periodId, request, ct),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    private async Task<ProjectTimePeriodResponse?> UpdateTimePeriodInTransactionAsync(
+        Guid projectId,
+        Guid periodId,
+        UpdateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
         var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
         if (project is null)
             return null;
+        var period = project.TimePeriods.SingleOrDefault(candidate => candidate.Id == periodId);
+        if (period is null)
+            return null;
+        var previousStart = ToDateOnly(period.Start);
+        var previousEnd = ToDateOnly(period.End);
         project.UpdateTimePeriod(
             periodId,
             request.Name,
@@ -212,9 +232,23 @@ public sealed class ProjectWorkspace(
             request.ShowOnInternalDocuments,
             request.ShowOnExternalDocuments
         );
+        await projectScheduleStore
+            .PropagateRangeAsync(
+                projectId,
+                periodId,
+                previousStart,
+                previousEnd,
+                ToDateOnly(request.Start),
+                ToDateOnly(request.End),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return ToResponse(project.TimePeriods.Single(period => period.Id == periodId));
+        return ToResponse(project.TimePeriods.Single(candidate => candidate.Id == periodId));
     }
+
+    private static DateOnly? ToDateOnly(DateTimeOffset? value) =>
+        value is null ? null : DateOnly.FromDateTime(value.Value.DateTime);
 
     /// <summary>Duplicates a period and inserts it directly after its source.</summary>
     public async Task<ProjectTimePeriodResponse?> DuplicateTimePeriodAsync(

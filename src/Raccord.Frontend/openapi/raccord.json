@@ -2301,6 +2301,49 @@
         }
       }
     },
+    "/api/projects/{id}/functions/from-periods": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateProjectFunctionsFromPeriodsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectFunctionResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects/{id}/functions": {
       "post": {
         "tags": [
@@ -7275,6 +7318,28 @@
           }
         }
       },
+      "GenerateProjectFunctionsFromPeriodsRequest": {
+        "required": [
+          "periodIds",
+          "kinds"
+        ],
+        "type": "object",
+        "properties": {
+          "periodIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrewFunctionKind"
+            }
+          }
+        }
+      },
       "InboundEInvoiceResponse": {
         "required": [
           "id",
@@ -8601,6 +8666,13 @@
             "items": {
               "$ref": "#/components/schemas/VehicleAssignmentResponse"
             }
+          },
+          "projectTimePeriodId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },

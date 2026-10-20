@@ -666,6 +666,19 @@ internal static class Endpoints
             }
         );
         projects.MapPost(
+            "/{id:guid}/functions/from-periods",
+            async (
+                Guid id,
+                GenerateProjectFunctionsFromPeriodsRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/{id}/functions",
+                    await catalog.GenerateFunctionsFromPeriodsAsync(id, request, ct)
+                )
+        );
+        projects.MapPost(
             "/{id:guid}/functions",
             async (
                 Guid id,

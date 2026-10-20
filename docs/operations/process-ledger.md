@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Browser journeys use exact accessible locators for repeated schedule controls
+
+- Observation: Adding a duplicate project period made partial label and form-name locators ambiguous, so the browser journey selected multiple checkboxes or edited both source and copied period.
+- Action: Use exact accessible names when a schedule renders repeated controls with shared label prefixes.
+- Check: The period-management journey duplicates a period, generates functions from only the selected periods, edits one period, and verifies linked and unlinked records independently.
+
 ## 2026-10-20 · Explicit transactions follow the database retry strategy
 
 - Observation: The cancellation journey reached the API but Npgsql rejected its explicit transaction because the configured retry strategy did not own the full transaction; after that was corrected, EF still returned tracked rows marked for deletion while the cancellation warning was recalculated.

@@ -16,6 +16,11 @@ public sealed record CreateProjectFunctionRequest(
     int RequiredResources = 1
 );
 
+public sealed record GenerateProjectFunctionsFromPeriodsRequest(
+    IReadOnlyList<Guid> PeriodIds,
+    IReadOnlyList<CrewFunctionKind> Kinds
+);
+
 public sealed record CreateProjectShiftRequest(DateOnly Date, TimeOnly StartTime, TimeOnly EndTime);
 
 public sealed record AssignCrewRequest(
@@ -58,7 +63,8 @@ public sealed record ProjectFunctionResponse(
     bool IsStaffed,
     IReadOnlyList<ProjectShiftResponse> Shifts,
     IReadOnlyList<CrewAssignmentResponse> Crew,
-    IReadOnlyList<VehicleAssignmentResponse> Vehicles
+    IReadOnlyList<VehicleAssignmentResponse> Vehicles,
+    Guid? ProjectTimePeriodId = null
 );
 
 #pragma warning restore CS1591

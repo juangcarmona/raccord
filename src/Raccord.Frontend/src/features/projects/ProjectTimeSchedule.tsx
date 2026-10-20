@@ -9,7 +9,12 @@ export function ProjectTimeSchedule({ projectId, readOnly }: { projectId: string
     const query = useQuery(`project-periods:${projectId}`, () =>
         unwrap(api.GET("/api/projects/{id}/periods", { params: { path: { id: projectId } } })),
     );
+    const functions = useQuery(`project-functions:${projectId}`, () =>
+        unwrap(api.GET("/api/projects/{id}/functions", { params: { path: { id: projectId } } })),
+    );
     const [name, setName] = useState("");
+    const [selectedPeriods, setSelectedPeriods] = useState<ReadonlySet<string>>(new Set());
+    const [selectedKinds, setSelectedKinds] = useState<ReadonlySet<number>>(new Set());
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState<unknown>(null);
 
@@ -120,6 +125,35 @@ export function ProjectTimeSchedule({ projectId, readOnly }: { projectId: string
         }
     }
 
+    async function generateFunctions() {
+        setBusy(true);
+        setError(null);
+        try {
+            await unwrap(
+                api.POST("/api/projects/{id}/functions/from-periods", {
+                    params: { path: { id: projectId } },
+                    body: {
+                        periodIds: [...selectedPeriods],
+                        kinds: [...selectedKinds],
+                    },
+                }),
+            );
+            setSelectedPeriods(new Set());
+            setSelectedKinds(new Set());
+            functions.reload();
+        } catch (failure) {
+            setError(failure);
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    function toggleSelection<T extends string | number>(current: ReadonlySet<T>, value: T) {
+        const next = new Set(current);
+        if (!next.delete(value)) next.add(value);
+        return next;
+    }
+
     return (
         <section aria-labelledby="project-time-schedule-heading" className="panel">
             <h2 id="project-time-schedule-heading">{t("projects.schedule")}</h2>
@@ -166,6 +200,17 @@ export function ProjectTimeSchedule({ projectId, readOnly }: { projectId: string
                                         disabled={readOnly || busy}
                                     />
                                     {t("projects.periodInternal")}
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedPeriods.has(period.id)}
+                                        disabled={readOnly || busy || !period.start || !period.end}
+                                        onChange={() => {
+                                            setSelectedPeriods((current) => toggleSelection(current, period.id));
+                                        }}
+                                    />
+                                    {t("projects.selectPeriodForFunctions", { name: period.name })}
                                 </label>
                                 <label>
                                     <input
@@ -250,6 +295,37 @@ export function ProjectTimeSchedule({ projectId, readOnly }: { projectId: string
                     {t("projects.addPeriod")}
                 </button>
             </form>
+            <fieldset className="actions" aria-label={t("projects.generateFunctions")}>
+                <legend>{t("projects.generateFunctions")}</legend>
+                {[0, 1].map((kind) => (
+                    <label key={kind}>
+                        <input
+                            type="checkbox"
+                            checked={selectedKinds.has(kind)}
+                            disabled={readOnly || busy}
+                            onChange={() => {
+                                setSelectedKinds((current) => toggleSelection(current, kind));
+                            }}
+                        />
+                        {kind === 0 ? t("projects.crewFunctions") : t("projects.transportFunctions")}
+                    </label>
+                ))}
+                <button
+                    type="button"
+                    className="button button--primary"
+                    disabled={readOnly || busy || selectedPeriods.size === 0 || selectedKinds.size === 0}
+                    onClick={() => void generateFunctions()}
+                >
+                    {t("projects.createSelectedFunctions")}
+                </button>
+            </fieldset>
+            {functions.status === "success" ? (
+                <ul aria-label={t("projects.projectFunctions")}>
+                    {functions.data.map((functionItem) => (
+                        <li key={functionItem.id}>{functionItem.name}</li>
+                    ))}
+                </ul>
+            ) : null}
             <FormError error={error} />
         </section>
     );

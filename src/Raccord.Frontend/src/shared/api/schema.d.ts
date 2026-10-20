@@ -2630,6 +2630,47 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/functions/from-periods": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["GenerateProjectFunctionsFromPeriodsRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectFunctionResponse"][];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/functions": {
         parameters: {
             query?: never;
@@ -6654,6 +6695,10 @@ export interface components {
             contentType: string;
             html: string;
         };
+        GenerateProjectFunctionsFromPeriodsRequest: {
+            periodIds: string[];
+            kinds: components["schemas"]["CrewFunctionKind"][];
+        };
         /** @description An inbound structured invoice and its current reporting status. */
         InboundEInvoiceResponse: {
             /** Format: uuid */
@@ -7155,6 +7200,8 @@ export interface components {
             shifts: components["schemas"]["ProjectShiftResponse"][];
             crew: components["schemas"]["CrewAssignmentResponse"][];
             vehicles: components["schemas"]["VehicleAssignmentResponse"][];
+            /** Format: uuid */
+            projectTimePeriodId?: null | string;
         };
         ProjectHistoryEntryResponse: {
             /** Format: uuid */

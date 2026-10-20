@@ -181,6 +181,193 @@ public sealed class ProjectTimePeriodsEndpointTests(PostgresContainer postgres) 
     }
 
     [Fact]
+    public async Task Generating_functions_from_selected_periods_Should_CreateOneLinkedFunctionPerKindAndPeriod()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client);
+        var periods = await GetPeriodsAsync(project.Id);
+        var first = await UpdatePeriodAsync(
+            project.Id,
+            periods[0].Id,
+            "Planning",
+            new DateTimeOffset(project.StartDate.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)),
+            new DateTimeOffset(
+                project.EndDate.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc).AddDays(1)
+            )
+        );
+        var second = await AddPeriodAsync(project.Id, "Shoot");
+        await UpdatePeriodAsync(
+            project.Id,
+            second.Id,
+            "Shoot",
+            new DateTimeOffset(
+                project.StartDate.AddDays(2).ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)
+            ),
+            new DateTimeOffset(
+                project
+                    .EndDate.AddDays(2)
+                    .ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)
+                    .AddDays(1)
+            )
+        );
+
+        var response = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/functions/from-periods",
+            new GenerateProjectFunctionsFromPeriodsRequest(
+                [first.Id, second.Id],
+                [CrewFunctionKind.Crew, CrewFunctionKind.Transport]
+            )
+        );
+
+        response.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var generated = await response.Content.ReadFromJsonAsync<List<ProjectFunctionResponse>>();
+        generated.ShouldNotBeNull();
+        generated!.Count.ShouldBe(4);
+        generated.Select(function => function.ProjectTimePeriodId).Distinct().Count().ShouldBe(2);
+        generated.Select(function => function.Kind).Distinct().Count().ShouldBe(2);
+        generated.ShouldAllBe(function => function.RequiredResources == 1);
+        var persisted = await client.GetFromJsonAsync<List<ProjectFunctionResponse>>(
+            $"/api/projects/{project.Id}/functions"
+        );
+        persisted!
+            .Select(function => function.Id)
+            .ToHashSet()
+            .SetEquals(generated.Select(function => function.Id))
+            .ShouldBeTrue();
+    }
+
+    [Fact]
+    public async Task Generating_functions_with_an_untimed_period_Should_RejectTheWholeBatch()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client);
+        var periods = await GetPeriodsAsync(project.Id);
+        var response = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/functions/from-periods",
+            new GenerateProjectFunctionsFromPeriodsRequest(
+                [periods[0].Id, periods[1].Id],
+                [CrewFunctionKind.Crew, CrewFunctionKind.Transport]
+            )
+        );
+
+        response.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        var persisted = await client.GetFromJsonAsync<List<ProjectFunctionResponse>>(
+            $"/api/projects/{project.Id}/functions"
+        );
+        persisted.ShouldNotBeNull();
+        persisted!.ShouldBeEmpty();
+    }
+
+    [Fact]
+    public async Task Updating_a_linked_period_Should_MoveFunctionsAndShiftsButRejectInvalidRangesAtomically()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client);
+        var period = await CreateTimedPeriodAsync(project.Id);
+        var linked = await GenerateLinkedCrewFunctionAsync(project.Id, period.Id);
+        var unlinkedResponse = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/functions",
+            new CreateProjectFunctionRequest(
+                "Independent crew",
+                CrewFunctionKind.Crew,
+                linked.StartDate,
+                linked.EndDate
+            )
+        );
+        unlinkedResponse.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var unlinked = (
+            await unlinkedResponse.Content.ReadFromJsonAsync<ProjectFunctionResponse>()
+        )!;
+        var shiftDate = linked.StartDate.AddDays(2);
+        var shiftResponse = await client.PostAsJsonAsync(
+            $"/api/projects/functions/{linked.Id}/shifts",
+            new CreateProjectShiftRequest(shiftDate, new TimeOnly(9, 0), new TimeOnly(17, 0))
+        );
+        shiftResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+        await AssertLinkedPeriodPropagationAsync(
+            project.Id,
+            period,
+            linked.Id,
+            unlinked,
+            shiftDate
+        );
+    }
+
+    private async Task AssertLinkedPeriodPropagationAsync(
+        Guid projectId,
+        ProjectTimePeriodResponse period,
+        Guid linkedFunctionId,
+        ProjectFunctionResponse unlinked,
+        DateOnly shiftDate
+    )
+    {
+        var movedStart = new DateTimeOffset(2026, 5, 5, 0, 0, 0, TimeSpan.Zero);
+        var movedEnd = new DateTimeOffset(2026, 5, 9, 0, 0, 0, TimeSpan.Zero);
+        var moved = await UpdatePeriodAsync(
+            projectId,
+            period.Id,
+            period.Name,
+            movedStart,
+            movedEnd
+        );
+        moved.Start.ShouldBe(movedStart);
+        var functions = await GetFunctionsAsync(projectId);
+        var linked = functions.Single(function => function.Id == linkedFunctionId);
+        linked.StartDate.ShouldBe(DateOnly.FromDateTime(movedStart.DateTime));
+        linked.EndDate.ShouldBe(DateOnly.FromDateTime(movedEnd.DateTime));
+        linked.Shifts.Single().Date.ShouldBe(shiftDate.AddDays(1));
+        functions
+            .Single(function => function.Id == unlinked.Id)
+            .StartDate.ShouldBe(unlinked.StartDate);
+
+        var rejected = await client.PutAsJsonAsync(
+            $"/api/projects/{projectId}/periods/{period.Id}",
+            new UpdateProjectTimePeriodRequest(
+                period.Name,
+                new DateTimeOffset(2026, 5, 6, 0, 0, 0, TimeSpan.Zero),
+                new DateTimeOffset(2026, 5, 7, 0, 0, 0, TimeSpan.Zero),
+                period.ShowOnInternalDocuments,
+                period.ShowOnExternalDocuments
+            )
+        );
+        rejected.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        (await GetPeriodsAsync(projectId))
+            .Single(item => item.Id == period.Id)
+            .Start.ShouldBe(movedStart);
+        linked = (await GetFunctionsAsync(projectId)).Single(function =>
+            function.Id == linkedFunctionId
+        );
+        linked.StartDate.ShouldBe(DateOnly.FromDateTime(movedStart.DateTime));
+        linked.Shifts.Single().Date.ShouldBe(shiftDate.AddDays(1));
+    }
+
+    private async Task<ProjectTimePeriodResponse> CreateTimedPeriodAsync(Guid projectId)
+    {
+        var period = await AddPeriodAsync(projectId, "Shoot");
+        var start = new DateTimeOffset(2026, 5, 4, 0, 0, 0, TimeSpan.Zero);
+        return await UpdatePeriodAsync(projectId, period.Id, period.Name, start, start.AddDays(4));
+    }
+
+    private async Task<ProjectFunctionResponse> GenerateLinkedCrewFunctionAsync(
+        Guid projectId,
+        Guid periodId
+    )
+    {
+        var response = await client.PostAsJsonAsync(
+            $"/api/projects/{projectId}/functions/from-periods",
+            new GenerateProjectFunctionsFromPeriodsRequest([periodId], [CrewFunctionKind.Crew])
+        );
+        response.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var generated = (
+            await response.Content.ReadFromJsonAsync<List<ProjectFunctionResponse>>()
+        )!;
+        return generated.Single();
+    }
+
+    private async Task<List<ProjectFunctionResponse>> GetFunctionsAsync(Guid projectId) =>
+        await client.GetFromJsonAsync<List<ProjectFunctionResponse>>(
+            $"/api/projects/{projectId}/functions"
+        ) ?? throw new InvalidOperationException("Project function response was empty.");
+
+    [Fact]
     public async Task Completing_a_project_Should_BlockOperationalChangesUntilReopened()
     {
         var project = await RaccordApi.ArrangeProjectAsync(client);
@@ -228,21 +415,7 @@ public sealed class ProjectTimePeriodsEndpointTests(PostgresContainer postgres) 
         Guid taskStatusId
     )
     {
-        var period = await client.PostAsJsonAsync(
-            $"/api/projects/{project.Id}/periods",
-            new AddProjectTimePeriodRequest("Show")
-        );
-        period.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
-        var function = await client.PostAsJsonAsync(
-            $"/api/projects/{project.Id}/functions",
-            new CreateProjectFunctionRequest(
-                "Camera operator",
-                CrewFunctionKind.Crew,
-                project.StartDate,
-                project.EndDate
-            )
-        );
-        function.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        await AssertProjectPlanningRejectedAsync(project);
         var task = await client.PostAsJsonAsync(
             "/api/project-coordination/tasks",
             new CreateProjectTaskRequest(
@@ -281,5 +454,34 @@ public sealed class ProjectTimePeriodsEndpointTests(PostgresContainer postgres) 
             new PlanEquipmentRequest(Guid.CreateVersion7(), 1)
         );
         equipmentPlan.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+    }
+
+    private async Task AssertProjectPlanningRejectedAsync(ProjectResponse project)
+    {
+        var currentPeriods = await GetPeriodsAsync(project.Id);
+        var generatedFunctions = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/functions/from-periods",
+            new GenerateProjectFunctionsFromPeriodsRequest(
+                [currentPeriods[0].Id],
+                [CrewFunctionKind.Crew]
+            )
+        );
+        generatedFunctions.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        (await GetFunctionsAsync(project.Id)).ShouldBeEmpty();
+        var period = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/periods",
+            new AddProjectTimePeriodRequest("Show")
+        );
+        period.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        var function = await client.PostAsJsonAsync(
+            $"/api/projects/{project.Id}/functions",
+            new CreateProjectFunctionRequest(
+                "Camera operator",
+                CrewFunctionKind.Crew,
+                project.StartDate,
+                project.EndDate
+            )
+        );
+        function.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
     }
 }

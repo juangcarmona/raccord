@@ -10,6 +10,7 @@ internal sealed class ProjectFunctionRow
 {
     public Guid Id { get; set; }
     public Guid ProjectId { get; set; }
+    public Guid? ProjectTimePeriodId { get; set; }
     public string Name { get; set; } = string.Empty;
     public CrewFunctionKind Kind { get; set; }
     public DateOnly StartDate { get; set; }
@@ -57,6 +58,7 @@ internal sealed class ProjectFunctionConfiguration : IEntityTypeConfiguration<Pr
         builder.Property(row => row.Id).ValueGeneratedNever();
         builder.Property(row => row.Name).HasMaxLength(200);
         builder.Property(row => row.Kind).HasConversion<string>().HasMaxLength(20);
+        builder.HasIndex(row => new { row.ProjectId, row.ProjectTimePeriodId });
         builder.HasIndex(row => new { row.ProjectId, row.Name }).IsUnique();
         builder
             .HasMany(row => row.Shifts)

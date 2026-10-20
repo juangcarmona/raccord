@@ -12,10 +12,10 @@ description: Defines architecture terms used consistently across the Raccord doc
 | **Organization / issuer** | The legal entity using the installation and issuing invoices (one per deployment, ADR-0012). |
 | **Issuer profile** | The issuer's legal name, tax ID and address used on new invoices. |
 | **Customer** | A company or person Raccord bills. *Invoiceable* when tax ID and address are complete. |
-| **Project** | An audiovisual job or rental engagement for one customer, with a period. |
+| **Project** | An audiovisual job or rental engagement for one customer, with named schedule periods. |
 | **Billable line** | A priced piece of project work (equipment, labour, transport, consumable, service, other) with a position and a billing state. |
 | **Billing state** | *Unbilled*, *in draft* (reserved by one draft) or *invoiced* (never billable again). |
-| **Planning period / usage period** | Time the equipment is away (availability) vs. time it is charged (price). Post-MVP. |
+| **Planning period / usage period** | The project's designated periods for planning and usage; a usage period must fit within the planning period. |
 | **Invoice draft** | Editable, unnumbered invoice built from billable lines. |
 | **Validation issue** | A coded reason a draft cannot be issued yet. |
 | **Finalization / issuing** | Turning a valid draft into an issued invoice with a number. |

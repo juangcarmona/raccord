@@ -58,9 +58,137 @@ public sealed class ProjectScheduleJourney_Should_ManagePeriods(DistributedAppFi
         await period.GetByRole(AriaRole.Button, new() { Name = "Duplicate period" }).ClickAsync();
         await duplicateResponse;
 
+        var buildPeriodId = await GenerateAndMoveFunctionsAsync(page, projectId);
+
         await page.ReloadAsync();
         await AssertPeriodsAsync(page, projectId);
+        await AssertGeneratedFunctionsAsync(page, projectId);
+        await AssertFunctionPropagationAsync(page, projectId, buildPeriodId);
         await AssertDocumentsAsync(page, projectId);
+    }
+
+    private static async Task<string> GenerateAndMoveFunctionsAsync(IPage page, string projectId)
+    {
+        await page.GetByLabel("Select Build to create functions", new() { Exact = true })
+            .CheckAsync();
+        await page.GetByLabel("Select Build copy to create functions", new() { Exact = true })
+            .CheckAsync();
+        await page.GetByLabel("Crew functions", new() { Exact = true }).CheckAsync();
+        await page.GetByLabel("Transport functions", new() { Exact = true }).CheckAsync();
+        var generationResponse = page.WaitForResponseAsync(response =>
+            response.Url.Contains("/functions/from-periods", StringComparison.Ordinal)
+            && response.Ok
+        );
+        await page.GetByRole(AriaRole.Button, new() { Name = "Create selected functions" })
+            .ClickAsync();
+        await generationResponse;
+
+        var periodsBeforeMove = await page.APIRequest.GetAsync(
+            $"/api/projects/{projectId}/periods"
+        );
+        using var periodBody = JsonDocument.Parse(await periodsBeforeMove.TextAsync());
+        var buildPeriod = periodBody
+            .RootElement.EnumerateArray()
+            .Single(item =>
+                string.Equals(
+                    item.GetProperty("name").GetString(),
+                    "Build",
+                    StringComparison.Ordinal
+                )
+            );
+        var buildPeriodId = buildPeriod.GetProperty("id").GetString()!;
+        var unlinkedResponse = await page.APIRequest.PostAsync(
+            $"/api/projects/{projectId}/functions",
+            new()
+            {
+                DataObject = new
+                {
+                    name = "Independent crew",
+                    kind = 0,
+                    startDate = "2026-05-04",
+                    endDate = "2026-05-04",
+                    requiredResources = 1,
+                },
+            }
+        );
+        unlinkedResponse.Status.ShouldBe(201);
+        var buildForm = page.GetByRole(
+            AriaRole.Form,
+            new() { Name = "Period Build", Exact = true }
+        );
+        await buildForm.GetByLabel("Period start").FillAsync("2026-05-05T08:00");
+        await buildForm.GetByLabel("Period end").FillAsync("2026-05-05T18:00");
+        var moveResponse = page.WaitForResponseAsync(response =>
+            response.Url.Contains($"/periods/{buildPeriodId}", StringComparison.Ordinal)
+            && string.Equals(response.Request.Method, "PUT", StringComparison.Ordinal)
+            && response.Ok
+        );
+        await buildForm
+            .GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true })
+            .ClickAsync();
+        await moveResponse;
+        return buildPeriodId;
+    }
+
+    private static async Task AssertGeneratedFunctionsAsync(IPage page, string projectId)
+    {
+        var response = await page.APIRequest.GetAsync($"/api/projects/{projectId}/functions");
+        response.Status.ShouldBe(200);
+        using var functions = JsonDocument.Parse(await response.TextAsync());
+        var generated = functions
+            .RootElement.EnumerateArray()
+            .Where(item =>
+                item.TryGetProperty("projectTimePeriodId", out var id)
+                && id.ValueKind == JsonValueKind.String
+            )
+            .ToArray();
+        generated.Length.ShouldBe(4);
+        generated
+            .Select(item => item.GetProperty("projectTimePeriodId").GetString())
+            .Distinct(StringComparer.Ordinal)
+            .Count()
+            .ShouldBe(2);
+        generated
+            .Select(item => item.GetProperty("kind").GetInt32())
+            .Distinct()
+            .Count()
+            .ShouldBe(2);
+    }
+
+    private static async Task AssertFunctionPropagationAsync(
+        IPage page,
+        string projectId,
+        string linkedPeriodId
+    )
+    {
+        var response = await page.APIRequest.GetAsync($"/api/projects/{projectId}/functions");
+        using var functions = JsonDocument.Parse(await response.TextAsync());
+        var linked = functions
+            .RootElement.EnumerateArray()
+            .Where(item =>
+                item.TryGetProperty("projectTimePeriodId", out var periodId)
+                && string.Equals(periodId.GetString(), linkedPeriodId, StringComparison.Ordinal)
+            )
+            .ToArray();
+        linked.Length.ShouldBe(2);
+        linked.ShouldAllBe(item =>
+            string.Equals(
+                item.GetProperty("startDate").GetString(),
+                "2026-05-05",
+                StringComparison.Ordinal
+            )
+        );
+        var unlinked = functions
+            .RootElement.EnumerateArray()
+            .Single(item =>
+                string.Equals(
+                    item.GetProperty("name").GetString(),
+                    "Independent crew",
+                    StringComparison.Ordinal
+                )
+            );
+        unlinked.GetProperty("startDate").GetString().ShouldBe("2026-05-04");
+        unlinked.GetProperty("projectTimePeriodId").ValueKind.ShouldBe(JsonValueKind.Null);
     }
 
     private static async Task AssertInvalidUsageRangeAsync(IPage page, string projectId)

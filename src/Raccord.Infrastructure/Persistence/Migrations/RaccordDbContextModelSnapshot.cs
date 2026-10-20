@@ -1979,6 +1979,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
+                    b.Property<Guid?>("ProjectTimePeriodId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_time_period_id");
+
                     b.Property<int>("RequiredResources")
                         .HasColumnType("integer")
                         .HasColumnName("required_resources");
@@ -1993,6 +1997,9 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasIndex("ProjectId", "Name")
                         .IsUnique()
                         .HasDatabaseName("ix_project_functions_project_id_name");
+
+                    b.HasIndex("ProjectId", "ProjectTimePeriodId")
+                        .HasDatabaseName("ix_project_functions_project_id_project_time_period_id");
 
                     b.ToTable("project_functions", "crew");
                 });

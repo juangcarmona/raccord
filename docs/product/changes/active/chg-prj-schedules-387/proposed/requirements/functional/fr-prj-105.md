@@ -8,6 +8,7 @@ derived-from:
   - "BR-PRJ-CALENDAR-QUICK-CREATE"
   - "BR-PRJ-OVERVIEW-DAY-SCOPE"
 verification:
+  - scenario-ref: "SB-PRJ-SCHEDULE-AND-PERSONAL-SCHEDULE-JOURNEY"
   - id: "PERSONAL-SCHEDULE"
     scenario: "Given a user with an appointment, a scheduled function and a project with equipment-out day, when the user opens the schedule, all are shown with availability colours; with the right to see colleagues the same view can be shown for a colleague, and a project can be started from a chosen day."
 uses-terms:

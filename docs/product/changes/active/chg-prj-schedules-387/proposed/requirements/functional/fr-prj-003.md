@@ -11,6 +11,7 @@ derived-from:
   - "BR-PRJ-PERIOD-DOCUMENT-DISPLAY"
   - "BR-PRJ-PERIOD-EDIT-AVAILABILITY"
 verification:
+  - scenario-ref: "SB-PRJ-SCHEDULE-AND-PERSONAL-SCHEDULE-JOURNEY"
   - scenario: "A new schedule contains one planning and one usage period"
   - scenario: "Moving a period moves the equipment group linked to it"
   - scenario-ref: "SB-PRJ-PERIOD-EDIT-CONFLICT-REFUSED"

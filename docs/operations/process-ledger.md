@@ -469,3 +469,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Running the pinned OpenSpec CLI through `npx` did not make its `openspec` executable discoverable by ProductShape, so citation verification reported PRODUCT069 and could only enumerate documents by filesystem convention.
 - **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
 - **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.
+
+## 2026-10-20 · Wait for API-backed browser options before inspecting them
+
+- **Observation:** The local E2E runner passed a project-customer assertion that read `<option>` elements immediately, while CI rendered the asynchronous customer query later and the immediate read returned an empty list.
+- **Action:** Wait for the specific API-backed option required by the journey before enumerating or asserting the complete option set.
+- **Check:** Run the same parallel in-process E2E runner used by CI and require the selected journeys to pass, including the newly added contact directory journey.

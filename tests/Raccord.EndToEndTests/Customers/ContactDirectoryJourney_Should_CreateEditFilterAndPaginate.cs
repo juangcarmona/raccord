@@ -55,12 +55,7 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
                     url.EndsWith("/contacts", StringComparison.Ordinal)
                 );
 
-                await page.GotoAsync("/projects/new");
-                var customerOptions = await page.GetByLabel("Customer")
-                    .Locator("option")
-                    .AllTextContentsAsync();
-                customerOptions.ShouldContain($"{companyName} Edited");
-                customerOptions.ShouldNotContain(venueName);
+                await AssertProjectCustomerOptionsAsync(page, companyName, venueName);
 
                 await page.GotoAsync("/contacts");
                 await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
@@ -72,6 +67,23 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
                     .WaitForAsync();
             }
         );
+    }
+
+    private static async Task AssertProjectCustomerOptionsAsync(
+        IPage page,
+        string companyName,
+        string venueName
+    )
+    {
+        await page.GotoAsync("/projects/new");
+        var customerField = page.GetByLabel("Customer");
+        await customerField
+            .Locator("option")
+            .Filter(new() { HasText = $"{companyName} Edited" })
+            .WaitForAsync(new() { State = WaitForSelectorState.Attached });
+        var options = await customerField.Locator("option").AllTextContentsAsync();
+        options.ShouldContain($"{companyName} Edited");
+        options.ShouldNotContain(venueName);
     }
 
     private static async Task SeedVenueContactsAsync(IPage page)

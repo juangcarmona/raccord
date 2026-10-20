@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Rebuild E2E discovery before updating the journey manifest
+
+- Observation: The manifest helper discovers tests with `--no-build`; after adding a journey, running `--update` against a stale Release assembly silently kept the old journey count.
+- Action: The helper now rejects a missing or older E2E assembly and names the Release build required before selection checks or manifest updates.
+- Check: Add or rename an E2E class, verify the helper fails before rebuilding, rebuild the E2E project, then verify the selected journey appears in the committed manifest.
+
 ## 2026-10-20 · Verify stacked pull requests against the default branch
 
 - Observation: PR #99 merged the self-hosted responsibility record into `feat/20-templates`, while its issue was treated as integrated although neither the ADR nor its decision-index updates were present on `main`.
@@ -463,3 +469,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Running the pinned OpenSpec CLI through `npx` did not make its `openspec` executable discoverable by ProductShape, so citation verification reported PRODUCT069 and could only enumerate documents by filesystem convention.
 - **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
 - **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.
+
+## 2026-10-20 · Wait for API-backed browser options before inspecting them
+
+- **Observation:** The local E2E runner passed a project-customer assertion that read `<option>` elements immediately, while CI rendered the asynchronous customer query later and the immediate read returned an empty list.
+- **Action:** Wait for the specific API-backed option required by the journey before enumerating or asserting the complete option set.
+- **Check:** Run the same parallel in-process E2E runner used by CI and require the selected journeys to pass, including the newly added contact directory journey.
+
+## 2026-10-20 · Wait for filtered and paginated rows before asserting browser results
+
+- **Observation:** A directory journey read the contact table immediately after changing its role filter and moving to the next page, so the assertion observed the pending render instead of the stable result.
+- **Action:** In browser journeys, wait for evidence that the previous result set has left and the requested page transition has rendered before enumerating rows.
+- **Check:** The contact directory journey verifies ten first-page venues, the eleventh venue on page two, no overlap, and identical rows after returning to page one.

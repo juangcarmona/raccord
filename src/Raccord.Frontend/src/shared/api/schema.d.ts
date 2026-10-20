@@ -1096,6 +1096,144 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                    role?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactPageResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveContactRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/contacts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveContactRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/customers": {
         parameters: {
             query?: never;
@@ -5742,6 +5880,31 @@ export interface components {
             city: null | string;
             countryCode: null | string;
         };
+        /** @description A paginated directory result. */
+        ContactPageResponse: {
+            items: components["schemas"]["ContactResponse"][];
+            /** Format: int32 */
+            page: number;
+            /** Format: int32 */
+            pageSize: number;
+            /** Format: int32 */
+            totalCount: number;
+            hasNextPage: boolean;
+            hasPreviousPage: boolean;
+        };
+        /** @description A contact shown in the shared directory. */
+        ContactResponse: {
+            /** Format: uuid */
+            id: string;
+            type: string;
+            contactNumber: string;
+            legalName: string;
+            taxId: null | string;
+            address: null | components["schemas"]["AddressDto"];
+            email: null | string;
+            roles: string[];
+            isInvoiceable: boolean;
+        };
         CreateCommunicationRequest: {
             recipient: string;
             subject: string;
@@ -7021,6 +7184,16 @@ export interface components {
             permissions: string[];
             /** Format: int32 */
             userCount: number;
+        };
+        /** @description Creates or updates a shared company or private-person contact. */
+        SaveContactRequest: {
+            type: string;
+            legalName: string;
+            contactNumber: null | string;
+            taxId: null | string;
+            address: null | components["schemas"]["AddressDto"];
+            email: null | string;
+            roles: string[];
         };
         SaveProjectViewRequest: {
             name: string;

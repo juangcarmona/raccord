@@ -1109,6 +1109,35 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("communications", "documents");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactFolderRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parent_id");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer")
+                        .HasColumnName("position");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_folders");
+
+                    b.HasIndex("ParentId", "Position")
+                        .HasDatabaseName("ix_contact_folders_parent_id_position");
+
+                    b.ToTable("contact_folders", "contacts");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1178,6 +1207,53 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasName("pk_contact_roles");
 
                     b.ToTable("contact_roles", "contacts");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactTagAssignmentRow", b =>
+                {
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tag_id");
+
+                    b.HasKey("ContactId", "TagId")
+                        .HasName("pk_contact_tag_assignments");
+
+                    b.HasIndex("TagId")
+                        .HasDatabaseName("ix_contact_tag_assignments_tag_id");
+
+                    b.ToTable("contact_tag_assignments", "contacts");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactTagRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("NameKey")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("name_key");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_tags");
+
+                    b.HasIndex("NameKey")
+                        .IsUnique()
+                        .HasDatabaseName("ix_contact_tags_name_key");
+
+                    b.ToTable("contact_tags", "contacts");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
@@ -1502,6 +1578,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(320)")
                         .HasColumnName("email");
 
+                    b.Property<Guid?>("FolderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("folder_id");
+
                     b.Property<string>("LegalName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -1555,6 +1635,9 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasIndex("ContactNumber")
                         .IsUnique()
                         .HasDatabaseName("ix_customers_contact_number");
+
+                    b.HasIndex("FolderId")
+                        .HasDatabaseName("ix_customers_folder_id");
 
                     b.HasIndex("TaxId")
                         .HasDatabaseName("ix_customers_tax_id");
@@ -2736,6 +2819,15 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.Navigation("PackingLines");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactFolderRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.ContactFolderRow", null)
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("fk_contact_folders_contact_folders_parent_id");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.CustomerRow", null)
@@ -2758,6 +2850,27 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.Navigation("Contact");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactTagAssignmentRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.CustomerRow", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_contact_tag_assignments_customers_contact_id");
+
+                    b.HasOne("Raccord.Infrastructure.Persistence.ContactTagRow", "Tag")
+                        .WithMany("Assignments")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_contact_tag_assignments_contact_tags_tag_id");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.ProjectFunctionRow", null)
@@ -2778,6 +2891,15 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_crew_signups_crew_jobs_job_id");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.ContactFolderRow", null)
+                        .WithMany()
+                        .HasForeignKey("FolderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("fk_customers_contact_folders_folder_id");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectShiftRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.ProjectFunctionRow", null)
@@ -2796,6 +2918,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_project_vehicle_assignments_project_functions_project_funct~");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactTagRow", b =>
+                {
+                    b.Navigation("Assignments");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewJobRow", b =>

@@ -99,6 +99,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         name: formText(data, "name"),
                         startDate: formText(data, "startDate"),
                         endDate: formText(data, "endDate"),
+                        externalReference: formText(data, "externalReference") || null,
                         projectTypeId: project.projectTypeId ?? null,
                         teamId: project.teamId ?? null,
                     },
@@ -208,6 +209,13 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         type="date"
                         required
                         defaultValue={project.endDate}
+                        disabled={busy || project.status === "complete"}
+                    />
+                    <Field
+                        label={t("projects.externalReference")}
+                        name="externalReference"
+                        maxLength={200}
+                        defaultValue={project.externalReference ?? ""}
                         disabled={busy || project.status === "complete"}
                     />
                     <div className="actions">

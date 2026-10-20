@@ -9,6 +9,7 @@
 - [x] Regenerate the OpenAPI and frontend API contracts for the project edit and status endpoints and response fields.
 - [x] Edit a project's name and date range through the project detail API and screen, with domain validation and a reloadable browser journey.
 - [x] Allow changing the selected customer on a project and prove persistence through a browser reload.
+- [x] Edit the optional external reference, reject values over 200 characters without mutation, and verify persistence after a browser reload.
 - [ ] Add the accepted project details workflow for existing contact and contact-person selection, project commercial overrides, account manager, notes, tasks, and files, plus duplicate project number validation; cover API validation and persisted detail display for each field.
 - [x] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
@@ -35,3 +36,5 @@
 <!-- pdac:cite id="BR-PRJ-PERIOD-DOCUMENT-DISPLAY" digest="sha256:aec83cc960f978d7a6e59f2105e5c15f9e75d0c855f7a5d44fa543756c54c907" -->
 <!-- pdac:cite id="BR-PRJ-FUNCTIONS-FROM-PERIODS" digest="sha256:335f48cbaf338557f9f01e6f1b49e6278b02d4a9d5c73328729650d909e330ac" -->
 <!-- pdac:cite id="TERM-PROJECT-STATUS" digest="sha256:ea57a30386b9806577b0ed5376630ed6b9048a5afc882cc20320958ed8382eef" -->
+<!-- pdac:cite id="BR-PRJ-EXTERNAL-REFERENCE-PRINTING" digest="sha256:97cf1e3e9d16398907ff2f91d1025afaf15865c4a24c1c6e6c11ef684bd97810" -->
+<!-- pdac:cite id="TERM-PROJECT-EXTERNAL-REFERENCE" digest="sha256:83edd787e70044c969325194692ecf45c1adce1686e3029ce2b8c378590ca420" -->

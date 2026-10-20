@@ -144,6 +144,46 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void Editing_project_details_Should_trim_and_persist_the_external_reference()
+    {
+        var project = NewProject();
+
+        project.EditDetails(
+            CustomerId,
+            "Summer campaign",
+            new DateOnly(2026, 6, 1),
+            new DateOnly(2026, 6, 3),
+            null,
+            null,
+            "  PO-2026-041  "
+        );
+
+        project.ExternalReference.ShouldBe("PO-2026-041");
+    }
+
+    [Fact]
+    public void Editing_project_details_Should_reject_an_overlong_external_reference_without_mutation()
+    {
+        var project = NewProject();
+        var externalReference = new string('x', 201);
+
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.EditDetails(
+                CustomerId,
+                "Summer campaign",
+                new DateOnly(2026, 6, 1),
+                new DateOnly(2026, 6, 3),
+                null,
+                null,
+                externalReference
+            )
+        );
+
+        error.Code.ShouldBe("projects.external-reference-too-long");
+        project.ExternalReference.ShouldBeNull();
+    }
+
+    [Fact]
     public void Editing_project_details_Should_reject_an_invalid_period_without_changing_the_project()
     {
         var project = NewProject();

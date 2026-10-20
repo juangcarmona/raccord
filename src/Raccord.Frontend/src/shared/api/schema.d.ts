@@ -7305,6 +7305,8 @@ export interface components {
              * @description UTC cancellation timestamp, when cancelled.
              */
             cancelledAt?: null | string;
+            /** @description Customer or production reference associated with the project. */
+            externalReference?: null | string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -7740,6 +7742,7 @@ export interface components {
             projectTypeId?: null | string;
             /** Format: uuid */
             teamId?: null | string;
+            externalReference?: null | string;
         };
         /** @description Updates a period's name, range and document visibility. */
         UpdateProjectTimePeriodRequest: {

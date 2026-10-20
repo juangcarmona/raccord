@@ -8915,6 +8915,13 @@
             ],
             "description": "UTC cancellation timestamp, when cancelled.",
             "format": "date-time"
+          },
+          "externalReference": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Customer or production reference associated with the project."
           }
         },
         "description": "A project with its billable lines."
@@ -10271,6 +10278,12 @@
               "string"
             ],
             "format": "uuid"
+          },
+          "externalReference": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         },
         "description": "Edits the identifying and scheduling details of an existing project."

@@ -31,6 +31,7 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     status: "draft",
     hasCancellationWarning: false,
     cancelledAt: null,
+    externalReference: null,
 });
 
 const routes = [
@@ -112,7 +113,7 @@ describe("ProjectDetailPage", () => {
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({ status: "confirmed" });
     });
 
-    it("saves edits to a project's name and period", async () => {
+    it("saves edits to a project's name, period and external reference", async () => {
         const requests = stubApi({
             ...customerApi,
             "GET /api/projects/p1": () => json(project([])),
@@ -127,6 +128,7 @@ describe("ProjectDetailPage", () => {
         await user.type(screen.getByLabelText("Inicio"), "2026-10-01");
         await user.clear(screen.getByLabelText("Fin"));
         await user.type(screen.getByLabelText("Fin"), "2026-10-03");
+        await user.type(screen.getByLabelText(/Referencia externa/), "PO-2026-041");
         await user.click(screen.getByRole("button", { name: "Guardar datos" }));
 
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({
@@ -134,6 +136,7 @@ describe("ProjectDetailPage", () => {
             customerId: "c1",
             startDate: "2026-10-01",
             endDate: "2026-10-03",
+            externalReference: "PO-2026-041",
             projectTypeId: null,
             teamId: null,
         });

@@ -41,6 +41,9 @@ public sealed class Project
     /// <summary>Human-readable project name.</summary>
     public string Name { get; private set; }
 
+    /// <summary>Customer or production reference associated with the project.</summary>
+    public string? ExternalReference { get; private set; }
+
     /// <summary>The customer billed for the project.</summary>
     public Guid CustomerId { get; private set; }
 
@@ -149,7 +152,8 @@ public sealed class Project
         DateOnly startDate,
         DateOnly endDate,
         Guid? projectTypeId,
-        Guid? teamId
+        Guid? teamId,
+        string? externalReference = null
     )
     {
         if (Status == ProjectStatus.Complete)
@@ -172,13 +176,25 @@ public sealed class Project
                 "projects.period-invalid",
                 "A project cannot end before it starts."
             );
+        if (externalReference?.Trim() is { Length: > 200 })
+            throw new BusinessRuleViolationException(
+                "projects.external-reference-too-long",
+                "A project external reference cannot exceed 200 characters."
+            );
 
         Name = name.Trim();
+        ExternalReference = NormalizeExternalReference(externalReference);
         CustomerId = customerId;
         StartDate = startDate;
         EndDate = endDate;
         ProjectTypeId = projectTypeId;
         TeamId = teamId;
+    }
+
+    private static string? NormalizeExternalReference(string? externalReference)
+    {
+        var normalized = externalReference?.Trim();
+        return string.IsNullOrEmpty(normalized) ? null : normalized;
     }
 
     /// <summary>Billable work recorded for the project.</summary>

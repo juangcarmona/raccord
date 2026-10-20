@@ -563,6 +563,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("date")
                         .HasColumnName("end_date");
 
+                    b.Property<string>("ExternalReference")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("external_reference");
+
                     b.Property<bool>("HasCancellationWarning")
                         .HasColumnType("boolean")
                         .HasColumnName("has_cancellation_warning");

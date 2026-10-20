@@ -39,7 +39,8 @@ public sealed record UpdateProjectDetailsRequest(
     DateOnly StartDate,
     DateOnly EndDate,
     Guid? ProjectTypeId = null,
-    Guid? TeamId = null
+    Guid? TeamId = null,
+    string? ExternalReference = null
 );
 
 /// <summary>Creates a named period in the project schedule.</summary>
@@ -309,6 +310,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="Status">Commercial lifecycle status of the project.</param>
 /// <param name="HasCancellationWarning">Whether open work remained when cancelled.</param>
 /// <param name="CancelledAt">UTC cancellation timestamp, when cancelled.</param>
+/// <param name="ExternalReference">Customer or production reference associated with the project.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -325,7 +327,8 @@ public sealed record ProjectResponse(
     DepositStatus DepositStatus = DepositStatus.NotPaid,
     string Status = "draft",
     bool HasCancellationWarning = false,
-    DateTimeOffset? CancelledAt = null
+    DateTimeOffset? CancelledAt = null,
+    string? ExternalReference = null
 );
 
 /// <summary>A billable line.</summary>

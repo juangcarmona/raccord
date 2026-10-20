@@ -529,3 +529,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The project edit browser journey selected the date-range inputs with partial labels after schedule periods added similarly named start and end fields; the project edit E2E passed locally before the periods were introduced but failed in CI with a Playwright strict-mode violation.
 - **Action:** Use exact accessible names for project-level start and end inputs wherever a project detail page also renders schedule periods.
 - **Check:** Run the project edit journey together with the schedule journeys and require each project date to persist after reload.
+
+## 2026-10-20 · Project detail fields cross the full request and response contract
+
+- **Observation:** A persisted project field is incomplete if only the editor and domain property change; the update request, API response, migration, generated frontend schema, and reload assertion must stay aligned.
+- **Action:** Extend the update and response contracts together, generate OpenAPI and TypeScript types, and assert the accepted field survives a real save and reload in the project journey.
+- **Check:** The domain validation test, project detail browser journey, API contract drift check, migration-backed tests, and full PR checks pass.
+
+## 2026-10-20 · Optional field labels include their optional marker
+
+- **Observation:** A browser query using an exact label stopped matching after the shared field control appended its localized “optional” marker to the accessible name.
+- **Action:** Use an exact accessible name for required project fields with colliding labels, and a partial label query for optional fields whose shared control appends a marker.
+- **Check:** The Spanish frontend test locates the optional field by its translated label, and the English browser journey saves and reloads its value.

@@ -159,7 +159,8 @@ public sealed class ProjectWorkspace(
             request.StartDate,
             request.EndDate,
             request.ProjectTypeId,
-            request.TeamId
+            request.TeamId,
+            request.ExternalReference
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
@@ -730,7 +731,8 @@ public sealed class ProjectWorkspace(
             (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
             ToStatusText(project.Status),
             project.HasCancellationWarning,
-            project.CancelledAt
+            project.CancelledAt,
+            project.ExternalReference
         );
 
     private static ProjectTimePeriodResponse ToResponse(

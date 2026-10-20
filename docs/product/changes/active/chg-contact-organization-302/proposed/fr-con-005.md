@@ -8,6 +8,7 @@ derived-from:
   - "BR-CON-FOLDER-HIERARCHY"
   - "BR-CON-FOLDER-DELETE-NONEMPTY"
 verification:
+  - scenario-ref: "SB-CON-ORGANIZE-AND-FILTER-CONTACTS"
   - scenario: "A contact is assigned to a folder and appears in its filtered view"
   - scenario: "A folder containing a contact or subfolder cannot be deleted"
 uses-terms:

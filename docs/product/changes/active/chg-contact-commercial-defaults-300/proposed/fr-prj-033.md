@@ -8,6 +8,7 @@ derived-from:
   - "BR-PRJ-CLIENT-COMMERCIAL-OVERRIDE"
 verification:
   - scenario-ref: "SB-PRJ-CLIENT-PAYMENT-TERM-OVERRIDES"
+  - scenario-ref: "SB-CONTACT-DEFAULTS-SNAPSHOT-ON-CREATE"
 uses-terms:
   - "TERM-CONTACT-COMMERCIAL-DEFAULTS"
 provenance:

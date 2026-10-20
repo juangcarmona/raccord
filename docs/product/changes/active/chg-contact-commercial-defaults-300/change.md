@@ -5,7 +5,8 @@ title: Accept contact commercial defaults copied into new projects
 status: proposed
 base-revision: "769edf87e11dec97b23de000741c2f745545256b"
 operations:
-  add: []
+  add:
+    - SB-CONTACT-DEFAULTS-SNAPSHOT-ON-CREATE
   modify:
     - UC-PRJ-SET-CONTACT-COMMERCIAL-DEFAULTS
     - TERM-CONTACT-COMMERCIAL-DEFAULTS

@@ -9,15 +9,4 @@ public interface IProjectScheduleStore
         IReadOnlyList<Guid> orderedPeriodIds,
         CancellationToken cancellationToken
     );
-
-    /// <summary>Moves linked planning with its period, preserving shift offsets where possible.</summary>
-    Task PropagateRangeAsync(
-        Guid projectId,
-        Guid periodId,
-        DateOnly? previousStart,
-        DateOnly? previousEnd,
-        DateOnly? nextStart,
-        DateOnly? nextEnd,
-        CancellationToken cancellationToken
-    );
 }

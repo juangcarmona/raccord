@@ -3,7 +3,9 @@ using Raccord.Modules.Projects.Contracts;
 
 namespace Raccord.Infrastructure.Persistence.Repositories;
 
-internal sealed class ProjectScheduleRepository(RaccordDbContext db) : IProjectScheduleStore
+internal sealed class ProjectScheduleRepository(RaccordDbContext db)
+    : IProjectScheduleStore,
+        IProjectSchedulePropagation
 {
     public async Task PropagateRangeAsync(
         Guid projectId,

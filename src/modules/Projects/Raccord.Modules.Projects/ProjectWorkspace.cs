@@ -14,6 +14,7 @@ public sealed class ProjectWorkspace(
     IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork,
     IProjectScheduleStore projectScheduleStore,
+    IProjectSchedulePropagation projectSchedulePropagation,
     ProjectCoordination coordination,
     IProjectCancellationOperations cancellationOperations
 )
@@ -232,7 +233,7 @@ public sealed class ProjectWorkspace(
             request.ShowOnInternalDocuments,
             request.ShowOnExternalDocuments
         );
-        await projectScheduleStore
+        await projectSchedulePropagation
             .PropagateRangeAsync(
                 projectId,
                 periodId,

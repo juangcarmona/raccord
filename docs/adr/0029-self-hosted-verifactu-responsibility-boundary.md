@@ -39,6 +39,6 @@ Raccord must not claim VERI*FACTU or other tax compliance until the implementati
 - [No legal compliance claim without verification](../product/model/requirements/constraints/con-no-compliance-claim.md)
 - [Spanish invoicing compliance research, open question 1](../research/spanish-invoicing-compliance-requirements.md#11-open-questions-requiring-legal-review)
 - [ADR-0010: compliance seam](0010-compliance-seam.md)
-- [Integration plan](../../openspec/changes/integrate-self-hosted-responsibility-boundary/proposal.md)
+- [Integration plan](../../openspec/changes/archive/2026-10-20-integrate-self-hosted-responsibility-boundary/proposal.md)
 - [PR #99, merged into a feature branch](https://github.com/juangcarmona/raccord/pull/99)
 - Related integration issue: [#59](https://github.com/juangcarmona/raccord/issues/59)

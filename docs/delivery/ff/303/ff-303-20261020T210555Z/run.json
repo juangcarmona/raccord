@@ -32,7 +32,7 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "69a6a428c75c8b2919d97cf243c91bf20b6883fa",
+      "outputCommit": "76b788e0b0266463d674e81669172154fbd10a50",
       "result": "running",
       "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation now creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Equipment-group propagation, full accepted project-detail fields and the Done gate remain unfinished.",
       "evidence": [

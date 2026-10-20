@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Verify stacked pull requests against the default branch
+
+- Observation: PR #99 merged the self-hosted responsibility record into `feat/20-templates`, while its issue was treated as integrated although neither the ADR nor its decision-index updates were present on `main`.
+- Action: Before closing an integration issue, check the merged PR's base and commit ancestry against the current default branch, then verify the expected artifact and index entries exist on that branch.
+- Check: The integration record links a PR whose base is the default branch, and the final default-branch commit contains the expected ADR and references; a merge into an intermediate feature branch does not satisfy this check.
+
 ## 2026-10-18 · Audit-trail evidence checks the displayed actor and event time
 
 - Observation: Persistence tests can prove an audit row exists without proving the administrator sees the correct actor and timestamp in the record's UI; the browser's displayed actor may also differ from an internal test identity.

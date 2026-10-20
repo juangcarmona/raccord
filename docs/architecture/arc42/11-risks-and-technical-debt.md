@@ -12,7 +12,7 @@ description: Records architectural risks, technical debt, and evidence-backed mi
 | ID | Risk | Impact | Mitigation |
 | --- | --- | --- | --- |
 | R-1 | **No role-based authorization yet** | Any authenticated account can reach the current application API | Keep account creation and deployment access controlled; add scoped permissions before multi-role deployments. |
-| R-2 | VERI*FACTU legal responsibility for open-source self-hosted software unresolved | Could block the Spanish market | Compliance seam records obligations now; legal review before implementation |
+| R-2 | Statutory producer identity and liability for open-source self-hosted VERI*FACTU remain unverified | Could block the Spanish market | [ADR-0029](../../adr/0029-self-hosted-verifactu-responsibility-boundary.md) records the product operator boundary; independent tax/legal review and verified official specifications remain required before compliance claims or submission |
 | R-3 | Tax rules and dates change (announced 2028 postponement not enacted) | Rework | Requirements dated and sourced; adapters isolated |
 | R-4 | Rounding policy not yet confirmed by an accountant | Possible disagreement on VAT breakdown | ADR-0006 explicit and tested; easy to change in one place |
 | R-5 | Scope creep toward full operations parity | Delays a trustworthy billing core | Roadmap orders billing before planning |

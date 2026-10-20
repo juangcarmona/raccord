@@ -23,7 +23,7 @@
 ## 4. Browser journey and issue evidence
 
 - [x] 4.1 Add one real-browser journey that creates a second contact person, changes its default and administrative designations, verifies the former default was cleared and the sole-default invariant, and confirms the project contact and issued-invoice recipient are unchanged; tag it `Area=contacts` and select it in `tests/Raccord.EndToEndTests/per-pr-selection.txt`.
-- [ ] 4.2 Capture and inspect the browser report, screenshot, video and trace for the actual Contacts screen and verify the selected journey passes in CI.
+- [x] 4.2 Capture and inspect the browser report, screenshot, video and trace for the actual Contacts screen and verify the selected journey passes in CI (run 39433805933, head 398aa00).
 
 <!-- pdac:cite id="UC-CON-MANAGE-CONTACT-PERSONS" digest="sha256:8253cf3c4c3b50fc1f53ca143ee99989c9c7652e0fa822e7d13ad5306bb43385" -->
 <!-- pdac:cite id="SB-CON-CHANGE-DEFAULT-CONTACT-PERSON" digest="sha256:fc39711eb0d43ad05b94f3c9fbbf6b2b2178ae806e8a05da3af3d8d1b0459e97" -->
@@ -31,8 +31,8 @@
 ## 5. Documentation and delivery gates
 
 - [x] 5.1 Update the main Contacts OpenSpec specification and affected architecture documentation, and review the process ledger for a durable lesson and a verified follow-up action.
-- [ ] 5.2 Run the relevant domain, persistence, Web API, frontend, architecture and selected E2E suites; then run the full CI-equivalent checks, OpenSpec validation, ProductShape validation and citation verification.
-- [ ] 5.3 Reconcile every #299 acceptance criterion with passing tests or runtime evidence, update the PR with exact-head CI and E2E evidence, and confirm every scoped limitation has a tracked follow-up.
+- [x] 5.2 Run the relevant domain, persistence, Web API, frontend, architecture and selected E2E suites; then run the full CI-equivalent checks, OpenSpec validation, ProductShape validation and citation verification (run 39433805933, head 398aa00).
+- [x] 5.3 Reconcile every #299 acceptance criterion with passing tests or runtime evidence, update the PR with exact-head CI and E2E evidence, and confirm every scoped limitation has a tracked follow-up (#409–#414).
 
 <!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->
 <!-- pdac:cite id="FR-CON-002" digest="sha256:d44280cb004062fbc3bd34228233dcfa03b2b6e51ee64b4f717652351f721feb" -->

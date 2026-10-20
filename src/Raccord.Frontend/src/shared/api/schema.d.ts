@@ -1234,6 +1234,150 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/contacts/import/inspect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": components["schemas"]["ContactImportForm"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactImportInspectionResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/contacts/import/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": components["schemas"]["ContactImportForm"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactImportPreviewResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/contacts/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": components["schemas"]["ContactImportForm"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ContactImportResultResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/contacts/{id}/people": {
         parameters: {
             query?: never;
@@ -6034,6 +6178,50 @@ export interface components {
             city: null | string;
             countryCode: null | string;
         };
+        ContactImportForm: {
+            file: components["schemas"]["IFormFile"];
+            mapping: null | string;
+            sha256: null | string;
+            hasHeader: null | boolean;
+        };
+        /** @description Column names and sample rows shown before the user maps fields. */
+        ContactImportInspectionResponse: {
+            fileType: string;
+            headers: string[];
+            sampleRows: string[][];
+        };
+        /** @description Validated preview of a supported contact spreadsheet. */
+        ContactImportPreviewResponse: {
+            sha256: string;
+            fileType: string;
+            /** Format: int32 */
+            totalRowCount: number;
+            /** Format: int32 */
+            validRowCount: number;
+            /** Format: int32 */
+            rejectedRowCount: number;
+            headers: string[];
+            rows: components["schemas"]["ContactImportRowResponse"][];
+        };
+        /** @description Outcome of importing valid rows from a contact spreadsheet. */
+        ContactImportResultResponse: {
+            /** Format: uuid */
+            importId: string;
+            /** Format: int32 */
+            acceptedRowCount: number;
+            /** Format: int32 */
+            rejectedRowCount: number;
+            rejectedRows: components["schemas"]["ContactImportRowResponse"][];
+        };
+        /** @description A row shown during preview or returned as a rejected import row. */
+        ContactImportRowResponse: {
+            /** Format: int32 */
+            rowNumber: number;
+            values: {
+                [key: string]: string;
+            };
+            errors: string[];
+        };
         /** @description A paginated directory result. */
         ContactPageResponse: {
             items: components["schemas"]["ContactResponse"][];
@@ -6519,6 +6707,8 @@ export interface components {
             contentType: string;
             html: string;
         };
+        /** Format: binary */
+        IFormFile: string;
         /** @description An inbound structured invoice and its current reporting status. */
         InboundEInvoiceResponse: {
             /** Format: uuid */

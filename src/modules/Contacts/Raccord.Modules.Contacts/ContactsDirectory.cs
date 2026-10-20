@@ -19,15 +19,7 @@ public sealed class ContactsDirectory(IContactDirectory contacts, IContactsUnitO
     )
     {
         ArgumentNullException.ThrowIfNull(request);
-        var contact = Contact.Register(
-            ParseType(request.Type),
-            request.LegalName,
-            request.TaxId,
-            ToAddress(request.Address),
-            request.Email,
-            request.ContactNumber,
-            ParseRoles(request.Roles)
-        );
+        var contact = CreateContact(request);
         var snapshot = ToSnapshot(contact.Id, contact);
         await contacts.AddContactAsync(snapshot, cancellationToken).ConfigureAwait(false);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
@@ -36,6 +28,26 @@ public sealed class ContactsDirectory(IContactDirectory contacts, IContactsUnitO
             .ConfigureAwait(false);
         return ToResponse(saved!)!;
     }
+
+    /// <summary>Returns a contact creation validation error without persisting the contact.</summary>
+    public static string? ValidateImportRow(SaveContactRequest request)
+    {
+        try
+        {
+            _ = CreateContact(request);
+            return null;
+        }
+        catch (BusinessRuleViolationException exception)
+        {
+            return exception.Message;
+        }
+    }
+
+    /// <summary>Checks whether a supplied contact number is already used.</summary>
+    public Task<bool> ContactNumberExistsAsync(
+        string contactNumber,
+        CancellationToken cancellationToken
+    ) => contacts.ContactNumberExistsAsync(contactNumber, cancellationToken);
 
     /// <summary>Reads one contact by its stable identifier.</summary>
     public async Task<ContactResponse?> GetAsync(Guid id, CancellationToken cancellationToken) =>
@@ -117,6 +129,17 @@ public sealed class ContactsDirectory(IContactDirectory contacts, IContactsUnitO
                 "contacts.type-unsupported",
                 "Contact type is not supported."
             );
+
+    private static Contact CreateContact(SaveContactRequest request) =>
+        Contact.Register(
+            ParseType(request.Type),
+            request.LegalName,
+            request.TaxId,
+            ToAddress(request.Address),
+            request.Email,
+            request.ContactNumber,
+            ParseRoles(request.Roles)
+        );
 
     private static ContactRole[] ParseRoles(IReadOnlyList<string>? roles)
     {

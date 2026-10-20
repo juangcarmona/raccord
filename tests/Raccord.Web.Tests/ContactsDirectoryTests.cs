@@ -1,6 +1,9 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Raccord.Contracts.Auditing;
 using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Customers;
 using Raccord.Web.Tests.Infrastructure;
@@ -9,6 +12,7 @@ namespace Raccord.Web.Tests;
 
 public sealed class ContactsDirectoryTests(PostgresContainer postgres) : IAsyncLifetime
 {
+    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
     private RaccordApi api = null!;
     private HttpClient client = null!;
 
@@ -234,11 +238,208 @@ public sealed class ContactsDirectoryTests(PostgresContainer postgres) : IAsyncL
         problem!.Extensions["code"]!.ToString().ShouldBe("contacts.page-invalid");
     }
 
+    [Fact]
+    public async Task Contacts_import_Should_PreviewImportValidRowsAndAuditOnlyTheOutcome()
+    {
+        const string csv =
+            "type,legalName,roles,email\r\ncompany,Northlight Films,customer,billing@northlight.example\r\ncompany,,supplier,rejected@example.test\r\n";
+        var mapping = new ContactImportMapping(
+            HasHeader: true,
+            new Dictionary<string, int>(StringComparer.Ordinal)
+            {
+                ["type"] = 0,
+                ["legalName"] = 1,
+                ["roles"] = 2,
+                ["email"] = 3,
+            }
+        );
+
+        using var previewRequest = CreateImportRequest(csv, mapping, digest: null);
+        var previewResponse = await client.PostAsync(
+            "/api/contacts/import/preview",
+            previewRequest
+        );
+        previewResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var preview =
+            await previewResponse.Content.ReadFromJsonAsync<ContactImportPreviewResponse>();
+        preview!.TotalRowCount.ShouldBe(2);
+        preview.ValidRowCount.ShouldBe(1);
+        preview.RejectedRowCount.ShouldBe(1);
+        preview.Rows[0].Values["legalName"].ShouldBe("Northlight Films");
+        preview.Rows[1].Errors.ShouldNotBeEmpty();
+
+        var beforeImport = await client.GetFromJsonAsync<ContactPageResponse>("/api/contacts");
+        beforeImport!.TotalCount.ShouldBe(0);
+
+        using var importRequest = CreateImportRequest(csv, mapping, preview.Sha256);
+        var importResponse = await client.PostAsync("/api/contacts/import", importRequest);
+        importResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var result = await importResponse.Content.ReadFromJsonAsync<ContactImportResultResponse>();
+        result!.AcceptedRowCount.ShouldBe(1);
+        result.RejectedRowCount.ShouldBe(1);
+        result.RejectedRows.Single().RowNumber.ShouldBe(3);
+
+        var contacts = await client.GetFromJsonAsync<ContactPageResponse>("/api/contacts");
+        contacts!.TotalCount.ShouldBe(1);
+        contacts.Items[0].LegalName.ShouldBe("Northlight Films");
+        await AssertImportAuditAsync(result.ImportId);
+    }
+
+    private async Task AssertImportAuditAsync(Guid importId)
+    {
+        var audit = await client.GetFromJsonAsync<List<AuditEventResponse>>(
+            $"/api/audit-events?entityId={importId}"
+        );
+        var auditEvents = audit!;
+        auditEvents
+            .Select(item => item.Action)
+            .ShouldBe(["contacts.import.started", "contacts.import.completed"]);
+        auditEvents.ShouldAllBe(item =>
+            item.EntityId == importId
+            && !string.IsNullOrWhiteSpace(item.Actor)
+            && item.OccurredAt != default
+            && string.Equals(item.Details["fileType"], "csv", StringComparison.Ordinal)
+        );
+        auditEvents[1].Details["acceptedRowCount"].ShouldBe("1");
+        auditEvents[1].Details["rejectedRowCount"].ShouldBe("1");
+        auditEvents
+            .SelectMany(item => item.Details.Values)
+            .ShouldNotContain(value => value.Contains("Northlight", StringComparison.Ordinal));
+        auditEvents
+            .SelectMany(item => item.Details.Values)
+            .ShouldNotContain(value => value.Contains("billing@", StringComparison.Ordinal));
+        auditEvents
+            .SelectMany(item => item.Details.Values)
+            .ShouldNotContain(value => value.Contains("rejected@", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public async Task Contacts_import_Should_RejectChangedFileAndCreateNoContacts()
+    {
+        var mapping = new ContactImportMapping(
+            HasHeader: false,
+            new Dictionary<string, int>(StringComparer.Ordinal)
+            {
+                ["type"] = 0,
+                ["legalName"] = 1,
+                ["roles"] = 2,
+            }
+        );
+        using var request = CreateImportRequest(
+            "company,Changed File,customer\n",
+            mapping,
+            new string('0', 64)
+        );
+
+        var response = await client.PostAsync("/api/contacts/import", request);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        var contacts = await client.GetFromJsonAsync<ContactPageResponse>("/api/contacts");
+        contacts!.TotalCount.ShouldBe(0);
+    }
+
+    [Fact]
+    public async Task Contacts_import_Should_ReportAllRowsRejectedWithoutCreatingContacts()
+    {
+        const string csv = "type,legalName,roles\ncompany,,customer\n";
+        var mapping = new ContactImportMapping(
+            HasHeader: true,
+            new Dictionary<string, int>(StringComparer.Ordinal)
+            {
+                ["type"] = 0,
+                ["legalName"] = 1,
+                ["roles"] = 2,
+            }
+        );
+        using var previewRequest = CreateImportRequest(csv, mapping, digest: null);
+        var previewResponse = await client.PostAsync(
+            "/api/contacts/import/preview",
+            previewRequest
+        );
+        previewResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var preview =
+            await previewResponse.Content.ReadFromJsonAsync<ContactImportPreviewResponse>();
+
+        using var importRequest = CreateImportRequest(csv, mapping, preview!.Sha256);
+        var importResponse = await client.PostAsync("/api/contacts/import", importRequest);
+
+        importResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var result = await importResponse.Content.ReadFromJsonAsync<ContactImportResultResponse>();
+        result!.AcceptedRowCount.ShouldBe(0);
+        result.RejectedRowCount.ShouldBe(1);
+        result.RejectedRows.Single().RowNumber.ShouldBe(2);
+        var contacts = await client.GetFromJsonAsync<ContactPageResponse>("/api/contacts");
+        contacts!.TotalCount.ShouldBe(0);
+    }
+
+    [Fact]
+    public async Task Contacts_import_Should_RequireMultipartForInspection()
+    {
+        using var request = new StringContent("not a multipart upload");
+
+        var response = await client.PostAsync("/api/contacts/import/inspect", request);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.UnsupportedMediaType);
+    }
+
+    [Fact]
+    public async Task Contacts_import_Should_RejectFilesLargerThanTenMebibytes()
+    {
+        using var request = new MultipartFormDataContent();
+        request.Add(
+            new ByteArrayContent(new byte[ContactImportLimits.MaximumFileBytes + 1]),
+            "file",
+            "contacts.csv"
+        );
+
+        var response = await client.PostAsync("/api/contacts/import/inspect", request);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Contacts_import_Should_RequireContactCreatePermission()
+    {
+        using var unauthorized = api.CreateClient();
+        unauthorized.DefaultRequestHeaders.Add("X-Test-NoPermissions", "true");
+        var mapping = new ContactImportMapping(
+            HasHeader: false,
+            new Dictionary<string, int>(StringComparer.Ordinal)
+            {
+                ["type"] = 0,
+                ["legalName"] = 1,
+                ["roles"] = 2,
+            }
+        );
+        using var request = CreateImportRequest("company,Denied,customer\n", mapping, null);
+
+        var response = await unauthorized.PostAsync("/api/contacts/import/preview", request);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
+    }
+
     private async Task<ContactResponse> CreateAsync(SaveContactRequest request)
     {
         var response = await client.PostAsJsonAsync("/api/contacts", request);
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
         return (await response.Content.ReadFromJsonAsync<ContactResponse>())!;
+    }
+
+    private static MultipartFormDataContent CreateImportRequest(
+        string csv,
+        ContactImportMapping mapping,
+        string? digest
+    )
+    {
+        var content = new MultipartFormDataContent();
+        content.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(csv)), "file", "contacts.csv");
+        content.Add(new StringContent(JsonSerializer.Serialize(mapping, JsonOptions)), "mapping");
+        if (digest is not null)
+        {
+            content.Add(new StringContent(digest), "sha256");
+        }
+
+        return content;
     }
 
     private async Task AssertCustomerProjectionAndEditAsync(

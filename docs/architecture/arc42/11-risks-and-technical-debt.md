@@ -28,7 +28,7 @@ description: Records architectural risks, technical debt, and evidence-backed mi
 | D-2 | Lists outside the Contacts directory remain unpaginated; draft list loads projects/customers one by one | Add pagination and projections before measuring QR-RESPONSE-TIME |
 | D-3 | PDF renderer: WinAnsi only, no logo/QR/PDF-A | Revisit with VERI*FACTU QR (ADR-0008) |
 | D-4 | Regime key / exemption cause not modelled per VAT group | Required by the compliance adapter |
-| D-5 | Frontend route tests still do not cover every feature screen; Contacts now covers loading, empty, error, filtering, pagination, create and edit states | Add focused route tests as the remaining screens gain behavior |
+| D-5 | Frontend route tests still do not cover every feature screen; Contacts now also covers spreadsheet import mapping, preview, confirmation and row rejection | Add focused route tests as the remaining screens gain behavior |
 | D-6 | No data export yet | MVP slice 8 |
 | D-7 | Azure template uses PostgreSQL password auth over public network with "Azure services" firewall rule | Move to Entra auth and private networking for production |
 | D-9 | Open technical questions: is one web replica enough for numbering under load; which role and permission model should ship for self-hosted deployments; should the PDF renderer move to a library once templates are configurable | Decide with MVP slices 2 and 5 |

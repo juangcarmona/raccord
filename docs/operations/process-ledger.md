@@ -2,6 +2,24 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Keep multipart browser tests aligned with the Fetch API
+
+- Observation: The shared frontend API stub accepted only `Request` objects and reparsed multipart bodies, while the import client sends a URL with `RequestInit`; the mismatch hid the preview state behind an `Invalid URL` test failure.
+- Action: Accept both Fetch input forms in the stub, retain a supplied `FormData` body directly, and keep the multipart flow on the browser's same-origin URL.
+- Check: The import page test completes inspect, preview and confirmation, and asserts its uploaded mapping and preview digest.
+
+## 2026-10-20 · Preserve spreadsheet cell types at the import boundary
+
+- Observation: XLSX numeric cells omit the cell type attribute, so treating every untyped value as text would silently stringify numeric data despite the approved plain-text-only import rule.
+- Action: Accept untyped cells only when empty, and reject numeric cells and formulas before field validation.
+- Check: Parser tests cover inline text, formula cells and numeric cells in a one-sheet workbook.
+
+## 2026-10-20 · Confirm E2E filter collection before trusting a local run
+
+- Observation: An unsupported local xUnit trait-filter expression exited successfully after discovering zero tests, which could be mistaken for a passing focused E2E run.
+- Action: Use the committed per-PR selection and the CI filter for complete verification; when narrowing a local E2E run, inspect the runner's discovered and executed counts first.
+- Check: The E2E output names a non-zero journey count, and the per-PR selection check confirms every selected journey is in the manifest.
+
 ## 2026-10-20 · Keep Git configuration out of parallel builds
 
 - Observation: `Directory.Build.props` ran `git config core.hooksPath .husky` before every project build. Parallel MSBuild nodes and separate worktrees write the shared `.git/config`, producing lock warnings and failed hook-setup commands even though compilation continued.

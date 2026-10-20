@@ -86,6 +86,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUser, HttpCurrentActor>();
 builder.Services.AddScoped<CustomerDirectory>();
 builder.Services.AddScoped<ContactsDirectory>();
+builder.Services.AddScoped<ContactImportDirectory>();
 builder.Services.AddScoped<ContactPeopleDirectory>();
 builder.Services.AddScoped<ProjectWorkspace>();
 builder.Services.AddScoped<ProjectContext>();

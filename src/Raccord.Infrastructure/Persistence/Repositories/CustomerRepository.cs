@@ -144,6 +144,15 @@ internal sealed class CustomerRepository(RaccordDbContext db)
                 .ConfigureAwait(false)
         );
 
+    public Task<bool> ContactNumberExistsAsync(
+        string contactNumber,
+        CancellationToken cancellationToken
+    ) =>
+        db.Customers.AnyAsync(
+            customer => customer.ContactNumber == contactNumber,
+            cancellationToken
+        );
+
     public async Task<ContactPage> ListContactsAsync(
         int page,
         int pageSize,

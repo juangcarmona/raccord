@@ -20,6 +20,17 @@ set -euo pipefail
 PROJECT="tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj"
 MANIFEST="tests/Raccord.EndToEndTests/per-pr-selection.txt"
 FILTER="Quarantine!=true&TestKind!=metadata"
+ASSEMBLY="tests/Raccord.EndToEndTests/bin/Release/net10.0/Raccord.EndToEndTests.dll"
+
+if [ ! -f "$ASSEMBLY" ]; then
+  echo "No Release E2E assembly at $ASSEMBLY. Build the E2E project before checking or updating the manifest." >&2
+  exit 1
+fi
+
+if find tests/Raccord.EndToEndTests -type f \( -name '*.cs' -o -name '*.csproj' \) -newer "$ASSEMBLY" -print -quit | grep -q .; then
+  echo "E2E sources changed after $ASSEMBLY. Build the E2E project before checking or updating the manifest." >&2
+  exit 1
+fi
 
 # Release and --no-build, matching the workflow exactly: a manifest generated from a different
 # configuration would either disagree with CI or, worse, look for build output CI never produced.

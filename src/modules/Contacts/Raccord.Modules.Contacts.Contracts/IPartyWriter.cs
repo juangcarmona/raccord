@@ -4,5 +4,5 @@ namespace Raccord.Modules.Contacts.Contracts;
 public interface IPartyWriter
 {
     /// <summary>Adds a customer to the current unit of work.</summary>
-    void Add(PartySnapshot party);
+    Task AddAsync(PartySnapshot party, CancellationToken cancellationToken);
 }

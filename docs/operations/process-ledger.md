@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Rebuild E2E discovery before updating the journey manifest
+
+- Observation: The manifest helper discovers tests with `--no-build`; after adding a journey, running `--update` against a stale Release assembly silently kept the old journey count.
+- Action: The helper now rejects a missing or older E2E assembly and names the Release build required before selection checks or manifest updates.
+- Check: Add or rename an E2E class, verify the helper fails before rebuilding, rebuild the E2E project, then verify the selected journey appears in the committed manifest.
+
 ## 2026-10-20 · Verify stacked pull requests against the default branch
 
 - Observation: PR #99 merged the self-hosted responsibility record into `feat/20-templates`, while its issue was treated as integrated although neither the ADR nor its decision-index updates were present on `main`.

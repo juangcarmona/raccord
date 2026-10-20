@@ -93,6 +93,7 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
         await companyRow.WaitForAsync();
         await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
         await companyRow.WaitForAsync(new() { State = WaitForSelectorState.Detached });
+        await page.Locator("tbody tr").Nth(9).WaitForAsync();
         var firstPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
         firstPageVenueNames.Count.ShouldBe(10);
         firstPageVenueNames.ShouldNotContain(venueName);

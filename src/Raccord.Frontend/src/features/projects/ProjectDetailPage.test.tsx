@@ -35,6 +35,11 @@ const routes = [
     { path: "/projects/:id", element: <ProjectDetailPage /> },
     { path: "/drafts/:id", element: <p>Página de borrador</p> },
 ];
+const customerResponse = [
+    { id: "c1", legalName: "Productora Ejemplo S.A." },
+    { id: "c2", legalName: "Productora Alternativa S.A." },
+];
+const customerApi = { "GET /api/customers": () => json(customerResponse) };
 
 describe("ProjectDetailPage", () => {
     afterEach(() => {
@@ -43,6 +48,7 @@ describe("ProjectDetailPage", () => {
 
     it("only lets unbilled lines be selected for a draft", async () => {
         stubApi({
+            ...customerApi,
             "GET /api/projects/p1": () =>
                 json(project([line("a", "Cámara", "unbilled"), line("b", "Óptica", "invoiced")])),
         });
@@ -57,6 +63,7 @@ describe("ProjectDetailPage", () => {
 
     it("creates a draft from the selected lines and opens it", async () => {
         const requests = stubApi({
+            ...customerApi,
             "GET /api/projects/p1": () =>
                 json(project([line("a", "Cámara", "unbilled"), line("b", "Gaffer", "unbilled")])),
             "POST /api/invoice-drafts": () => json({ id: "d9" }, 201),
@@ -78,7 +85,7 @@ describe("ProjectDetailPage", () => {
     });
 
     it("says when a project has nothing to bill", async () => {
-        stubApi({ "GET /api/projects/p1": () => json(project([])) });
+        stubApi({ ...customerApi, "GET /api/projects/p1": () => json(project([])) });
 
         renderAt("/projects/p1", routes);
 
@@ -87,6 +94,7 @@ describe("ProjectDetailPage", () => {
 
     it("changes a project's lifecycle status", async () => {
         const requests = stubApi({
+            ...customerApi,
             "GET /api/projects/p1": () => json(project([])),
             "PUT /api/projects/p1/status": () => json({ ...project([]), status: "confirmed" }),
         });
@@ -101,6 +109,7 @@ describe("ProjectDetailPage", () => {
 
     it("saves edits to a project's name and period", async () => {
         const requests = stubApi({
+            ...customerApi,
             "GET /api/projects/p1": () => json(project([])),
             "PUT /api/projects/p1": () => json(project([])),
         });
@@ -117,11 +126,27 @@ describe("ProjectDetailPage", () => {
 
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({
             name: "Rodaje verano",
+            customerId: "c1",
             startDate: "2026-10-01",
             endDate: "2026-10-03",
             projectTypeId: null,
             teamId: null,
         });
+    });
+
+    it("updates the selected project customer", async () => {
+        const requests = stubApi({
+            ...customerApi,
+            "GET /api/projects/p1": () => json(project([])),
+            "PUT /api/projects/p1": () => json(project([])),
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.selectOptions(await screen.findByRole("combobox", { name: "Cliente" }), "c2");
+        await user.click(screen.getByRole("button", { name: "Guardar datos" }));
+
+        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({ customerId: "c2" });
     });
 
     it("reports a missing project instead of an empty page", async () => {

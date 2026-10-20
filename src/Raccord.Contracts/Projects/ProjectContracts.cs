@@ -34,6 +34,7 @@ public sealed record ChangeProjectStatusRequest(string Status);
 
 /// <summary>Edits the identifying and scheduling details of an existing project.</summary>
 public sealed record UpdateProjectDetailsRequest(
+    Guid CustomerId,
     string Name,
     DateOnly StartDate,
     DateOnly EndDate,

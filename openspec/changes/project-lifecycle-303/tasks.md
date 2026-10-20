@@ -8,7 +8,8 @@
 - [x] Add a browser journey proving status changes persist after reload and register it in the PR E2E selection.
 - [x] Regenerate the OpenAPI and frontend API contracts for the project edit and status endpoints and response fields.
 - [x] Edit a project's name and date range through the project detail API and screen, with domain validation and a reloadable browser journey.
-- [ ] Add the remaining accepted project detail fields, including customer/contact selection, commercial and account manager values, and duplicate project number validation.
+- [x] Allow changing the selected customer on a project and prove persistence through a browser reload.
+- [ ] Add contact person, commercial and account manager fields, plus duplicate project number validation.
 - [ ] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period create/edit/order/display operations and linked-period propagation through the Projects module.
 - [ ] Add project detail UI for the accepted editable fields and schedule.

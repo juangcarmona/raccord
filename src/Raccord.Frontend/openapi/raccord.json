@@ -9644,12 +9644,17 @@
       },
       "UpdateProjectDetailsRequest": {
         "required": [
+          "customerId",
           "name",
           "startDate",
           "endDate"
         ],
         "type": "object",
         "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "name": {
             "type": "string"
           },

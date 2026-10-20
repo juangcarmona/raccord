@@ -87,7 +87,7 @@ public sealed class ProjectTests
         var start = new DateOnly(2026, 6, 1);
         var end = new DateOnly(2026, 6, 3);
 
-        project.EditDetails("  Summer campaign  ", start, end, null, null);
+        project.EditDetails(CustomerId, "  Summer campaign  ", start, end, null, null);
 
         project.Name.ShouldBe("Summer campaign");
         project.StartDate.ShouldBe(start);
@@ -101,6 +101,7 @@ public sealed class ProjectTests
 
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             project.EditDetails(
+                CustomerId,
                 "Summer campaign",
                 new DateOnly(2026, 6, 3),
                 new DateOnly(2026, 6, 1),
@@ -123,6 +124,7 @@ public sealed class ProjectTests
 
         var error = Should.Throw<BusinessRuleViolationException>(() =>
             project.EditDetails(
+                CustomerId,
                 "Summer campaign",
                 new DateOnly(2026, 6, 1),
                 new DateOnly(2026, 6, 3),

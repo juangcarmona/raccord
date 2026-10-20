@@ -117,6 +117,7 @@ public sealed class Project
 
     /// <summary>Updates the project's editable identifying and scheduling details.</summary>
     public void EditDetails(
+        Guid customerId,
         string name,
         DateOnly startDate,
         DateOnly endDate,
@@ -128,6 +129,11 @@ public sealed class Project
             throw new BusinessRuleViolationException(
                 "projects.complete-read-only",
                 "Reopen a completed project before editing its operational details."
+            );
+        if (customerId == Guid.Empty)
+            throw new BusinessRuleViolationException(
+                "projects.customer-required",
+                "A project needs a customer."
             );
         if (string.IsNullOrWhiteSpace(name))
             throw new BusinessRuleViolationException(
@@ -141,6 +147,7 @@ public sealed class Project
             );
 
         Name = name.Trim();
+        CustomerId = customerId;
         StartDate = startDate;
         EndDate = endDate;
         ProjectTypeId = projectTypeId;

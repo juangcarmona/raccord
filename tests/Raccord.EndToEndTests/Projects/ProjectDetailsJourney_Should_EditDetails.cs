@@ -20,8 +20,28 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
             {
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
+                var projectUrl = page.Url;
+
+                await page.GotoAsync("/customers/new");
+                await page.GetByLabel("Legal name").FillAsync($"Alternative E2E {RunStamp}");
+                await page.GetByLabel("Tax ID").FillAsync("B87654322");
+                await page.GetByLabel("Billing e-mail")
+                    .FillAsync("alternative@productora-e2e.example");
+                await page.GetByLabel("Street and number").FillAsync("Calle de pruebas 2");
+                await page.GetByLabel("Postal code").FillAsync("28002");
+                await page.GetByLabel("City").FillAsync("Madrid");
+                await page.GetByLabel("Country (ISO").FillAsync("ES");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+                await page.WaitForURLAsync(url =>
+                    url.EndsWith("/customers", StringComparison.Ordinal)
+                );
+                await page.GotoAsync(projectUrl);
 
                 await page.GetByLabel("Project name").FillAsync("Summer campaign shoot");
+                await page.GetByLabel("Customer")
+                    .SelectOptionAsync(
+                        new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
+                    );
                 await page.GetByLabel("Start").FillAsync("2026-10-01");
                 await page.GetByLabel("End").FillAsync("2026-10-03");
                 await page.GetByRole(AriaRole.Button, new() { Name = "Save details" }).ClickAsync();
@@ -32,6 +52,9 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 (await page.GetByLabel("Project name").InputValueAsync()).ShouldBe(
                     "Summer campaign shoot"
                 );
+                (
+                    await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()
+                ).ShouldBe($"Alternative E2E {RunStamp}");
                 (await page.GetByLabel("Start").InputValueAsync()).ShouldBe("2026-10-01");
                 (await page.GetByLabel("End").InputValueAsync()).ShouldBe("2026-10-03");
             }

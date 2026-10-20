@@ -142,7 +142,15 @@ public sealed class ProjectWorkspace(
         if (project is null)
             return null;
 
+        var customer =
+            await parties.FindAsync(request.CustomerId, cancellationToken).ConfigureAwait(false)
+            ?? throw new BusinessRuleViolationException(
+                "customers.not-found",
+                $"Customer '{request.CustomerId}' does not exist."
+            );
+
         project.EditDetails(
+            customer.Id,
             request.Name,
             request.StartDate,
             request.EndDate,
@@ -150,9 +158,6 @@ public sealed class ProjectWorkspace(
             request.TeamId
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        var customer = await parties
-            .FindAsync(project.CustomerId, cancellationToken)
-            .ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
 

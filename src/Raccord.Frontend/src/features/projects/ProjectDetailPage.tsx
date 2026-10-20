@@ -31,6 +31,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const [selected, setSelected] = useState<ReadonlySet<string>>(new Set());
     const [busy, setBusy] = useState(false);
     const [status, setStatus] = useState(project.status);
+    const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
     const [error, setError] = useState<unknown>(null);
     const [detailsError, setDetailsError] = useState<unknown>(null);
 
@@ -86,6 +87,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                 api.PUT("/api/projects/{id}", {
                     params: { path: { id: project.id } },
                     body: {
+                        customerId: formText(data, "customerId"),
                         name: formText(data, "name"),
                         startDate: formText(data, "startDate"),
                         endDate: formText(data, "endDate"),
@@ -125,6 +127,22 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         maxLength={200}
                         defaultValue={project.name}
                     />
+                    <Async query={customers}>
+                        {(list) => (
+                            <SelectField
+                                label={t("common.customer")}
+                                name="customerId"
+                                required
+                                defaultValue={project.customerId}
+                            >
+                                {list.map((customer) => (
+                                    <option key={customer.id} value={customer.id}>
+                                        {customer.legalName}
+                                    </option>
+                                ))}
+                            </SelectField>
+                        )}
+                    </Async>
                     <Field
                         label={t("projects.startDate")}
                         name="startDate"

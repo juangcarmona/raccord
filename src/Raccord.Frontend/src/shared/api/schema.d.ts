@@ -7260,6 +7260,8 @@ export interface components {
         };
         /** @description Edits the identifying and scheduling details of an existing project. */
         UpdateProjectDetailsRequest: {
+            /** Format: uuid */
+            customerId: string;
             name: string;
             /** Format: date */
             startDate: string;

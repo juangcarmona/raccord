@@ -8,8 +8,86 @@ namespace Raccord.Infrastructure.Persistence.Repositories;
 internal sealed class CustomerRepository(RaccordDbContext db)
     : IPartyDirectory,
         IPartyWriter,
-        IContactDirectory
+        IContactDirectory,
+        IContactPeopleDirectory
 {
+    public async Task<bool> LockContactAsync(Guid contactId, CancellationToken cancellationToken) =>
+        await db
+            .Database.SqlQuery<Guid>(
+                $"SELECT id AS \"Value\" FROM contacts.customers WHERE id = {contactId} FOR UPDATE"
+            )
+            .SingleOrDefaultAsync(cancellationToken)
+            .ConfigureAwait(false) != Guid.Empty;
+
+    public async Task<IReadOnlyList<ContactPersonSnapshot>> ListAsync(
+        Guid contactId,
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (
+                await db
+                    .ContactPersons.AsNoTracking()
+                    .Where(person => person.ContactId == contactId)
+                    .OrderBy(person => person.Name)
+                    .ThenBy(person => person.Id)
+                    .ToListAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(ToContactPersonSnapshot),
+        ];
+
+    public async Task<ContactPersonSnapshot?> FindAsync(
+        Guid contactId,
+        Guid personId,
+        CancellationToken cancellationToken
+    )
+    {
+        var person = await db
+            .ContactPersons.AsNoTracking()
+            .FirstOrDefaultAsync(
+                candidate => candidate.ContactId == contactId && candidate.Id == personId,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        return person is null ? null : ToContactPersonSnapshot(person);
+    }
+
+    public Task AddAsync(ContactPersonSnapshot person, CancellationToken cancellationToken)
+    {
+        db.ContactPersons.Add(
+            new ContactPersonRow
+            {
+                Id = person.Id,
+                ContactId = person.ContactId,
+                Name = person.Name,
+                Email = person.Email,
+                Phone = person.Phone,
+                IsDefault = person.IsDefault,
+                IsAdministrative = person.IsAdministrative,
+            }
+        );
+        return Task.CompletedTask;
+    }
+
+    public async Task UpdateAsync(ContactPersonSnapshot person, CancellationToken cancellationToken)
+    {
+        var row = await db
+            .ContactPersons.FirstOrDefaultAsync(
+                candidate => candidate.ContactId == person.ContactId && candidate.Id == person.Id,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            return;
+        }
+
+        row.Name = person.Name;
+        row.Email = person.Email;
+        row.Phone = person.Phone;
+        row.IsDefault = person.IsDefault;
+        row.IsAdministrative = person.IsAdministrative;
+    }
+
     public async Task<PartySnapshot?> FindAsync(Guid id, CancellationToken cancellationToken) =>
         ToPartySnapshot(
             await db
@@ -198,4 +276,15 @@ internal sealed class CustomerRepository(RaccordDbContext db)
                 customer.Email,
                 customer.Roles.Select(role => role.Role).ToHashSet()
             );
+
+    private static ContactPersonSnapshot ToContactPersonSnapshot(ContactPersonRow person) =>
+        new(
+            person.Id,
+            person.ContactId,
+            person.Name,
+            person.Email,
+            person.Phone,
+            person.IsDefault,
+            person.IsAdministrative
+        );
 }

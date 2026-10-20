@@ -44,9 +44,9 @@ describe("contacts directory", () => {
         await userEvent.click(screen.getByRole("button", { name: "Guardar" }));
 
         await waitFor(() => {
-            expect(requests).toHaveLength(2);
+            expect(requests.some((request) => request.method === "PUT")).toBe(true);
         });
-        expect(requests[1]?.body).toMatchObject({
+        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({
             legalName: "Northlight Updated",
             contactNumber: "10001",
             roles: ["Customer", "Supplier"],
@@ -143,5 +143,117 @@ describe("contacts directory", () => {
         await userEvent.click(screen.getByRole("button", { name: "Guardar" }));
 
         expect(await screen.findByRole("alert")).toHaveTextContent("Duplicated.");
+    });
+});
+
+describe("contact people", () => {
+    it("shows an empty state when the contact has no people", async () => {
+        stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/people": () => json([]),
+        });
+        renderAt("/contacts/contact-1", [{ path: "/contacts/:id", element: <ContactFormPage /> }]);
+
+        expect(await screen.findByText("Todavía no hay personas asociadas a este contacto.")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "Añadir persona" })).toBeInTheDocument();
+    });
+
+    it("shows a loading state before the directory responds", async () => {
+        let resolvePeople: ((response: Response) => void) | undefined;
+        stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/people": () =>
+                new Promise<Response>((resolve) => {
+                    resolvePeople = resolve;
+                }),
+        });
+        renderAt("/contacts/contact-1", [{ path: "/contacts/:id", element: <ContactFormPage /> }]);
+
+        expect(await screen.findByRole("status")).toHaveTextContent("Cargando");
+        resolvePeople?.(json([]));
+        expect(await screen.findByRole("heading", { name: "Personas de contacto" })).toBeInTheDocument();
+    });
+
+    it("creates, lists and edits contact people with the default and administrative designations", async () => {
+        const person = {
+            id: "person-1",
+            contactId: "contact-1",
+            name: "Marina Costa",
+            email: "marina@example.test",
+            phone: "+34 600 123 456",
+            isDefault: true,
+            isAdministrative: true,
+        };
+        const requests = stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/people": () => json([person]),
+            "POST /api/contacts/contact-1/people": () => json(person, 201),
+            "PUT /api/contacts/contact-1/people/person-1": () =>
+                json({ ...person, name: "Marina Costa Editada", isAdministrative: false }),
+        });
+        renderAt("/contacts/contact-1", [{ path: "/contacts/:id", element: <ContactFormPage /> }]);
+
+        expect(await screen.findByText("Marina Costa")).toBeInTheDocument();
+        expect(screen.getByText("Persona predeterminada")).toBeInTheDocument();
+        expect(screen.getByText("Persona administrativa")).toBeInTheDocument();
+        await userEvent.type(screen.getByLabelText("Nombre de la persona"), "Nueva Persona");
+        await userEvent.type(screen.getByLabelText(/Correo de la persona/), "nueva@example.test");
+        await userEvent.type(screen.getByLabelText(/Teléfono de la persona/), "+34 600 000 000");
+        await userEvent.click(screen.getByLabelText("Persona predeterminada"));
+        await userEvent.click(screen.getByLabelText("Persona administrativa"));
+        await userEvent.click(screen.getByRole("button", { name: "Añadir persona" }));
+
+        await waitFor(() => {
+            expect(requests.some((request) => request.method === "POST")).toBe(true);
+        });
+        expect(requests.find((request) => request.method === "POST")?.body).toMatchObject({
+            name: "Nueva Persona",
+            email: "nueva@example.test",
+            phone: "+34 600 000 000",
+            isDefault: true,
+            isAdministrative: true,
+        });
+        expect(screen.getByLabelText("Nombre de la persona")).toHaveValue("");
+        await userEvent.click(screen.getByRole("button", { name: "Editar persona" }));
+        await userEvent.clear(screen.getByLabelText("Nombre de la persona"));
+        await userEvent.type(screen.getByLabelText("Nombre de la persona"), "Marina Costa Editada");
+        await userEvent.click(screen.getByLabelText("Persona administrativa"));
+        await userEvent.click(screen.getByRole("button", { name: "Guardar cambios" }));
+        await waitFor(() => {
+            expect(requests.some((request) => request.method === "PUT")).toBe(true);
+        });
+        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({
+            name: "Marina Costa Editada",
+            isAdministrative: false,
+        });
+    });
+
+    it("shows the people request error and retries it", async () => {
+        let calls = 0;
+        stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/people": () => {
+                calls += 1;
+                return calls === 1 ? json({ title: "Unavailable" }, 503) : json([]);
+            },
+        });
+        renderAt("/contacts/contact-1", [{ path: "/contacts/:id", element: <ContactFormPage /> }]);
+
+        expect(await screen.findByRole("alert")).toBeInTheDocument();
+        await userEvent.click(screen.getByRole("button", { name: "Reintentar" }));
+        expect(await screen.findByRole("heading", { name: "Personas de contacto" })).toBeInTheDocument();
+    });
+
+    it("shows a server validation message when saving a person fails", async () => {
+        stubApi({
+            "GET /api/contacts/contact-1": () => json(company),
+            "GET /api/contacts/contact-1/people": () => json([]),
+            "POST /api/contacts/contact-1/people": () => json({ detail: "La persona administrativa ya existe." }, 409),
+        });
+        renderAt("/contacts/contact-1", [{ path: "/contacts/:id", element: <ContactFormPage /> }]);
+
+        await userEvent.type(await screen.findByLabelText("Nombre de la persona"), "Marina Costa");
+        await userEvent.click(screen.getByRole("button", { name: "Añadir persona" }));
+        expect(await screen.findByRole("alert")).toHaveTextContent("La persona administrativa ya existe.");
     });
 });

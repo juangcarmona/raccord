@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Keep Git configuration out of parallel builds
+
+- Observation: `Directory.Build.props` ran `git config core.hooksPath .husky` before every project build. Parallel MSBuild nodes and separate worktrees write the shared `.git/config`, producing lock warnings and failed hook-setup commands even though compilation continued.
+- Action: Remove Git configuration writes from build targets and make the one-time hook activation an explicit local-development setup command.
+- Check: Run the Release solution build, which compiles projects in parallel, and confirm it finishes without `.git/config` lock warnings; verify `git config --get core.hooksPath` still reports `.husky`.
+
 ## 2026-10-20 · Rebuild E2E discovery before updating the journey manifest
 
 - Observation: The manifest helper discovers tests with `--no-build`; after adding a journey, running `--update` against a stale Release assembly silently kept the old journey count.
@@ -478,6 +484,6 @@ Every completed FF loop must review this ledger, add new observations and action
 
 ## 2026-10-20 · Wait for filtered and paginated rows before asserting browser results
 
-- **Observation:** A directory journey read the contact table immediately after changing its role filter and moving to the next page, so the assertion observed the pending render instead of the stable result.
-- **Action:** In browser journeys, wait for evidence that the previous result set has left and the requested page transition has rendered before enumerating rows.
-- **Check:** The contact directory journey verifies ten first-page venues, the eleventh venue on page two, no overlap, and identical rows after returning to page one.
+- **Observation:** Directory journeys run against shared E2E data while other browser journeys execute in parallel. Reading rows immediately after changing a role or page can observe stale or incomplete results, and exact page counts can depend on unrelated contacts.
+- **Action:** Await the filtered API response and rendered page indicator before reading rows; traverse the available pages and assert the journey's own records, role exclusions, stable previous-page results and no duplicate rows.
+- **Check:** Run the contact journeys with the in-process E2E runner and require the directory journey to find its company and venue across all pages despite concurrent fixture data.

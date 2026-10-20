@@ -57,9 +57,15 @@ dotnet csharpier check .
 
 In `src/Raccord.Frontend`: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run format:check`. From the repository root: `npx -y markdownlint-cli2@0.23.3` (add `--fix` to apply the automatic fixes). It runs pinned through `npx`, like `@prodshape/cli` and OpenSpec, rather than from `package.json`.
 
-### Git hooks (auto-installed on build)
+### Git hooks
 
-The first `dotnet build` after cloning installs husky hooks (`git config core.hooksPath .husky`):
+Activate husky hooks once after cloning:
+
+```bash
+git config core.hooksPath .husky
+```
+
+Builds do not modify Git configuration, so parallel project builds and multiple worktrees cannot race while writing the shared repository configuration. Verify the setting with `git config --get core.hooksPath`.
 
 - **pre-commit**: CSharpier on staged `.cs` files, then lint-staged (ESLint `--fix` + Prettier for code and configuration, `markdownlint-cli2 --fix` for Markdown).
 - **commit-msg**: [conventional commits](https://www.conventionalcommits.org/) with types `feat, fix, chore, docs, refactor, test, ci`.

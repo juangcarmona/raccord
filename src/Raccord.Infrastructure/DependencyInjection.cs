@@ -67,6 +67,9 @@ public static class DependencyInjection
         services.AddScoped<IContactDirectory>(provider =>
             (CustomerRepository)provider.GetRequiredService<IPartyDirectory>()
         );
+        services.AddScoped<IContactPeopleDirectory>(provider =>
+            (CustomerRepository)provider.GetRequiredService<IPartyDirectory>()
+        );
         services.AddScoped<IPartyWriter>(provider =>
             provider.GetRequiredService<IPartyDirectory>() as IPartyWriter
             ?? throw new InvalidOperationException("Contacts persistence must support writes.")

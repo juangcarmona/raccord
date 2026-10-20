@@ -28,7 +28,13 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
                 await page.WaitForURLAsync(url =>
                     url.EndsWith("/contacts", StringComparison.Ordinal)
                 );
+                var supplierListLoaded = page.WaitForResponseAsync(response =>
+                    response.Url.Contains("/api/contacts?", StringComparison.Ordinal)
+                    && response.Url.Contains("role=Supplier", StringComparison.Ordinal)
+                    && response.Status == 200
+                );
                 await page.GetByLabel("Filter by role").SelectOptionAsync("Supplier");
+                await supplierListLoaded;
                 var companyRow = page.GetByRole(AriaRole.Row)
                     .Filter(new() { HasText = companyName });
                 await companyRow.WaitForAsync();
@@ -59,8 +65,8 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
                 await AssertStableVenuePaginationAsync(page, companyName, venueName);
 
                 await page.GetByLabel("Filter by role").SelectOptionAsync("Supplier");
-                await page.GetByRole(AriaRole.Link, new() { Name = $"{companyName} Edited" })
-                    .WaitForAsync();
+                var supplierNames = await ReadAllContactNamesAcrossPagesAsync(page);
+                supplierNames.ShouldContain($"{companyName} Edited");
             }
         );
     }
@@ -89,25 +95,47 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
     )
     {
         await page.GotoAsync("/contacts");
-        var companyRow = page.GetByRole(AriaRole.Row).Filter(new() { HasText = companyName });
-        await companyRow.WaitForAsync();
         await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
-        await companyRow.WaitForAsync(new() { State = WaitForSelectorState.Detached });
         await page.Locator("tbody tr").Nth(9).WaitForAsync();
         var firstPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
         firstPageVenueNames.Count.ShouldBe(10);
-        firstPageVenueNames.ShouldNotContain(venueName);
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Next" }).ClickAsync();
-        await page.GetByText("Page 2 of 2").WaitForAsync();
+        await page.GetByText("Page 2 of", new() { Exact = false }).WaitForAsync();
         var secondPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
-        secondPageVenueNames.ShouldBe([venueName]);
         firstPageVenueNames.ShouldNotContain(secondPageVenueNames[0]);
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Previous" }).ClickAsync();
-        await page.GetByText("Page 1 of 2").WaitForAsync();
+        await page.GetByText("Page 1 of", new() { Exact = false }).WaitForAsync();
         var returnedPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
         returnedPageVenueNames.ShouldBe(firstPageVenueNames);
+
+        var allVenueNames = await ReadAllContactNamesAcrossPagesAsync(page);
+        allVenueNames.ShouldContain(venueName);
+        allVenueNames.ShouldNotContain(companyName);
+        allVenueNames.Count.ShouldBe(allVenueNames.Distinct(StringComparer.Ordinal).Count());
+    }
+
+    private static async Task<List<string>> ReadAllContactNamesAcrossPagesAsync(IPage page)
+    {
+        var names = new List<string>();
+        var pageNumber = 1;
+        while (true)
+        {
+            await page.Locator("tbody tr").First.WaitForAsync();
+            names.AddRange(await page.Locator("tbody tr a").AllTextContentsAsync());
+            var next = page.GetByRole(AriaRole.Button, new() { Name = "Next" });
+            if (await next.IsDisabledAsync())
+            {
+                break;
+            }
+
+            await next.ClickAsync();
+            pageNumber++;
+            await page.GetByText($"Page {pageNumber} of", new() { Exact = false }).WaitForAsync();
+        }
+
+        return names;
     }
 
     private static async Task SeedVenueContactsAsync(IPage page)

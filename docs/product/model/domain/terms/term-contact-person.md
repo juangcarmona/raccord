@@ -2,7 +2,7 @@
 id: TERM-CONTACT-PERSON
 type: domain-term
 title: "Contact person"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
@@ -15,12 +15,12 @@ provenance:
 
 ## Definition
 
-An individual affiliated with a contact (for example the person who receives invoices, or other colleagues), with own name, phone, e-mail and other details, custom fields and files. A contact person belongs to one contact and cannot be moved to another; someone working for two companies is recorded under both.
+An individual affiliated with a contact, with their own name and supported contact details. A contact person belongs to one contact and cannot be moved to another; someone working for two companies is recorded under each separately. A record may carry the default and administrative designations defined by the product.
 
 ## Distinguish From
 
-Contact: the organisation or private individual. Crew member.
+Contact: the organization or private individual. Crew member: a worker record.
 
 ## Usage
 
-Chosen with the client on projects; invoice recipient.
+Maintained under a contact for later contact and project workflows. Project selection and invoice or message delivery are governed by their own product requirements.

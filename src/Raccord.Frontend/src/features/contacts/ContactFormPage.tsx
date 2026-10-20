@@ -125,6 +125,158 @@ function ContactForm({ contact }: { contact: Schemas["ContactResponse"] | null }
                 </div>
                 <FormError error={error} />
             </form>
+            {contact && <ContactPeopleSection contactId={contact.id} />}
         </>
+    );
+}
+
+function ContactPeopleSection({ contactId }: { contactId: string }) {
+    const { t } = useI18n();
+    const [editing, setEditing] = useState<Schemas["ContactPersonResponse"] | null>(null);
+    const [formVersion, setFormVersion] = useState(0);
+    const [error, setError] = useState<unknown>(null);
+    const [busy, setBusy] = useState(false);
+    const query = useQuery(`contact-people:${contactId}`, () =>
+        unwrap(api.GET("/api/contacts/{id}/people", { params: { path: { id: contactId } } })),
+    );
+
+    async function save(event: SubmitEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const optional = (name: string) => {
+            const value = formText(formData, name).trim();
+            return value === "" ? null : value;
+        };
+        const body = {
+            name: formText(formData, "name").trim(),
+            email: optional("email"),
+            phone: optional("phone"),
+            isDefault: formData.get("isDefault") === "on",
+            isAdministrative: formData.get("isAdministrative") === "on",
+        };
+        setBusy(true);
+        setError(null);
+        try {
+            if (editing) {
+                await unwrap(
+                    api.PUT("/api/contacts/{id}/people/{personId}", {
+                        params: { path: { id: contactId, personId: editing.id } },
+                        body,
+                    }),
+                );
+            } else {
+                await unwrap(
+                    api.POST("/api/contacts/{id}/people", {
+                        params: { path: { id: contactId } },
+                        body,
+                    }),
+                );
+            }
+            setEditing(null);
+            setFormVersion((value) => value + 1);
+            query.reload();
+        } catch (failure) {
+            setError(failure);
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    return (
+        <section className="panel" aria-labelledby="contact-people-heading">
+            <h2 id="contact-people-heading">{t("contacts.people.title")}</h2>
+            <Async query={query}>
+                {(people) => (
+                    <>
+                        {people.length === 0 ? (
+                            <p className="state state--empty">{t("contacts.people.empty")}</p>
+                        ) : (
+                            <ul>
+                                {people.map((person) => (
+                                    <li key={person.id}>
+                                        <strong>{person.name}</strong>
+                                        {person.email && <span> · {person.email}</span>}
+                                        {person.phone && <span> · {person.phone}</span>}
+                                        {person.isDefault && <span> · {t("contacts.people.default")}</span>}
+                                        {person.isAdministrative && (
+                                            <span> · {t("contacts.people.administrative")}</span>
+                                        )}
+                                        <button
+                                            type="button"
+                                            className="button button--quiet"
+                                            onClick={() => {
+                                                setEditing(person);
+                                                setError(null);
+                                            }}
+                                        >
+                                            {t("contacts.people.edit")}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </>
+                )}
+            </Async>
+            <h3>{editing ? t("contacts.people.editHeading") : t("contacts.people.addHeading")}</h3>
+            <form
+                key={`${editing?.id ?? "new-person"}-${formVersion}`}
+                className="grid-form"
+                onSubmit={(event) => void save(event)}
+            >
+                <Field
+                    label={t("contacts.people.name")}
+                    name="name"
+                    required
+                    maxLength={200}
+                    defaultValue={editing?.name ?? ""}
+                />
+                <Field
+                    label={t("contacts.people.email")}
+                    name="email"
+                    type="email"
+                    maxLength={320}
+                    defaultValue={editing?.email ?? ""}
+                />
+                <Field
+                    label={t("contacts.people.phone")}
+                    name="phone"
+                    type="tel"
+                    maxLength={64}
+                    defaultValue={editing?.phone ?? ""}
+                />
+                <div className="actions">
+                    <label>
+                        <input type="checkbox" name="isDefault" defaultChecked={editing?.isDefault ?? false} />
+                        {t("contacts.people.default")}
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="isAdministrative"
+                            defaultChecked={editing?.isAdministrative ?? false}
+                        />
+                        {t("contacts.people.administrative")}
+                    </label>
+                </div>
+                <div className="actions">
+                    <button type="submit" className="button button--primary" disabled={busy}>
+                        {editing ? t("contacts.people.save") : t("contacts.people.add")}
+                    </button>
+                    {editing && (
+                        <button
+                            type="button"
+                            className="button button--quiet"
+                            onClick={() => {
+                                setEditing(null);
+                            }}
+                        >
+                            {t("common.cancel")}
+                        </button>
+                    )}
+                </div>
+                <FormError error={error} />
+            </form>
+        </section>
     );
 }

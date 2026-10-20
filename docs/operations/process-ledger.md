@@ -475,3 +475,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The cancellation browser journey initially read the preview alert after confirmation, then expected warning copy that differed from the localized product message.
 - **Action:** Wait for the confirmation dialog to close before asserting the persisted state, and take expected user-facing text from the active locale catalog.
 - **Check:** The journey passes through confirmation, reload, invoiced project-line history and the issued invoice page.
+
+## 2026-10-20 · E2E selection discovery builds the current test assembly
+
+- **Observation:** The selection manifest initially missed the new cancellation journey because discovery used a stale Release assembly; the discrepancy surfaced only on the next selection check.
+- **Action:** Build the E2E project in the selection script before listing discovered tests.
+- **Check:** Run the selection script after adding a journey and require the new fully qualified test to appear in the manifest.

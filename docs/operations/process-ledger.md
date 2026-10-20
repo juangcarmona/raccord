@@ -523,3 +523,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A fixed past invoice date became earlier than the last issued invoice in the shared E2E sequence and caused a valid invoice finalization to return 422.
 - **Action:** Use the current UTC date when the journey verifies invoice history and does not test historical-date behavior.
 - **Check:** Run the cancellation invoice-history journey alongside the other project lifecycle journeys and require the issued invoice route and immutable content to load.
+
+## 2026-10-20 · Project date locators must match labels exactly
+
+- **Observation:** The project edit browser journey selected the date-range inputs with partial labels after schedule periods added similarly named start and end fields; the project edit E2E passed locally before the periods were introduced but failed in CI with a Playwright strict-mode violation.
+- **Action:** Use exact accessible names for project-level start and end inputs wherever a project detail page also renders schedule periods.
+- **Check:** Run the project edit journey together with the schedule journeys and require each project date to persist after reload.

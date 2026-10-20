@@ -42,8 +42,8 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                     .SelectOptionAsync(
                         new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
                     );
-                await page.GetByLabel("Start").FillAsync("2026-10-01");
-                await page.GetByLabel("End").FillAsync("2026-10-03");
+                await page.GetByLabel("Start", new() { Exact = true }).FillAsync("2026-10-01");
+                await page.GetByLabel("End", new() { Exact = true }).FillAsync("2026-10-03");
                 await page.GetByRole(AriaRole.Button, new() { Name = "Save details" }).ClickAsync();
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Summer campaign shoot" })
                     .WaitForAsync();
@@ -55,8 +55,12 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 (
                     await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()
                 ).ShouldBe($"Alternative E2E {RunStamp}");
-                (await page.GetByLabel("Start").InputValueAsync()).ShouldBe("2026-10-01");
-                (await page.GetByLabel("End").InputValueAsync()).ShouldBe("2026-10-03");
+                (await page.GetByLabel("Start", new() { Exact = true }).InputValueAsync()).ShouldBe(
+                    "2026-10-01"
+                );
+                (await page.GetByLabel("End", new() { Exact = true }).InputValueAsync()).ShouldBe(
+                    "2026-10-03"
+                );
             }
         );
     }

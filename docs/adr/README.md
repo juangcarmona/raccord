@@ -36,3 +36,4 @@ Records are immutable in spirit. To reverse or replace a decision, write a new r
 | ADR-0028 | [Deliver application email through configured SMTP](0028-configure-smtp-email-delivery-through-mailkit.md)                                                         | Accepted               | 2026-10-18 |
 | ADR-0029 | [Record self-hosted VERI\*FACTU responsibility boundary](0029-self-hosted-verifactu-responsibility-boundary.md)                                                    | Accepted               | 2026-10-20 |
 | ADR-0030 | [Give Equipment ownership of its catalog and stock records](0030-equipment-module-boundary.md)                                                                     | Proposed               | 2026-10-20 |
+| ADR-0031 | [Validate Equipment image uploads before storage](0031-validate-equipment-image-uploads-before-storage.md)                                                         | Proposed               | 2026-10-20 |

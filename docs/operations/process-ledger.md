@@ -487,3 +487,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The selection manifest initially missed the new cancellation journey because discovery used a stale Release assembly; the discrepancy surfaced only on the next selection check.
 - **Action:** Build the E2E project in the selection script before listing discovered tests.
 - **Check:** Run the selection script after adding a journey and require the new fully qualified test to appear in the manifest.
+
+## 2026-10-20 · SPA route assertions do not wait for document load
+
+- **Observation:** The invoice issue journey reached the SPA route but Playwright's default `WaitForURLAsync` load condition timed out in CI.
+- **Action:** Wait for the URL at navigation commit, then assert the destination content separately.
+- **Check:** Run the affected invoice and cancellation journeys and require the issued-invoice content to be visible.

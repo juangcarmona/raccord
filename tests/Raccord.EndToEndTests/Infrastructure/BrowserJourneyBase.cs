@@ -241,7 +241,10 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             );
         await page.GetByRole(AriaRole.Button, new() { Name = "Issue invoice" }).ClickAsync();
 
-        await page.WaitForURLAsync(url => url.Contains("/invoices/", StringComparison.Ordinal));
+        await page.WaitForURLAsync(
+            url => url.Contains("/invoices/", StringComparison.Ordinal),
+            new() { WaitUntil = WaitUntilState.Commit }
+        );
         await page.GetByText("Issued and unalterable.").WaitForAsync();
     }
 

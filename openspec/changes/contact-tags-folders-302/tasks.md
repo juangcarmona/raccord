@@ -30,7 +30,7 @@
 
 - [x] Update Contacts architecture/runtime/risk documentation and process ledger with durable lessons.
 - [x] Run formatters, focused tests, database migration checks, ProductShape validation and citation verification, OpenSpec validation, Markdown lint, complete CI-equivalent frontend/.NET tests and selected Aspire E2E; reconcile all evidence against the diff.
-- [ ] Mark this task list complete only after all final-head CI checks pass.
+- [x] Mark this task list complete only after all final-head CI checks pass.
 
 <!-- pdac:cite id="UC-CON-TAG-CONTACTS" digest="sha256:c19ff9af883fc97b09e564a63540df53b6235343c791288bfdd1d8cae856f912" -->
 <!-- pdac:cite id="UC-CON-MANAGE-CONTACT-FOLDERS" digest="sha256:64bf01e23b42803074aa40b1c666ecfc1c2a1fbd0b453c4d15c2c11c4572c082" -->

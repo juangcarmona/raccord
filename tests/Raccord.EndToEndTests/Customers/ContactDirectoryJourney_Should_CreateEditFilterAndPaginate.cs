@@ -56,11 +56,7 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
                 );
 
                 await AssertProjectCustomerOptionsAsync(page, companyName, venueName);
-
-                await page.GotoAsync("/contacts");
-                await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Next" }).ClickAsync();
-                await page.GetByRole(AriaRole.Link, new() { Name = venueName }).WaitForAsync();
+                await AssertStableVenuePaginationAsync(page, companyName, venueName);
 
                 await page.GetByLabel("Filter by role").SelectOptionAsync("Supplier");
                 await page.GetByRole(AriaRole.Link, new() { Name = $"{companyName} Edited" })
@@ -84,6 +80,33 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
         var options = await customerField.Locator("option").AllTextContentsAsync();
         options.ShouldContain($"{companyName} Edited");
         options.ShouldNotContain(venueName);
+    }
+
+    private static async Task AssertStableVenuePaginationAsync(
+        IPage page,
+        string companyName,
+        string venueName
+    )
+    {
+        await page.GotoAsync("/contacts");
+        var companyRow = page.GetByRole(AriaRole.Row).Filter(new() { HasText = companyName });
+        await companyRow.WaitForAsync();
+        await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
+        await companyRow.WaitForAsync(new() { State = WaitForSelectorState.Detached });
+        var firstPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        firstPageVenueNames.Count.ShouldBe(10);
+        firstPageVenueNames.ShouldNotContain(venueName);
+
+        await page.GetByRole(AriaRole.Button, new() { Name = "Next" }).ClickAsync();
+        await page.GetByText("Page 2 of 2").WaitForAsync();
+        var secondPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        secondPageVenueNames.ShouldBe([venueName]);
+        firstPageVenueNames.ShouldNotContain(secondPageVenueNames[0]);
+
+        await page.GetByRole(AriaRole.Button, new() { Name = "Previous" }).ClickAsync();
+        await page.GetByText("Page 1 of 2").WaitForAsync();
+        var returnedPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        returnedPageVenueNames.ShouldBe(firstPageVenueNames);
     }
 
     private static async Task SeedVenueContactsAsync(IPage page)

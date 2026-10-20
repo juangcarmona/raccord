@@ -475,3 +475,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The local E2E runner passed a project-customer assertion that read `<option>` elements immediately, while CI rendered the asynchronous customer query later and the immediate read returned an empty list.
 - **Action:** Wait for the specific API-backed option required by the journey before enumerating or asserting the complete option set.
 - **Check:** Run the same parallel in-process E2E runner used by CI and require the selected journeys to pass, including the newly added contact directory journey.
+
+## 2026-10-20 · Wait for filtered and paginated rows before asserting browser results
+
+- **Observation:** A directory journey read the contact table immediately after changing its role filter and moving to the next page, so the assertion observed the pending render instead of the stable result.
+- **Action:** In browser journeys, wait for evidence that the previous result set has left and the requested page transition has rendered before enumerating rows.
+- **Check:** The contact directory journey verifies ten first-page venues, the eleventh venue on page two, no overlap, and identical rows after returning to page one.

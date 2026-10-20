@@ -2,7 +2,7 @@
 id: CHG-CONTACT-SPREADSHEET-IMPORT-301
 type: product-change
 title: Accept validated spreadsheet import for contacts
-status: proposed
+status: applied
 base-revision: "769edf87e11dec97b23de000741c2f745545256b"
 operations:
   add:
@@ -34,17 +34,16 @@ Contacts directory creation, spreadsheet upload, column mapping, validation feed
 
 ## Open Questions
 
-- Which file types and structural limits are supported? Recommendation: accept CSV and XLSX with a single sheet, at most 64 columns, plain text values, no embedded images, optional header row, and a preview of the first 10 data rows, consistent with the existing draft format constraint. No row-count limit is proposed pending product/operations input.
-- Should the import complete valid rows when some rows are rejected, with atomicity per row? Recommendation: yes, because #301 explicitly requires valid rows to import while invalid rows are reported.
-- Should administrators download a rejected-row report, or is an in-product list sufficient? Recommendation: provide an in-product list with row number and reason for this story; downloadable correction/re-import is a separate follow-up.
-- Confirm that this story creates new contacts only and excludes contact-person rows, update/skip matching, folder placement, tags, custom fields, and import undo. Recommendation: yes; these behaviors are outside #301 and depend on other contact issues.
+None. This change accepts CSV and XLSX files with one worksheet, up to 64 columns, plain text values, no embedded images, an optional header row, and a preview of the first 10 data rows. It imports each valid row atomically and reports rejected row numbers and reasons in the product. It creates new contacts only and does not retain uploaded files or raw contact values for audit.
 
 ## Product Acceptance
 
-- The Product Owner confirms supported file types and structural limits.
-- The Product Owner confirms valid-row import with per-row atomicity when other rows are rejected.
-- The Product Owner confirms the in-product rejected-row report and the new-contact-only scope.
-- The Product Owner confirms the audit record contains actor, time and outcome summary but no retained upload or raw contact values.
+- Accept CSV and XLSX uploads with one worksheet, up to 64 columns, plain text values, no embedded images, an optional header row, and a 10-data-row preview.
+- Import valid rows even when other rows are rejected; persist or reject each row atomically.
+- Show rejected row numbers and validation reasons in the product; downloadable correction files and re-import are outside this change.
+- Create new contacts only; do not update or skip existing records, import contact persons, or assign folders, tags, or custom fields.
+- Record actor, time, and outcome counts for audit without retaining the uploaded file or raw contact values.
+- Limit each upload to 10 MiB to bound temporary-file and parser resource use; this technical limit does not impose a row-count limit.
 
 ## Out of Scope
 

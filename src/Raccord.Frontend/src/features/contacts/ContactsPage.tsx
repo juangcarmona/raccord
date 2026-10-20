@@ -30,9 +30,14 @@ export function ContactsPage() {
             <PageHeader
                 title={t("contacts.title")}
                 actions={
-                    <Link className="button button--primary" to="/contacts/new">
-                        {t("contacts.new")}
-                    </Link>
+                    <div className="actions">
+                        <Link className="button button--quiet" to="/contacts/import">
+                            {t("contacts.import.action")}
+                        </Link>
+                        <Link className="button button--primary" to="/contacts/new">
+                            {t("contacts.new")}
+                        </Link>
+                    </div>
                 }
             />
             <div className="panel">

@@ -1053,6 +1053,123 @@
         }
       }
     },
+    "/api/contacts/import/inspect": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactImportForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactImportInspectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contacts/import/preview": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactImportForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactImportPreviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contacts/import": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactImportForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactImportResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/contacts/{id}/people": {
       "get": {
         "tags": [
@@ -5665,6 +5782,169 @@
           }
         }
       },
+      "ContactImportForm": {
+        "required": [
+          "file",
+          "mapping",
+          "sha256",
+          "hasHeader"
+        ],
+        "type": "object",
+        "properties": {
+          "file": {
+            "$ref": "#/components/schemas/IFormFile"
+          },
+          "mapping": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sha256": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hasHeader": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "ContactImportInspectionResponse": {
+        "required": [
+          "fileType",
+          "headers",
+          "sampleRows"
+        ],
+        "type": "object",
+        "properties": {
+          "fileType": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sampleRows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "description": "Column names and sample rows shown before the user maps fields."
+      },
+      "ContactImportPreviewResponse": {
+        "required": [
+          "sha256",
+          "fileType",
+          "totalRowCount",
+          "validRowCount",
+          "rejectedRowCount",
+          "headers",
+          "rows"
+        ],
+        "type": "object",
+        "properties": {
+          "sha256": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "validRowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedRowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactImportRowResponse"
+            }
+          }
+        },
+        "description": "Validated preview of a supported contact spreadsheet."
+      },
+      "ContactImportResultResponse": {
+        "required": [
+          "importId",
+          "acceptedRowCount",
+          "rejectedRowCount",
+          "rejectedRows"
+        ],
+        "type": "object",
+        "properties": {
+          "importId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "acceptedRowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedRowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectedRows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactImportRowResponse"
+            }
+          }
+        },
+        "description": "Outcome of importing valid rows from a contact spreadsheet."
+      },
+      "ContactImportRowResponse": {
+        "required": [
+          "rowNumber",
+          "values",
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "rowNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "A row shown during preview or returned as a rejected import row."
+      },
       "ContactPageResponse": {
         "required": [
           "items",
@@ -7230,6 +7510,10 @@
             "type": "string"
           }
         }
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
       },
       "InboundEInvoiceResponse": {
         "required": [

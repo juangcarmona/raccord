@@ -9,7 +9,7 @@ const navigation = [
     { to: "/projects", key: "nav.projects" },
     { to: "/drafts", key: "nav.drafts" },
     { to: "/invoices", key: "nav.invoices" },
-    { to: "/customers", key: "nav.customers" },
+    { to: "/contacts", key: "nav.contacts" },
     { to: "/settings/issuer", key: "nav.settings" },
 ] as const;
 

@@ -2,7 +2,7 @@
 id: BR-PRJ-CONTACT-NUMBER-ASSIGNMENT
 type: business-rule
 title: "Contact numbers are auto-assigned when empty"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-ADD-CONTACT"
 uses-terms:

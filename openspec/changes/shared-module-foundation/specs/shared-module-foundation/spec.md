@@ -13,7 +13,7 @@ The extracted shared primitives SHALL preserve the existing behaviors of money, 
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
 <!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:652792a573f685a43f131a08b467a4de67c176c48e81ea5ba38aa1367e7c599c" -->
 <!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:aadb655c57c6486610d3a3346f45bdd19696a407dd954d4fc37cd9cefd3391ca" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:5ac10d9c4ab5f68acd5a18213fe4c9c0d50786549a1d94c760409214b13355f7" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
 
 #### Scenario: Existing financial and party tests after extraction
@@ -120,7 +120,7 @@ Shared persistence SHALL execute participating context writes on the same Postgr
 Extracted storage SHALL retain the current `Storage` options, document keys, overwrite semantics, content types, missing-document behavior and filesystem containment rules. The current HTTP endpoints and regenerated OpenAPI schemas SHALL remain compatible; this foundation SHALL not create module migrations or remove existing end-to-end selection entries.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:5ac10d9c4ab5f68acd5a18213fe4c9c0d50786549a1d94c760409214b13355f7" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:8138f31518261c618e3fef1dc93d5deaef6f55a4c3b2bfd41dfc0c5a4b75aecc" -->
 <!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->

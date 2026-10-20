@@ -2,7 +2,7 @@
 id: TERM-VENUE
 type: domain-term
 title: "Venue"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms:
   - "Location"

@@ -23,6 +23,11 @@ UUIDv7 identifiers (time-ordered). `IClock` is the only time source: UTC instant
 
 EF Core, snake_case schema, explicit migrations, `xmin` optimistic concurrency, unique indexes as a second safety net, append-only triggers (ADR-0004).
 
+Contact-person records are owned by the Contacts schema and reference their parent contact. A contact-row lock and a single unit-of-work transaction serialize designation changes; partial unique indexes enforce the one-default and one-administrative limits if application-level checks race. The project and invoice modules continue to consume the contact record through their existing stable identifier and snapshot boundaries.
+
+<!-- pdac:cite id="BR-CON-CONTACT-PERSON-DESIGNATIONS" digest="sha256:a0f4d168bcd4dc9375a7f21fd3341b41eb0d100c57fe6a1a25c54ea21986e27e" -->
+<!-- pdac:cite id="BR-PRJ-CONTACT-PERSON-NOT-MOVABLE" digest="sha256:5b2f5e3280eb10ed7873b1e8d55d3c9f3eb57a339aef663b822a17da062c86af" -->
+
 ## Immutability and integrity
 
 Issued representation + SHA-256 verified on every read (ADR-0005); documents regenerable byte-for-byte; audit events append-only.

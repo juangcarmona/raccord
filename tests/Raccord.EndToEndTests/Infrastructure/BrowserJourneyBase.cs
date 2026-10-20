@@ -196,14 +196,16 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     /// registered in the same page session (the project form needs a customer to bill), with one
     /// billable line, and lands on the project detail page showing the line.
     /// </summary>
-    protected async Task CreateProjectWithBillableLineAsync(IPage page)
+    protected async Task CreateProjectWithBillableLineAsync(IPage page, string? customerName = null)
     {
         await page.GotoAsync("/projects/new");
         await page.GetByLabel("Project name").FillAsync($"Promo E2E {RunStamp}");
         // The customer select lists every customer — the one this journey created is picked by
         // its unique legal name.
         await page.GetByLabel("Customer")
-            .SelectOptionAsync(new SelectOptionValue { Label = $"Productora E2E {RunStamp}" });
+            .SelectOptionAsync(
+                new SelectOptionValue { Label = customerName ?? $"Productora E2E {RunStamp}" }
+            );
         await page.GetByLabel("Start").FillAsync("2026-09-14");
         await page.GetByLabel("End").FillAsync("2026-09-18");
         await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();

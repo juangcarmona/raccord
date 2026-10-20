@@ -2,7 +2,7 @@
 id: TERM-CONTACT-NUMBER
 type: domain-term
 title: "Contact number"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms:
   - "Database number"

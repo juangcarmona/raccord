@@ -103,6 +103,64 @@ public sealed class ContactsDirectoryTests(PostgresContainer postgres) : IAsyncL
     }
 
     [Fact]
+    public async Task Contacts_Should_RejectDuplicateNumberOnEditWithoutChangingEitherContact()
+    {
+        var first = await CreateAsync(
+            new SaveContactRequest(
+                "Company",
+                "First Contact",
+                "CONTACT-100",
+                null,
+                null,
+                null,
+                ["Supplier"]
+            )
+        );
+        var second = await CreateAsync(
+            new SaveContactRequest(
+                "Company",
+                "Second Contact",
+                "CONTACT-200",
+                null,
+                null,
+                null,
+                ["Venue"]
+            )
+        );
+
+        var duplicate = await client.PutAsJsonAsync(
+            $"/api/contacts/{second.Id}",
+            new SaveContactRequest(
+                "PrivatePerson",
+                "Changed Contact",
+                first.ContactNumber,
+                null,
+                null,
+                null,
+                ["Customer"]
+            )
+        );
+
+        duplicate.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        var problem = await duplicate.Content.ReadFromJsonAsync<ProblemDetails>();
+        problem!.Extensions["code"]!.ToString().ShouldBe("contacts.number-duplicate");
+
+        var unchangedFirst = await client.GetFromJsonAsync<ContactResponse>(
+            $"/api/contacts/{first.Id}"
+        );
+        unchangedFirst!.LegalName.ShouldBe("First Contact");
+        unchangedFirst.ContactNumber.ShouldBe("CONTACT-100");
+        unchangedFirst.Roles.ShouldBe(["Supplier"]);
+
+        var unchangedSecond = await client.GetFromJsonAsync<ContactResponse>(
+            $"/api/contacts/{second.Id}"
+        );
+        unchangedSecond!.LegalName.ShouldBe("Second Contact");
+        unchangedSecond.ContactNumber.ShouldBe("CONTACT-200");
+        unchangedSecond.Roles.ShouldBe(["Venue"]);
+    }
+
+    [Fact]
     public async Task Contacts_Should_AssignDistinctNumbersDuringConcurrentCreation()
     {
         var creates = Enumerable

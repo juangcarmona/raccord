@@ -2,7 +2,7 @@
 id: CHG-PRJ-LIFECYCLE-CANCELLATION-303
 type: product-change
 title: Accept project periods, lifecycle and cancellation behavior
-status: proposed
+status: applied
 base-revision: "5a92fa0cc2ad8841410e007f10391e469492915f"
 operations:
   add:
@@ -64,19 +64,23 @@ Issue #303 delivers lifecycle and cancellation behavior through the web app. Acc
 
 Project details, project time schedules, planning and usage periods, fixed project statuses, cancellation actions, equipment availability after cancellation, and issued invoice history.
 
+## Accepted Product Decisions
+
+- #303 delivers the complete modeled project detail workflow, including existing contact selection, commercial overrides, notes, tasks and files. Contact/person maintenance, commercial defaults and project-context UI remain with #298–#302 and #389.
+- #303 includes planning/usage period designation, propagation to linked equipment/functions, document visibility and crew/transport function generation as defined by UC-PRJ-MANAGE-TIME-SCHEDULE.
+- Equipment reservation release on cancellation remains canonical here; #303 owns the project-side action and #384 verifies the cross-context implementation and journey.
+- Modeled automatic status progression remains accepted, while #303 implements manual status changes and cancellation and #304 implements automatic progression.
+- Issued invoice records and their invoiced project work remain immutable and linked in project history through status changes and cancellation.
+
 ## Open Questions
 
-- Does #303 include the complete existing project detail workflow, including contact selection, commercial overrides, notes, tasks and files, or should those behaviors remain with their own stories? Recommendation: retain the existing complete UC-PRJ-EDIT-PROJECT-DETAILS behavior while keeping contact/person maintenance, commercial defaults and project-context UI owned by #298–#302 and #389.
-- Confirm that planning/usage period designation, propagation to linked equipment/functions, document visibility and generation of crew/transport functions are all in #303. Recommendation: yes; they are part of the cited UC-PRJ-MANAGE-TIME-SCHEDULE.
-- Confirm that the product rule releasing equipment reservations on cancellation is canonical in this change, while its cross-context implementation/E2E integration remains #384. Recommendation: yes; #303 owns project cancellation and #384 verifies the warehouse integration.
-- Confirm that project status may advance automatically on the modeled quotation and warehouse events, while implementation of automatic progression stays in #304. Recommendation: yes; #303 covers manual status changes and cancellation, and #304 implements modeled automatic progression.
-- Confirm that preservation means issued invoice records and their invoiced project work remain immutable and linked in project history. Recommendation: yes; this change adds that rule and a concrete scenario from #303's acceptance criterion.
+None. The prior questions are resolved by the decisions above and the Owner's authorization of the requested scope.
 
 ## Product Acceptance
 
-- The Product Owner confirms the proposed periods, fixed status set, cancellation actions and status effects match intended product behavior.
-- The Product Owner resolves the open questions, including the boundaries between #303 and #384 and between #303 and adjacent contact, commercial and project-context stories.
-- The accepted model proves that issued invoices and their invoiced project work survive status changes and cancellation unchanged.
+The Product Owner authorized the requested unattended implementation of #303, #304 and the Projects workflow block, including the product-scope decisions above. This approval applies to the stated boundaries; implementation remains subject to the OpenSpec plan, tests, architecture decisions and CI evidence.
+
+The accepted model proves that issued invoices and their invoiced project work survive status changes and cancellation unchanged.
 
 ## Out of Scope
 

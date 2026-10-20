@@ -2,7 +2,7 @@
 id: SB-PRJ-CANCEL-WITHDRAWS-INVITATIONS
 type: structured-behaviour
 title: "Withdrawing invitations on cancellation"
-status: draft
+status: active
 illustrates:
   - "BR-PRJ-CANCELLATION-ACTIONS-APPLICABLE"
   - "UC-PRJ-CANCEL-PROJECT"

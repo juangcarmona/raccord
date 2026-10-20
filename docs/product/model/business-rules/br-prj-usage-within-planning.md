@@ -2,7 +2,7 @@
 id: BR-PRJ-USAGE-WITHIN-PLANNING
 type: business-rule
 title: "The usage period is shorter than the planning period"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-MANAGE-TIME-SCHEDULE"
   - "BC-PROJECTS"

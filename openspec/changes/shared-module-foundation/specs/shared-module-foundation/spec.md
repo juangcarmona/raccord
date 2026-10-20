@@ -60,7 +60,7 @@ The shared dispatcher SHALL validate input before invoking its handler, SHALL re
 The shared failure mapping SHALL preserve the existing status and problem-code conventions in `src/Raccord.Web/Api/ApiExceptionHandler.cs`. Validation and rule errors SHALL map to 422, conflict to 409, not found to 404, forbidden to 403 and unauthenticated to 401. Problem responses SHALL include `type = urn:raccord:problem:<code>` and `code`; validation issues SHALL retain the current `{code,message}` shape. Defects and integrity failures SHALL not be downgraded to business-rule failures.
 
 <!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
-<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:8138f31518261c618e3fef1dc93d5deaef6f55a4c3b2bfd41dfc0c5a4b75aecc" -->
 <!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
 
 #### Scenario: Already-issued draft
@@ -121,7 +121,7 @@ Extracted storage SHALL retain the current `Storage` options, document keys, ove
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
 <!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
-<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:8138f31518261c618e3fef1dc93d5deaef6f55a4c3b2bfd41dfc0c5a4b75aecc" -->
 <!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
 

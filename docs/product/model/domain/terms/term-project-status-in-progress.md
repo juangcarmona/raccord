@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-IN-PROGRESS
 type: domain-term
 title: "In progress (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

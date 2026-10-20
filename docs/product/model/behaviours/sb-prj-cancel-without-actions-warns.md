@@ -2,7 +2,7 @@
 id: SB-PRJ-CANCEL-WITHOUT-ACTIONS-WARNS
 type: structured-behaviour
 title: "Cancelling without actions keeps a warning"
-status: draft
+status: active
 illustrates:
   - "BR-PRJ-CANCEL-OPEN-ITEMS-WARNING"
   - "UC-PRJ-CANCEL-PROJECT"

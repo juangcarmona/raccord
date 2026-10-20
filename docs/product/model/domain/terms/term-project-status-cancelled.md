@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-CANCELLED
 type: domain-term
 title: "Cancelled (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

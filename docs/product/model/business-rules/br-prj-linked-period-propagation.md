@@ -2,7 +2,7 @@
 id: BR-PRJ-LINKED-PERIOD-PROPAGATION
 type: business-rule
 title: "Linked planning follows its period"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-MANAGE-TIME-SCHEDULE"
   - "UC-PRJ-SHIFT-PROJECT-TIMES"

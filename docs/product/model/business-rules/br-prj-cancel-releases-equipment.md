@@ -2,7 +2,7 @@
 id: BR-PRJ-CANCEL-RELEASES-EQUIPMENT
 type: business-rule
 title: "Cancelling releases equipment reservations"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-CANCEL-PROJECT"
 uses-terms:

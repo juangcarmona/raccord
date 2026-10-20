@@ -2,7 +2,7 @@
 id: BR-WHS-STATUS-INDEPENDENCE
 type: business-rule
 title: "Project status and equipment status are independent"
-status: draft
+status: active
 applies-to:
   - "UC-WHS-BOOK-MANUALLY"
   - "UC-WHS-REVIEW-WAREHOUSE-BOARD"

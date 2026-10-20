@@ -2,7 +2,7 @@
 id: BR-PRJ-CANCELLATION-ACTIONS-APPLICABLE
 type: business-rule
 title: "Only applicable cancellation actions are offered"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-CANCEL-PROJECT"
 uses-terms:

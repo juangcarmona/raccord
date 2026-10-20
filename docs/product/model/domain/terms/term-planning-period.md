@@ -2,7 +2,7 @@
 id: TERM-PLANNING-PERIOD
 type: domain-term
 title: "Planning period"
-status: draft
+status: active
 defined-in: BC-EQUIPMENT
 synonyms:
   - "equipment out period"

@@ -2,7 +2,7 @@
 id: UC-PRJ-MANAGE-TIME-SCHEDULE
 type: use-case
 title: "Maintain a project time schedule"
-status: draft
+status: active
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
 bounded-context: "BC-PROJECTS"

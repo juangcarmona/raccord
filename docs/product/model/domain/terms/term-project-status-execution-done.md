@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-EXECUTION-DONE
 type: domain-term
 title: "Execution done (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

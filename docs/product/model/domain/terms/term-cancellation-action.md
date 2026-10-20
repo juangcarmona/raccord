@@ -2,7 +2,7 @@
 id: TERM-CANCELLATION-ACTION
 type: domain-term
 title: "Cancellation action"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

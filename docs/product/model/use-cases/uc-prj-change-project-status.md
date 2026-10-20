@@ -2,7 +2,7 @@
 id: UC-PRJ-CHANGE-PROJECT-STATUS
 type: use-case
 title: "Change a project status manually"
-status: draft
+status: active
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
 bounded-context: "BC-PROJECTS"

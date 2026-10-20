@@ -236,7 +236,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         await page.GetByLabel("Issue date")
             .FillAsync(
-                (issueDate ?? OrganizationToday()).ToString(
+                (issueDate ?? OrganizationDateToday()).ToString(
                     "yyyy-MM-dd",
                     CultureInfo.InvariantCulture
                 )
@@ -250,7 +250,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         await page.GetByText("Issued and unalterable.").WaitForAsync();
     }
 
-    private static DateOnly OrganizationToday() =>
+    protected static DateOnly OrganizationDateToday() =>
         DateOnly.FromDateTime(
             TimeZoneInfo
                 .ConvertTime(

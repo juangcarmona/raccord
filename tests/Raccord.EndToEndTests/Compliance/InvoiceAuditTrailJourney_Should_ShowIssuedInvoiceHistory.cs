@@ -29,7 +29,7 @@ public sealed class InvoiceAuditTrailJourney_Should_ShowIssuedInvoiceHistory(
             {
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
-                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow));
+                await FinalizeDraftAsync(page);
 
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Audit trail" })
                     .WaitForAsync();

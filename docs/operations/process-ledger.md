@@ -2,6 +2,12 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Explicit transactions follow the database retry strategy
+
+- Observation: The cancellation journey reached the API but Npgsql rejected its explicit transaction because the configured retry strategy did not own the full transaction; after that was corrected, EF still returned tracked rows marked for deletion while the cancellation warning was recalculated.
+- Action: Execute the complete shared unit-of-work transaction through the participating context's execution strategy, and derive remaining-work warnings from the pre-action counts plus the actions selected by the user.
+- Check: Aspire cancellation journeys complete tasks, remove crew and vehicle assignments, withdraw invitations, preserve issued invoice history, and keep a warning only when work remains.
+
 ## 2026-10-20 · Verify stacked pull requests against the default branch
 
 - Observation: PR #99 merged the self-hosted responsibility record into `feat/20-templates`, while its issue was treated as integrated although neither the ADR nor its decision-index updates were present on `main`.

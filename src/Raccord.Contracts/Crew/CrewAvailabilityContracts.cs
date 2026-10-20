@@ -13,6 +13,7 @@ public enum CrewInvitationStatus
     Pending,
     Accepted,
     Declined,
+    Withdrawn,
 }
 
 public sealed record SetCrewAvailabilityRequest(

@@ -225,6 +225,63 @@ public sealed class ProjectCoordination(
         return new(projectId, project.ProgressPercent, [.. tasks.Select(ToResponse)]);
     }
 
+    /// <summary>Counts project tasks that are not in a completing status.</summary>
+    public async Task<int> CountOpenTasksAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatusIds = (
+            await coordination.ListTaskStatusesAsync(cancellationToken).ConfigureAwait(false)
+        )
+            .Where(status => status.CompletesProject)
+            .Select(status => status.Id)
+            .ToHashSet();
+        return tasks.Count(task => !completingStatusIds.Contains(task.StatusId));
+    }
+
+    /// <summary>Whether task completion can be offered for this project.</summary>
+    public async Task<bool> CanCompleteOpenTasksAsync(CancellationToken cancellationToken) =>
+        (await coordination.ListTaskStatusesAsync(cancellationToken).ConfigureAwait(false)).Any(
+            status => status.CompletesProject
+        );
+
+    /// <summary>Moves every open project task to a configured completing status.</summary>
+    public async Task<int> CompleteOpenTasksAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var statuses = await coordination
+            .ListTaskStatusesAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatus = statuses
+            .Where(status => status.CompletesProject)
+            .OrderBy(status => status.Position)
+            .FirstOrDefault();
+        if (completingStatus is null)
+            throw new BusinessRuleViolationException(
+                "projects.task-completion-status-not-configured",
+                "Configure a completing task status before completing open tasks."
+            );
+
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatusIds = statuses
+            .Where(status => status.CompletesProject)
+            .Select(status => status.Id)
+            .ToHashSet();
+        var openTasks = tasks.Where(task => !completingStatusIds.Contains(task.StatusId)).ToArray();
+        foreach (var (task, position) in openTasks.Select((task, index) => (task, index)))
+            task.Progress(completingStatus.Id, position);
+
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is not null)
+            project.UpdateProgress(100m);
+        return openTasks.Length;
+    }
+
     /// <summary>Moves a task and recalculates project progress.</summary>
     public async Task<ProjectTaskResponse?> ProgressTaskAsync(
         Guid taskId,

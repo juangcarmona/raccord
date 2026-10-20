@@ -5425,9 +5425,21 @@
         "properties": {
           "confirm": {
             "type": "boolean"
+          },
+          "completeOpenTasks": {
+            "type": "boolean",
+            "default": false
+          },
+          "removePlannedResources": {
+            "type": "boolean",
+            "default": false
+          },
+          "withdrawInvitations": {
+            "type": "boolean",
+            "default": false
           }
         },
-        "description": "Confirms project cancellation after reviewing open work."
+        "description": "Confirms project cancellation and the selected applicable actions."
       },
       "ChangeProjectStatusRequest": {
         "required": [
@@ -8091,7 +8103,9 @@
         "required": [
           "openTaskCount",
           "plannedCrewCount",
-          "plannedTransportCount"
+          "plannedTransportCount",
+          "activeInvitationCount",
+          "canCompleteOpenTasks"
         ],
         "type": "object",
         "properties": {
@@ -8106,6 +8120,13 @@
           "plannedTransportCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "activeInvitationCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "canCompleteOpenTasks": {
+            "type": "boolean"
           }
         },
         "description": "Open operational work that the cancellation warning will retain."

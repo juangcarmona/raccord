@@ -38,6 +38,9 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
         Schemas["ProjectCancellationPreviewResponse"] | null
     >(null);
     const [cancellationError, setCancellationError] = useState<unknown>(null);
+    const [completeOpenTasks, setCompleteOpenTasks] = useState(false);
+    const [removePlannedResources, setRemovePlannedResources] = useState(false);
+    const [withdrawInvitations, setWithdrawInvitations] = useState(false);
 
     function toggle(lineId: string) {
         setSelected((current) => {
@@ -117,6 +120,9 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                 }),
             );
             setCancellationPreview(preview);
+            setCompleteOpenTasks(false);
+            setRemovePlannedResources(false);
+            setWithdrawInvitations(false);
         } catch (failure) {
             setCancellationError(failure);
         }
@@ -129,7 +135,12 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
             await unwrap(
                 api.POST("/api/projects/{id}/cancellation", {
                     params: { path: { id: project.id } },
-                    body: { confirm: true },
+                    body: {
+                        confirm: true,
+                        completeOpenTasks,
+                        removePlannedResources,
+                        withdrawInvitations,
+                    },
                 }),
             );
             setCancellationPreview(null);
@@ -274,6 +285,58 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         <p>{t("projects.cancellationNoOpenItems")}</p>
                     )}
                     <p>{t("projects.cancellationConfirmHelp")}</p>
+                    {cancellationPreview.activeInvitationCount > 0 ||
+                    cancellationPreview.plannedCrewCount > 0 ||
+                    cancellationPreview.plannedTransportCount > 0 ||
+                    (cancellationPreview.canCompleteOpenTasks && cancellationPreview.openTaskCount > 0) ? (
+                        <fieldset>
+                            <legend>{t("projects.cancellationActions")}</legend>
+                            {cancellationPreview.canCompleteOpenTasks && cancellationPreview.openTaskCount > 0 && (
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={completeOpenTasks}
+                                        onChange={(event) => {
+                                            setCompleteOpenTasks(event.target.checked);
+                                        }}
+                                    />
+                                    {t("projects.cancellationCompleteTasks", {
+                                        count: cancellationPreview.openTaskCount,
+                                    })}
+                                </label>
+                            )}
+                            {(cancellationPreview.plannedCrewCount > 0 ||
+                                cancellationPreview.plannedTransportCount > 0) && (
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={removePlannedResources}
+                                        onChange={(event) => {
+                                            setRemovePlannedResources(event.target.checked);
+                                        }}
+                                    />
+                                    {t("projects.cancellationRemoveResources", {
+                                        crew: cancellationPreview.plannedCrewCount,
+                                        transport: cancellationPreview.plannedTransportCount,
+                                    })}
+                                </label>
+                            )}
+                            {cancellationPreview.activeInvitationCount > 0 && (
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={withdrawInvitations}
+                                        onChange={(event) => {
+                                            setWithdrawInvitations(event.target.checked);
+                                        }}
+                                    />
+                                    {t("projects.cancellationWithdrawInvitations", {
+                                        count: cancellationPreview.activeInvitationCount,
+                                    })}
+                                </label>
+                            )}
+                        </fieldset>
+                    ) : null}
                     <div className="actions">
                         <button
                             type="button"

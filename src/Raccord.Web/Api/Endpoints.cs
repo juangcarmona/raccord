@@ -13,6 +13,7 @@ using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
+using Raccord.Modules.Projects.Contracts;
 using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Authorization;
@@ -628,27 +629,22 @@ internal static class Endpoints
                 Guid id,
                 ProjectWorkspace workspace,
                 ProjectCoordination coordination,
-                CrewPlanningCatalog planning,
+                IProjectCancellationOperations cancellationOperations,
                 CancellationToken ct
             ) =>
             {
                 if (await workspace.GetAsync(id, ct) is null)
                     return TypedResults.NotFound();
 
-                var board = await coordination.GetBoardAsync(id, ct);
-                var taskStatuses = await coordination.ListTaskStatusesAsync(ct);
-                var completingStatusIds = taskStatuses
-                    .Where(status => status.CompletesProject)
-                    .Select(status => status.Id)
-                    .ToHashSet();
-                var openTaskCount =
-                    board?.Tasks.Count(task => !completingStatusIds.Contains(task.StatusId)) ?? 0;
-                var functions = await planning.ListFunctionsAsync(id, ct);
+                var openTaskCount = await coordination.CountOpenTasksAsync(id, ct);
+                var planning = await cancellationOperations.PreviewAsync(id, ct);
                 return TypedResults.Ok(
                     new ProjectCancellationPreviewResponse(
                         openTaskCount,
-                        functions.Sum(function => function.Crew.Count),
-                        functions.Sum(function => function.Vehicles.Count)
+                        planning.PlannedCrewCount,
+                        planning.PlannedTransportCount,
+                        planning.ActiveInvitationCount,
+                        await coordination.CanCompleteOpenTasksAsync(ct)
                     )
                 );
             }
@@ -659,34 +655,10 @@ internal static class Endpoints
                 Guid id,
                 CancelProjectRequest request,
                 ProjectWorkspace workspace,
-                ProjectCoordination coordination,
-                CrewPlanningCatalog planning,
                 CancellationToken ct
             ) =>
             {
-                var board = await coordination.GetBoardAsync(id, ct);
-                if (board is null)
-                    return TypedResults.NotFound();
-                var taskStatuses = await coordination.ListTaskStatusesAsync(ct);
-                var completingStatusIds = taskStatuses
-                    .Where(status => status.CompletesProject)
-                    .Select(status => status.Id)
-                    .ToHashSet();
-                var hasOpenTasks = board.Tasks.Any(task =>
-                    !completingStatusIds.Contains(task.StatusId)
-                );
-                var functions = await planning.ListFunctionsAsync(id, ct);
-                var hasPlannedResources = functions.Any(function =>
-                    function.Crew.Count > 0 || function.Vehicles.Count > 0
-                );
-                return
-                    await workspace.CancelAsync(
-                        id,
-                        request,
-                        hasOpenTasks || hasPlannedResources,
-                        ct
-                    )
-                        is { } project
+                return await workspace.CancelAsync(id, request, ct) is { } project
                     ? TypedResults.Ok(project)
                     : TypedResults.NotFound();
             }

@@ -12,7 +12,9 @@ public sealed class ProjectWorkspace(
     IBillableWork projects,
     IPartyDirectory parties,
     IEquipmentStock equipment,
-    IProjectsUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork,
+    ProjectCoordination coordination,
+    IProjectCancellationOperations cancellationOperations
 )
 {
     /// <summary>Creates a project for an existing customer.</summary>
@@ -165,7 +167,6 @@ public sealed class ProjectWorkspace(
     public async Task<ProjectResponse?> CancelAsync(
         Guid projectId,
         CancelProjectRequest request,
-        bool hasOpenItems,
         CancellationToken cancellationToken
     )
     {
@@ -176,17 +177,100 @@ public sealed class ProjectWorkspace(
                 "Confirm project cancellation before it is saved."
             );
 
+        return await unitOfWork
+            .ExecuteAsync(ct => CancelInTransactionAsync(projectId, request, ct), cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    private async Task<ProjectResponse?> CancelInTransactionAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        CancellationToken cancellationToken
+    )
+    {
         var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
         if (project is null)
             return null;
 
-        project.Cancel(hasOpenItems, DateTimeOffset.UtcNow);
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var openTaskCount = await coordination
+            .CountOpenTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var planning = await cancellationOperations
+            .PreviewAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        await ValidateCancellationActionsAsync(request, openTaskCount, planning, cancellationToken)
+            .ConfigureAwait(false);
+        await ApplyCancellationActionsAsync(projectId, request, cancellationToken)
+            .ConfigureAwait(false);
+
+        project.Cancel(HasRemainingWork(request, openTaskCount, planning), DateTimeOffset.UtcNow);
         var customer = await parties
             .FindAsync(project.CustomerId, cancellationToken)
             .ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
+
+    private async Task ValidateCancellationActionsAsync(
+        CancelProjectRequest request,
+        int openTaskCount,
+        ProjectCancellationOperationsSummary planning,
+        CancellationToken cancellationToken
+    )
+    {
+        var canCompleteTasks = await coordination
+            .CanCompleteOpenTasksAsync(cancellationToken)
+            .ConfigureAwait(false);
+        if (request.CompleteOpenTasks && (openTaskCount == 0 || !canCompleteTasks))
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Completing tasks is not available for this project."
+            );
+        if (
+            request.RemovePlannedResources
+            && planning.PlannedCrewCount + planning.PlannedTransportCount == 0
+        )
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Removing planned resources is not available for this project."
+            );
+        if (request.WithdrawInvitations && planning.ActiveInvitationCount == 0)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Withdrawing invitations is not available for this project."
+            );
+    }
+
+    private async Task ApplyCancellationActionsAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        if (request.CompleteOpenTasks)
+            await coordination
+                .CompleteOpenTasksAsync(projectId, cancellationToken)
+                .ConfigureAwait(false);
+        await cancellationOperations
+            .ApplyAsync(
+                projectId,
+                request.RemovePlannedResources,
+                request.WithdrawInvitations,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    private static bool HasRemainingWork(
+        CancelProjectRequest request,
+        int openTaskCount,
+        ProjectCancellationOperationsSummary planning
+    ) =>
+        (!request.CompleteOpenTasks && openTaskCount > 0)
+        || (
+            !request.RemovePlannedResources
+            && planning.PlannedCrewCount + planning.PlannedTransportCount > 0
+        )
+        || (!request.WithdrawInvitations && planning.ActiveInvitationCount > 0);
 
     /// <summary>Configures a project's fixed refundable deposit.</summary>
     public async Task<ProjectResponse?> SetDepositAsync(

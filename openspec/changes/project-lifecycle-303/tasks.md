@@ -13,10 +13,10 @@
 - [ ] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period create/edit/order/display operations and linked-period propagation through the Projects module.
 - [ ] Add project detail UI for the accepted editable fields and schedule.
-- [ ] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.
+- [x] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.
 - [x] Prove status and cancellation leave issued invoices and invoiced work unchanged.
 - [x] Add project edit and manual status journeys to the PR E2E selection.
-- [x] Add a Playwright journey for cancellation with open tasks and invoice history.
+- [x] Add Playwright cancellation journeys for open tasks, crew and vehicle assignments, invitations, persistent warnings and issued invoice history.
 - [ ] Add a Playwright journey for schedule validation.
 - [ ] Update affected architecture and operations documentation.
 - [ ] Run the repository Done checks and reconcile all evidence.

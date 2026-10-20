@@ -42,14 +42,21 @@ public sealed record UpdateProjectDetailsRequest(
     Guid? TeamId = null
 );
 
-/// <summary>Confirms project cancellation after reviewing open work.</summary>
-public sealed record CancelProjectRequest(bool Confirm);
+/// <summary>Confirms project cancellation and the selected applicable actions.</summary>
+public sealed record CancelProjectRequest(
+    bool Confirm,
+    bool CompleteOpenTasks = false,
+    bool RemovePlannedResources = false,
+    bool WithdrawInvitations = false
+);
 
 /// <summary>Open operational work that the cancellation warning will retain.</summary>
 public sealed record ProjectCancellationPreviewResponse(
     int OpenTaskCount,
     int PlannedCrewCount,
-    int PlannedTransportCount
+    int PlannedTransportCount,
+    int ActiveInvitationCount,
+    bool CanCompleteOpenTasks
 );
 
 /// <summary>Records incoming project work.</summary>

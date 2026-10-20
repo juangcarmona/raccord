@@ -58,11 +58,16 @@ public static class DependencyInjection
         services.AddScoped<SharedConnectionUnitOfWork>(provider =>
         {
             var db = provider.GetRequiredService<RaccordDbContext>();
+            var participants = provider.GetRequiredService<ParticipatingContexts>();
+            participants.Register(db);
             return new SharedConnectionUnitOfWork(
                 (NpgsqlConnection)db.Database.GetDbConnection(),
-                provider.GetRequiredService<ParticipatingContexts>()
+                participants
             );
         });
+        services.AddScoped<Raccord.BuildingBlocks.Persistence.IUnitOfWork>(provider =>
+            provider.GetRequiredService<SharedConnectionUnitOfWork>()
+        );
         services.AddScoped<IPartyDirectory, CustomerRepository>();
         services.AddScoped<IPartyWriter>(provider =>
             provider.GetRequiredService<IPartyDirectory>() as IPartyWriter
@@ -71,6 +76,7 @@ public static class DependencyInjection
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
         services.AddScoped<IBillableWork, ProjectRepository>();
         services.AddScoped<IProjectCoordinationStore, ProjectCoordinationRepository>();
+        services.AddScoped<IProjectCancellationOperations, ProjectCancellationOperations>();
         services.AddScoped<IProjectContextStore, ProjectContextRepository>();
         services.AddScoped<IProjectTimeStore, ProjectTimeRepository>();
         services.AddScoped<IProjectsUnitOfWork, ProjectsUnitOfWork>();

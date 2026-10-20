@@ -5893,9 +5893,15 @@ export interface components {
             stream: string;
             url: string;
         };
-        /** @description Confirms project cancellation after reviewing open work. */
+        /** @description Confirms project cancellation and the selected applicable actions. */
         CancelProjectRequest: {
             confirm: boolean;
+            /** @default false */
+            completeOpenTasks: boolean;
+            /** @default false */
+            removePlannedResources: boolean;
+            /** @default false */
+            withdrawInvitations: boolean;
         };
         /** @description Changes a project's fixed lifecycle status. */
         ChangeProjectStatusRequest: {
@@ -6826,6 +6832,9 @@ export interface components {
             plannedCrewCount: number;
             /** Format: int32 */
             plannedTransportCount: number;
+            /** Format: int32 */
+            activeInvitationCount: number;
+            canCompleteOpenTasks: boolean;
         };
         ProjectContextEntryResponse: {
             /** Format: uuid */

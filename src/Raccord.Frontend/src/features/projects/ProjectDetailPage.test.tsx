@@ -156,7 +156,13 @@ describe("ProjectDetailPage", () => {
             ...customerApi,
             "GET /api/projects/p1": () => json(project([])),
             "GET /api/projects/p1/cancellation-preview": () =>
-                json({ openTaskCount: 2, plannedCrewCount: 1, plannedTransportCount: 0 }),
+                json({
+                    openTaskCount: 2,
+                    plannedCrewCount: 0,
+                    plannedTransportCount: 0,
+                    activeInvitationCount: 0,
+                    canCompleteOpenTasks: true,
+                }),
             "POST /api/projects/p1/cancellation": () =>
                 json({ ...project([]), status: "cancelled", hasCancellationWarning: true }),
         });
@@ -165,11 +171,17 @@ describe("ProjectDetailPage", () => {
         const user = userEvent.setup();
         await user.click(await screen.findByRole("button", { name: "Cancelar proyecto" }));
         expect(await screen.findByRole("alert")).toHaveTextContent(
-            "Quedan 2 tareas abiertas, 1 personas asignadas y 0 vehículos asignados.",
+            "Quedan 2 tareas abiertas, 0 personas asignadas y 0 vehículos asignados.",
         );
+        await user.click(screen.getByRole("checkbox", { name: "Completar 2 tareas abiertas" }));
         await user.click(screen.getByRole("button", { name: "Confirmar cancelación" }));
 
-        expect(requests.find((request) => request.method === "POST")?.body).toEqual({ confirm: true });
+        expect(requests.find((request) => request.method === "POST")?.body).toEqual({
+            confirm: true,
+            completeOpenTasks: true,
+            removePlannedResources: false,
+            withdrawInvitations: false,
+        });
     });
 
     it("reports a missing project instead of an empty page", async () => {

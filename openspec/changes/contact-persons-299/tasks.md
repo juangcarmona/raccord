@@ -2,7 +2,7 @@
 
 ## 1. Contacts domain and persistence
 
-- [ ] 1.1 Add failing domain tests for valid person creation and editing, required names, supported contact details, one default and one administrative person per contact, failed designation changes preserving the previous state, and immutable parent ownership; implement the contact-person model after the tests fail for the expected reason.
+- [x] 1.1 Add failing domain tests for valid person creation and editing, required names, supported contact details, one default and one administrative person per contact, failed designation changes preserving the previous state, and immutable parent ownership; implement the contact-person model after the tests fail for the expected reason.
 - [ ] 1.2 Add failing persistence tests for parent-scoped list/create/edit, one-default and one-administrative constraints, concurrent default reassignment, and atomic rollback; add the migration and persistence adapter behavior required to pass them.
 - [ ] 1.3 Add regression tests proving contact-person writes do not change project contact associations or issued invoice party snapshots.
 

@@ -2181,7 +2181,39 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateProjectDetailsRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
         post?: never;
         delete?: never;
         options?: never;
@@ -7225,6 +7257,18 @@ export interface components {
         UpdateProfileRequest: {
             displayName: null | string;
             preferredLanguage: null | string;
+        };
+        /** @description Edits the identifying and scheduling details of an existing project. */
+        UpdateProjectDetailsRequest: {
+            name: string;
+            /** Format: date */
+            startDate: string;
+            /** Format: date */
+            endDate: string;
+            /** Format: uuid */
+            projectTypeId?: null | string;
+            /** Format: uuid */
+            teamId?: null | string;
         };
         UpdateVehicleRequest: {
             registrationNumber: string;

@@ -99,6 +99,31 @@ describe("ProjectDetailPage", () => {
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({ status: "confirmed" });
     });
 
+    it("saves edits to a project's name and period", async () => {
+        const requests = stubApi({
+            "GET /api/projects/p1": () => json(project([])),
+            "PUT /api/projects/p1": () => json(project([])),
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.clear(await screen.findByRole("textbox", { name: "Nombre del proyecto" }));
+        await user.type(screen.getByRole("textbox", { name: "Nombre del proyecto" }), "Rodaje verano");
+        await user.clear(screen.getByLabelText("Inicio"));
+        await user.type(screen.getByLabelText("Inicio"), "2026-10-01");
+        await user.clear(screen.getByLabelText("Fin"));
+        await user.type(screen.getByLabelText("Fin"), "2026-10-03");
+        await user.click(screen.getByRole("button", { name: "Guardar datos" }));
+
+        expect(requests.find((request) => request.method === "PUT")?.body).toEqual({
+            name: "Rodaje verano",
+            startDate: "2026-10-01",
+            endDate: "2026-10-03",
+            projectTypeId: null,
+            teamId: null,
+        });
+    });
+
     it("reports a missing project instead of an empty page", async () => {
         stubApi({});
 

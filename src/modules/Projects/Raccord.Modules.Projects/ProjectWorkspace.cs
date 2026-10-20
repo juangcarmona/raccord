@@ -130,6 +130,32 @@ public sealed class ProjectWorkspace(
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
 
+    /// <summary>Edits a project's identifying and scheduling details.</summary>
+    public async Task<ProjectResponse?> EditDetailsAsync(
+        Guid projectId,
+        UpdateProjectDetailsRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        project.EditDetails(
+            request.Name,
+            request.StartDate,
+            request.EndDate,
+            request.ProjectTypeId,
+            request.TeamId
+        );
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
     /// <summary>Configures a project's fixed refundable deposit.</summary>
     public async Task<ProjectResponse?> SetDepositAsync(
         Guid projectId,

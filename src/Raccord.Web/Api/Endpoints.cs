@@ -610,6 +610,18 @@ internal static class Endpoints
                     ? TypedResults.Ok(project)
                     : TypedResults.NotFound()
         );
+        projects.MapPut(
+            "/{id:guid}",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                UpdateProjectDetailsRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.EditDetailsAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
         projects.MapPost(
             "/{id:guid}/functions",
             async (

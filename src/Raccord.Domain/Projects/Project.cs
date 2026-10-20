@@ -115,6 +115,38 @@ public sealed class Project
         Status = status;
     }
 
+    /// <summary>Updates the project's editable identifying and scheduling details.</summary>
+    public void EditDetails(
+        string name,
+        DateOnly startDate,
+        DateOnly endDate,
+        Guid? projectTypeId,
+        Guid? teamId
+    )
+    {
+        if (Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before editing its operational details."
+            );
+        if (string.IsNullOrWhiteSpace(name))
+            throw new BusinessRuleViolationException(
+                "projects.name-required",
+                "Project name is required."
+            );
+        if (endDate < startDate)
+            throw new BusinessRuleViolationException(
+                "projects.period-invalid",
+                "A project cannot end before it starts."
+            );
+
+        Name = name.Trim();
+        StartDate = startDate;
+        EndDate = endDate;
+        ProjectTypeId = projectTypeId;
+        TeamId = teamId;
+    }
+
     /// <summary>Billable work recorded for the project.</summary>
     public IReadOnlyList<BillableLine> BillableLines =>
         [.. billableLines.OrderBy(line => line.Position)];

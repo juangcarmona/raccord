@@ -23,7 +23,8 @@ public sealed class ProjectLifecycleJourney_Should_ChangeStatus(DistributedAppFi
 
                 var status = page.GetByRole(AriaRole.Combobox, new() { Name = "Status" });
                 await status.SelectOptionAsync("confirmed");
-                await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true })
+                    .ClickAsync();
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Billable lines" })
                     .WaitForAsync();
                 await page.ReloadAsync();

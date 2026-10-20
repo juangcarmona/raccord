@@ -32,6 +32,15 @@ public sealed record CreateProjectRequest(
 /// <summary>Changes a project's fixed lifecycle status.</summary>
 public sealed record ChangeProjectStatusRequest(string Status);
 
+/// <summary>Edits the identifying and scheduling details of an existing project.</summary>
+public sealed record UpdateProjectDetailsRequest(
+    string Name,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? ProjectTypeId = null,
+    Guid? TeamId = null
+);
+
 /// <summary>Records incoming project work.</summary>
 public sealed record ReceiveProjectRequest(
     string Name,

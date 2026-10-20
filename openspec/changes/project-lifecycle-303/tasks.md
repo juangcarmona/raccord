@@ -6,16 +6,17 @@
 - [x] Expose project status in API responses and add the manual status endpoint.
 - [x] Add project status selection in the project detail page and status in project listings.
 - [x] Add a browser journey proving status changes persist after reload and register it in the PR E2E selection.
-- [x] Regenerate the OpenAPI and frontend API contracts for the status endpoint and response fields.
-- [ ] Add editable project detail fields and duplicate project number validation.
+- [x] Regenerate the OpenAPI and frontend API contracts for the project edit and status endpoints and response fields.
+- [x] Edit a project's name and date range through the project detail API and screen, with domain validation and a reloadable browser journey.
+- [ ] Add the remaining accepted project detail fields, including customer/contact selection, commercial and account manager values, and duplicate project number validation.
 - [ ] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period create/edit/order/display operations and linked-period propagation through the Projects module.
 - [ ] Add project detail UI for the accepted editable fields and schedule.
 - [ ] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.
 - [ ] Prove status and cancellation leave issued invoices and invoiced work unchanged.
-- [ ] Add Playwright journeys for project editing, schedule validation, and cancellation with invoice history; add them to the PR E2E selection.
+- [x] Add project edit and manual status journeys to the PR E2E selection.
+- [ ] Add Playwright journeys for schedule validation and cancellation with invoice history.
 - [ ] Update affected architecture and operations documentation.
-- [ ] Run the repository Done checks and reconcile all evidence.
 - [ ] Run the repository Done checks and reconcile all evidence.
 
 <!-- pdac:cite id="UC-PRJ-EDIT-PROJECT-DETAILS" digest="sha256:cc87eb90988fdbd32fb2e626a02aa7154783ffc7b161702a3c2bf4ace9c2bdb7" -->

@@ -81,6 +81,61 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void Editing_project_details_Should_update_the_name_and_period()
+    {
+        var project = NewProject();
+        var start = new DateOnly(2026, 6, 1);
+        var end = new DateOnly(2026, 6, 3);
+
+        project.EditDetails("  Summer campaign  ", start, end, null, null);
+
+        project.Name.ShouldBe("Summer campaign");
+        project.StartDate.ShouldBe(start);
+        project.EndDate.ShouldBe(end);
+    }
+
+    [Fact]
+    public void Editing_project_details_Should_reject_an_invalid_period_without_changing_the_project()
+    {
+        var project = NewProject();
+
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.EditDetails(
+                "Summer campaign",
+                new DateOnly(2026, 6, 3),
+                new DateOnly(2026, 6, 1),
+                null,
+                null
+            )
+        );
+
+        error.Code.ShouldBe("projects.period-invalid");
+        project.Name.ShouldBe("Spring campaign shoot");
+        project.StartDate.ShouldBe(new DateOnly(2026, 5, 4));
+        project.EndDate.ShouldBe(new DateOnly(2026, 5, 8));
+    }
+
+    [Fact]
+    public void A_completed_project_Should_require_reopening_before_details_are_edited()
+    {
+        var project = NewProject();
+        project.ChangeStatus(ProjectStatus.Complete);
+
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.EditDetails(
+                "Summer campaign",
+                new DateOnly(2026, 6, 1),
+                new DateOnly(2026, 6, 3),
+                null,
+                null
+            )
+        );
+
+        error.Code.ShouldBe("projects.complete-read-only");
+        project.Name.ShouldBe("Spring campaign shoot");
+    }
+
+    [Fact]
     public void Reserving_lines_for_a_draft_Should_move_them_out_of_the_unbilled_pool()
     {
         var project = NewProject();

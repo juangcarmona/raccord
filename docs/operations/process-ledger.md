@@ -466,6 +466,6 @@ Every completed FF loop must review this ledger, add new observations and action
 
 ## 2026-10-20 · Project lifecycle browser checks use role-specific selectors
 
-- **Observation:** The first status journey matched both a labelled section and its labelled select when it used `GetByLabel("Status")`; parallel project builds also contended while trying to install Git hooks into the shared worktree config.
-- **Action:** Select form controls by their semantic role when a section shares the same accessible name, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
+- **Observation:** The project status journey matched both a labelled section and its select, then later matched both “Save” and “Save details” buttons; parallel project builds also contended while installing Git hooks into shared worktree config.
+- **Action:** Select form controls by semantic role and use exact button names where labels overlap, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
 - **Check:** The status Playwright journey passes after reload using the named combobox, and a Release solution build passes with zero warnings under `HUSKY=0`.

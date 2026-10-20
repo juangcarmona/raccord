@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, type SubmitEvent } from "react";
 import { useNavigate, useParams } from "react-router";
 import { api, unwrap, type Schemas } from "../../shared/api/client";
 import { useQuery } from "../../shared/hooks/useQuery";
 import { useI18n } from "../../shared/i18n/I18nProvider";
-import { FormError, SelectField } from "../../shared/ui/Form";
+import { Field, FormError, SelectField } from "../../shared/ui/Form";
 import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
 import { AddBillableLineForm } from "./AddBillableLineForm";
+import { formText } from "../../shared/ui/formText";
 
 const projectStatuses = [
     { value: "inquiry", label: "projects.status.inquiry" },
@@ -31,6 +32,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const [busy, setBusy] = useState(false);
     const [status, setStatus] = useState(project.status);
     const [error, setError] = useState<unknown>(null);
+    const [detailsError, setDetailsError] = useState<unknown>(null);
 
     function toggle(lineId: string) {
         setSelected((current) => {
@@ -74,6 +76,32 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
         }
     }
 
+    async function saveDetails(event: SubmitEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        setBusy(true);
+        setDetailsError(null);
+        try {
+            await unwrap(
+                api.PUT("/api/projects/{id}", {
+                    params: { path: { id: project.id } },
+                    body: {
+                        name: formText(data, "name"),
+                        startDate: formText(data, "startDate"),
+                        endDate: formText(data, "endDate"),
+                        projectTypeId: project.projectTypeId ?? null,
+                        teamId: project.teamId ?? null,
+                    },
+                }),
+            );
+            onChanged();
+        } catch (failure) {
+            setDetailsError(failure);
+        } finally {
+            setBusy(false);
+        }
+    }
+
     return (
         <>
             <PageHeader title={project.name}>
@@ -81,6 +109,44 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                     {project.customerName} · {format.date(project.startDate)} – {format.date(project.endDate)}
                 </p>
             </PageHeader>
+
+            <section aria-labelledby="project-details-heading" className="panel">
+                <h2 id="project-details-heading">{t("projects.details")}</h2>
+                <form
+                    className="grid-form"
+                    onSubmit={(event) => {
+                        void saveDetails(event);
+                    }}
+                >
+                    <Field
+                        label={t("projects.name")}
+                        name="name"
+                        required
+                        maxLength={200}
+                        defaultValue={project.name}
+                    />
+                    <Field
+                        label={t("projects.startDate")}
+                        name="startDate"
+                        type="date"
+                        required
+                        defaultValue={project.startDate}
+                    />
+                    <Field
+                        label={t("projects.endDate")}
+                        name="endDate"
+                        type="date"
+                        required
+                        defaultValue={project.endDate}
+                    />
+                    <div className="actions">
+                        <button type="submit" className="button button--primary" disabled={busy}>
+                            {t("projects.saveDetails")}
+                        </button>
+                    </div>
+                    <FormError error={detailsError} />
+                </form>
+            </section>
 
             <section aria-labelledby="project-status-heading" className="panel">
                 <h2 id="project-status-heading">{t("projects.status")}</h2>

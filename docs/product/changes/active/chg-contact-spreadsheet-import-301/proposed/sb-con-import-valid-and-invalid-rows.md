@@ -6,8 +6,8 @@ status: active
 illustrates:
   - "BR-CON-IMPORT-ROW-ATOMICITY"
 given:
-  - "A supported spreadsheet contains three valid contact rows and one row with an invalid required value"
-when: "An authorized administrator reviews the mapping and confirms the import"
+  - "A supported CSV or XLSX spreadsheet contains three valid contact rows and one row with an invalid required value"
+when: "An authorized administrator uploads the file, maps its columns, reviews the preview and row validation, then confirms the import"
 then:
   - "The three valid rows each create one complete contact"
   - "The invalid row creates no contact and is listed with its reason"

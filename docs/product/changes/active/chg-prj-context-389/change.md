@@ -5,7 +5,8 @@ title: Accept project notes, files, metadata and history workflows
 status: proposed
 base-revision: "5a92fa0cc2ad8841410e007f10391e469492915f"
 operations:
-  add: []
+  add:
+    - SB-PRJ-PROJECT-CONTEXT-AND-HISTORY
   modify:
     - UC-PRJ-ADD-NOTE
     - UC-PRJ-ATTACH-FILE
@@ -62,6 +63,7 @@ Project notes, file attachments and folders, workspace custom fields, project ta
 - The Product Owner resolves each open question and approves this Product Change.
 - The accepted definition makes the seven context workflows, file and note requirements, and their governing visibility, authorization, confidentiality, sharing and history rules active and coherent.
 - The #389 browser journey uses synthetic files and records to add a note and attachment, organize project context and inspect history, while asserting modeled access boundaries.
+- The journey also proves that a project tag/filter, an administrator-defined field and a saved view are available in the project workspace.
 - Document templates and generated project documents remain in #329–#330.
 
 ## Out of Scope

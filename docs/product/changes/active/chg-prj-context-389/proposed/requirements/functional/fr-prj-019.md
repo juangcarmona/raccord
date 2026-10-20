@@ -9,6 +9,7 @@ derived-from:
   - "BR-PRJ-NOTE-DISPLAY"
 verification:
   - scenario-ref: "SB-PRJ-NOTE-ON-PACKING-SLIP-ONLY"
+  - scenario-ref: "SB-PRJ-PROJECT-CONTEXT-AND-HISTORY"
 uses-terms:
   - "TERM-PROJECT-NOTE"
 provenance:

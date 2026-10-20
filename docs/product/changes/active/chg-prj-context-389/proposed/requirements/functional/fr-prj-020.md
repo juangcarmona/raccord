@@ -11,6 +11,7 @@ derived-from:
   - "BR-PRJ-FILE-RIGHTS"
 verification:
   - scenario-ref: "SB-PRJ-CONFIDENTIAL-FOLDER-HIDDEN"
+  - scenario-ref: "SB-PRJ-PROJECT-CONTEXT-AND-HISTORY"
   - scenario: "Deleting a folder deletes the files it contains"
 uses-terms:
   - "TERM-ATTACHED-FILE"

@@ -6,8 +6,8 @@
 - [ ] 1.2 Add failing persistence tests for parent-scoped list/create/edit, one-default and one-administrative constraints, concurrent default reassignment, and atomic rollback; add the migration and persistence adapter behavior required to pass them.
 - [ ] 1.3 Add regression tests proving contact-person writes do not change project contact associations or issued invoice party snapshots.
 
-<!-- pdac:cite id="FR-CON-002" digest="sha256:a04f4522eb929f86d105ac81b4f68aea091803e9d1a4b18e9210d2a50e4421d7" -->
-<!-- pdac:cite id="BR-CON-CONTACT-PERSON-DESIGNATIONS" digest="sha256:47e4d43d3335cc85f1faafee6ec1eca70373441fe54704126c5c84417748ed8f" -->
+<!-- pdac:cite id="FR-CON-002" digest="sha256:d44280cb004062fbc3bd34228233dcfa03b2b6e51ee64b4f717652351f721feb" -->
+<!-- pdac:cite id="BR-CON-CONTACT-PERSON-DESIGNATIONS" digest="sha256:a0f4d168bcd4dc9375a7f21fd3341b41eb0d100c57fe6a1a25c54ea21986e27e" -->
 <!-- pdac:cite id="BR-PRJ-CONTACT-PERSON-NOT-MOVABLE" digest="sha256:5b2f5e3280eb10ed7873b1e8d55d3c9f3eb57a339aef663b822a17da062c86af" -->
 
 ## 2. API contracts and application behavior
@@ -35,4 +35,4 @@
 - [ ] 5.3 Reconcile every #299 acceptance criterion with passing tests or runtime evidence, update the PR with exact-head CI and E2E evidence, and confirm every scoped limitation has a tracked follow-up.
 
 <!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->
-<!-- pdac:cite id="FR-CON-002" digest="sha256:a04f4522eb929f86d105ac81b4f68aea091803e9d1a4b18e9210d2a50e4421d7" -->
+<!-- pdac:cite id="FR-CON-002" digest="sha256:d44280cb004062fbc3bd34228233dcfa03b2b6e51ee64b4f717652351f721feb" -->

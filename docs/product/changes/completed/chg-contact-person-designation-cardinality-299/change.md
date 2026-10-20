@@ -2,7 +2,7 @@
 id: CHG-CONTACT-PERSON-DESIGNATION-CARDINALITY-299
 type: product-change
 title: Define one administrative contact person per contact
-status: proposed
+status: applied
 base-revision: "9b9bcd33e28594142b3a839a700caa0140da3fe0"
 operations:
   add: []

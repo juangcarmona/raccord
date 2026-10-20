@@ -23,8 +23,8 @@ Contacts can represent companies and private people, but the product has no acce
 This delivery implements approved Product Change `CHG-CONTACT-PERSONS-299`. The use case and functional requirement define the behavior; the two designation rules govern one-default reassignment, administrative cardinality and the immutable parent association. The structured behavior is the browser journey's acceptance anchor.
 
 <!-- pdac:cite id="UC-CON-MANAGE-CONTACT-PERSONS" digest="sha256:8253cf3c4c3b50fc1f53ca143ee99989c9c7652e0fa822e7d13ad5306bb43385" -->
-<!-- pdac:cite id="FR-CON-002" digest="sha256:a04f4522eb929f86d105ac81b4f68aea091803e9d1a4b18e9210d2a50e4421d7" -->
-<!-- pdac:cite id="BR-CON-CONTACT-PERSON-DESIGNATIONS" digest="sha256:47e4d43d3335cc85f1faafee6ec1eca70373441fe54704126c5c84417748ed8f" -->
+<!-- pdac:cite id="FR-CON-002" digest="sha256:d44280cb004062fbc3bd34228233dcfa03b2b6e51ee64b4f717652351f721feb" -->
+<!-- pdac:cite id="BR-CON-CONTACT-PERSON-DESIGNATIONS" digest="sha256:a0f4d168bcd4dc9375a7f21fd3341b41eb0d100c57fe6a1a25c54ea21986e27e" -->
 <!-- pdac:cite id="BR-PRJ-CONTACT-PERSON-NOT-MOVABLE" digest="sha256:5b2f5e3280eb10ed7873b1e8d55d3c9f3eb57a339aef663b822a17da062c86af" -->
 <!-- pdac:cite id="SB-CON-CHANGE-DEFAULT-CONTACT-PERSON" digest="sha256:fc39711eb0d43ad05b94f3c9fbbf6b2b2178ae806e8a05da3af3d8d1b0459e97" -->
 <!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->

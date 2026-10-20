@@ -5,7 +5,7 @@
 The Contacts module currently owns a company/private-person contact and exposes it through module contracts, an application directory and host-mapped API endpoints. The existing editor is the only contact maintenance screen. Contact persons therefore need a parent-scoped management surface that composes with the current directory without changing party identity or downstream project and invoice behavior.
 
 <!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->
-<!-- pdac:cite id="FR-CON-002" digest="sha256:a04f4522eb929f86d105ac81b4f68aea091803e9d1a4b18e9210d2a50e4421d7" -->
+<!-- pdac:cite id="FR-CON-002" digest="sha256:d44280cb004062fbc3bd34228233dcfa03b2b6e51ee64b4f717652351f721feb" -->
 
 ## Goals / Non-Goals
 

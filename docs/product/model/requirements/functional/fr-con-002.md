@@ -21,7 +21,7 @@ uses-terms:
 
 ## Requirement
 
-The product MUST let an authorized user create and edit contact persons under a contact and record their supported default and administrative designations. A contact MUST have at most one default contact person; setting another person as default MUST clear the previous designation atomically. A contact person MUST remain associated with the contact under which it was created. This requirement does not make the designated person a project or invoice recipient.
+The product MUST let an authorized user create and edit contact persons under a contact and record their supported default and administrative designations. A contact MUST have at most one default contact person and at most one administrative contact person; setting another person as default MUST clear the previous designation atomically. A contact person MUST remain associated with the contact under which it was created. These designations do not make the person a project or invoice recipient.
 
 ## Rationale
 

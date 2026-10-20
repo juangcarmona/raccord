@@ -71,8 +71,8 @@ public sealed class DatabaseMaintenance(
             null,
             "admin@agencia.example"
         );
-        partyWriter.Add(producer);
-        partyWriter.Add(agency);
+        await partyWriter.AddAsync(producer, cancellationToken).ConfigureAwait(false);
+        await partyWriter.AddAsync(agency, cancellationToken).ConfigureAwait(false);
 
         db.Projects.AddRange(
             CreateShootDemoProject(producer.Id),

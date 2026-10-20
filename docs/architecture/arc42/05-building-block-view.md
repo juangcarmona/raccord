@@ -34,7 +34,7 @@ The solution entry points are `src/root/Raccord.Web/Raccord.Web.csproj` and `src
 | `Raccord.Application` | Cross-module workflows, including invoice operations | `src/Raccord.Application/` |
 | `Raccord.Domain` and `Raccord.Contracts` | Shared domain rules and API contracts | `src/Raccord.Domain/`, `src/Raccord.Contracts/` |
 | `Raccord.Infrastructure` | EF Core persistence, storage and module adapters | `src/Raccord.Infrastructure/DependencyInjection.cs` |
-| Contacts module | Customer directory and customer records | `src/modules/Contacts/` |
+| Contacts module | Company/person contact directory, customer compatibility projection and party lookup for projects and invoices | `src/modules/Contacts/` |
 | Workspace module | Issuer settings and invoice series | `src/modules/Workspace/` |
 | Projects module | Projects, crew, project context, time and coordination | `src/modules/Projects/` |
 | Invoicing module | Invoice contracts and lifecycle | `src/modules/Invoicing/`, `src/Raccord.Application/Invoicing/` |
@@ -73,3 +73,5 @@ flowchart TB
 ```
 
 The frontend entry point composes authentication around the router; the authenticated application routes and the public sign-in route are defined in `src/Raccord.Frontend/src/main.tsx` and `src/Raccord.Frontend/src/app/routes.tsx`.
+
+The Contacts feature owns the `/contacts` directory and create/edit forms; the `/customers` route remains the customer-only compatibility view used by existing workflows. Project selectors and invoice preparation continue to resolve parties by the stable customer identifier through the Contacts module contract.

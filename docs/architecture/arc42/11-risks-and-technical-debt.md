@@ -24,12 +24,13 @@ description: Records architectural risks, technical debt, and evidence-backed mi
 
 | ID | Debt | Plan |
 | --- | --- | --- |
-| D-1 | No editing of customers or billable lines yet | MVP slice 3 |
-| D-2 | Lists are unpaginated; draft list loads projects/customers one by one | Add pagination and projections before measuring QR-RESPONSE-TIME |
+| D-1 | Billable-line editing is not available yet; Contacts creation and editing are implemented | Add billable-line editing when the product scope includes it |
+| D-2 | Lists outside the Contacts directory remain unpaginated; draft list loads projects/customers one by one | Add pagination and projections before measuring QR-RESPONSE-TIME |
 | D-3 | PDF renderer: WinAnsi only, no logo/QR/PDF-A | Revisit with VERI*FACTU QR (ADR-0008) |
 | D-4 | Regime key / exemption cause not modelled per VAT group | Required by the compliance adapter |
-| D-5 | Frontend has tests for formatting, draft and project pages only | Add tests as forms gain behavior |
+| D-5 | Frontend route tests still do not cover every feature screen; Contacts now covers loading, empty, error, filtering, pagination, create and edit states | Add focused route tests as the remaining screens gain behavior |
 | D-6 | No data export yet | MVP slice 8 |
 | D-7 | Azure template uses PostgreSQL password auth over public network with "Azure services" firewall rule | Move to Entra auth and private networking for production |
 | D-9 | Open technical questions: is one web replica enough for numbering under load; which role and permission model should ship for self-hosted deployments; should the PDF renderer move to a library once templates are configurable | Decide with MVP slices 2 and 5 |
 | D-8 | Local Node 24.11 is below jsdom's declared minimum (24.15); tests pass, CI uses current Node 24 | Upgrade local toolchains |
+| D-10 | Contacts numbers use a database sequence with a deterministic legacy backfill; a configurable number-series screen is not part of the current Contacts slice | Tracked by [issue #397](https://github.com/juangcarmona/raccord/issues/397) under the Contacts epic |

@@ -1,5 +1,7 @@
+using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
+using Raccord.Contracts.Customers;
 using Raccord.Infrastructure.Persistence;
 using Raccord.Web.Tests.Infrastructure;
 
@@ -78,6 +80,14 @@ public sealed class ContactsMigrationTests(PostgresContainer postgres)
         (
             await api.QueryScalarAsync<long>("SELECT nextval('contacts.contact_number_seq')")
         ).ShouldBe(10002);
+
+        using var client = api.CreateClient();
+        var readableCustomer = await client.GetFromJsonAsync<CustomerResponse>(
+            $"/api/customers/{contactId}"
+        );
+        readableCustomer.ShouldNotBeNull();
+        readableCustomer.Id.ShouldBe(contactId);
+        readableCustomer.LegalName.ShouldBe("Legacy Studio S.A.");
     }
 #pragma warning restore MA0051
 }

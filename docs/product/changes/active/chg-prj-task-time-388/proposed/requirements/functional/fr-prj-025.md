@@ -10,6 +10,7 @@ derived-from:
   - "BR-PRJ-TASK-HOURS-APPROVAL"
 verification:
   - scenario-ref: "SB-PRJ-FORGOTTEN-TIMER-REMINDER"
+  - scenario-ref: "SB-PRJ-PLANNED-VS-ACTUAL-TASK-HOURS"
   - scenario: "A timer started on the mobile web app can be stopped on the web"
 uses-terms:
   - "TERM-TRACKED-TIME"

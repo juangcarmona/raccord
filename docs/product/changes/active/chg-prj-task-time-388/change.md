@@ -5,7 +5,8 @@ title: Accept project task time tracking and comparison workflows
 status: proposed
 base-revision: "5a92fa0cc2ad8841410e007f10391e469492915f"
 operations:
-  add: []
+  add:
+    - SB-PRJ-PLANNED-VS-ACTUAL-TASK-HOURS
   modify:
     - UC-PRJ-TRACK-TASK-TIME
     - UC-PRJ-REPORT-TASK-TIME

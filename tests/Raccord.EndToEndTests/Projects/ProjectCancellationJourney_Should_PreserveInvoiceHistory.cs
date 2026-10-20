@@ -25,7 +25,7 @@ public sealed class ProjectCancellationJourney_Should_PreserveInvoiceHistory(
                 await CreateProjectWithBillableLineAsync(page);
                 var projectUrl = page.Url;
 
-                await FinalizeDraftAsync(page, DateOnly.FromDateTime(DateTime.UtcNow));
+                await FinalizeDraftAsync(page);
                 var invoiceUrl = page.Url;
                 var projectId = new Uri(projectUrl).Segments[^1];
                 await CreateOpenTaskAsync(page, projectId);

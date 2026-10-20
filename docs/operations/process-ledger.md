@@ -541,3 +541,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A browser query using an exact label stopped matching after the shared field control appended its localized “optional” marker to the accessible name.
 - **Action:** Use an exact accessible name for required project fields with colliding labels, and a partial label query for optional fields whose shared control appends a marker.
 - **Check:** The Spanish frontend test locates the optional field by its translated label, and the English browser journey saves and reloads its value.
+
+## 2026-10-20 · Invoice journeys isolate date-sensitive number sequences
+
+- **Observation:** The browser E2E helper used the UTC calendar date while another invoice journey explicitly used the configured Europe/Madrid date; near midnight, the UTC date was earlier than the most recent invoice in the shared series.
+- **Action:** Use the configured organization date for journeys that do not test historical issue dates; keep explicit date scenarios explicit.
+- **Check:** Run the per-PR invoice and cancellation journeys with the shared series and require all finalized invoice dates to satisfy the sequence rule.

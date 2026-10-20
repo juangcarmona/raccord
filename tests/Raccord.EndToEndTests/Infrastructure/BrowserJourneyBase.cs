@@ -234,7 +234,7 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
 
         await page.GetByLabel("Issue date")
             .FillAsync(
-                (issueDate ?? DateOnly.FromDateTime(DateTime.UtcNow)).ToString(
+                (issueDate ?? OrganizationToday()).ToString(
                     "yyyy-MM-dd",
                     CultureInfo.InvariantCulture
                 )
@@ -247,6 +247,16 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         );
         await page.GetByText("Issued and unalterable.").WaitForAsync();
     }
+
+    private static DateOnly OrganizationToday() =>
+        DateOnly.FromDateTime(
+            TimeZoneInfo
+                .ConvertTime(
+                    DateTimeOffset.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Europe/Madrid")
+                )
+                .DateTime
+        );
 
     /// <summary>
     /// A short per-run identifier stamped into names the journeys assert on, so journeys never

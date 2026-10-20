@@ -6,7 +6,7 @@ See `proposal.md` for the motivation and `specs/` for the user-visible contract.
 
 The content map depends on the ten bounded contexts and the audiences who coordinate operations, billing and installation. The product model describes the areas; it does not prove their current UI status.
 
-<!-- pdac:cite id="BC-CONTACTS" digest="sha256:c9c5f006e7a0904b8ac8303a008358ba52bc1203747dba3e03340500cd2f86d7" -->
+<!-- pdac:cite id="BC-CONTACTS" digest="sha256:b63537573b968a16a585370ae0e4a98ec688de6e31e42e8b7e2dad5c89d3f474" -->
 <!-- pdac:cite id="BC-PROJECTS" digest="sha256:11cadbc8906365210716689609d66738e29fc576822aa2e8e7a925a8bae0933e" -->
 <!-- pdac:cite id="BC-COMMERCIAL" digest="sha256:cecf438d86ba351619417a2951b5dbc53aea0c70dbb07a0dd509e80ab4391adc" -->
 <!-- pdac:cite id="BC-INVOICING" digest="sha256:386343a8a3613a73a2ab60d1b5767cbe7d880fb8ded0d2d1a7c5dee68fa2a567" -->

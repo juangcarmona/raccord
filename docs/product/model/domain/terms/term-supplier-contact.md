@@ -2,7 +2,7 @@
 id: TERM-SUPPLIER-CONTACT
 type: domain-term
 title: "Supplier contact"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:

@@ -2,7 +2,7 @@
 id: BC-CONTACTS
 type: bounded-context
 title: "Contacts"
-status: draft
+status: active
 ---
 
 ## Responsibility

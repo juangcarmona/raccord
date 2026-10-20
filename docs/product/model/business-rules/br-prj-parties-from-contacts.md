@@ -2,7 +2,7 @@
 id: BR-PRJ-PARTIES-FROM-CONTACTS
 type: business-rule
 title: "Clients and locations come from the contact database"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-EDIT-PROJECT-DETAILS"
 uses-terms:

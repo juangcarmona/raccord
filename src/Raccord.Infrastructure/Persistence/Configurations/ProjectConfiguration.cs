@@ -19,6 +19,8 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .HasConversion<string>()
             .HasMaxLength(30)
             .HasDefaultValue(ProjectStatus.Draft);
+        builder.Property(project => project.HasCancellationWarning).IsRequired();
+        builder.Property(project => project.CancelledAt);
         builder.Property(project => project.ProgressPercent).HasPrecision(5, 2).IsRequired();
         builder.Property(project => project.RefundableDepositAmount).HasPrecision(18, 2);
         builder.Property(project => project.DepositStatus).HasConversion<string>().HasMaxLength(20);

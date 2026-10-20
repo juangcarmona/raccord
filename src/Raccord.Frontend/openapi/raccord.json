@@ -1948,6 +1948,82 @@
         }
       }
     },
+    "/api/projects/{id}/cancellation-preview": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectCancellationPreviewResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/cancellation": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/functions": {
       "post": {
         "tags": [
@@ -5341,6 +5417,18 @@
           }
         }
       },
+      "CancelProjectRequest": {
+        "required": [
+          "confirm"
+        ],
+        "type": "object",
+        "properties": {
+          "confirm": {
+            "type": "boolean"
+          }
+        },
+        "description": "Confirms project cancellation after reviewing open work."
+      },
       "ChangeProjectStatusRequest": {
         "required": [
           "status"
@@ -7999,6 +8087,29 @@
         },
         "description": "A project board with automatic progress."
       },
+      "ProjectCancellationPreviewResponse": {
+        "required": [
+          "openTaskCount",
+          "plannedCrewCount",
+          "plannedTransportCount"
+        ],
+        "type": "object",
+        "properties": {
+          "openTaskCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "plannedCrewCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "plannedTransportCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Open operational work that the cancellation warning will retain."
+      },
       "ProjectContextEntryResponse": {
         "required": [
           "id",
@@ -8393,6 +8504,19 @@
             "type": "string",
             "description": "Commercial lifecycle status of the project.",
             "default": "draft"
+          },
+          "hasCancellationWarning": {
+            "type": "boolean",
+            "description": "Whether open work remained when cancelled.",
+            "default": false
+          },
+          "cancelledAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "UTC cancellation timestamp, when cancelled.",
+            "format": "date-time"
           }
         },
         "description": "A project with its billable lines."

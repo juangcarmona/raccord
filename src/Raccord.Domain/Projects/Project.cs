@@ -56,6 +56,12 @@ public sealed class Project
     /// <summary>Commercial lifecycle status, independent of equipment warehouse status.</summary>
     public ProjectStatus Status { get; private set; } = ProjectStatus.Draft;
 
+    /// <summary>Whether open work remained when the project was cancelled.</summary>
+    public bool HasCancellationWarning { get; private set; }
+
+    /// <summary>UTC instant when the project was cancelled, when applicable.</summary>
+    public DateTimeOffset? CancelledAt { get; private set; }
+
     /// <summary>Automatic completion percentage based on task statuses.</summary>
     public decimal ProgressPercent { get; private set; }
 
@@ -112,7 +118,25 @@ public sealed class Project
                 "projects.status-invalid",
                 "Project status must be one of the fixed lifecycle statuses."
             );
+        if (status == ProjectStatus.Cancelled)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-confirmation-required",
+                "Use the cancellation workflow to cancel a project."
+            );
         Status = status;
+    }
+
+    /// <summary>Cancels the project and records whether operational work remains.</summary>
+    public void Cancel(bool hasOpenItems, DateTimeOffset cancelledAt)
+    {
+        if (Status == ProjectStatus.Cancelled)
+            throw new BusinessRuleViolationException(
+                "projects.already-cancelled",
+                "This project has already been cancelled."
+            );
+        Status = ProjectStatus.Cancelled;
+        HasCancellationWarning = hasOpenItems;
+        CancelledAt = cancelledAt.ToUniversalTime();
     }
 
     /// <summary>Updates the project's editable identifying and scheduling details.</summary>

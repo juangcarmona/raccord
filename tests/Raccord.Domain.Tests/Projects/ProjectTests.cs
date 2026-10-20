@@ -72,12 +72,61 @@ public sealed class ProjectTests
         project.ReserveForDraft([line.Id], draftId);
         project.MarkInvoiced(draftId, invoiceId);
 
-        project.ChangeStatus(ProjectStatus.Cancelled);
+        project.Cancel(
+            hasOpenItems: false,
+            cancelledAt: new DateTimeOffset(2026, 5, 1, 12, 0, 0, TimeSpan.Zero)
+        );
 
         project.Status.ShouldBe(ProjectStatus.Cancelled);
         line.State.ShouldBe(BillingState.Invoiced);
         line.InvoiceId.ShouldBe(invoiceId);
         line.Description.ShouldBe("Colour grading");
+    }
+
+    [Fact]
+    public void Changing_project_status_Should_preserve_its_invoiced_work()
+    {
+        var project = NewProject();
+        var line = project.AddBillableLine(
+            BillableLineKind.Service,
+            "Colour grading",
+            Pricing(8m, 95m)
+        );
+        var draftId = Guid.CreateVersion7();
+        var invoiceId = Guid.CreateVersion7();
+        project.ReserveForDraft([line.Id], draftId);
+        project.MarkInvoiced(draftId, invoiceId);
+
+        project.ChangeStatus(ProjectStatus.Confirmed);
+
+        line.State.ShouldBe(BillingState.Invoiced);
+        line.InvoiceId.ShouldBe(invoiceId);
+        line.Description.ShouldBe("Colour grading");
+    }
+
+    [Fact]
+    public void Cancelling_a_project_with_open_items_Should_keep_a_persistent_warning()
+    {
+        var project = NewProject();
+        var cancelledAt = new DateTimeOffset(2026, 5, 1, 12, 0, 0, TimeSpan.Zero);
+
+        project.Cancel(hasOpenItems: true, cancelledAt);
+
+        project.Status.ShouldBe(ProjectStatus.Cancelled);
+        project.HasCancellationWarning.ShouldBeTrue();
+        project.CancelledAt.ShouldBe(cancelledAt);
+    }
+
+    [Fact]
+    public void Changing_status_directly_to_cancelled_Should_require_the_cancellation_flow()
+    {
+        var project = NewProject();
+
+        var error = Should.Throw<BusinessRuleViolationException>(() =>
+            project.ChangeStatus(ProjectStatus.Cancelled)
+        );
+
+        error.Code.ShouldBe("projects.cancellation-confirmation-required");
     }
 
     [Fact]

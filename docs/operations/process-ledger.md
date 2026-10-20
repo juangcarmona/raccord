@@ -469,3 +469,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The project status journey matched both a labelled section and its select, then later matched both “Save” and “Save details” buttons; parallel project builds also contended while installing Git hooks into shared worktree config.
 - **Action:** Select form controls by semantic role and use exact button names where labels overlap, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
 - **Check:** The status Playwright journey passes after reload using the named combobox, and a Release solution build passes with zero warnings under `HUSKY=0`.
+
+## 2026-10-20 · Cancellation journeys wait for confirmation state and assert product copy
+
+- **Observation:** The cancellation browser journey initially read the preview alert after confirmation, then expected warning copy that differed from the localized product message.
+- **Action:** Wait for the confirmation dialog to close before asserting the persisted state, and take expected user-facing text from the active locale catalog.
+- **Check:** The journey passes through confirmation, reload, invoiced project-line history and the issued invoice page.

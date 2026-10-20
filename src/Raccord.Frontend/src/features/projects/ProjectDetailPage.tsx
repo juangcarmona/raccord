@@ -34,6 +34,10 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
     const [error, setError] = useState<unknown>(null);
     const [detailsError, setDetailsError] = useState<unknown>(null);
+    const [cancellationPreview, setCancellationPreview] = useState<
+        Schemas["ProjectCancellationPreviewResponse"] | null
+    >(null);
+    const [cancellationError, setCancellationError] = useState<unknown>(null);
 
     function toggle(lineId: string) {
         setSelected((current) => {
@@ -104,6 +108,39 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
         }
     }
 
+    async function openCancellation() {
+        setCancellationError(null);
+        try {
+            const preview = await unwrap(
+                api.GET("/api/projects/{id}/cancellation-preview", {
+                    params: { path: { id: project.id } },
+                }),
+            );
+            setCancellationPreview(preview);
+        } catch (failure) {
+            setCancellationError(failure);
+        }
+    }
+
+    async function confirmCancellation() {
+        setBusy(true);
+        setCancellationError(null);
+        try {
+            await unwrap(
+                api.POST("/api/projects/{id}/cancellation", {
+                    params: { path: { id: project.id } },
+                    body: { confirm: true },
+                }),
+            );
+            setCancellationPreview(null);
+            onChanged();
+        } catch (failure) {
+            setCancellationError(failure);
+        } finally {
+            setBusy(false);
+        }
+    }
+
     return (
         <>
             <PageHeader title={project.name}>
@@ -169,31 +206,97 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
             <section aria-labelledby="project-status-heading" className="panel">
                 <h2 id="project-status-heading">{t("projects.status")}</h2>
                 <div className="actions">
-                    <SelectField
-                        label={t("projects.status")}
-                        name="projectStatus"
-                        value={status}
-                        onChange={(event) => {
-                            setStatus(event.target.value);
-                        }}
-                    >
-                        {projectStatuses.map(({ value, label }) => (
-                            <option key={value} value={value}>
-                                {t(label)}
-                            </option>
-                        ))}
-                    </SelectField>
-                    <button
-                        type="button"
-                        className="button button--primary"
-                        disabled={busy || status === project.status}
-                        onClick={() => void saveStatus()}
-                    >
-                        {t("common.save")}
-                    </button>
+                    {project.status === "cancelled" ? (
+                        <p>{t("projects.status.cancelled")}</p>
+                    ) : (
+                        <>
+                            <SelectField
+                                label={t("projects.status")}
+                                name="projectStatus"
+                                value={status}
+                                onChange={(event) => {
+                                    setStatus(event.target.value);
+                                }}
+                            >
+                                {projectStatuses.map(({ value, label }) => (
+                                    <option key={value} value={value}>
+                                        {t(label)}
+                                    </option>
+                                ))}
+                            </SelectField>
+                            <button
+                                type="button"
+                                className="button button--primary"
+                                disabled={busy || status === project.status}
+                                onClick={() => void saveStatus()}
+                            >
+                                {t("common.save")}
+                            </button>
+                        </>
+                    )}
                 </div>
                 <FormError error={error} />
             </section>
+
+            {project.hasCancellationWarning && (
+                <p className="notice notice--warning" role="alert">
+                    {t("projects.cancellationWarning")}
+                </p>
+            )}
+            {project.status !== "cancelled" && (
+                <div className="actions">
+                    <button
+                        type="button"
+                        className="button button--quiet"
+                        onClick={() => {
+                            void openCancellation();
+                        }}
+                    >
+                        {t("projects.cancelProject")}
+                    </button>
+                </div>
+            )}
+            {cancellationPreview && (
+                <section role="dialog" aria-modal="true" aria-labelledby="cancellation-heading" className="panel">
+                    <h2 id="cancellation-heading">{t("projects.cancellationConfirmTitle")}</h2>
+                    {cancellationPreview.openTaskCount +
+                        cancellationPreview.plannedCrewCount +
+                        cancellationPreview.plannedTransportCount >
+                    0 ? (
+                        <p role="alert">
+                            {t("projects.cancellationOpenItems", {
+                                tasks: cancellationPreview.openTaskCount,
+                                crew: cancellationPreview.plannedCrewCount,
+                                transport: cancellationPreview.plannedTransportCount,
+                            })}
+                        </p>
+                    ) : (
+                        <p>{t("projects.cancellationNoOpenItems")}</p>
+                    )}
+                    <p>{t("projects.cancellationConfirmHelp")}</p>
+                    <div className="actions">
+                        <button
+                            type="button"
+                            className="button button--danger"
+                            disabled={busy}
+                            onClick={() => void confirmCancellation()}
+                        >
+                            {t("projects.confirmCancellation")}
+                        </button>
+                        <button
+                            type="button"
+                            className="button button--quiet"
+                            disabled={busy}
+                            onClick={() => {
+                                setCancellationPreview(null);
+                            }}
+                        >
+                            {t("common.cancel")}
+                        </button>
+                    </div>
+                    <FormError error={cancellationError} />
+                </section>
+            )}
 
             <section aria-labelledby="lines-heading">
                 <h2 id="lines-heading">{t("projects.lines")}</h2>

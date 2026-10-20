@@ -42,6 +42,16 @@ public sealed record UpdateProjectDetailsRequest(
     Guid? TeamId = null
 );
 
+/// <summary>Confirms project cancellation after reviewing open work.</summary>
+public sealed record CancelProjectRequest(bool Confirm);
+
+/// <summary>Open operational work that the cancellation warning will retain.</summary>
+public sealed record ProjectCancellationPreviewResponse(
+    int OpenTaskCount,
+    int PlannedCrewCount,
+    int PlannedTransportCount
+);
+
 /// <summary>Records incoming project work.</summary>
 public sealed record ReceiveProjectRequest(
     string Name,
@@ -259,6 +269,8 @@ public sealed record ProjectSummaryResponse(
 /// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
 /// <param name="Status">Commercial lifecycle status of the project.</param>
+/// <param name="HasCancellationWarning">Whether open work remained when cancelled.</param>
+/// <param name="CancelledAt">UTC cancellation timestamp, when cancelled.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -273,7 +285,9 @@ public sealed record ProjectResponse(
     IReadOnlyList<PackingLineResponse>? PackingLines = null,
     decimal? RefundableDepositAmount = null,
     DepositStatus DepositStatus = DepositStatus.NotPaid,
-    string Status = "draft"
+    string Status = "draft",
+    bool HasCancellationWarning = false,
+    DateTimeOffset? CancelledAt = null
 );
 
 /// <summary>A billable line.</summary>

@@ -161,6 +161,33 @@ public sealed class ProjectWorkspace(
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
 
+    /// <summary>Cancels a project after confirmation and records whether open work remains.</summary>
+    public async Task<ProjectResponse?> CancelAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        bool hasOpenItems,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        if (!request.Confirm)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-confirmation-required",
+                "Confirm project cancellation before it is saved."
+            );
+
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        project.Cancel(hasOpenItems, DateTimeOffset.UtcNow);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
     /// <summary>Configures a project's fixed refundable deposit.</summary>
     public async Task<ProjectResponse?> SetDepositAsync(
         Guid projectId,
@@ -451,7 +478,9 @@ public sealed class ProjectWorkspace(
             [.. project.PackingLines.Select(ToResponse)],
             project.RefundableDepositAmount,
             (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
-            ToStatusText(project.Status)
+            ToStatusText(project.Status),
+            project.HasCancellationWarning,
+            project.CancelledAt
         );
 
     private static string ToStatusText(ProjectStatus status) =>

@@ -2269,6 +2269,98 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{id}/cancellation-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectCancellationPreviewResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{id}/cancellation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CancelProjectRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{id}/functions": {
         parameters: {
             query?: never;
@@ -5801,6 +5893,10 @@ export interface components {
             stream: string;
             url: string;
         };
+        /** @description Confirms project cancellation after reviewing open work. */
+        CancelProjectRequest: {
+            confirm: boolean;
+        };
         /** @description Changes a project's fixed lifecycle status. */
         ChangeProjectStatusRequest: {
             status: string;
@@ -6722,6 +6818,15 @@ export interface components {
             progressPercent: number;
             tasks: components["schemas"]["ProjectTaskResponse"][];
         };
+        /** @description Open operational work that the cancellation warning will retain. */
+        ProjectCancellationPreviewResponse: {
+            /** Format: int32 */
+            openTaskCount: number;
+            /** Format: int32 */
+            plannedCrewCount: number;
+            /** Format: int32 */
+            plannedTransportCount: number;
+        };
         ProjectContextEntryResponse: {
             /** Format: uuid */
             id: string;
@@ -6856,6 +6961,16 @@ export interface components {
              * @default draft
              */
             status: string;
+            /**
+             * @description Whether open work remained when cancelled.
+             * @default false
+             */
+            hasCancellationWarning: boolean;
+            /**
+             * Format: date-time
+             * @description UTC cancellation timestamp, when cancelled.
+             */
+            cancelledAt?: null | string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {

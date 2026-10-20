@@ -622,6 +622,75 @@ internal static class Endpoints
                     ? TypedResults.Ok(project)
                     : TypedResults.NotFound()
         );
+        projects.MapGet(
+            "/{id:guid}/cancellation-preview",
+            async Task<Results<Ok<ProjectCancellationPreviewResponse>, NotFound>> (
+                Guid id,
+                ProjectWorkspace workspace,
+                ProjectCoordination coordination,
+                CrewPlanningCatalog planning,
+                CancellationToken ct
+            ) =>
+            {
+                if (await workspace.GetAsync(id, ct) is null)
+                    return TypedResults.NotFound();
+
+                var board = await coordination.GetBoardAsync(id, ct);
+                var taskStatuses = await coordination.ListTaskStatusesAsync(ct);
+                var completingStatusIds = taskStatuses
+                    .Where(status => status.CompletesProject)
+                    .Select(status => status.Id)
+                    .ToHashSet();
+                var openTaskCount =
+                    board?.Tasks.Count(task => !completingStatusIds.Contains(task.StatusId)) ?? 0;
+                var functions = await planning.ListFunctionsAsync(id, ct);
+                return TypedResults.Ok(
+                    new ProjectCancellationPreviewResponse(
+                        openTaskCount,
+                        functions.Sum(function => function.Crew.Count),
+                        functions.Sum(function => function.Vehicles.Count)
+                    )
+                );
+            }
+        );
+        projects.MapPost(
+            "/{id:guid}/cancellation",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                CancelProjectRequest request,
+                ProjectWorkspace workspace,
+                ProjectCoordination coordination,
+                CrewPlanningCatalog planning,
+                CancellationToken ct
+            ) =>
+            {
+                var board = await coordination.GetBoardAsync(id, ct);
+                if (board is null)
+                    return TypedResults.NotFound();
+                var taskStatuses = await coordination.ListTaskStatusesAsync(ct);
+                var completingStatusIds = taskStatuses
+                    .Where(status => status.CompletesProject)
+                    .Select(status => status.Id)
+                    .ToHashSet();
+                var hasOpenTasks = board.Tasks.Any(task =>
+                    !completingStatusIds.Contains(task.StatusId)
+                );
+                var functions = await planning.ListFunctionsAsync(id, ct);
+                var hasPlannedResources = functions.Any(function =>
+                    function.Crew.Count > 0 || function.Vehicles.Count > 0
+                );
+                return
+                    await workspace.CancelAsync(
+                        id,
+                        request,
+                        hasOpenTasks || hasPlannedResources,
+                        ct
+                    )
+                        is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound();
+            }
+        );
         projects.MapPost(
             "/{id:guid}/functions",
             async (

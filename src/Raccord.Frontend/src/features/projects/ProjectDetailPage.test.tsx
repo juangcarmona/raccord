@@ -29,6 +29,8 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     currency: "EUR",
     billableLines,
     status: "draft",
+    hasCancellationWarning: false,
+    cancelledAt: null,
 });
 
 const routes = [
@@ -147,6 +149,27 @@ describe("ProjectDetailPage", () => {
         await user.click(screen.getByRole("button", { name: "Guardar datos" }));
 
         expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({ customerId: "c2" });
+    });
+
+    it("confirms cancellation after showing the open-work warning", async () => {
+        const requests = stubApi({
+            ...customerApi,
+            "GET /api/projects/p1": () => json(project([])),
+            "GET /api/projects/p1/cancellation-preview": () =>
+                json({ openTaskCount: 2, plannedCrewCount: 1, plannedTransportCount: 0 }),
+            "POST /api/projects/p1/cancellation": () =>
+                json({ ...project([]), status: "cancelled", hasCancellationWarning: true }),
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.click(await screen.findByRole("button", { name: "Cancelar proyecto" }));
+        expect(await screen.findByRole("alert")).toHaveTextContent(
+            "Quedan 2 tareas abiertas, 1 personas asignadas y 0 vehículos asignados.",
+        );
+        await user.click(screen.getByRole("button", { name: "Confirmar cancelación" }));
+
+        expect(requests.find((request) => request.method === "POST")?.body).toEqual({ confirm: true });
     });
 
     it("reports a missing project instead of an empty page", async () => {

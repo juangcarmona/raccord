@@ -2,7 +2,7 @@
 id: CHG-CONTACT-PERSONS-299
 type: product-change
 title: Accept contact persons and their designations in Contacts
-status: proposed
+status: applied
 base-revision: "769edf87e11dec97b23de000741c2f745545256b"
 operations:
   add:
@@ -37,19 +37,14 @@ Contacts, contact-person records, the default and administrative designations, a
 
 ## Open Questions
 
-- Should a contact allow at most one administrative contact person, matching the singular term and future invoice-recipient use case, or may several people carry this designation? Recommendation: at most one.
-- When a person is set as default while another person is already default, should the product atomically clear the previous designation or reject the change until the previous designation is cleared? Recommendation: atomically clear the previous designation.
-- Should #299 allow deleting a contact person, and, if so, what happens to its default or administrative designation and any future project or communication references? Recommendation: leave deletion out of #299 until reference and audit behavior is defined.
-- Should custom fields and files currently named in the draft `TERM-CONTACT-PERSON` be included in #299, or tracked as a separate Contacts/Documents issue? Recommendation: defer them; #299 asks for person records and designations, and its E2E does not require file handling.
+None. The Product Owner approved this proposal as drafted on 2026-10-20, including the recommendations: at most one administrative person per contact; changing the default atomically clears the former default; deletion, custom fields, and files stay out of #299; and project selection and invoice/message dispatch remain outside this change.
 
 ## Product Acceptance
 
-- The Product Owner confirms that contact persons are maintained independently under one contact and cannot be moved between contacts.
-- The Product Owner confirms that each contact has at most one default contact person and that changing it clears the previous default.
-- The Product Owner confirms whether #299 supports deleting a contact person or defers deletion for a later change.
-- The Product Owner confirms which administrative designation cardinality to accept.
-- The Product Owner confirms whether custom fields and files are excluded from #299 and need separate backlog coverage.
-- The Product Owner confirms that project selection and invoice/email dispatch are not implemented by #299.
+- The Product Owner approved the scoped behavior: contact persons are maintained under one contact and cannot be moved to another.
+- Each contact has at most one default and at most one administrative contact person; changing the default atomically clears the previous default.
+- Contact-person deletion, custom fields and files are excluded from #299 pending later product definition.
+- Project selection and invoice/message dispatch remain outside #299.
 
 ## Out of Scope
 

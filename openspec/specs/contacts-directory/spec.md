@@ -42,7 +42,7 @@ The system MUST return contacts in a deterministic order and expose a page of re
 
 <!-- pdac:cite id="UC-CON-MANAGE-CONTACT-DIRECTORY" digest="sha256:58989f1d3dfd59bb6021eb503753e4f9bccd6bd57f4dc43697dddf535c057901" -->
 <!-- pdac:cite id="FR-CON-001" digest="sha256:9b09ae74057045edaba5e51c4d14f287a22093be7537c8867a4fee8e07ccaa5f" -->
-<!-- pdac:cite id="BC-CONTACTS" digest="sha256:b63537573b968a16a585370ae0e4a98ec688de6e31e42e8b7e2dad5c89d3f474" -->
+<!-- pdac:cite id="BC-CONTACTS" digest="sha256:bdadd84cb901027c8630d88c714ba8c52bcecdf383345d35a2631c7fa8b69c85" -->
 
 #### Scenario: Navigate to another page
 

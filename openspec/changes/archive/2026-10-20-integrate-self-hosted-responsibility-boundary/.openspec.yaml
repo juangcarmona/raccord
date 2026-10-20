@@ -1,0 +1,4 @@
+schema: spec-driven
+created: 2026-10-20
+goal: Record the existing self-hosted responsibility boundary in the mainline architecture docs without changing product behavior or making a compliance claim.
+skip_specs: true

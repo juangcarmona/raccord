@@ -32,13 +32,14 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "5912bc9b48dd6b884f54a446a5e59772b2e8c943",
+      "outputCommit": "69a6a428c75c8b2919d97cf243c91bf20b6883fa",
       "result": "running",
-      "findings": "Implementation is underway. Project time periods now have persistence, API and browser management; internal and external documents honor period visibility; Complete blocks operational writes and explicit reopening restores them; selected cancellation actions are covered. Linked equipment/function propagation, period-based function generation, full accepted project-detail fields and the final Done evidence remain unfinished.",
+      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation now creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Equipment-group propagation, full accepted project-detail fields and the Done gate remain unfinished.",
       "evidence": [
         "openspec/changes/project-lifecycle-303/tasks.md",
         "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectScheduleJourney_Should_ManagePeriods.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261020214850_ProjectFunctionTimePeriodLink.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectCompleteJourney_Should_ReopenOperations.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs"
       ]

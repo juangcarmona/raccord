@@ -103,8 +103,8 @@ The system MUST let an authorized user create, read and edit contact-person reco
 
 #### Scenario: Maintain an administrative contact person
 
-- **WHEN** an authorized user designates a person as administrative for a contact
-- **THEN** the contact has at most one administrative person
+- **WHEN** an authorized user designates a person as administrative for a contact that already has another administrative person
+- **THEN** the system rejects the change or atomically replaces the prior administrative designation, and no contact has more than one administrative person
 
 #### Scenario: Reject a person moved to another contact
 

@@ -32,9 +32,9 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "677af75b762e89791f9d9898a176b20dcd598139",
+      "outputCommit": "d9b48c529e0ec4da25adbeaf9b0900caa7c116ba",
       "result": "running",
-      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing persists contact-person selection, project type and team. The project-number slice now supports transactional automatic/custom allocation, deterministic legacy backfill, duplicate rejection, concurrency and browser reload persistence; seed and request-conversion creation paths also assign unique values. The full Web suite passed after the API test fixture began clearing its own Npgsql pool on disposal. Remaining project detail fields, equipment-group propagation, remaining planned UI/E2E coverage and the Done gate remain unfinished.",
+      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing persists contact-person selection, project type, team and an eligible Admin/Office account manager. The account manager directory is role-filtered, assignments are revalidated on create/update, and the detail E2E reloads the persisted name. Project-number allocation supports transactional automatic/custom assignment, deterministic backfill, duplicate rejection, concurrency and browser reload persistence; seed and request-conversion paths assign unique values. Full Web, frontend, solution, and E2E suites passed locally; remote CI for d9b48c5 is still running. Remaining project detail fields, equipment-group propagation, remaining planned UI/E2E coverage and the Done gate remain unfinished.",
       "evidence": [
         "openspec/changes/project-lifecycle-303/tasks.md",
         "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
@@ -47,6 +47,9 @@
         "tests/Raccord.Web.Tests/ProjectNumberMigrationTests.cs",
         "src/Raccord.Infrastructure/Persistence/Migrations/20261021041758_ProjectNumberSeries.cs",
         "src/Raccord.Frontend/src/features/projects/ProjectDetailPage.test.tsx",
+        "src/Raccord.Frontend/src/features/projects/NewProjectPage.test.tsx",
+        "tests/Raccord.Web.Tests/ProjectAccountManagerEndpointTests.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261021043845_ProjectAccountManager.cs",
         "docs/operations/process-ledger.md"
       ]
     },
@@ -86,6 +89,26 @@
         "The committed number allocation amendment matches the previously reviewed plan; custom and generated numbers share a transaction-scoped lock, the migration backfills deterministically, and configurable start values remain tracked by #416."
       ],
       "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+    },
+    {
+      "gate": "account manager assignment slice",
+      "round": 1,
+      "resultingCommit": "d9b48c529e0ec4da25adbeaf9b0900caa7c116ba",
+      "rerunChecks": {
+        "accountManagerApiTests": "passed (3 passed, 0 failed)",
+        "projectDetailFrontendTests": "passed (10 passed, 0 failed)",
+        "projectAreaE2E": "passed (12 passed, 0 failed; 47 journeys selected)",
+        "fullE2E": "passed (49 passed, 0 failed, 0 skipped)",
+        "fullWebTests": "passed (72 passed, 0 failed)",
+        "frontendCiSequence": "passed (51 tests; lint, typecheck, format, architecture, build, audit, API generation)",
+        "openSpecValidateAll": "passed (41 items)",
+        "productshapeValidateAndCitations": "passed (1917 artifacts; 152 documents, 597 current citations)",
+        "csharpierMarkdownlintAndDiffCheck": "passed",
+        "efPendingModelChanges": "passed (no pending model changes)",
+        "runtimeEvidence": "passed (Playwright account manager selection persisted after reload; screenshot, trace and video captured under /tmp/raccord-ff-303-account-manager)",
+        "remoteCi": "running (PR #401, head d9b48c5)"
+      },
+      "findings": "The project detail previously had no account manager assignment. The approved plan's Admin/Office eligibility is enforced in the Projects module using a Workspace identity directory, checked on writes, and exposed through an eligible-user endpoint. The browser journey selects and reloads a manager. The process ledger now records the rule to validate role-based assignments at the write boundary."
     }
   ],
   "corrections": [

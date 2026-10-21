@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "runId": "418-vat-catalogs-20261021T090538Z",
+  "workItem": "#418",
+  "branch": "codex/418-vat-catalogs",
+  "startedAt": "2026-10-21T09:05:38Z",
+  "executorModel": "gpt-6",
+  "maxCorrectionRounds": 3,
+  "status": "running",
+  "stages": [
+    {
+      "name": "refine",
+      "startedAt": "2026-10-21T09:05:38Z",
+      "endedAt": "2026-10-21T09:06:33Z",
+      "inputCommit": "85029e8123fcb9808a277c03163b62ced45d247b",
+      "outputCommit": "85029e8123fcb9808a277c03163b62ced45d247b",
+      "result": "complete",
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/issues/418",
+        "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/manual-iva-2026/capitulo-04-sujetos-pasivos-repercusion-impositivo/tipo-impositivo.html",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740"
+      ]
+    },
+    {
+      "name": "propose",
+      "startedAt": "2026-10-21T09:06:34Z",
+      "endedAt": "2026-10-21T09:23:13Z",
+      "inputCommit": "85029e8123fcb9808a277c03163b62ced45d247b",
+      "outputCommit": "6584f12085b3b1ef15e763b6fa877cd70258fd17",
+      "result": "complete",
+      "evidence": [
+        "openspec/changes/vat-catalogs-418/proposal.md",
+        "openspec/changes/vat-catalogs-418/design.md",
+        "openspec/changes/vat-catalogs-418/tasks.md",
+        "openspec/changes/vat-catalogs-418/specs/vat-catalogs/spec.md",
+        "https://github.com/juangcarmona/raccord/pull/421"
+      ]
+    },
+    {
+      "name": "implement",
+      "startedAt": "2026-10-21T12:20:00Z",
+      "endedAt": "2026-10-21T13:52:29Z",
+      "inputCommit": "b3f32046e60c53fd7df2e63039c35db667ab354b",
+      "outputCommit": "8199399",
+      "result": "complete",
+      "evidence": [
+        "Owner approval in conversation for PR #421 plan",
+        "https://github.com/juangcarmona/raccord/issues/418#issuecomment-6315968072",
+        "dotnet test Raccord.slnx --configuration Release --no-build --filter FullyQualifiedName!~Raccord.EndToEndTests: 170 passed",
+        "CI E2E runner: 37 passed, 0 failed; vat-catalog-project-rate browser evidence status passed",
+        "OpenSpec 1.12.0: 37 passed; ProductShape: 0 errors and warnings; citations: 145 documents and 517 current citations",
+        "CSharpier: 406 files; Markdown lint: 301 files, 0 issues; EF reports no pending model changes",
+        "PR #421 implementation commit 63398ccc0b85b8de6563dc0b3c2c16a3858e73e2",
+        "CI E2E failure corrected: collections journey now selects and asserts the named General scheme instead of the mutable workspace default; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)",
+        "Second CI E2E failure corrected in shared BrowserJourneyBase: common billing journeys explicitly choose General unless the journey supplies its own scheme; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "reviewerModel": "gpt-6-astra",
+      "reviewKind": "plan",
+      "reviewedCommit": "85029e8123fcb9808a277c03163b62ced45d247b",
+      "reviewedState": "working-tree plan diff based on this commit",
+      "decision": "request-changes",
+      "findings": [
+        "Existing billable and invoice draft lines persisted percentages only; the plan needed a concrete scheme identity and snapshot path plus transaction serialization against concurrent updates.",
+        "The plan referenced existing audit infrastructure but had no catalog audit implementation or atomicity assertions."
+      ],
+      "evidence": [
+        "independent reviewer report for #418 plan, first pass"
+      ]
+    },
+    {
+      "reviewerModel": "gpt-6-astra",
+      "reviewKind": "plan",
+      "reviewedCommit": "6584f12085b3b1ef15e763b6fa877cd70258fd17",
+      "decision": "approve",
+      "findings": [
+        "No blocking plan findings. Stable scheme identity and percentage snapshots, concurrent first-use serialization, atomic audit tests, #300 ownership and the selected browser journey are covered."
+      ],
+      "evidence": [
+        "independent reviewer report for #418 plan, second pass"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "gate": "Planned",
+      "round": 1,
+      "requestedChanges": [
+        "Persist scheme identity and effective percentage snapshots on saved project billable and invoice draft lines; serialize first use against rate edits; test the public API and browser path.",
+        "Define catalog audit events and test successful and rolled-back mutations in the same unit of work."
+      ],
+      "resultingCommit": "6584f12085b3b1ef15e763b6fa877cd70258fd17",
+      "rerunChecks": "OpenSpec 1.12.0 (this change and all 37 items), ProductShape, citations (516 current), Markdown and git diff checks passed; independent review approved"
+    },
+    {
+      "gate": "CI E2E",
+      "round": 2,
+      "requestedChanges": [
+        "Remove dependency on the workspace default scheme because parallel E2E journeys mutate it; select the named source-dated General scheme and assert its 21% rate."
+      ],
+      "resultingCommit": "bfe1ebf",
+      "rerunChecks": "Release build 0 warnings/0 errors; full selected E2E runner with DOTNET_PROCESSOR_COUNT=4: 37 passed, 0 failed; selection manifest 35 journeys; metadata tests 2/2; OpenSpec 37/37; citations 145 documents and 517 current; Markdown 0 issues; CSharpier 406 files."
+    },
+    {
+      "gate": "CI E2E",
+      "round": 3,
+      "requestedChanges": [
+        "Pin the shared browser billing helper to the named General class and scheme by default so invoice and UBL journeys do not inherit parallel changes to the mutable workspace default."
+      ],
+      "resultingCommit": "8199399",
+      "rerunChecks": "Release build 0 warnings/0 errors; full selected E2E runner with DOTNET_PROCESSOR_COUNT=4: 37 passed, 0 failed; CSharpier 406 files; Markdown lint 301 files, 0 issues."
+    }
+  ],
+  "stopReason": null,
+  "pullRequest": {
+    "number": 421,
+    "url": "https://github.com/juangcarmona/raccord/pull/421",
+    "state": "open",
+    "isDraft": false,
+    "base": "codex/finance-catalog-product-change"
+  },
+  "reviewOverride": "Owner explicitly waived any independent reviewer for work item #418. No independent implementation review is required; this item-level exception does not change repository-wide policy.",
+  "links": [
+    "https://github.com/juangcarmona/raccord/pull/420",
+    "https://github.com/juangcarmona/raccord/pull/421",
+    "https://github.com/juangcarmona/raccord/issues/418",
+    "https://github.com/juangcarmona/raccord/issues/285",
+    "https://github.com/juangcarmona/raccord/issues/300",
+    "https://github.com/juangcarmona/raccord/pull/421"
+  ]
+}

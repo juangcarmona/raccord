@@ -12,30 +12,20 @@ public sealed class InvoicingSliceTests(PostgresContainer postgres) : IAsyncLife
 {
 #pragma warning disable MA0051
     private static readonly DateOnly IssueDate = new(2026, 5, 11);
-    private static readonly AddBillableLineRequest Camera = new(
-        "equipment",
-        "Cinema camera kit",
-        2m,
-        450m,
-        0m,
-        21m
-    );
-    private static readonly AddBillableLineRequest Gaffer = new(
-        "labour",
-        "Gaffer, 10h day",
-        1m,
-        380m,
-        0m,
-        21m
-    );
-
     private RaccordApi api = null!;
     private HttpClient client = null!;
+    private Guid vatClassId;
+    private Guid vatSchemeId;
+    private AddBillableLineRequest Camera =>
+        new("equipment", "Cinema camera kit", 2m, 450m, 0m, vatClassId, vatSchemeId);
+    private AddBillableLineRequest Gaffer =>
+        new("labour", "Gaffer, 10h day", 1m, 380m, 0m, vatClassId, vatSchemeId);
 
     public async ValueTask InitializeAsync()
     {
         api = await RaccordApi.StartAsync(postgres);
         client = api.CreateClient();
+        (vatClassId, vatSchemeId) = await RaccordApi.GetDefaultVatReferenceAsync(client);
     }
 
     public async ValueTask DisposeAsync()

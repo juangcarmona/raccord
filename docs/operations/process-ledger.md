@@ -469,3 +469,21 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** A request for the latest known legal VAT rate can be read as a universal classification rule even when the current rate is operation-specific and may change over time.
 - **Action:** Before accepting a tax-rate default, verify it against a current official source, record the source and verification date, use it only as an editable setup default for the explicitly named standard class, and preserve used rates by creating a new scheme for later changes. Do not infer or pre-fill discount percentages from tax defaults.
 - **Check:** The Product Change names the source and date, excludes automatic legal updates and universal treatment claims, preserves used schemes, and passes ProductShape validation; consumer citations verify against the updated digests.
+
+## 2026-10-21 · Keep class-specific schemes constrained in the editor
+
+- **Observation:** A dated default mapped to one class can still be applied incorrectly if the editor lets a user pair it with an unrelated class.
+- **Action:** Model the standard-rate starter as a per-class mapping and filter selectable schemes whenever a line's class changes; make newly created schemes name their mapped class.
+- **Check:** Frontend tests inspect the create request's class mapping, and the browser journey configures a separate class and verifies the resulting project line keeps that class identity and rate snapshot.
+
+## 2026-10-21 · Require catalog identity on new project lines
+
+- **Observation:** Optional class and scheme identities let a new API write bypass the catalog and preserve only a caller-supplied percentage.
+- **Action:** Require both stable identities when creating project billable lines; allow older persisted rows to retain nullable identity fields for historical compatibility.
+- **Check:** A web integration test posts a line without either identity, expects a validation response, and confirms that no billable-line row was written; the generated API contract marks both request identities required.
+
+## 2026-10-21 · Isolate E2E journeys from mutable catalog defaults
+
+- **Observation:** The collections journey selected whichever VAT scheme was currently marked default; a parallel catalog journey changed that global default and changed the invoice total, failing CI at four workers although the local run passed at a higher worker count.
+- **Action:** When a journey needs a specific setup rate, select the named source-dated starter scheme and assert its expected rate instead of depending on mutable default selection; make the shared browser billing helper explicitly choose `General` unless a journey supplies its own class and scheme.
+- **Check:** Collections and UBL export journeys use `General` and assert the 21% setup rate; the full 37-journey suite passes with four workers while the VAT catalog journey changes the workspace default to a synthetic rate.

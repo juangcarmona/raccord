@@ -39,6 +39,26 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void New_billable_lines_Should_keep_the_selected_vat_class_and_scheme_identity()
+    {
+        var project = NewProject();
+        var vatClassId = Guid.CreateVersion7();
+        var vatSchemeId = Guid.CreateVersion7();
+
+        var line = project.AddBillableLine(
+            BillableLineKind.Equipment,
+            "Cinema camera kit",
+            Pricing(2m, 450m),
+            vatClassId,
+            vatSchemeId
+        );
+
+        line.VatClassId.ShouldBe(vatClassId);
+        line.VatSchemeId.ShouldBe(vatSchemeId);
+        line.VatPercentage.ShouldBe(21m);
+    }
+
+    [Fact]
     public void Reserving_lines_for_a_draft_Should_move_them_out_of_the_unbilled_pool()
     {
         var project = NewProject();

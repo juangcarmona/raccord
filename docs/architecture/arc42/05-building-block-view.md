@@ -37,10 +37,12 @@ The solution entry points are `src/root/Raccord.Web/Raccord.Web.csproj` and `src
 | Contacts module | Customer directory and customer records | `src/modules/Contacts/` |
 | Workspace module | Issuer settings and invoice series | `src/modules/Workspace/` |
 | Projects module | Projects, crew, project context, time and coordination | `src/modules/Projects/` |
-| Invoicing module | Invoice contracts and lifecycle | `src/modules/Invoicing/`, `src/Raccord.Application/Invoicing/` |
+| Invoicing module | Invoice contracts and lifecycle, VAT class and scheme catalog workflows | `src/modules/Invoicing/`, `src/Raccord.Application/Invoicing/` |
 | Compliance module | Audit and compliance records | `src/modules/Compliance/` |
 
 Project coordination and project context are owned by the Projects module. Invoicing consumes module contracts for contacts, projects and workspace data; infrastructure implements persistence adapters against those contracts.
+
+VAT catalog use cases are owned by Invoicing. Projects calls the Invoicing pricing contract to validate a selected class/scheme pair and records the stable identities and effective percentage with each billable line; the UI reads and edits catalog values through the Invoicing API.
 
 ## Level 2 — domain modules
 

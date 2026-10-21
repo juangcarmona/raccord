@@ -1,6 +1,7 @@
 using Raccord.Contracts.Projects;
 using Raccord.Domain.Projects;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Invoicing.Contracts;
 using Raccord.Modules.Projects.Contracts;
 using Raccord.SharedKernel.Common;
 using Raccord.SharedKernel.Pricing;
@@ -12,7 +13,8 @@ public sealed class ProjectWorkspace(
     IBillableWork projects,
     IPartyDirectory parties,
     IEquipmentStock equipment,
-    IProjectsUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork,
+    IVatSchemePricing vatPricing
 )
 {
     /// <summary>Creates a project for an existing customer.</summary>
@@ -164,13 +166,23 @@ public sealed class ProjectWorkspace(
             );
         }
 
+        var vatSelection = await vatPricing
+            .ResolveRateAsync(request.VatClassId, request.VatSchemeId, cancellationToken)
+            .ConfigureAwait(false);
         var pricing = LinePricing.Create(
             request.Quantity,
             request.UnitPrice,
             request.DiscountPercent,
-            VatRate.Of(request.VatRate)
+            VatRate.Of(vatSelection.Percentage)
         );
-        var line = project.AddBillableLine(kind, request.Description ?? string.Empty, pricing);
+        var line = project.AddBillableLine(
+            kind,
+            request.Description ?? string.Empty,
+            pricing,
+            vatSelection.VatClassId,
+            vatSelection.VatSchemeId
+        );
+        vatPricing.MarkUsed(vatSelection.VatSchemeId);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(line);
     }
@@ -405,7 +417,9 @@ public sealed class ProjectWorkspace(
                 _ => "invoiced",
             },
             line.DraftId,
-            line.InvoiceId
+            line.InvoiceId,
+            line.VatClassId,
+            line.VatSchemeId
         );
 
     private static PackingLineResponse ToResponse(PackingLine line) =>

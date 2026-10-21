@@ -1154,10 +1154,108 @@ internal static class Endpoints
 
     private static void MapInvoicing(RouteGroupBuilder api)
     {
+        MapVatCatalogs(api);
         MapInvoiceDrafts(api);
         MapInvoices(api);
         MapInboundEInvoices(api);
         MapFinance(api);
+    }
+
+    private static void MapVatCatalogs(RouteGroupBuilder api)
+    {
+        MapVatClasses(api.MapGroup("/invoicing").WithTags("Invoicing"));
+        MapVatSchemes(api.MapGroup("/invoicing").WithTags("Invoicing"));
+    }
+
+    private static void MapVatClasses(RouteGroupBuilder catalog)
+    {
+        catalog
+            .MapGet(
+                "/vat-classes",
+                async (VatCatalogWorkflow workflow, CancellationToken ct) =>
+                    TypedResults.Ok(await workflow.ListClassesAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.InvoicingRead);
+        catalog
+            .MapPost(
+                "/vat-classes",
+                async (
+                    CreateVatClassRequest request,
+                    VatCatalogWorkflow workflow,
+                    CancellationToken ct
+                ) =>
+                    TypedResults.Created(
+                        "/api/invoicing/vat-classes",
+                        await workflow.CreateClassAsync(request, ct)
+                    )
+            )
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
+        catalog
+            .MapPut(
+                "/vat-classes/{id:guid}",
+                async Task<Results<Ok<VatClassResponse>, NotFound>> (
+                    Guid id,
+                    RenameVatClassRequest request,
+                    VatCatalogWorkflow workflow,
+                    CancellationToken ct
+                ) =>
+                    await workflow.RenameClassAsync(id, request, ct) is { } vatClass
+                        ? TypedResults.Ok(vatClass)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
+    }
+
+    private static void MapVatSchemes(RouteGroupBuilder catalog)
+    {
+        catalog
+            .MapGet(
+                "/vat-schemes",
+                async (VatCatalogWorkflow workflow, CancellationToken ct) =>
+                    TypedResults.Ok(await workflow.ListSchemesAsync(ct))
+            )
+            .RequirePermission(PermissionCatalog.InvoicingRead);
+        catalog
+            .MapPost(
+                "/vat-schemes",
+                async (
+                    CreateVatSchemeRequest request,
+                    VatCatalogWorkflow workflow,
+                    CancellationToken ct
+                ) =>
+                    TypedResults.Created(
+                        "/api/invoicing/vat-schemes",
+                        await workflow.CreateSchemeAsync(request, ct)
+                    )
+            )
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
+        catalog
+            .MapPut(
+                "/vat-schemes/{id:guid}",
+                async Task<Results<Ok<VatSchemeResponse>, NotFound>> (
+                    Guid id,
+                    UpdateVatSchemeRequest request,
+                    VatCatalogWorkflow workflow,
+                    CancellationToken ct
+                ) =>
+                    await workflow.UpdateSchemeAsync(id, request, ct) is { } scheme
+                        ? TypedResults.Ok(scheme)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
+        catalog
+            .MapPut(
+                "/vat-schemes/{id:guid}/default",
+                async Task<Results<Ok<VatSchemeResponse>, NotFound>> (
+                    Guid id,
+                    VatCatalogWorkflow workflow,
+                    CancellationToken ct
+                ) =>
+                    await workflow.SetDefaultAsync(id, ct) is { } scheme
+                        ? TypedResults.Ok(scheme)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.InvoicingEdit);
     }
 
     private static void MapInboundEInvoices(RouteGroupBuilder api)

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using Raccord.Contracts.Common;
 using Raccord.Contracts.Customers;
+using Raccord.Contracts.Invoicing;
 using Raccord.Contracts.Organization;
 using Raccord.Contracts.Projects;
 using Raccord.Infrastructure.Persistence;
@@ -101,6 +102,27 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
         }
 
         return (await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project!.Id}"))!;
+    }
+
+    public static async Task<(Guid VatClassId, Guid VatSchemeId)> GetDefaultVatReferenceAsync(
+        HttpClient client
+    )
+    {
+        var schemes = await client.GetFromJsonAsync<List<VatSchemeResponse>>(
+            "/api/invoicing/vat-schemes"
+        );
+        var classes = await client.GetFromJsonAsync<List<VatClassResponse>>(
+            "/api/invoicing/vat-classes"
+        );
+        var scheme =
+            schemes?.SingleOrDefault(item => item.IsDefault)
+            ?? throw new InvalidOperationException("The installation had no default VAT scheme.");
+        var classId =
+            scheme.ClassRates.Count > 0
+                ? scheme.ClassRates[0].VatClassId
+                : classes?.FirstOrDefault()?.Id
+                    ?? throw new InvalidOperationException("The installation had no VAT class.");
+        return (classId, scheme.Id);
     }
 
     public async Task<T?> QueryScalarAsync<T>(string sql)

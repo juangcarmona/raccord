@@ -100,6 +100,7 @@ public sealed class InvoiceCollectionsJourney_Should_RecordAndReportPayments(
 
     private async Task<Guid> CreateProjectAsync(IPage page, Guid customerId)
     {
+        var (vatClassId, vatSchemeId) = await GetGeneralVatReferenceAsync(page);
         var projectResponse = await page.APIRequest.PostAsync(
             "/api/projects",
             JsonOptions(
@@ -117,10 +118,44 @@ public sealed class InvoiceCollectionsJourney_Should_RecordAndReportPayments(
 
         var lineResponse = await page.APIRequest.PostAsync(
             $"/api/projects/{projectId}/billable-lines",
-            JsonOptions(new AddBillableLineRequest("equipment", "Camera kit", 2m, 450m, 0m, 21m))
+            JsonOptions(
+                new AddBillableLineRequest(
+                    "equipment",
+                    "Camera kit",
+                    2m,
+                    450m,
+                    0m,
+                    vatClassId,
+                    vatSchemeId
+                )
+            )
         );
         lineResponse.Status.ShouldBe((int)HttpStatusCode.Created);
         return projectId;
+    }
+
+    private static async Task<(Guid VatClassId, Guid VatSchemeId)> GetGeneralVatReferenceAsync(
+        IPage page
+    )
+    {
+        var schemes = await page.APIRequest.GetAsync("/api/invoicing/vat-schemes");
+        schemes.Status.ShouldBe((int)HttpStatusCode.OK);
+        using var schemeCatalog = JsonDocument.Parse(await schemes.TextAsync());
+        var generalScheme = schemeCatalog
+            .RootElement.EnumerateArray()
+            .Single(scheme =>
+                string.Equals(
+                    scheme.GetProperty("name").GetString(),
+                    "General",
+                    StringComparison.Ordinal
+                )
+            );
+        var mappedClass = generalScheme.GetProperty("classRates").EnumerateArray().Single();
+        mappedClass.GetProperty("percentage").GetDecimal().ShouldBe(21m);
+        return (
+            mappedClass.GetProperty("vatClassId").GetGuid(),
+            generalScheme.GetProperty("id").GetGuid()
+        );
     }
 
     private static async Task AssertRefundableDepositAsync(IPage page, Guid projectId)

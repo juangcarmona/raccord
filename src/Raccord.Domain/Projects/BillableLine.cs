@@ -16,9 +16,19 @@ public sealed class BillableLine
         int position,
         BillableLineKind kind,
         string description,
-        LinePricing pricing
+        LinePricing pricing,
+        Guid? vatClassId = null,
+        Guid? vatSchemeId = null
     )
     {
+        if ((vatClassId is null) != (vatSchemeId is null))
+        {
+            throw new BusinessRuleViolationException(
+                "invoicing.vat-reference-incomplete",
+                "A billable line must store both its VAT class and scheme identities."
+            );
+        }
+
         Id = Guid.CreateVersion7();
         Position = position;
         Kind = kind;
@@ -27,6 +37,8 @@ public sealed class BillableLine
         UnitPrice = pricing.UnitPrice;
         DiscountPercent = pricing.DiscountPercent;
         VatPercentage = pricing.VatRate.Percentage;
+        VatClassId = vatClassId;
+        VatSchemeId = vatSchemeId;
         CurrencyCode = pricing.Currency.Code;
         State = BillingState.Unbilled;
     }
@@ -54,6 +66,12 @@ public sealed class BillableLine
 
     /// <summary>VAT percentage.</summary>
     public decimal VatPercentage { get; private set; }
+
+    /// <summary>Stable VAT class identity selected when the line was saved.</summary>
+    public Guid? VatClassId { get; private set; }
+
+    /// <summary>Stable VAT scheme identity selected when the line was saved.</summary>
+    public Guid? VatSchemeId { get; private set; }
 
     /// <summary>ISO currency code.</summary>
     public string CurrencyCode { get; private set; }

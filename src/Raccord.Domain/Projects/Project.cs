@@ -186,6 +186,34 @@ public sealed class Project
         BillableLineKind kind,
         string description,
         LinePricing pricing
+    ) => AddBillableLine(kind, description, pricing, null, null);
+
+    /// <summary>Records billable work with stable VAT class and scheme references.</summary>
+    public BillableLine AddBillableLine(
+        BillableLineKind kind,
+        string description,
+        LinePricing pricing,
+        Guid vatClassId,
+        Guid vatSchemeId
+    )
+    {
+        if (vatClassId == Guid.Empty || vatSchemeId == Guid.Empty)
+        {
+            throw new BusinessRuleViolationException(
+                "invoicing.vat-reference-incomplete",
+                "A billable line must store both its VAT class and scheme identities."
+            );
+        }
+
+        return AddBillableLine(kind, description, pricing, (Guid?)vatClassId, vatSchemeId);
+    }
+
+    private BillableLine AddBillableLine(
+        BillableLineKind kind,
+        string description,
+        LinePricing pricing,
+        Guid? vatClassId,
+        Guid? vatSchemeId
     )
     {
         ArgumentNullException.ThrowIfNull(pricing);
@@ -198,7 +226,14 @@ public sealed class Project
         }
 
         var position = billableLines.Count == 0 ? 1 : billableLines.Max(line => line.Position) + 1;
-        var line = new BillableLine(position, kind, description.Trim(), pricing);
+        var line = new BillableLine(
+            position,
+            kind,
+            description.Trim(),
+            pricing,
+            vatClassId,
+            vatSchemeId
+        );
         billableLines.Add(line);
         return line;
     }

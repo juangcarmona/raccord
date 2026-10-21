@@ -6,7 +6,7 @@
   "startedAt": "2026-10-21T09:05:38Z",
   "executorModel": "gpt-6",
   "maxCorrectionRounds": 3,
-  "status": "running",
+  "status": "complete",
   "stages": [
     {
       "name": "refine",
@@ -58,14 +58,22 @@
     {
       "name": "integrate",
       "startedAt": "2026-10-21T14:21:05Z",
-      "endedAt": null,
+      "endedAt": "2026-10-21T14:34:58Z",
       "inputCommit": "c4fa585c7d9e9ff98b732251b5de39b28e098ac9",
-      "outputCommit": "03de496164bb7eb5e35c37d2549625a251501753",
-      "result": "running",
+      "outputCommit": "44da525d116dcbbc9f0265d5d9dff996a2c49f9a",
+      "result": "complete",
       "evidence": [
         "PR #421 merged into PR #420 stack at 03de496164bb7eb5e35c37d2549625a251501753",
         "PR #421 CI run 39615064024 succeeded, including 37/37 E2E journeys",
-        "PR #420 combined-head CI run 39616123907 queued; final main integration pending"
+        "PR #420 combined-head CI run 39616123907 queued; final main integration pending",
+        "PR #420 merged into main at 44da525d116dcbbc9f0265d5d9dff996a2c49f9a on 2026-10-21",
+        "OpenSpec VAT catalog delta synced into openspec/specs/vat-catalogs/spec.md",
+        "OpenSpec change archived to openspec/changes/archive/2026-10-21-vat-catalogs-418/",
+        "OpenSpec main spec synced to openspec/specs/vat-catalogs/spec.md",
+        "Final citation verification after archive: 142 documents, 501 current citations, 0 stale/tampered/unresolved/unclassified",
+        "OpenSpec validation after archive: 37 passed, 0 failed",
+        "Issue #418 transitioned to status:done and closed after merge; completion comment 6318663712",
+        "After syncing the new main spec: citation verification reported 146 documents and 532 current citations; after archive it reported 142 documents and 501 current citations."
       ]
     }
   ],
@@ -143,6 +151,21 @@
     "https://github.com/juangcarmona/raccord/pull/421",
     "https://github.com/juangcarmona/raccord/issues/418",
     "https://github.com/juangcarmona/raccord/issues/285",
-    "https://github.com/juangcarmona/raccord/issues/300"
-  ]
+    "https://github.com/juangcarmona/raccord/issues/300",
+    "https://github.com/juangcarmona/raccord/issues/418#issuecomment-6318663712"
+  ],
+  "finalPullRequest": {
+    "number": 420,
+    "url": "https://github.com/juangcarmona/raccord/pull/420",
+    "state": "merged",
+    "mergedAt": "2026-10-21T14:30:28Z",
+    "mergeCommit": "44da525d116dcbbc9f0265d5d9dff996a2c49f9a"
+  },
+  "tracker": {
+    "issue": 418,
+    "state": "closed",
+    "label": "status:done",
+    "url": "https://github.com/juangcarmona/raccord/issues/418",
+    "completionComment": "https://github.com/juangcarmona/raccord/issues/418#issuecomment-6318663712"
+  }
 }

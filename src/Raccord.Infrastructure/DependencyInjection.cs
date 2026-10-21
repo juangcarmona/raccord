@@ -21,6 +21,7 @@ using Raccord.Infrastructure.Time;
 using Raccord.Modules.Compliance;
 using Raccord.Modules.Compliance.Contracts;
 using Raccord.Modules.Contacts.Contracts;
+using Raccord.Modules.Invoicing.Contracts;
 using Raccord.Modules.Projects.Contracts;
 using Raccord.Modules.Workspace.Contracts;
 using Raccord.SharedKernel.Abstractions;
@@ -85,6 +86,8 @@ public static class DependencyInjection
         services.AddScoped<IInboundEInvoiceRepository, InboundEInvoiceRepository>();
         services.AddScoped<IInvoicePaymentRepository, InvoicePaymentRepository>();
         services.AddScoped<IInvoiceReminderRepository, InvoiceReminderRepository>();
+        services.AddScoped<IVatCatalogRepository, VatCatalogRepository>();
+        services.AddScoped<IVatSchemePricing, VatSchemePricing>();
         RegisterWorkspaceServices(services);
         services.AddScoped<ApplicationAuditTrail, AuditTrail>();
         services.AddScoped<Raccord.Modules.Compliance.Contracts.IAuditTrail>(provider =>
@@ -96,6 +99,7 @@ public static class DependencyInjection
         services.AddScoped<ApplicationComplianceRecorder, PendingComplianceRecorder>();
         services.AddSingleton<IInvoiceDocumentRenderer, PdfInvoiceRenderer>();
         services.AddScoped<DatabaseMaintenance>();
+        services.AddScoped<VatCatalogInitializer>();
         services.AddScoped<CommunicationCatalog>();
         services.AddScoped<CrewCatalog>();
         services.AddScoped<CrewAvailabilityCatalog>();

@@ -16,7 +16,8 @@ public sealed class DatabaseMaintenance(
     IPartyWriter partyWriter,
     IWorkspaceStore workspace,
     UserManager<RaccordUser> users,
-    InstallationSetup installation
+    InstallationSetup installation,
+    VatCatalogInitializer vatCatalog
 )
 {
     /// <summary>
@@ -142,6 +143,13 @@ public sealed class DatabaseMaintenance(
     public async Task MigrateAsync(CancellationToken cancellationToken)
     {
         await db.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
+
+        if (!await users.Users.AnyAsync(cancellationToken).ConfigureAwait(false))
+        {
+            await vatCatalog
+                .EnsureInitializedAsync("system:installation", cancellationToken)
+                .ConfigureAwait(false);
+        }
 
         if (!(await workspace.ListAsync(cancellationToken).ConfigureAwait(false)).Any())
         {

@@ -40,6 +40,8 @@ npm run dev
 
 Vite proxies `/api` and `/health` to `RACCORD_API_URL` (default `http://localhost:5194`).
 
+On a fresh installation, the migration/setup flow creates an editable VAT scheme for the `General` class with a dated 21% reference value and its official source. Manage VAT classes and schemes at `/settings/vat`; per-class schemes must contain a mapping for the class selected on a project line, and saved lines retain their effective-rate snapshot. Verify the treatment for each transaction; the initial value does not classify all operations, imply tax compliance, or set a discount.
+
 ## Tests and checks
 
 ```bash

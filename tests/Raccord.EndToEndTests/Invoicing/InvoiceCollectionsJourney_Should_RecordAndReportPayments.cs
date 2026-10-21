@@ -100,6 +100,30 @@ public sealed class InvoiceCollectionsJourney_Should_RecordAndReportPayments(
 
     private async Task<Guid> CreateProjectAsync(IPage page, Guid customerId)
     {
+        var schemes = await page.APIRequest.GetAsync("/api/invoicing/vat-schemes");
+        schemes.Status.ShouldBe((int)HttpStatusCode.OK);
+        using var schemeCatalog = JsonDocument.Parse(await schemes.TextAsync());
+        var defaultScheme = schemeCatalog
+            .RootElement.EnumerateArray()
+            .Single(scheme => scheme.GetProperty("isDefault").GetBoolean());
+        var vatSchemeId = defaultScheme.GetProperty("id").GetGuid();
+        var mappedClass = defaultScheme.GetProperty("classRates").EnumerateArray().FirstOrDefault();
+        Guid vatClassId;
+        if (mappedClass.ValueKind is JsonValueKind.Object)
+        {
+            vatClassId = mappedClass.GetProperty("vatClassId").GetGuid();
+        }
+        else
+        {
+            var classes = await page.APIRequest.GetAsync("/api/invoicing/vat-classes");
+            classes.Status.ShouldBe((int)HttpStatusCode.OK);
+            using var classCatalog = JsonDocument.Parse(await classes.TextAsync());
+            vatClassId = classCatalog
+                .RootElement.EnumerateArray()
+                .First()
+                .GetProperty("id")
+                .GetGuid();
+        }
         var projectResponse = await page.APIRequest.PostAsync(
             "/api/projects",
             JsonOptions(
@@ -117,7 +141,17 @@ public sealed class InvoiceCollectionsJourney_Should_RecordAndReportPayments(
 
         var lineResponse = await page.APIRequest.PostAsync(
             $"/api/projects/{projectId}/billable-lines",
-            JsonOptions(new AddBillableLineRequest("equipment", "Camera kit", 2m, 450m, 0m, 21m))
+            JsonOptions(
+                new AddBillableLineRequest(
+                    "equipment",
+                    "Camera kit",
+                    2m,
+                    450m,
+                    0m,
+                    vatClassId,
+                    vatSchemeId
+                )
+            )
         );
         lineResponse.Status.ShouldBe((int)HttpStatusCode.Created);
         return projectId;

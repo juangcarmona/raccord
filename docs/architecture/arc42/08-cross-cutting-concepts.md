@@ -13,7 +13,7 @@ Invariants throw `BusinessRuleViolationException` with a stable, kebab-case code
 
 ## Money, tax and rounding
 
-`decimal` everywhere, `Money` with currency, rounding policy in ADR-0006. Unit prices up to four decimals. Calculations happen only in the domain.
+`decimal` everywhere, `Money` with currency, rounding policy in ADR-0006. Unit prices up to four decimals. Calculations happen only in the domain. VAT classes and schemes have stable identities; project billable lines retain the selected identities and effective rate snapshot so later catalog changes cannot rewrite existing work.
 
 ## Identity and time
 
@@ -29,7 +29,7 @@ Issued representation + SHA-256 verified on every read (ADR-0005); documents reg
 
 ## Audit
 
-`SharedKernel.Auditing.AuditEntry(occurredAt, actor, action, entityType, entityId, details)` is accepted through `IAuditAppender` and adapted by the current `IAuditTrail` to `Domain.Auditing.AuditEvent`, appended in the same transaction as the change. Current actions: `invoice-draft.created`, `invoice-draft.line-removed`, `invoice-draft.discarded`, `invoice.issued`, `invoice.document.stored`, `invoice.document.regenerated`, `issuer-profile.updated`, `issuer-identity-change.requested`, `issuer-identity-change.approved`, `issuer-identity-change.rejected`.
+`SharedKernel.Auditing.AuditEntry(occurredAt, actor, action, entityType, entityId, details)` is accepted through `IAuditAppender` and adapted by the current `IAuditTrail` to `Domain.Auditing.AuditEvent`, appended in the same transaction as the change. Current actions: `invoice-draft.created`, `invoice-draft.line-removed`, `invoice-draft.discarded`, `invoice.issued`, `invoice.document.stored`, `invoice.document.regenerated`, `issuer-profile.updated`, `issuer-identity-change.requested`, `issuer-identity-change.approved`, `issuer-identity-change.rejected`, `vat-catalog.initialized`, `vat-class.created`, `vat-class.renamed`, `vat-scheme.created`, `vat-scheme.updated`, `vat-scheme.default-set`. Catalog changes and first use are audited in the same unit of work as their persisted state.
 
 ## Security
 

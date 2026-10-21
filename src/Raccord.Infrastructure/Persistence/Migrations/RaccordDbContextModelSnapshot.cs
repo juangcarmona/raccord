@@ -381,6 +381,89 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("invoice_reminders", "workspace");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Billing.VatClass", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vat_classes");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_vat_classes_name");
+
+                    b.ToTable("vat_classes", "invoicing");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Billing.VatScheme", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal?>("FixedPercentage")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)")
+                        .HasColumnName("fixed_percentage");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_used");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("kind");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("SourceUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("source_url");
+
+                    b.Property<string>("Territory")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("territory");
+
+                    b.Property<DateOnly?>("VerifiedOn")
+                        .HasColumnType("date")
+                        .HasColumnName("verified_on");
+
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vat_schemes");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_vat_schemes_name");
+
+                    b.ToTable("vat_schemes", "invoicing");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Equipment.EquipmentItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2432,10 +2515,18 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("numeric(18,4)")
                                 .HasColumnName("unit_price");
 
+                            b1.Property<Guid?>("VatClassId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_class_id");
+
                             b1.Property<decimal>("VatPercentage")
                                 .HasPrecision(5, 2)
                                 .HasColumnType("numeric(5,2)")
                                 .HasColumnName("vat_percentage");
+
+                            b1.Property<Guid?>("VatSchemeId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_scheme_id");
 
                             b1.HasKey("Id")
                                 .HasName("pk_invoice_draft_lines");
@@ -2451,6 +2542,46 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         });
 
                     b.Navigation("Lines");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Billing.VatScheme", b =>
+                {
+                    b.OwnsMany("Raccord.Domain.Billing.VatClassRate", "ClassRates", b1 =>
+                        {
+                            b1.Property<Guid>("VatSchemeId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_scheme_id");
+
+                            b1.Property<Guid>("VatClassId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_class_id");
+
+                            b1.Property<decimal>("Percentage")
+                                .HasPrecision(5, 2)
+                                .HasColumnType("numeric(5,2)")
+                                .HasColumnName("percentage");
+
+                            b1.HasKey("VatSchemeId", "VatClassId")
+                                .HasName("pk_vat_scheme_class_rates");
+
+                            b1.HasIndex("VatClassId")
+                                .HasDatabaseName("ix_vat_scheme_class_rates_vat_class_id");
+
+                            b1.ToTable("vat_scheme_class_rates", "invoicing");
+
+                            b1.HasOne("Raccord.Domain.Billing.VatClass", null)
+                                .WithMany()
+                                .HasForeignKey("VatClassId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired()
+                                .HasConstraintName("fk_vat_scheme_class_rates_vat_classes_vat_class_id");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VatSchemeId")
+                                .HasConstraintName("fk_vat_scheme_class_rates_vat_schemes_vat_scheme_id");
+                        });
+
+                    b.Navigation("ClassRates");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
@@ -2516,10 +2647,18 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasColumnType("numeric(18,4)")
                                 .HasColumnName("unit_price");
 
+                            b1.Property<Guid?>("VatClassId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_class_id");
+
                             b1.Property<decimal>("VatPercentage")
                                 .HasPrecision(5, 2)
                                 .HasColumnType("numeric(5,2)")
                                 .HasColumnName("vat_percentage");
+
+                            b1.Property<Guid?>("VatSchemeId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("vat_scheme_id");
 
                             b1.Property<uint>("Version")
                                 .IsConcurrencyToken()

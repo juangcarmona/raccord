@@ -125,6 +125,8 @@ public sealed record FinanceReportResponse(
 /// <param name="DiscountPercent">Line discount percentage.</param>
 /// <param name="VatRate">VAT percentage.</param>
 /// <param name="NetAmount">Net amount.</param>
+/// <param name="VatClassId">Stable VAT class identity copied from the source project line.</param>
+/// <param name="VatSchemeId">Stable VAT scheme identity copied from the source project line.</param>
 public sealed record InvoiceLineResponse(
     Guid? Id,
     int Position,
@@ -133,7 +135,9 @@ public sealed record InvoiceLineResponse(
     decimal UnitPrice,
     decimal DiscountPercent,
     decimal VatRate,
-    decimal NetAmount
+    decimal NetAmount,
+    Guid? VatClassId = null,
+    Guid? VatSchemeId = null
 );
 
 /// <summary>Taxable base and VAT for one rate.</summary>

@@ -3708,6 +3708,223 @@
         }
       }
     },
+    "/api/invoicing/vat-classes": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VatClassResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVatClassRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VatClassResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoicing/vat-classes/{id}": {
+      "put": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameVatClassRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VatClassResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoicing/vat-schemes": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VatSchemeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoicing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVatSchemeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VatSchemeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/invoicing/vat-schemes/{id}": {
+      "put": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVatSchemeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VatSchemeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/invoicing/vat-schemes/{id}/default": {
+      "put": {
+        "tags": [
+          "Invoicing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VatSchemeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/invoice-drafts": {
       "get": {
         "tags": [
@@ -4825,7 +5042,8 @@
           "quantity",
           "unitPrice",
           "discountPercent",
-          "vatRate"
+          "vatClassId",
+          "vatSchemeId"
         ],
         "type": "object",
         "properties": {
@@ -4852,10 +5070,15 @@
             "description": "Line discount, 0–100.",
             "format": "double"
           },
-          "vatRate": {
-            "type": "number",
-            "description": "VAT percentage, 0–100.",
-            "format": "double"
+          "vatClassId": {
+            "type": "string",
+            "description": "Stable VAT class identity selected from the Invoicing catalog.",
+            "format": "uuid"
+          },
+          "vatSchemeId": {
+            "type": "string",
+            "description": "Stable VAT scheme identity selected from the Invoicing catalog.",
+            "format": "uuid"
           }
         },
         "description": "Adds billable work to a project."
@@ -5215,6 +5438,22 @@
               "string"
             ],
             "description": "Invoice that billed the line.",
+            "format": "uuid"
+          },
+          "vatClassId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Stable VAT class identity captured when saved.",
+            "format": "uuid"
+          },
+          "vatSchemeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Stable VAT scheme identity captured when saved.",
             "format": "uuid"
           }
         },
@@ -5844,6 +6083,52 @@
           }
         },
         "description": "Creates an invoice draft that is not linked to a project."
+      },
+      "CreateVatClassRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Creates a VAT class."
+      },
+      "CreateVatSchemeRequest": {
+        "required": [
+          "name",
+          "kind",
+          "fixedPercentage",
+          "classRates"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "fixedPercentage": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "classRates": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/VatClassRateRequest"
+            }
+          }
+        },
+        "description": "Creates a VAT scheme."
       },
       "CreateVehicleRequest": {
         "required": [
@@ -7097,6 +7382,22 @@
             "type": "number",
             "description": "Net amount.",
             "format": "double"
+          },
+          "vatClassId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Stable VAT class identity copied from the source project line.",
+            "format": "uuid"
+          },
+          "vatSchemeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Stable VAT scheme identity copied from the source project line.",
+            "format": "uuid"
           }
         },
         "description": "A line of a draft or issued invoice."
@@ -8961,6 +9262,18 @@
         },
         "description": "Registers a customer."
       },
+      "RenameVatClassRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Changes a VAT class display name."
+      },
       "RespondToCrewInvitationRequest": {
         "required": [
           "status"
@@ -9536,6 +9849,36 @@
           }
         }
       },
+      "UpdateVatSchemeRequest": {
+        "required": [
+          "name",
+          "fixedPercentage",
+          "classRates"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fixedPercentage": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "classRates": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/VatClassRateRequest"
+            }
+          }
+        },
+        "description": "Changes an unused VAT scheme rate and display name."
+      },
       "UpdateVehicleRequest": {
         "required": [
           "registrationNumber",
@@ -9591,6 +9934,59 @@
         },
         "description": "A reason an operation cannot proceed, identified by a stable code the UI can localize."
       },
+      "VatClassRateRequest": {
+        "required": [
+          "vatClassId",
+          "percentage"
+        ],
+        "type": "object",
+        "properties": {
+          "vatClassId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "Maps one VAT class to a percentage."
+      },
+      "VatClassRateResponse": {
+        "required": [
+          "vatClassId",
+          "percentage"
+        ],
+        "type": "object",
+        "properties": {
+          "vatClassId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "One VAT percentage mapped to a stable class identity."
+      },
+      "VatClassResponse": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "A reusable VAT classification."
+      },
       "VatGroupResponse": {
         "required": [
           "rate",
@@ -9616,6 +10012,72 @@
           }
         },
         "description": "Taxable base and VAT for one rate."
+      },
+      "VatSchemeResponse": {
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "fixedPercentage",
+          "isDefault",
+          "isUsed",
+          "territory",
+          "sourceUrl",
+          "verifiedOn",
+          "classRates"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "fixedPercentage": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "isUsed": {
+            "type": "boolean"
+          },
+          "territory": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sourceUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "verifiedOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "classRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VatClassRateResponse"
+            }
+          }
+        },
+        "description": "A configured VAT scheme and its source-date metadata."
       },
       "VehicleAssignmentResponse": {
         "required": [

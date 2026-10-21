@@ -4,6 +4,10 @@
 
 The Invoicing module currently calculates VAT for invoice lines but has no persistent class or scheme catalog. The issue requires administrators to configure catalogs, expose stable scheme references to Contacts and Projects, initialize a new Spanish installation with an editable standard-rate default, and preserve rates after use. The accepted product contract is `CHG-FINANCE-CATALOGS-417-419-001` on PR #420.
 
+<!-- pdac:cite id="TERM-WORKSPACE" digest="sha256:76a1adeba2ddd9f048c0e6c171f0fe224f6ea85609ca288a61424b7522e30b92" -->
+
+The product defines one workspace as the company's own installation. The catalog is therefore scoped to that installation's database; this change does not introduce multiple workspace identities inside one installation.
+
 <!-- pdac:cite id="UC-FIN-CONFIGURE-VAT" digest="sha256:3c05cb10f788f77cb6752fca0c806d089d618a79be13a6cd2a2d4cb911388ab7" -->
 <!-- pdac:cite id="TERM-VAT-SCHEME" digest="sha256:d7fbf3cf62480bae491180a199e8fbe4455b25712d349af2b203173abf42095f" -->
 <!-- pdac:cite id="BR-FIN-USED-RATE-FROZEN" digest="sha256:b33134bd0f2519dfb830cd37b214eab8e6c9e8609b7a9bf63c9db8e2e6cb8a95" -->

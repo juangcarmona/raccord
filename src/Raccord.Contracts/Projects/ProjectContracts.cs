@@ -147,14 +147,16 @@ public sealed record ProjectScheduleResponse(
 /// <param name="Quantity">Units, days or hours; greater than zero.</param>
 /// <param name="UnitPrice">Net unit price with up to four decimals.</param>
 /// <param name="DiscountPercent">Line discount, 0–100.</param>
-/// <param name="VatRate">VAT percentage, 0–100.</param>
+/// <param name="VatClassId">Stable VAT class identity selected from the Invoicing catalog.</param>
+/// <param name="VatSchemeId">Stable VAT scheme identity selected from the Invoicing catalog.</param>
 public sealed record AddBillableLineRequest(
     string Kind,
     string Description,
     decimal Quantity,
     decimal UnitPrice,
     decimal DiscountPercent,
-    decimal VatRate
+    Guid VatClassId,
+    Guid VatSchemeId
 );
 
 #pragma warning disable CS1591
@@ -271,6 +273,8 @@ public sealed record ProjectResponse(
 /// <param name="BillingState">One of <c>unbilled</c>, <c>in-draft</c>, <c>invoiced</c>.</param>
 /// <param name="DraftId">Draft holding the line.</param>
 /// <param name="InvoiceId">Invoice that billed the line.</param>
+/// <param name="VatClassId">Stable VAT class identity captured when saved.</param>
+/// <param name="VatSchemeId">Stable VAT scheme identity captured when saved.</param>
 public sealed record BillableLineResponse(
     Guid Id,
     string Kind,
@@ -282,5 +286,7 @@ public sealed record BillableLineResponse(
     decimal NetAmount,
     string BillingState,
     Guid? DraftId,
-    Guid? InvoiceId
+    Guid? InvoiceId,
+    Guid? VatClassId = null,
+    Guid? VatSchemeId = null
 );

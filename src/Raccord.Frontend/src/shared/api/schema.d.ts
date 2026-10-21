@@ -4208,6 +4208,262 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/invoicing/vat-classes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatClassResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateVatClassRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatClassResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoicing/vat-classes/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RenameVatClassRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatClassResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoicing/vat-schemes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatSchemeResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateVatSchemeRequest"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatSchemeResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoicing/vat-schemes/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateVatSchemeRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatSchemeResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invoicing/vat-schemes/{id}/default": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VatSchemeResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invoice-drafts": {
         parameters: {
             query?: never;
@@ -5561,10 +5817,15 @@ export interface components {
              */
             discountPercent: number;
             /**
-             * Format: double
-             * @description VAT percentage, 0–100.
+             * Format: uuid
+             * @description Stable VAT class identity selected from the Invoicing catalog.
              */
-            vatRate: number;
+            vatClassId: string;
+            /**
+             * Format: uuid
+             * @description Stable VAT scheme identity selected from the Invoicing catalog.
+             */
+            vatSchemeId: string;
         };
         AddProjectFileRequest: {
             name: string;
@@ -5710,6 +5971,16 @@ export interface components {
              * @description Invoice that billed the line.
              */
             invoiceId: null | string;
+            /**
+             * Format: uuid
+             * @description Stable VAT class identity captured when saved.
+             */
+            vatClassId?: null | string;
+            /**
+             * Format: uuid
+             * @description Stable VAT scheme identity captured when saved.
+             */
+            vatSchemeId?: null | string;
         };
         BookOutLineRequest: {
             actor: string;
@@ -5904,6 +6175,18 @@ export interface components {
             operationDate: null | string;
             lines: components["schemas"]["StandaloneInvoiceLineRequest"][];
             seriesCode: null | string;
+        };
+        /** @description Creates a VAT class. */
+        CreateVatClassRequest: {
+            name: string;
+        };
+        /** @description Creates a VAT scheme. */
+        CreateVatSchemeRequest: {
+            name: string;
+            kind: string;
+            /** Format: double */
+            fixedPercentage: null | number;
+            classRates: null | components["schemas"]["VatClassRateRequest"][];
         };
         CreateVehicleRequest: {
             registrationNumber: string;
@@ -6346,6 +6629,16 @@ export interface components {
              * @description Net amount.
              */
             netAmount: number;
+            /**
+             * Format: uuid
+             * @description Stable VAT class identity copied from the source project line.
+             */
+            vatClassId?: null | string;
+            /**
+             * Format: uuid
+             * @description Stable VAT scheme identity copied from the source project line.
+             */
+            vatSchemeId?: null | string;
         };
         /** @description One payment received against an issued invoice. */
         InvoicePaymentResponse: {
@@ -7001,6 +7294,10 @@ export interface components {
             /** @description Billing e-mail. */
             email: null | string;
         };
+        /** @description Changes a VAT class display name. */
+        RenameVatClassRequest: {
+            name: string;
+        };
         RespondToCrewInvitationRequest: {
             status: components["schemas"]["CrewInvitationStatus"];
         };
@@ -7164,6 +7461,13 @@ export interface components {
             displayName: null | string;
             preferredLanguage: null | string;
         };
+        /** @description Changes an unused VAT scheme rate and display name. */
+        UpdateVatSchemeRequest: {
+            name: string;
+            /** Format: double */
+            fixedPercentage: null | number;
+            classRates: null | components["schemas"]["VatClassRateRequest"][];
+        };
         UpdateVehicleRequest: {
             registrationNumber: string;
             /** Format: int32 */
@@ -7178,6 +7482,26 @@ export interface components {
             code: string;
             /** @description English explanation. */
             message: string;
+        };
+        /** @description Maps one VAT class to a percentage. */
+        VatClassRateRequest: {
+            /** Format: uuid */
+            vatClassId: string;
+            /** Format: double */
+            percentage: number;
+        };
+        /** @description One VAT percentage mapped to a stable class identity. */
+        VatClassRateResponse: {
+            /** Format: uuid */
+            vatClassId: string;
+            /** Format: double */
+            percentage: number;
+        };
+        /** @description A reusable VAT classification. */
+        VatClassResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
         };
         /** @description Taxable base and VAT for one rate. */
         VatGroupResponse: {
@@ -7196,6 +7520,22 @@ export interface components {
              * @description VAT at this rate.
              */
             vatAmount: number;
+        };
+        /** @description A configured VAT scheme and its source-date metadata. */
+        VatSchemeResponse: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            kind: string;
+            /** Format: double */
+            fixedPercentage: null | number;
+            isDefault: boolean;
+            isUsed: boolean;
+            territory: null | string;
+            sourceUrl: null | string;
+            /** Format: date */
+            verifiedOn: null | string;
+            classRates: components["schemas"]["VatClassRateResponse"][];
         };
         VehicleAssignmentResponse: {
             /** Format: uuid */

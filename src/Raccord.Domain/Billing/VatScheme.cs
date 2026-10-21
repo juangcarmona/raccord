@@ -32,6 +32,18 @@ public sealed class VatScheme
     /// <summary>Whether a saved commercial record has captured this scheme.</summary>
     public bool IsUsed { get; private set; }
 
+    /// <summary>Whether new commercial records should select this scheme by default.</summary>
+    public bool IsDefault { get; private set; }
+
+    /// <summary>Territory associated with a source-dated initial rate.</summary>
+    public string? Territory { get; private set; }
+
+    /// <summary>Official source used to verify an initial rate.</summary>
+    public string? SourceUrl { get; private set; }
+
+    /// <summary>Date on which the source for the initial rate was verified.</summary>
+    public DateOnly? VerifiedOn { get; private set; }
+
     /// <summary>Per-class rate mappings.</summary>
     public IReadOnlyCollection<VatClassRate> ClassRates => classRates.AsReadOnly();
 
@@ -140,6 +152,29 @@ public sealed class VatScheme
 
     /// <summary>Marks the scheme as used by a saved commercial record.</summary>
     public void MarkUsed() => IsUsed = true;
+
+    /// <summary>Marks this scheme as the installation's current default.</summary>
+    public void SetDefault(bool isDefault) => IsDefault = isDefault;
+
+    /// <summary>Attaches the official source metadata to a source-dated bootstrap rate.</summary>
+    public void SetBootstrapSource(VatRateBootstrap source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        if (
+            string.IsNullOrWhiteSpace(source.Territory)
+            || string.IsNullOrWhiteSpace(source.SourceUrl)
+        )
+        {
+            throw new BusinessRuleViolationException(
+                "invoicing.vat-bootstrap-source-invalid",
+                "A bootstrap VAT rate requires a territory and official source."
+            );
+        }
+
+        Territory = source.Territory;
+        SourceUrl = source.SourceUrl;
+        VerifiedOn = source.VerifiedOn;
+    }
 
     private static string NormalizeName(string name)
     {

@@ -47,7 +47,9 @@ internal static class InvoicingMapping
             line.Pricing.UnitPrice,
             line.Pricing.DiscountPercent,
             line.Pricing.VatRate.Percentage,
-            line.Pricing.NetAmount.Amount
+            line.Pricing.NetAmount.Amount,
+            line.VatClassId,
+            line.VatSchemeId
         );
 
     internal static InvoiceLineResponse ToResponse(this IssuedInvoiceLine line) =>
@@ -59,7 +61,9 @@ internal static class InvoicingMapping
             line.Pricing.UnitPrice,
             line.Pricing.DiscountPercent,
             line.Pricing.VatRate.Percentage,
-            line.Pricing.NetAmount.Amount
+            line.Pricing.NetAmount.Amount,
+            null,
+            null
         );
 
     internal static ValidationIssueResponse ToResponse(this ValidationIssue issue) =>

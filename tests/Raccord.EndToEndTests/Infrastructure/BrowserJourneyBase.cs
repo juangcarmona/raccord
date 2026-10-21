@@ -196,7 +196,11 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     /// registered in the same page session (the project form needs a customer to bill), with one
     /// billable line, and lands on the project detail page showing the line.
     /// </summary>
-    protected async Task CreateProjectWithBillableLineAsync(IPage page)
+    protected async Task CreateProjectWithBillableLineAsync(
+        IPage page,
+        string? vatClassName = null,
+        string? vatSchemeName = null
+    )
     {
         await page.GotoAsync("/projects/new");
         await page.GetByLabel("Project name").FillAsync($"Promo E2E {RunStamp}");
@@ -214,6 +218,16 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         await page.GetByLabel("Description").FillAsync("Camera kit with lenses");
         await page.GetByLabel("Quantity").FillAsync("2");
         await page.GetByLabel("Unit price").FillAsync("450");
+        if (vatClassName is not null)
+        {
+            await page.GetByLabel("VAT class")
+                .SelectOptionAsync(new SelectOptionValue { Label = vatClassName });
+        }
+        if (vatSchemeName is not null)
+        {
+            await page.GetByLabel("VAT scheme")
+                .SelectOptionAsync(new SelectOptionValue { Label = vatSchemeName });
+        }
         await page.GetByRole(AriaRole.Button, new() { Name = "Add billable line" }).ClickAsync();
         await page.GetByText("Camera kit with lenses").First.WaitForAsync();
     }

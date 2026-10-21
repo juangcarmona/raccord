@@ -49,6 +49,27 @@ public sealed class InvoiceDraftTests
     }
 
     [Fact]
+    public void Draft_lines_Should_copy_vat_class_and_scheme_identities_with_the_rate_snapshot()
+    {
+        var vatClassId = Guid.CreateVersion7();
+        var vatSchemeId = Guid.CreateVersion7();
+        var line = project.AddBillableLine(
+            BillableLineKind.Equipment,
+            "Cinema camera kit",
+            LinePricing.Create(1m, 100m, 0m, VatRate.Of(21m)),
+            vatClassId,
+            vatSchemeId
+        );
+
+        var draft = InvoiceDraft.CreateFromProject(project, [line.Id], "F", Now);
+        var draftLine = draft.Lines.ShouldHaveSingleItem();
+
+        draftLine.VatClassId.ShouldBe(vatClassId);
+        draftLine.VatSchemeId.ShouldBe(vatSchemeId);
+        draftLine.VatPercentage.ShouldBe(21m);
+    }
+
+    [Fact]
     public void Draft_lines_Should_follow_the_project_order_whatever_the_selection_order()
     {
         var camera = AddLine("Cinema camera kit", 2m, 450m);

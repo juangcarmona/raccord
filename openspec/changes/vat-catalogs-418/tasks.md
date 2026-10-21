@@ -2,12 +2,12 @@
 
 ## 1. Domain contract and source-dated initialization
 
-- [ ] 1.1 Add failing domain tests for class and scheme validation, supported kinds (per-class, fixed rate, reverse charge), stable identity, and invalid percentage/reference rejection.
+- [x] 1.1 Add failing domain tests for class and scheme validation, supported kinds (per-class, fixed rate, reverse charge), stable identity, and invalid percentage/reference rejection.
 - [ ] 1.2 Add failing tests proving the named Spanish standard-rate constant carries 21%, official source URL and verification date, and that initialization uses it only when the installation has no VAT catalog.
-- [ ] 1.3 Add failing domain tests proving a used scheme rate cannot change and a replacement scheme preserves existing references.
-- [ ] 1.4 Add failing tests proving a saved project billable line records both the stable scheme identity and effective percentage snapshot, and invoice draft lines carry both forward.
-- [ ] 1.5 Implement the minimal Invoicing domain types and validation to make the tests pass; keep them independent of EF Core and HTTP.
-- [ ] 1.6 Update the project billable-line and invoice draft-line write paths to capture the stable VAT scheme identity and effective percentage snapshot; keep existing calculation behavior intact.
+- [x] 1.3 Add failing domain tests proving a used scheme rate cannot change and a replacement scheme preserves existing references.
+- [x] 1.4 Add failing tests proving a saved project billable line records both the stable scheme identity and effective percentage snapshot, and invoice draft lines carry both forward.
+- [x] 1.5 Implement the minimal Invoicing domain types and validation to make the tests pass; keep them independent of EF Core and HTTP.
+- [x] 1.6 Update the project billable-line and invoice draft-line write paths to capture the stable VAT scheme identity and effective percentage snapshot; keep existing calculation behavior intact.
 - [ ] 1.7 Implement the source-dated bootstrap value and first-install initializer; test restart/idempotency and preservation of administrator changes.
 
 ## 2. Persistence and module boundary

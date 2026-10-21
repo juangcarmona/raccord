@@ -41,7 +41,7 @@
 
 - [x] 6.1 Update affected arc42 module and persistence descriptions plus operations guidance for the dated bootstrap default and explicit rate-change process; do not claim tax compliance.
 - [x] 6.2 Review `docs/operations/process-ledger.md` and record any durable lessons from this loop.
-- [ ] 6.3 Run ProductShape validation, OpenSpec validation, PDaC citation verification, formatting, analyzers, architecture tests, .NET tests, frontend checks, contract-drift checks, security/license/SBOM checks, deployment-artifact checks, E2E selection validation and the complete selected Playwright battery.
+- [x] 6.3 Run ProductShape validation, OpenSpec validation, PDaC citation verification, formatting, analyzers, architecture tests, .NET tests, frontend checks, contract-drift checks, security/license/SBOM checks, deployment-artifact checks, E2E selection validation and the complete selected Playwright battery.
 - [ ] 6.4 Obtain the Owner's Done judgement and PR approval; keep the PR stacked on #420 until that base is integrated, then verify the final head and complete the tracker transition.
 
 ## Definition of Done coverage

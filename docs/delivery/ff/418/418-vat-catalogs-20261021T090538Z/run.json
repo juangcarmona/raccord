@@ -54,6 +54,19 @@
         "CI E2E failure corrected: collections journey now selects and asserts the named General scheme instead of the mutable workspace default; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)",
         "Second CI E2E failure corrected in shared BrowserJourneyBase: common billing journeys explicitly choose General unless the journey supplies its own scheme; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)"
       ]
+    },
+    {
+      "name": "integrate",
+      "startedAt": "2026-10-21T14:21:05Z",
+      "endedAt": null,
+      "inputCommit": "c4fa585c7d9e9ff98b732251b5de39b28e098ac9",
+      "outputCommit": "03de496164bb7eb5e35c37d2549625a251501753",
+      "result": "running",
+      "evidence": [
+        "PR #421 merged into PR #420 stack at 03de496164bb7eb5e35c37d2549625a251501753",
+        "PR #421 CI run 39615064024 succeeded, including 37/37 E2E journeys",
+        "PR #420 combined-head CI run 39616123907 queued; final main integration pending"
+      ]
     }
   ],
   "reviews": [
@@ -118,9 +131,11 @@
   "pullRequest": {
     "number": 421,
     "url": "https://github.com/juangcarmona/raccord/pull/421",
-    "state": "open",
+    "state": "merged",
     "isDraft": false,
-    "base": "codex/finance-catalog-product-change"
+    "base": "codex/finance-catalog-product-change",
+    "mergedAt": "2026-10-21T14:21:05Z",
+    "mergeCommit": "03de496164bb7eb5e35c37d2549625a251501753"
   },
   "reviewOverride": "Owner explicitly waived any independent reviewer for work item #418. No independent implementation review is required; this item-level exception does not change repository-wide policy.",
   "links": [
@@ -128,7 +143,6 @@
     "https://github.com/juangcarmona/raccord/pull/421",
     "https://github.com/juangcarmona/raccord/issues/418",
     "https://github.com/juangcarmona/raccord/issues/285",
-    "https://github.com/juangcarmona/raccord/issues/300",
-    "https://github.com/juangcarmona/raccord/pull/421"
+    "https://github.com/juangcarmona/raccord/issues/300"
   ]
 }

@@ -84,8 +84,7 @@
     "url": "https://github.com/juangcarmona/raccord/pull/421",
     "state": "open",
     "isDraft": true,
-    "base": "codex/finance-catalog-product-change",
-    "head": "6584f12085b3b1ef15e763b6fa877cd70258fd17"
+    "base": "codex/finance-catalog-product-change"
   },
   "links": [
     "https://github.com/juangcarmona/raccord/pull/420",

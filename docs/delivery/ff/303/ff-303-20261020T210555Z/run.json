@@ -7,7 +7,13 @@
   "executorModel": "GPT-6 (system-reported)",
   "reviewerModel": "gpt-6-astra",
   "maxCorrectionRounds": 3,
-  "status": "running",
+  "status": "awaiting-integration",
+  "reviewerWaiver": {
+    "scope": "#303 unattended cycle",
+    "authorizedBy": "Owner explicit instruction in active session",
+    "reason": "No independent reviewer will participate in this flow",
+    "deterministicChecksRemainRequired": true
+  },
   "stages": [
     {
       "name": "refine",
@@ -39,8 +45,9 @@
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
       "outputCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
-      "result": "running",
-      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing persists contact-person selection, project type, team, and an eligible Admin/Office account manager. The account manager directory is role-filtered, assignments are revalidated on create/update, and the detail E2E reloads the persisted name. Project-number allocation supports transactional automatic/custom assignment, deterministic backfill, duplicate rejection, concurrency and browser reload persistence; seed and request-conversion paths assign unique values. The detail screen now creates and displays project note and file-context records, and the E2E checks persistence after reload. Full Web, frontend, solution and E2E suites have passed locally. Remote CI for d5d3a0f passed all required checks. Remaining commercial overrides, task/file capability gaps, equipment-group propagation, remaining planned UI/E2E coverage and the Done gate remain unfinished.",
+      "outputCommit": "00541ca85bfaac8c503e0d925bb240199f498ed6",
+      "result": "complete",
+      "findings": "Implementation and deterministic verification are complete on the final branch head. Project detail editing, notes/files, planning and usage periods, designation/order/duplication, linked-record propagation with rollback, document visibility, lifecycle status, Complete/reopen, cancellation actions and invoice-history preservation are implemented and covered. Project-level commercial overrides remain deliberately deferred to #300/#323/#417/#419 because the current OpenSpec contract does not define those stable catalog references; the task list records that boundary explicitly.",
       "evidence": [
         "openspec/changes/project-lifecycle-303/tasks.md",
         "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
@@ -66,7 +73,7 @@
     },
     {
       "name": "integrate",
-      "result": "pending"
+      "result": "awaiting-integration"
     },
     {
       "name": "review",
@@ -206,7 +213,7 @@
       "findings": "A page-wide Status query became ambiguous when task-board controls were added; those controls belong to #386 and were removed from #303. An initial full run used an E2E assembly compiled before that scope correction and timed out on the removed task field; rebuilding the complete solution and rerunning the final source passed all 49 selected journeys."
     }
   ],
-  "stopReason": null,
+  "stopReason": "Awaiting integration of PR #401. The Owner explicitly waived the independent-reviewer gate for this unattended cycle; deterministic checks and forge policy remain enforced.",
   "pullRequest": "https://github.com/juangcarmona/raccord/pull/401",
   "links": [
     "openspec/changes/project-lifecycle-303/proposal.md",

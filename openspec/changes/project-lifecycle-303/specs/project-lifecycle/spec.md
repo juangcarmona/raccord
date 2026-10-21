@@ -12,6 +12,16 @@ The system MUST let an operator edit the accepted project detail fields, choose 
 - **WHEN** an operator saves valid project details
 - **THEN** the project overview and detail show the saved values
 
+#### Scenario: Assign the next project number when omitted
+
+- **WHEN** an operator creates a project without a manually assigned number or clears the number while editing an existing project
+- **THEN** the project receives the next number in the installation's project sequence
+
+#### Scenario: Assign a custom project number
+
+- **WHEN** an operator supplies an unused custom number while creating or editing a project
+- **THEN** the project stores that number and future automatic assignments do not reuse it
+
 #### Scenario: Reject a contact person from another contact
 
 - **WHEN** an operator saves a contact person that does not belong to the selected customer
@@ -106,3 +116,4 @@ The system MUST show cancellation actions only when relevant, execute exactly th
 <!-- pdac:cite id="BR-PRJ-CONTACT-SELECTION-EFFECTS" digest="sha256:8a97ed06931ff2b4ec14c11e4df84a1e1fb74a3599ee568ca195272d4bc541b7" -->
 <!-- pdac:cite id="BR-PRJ-PARTIES-FROM-CONTACTS" digest="sha256:2fe8ce59516db4c08c3582e1c3dd6341fa3b658e8386d10f725671b633b2dcfe" -->
 <!-- pdac:cite id="FR-PRJ-010" digest="sha256:1475c6b8459b26d9838f42e83f16953e9e2aa967d29585efc738f102251abd91" -->
+<!-- pdac:cite id="BR-PRJ-PROJECT-NUMBER-ASSIGNMENT" digest="sha256:f7b7bbb40f510d6a21e40f8728a060565c0efd2ef3c8488775fd3b3ecba98757" -->

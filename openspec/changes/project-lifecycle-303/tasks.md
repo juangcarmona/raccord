@@ -12,6 +12,9 @@
 - [x] Edit the optional external reference, reject values over 200 characters without mutation, and verify persistence after a browser reload.
 - [x] Persist a selected project contact person, reject a person belonging to another customer, and verify the selection through the project detail browser flow.
 - [x] Edit project type and team through the project detail screen and verify both selections persist after browser reload.
+- [ ] Assign the next unique project number on create when omitted and when cleared during edit; accept custom numbers on create and edit while preserving the number for legacy update requests that omit the field.
+- [ ] Add a deterministic project-number backfill ordered by project id, initialize the sequence for populated and empty databases, serialize allocations/custom assignments transactionally, skip numbers used by custom assignments, and retain a unique index as the database invariant.
+- [ ] Verify custom assignment, automatic allocation, duplicate rejection without mutation, and concurrent number allocation through domain, API, persistence and browser coverage.
 - [ ] Add the accepted project details workflow for existing contact and contact-person selection, project commercial overrides, account manager, notes, tasks, and files, plus duplicate project number validation; cover API validation and persisted detail display for each field.
 - [x] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.

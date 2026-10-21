@@ -7,6 +7,7 @@ import { FormError } from "../../shared/ui/Form";
 import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
 import { AddBillableLineForm } from "./AddBillableLineForm";
+import { WarehousePackingPanel } from "./WarehousePackingPanel";
 
 export function ProjectDetailPage() {
     const { id = "" } = useParams();
@@ -130,6 +131,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
             </section>
 
             <AddBillableLineForm projectId={project.id} onAdded={onChanged} />
+            <WarehousePackingPanel project={project} onChanged={onChanged} />
         </>
     );
 }

@@ -2,7 +2,7 @@
 id: UC-FIN-CONFIGURE-PAYMENT-TERMS
 type: use-case
 title: "Configure payment terms"
-status: draft
+status: active
 primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
 supporting-actors: []
 bounded-context: "BC-INVOICING"

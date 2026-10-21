@@ -2,7 +2,7 @@
 id: BR-FIN-MOMENT-PERCENTAGES
 type: business-rule
 title: "Invoice moment parts share the project total"
-status: draft
+status: active
 applies-to:
   - "UC-FIN-CONFIGURE-INVOICE-MOMENTS"
   - "UC-FIN-GENERATE-PROJECT-INVOICE"

@@ -2,7 +2,7 @@
 id: FR-FIN-DISCOUNTS
 type: functional-requirement
 title: "Support discounts at every level"
-status: draft
+status: active
 derived-from:
   - "UC-FIN-APPLY-PROJECT-DISCOUNTS"
   - "BR-FIN-CATEGORY-DISCOUNT"

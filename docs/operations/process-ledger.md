@@ -463,3 +463,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Running the pinned OpenSpec CLI through `npx` did not make its `openspec` executable discoverable by ProductShape, so citation verification reported PRODUCT069 and could only enumerate documents by filesystem convention.
 - **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
 - **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.
+
+## 2026-10-21 · Tax-rate defaults need dated official evidence and narrow scope
+
+- **Observation:** A request for the latest known legal VAT rate can be read as a universal classification rule even when the current rate is operation-specific and may change over time.
+- **Action:** Before accepting a tax-rate default, verify it against a current official source, record the source and verification date, use it only as an editable setup default for the explicitly named standard class, and preserve used rates by creating a new scheme for later changes. Do not infer or pre-fill discount percentages from tax defaults.
+- **Check:** The Product Change names the source and date, excludes automatic legal updates and universal treatment claims, preserves used schemes, and passes ProductShape validation; consumer citations verify against the updated digests.

@@ -2,7 +2,7 @@
 id: UC-FIN-CONFIGURE-INVOICE-MOMENTS
 type: use-case
 title: "Configure invoice moments"
-status: draft
+status: active
 primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
 supporting-actors: []
 bounded-context: "BC-INVOICING"

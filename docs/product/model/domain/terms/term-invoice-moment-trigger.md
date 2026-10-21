@@ -2,7 +2,7 @@
 id: TERM-INVOICE-MOMENT-TRIGGER
 type: domain-term
 title: "Invoice moment trigger"
-status: draft
+status: active
 defined-in: "BC-INVOICING"
 synonyms: []
 uses-terms: []

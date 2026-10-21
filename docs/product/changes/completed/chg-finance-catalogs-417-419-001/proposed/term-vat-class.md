@@ -15,7 +15,7 @@ provenance:
 
 ## Definition
 
-A named tax category (by default high rate, low rate and zero rate) assigned to every equipment item, crew and transport function and additional cost. A class has no percentage by itself.
+A named tax category assigned to equipment items, crew and transport functions and additional costs. A class has no percentage by itself. A new Spanish installation starts with a standard-rate class; administrators create other classes to represent reduced, zero-rate or other treatments as their operations require.
 
 ## Distinguish From
 

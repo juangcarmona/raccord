@@ -2,7 +2,7 @@
 id: BR-FIN-VAT-FROM-CLASS-AND-SCHEME
 type: business-rule
 title: "VAT rate = scheme percentage for the line's class"
-status: draft
+status: active
 applies-to:
   - "UC-FIN-CONFIGURE-VAT"
   - "UC-FIN-SELECT-VAT-SCHEME"

@@ -2,7 +2,7 @@
 id: TERM-PAYMENT-METHOD
 type: domain-term
 title: "Payment method"
-status: draft
+status: active
 defined-in: "BC-INVOICING"
 synonyms: []
 uses-terms: []

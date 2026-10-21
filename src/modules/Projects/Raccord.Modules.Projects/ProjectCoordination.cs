@@ -12,7 +12,8 @@ public sealed class ProjectCoordination(
     IProjectCoordinationStore coordination,
     IBillableWork projects,
     IPartyDirectory parties,
-    IProjectsUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork,
+    IProjectNumberSeries projectNumbers
 )
 {
     /// <summary>Lists incoming project requests.</summary>
@@ -71,29 +72,39 @@ public sealed class ProjectCoordination(
                 "customers.not-found",
                 $"Customer '{customerId}' does not exist."
             );
-        var project = Project.Create(
-            request.Name,
-            customerId,
-            request.StartDate,
-            request.EndDate,
-            request.ProjectTypeId,
-            request.TeamId
-        );
-        projects.Add(project);
-        request.Convert(project.Id);
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return new ProjectResponse(
-            project.Id,
-            project.Name,
-            project.CustomerId,
-            customer.LegalName,
-            project.StartDate,
-            project.EndDate,
-            Currency.Eur.Code,
-            [],
-            project.ProjectTypeId,
-            project.TeamId
-        );
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                    var project = Project.Create(
+                        request.Name,
+                        customerId,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        await projectNumbers.NextAsync(ct).ConfigureAwait(false)
+                    );
+                    projects.Add(project);
+                    request.Convert(project.Id);
+                    return new ProjectResponse(
+                        project.Id,
+                        project.Name,
+                        project.CustomerId,
+                        customer.LegalName,
+                        project.StartDate,
+                        project.EndDate,
+                        Currency.Eur.Code,
+                        [],
+                        project.ProjectTypeId,
+                        project.TeamId,
+                        ProjectNumber: project.ProjectNumber
+                    );
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     /// <summary>Declines an incoming request.</summary>

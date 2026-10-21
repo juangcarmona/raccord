@@ -22,6 +22,7 @@ const line = (id: string, description: string, billingState: string): Schemas["B
 const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["ProjectResponse"] => ({
     id: "p1",
     name: "Rodaje campaña primavera",
+    projectNumber: "10001",
     customerId: "c1",
     customerName: "Productora Ejemplo S.A.",
     startDate: "2026-09-14",
@@ -129,7 +130,7 @@ describe("ProjectDetailPage", () => {
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({ status: "confirmed" });
     });
 
-    it("saves edits to a project's name, period and external reference", async () => {
+    it("saves edits to a project's name, number, period and external reference", async () => {
         const requests = stubApi({
             ...customerApi,
             "GET /api/projects/p1": () => json(project([])),
@@ -140,6 +141,8 @@ describe("ProjectDetailPage", () => {
         const user = userEvent.setup();
         await user.clear(await screen.findByRole("textbox", { name: "Nombre del proyecto" }));
         await user.type(screen.getByRole("textbox", { name: "Nombre del proyecto" }), "Rodaje verano");
+        await user.clear(screen.getByRole("textbox", { name: "Número de proyecto" }));
+        await user.type(screen.getByRole("textbox", { name: "Número de proyecto" }), "PRJ-2026-041");
         await user.clear(screen.getByLabelText("Inicio"));
         await user.type(screen.getByLabelText("Inicio"), "2026-10-01");
         await user.clear(screen.getByLabelText("Fin"));
@@ -151,6 +154,7 @@ describe("ProjectDetailPage", () => {
 
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({
             name: "Rodaje verano",
+            projectNumber: "PRJ-2026-041",
             customerId: "c1",
             startDate: "2026-10-01",
             endDate: "2026-10-03",

@@ -14,6 +14,7 @@ public sealed class ProjectWorkspace(
     IContactPeopleDirectory contactPeople,
     IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork,
+    IProjectNumberSeries projectNumbers,
     IProjectScheduleStore projectScheduleStore,
     IProjectSchedulePropagation projectSchedulePropagation,
     ProjectCoordination coordination,
@@ -33,17 +34,32 @@ public sealed class ProjectWorkspace(
                 "customers.not-found",
                 $"Customer '{request.CustomerId}' does not exist."
             );
-        var project = Project.Create(
-            request.Name ?? string.Empty,
-            customer.Id,
-            request.StartDate,
-            request.EndDate,
-            request.ProjectTypeId,
-            request.TeamId
-        );
-        projects.Add(project);
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return ToResponse(project, customer.LegalName);
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                    var projectNumber = await ResolveProjectNumberAsync(
+                            request.ProjectNumber,
+                            excludingProjectId: null,
+                            ct
+                        )
+                        .ConfigureAwait(false);
+                    var project = Project.Create(
+                        request.Name ?? string.Empty,
+                        customer.Id,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        projectNumber
+                    );
+                    projects.Add(project);
+                    return ToResponse(project, customer.LegalName);
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     /// <summary>Lists projects with their unbilled work.</summary>
@@ -81,7 +97,8 @@ public sealed class ProjectWorkspace(
                     project.TeamId,
                     project.RefundableDepositAmount,
                     (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
-                    ToStatusText(project.Status)
+                    ToStatusText(project.Status),
+                    project.ProjectNumber
                 );
             }),
         ];
@@ -165,18 +182,33 @@ public sealed class ProjectWorkspace(
                 "The selected contact person does not belong to the project customer."
             );
 
-        project.EditDetails(
-            customer.Id,
-            request.Name,
-            request.StartDate,
-            request.EndDate,
-            request.ProjectTypeId,
-            request.TeamId,
-            request.ExternalReference,
-            request.ContactPersonId
-        );
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return ToResponse(project, customer?.LegalName ?? string.Empty);
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    if (request.ProjectNumber is not null)
+                    {
+                        await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                        project.SetProjectNumber(
+                            await ResolveProjectNumberAsync(request.ProjectNumber, project.Id, ct)
+                                .ConfigureAwait(false)
+                        );
+                    }
+                    project.EditDetails(
+                        customer.Id,
+                        request.Name,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        request.ExternalReference,
+                        request.ContactPersonId
+                    );
+                    return ToResponse(project, customer.LegalName);
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     /// <summary>Lists the named periods in a project's schedule.</summary>
@@ -746,8 +778,36 @@ public sealed class ProjectWorkspace(
             project.HasCancellationWarning,
             project.CancelledAt,
             project.ExternalReference,
-            project.ContactPersonId
+            project.ContactPersonId,
+            project.ProjectNumber
         );
+
+    private async Task<string> ResolveProjectNumberAsync(
+        string? requestedNumber,
+        Guid? excludingProjectId,
+        CancellationToken cancellationToken
+    )
+    {
+        if (string.IsNullOrWhiteSpace(requestedNumber))
+            return await projectNumbers.NextAsync(cancellationToken).ConfigureAwait(false);
+
+        var normalized = requestedNumber.Trim();
+        if (normalized.Length > 64)
+            throw new BusinessRuleViolationException(
+                "projects.number-invalid",
+                "A project number must contain 1 to 64 characters."
+            );
+        if (
+            await projectNumbers
+                .IsAssignedAsync(normalized, excludingProjectId, cancellationToken)
+                .ConfigureAwait(false)
+        )
+            throw new BusinessRuleViolationException(
+                "projects.number-duplicate",
+                "The project number is already assigned to another project."
+            );
+        return normalized;
+    }
 
     private static ProjectTimePeriodResponse ToResponse(
         ProjectTimePeriod period,

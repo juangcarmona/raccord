@@ -7313,6 +7313,8 @@ export interface components {
              * @description Optional assigned team.
              */
             teamId?: null | string;
+            /** @description Optional custom project number; omitted values are assigned automatically. */
+            projectNumber?: null | string;
         };
         /** @description Creates scheduled project work. */
         CreateProjectScheduleRequest: {
@@ -8272,6 +8274,11 @@ export interface components {
              * @description Selected person at the project customer contact.
              */
             contactPersonId?: null | string;
+            /**
+             * @description Installation-wide project number.
+             * @default
+             */
+            projectNumber: string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -8357,6 +8364,11 @@ export interface components {
              * @default draft
              */
             status: string;
+            /**
+             * @description Installation-wide project number.
+             * @default
+             */
+            projectNumber: string;
         };
         /** @description A project task. */
         ProjectTaskResponse: {
@@ -8738,6 +8750,7 @@ export interface components {
             externalReference?: null | string;
             /** Format: uuid */
             contactPersonId?: null | string;
+            projectNumber?: null | string;
         };
         /** @description Updates a period's name, range and document visibility. */
         UpdateProjectTimePeriodRequest: {

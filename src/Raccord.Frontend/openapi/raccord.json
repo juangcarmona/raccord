@@ -7431,6 +7431,13 @@
             ],
             "description": "Optional assigned team.",
             "format": "uuid"
+          },
+          "projectNumber": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional custom project number; omitted values are assigned automatically."
           }
         },
         "description": "Creates a project."
@@ -10151,6 +10158,11 @@
             ],
             "description": "Selected person at the project customer contact.",
             "format": "uuid"
+          },
+          "projectNumber": {
+            "type": "string",
+            "description": "Installation-wide project number.",
+            "default": ""
           }
         },
         "description": "A project with its billable lines."
@@ -10310,6 +10322,11 @@
             "type": "string",
             "description": "Commercial lifecycle status of the project.",
             "default": "draft"
+          },
+          "projectNumber": {
+            "type": "string",
+            "description": "Installation-wide project number.",
+            "default": ""
           }
         },
         "description": "A project in a list."
@@ -11634,6 +11651,12 @@
               "string"
             ],
             "format": "uuid"
+          },
+          "projectNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         },
         "description": "Edits the identifying and scheduling details of an existing project."

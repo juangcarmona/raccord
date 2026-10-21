@@ -37,6 +37,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 );
 
                 await page.GetByLabel("Project name").FillAsync("Summer campaign shoot");
+                await page.GetByLabel("Project number").FillAsync("PRJ-2026-041");
                 await page.GetByLabel("Customer")
                     .SelectOptionAsync(
                         new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
@@ -145,6 +146,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
     private async Task AssertSavedDetailsAsync(IPage page)
     {
         (await page.GetByLabel("Project name").InputValueAsync()).ShouldBe("Summer campaign shoot");
+        (await page.GetByLabel("Project number").InputValueAsync()).ShouldBe("PRJ-2026-041");
         (await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()).ShouldBe(
             $"Alternative E2E {RunStamp}"
         );

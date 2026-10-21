@@ -587,6 +587,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("numeric(5,2)")
                         .HasColumnName("progress_percent");
 
+                    b.Property<string>("ProjectNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("project_number");
+
                     b.Property<Guid?>("ProjectTypeId")
                         .HasColumnType("uuid")
                         .HasColumnName("project_type_id");
@@ -620,6 +626,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_projects");
+
+                    b.HasIndex("ProjectNumber")
+                        .IsUnique()
+                        .HasDatabaseName("ix_projects_project_number");
 
                     b.ToTable("projects", "projects");
                 });

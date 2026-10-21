@@ -613,3 +613,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The Aspire E2E fixture runs `npm ci`; running frontend checks at the same time can remove and replace `node_modules` while TypeScript or Vite is starting.
 - **Action:** Run the Aspire E2E journey to completion before frontend checks in a shared worktree, then rerun `npm ci` before lint, typecheck, tests and build.
 - **Check:** The project detail E2E passes, followed by the complete frontend check sequence with dependencies present and a successful production build.
+
+## 2026-10-21 · Give every project creation path a unique project number
+
+- **Observation:** Adding a required unique project-number index caused Aspire startup to fail because demo seeding and request conversion bypassed the interactive project workflow and persisted the domain factory's temporary default number.
+- **Action:** Inventory every `Project.Create` call when introducing a required invariant, explicitly assign numbers in demo seed paths, and route application-level project creation through the same transactional number allocator.
+- **Check:** Run database-backed project creation and conversion tests, the deterministic backfill test, and the real Aspire project details journey after changing the project schema or seeding workflow.
+
+## 2026-10-21 · Clear per-test PostgreSQL pools when disposing API fixtures
+
+- **Observation:** The complete Web integration suite exhausted PostgreSQL's connection limit because each test creates a database-specific Npgsql pool and disposing its `RaccordApi` did not clear idle connections for that database.
+- **Action:** Clear only the disposed fixture's Npgsql pool after its web host shuts down, so parallel test databases release server connections promptly.
+- **Check:** Run the full Web integration suite with normal xUnit parallelism and require it to finish without PostgreSQL `53300` connection-limit errors.

@@ -45,6 +45,24 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void Assigning_a_project_number_Should_TrimTheValueAndRejectInvalidValues()
+    {
+        var project = NewProject();
+
+        project.SetProjectNumber("  PRJ-2026-041  ");
+
+        project.ProjectNumber.ShouldBe("PRJ-2026-041");
+        Should
+            .Throw<BusinessRuleViolationException>(() => project.SetProjectNumber(" "))
+            .Code.ShouldBe("projects.number-invalid");
+        Should
+            .Throw<BusinessRuleViolationException>(() =>
+                project.SetProjectNumber(new string('x', 65))
+            )
+            .Code.ShouldBe("projects.number-invalid");
+    }
+
+    [Fact]
     public void A_project_Should_allow_manual_status_changes_without_changing_warehouse_state()
     {
         var project = NewProject();

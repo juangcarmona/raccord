@@ -87,7 +87,8 @@ public sealed class DatabaseMaintenance(
             "Rodaje campaña primavera",
             producerId,
             new DateOnly(2026, 9, 14),
-            new DateOnly(2026, 9, 18)
+            new DateOnly(2026, 9, 18),
+            projectNumber: "10001"
         );
         shoot.AddBillableLine(
             BillableLineKind.Equipment,
@@ -123,7 +124,8 @@ public sealed class DatabaseMaintenance(
             "Streaming evento corporativo",
             agencyId,
             new DateOnly(2026, 10, 1),
-            new DateOnly(2026, 10, 1)
+            new DateOnly(2026, 10, 1),
+            projectNumber: "10002"
         );
         stream.AddBillableLine(
             BillableLineKind.Service,

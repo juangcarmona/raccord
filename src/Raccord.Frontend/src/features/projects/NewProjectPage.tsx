@@ -25,6 +25,7 @@ export function NewProjectPage() {
                 api.POST("/api/projects", {
                     body: {
                         name: formText(data, "name"),
+                        projectNumber: formText(data, "projectNumber") || null,
                         customerId: formText(data, "customerId"),
                         startDate: formText(data, "startDate"),
                         endDate: formText(data, "endDate"),
@@ -55,6 +56,7 @@ export function NewProjectPage() {
                             }}
                         >
                             <Field label={t("projects.name")} name="name" required maxLength={200} />
+                            <Field label={t("projects.number")} name="projectNumber" maxLength={64} />
                             <SelectField label={t("common.customer")} name="customerId" required>
                                 {list.map((customer) => (
                                     <option key={customer.id} value={customer.id}>

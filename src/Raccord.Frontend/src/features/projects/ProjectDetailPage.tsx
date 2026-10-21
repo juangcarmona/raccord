@@ -110,6 +110,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         projectTypeId: formText(data, "projectTypeId") || null,
                         teamId: formText(data, "teamId") || null,
                         contactPersonId: contactPersonId || null,
+                        projectNumber: formText(data, "projectNumber"),
                     },
                 }),
             );
@@ -184,6 +185,14 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         required
                         maxLength={200}
                         defaultValue={project.name}
+                        disabled={busy || project.status === "complete"}
+                    />
+                    <Field
+                        label={t("projects.number")}
+                        name="projectNumber"
+                        required
+                        maxLength={64}
+                        defaultValue={project.projectNumber}
                         disabled={busy || project.status === "complete"}
                     />
                     <Async query={customers}>

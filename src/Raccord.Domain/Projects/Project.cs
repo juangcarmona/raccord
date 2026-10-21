@@ -21,10 +21,12 @@ public sealed class Project
         DateOnly startDate,
         DateOnly endDate,
         Guid? projectTypeId,
-        Guid? teamId
+        Guid? teamId,
+        string projectNumber
     )
     {
         Id = Guid.CreateVersion7();
+        ProjectNumber = projectNumber;
         Name = name;
         CustomerId = customerId;
         StartDate = startDate;
@@ -37,6 +39,9 @@ public sealed class Project
 
     /// <summary>Project identifier.</summary>
     public Guid Id { get; private set; }
+
+    /// <summary>Installation-wide project number.</summary>
+    public string ProjectNumber { get; private set; } = string.Empty;
 
     /// <summary>Human-readable project name.</summary>
     public string Name { get; private set; }
@@ -194,6 +199,17 @@ public sealed class Project
         EndDate = endDate;
         ProjectTypeId = projectTypeId;
         TeamId = teamId;
+    }
+
+    /// <summary>Assigns a validated project number.</summary>
+    public void SetProjectNumber(string projectNumber)
+    {
+        if (string.IsNullOrWhiteSpace(projectNumber) || projectNumber.Trim().Length > 64)
+            throw new BusinessRuleViolationException(
+                "projects.number-invalid",
+                "A project number must contain 1 to 64 characters."
+            );
+        ProjectNumber = projectNumber.Trim();
     }
 
     private static string? NormalizeExternalReference(string? externalReference)
@@ -467,7 +483,8 @@ public sealed class Project
         DateOnly startDate,
         DateOnly endDate,
         Guid? projectTypeId = null,
-        Guid? teamId = null
+        Guid? teamId = null,
+        string projectNumber = "TEMP"
     )
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -486,7 +503,21 @@ public sealed class Project
             );
         }
 
-        return new Project(name.Trim(), customerId, startDate, endDate, projectTypeId, teamId);
+        if (string.IsNullOrWhiteSpace(projectNumber) || projectNumber.Trim().Length > 64)
+            throw new BusinessRuleViolationException(
+                "projects.number-invalid",
+                "A project number must contain 1 to 64 characters."
+            );
+
+        return new Project(
+            name.Trim(),
+            customerId,
+            startDate,
+            endDate,
+            projectTypeId,
+            teamId,
+            projectNumber.Trim()
+        );
     }
 
     /// <summary>Records billable work.</summary>

@@ -2,6 +2,18 @@
 
 This ledger records repeatable improvements discovered during delivery reviews. Each entry names the observation, the durable action, and the check that prevents regression.
 
+## 2026-10-20 · Browser journeys use exact accessible locators for repeated schedule controls
+
+- Observation: Adding a duplicate project period made partial label and form-name locators ambiguous, so the browser journey selected multiple checkboxes or edited both source and copied period.
+- Action: Use exact accessible names when a schedule renders repeated controls with shared label prefixes.
+- Check: The period-management journey duplicates a period, generates functions from only the selected periods, edits one period, and verifies linked and unlinked records independently.
+
+## 2026-10-20 · Explicit transactions follow the database retry strategy
+
+- Observation: The cancellation journey reached the API but Npgsql rejected its explicit transaction because the configured retry strategy did not own the full transaction; after that was corrected, EF still returned tracked rows marked for deletion while the cancellation warning was recalculated.
+- Action: Execute the complete shared unit-of-work transaction through the participating context's execution strategy, and derive remaining-work warnings from the pre-action counts plus the actions selected by the user.
+- Check: Aspire cancellation journeys complete tasks, remove crew and vehicle assignments, withdraw invitations, preserve issued invoice history, and keep a warning only when work remains.
+
 ## 2026-10-20 · Keep multipart browser tests aligned with the Fetch API
 
 - Observation: The shared frontend API stub accepted only `Request` objects and reparsed multipart bodies, while the import client sends a URL with `RequestInit`; the mismatch hid the preview state behind an `Invalid URL` test failure.
@@ -494,6 +506,78 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Action:** Add the pinned OpenSpec package's `node_modules/.bin` directory to `PATH` before running `prodshape citations verify --provider openspec`.
 - **Check:** Verification reports authoritative OpenSpec discovery, zero unclassified documents, and zero stale, tampered or unresolved citations.
 
+## 2026-10-20 · Project lifecycle browser checks use role-specific selectors
+
+- **Observation:** The project status journey matched both a labelled section and its select, then its Save button became ambiguous after schedule periods added identical buttons; parallel project builds also contended while installing Git hooks into shared worktree config.
+- **Action:** Select form controls by semantic role, scope repeated buttons to their owning section, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
+- **Check:** The status Playwright journey passes after reload using its named combobox and section-scoped Save button, and a Release solution build passes with zero warnings under `HUSKY=0`.
+
+## 2026-10-20 · Cancellation journeys wait for confirmation state and assert product copy
+
+- **Observation:** The cancellation browser journey initially read the preview alert after confirmation, then expected warning copy that differed from the localized product message.
+- **Action:** Wait for the confirmation dialog to close before asserting the persisted state, and take expected user-facing text from the active locale catalog.
+- **Check:** The journey passes through confirmation, reload, invoiced project-line history and the issued invoice page.
+
+## 2026-10-20 · E2E selection discovery builds the current test assembly
+
+- **Observation:** The selection manifest initially missed the new cancellation journey because discovery used a stale Release assembly; the discrepancy surfaced only on the next selection check.
+- **Action:** Build the E2E project in the selection script before listing discovered tests.
+- **Check:** Run the selection script after adding a journey and require the new fully qualified test to appear in the manifest.
+
+## 2026-10-20 · SPA route assertions do not wait for document load
+
+- **Observation:** The invoice issue journey reached the SPA route but Playwright's default `WaitForURLAsync` load condition timed out in CI.
+- **Action:** Wait for the URL at navigation commit, then assert the destination content separately.
+- **Check:** Run the affected invoice and cancellation journeys and require the issued-invoice content to be visible.
+
+## 2026-10-20 · PostgreSQL migration backfills type nullable timestamps explicitly
+
+- **Observation:** PostgreSQL inferred bare `NULL` values in a migration `INSERT ... SELECT` as `text`, so the new `timestamp with time zone` columns rejected the period backfill and prevented the API and E2E AppHost from starting.
+- **Action:** Cast nullable timestamp expressions to `timestamp with time zone` in each branch of migration backfills and exercise the migration through the repository database-backed test lane.
+- **Check:** The full Web integration suite applies the migration successfully, then the PR E2E AppHost starts and the selected journeys pass.
+
+## 2026-10-20 · Reordering rows with a unique position index must break EF update cycles
+
+- **Observation:** EF Core found a circular update dependency when a schedule reorder permuted rows under the unique `(project_id, position)` index; moving only the tracked values could not order the generated updates safely.
+- **Action:** Validate the complete requested order first, then update persisted positions through the owning schedule store inside one shared database transaction by staging rows outside the active range before assigning final positions.
+- **Check:** The database-backed project schedule test reorders a multi-row permutation, reloads it, and verifies each row has the requested unique position; invalid requests leave the saved order unchanged.
+
+## 2026-10-20 · Browser journeys wait for fire-and-forget mutation requests
+
+- **Observation:** React event handlers intentionally start async mutations without returning their promises, so Playwright can continue and reload before a reorder or designation request has committed.
+- **Action:** Register a response wait before clicking any action whose handler starts an async API mutation, then assert the persisted state after the response and reload.
+- **Check:** The project schedule journey waits for designation, ordering, duplication and invalid-range responses before checking the reloaded schedule.
+
+## 2026-10-20 · Invoice-numbering journeys use a date accepted by the active sequence
+
+- **Observation:** A fixed past invoice date became earlier than the last issued invoice in the shared E2E sequence and caused a valid invoice finalization to return 422.
+- **Action:** Use the current UTC date when the journey verifies invoice history and does not test historical-date behavior.
+- **Check:** Run the cancellation invoice-history journey alongside the other project lifecycle journeys and require the issued invoice route and immutable content to load.
+
+## 2026-10-20 · Project date locators must match labels exactly
+
+- **Observation:** The project edit browser journey selected the date-range inputs with partial labels after schedule periods added similarly named start and end fields; the project edit E2E passed locally before the periods were introduced but failed in CI with a Playwright strict-mode violation.
+- **Action:** Use exact accessible names for project-level start and end inputs wherever a project detail page also renders schedule periods.
+- **Check:** Run the project edit journey together with the schedule journeys and require each project date to persist after reload.
+
+## 2026-10-20 · Project detail fields cross the full request and response contract
+
+- **Observation:** A persisted project field is incomplete if only the editor and domain property change; the update request, API response, migration, generated frontend schema, and reload assertion must stay aligned.
+- **Action:** Extend the update and response contracts together, generate OpenAPI and TypeScript types, and assert the accepted field survives a real save and reload in the project journey.
+- **Check:** The domain validation test, project detail browser journey, API contract drift check, migration-backed tests, and full PR checks pass.
+
+## 2026-10-20 · Optional field labels include their optional marker
+
+- **Observation:** A browser query using an exact label stopped matching after the shared field control appended its localized “optional” marker to the accessible name.
+- **Action:** Use an exact accessible name for required project fields with colliding labels, and a partial label query for optional fields whose shared control appends a marker.
+- **Check:** The Spanish frontend test locates the optional field by its translated label, and the English browser journey saves and reloads its value.
+
+## 2026-10-20 · Invoice journeys isolate date-sensitive number sequences
+
+- **Observation:** The browser E2E helper used the UTC calendar date while another invoice journey explicitly used the configured Europe/Madrid date; near midnight, the UTC date was earlier than the most recent invoice in the shared series.
+- **Action:** Use the configured organization date for journeys that do not test historical issue dates; keep explicit date scenarios explicit.
+- **Check:** Run the per-PR invoice and cancellation journeys with the shared series and require all finalized invoice dates to satisfy the sequence rule.
+
 ## 2026-10-20 · Wait for API-backed browser options before inspecting them
 
 - **Observation:** The local E2E runner passed a project-customer assertion that read `<option>` elements immediately, while CI rendered the asynchronous customer query later and the immediate read returned an empty list.
@@ -523,3 +607,39 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Prettier rewrites ProductShape-owned YAML front matter, which changes ProductShape content digests and makes OpenSpec citations stale even when product behavior is unchanged.
 - **Action:** Exclude `docs/product/model/**` from generic Prettier runs and use ProductShape commands for model changes; regenerate consumer citations with `prodshape cite` whenever an approved model change alters a referenced artifact.
 - **Check:** `prodshape citations verify --provider openspec` reports zero stale, tampered or unresolved citations after model and formatter changes.
+
+## 2026-10-21 · Serialize Aspire E2E and frontend dependency checks in one worktree
+
+- **Observation:** The Aspire E2E fixture runs `npm ci`; running frontend checks at the same time can remove and replace `node_modules` while TypeScript or Vite is starting.
+- **Action:** Run the Aspire E2E journey to completion before frontend checks in a shared worktree, then rerun `npm ci` before lint, typecheck, tests and build.
+- **Check:** The project detail E2E passes, followed by the complete frontend check sequence with dependencies present and a successful production build.
+
+## 2026-10-21 · Give every project creation path a unique project number
+
+- **Observation:** Adding a required unique project-number index caused Aspire startup to fail because demo seeding and request conversion bypassed the interactive project workflow and persisted the domain factory's temporary default number.
+- **Action:** Inventory every `Project.Create` call when introducing a required invariant, explicitly assign numbers in demo seed paths, and route application-level project creation through the same transactional number allocator.
+- **Check:** Run database-backed project creation and conversion tests, the deterministic backfill test, and the real Aspire project details journey after changing the project schema or seeding workflow.
+
+## 2026-10-21 · Clear per-test PostgreSQL pools when disposing API fixtures
+
+- **Observation:** The complete Web integration suite exhausted PostgreSQL's connection limit because each test creates a database-specific Npgsql pool and disposing its `RaccordApi` did not clear idle connections for that database.
+- **Action:** Clear only the disposed fixture's Npgsql pool after its web host shuts down, so parallel test databases release server connections promptly.
+- **Check:** Run the full Web integration suite with normal xUnit parallelism and require it to finish without PostgreSQL `53300` connection-limit errors.
+
+## 2026-10-21 · Validate role-based project assignments at the write boundary
+
+- **Observation:** Filtering eligible users in a project editor does not protect API callers or stale browser forms from assigning a user whose role is not permitted.
+- **Action:** Expose only eligible candidates through a module-owned directory port and revalidate role eligibility in the Projects use case before persisting the assignment; keep the optional user relationship constrained by a database foreign key.
+- **Check:** The API test lists Admin and Office users, rejects a Crew assignment without mutation, and the selected browser journey reloads the saved account manager.
+
+## 2026-10-21 · Keep project journey labels exact across adjacent forms
+
+- **Observation:** As project detail sections accumulate, broad Playwright label lookups such as `Description`, `Task` or `Status` can match controls from more than one section.
+- **Action:** Use exact accessible labels or scope a locator to its named section when a journey interacts with adjacent forms; when a selector becomes ambiguous, make the shared helper exact before rerunning the affected flow.
+- **Check:** Run the affected project detail and lifecycle journeys after adding or changing form sections and verify saved values through browser reloads.
+
+## 2026-10-21 · Scope project lifecycle locators to their section
+
+- **Observation:** Adding task status controls introduced a second accessible `Status` control, which made the project lifecycle journey's page-wide selector ambiguous.
+- **Action:** Scope lifecycle controls to the section named by `project-status-heading` and use section-scoped locators for future controls with shared labels.
+- **Check:** Run both the project status and Complete/reopen journeys alongside the project details journey after adding task controls.

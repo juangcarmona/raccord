@@ -2,7 +2,7 @@
 id: BR-ISSUED-INVOICE-IMMUTABLE
 type: business-rule
 title: "Issued invoices never change"
-status: draft
+status: active
 applies-to:
   - "BC-INVOICING"
 uses-terms:

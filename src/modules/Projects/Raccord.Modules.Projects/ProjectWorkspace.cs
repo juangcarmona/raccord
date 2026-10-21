@@ -11,8 +11,15 @@ namespace Raccord.Modules.Projects;
 public sealed class ProjectWorkspace(
     IBillableWork projects,
     IPartyDirectory parties,
+    IContactPeopleDirectory contactPeople,
     IEquipmentStock equipment,
-    IProjectsUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork,
+    IProjectNumberSeries projectNumbers,
+    IProjectAccountManagerDirectory accountManagers,
+    IProjectScheduleStore projectScheduleStore,
+    IProjectSchedulePropagation projectSchedulePropagation,
+    ProjectCoordination coordination,
+    IProjectCancellationOperations cancellationOperations
 )
 {
     /// <summary>Creates a project for an existing customer.</summary>
@@ -28,17 +35,35 @@ public sealed class ProjectWorkspace(
                 "customers.not-found",
                 $"Customer '{request.CustomerId}' does not exist."
             );
-        var project = Project.Create(
-            request.Name ?? string.Empty,
-            customer.Id,
-            request.StartDate,
-            request.EndDate,
-            request.ProjectTypeId,
-            request.TeamId
-        );
-        projects.Add(project);
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return ToResponse(project, customer.LegalName);
+        await EnsureAccountManagerAsync(request.AccountManagerId, cancellationToken)
+            .ConfigureAwait(false);
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                    var projectNumber = await ResolveProjectNumberAsync(
+                            request.ProjectNumber,
+                            excludingProjectId: null,
+                            ct
+                        )
+                        .ConfigureAwait(false);
+                    var project = Project.Create(
+                        request.Name ?? string.Empty,
+                        customer.Id,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        projectNumber,
+                        request.AccountManagerId
+                    );
+                    projects.Add(project);
+                    return ToResponse(project, customer.LegalName);
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     /// <summary>Lists projects with their unbilled work.</summary>
@@ -75,11 +100,24 @@ public sealed class ProjectWorkspace(
                     project.ProjectTypeId,
                     project.TeamId,
                     project.RefundableDepositAmount,
-                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
+                    (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
+                    ToStatusText(project.Status),
+                    project.ProjectNumber,
+                    project.AccountManagerId
                 );
             }),
         ];
     }
+
+    /// <summary>Lists workspace users eligible to manage a project.</summary>
+    public async Task<IReadOnlyList<ProjectAccountManagerResponse>> ListAccountManagersAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (await accountManagers.ListAsync(cancellationToken).ConfigureAwait(false)).Select(
+                manager => new ProjectAccountManagerResponse(manager.Id, manager.DisplayName)
+            ),
+        ];
 
     /// <summary>Reads a project with its billable lines.</summary>
     public async Task<ProjectResponse?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -95,6 +133,363 @@ public sealed class ProjectWorkspace(
             .ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
     }
+
+    /// <summary>Changes a project's lifecycle status without changing warehouse statuses.</summary>
+    public async Task<ProjectResponse?> ChangeStatusAsync(
+        Guid projectId,
+        ChangeProjectStatusRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        var normalizedStatus = request.Status.Replace("-", string.Empty, StringComparison.Ordinal);
+        if (!Enum.TryParse<ProjectStatus>(normalizedStatus, true, out var status))
+            throw new BusinessRuleViolationException(
+                "projects.status-invalid",
+                $"Unknown project status '{request.Status}'."
+            );
+
+        if (status == ProjectStatus.Cancelled)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-confirmation-required",
+                "Use the cancellation workflow to cancel a project."
+            );
+
+        project.ChangeStatus(status);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    /// <summary>Edits a project's identifying and scheduling details.</summary>
+    public async Task<ProjectResponse?> EditDetailsAsync(
+        Guid projectId,
+        UpdateProjectDetailsRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        var customer =
+            await parties.FindAsync(request.CustomerId, cancellationToken).ConfigureAwait(false)
+            ?? throw new BusinessRuleViolationException(
+                "customers.not-found",
+                $"Customer '{request.CustomerId}' does not exist."
+            );
+        if (
+            request.ContactPersonId is { } contactPersonId
+            && await contactPeople
+                .FindAsync(customer.Id, contactPersonId, cancellationToken)
+                .ConfigureAwait(false)
+                is null
+        )
+            throw new BusinessRuleViolationException(
+                "projects.contact-person-not-found",
+                "The selected contact person does not belong to the project customer."
+            );
+        await EnsureAccountManagerAsync(request.AccountManagerId, cancellationToken)
+            .ConfigureAwait(false);
+
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    if (request.ProjectNumber is not null)
+                    {
+                        await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                        project.SetProjectNumber(
+                            await ResolveProjectNumberAsync(request.ProjectNumber, project.Id, ct)
+                                .ConfigureAwait(false)
+                        );
+                    }
+                    project.EditDetails(
+                        customer.Id,
+                        request.Name,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        request.ExternalReference,
+                        request.ContactPersonId,
+                        request.AccountManagerId
+                    );
+                    return ToResponse(project, customer.LegalName);
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>Lists the named periods in a project's schedule.</summary>
+    public async Task<IReadOnlyList<ProjectTimePeriodResponse>?> GetTimePeriodsAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        return project is null
+            ? null
+            : [.. project.TimePeriods.Select(period => ToResponse(period))];
+    }
+
+    /// <summary>Adds a named period to a project's schedule.</summary>
+    public async Task<ProjectTimePeriodResponse?> AddTimePeriodAsync(
+        Guid projectId,
+        AddProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var period = project.AddTimePeriod(request.Name);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(period);
+    }
+
+    /// <summary>Updates a project's period, including its internal and external visibility.</summary>
+    public async Task<ProjectTimePeriodResponse?> UpdateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        UpdateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        return await unitOfWork
+            .ExecuteAsync(
+                ct => UpdateTimePeriodInTransactionAsync(projectId, periodId, request, ct),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    private async Task<ProjectTimePeriodResponse?> UpdateTimePeriodInTransactionAsync(
+        Guid projectId,
+        Guid periodId,
+        UpdateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var period = project.TimePeriods.SingleOrDefault(candidate => candidate.Id == periodId);
+        if (period is null)
+            return null;
+        var previousStart = ToDateOnly(period.Start);
+        var previousEnd = ToDateOnly(period.End);
+        project.UpdateTimePeriod(
+            periodId,
+            request.Name,
+            request.Start,
+            request.End,
+            request.ShowOnInternalDocuments,
+            request.ShowOnExternalDocuments
+        );
+        await projectSchedulePropagation
+            .PropagateRangeAsync(
+                projectId,
+                periodId,
+                previousStart,
+                previousEnd,
+                ToDateOnly(request.Start),
+                ToDateOnly(request.End),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(project.TimePeriods.Single(candidate => candidate.Id == periodId));
+    }
+
+    private static DateOnly? ToDateOnly(DateTimeOffset? value) =>
+        value is null ? null : DateOnly.FromDateTime(value.Value.DateTime);
+
+    /// <summary>Duplicates a period and inserts it directly after its source.</summary>
+    public async Task<ProjectTimePeriodResponse?> DuplicateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        var duplicate = project.DuplicateTimePeriod(periodId);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(duplicate);
+    }
+
+    /// <summary>Reorders all project periods.</summary>
+    public async Task<IReadOnlyList<ProjectTimePeriodResponse>?> ReorderTimePeriodsAsync(
+        Guid projectId,
+        ReorderProjectTimePeriodsRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    var project = await projects.FindAsync(projectId, ct).ConfigureAwait(false);
+                    if (project is null)
+                        return null;
+                    project.ValidateTimePeriodOrder(request.PeriodIds);
+                    await projectScheduleStore
+                        .ReorderAsync(projectId, request.PeriodIds, ct)
+                        .ConfigureAwait(false);
+                    return (IReadOnlyList<ProjectTimePeriodResponse>)
+                        [
+                            .. request.PeriodIds.Select(
+                                (id, position) =>
+                                    ToResponse(
+                                        project.TimePeriods.Single(period => period.Id == id),
+                                        position
+                                    )
+                            ),
+                        ];
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>Moves one or both default schedule roles to a period.</summary>
+    public async Task<ProjectTimePeriodResponse?> DesignateTimePeriodAsync(
+        Guid projectId,
+        Guid periodId,
+        DesignateProjectTimePeriodRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+        project.DesignateTimePeriod(periodId, request.IsDefaultPlanning, request.IsDefaultUsage);
+        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        return ToResponse(project.TimePeriods.Single(period => period.Id == periodId));
+    }
+
+    /// <summary>Cancels a project after confirmation and records whether open work remains.</summary>
+    public async Task<ProjectResponse?> CancelAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        if (!request.Confirm)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-confirmation-required",
+                "Confirm project cancellation before it is saved."
+            );
+
+        return await unitOfWork
+            .ExecuteAsync(ct => CancelInTransactionAsync(projectId, request, ct), cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    private async Task<ProjectResponse?> CancelInTransactionAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            return null;
+
+        var openTaskCount = await coordination
+            .CountOpenTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var planning = await cancellationOperations
+            .PreviewAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        await ValidateCancellationActionsAsync(request, openTaskCount, planning, cancellationToken)
+            .ConfigureAwait(false);
+        await ApplyCancellationActionsAsync(projectId, request, cancellationToken)
+            .ConfigureAwait(false);
+
+        project.Cancel(HasRemainingWork(request, openTaskCount, planning), DateTimeOffset.UtcNow);
+        var customer = await parties
+            .FindAsync(project.CustomerId, cancellationToken)
+            .ConfigureAwait(false);
+        return ToResponse(project, customer?.LegalName ?? string.Empty);
+    }
+
+    private async Task ValidateCancellationActionsAsync(
+        CancelProjectRequest request,
+        int openTaskCount,
+        ProjectCancellationOperationsSummary planning,
+        CancellationToken cancellationToken
+    )
+    {
+        var canCompleteTasks = await coordination
+            .CanCompleteOpenTasksAsync(cancellationToken)
+            .ConfigureAwait(false);
+        if (request.CompleteOpenTasks && (openTaskCount == 0 || !canCompleteTasks))
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Completing tasks is not available for this project."
+            );
+        if (
+            request.RemovePlannedResources
+            && planning.PlannedCrewCount + planning.PlannedTransportCount == 0
+        )
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Removing planned resources is not available for this project."
+            );
+        if (request.WithdrawInvitations && planning.ActiveInvitationCount == 0)
+            throw new BusinessRuleViolationException(
+                "projects.cancellation-action-not-applicable",
+                "Withdrawing invitations is not available for this project."
+            );
+    }
+
+    private async Task ApplyCancellationActionsAsync(
+        Guid projectId,
+        CancelProjectRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        if (request.CompleteOpenTasks)
+            await coordination
+                .CompleteOpenTasksAsync(projectId, cancellationToken)
+                .ConfigureAwait(false);
+        await cancellationOperations
+            .ApplyAsync(
+                projectId,
+                request.RemovePlannedResources,
+                request.WithdrawInvitations,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    private static bool HasRemainingWork(
+        CancelProjectRequest request,
+        int openTaskCount,
+        ProjectCancellationOperationsSummary planning
+    ) =>
+        (!request.CompleteOpenTasks && openTaskCount > 0)
+        || (
+            !request.RemovePlannedResources
+            && planning.PlannedCrewCount + planning.PlannedTransportCount > 0
+        )
+        || (!request.WithdrawInvitations && planning.ActiveInvitationCount > 0);
 
     /// <summary>Configures a project's fixed refundable deposit.</summary>
     public async Task<ProjectResponse?> SetDepositAsync(
@@ -231,6 +626,7 @@ public sealed class ProjectWorkspace(
         var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
         if (line is null)
             return null;
+        EnsureOperationalProject(project);
         line.RecordException(
             request.Kind,
             request.Description,
@@ -256,6 +652,7 @@ public sealed class ProjectWorkspace(
         var line = project.PackingLines.FirstOrDefault(candidate => candidate.Id == lineId);
         if (line is null)
             return null;
+        EnsureOperationalProject(project);
         var dispositionName = request.Disposition.Replace(
             "-",
             string.Empty,
@@ -363,6 +760,15 @@ public sealed class ProjectWorkspace(
         Receive,
     }
 
+    private static void EnsureOperationalProject(Project project)
+    {
+        if (project.Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational records."
+            );
+    }
+
     private static PackingLineRole ParsePackingRole(string role) =>
         Enum.TryParse<PackingLineRole>(role, true, out var parsed)
             ? parsed
@@ -385,8 +791,83 @@ public sealed class ProjectWorkspace(
             project.TeamId,
             [.. project.PackingLines.Select(ToResponse)],
             project.RefundableDepositAmount,
-            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus
+            (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
+            ToStatusText(project.Status),
+            project.HasCancellationWarning,
+            project.CancelledAt,
+            project.ExternalReference,
+            project.ContactPersonId,
+            project.ProjectNumber,
+            project.AccountManagerId
         );
+
+    private async Task EnsureAccountManagerAsync(
+        Guid? accountManagerId,
+        CancellationToken cancellationToken
+    )
+    {
+        if (
+            accountManagerId is { } userId
+            && !await accountManagers
+                .IsEligibleAsync(userId, cancellationToken)
+                .ConfigureAwait(false)
+        )
+            throw new BusinessRuleViolationException(
+                "projects.account-manager-invalid",
+                "Only Admin or Office users can manage projects."
+            );
+    }
+
+    private async Task<string> ResolveProjectNumberAsync(
+        string? requestedNumber,
+        Guid? excludingProjectId,
+        CancellationToken cancellationToken
+    )
+    {
+        if (string.IsNullOrWhiteSpace(requestedNumber))
+            return await projectNumbers.NextAsync(cancellationToken).ConfigureAwait(false);
+
+        var normalized = requestedNumber.Trim();
+        if (normalized.Length > 64)
+            throw new BusinessRuleViolationException(
+                "projects.number-invalid",
+                "A project number must contain 1 to 64 characters."
+            );
+        if (
+            await projectNumbers
+                .IsAssignedAsync(normalized, excludingProjectId, cancellationToken)
+                .ConfigureAwait(false)
+        )
+            throw new BusinessRuleViolationException(
+                "projects.number-duplicate",
+                "The project number is already assigned to another project."
+            );
+        return normalized;
+    }
+
+    private static ProjectTimePeriodResponse ToResponse(
+        ProjectTimePeriod period,
+        int? position = null
+    ) =>
+        new(
+            period.Id,
+            period.Name,
+            position ?? period.Position,
+            period.IsDefaultPlanning,
+            period.IsDefaultUsage,
+            period.Start,
+            period.End,
+            period.ShowOnInternalDocuments,
+            period.ShowOnExternalDocuments
+        );
+
+    private static string ToStatusText(ProjectStatus status) =>
+        status switch
+        {
+            ProjectStatus.InProgress => "in-progress",
+            ProjectStatus.ExecutionDone => "execution-done",
+            _ => status.ToString().ToLowerInvariant(),
+        };
 
     private static BillableLineResponse ToResponse(BillableLine line) =>
         new(

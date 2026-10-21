@@ -5,4 +5,4 @@
 - [x] Add create, list, shift and assignee-filtered API operations.
 - [x] Add domain tests and generated API contract.
 
-<!-- pdac:cite id="UC-PRJ-MANAGE-TIME-SCHEDULE" digest="sha256:abe44ff29ca48525e670a67bed4a6eb94393af38e0a7276fd71ffe0ccfc96aab" -->
+<!-- pdac:cite id="UC-PRJ-MANAGE-TIME-SCHEDULE" digest="sha256:63f5e75776fe129ece805663868a322547da608fd04023944189c071b9c04bae" -->

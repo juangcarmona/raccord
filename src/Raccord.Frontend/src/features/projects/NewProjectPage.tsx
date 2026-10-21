@@ -12,6 +12,9 @@ export function NewProjectPage() {
     const { t } = useI18n();
     const navigate = useNavigate();
     const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
+    const accountManagers = useQuery("project-account-managers", () =>
+        unwrap(api.GET("/api/projects/account-managers")),
+    );
     const [error, setError] = useState<unknown>(null);
     const [busy, setBusy] = useState(false);
 
@@ -25,9 +28,11 @@ export function NewProjectPage() {
                 api.POST("/api/projects", {
                     body: {
                         name: formText(data, "name"),
+                        projectNumber: formText(data, "projectNumber") || null,
                         customerId: formText(data, "customerId"),
                         startDate: formText(data, "startDate"),
                         endDate: formText(data, "endDate"),
+                        accountManagerId: formText(data, "accountManagerId") || null,
                     },
                 }),
             );
@@ -55,6 +60,7 @@ export function NewProjectPage() {
                             }}
                         >
                             <Field label={t("projects.name")} name="name" required maxLength={200} />
+                            <Field label={t("projects.number")} name="projectNumber" maxLength={64} />
                             <SelectField label={t("common.customer")} name="customerId" required>
                                 {list.map((customer) => (
                                     <option key={customer.id} value={customer.id}>
@@ -62,6 +68,18 @@ export function NewProjectPage() {
                                     </option>
                                 ))}
                             </SelectField>
+                            <Async query={accountManagers}>
+                                {(managers) => (
+                                    <SelectField label={t("projects.accountManager")} name="accountManagerId">
+                                        <option value="">{t("projects.noAccountManager")}</option>
+                                        {managers.map((manager) => (
+                                            <option key={manager.id} value={manager.id}>
+                                                {manager.displayName}
+                                            </option>
+                                        ))}
+                                    </SelectField>
+                                )}
+                            </Async>
                             <Field label={t("projects.startDate")} name="startDate" type="date" required />
                             <Field label={t("projects.endDate")} name="endDate" type="date" required />
                             <div className="actions">

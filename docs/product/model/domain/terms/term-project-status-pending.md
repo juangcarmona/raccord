@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-PENDING
 type: domain-term
 title: "Pending (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

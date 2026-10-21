@@ -35,6 +35,7 @@ fi
 # Release and --no-build, matching the workflow exactly: a manifest generated from a different
 # configuration would either disagree with CI or, worse, look for build output CI never produced.
 discover() {
+  HUSKY=0 dotnet build "$PROJECT" --configuration Release --verbosity quiet >/dev/null
   dotnet test "$PROJECT" --no-build --configuration Release -t --filter "$FILTER" 2>/dev/null \
     | sed -n 's/^    \(Raccord\.EndToEndTests\..*\)$/\1/p' \
     | LC_ALL=C sort -u

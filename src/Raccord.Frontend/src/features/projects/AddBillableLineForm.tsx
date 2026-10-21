@@ -6,10 +6,20 @@ import { formText } from "../../shared/ui/formText";
 
 const kinds = ["equipment", "labour", "transport", "consumable", "service", "other"] as const;
 
-export function AddBillableLineForm({ projectId, onAdded }: { projectId: string; onAdded: () => void }) {
+export function AddBillableLineForm({
+    projectId,
+    onAdded,
+    readOnly = false,
+}: {
+    projectId: string;
+    onAdded: () => void;
+    readOnly?: boolean;
+}) {
     const { t } = useI18n();
     const [error, setError] = useState<unknown>(null);
     const [busy, setBusy] = useState(false);
+
+    if (readOnly) return null;
 
     async function submit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault();

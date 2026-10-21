@@ -24,6 +24,25 @@ description: Shows the runtime interactions for the system's important scenarios
 
 <!-- pdac:cite id="UC-PRJ-CONVERT-PROJECT-REQUEST" digest="sha256:7efe604979d08b83572e4bf7e9441cef0e69f20f7e51645a99419d611c473a50" -->
 
+## R-1b Cancel a project
+
+1. `GET /api/projects/{id}/cancellation-preview` counts open tasks, planned crew and vehicles, active invitations, and whether a completing task status is configured.
+2. The operator selects only the applicable cleanup actions and confirms cancellation.
+3. `ProjectWorkspace` completes selected tasks, removes selected crew and vehicle assignments, withdraws selected active invitations, and cancels the project in one shared database transaction.
+4. The cancellation warning reflects work the operator left open; issued invoices and invoiced work remain unchanged.
+
+<!-- pdac:cite id="UC-PRJ-CANCEL-PROJECT" digest="sha256:80e15e9d11dba906cb7d753fd78b7ce8b29c30651bfe9cdb9ac1d7cdc3118d96" -->
+<!-- pdac:cite id="BR-PRJ-CANCEL-PRESERVES-INVOICED-WORK" digest="sha256:383aadaf0babcb79c58e36c9c9559532ceb4589ad3b8bc92f409874c012ae258" -->
+
+## R-1c Generate and move period-linked planning
+
+1. The operator selects one or more timed project periods and Crew and/or Transport, then requests function generation.
+2. The API validates the selection, project status and period ownership before adding one function for each selected period and requested kind with a period link.
+3. Updating a period runs in the Projects unit of work; linked functions receive the new date range and their shifts retain their day offset from the old start date.
+4. If a linked shift would fall outside the new range, the operation is rejected and the period, functions and shifts remain unchanged. Unlinked functions keep their independent dates.
+
+This behavior follows BR-PRJ-FUNCTIONS-FROM-PERIODS and BR-PRJ-LINKED-PERIOD-PROPAGATION.
+
 ## R-0 Sign in and authorize the application
 
 1. The frontend restores the session through `GET /api/auth/me`. The response includes the account display name, personal language preference and a role-management capability derived from the user's current role claims. `PUT /api/auth/me` updates only the authenticated user's display name and supported personal language.

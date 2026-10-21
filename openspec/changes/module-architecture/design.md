@@ -71,7 +71,7 @@ Contract dependencies between modules: Invoicing → Projects, Contacts, Workspa
 - **Rejected:** dropping and recreating the tables, because it loses data in installations that already exist.
 - The trigger function `raccord_reject_mutation()` stays in `public` as a shared database utility, created idempotently by the Compliance module's first migration and reused by the Invoicing triggers.
 
-<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:8138f31518261c618e3fef1dc93d5deaef6f55a4c3b2bfd41dfc0c5a4b75aecc" -->
 
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 

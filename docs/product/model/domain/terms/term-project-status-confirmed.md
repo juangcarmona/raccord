@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-CONFIRMED
 type: domain-term
 title: "Confirmed (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

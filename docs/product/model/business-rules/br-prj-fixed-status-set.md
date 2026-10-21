@@ -2,7 +2,7 @@
 id: BR-PRJ-FIXED-STATUS-SET
 type: business-rule
 title: "The project status set is fixed"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-CHANGE-PROJECT-STATUS"
   - "BC-PROJECTS"

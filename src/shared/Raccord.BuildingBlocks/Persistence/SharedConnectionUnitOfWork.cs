@@ -29,31 +29,55 @@ public sealed class SharedConnectionUnitOfWork(
             );
         }
 
-        var openedHere = connection.State != System.Data.ConnectionState.Open;
         executing = true;
-        var transaction = await OpenTransactionAsync(cancellationToken).ConfigureAwait(false);
         try
         {
+            if (participants.Items.Count == 0)
+                throw new InvalidOperationException(
+                    "At least one database context must participate in a shared unit of work."
+                );
+            var strategy = participants.Items[0].Database.CreateExecutionStrategy();
+            return await strategy
+                .ExecuteAsync(() => ExecuteTransactionAsync(callback, cancellationToken))
+                .ConfigureAwait(false);
+        }
+        finally
+        {
+            executing = false;
+        }
+    }
+
+    private async Task<T> ExecuteTransactionAsync<T>(
+        Func<CancellationToken, Task<T>> callback,
+        CancellationToken cancellationToken
+    )
+    {
+        var openedHere = connection.State != System.Data.ConnectionState.Open;
+        NpgsqlTransaction? transaction = null;
+        try
+        {
+            transaction = await OpenTransactionAsync(cancellationToken).ConfigureAwait(false);
             await EnlistAsync(transaction, cancellationToken).ConfigureAwait(false);
             var result = await callback(cancellationToken).ConfigureAwait(false);
             await EnlistAsync(transaction, cancellationToken).ConfigureAwait(false);
             foreach (var context in participants.Items)
-            {
                 await SaveContextAsync(context, cancellationToken).ConfigureAwait(false);
-            }
 
             await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
             return result;
         }
         catch
         {
-            try
+            if (transaction is not null)
             {
-                await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
-            }
-            finally
-            {
-                ClearTrackedState();
+                try
+                {
+                    await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
+                }
+                finally
+                {
+                    ClearTrackedState();
+                }
             }
 
             throw;
@@ -61,13 +85,10 @@ public sealed class SharedConnectionUnitOfWork(
         finally
         {
             await DetachAsync().ConfigureAwait(false);
-            await transaction.DisposeAsync().ConfigureAwait(false);
-
-            executing = false;
+            if (transaction is not null)
+                await transaction.DisposeAsync().ConfigureAwait(false);
             if (openedHere)
-            {
                 await connection.CloseAsync().ConfigureAwait(false);
-            }
         }
     }
 

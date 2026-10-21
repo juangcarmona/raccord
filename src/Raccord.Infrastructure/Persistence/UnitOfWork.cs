@@ -25,6 +25,20 @@ internal sealed class UnitOfWork(RaccordDbContext db) : IUnitOfWork
                     is PostgresException
                     {
                         SqlState: PostgresErrorCodes.UniqueViolation,
+                        ConstraintName: "ix_projects_project_number",
+                    }
+            )
+        {
+            throw new BusinessRuleViolationException(
+                "projects.number-duplicate",
+                "The project number is already assigned to another project."
+            );
+        }
+        catch (DbUpdateException exception)
+            when (exception.InnerException
+                    is PostgresException
+                    {
+                        SqlState: PostgresErrorCodes.UniqueViolation,
                         ConstraintName: "ix_customers_contact_number",
                     }
             )

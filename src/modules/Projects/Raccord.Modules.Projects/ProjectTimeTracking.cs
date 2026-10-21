@@ -23,8 +23,14 @@ public sealed class ProjectTimeTracking(
     )
     {
         ArgumentNullException.ThrowIfNull(request);
-        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
             return null;
+        if (project.Status == ProjectStatus.Complete)
+            throw new Raccord.SharedKernel.Common.BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before recording operational time."
+            );
         var entry = ProjectTimeEntry.Record(
             projectId,
             request.TaskId,

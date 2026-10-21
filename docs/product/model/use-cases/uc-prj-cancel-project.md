@@ -2,7 +2,7 @@
 id: UC-PRJ-CANCEL-PROJECT
 type: use-case
 title: "Cancel a project"
-status: draft
+status: active
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors:
   - "ACT-CREW-MEMBER"
@@ -13,6 +13,7 @@ governed-by:
   - "BR-PRJ-CANCELLATION-ACTIONS-APPLICABLE"
   - "BR-PRJ-CANCEL-RELEASES-EQUIPMENT"
   - "BR-PRJ-CANCEL-OPEN-ITEMS-WARNING"
+  - "BR-PRJ-CANCEL-PRESERVES-INVOICED-WORK"
 uses-terms:
   - "TERM-PROJECT-STATUS-CANCELLED"
   - "TERM-CANCELLATION-ACTION"

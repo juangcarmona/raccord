@@ -2,7 +2,7 @@
 id: BR-PRJ-CANCEL-MANUAL-ONLY
 type: business-rule
 title: "Cancellation is never automatic"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-CANCEL-PROJECT"
 uses-terms:

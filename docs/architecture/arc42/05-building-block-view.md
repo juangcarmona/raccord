@@ -36,12 +36,16 @@ The solution entry points are `src/root/Raccord.Web/Raccord.Web.csproj` and `src
 | `Raccord.Domain` and `Raccord.Contracts` | Shared domain rules and API contracts                                                                                                                             | `src/Raccord.Domain/`, `src/Raccord.Contracts/`                  |
 | `Raccord.Infrastructure`                 | EF Core persistence, storage and module adapters                                                                                                                  | `src/Raccord.Infrastructure/DependencyInjection.cs`              |
 | Contacts module                          | Company/person contact directory, tags and hierarchical folders, spreadsheet import, customer compatibility projection and party lookup for projects and invoices | `src/modules/Contacts/`                                          |
-| Workspace module                         | Issuer settings and invoice series                                                                                                                                | `src/modules/Workspace/`                                         |
-| Projects module                          | Projects, crew, project context, time and coordination                                                                                                            | `src/modules/Projects/`                                          |
+| Workspace module                         | Issuer settings, invoice series and workspace identity                                                                                                            | `src/modules/Workspace/`                                         |
+| Projects module                          | Projects, account-manager assignment, named time periods, linked crew and transport planning, project context, time and coordination                              | `src/modules/Projects/`                                          |
 | Invoicing module                         | Invoice contracts and lifecycle                                                                                                                                   | `src/modules/Invoicing/`, `src/Raccord.Application/Invoicing/`   |
 | Compliance module                        | Audit and compliance records                                                                                                                                      | `src/modules/Compliance/`                                        |
 
 Project coordination and project context are owned by the Projects module. Invoicing consumes module contracts for contacts, projects and workspace data; infrastructure implements persistence adapters against those contracts.
+
+Projects reads eligible account-manager candidates through a module-owned directory port; Infrastructure adapts the Workspace identity store and the Projects workflow validates Admin or Office role membership before saving the assignment.
+
+The project schedule is persisted with the project aggregate. Crew and transport functions generated from selected periods keep a nullable period link in crew planning persistence; updating a linked period propagates its date range and shift offsets within the same database transaction. Functions without a period link keep their own dates (BR-PRJ-FUNCTIONS-FROM-PERIODS, BR-PRJ-LINKED-PERIOD-PROPAGATION).
 
 ## Level 2 — domain modules
 

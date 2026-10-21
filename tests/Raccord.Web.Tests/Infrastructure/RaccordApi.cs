@@ -158,9 +158,12 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        if (disposing && Directory.Exists(DocumentRoot))
+        if (disposing)
         {
-            Directory.Delete(DocumentRoot, recursive: true);
+            using var connection = new NpgsqlConnection(ConnectionString);
+            NpgsqlConnection.ClearPool(connection);
+            if (Directory.Exists(DocumentRoot))
+                Directory.Delete(DocumentRoot, recursive: true);
         }
     }
 }

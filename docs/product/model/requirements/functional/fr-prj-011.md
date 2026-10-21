@@ -2,16 +2,18 @@
 id: FR-PRJ-011
 type: functional-requirement
 title: "Cancel projects with follow-up actions"
-status: draft
+status: active
 derived-from:
   - "UC-PRJ-CANCEL-PROJECT"
   - "BR-PRJ-CANCELLATION-ACTIONS-APPLICABLE"
   - "BR-PRJ-CANCEL-RELEASES-EQUIPMENT"
   - "BR-PRJ-CANCEL-OPEN-ITEMS-WARNING"
+  - "BR-PRJ-CANCEL-PRESERVES-INVOICED-WORK"
 verification:
   - scenario-ref: "SB-PRJ-CANCEL-FREES-STOCK"
   - scenario-ref: "SB-PRJ-CANCEL-WITHOUT-ACTIONS-WARNS"
   - scenario-ref: "SB-PRJ-CANCEL-WITHDRAWS-INVITATIONS"
+  - scenario-ref: "SB-PRJ-CANCEL-PRESERVES-INVOICED-WORK"
 uses-terms:
   - "TERM-CANCELLATION-ACTION"
 provenance:

@@ -2,7 +2,7 @@
 id: BR-PRJ-DEFAULT-PERIOD-DESIGNATION
 type: business-rule
 title: "Any period may be designated default planning or usage period"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-MANAGE-TIME-SCHEDULE"
 uses-terms:

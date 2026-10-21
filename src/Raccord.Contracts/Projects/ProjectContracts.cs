@@ -20,13 +20,82 @@ public enum DepositStatus
 /// <param name="EndDate">Last day of the job.</param>
 /// <param name="ProjectTypeId">Optional reusable project type.</param>
 /// <param name="TeamId">Optional assigned team.</param>
+/// <param name="ProjectNumber">Optional custom project number; omitted values are assigned automatically.</param>
+/// <param name="AccountManagerId">Optional workspace user with the Admin or Office role.</param>
 public sealed record CreateProjectRequest(
     string Name,
     Guid CustomerId,
     DateOnly StartDate,
     DateOnly EndDate,
     Guid? ProjectTypeId = null,
-    Guid? TeamId = null
+    Guid? TeamId = null,
+    string? ProjectNumber = null,
+    Guid? AccountManagerId = null
+);
+
+/// <summary>Changes a project's fixed lifecycle status.</summary>
+public sealed record ChangeProjectStatusRequest(string Status);
+
+/// <summary>Edits the identifying and scheduling details of an existing project.</summary>
+public sealed record UpdateProjectDetailsRequest(
+    Guid CustomerId,
+    string Name,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    Guid? ProjectTypeId = null,
+    Guid? TeamId = null,
+    string? ExternalReference = null,
+    Guid? ContactPersonId = null,
+    string? ProjectNumber = null,
+    Guid? AccountManagerId = null
+);
+
+/// <summary>Creates a named period in the project schedule.</summary>
+public sealed record AddProjectTimePeriodRequest(string Name);
+
+/// <summary>Updates a period's name, range and document visibility.</summary>
+public sealed record UpdateProjectTimePeriodRequest(
+    string Name,
+    DateTimeOffset? Start,
+    DateTimeOffset? End,
+    bool ShowOnInternalDocuments,
+    bool ShowOnExternalDocuments
+);
+
+/// <summary>Assigns the planning role, usage role or both to a period.</summary>
+public sealed record DesignateProjectTimePeriodRequest(bool IsDefaultPlanning, bool IsDefaultUsage);
+
+/// <summary>Sets the complete project time-period order.</summary>
+public sealed record ReorderProjectTimePeriodsRequest(IReadOnlyList<Guid> PeriodIds);
+
+/// <summary>A named, optionally timed period in a project schedule.</summary>
+public sealed record ProjectTimePeriodResponse(
+    Guid Id,
+    string Name,
+    int Position,
+    bool IsDefaultPlanning,
+    bool IsDefaultUsage,
+    DateTimeOffset? Start,
+    DateTimeOffset? End,
+    bool ShowOnInternalDocuments,
+    bool ShowOnExternalDocuments
+);
+
+/// <summary>Confirms project cancellation and the selected applicable actions.</summary>
+public sealed record CancelProjectRequest(
+    bool Confirm,
+    bool CompleteOpenTasks = false,
+    bool RemovePlannedResources = false,
+    bool WithdrawInvitations = false
+);
+
+/// <summary>Open operational work that the cancellation warning will retain.</summary>
+public sealed record ProjectCancellationPreviewResponse(
+    int OpenTaskCount,
+    int PlannedCrewCount,
+    int PlannedTransportCount,
+    int ActiveInvitationCount,
+    bool CanCompleteOpenTasks
 );
 
 /// <summary>Records incoming project work.</summary>
@@ -213,6 +282,9 @@ public sealed record SetDepositStatusRequest(DepositStatus Status);
 /// <param name="TeamId">Assigned team.</param>
 /// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
+/// <param name="Status">Commercial lifecycle status of the project.</param>
+/// <param name="ProjectNumber">Installation-wide project number.</param>
+/// <param name="AccountManagerId">Assigned project account manager.</param>
 public sealed record ProjectSummaryResponse(
     Guid Id,
     string Name,
@@ -226,7 +298,10 @@ public sealed record ProjectSummaryResponse(
     Guid? ProjectTypeId = null,
     Guid? TeamId = null,
     decimal? RefundableDepositAmount = null,
-    DepositStatus DepositStatus = DepositStatus.NotPaid
+    DepositStatus DepositStatus = DepositStatus.NotPaid,
+    string Status = "draft",
+    string ProjectNumber = "",
+    Guid? AccountManagerId = null
 );
 
 /// <summary>A project with its billable lines.</summary>
@@ -243,6 +318,13 @@ public sealed record ProjectSummaryResponse(
 /// <param name="PackingLines">Warehouse packing lines.</param>
 /// <param name="RefundableDepositAmount">Fixed refundable deposit.</param>
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
+/// <param name="Status">Commercial lifecycle status of the project.</param>
+/// <param name="HasCancellationWarning">Whether open work remained when cancelled.</param>
+/// <param name="CancelledAt">UTC cancellation timestamp, when cancelled.</param>
+/// <param name="ExternalReference">Customer or production reference associated with the project.</param>
+/// <param name="ContactPersonId">Selected person at the project customer contact.</param>
+/// <param name="ProjectNumber">Installation-wide project number.</param>
+/// <param name="AccountManagerId">Assigned project account manager.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -256,8 +338,18 @@ public sealed record ProjectResponse(
     Guid? TeamId = null,
     IReadOnlyList<PackingLineResponse>? PackingLines = null,
     decimal? RefundableDepositAmount = null,
-    DepositStatus DepositStatus = DepositStatus.NotPaid
+    DepositStatus DepositStatus = DepositStatus.NotPaid,
+    string Status = "draft",
+    bool HasCancellationWarning = false,
+    DateTimeOffset? CancelledAt = null,
+    string? ExternalReference = null,
+    Guid? ContactPersonId = null,
+    string ProjectNumber = "",
+    Guid? AccountManagerId = null
 );
+
+/// <summary>A user eligible to manage a project.</summary>
+public sealed record ProjectAccountManagerResponse(Guid Id, string DisplayName);
 
 /// <summary>A billable line.</summary>
 /// <param name="Id">Line identifier.</param>

@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-DRAFT
 type: domain-term
 title: "Draft (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms:
   - "Concept"

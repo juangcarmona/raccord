@@ -507,6 +507,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "audience",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "internal"
+            }
           }
         ],
         "responses": {
@@ -2494,6 +2502,275 @@
         }
       }
     },
+    "/api/projects/{id}/periods": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddProjectTimePeriodRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/periods/{periodId}": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "periodId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectTimePeriodRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/periods/{periodId}/duplicate": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "periodId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/periods/order": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReorderProjectTimePeriodsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/periods/{periodId}/designation": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "periodId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignateProjectTimePeriodRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTimePeriodResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/projects/{id}/time": {
       "post": {
         "tags": [
@@ -2566,6 +2843,28 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/account-managers": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectAccountManagerResponse"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2648,6 +2947,209 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDetailsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/status": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeProjectStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/cancellation-preview": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectCancellationPreviewResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/cancellation": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/functions/from-periods": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateProjectFunctionsFromPeriodsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectFunctionResponse"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -5715,6 +6217,18 @@
           }
         }
       },
+      "AddProjectTimePeriodRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Creates a named period in the project schedule."
+      },
       "AddressDto": {
         "required": [
           "street",
@@ -6060,6 +6574,42 @@
             "type": "string"
           }
         }
+      },
+      "CancelProjectRequest": {
+        "required": [
+          "confirm"
+        ],
+        "type": "object",
+        "properties": {
+          "confirm": {
+            "type": "boolean"
+          },
+          "completeOpenTasks": {
+            "type": "boolean",
+            "default": false
+          },
+          "removePlannedResources": {
+            "type": "boolean",
+            "default": false
+          },
+          "withdrawInvitations": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "Confirms project cancellation and the selected applicable actions."
+      },
+      "ChangeProjectStatusRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "description": "Changes a project's fixed lifecycle status."
       },
       "CommunicationSnapshot": {
         "required": [
@@ -6903,6 +7453,21 @@
             ],
             "description": "Optional assigned team.",
             "format": "uuid"
+          },
+          "projectNumber": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional custom project number; omitted values are assigned automatically."
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional workspace user with the Admin or Office role.",
+            "format": "uuid"
           }
         },
         "description": "Creates a project."
@@ -7575,6 +8140,22 @@
         "description": "Lifecycle status of a refundable project deposit.",
         "default": 0
       },
+      "DesignateProjectTimePeriodRequest": {
+        "required": [
+          "isDefaultPlanning",
+          "isDefaultUsage"
+        ],
+        "type": "object",
+        "properties": {
+          "isDefaultPlanning": {
+            "type": "boolean"
+          },
+          "isDefaultUsage": {
+            "type": "boolean"
+          }
+        },
+        "description": "Assigns the planning role, usage role or both to a period."
+      },
       "DocumentTemplatePreviewResponse": {
         "required": [
           "id",
@@ -7988,6 +8569,28 @@
           },
           "html": {
             "type": "string"
+          }
+        }
+      },
+      "GenerateProjectFunctionsFromPeriodsRequest": {
+        "required": [
+          "periodIds",
+          "kinds"
+        ],
+        "type": "object",
+        "properties": {
+          "periodIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrewFunctionKind"
+            }
           }
         }
       },
@@ -9099,6 +9702,23 @@
         },
         "description": "Moves a task on the board."
       },
+      "ProjectAccountManagerResponse": {
+        "required": [
+          "id",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          }
+        },
+        "description": "A user eligible to manage a project."
+      },
       "ProjectBoardResponse": {
         "required": [
           "projectId",
@@ -9123,6 +9743,38 @@
           }
         },
         "description": "A project board with automatic progress."
+      },
+      "ProjectCancellationPreviewResponse": {
+        "required": [
+          "openTaskCount",
+          "plannedCrewCount",
+          "plannedTransportCount",
+          "activeInvitationCount",
+          "canCompleteOpenTasks"
+        ],
+        "type": "object",
+        "properties": {
+          "openTaskCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "plannedCrewCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "plannedTransportCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeInvitationCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "canCompleteOpenTasks": {
+            "type": "boolean"
+          }
+        },
+        "description": "Open operational work that the cancellation warning will retain."
       },
       "ProjectContextEntryResponse": {
         "required": [
@@ -9289,6 +9941,13 @@
             "items": {
               "$ref": "#/components/schemas/VehicleAssignmentResponse"
             }
+          },
+          "projectTimePeriodId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
@@ -9513,6 +10172,52 @@
           "depositStatus": {
             "description": "Current deposit lifecycle status.",
             "$ref": "#/components/schemas/DepositStatus"
+          },
+          "status": {
+            "type": "string",
+            "description": "Commercial lifecycle status of the project.",
+            "default": "draft"
+          },
+          "hasCancellationWarning": {
+            "type": "boolean",
+            "description": "Whether open work remained when cancelled.",
+            "default": false
+          },
+          "cancelledAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "UTC cancellation timestamp, when cancelled.",
+            "format": "date-time"
+          },
+          "externalReference": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Customer or production reference associated with the project."
+          },
+          "contactPersonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Selected person at the project customer contact.",
+            "format": "uuid"
+          },
+          "projectNumber": {
+            "type": "string",
+            "description": "Installation-wide project number.",
+            "default": ""
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned project account manager.",
+            "format": "uuid"
           }
         },
         "description": "A project with its billable lines."
@@ -9667,6 +10372,24 @@
           "depositStatus": {
             "description": "Current deposit lifecycle status.",
             "$ref": "#/components/schemas/DepositStatus"
+          },
+          "status": {
+            "type": "string",
+            "description": "Commercial lifecycle status of the project.",
+            "default": "draft"
+          },
+          "projectNumber": {
+            "type": "string",
+            "description": "Installation-wide project number.",
+            "default": ""
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned project account manager.",
+            "format": "uuid"
           }
         },
         "description": "A project in a list."
@@ -9815,6 +10538,60 @@
             "format": "date-time"
           }
         }
+      },
+      "ProjectTimePeriodResponse": {
+        "required": [
+          "id",
+          "name",
+          "position",
+          "isDefaultPlanning",
+          "isDefaultUsage",
+          "start",
+          "end",
+          "showOnInternalDocuments",
+          "showOnExternalDocuments"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDefaultPlanning": {
+            "type": "boolean"
+          },
+          "isDefaultUsage": {
+            "type": "boolean"
+          },
+          "start": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "end": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "showOnInternalDocuments": {
+            "type": "boolean"
+          },
+          "showOnExternalDocuments": {
+            "type": "boolean"
+          }
+        },
+        "description": "A named, optionally timed period in a project schedule."
       },
       "ProjectTimeReportResponse": {
         "required": [
@@ -10181,6 +10958,22 @@
           }
         },
         "description": "Registers a customer."
+      },
+      "ReorderProjectTimePeriodsRequest": {
+        "required": [
+          "periodIds"
+        ],
+        "type": "object",
+        "properties": {
+          "periodIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "description": "Sets the complete project time-period order."
       },
       "RespondToCrewInvitationRequest": {
         "required": [
@@ -10870,6 +11663,109 @@
             ]
           }
         }
+      },
+      "UpdateProjectDetailsRequest": {
+        "required": [
+          "customerId",
+          "name",
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "projectTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "teamId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "externalReference": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactPersonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "projectNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        },
+        "description": "Edits the identifying and scheduling details of an existing project."
+      },
+      "UpdateProjectTimePeriodRequest": {
+        "required": [
+          "name",
+          "start",
+          "end",
+          "showOnInternalDocuments",
+          "showOnExternalDocuments"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "end": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "showOnInternalDocuments": {
+            "type": "boolean"
+          },
+          "showOnExternalDocuments": {
+            "type": "boolean"
+          }
+        },
+        "description": "Updates a period's name, range and document visibility."
       },
       "UpdateVehicleRequest": {
         "required": [

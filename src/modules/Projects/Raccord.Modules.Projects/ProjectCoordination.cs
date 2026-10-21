@@ -12,7 +12,8 @@ public sealed class ProjectCoordination(
     IProjectCoordinationStore coordination,
     IBillableWork projects,
     IPartyDirectory parties,
-    IProjectsUnitOfWork unitOfWork
+    IProjectsUnitOfWork unitOfWork,
+    IProjectNumberSeries projectNumbers
 )
 {
     /// <summary>Lists incoming project requests.</summary>
@@ -71,29 +72,39 @@ public sealed class ProjectCoordination(
                 "customers.not-found",
                 $"Customer '{customerId}' does not exist."
             );
-        var project = Project.Create(
-            request.Name,
-            customerId,
-            request.StartDate,
-            request.EndDate,
-            request.ProjectTypeId,
-            request.TeamId
-        );
-        projects.Add(project);
-        request.Convert(project.Id);
-        await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        return new ProjectResponse(
-            project.Id,
-            project.Name,
-            project.CustomerId,
-            customer.LegalName,
-            project.StartDate,
-            project.EndDate,
-            Currency.Eur.Code,
-            [],
-            project.ProjectTypeId,
-            project.TeamId
-        );
+        return await unitOfWork
+            .ExecuteAsync(
+                async ct =>
+                {
+                    await projectNumbers.LockAsync(ct).ConfigureAwait(false);
+                    var project = Project.Create(
+                        request.Name,
+                        customerId,
+                        request.StartDate,
+                        request.EndDate,
+                        request.ProjectTypeId,
+                        request.TeamId,
+                        await projectNumbers.NextAsync(ct).ConfigureAwait(false)
+                    );
+                    projects.Add(project);
+                    request.Convert(project.Id);
+                    return new ProjectResponse(
+                        project.Id,
+                        project.Name,
+                        project.CustomerId,
+                        customer.LegalName,
+                        project.StartDate,
+                        project.EndDate,
+                        Currency.Eur.Code,
+                        [],
+                        project.ProjectTypeId,
+                        project.TeamId,
+                        ProjectNumber: project.ProjectNumber
+                    );
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     /// <summary>Declines an incoming request.</summary>
@@ -225,6 +236,63 @@ public sealed class ProjectCoordination(
         return new(projectId, project.ProgressPercent, [.. tasks.Select(ToResponse)]);
     }
 
+    /// <summary>Counts project tasks that are not in a completing status.</summary>
+    public async Task<int> CountOpenTasksAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatusIds = (
+            await coordination.ListTaskStatusesAsync(cancellationToken).ConfigureAwait(false)
+        )
+            .Where(status => status.CompletesProject)
+            .Select(status => status.Id)
+            .ToHashSet();
+        return tasks.Count(task => !completingStatusIds.Contains(task.StatusId));
+    }
+
+    /// <summary>Whether task completion can be offered for this project.</summary>
+    public async Task<bool> CanCompleteOpenTasksAsync(CancellationToken cancellationToken) =>
+        (await coordination.ListTaskStatusesAsync(cancellationToken).ConfigureAwait(false)).Any(
+            status => status.CompletesProject
+        );
+
+    /// <summary>Moves every open project task to a configured completing status.</summary>
+    public async Task<int> CompleteOpenTasksAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var statuses = await coordination
+            .ListTaskStatusesAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatus = statuses
+            .Where(status => status.CompletesProject)
+            .OrderBy(status => status.Position)
+            .FirstOrDefault();
+        if (completingStatus is null)
+            throw new BusinessRuleViolationException(
+                "projects.task-completion-status-not-configured",
+                "Configure a completing task status before completing open tasks."
+            );
+
+        var tasks = await coordination
+            .ListTasksAsync(projectId, cancellationToken)
+            .ConfigureAwait(false);
+        var completingStatusIds = statuses
+            .Where(status => status.CompletesProject)
+            .Select(status => status.Id)
+            .ToHashSet();
+        var openTasks = tasks.Where(task => !completingStatusIds.Contains(task.StatusId)).ToArray();
+        foreach (var (task, position) in openTasks.Select((task, index) => (task, index)))
+            task.Progress(completingStatus.Id, position);
+
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is not null)
+            project.UpdateProgress(100m);
+        return openTasks.Length;
+    }
+
     /// <summary>Moves a task and recalculates project progress.</summary>
     public async Task<ProjectTaskResponse?> ProgressTaskAsync(
         Guid taskId,
@@ -238,6 +306,8 @@ public sealed class ProjectCoordination(
             .ConfigureAwait(false);
         if (task is null)
             return null;
+        await EnsureOperationalProjectAsync(task.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         await EnsureStatusAsync(request.StatusId, cancellationToken).ConfigureAwait(false);
         task.Progress(request.StatusId, request.Position);
         await RecalculateProgressAsync(task.ProjectId, cancellationToken).ConfigureAwait(false);
@@ -247,10 +317,35 @@ public sealed class ProjectCoordination(
 
     private async Task EnsureProjectAsync(Guid projectId, CancellationToken cancellationToken)
     {
-        if (await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false) is null)
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
             throw new BusinessRuleViolationException(
                 "projects.not-found",
                 $"Project '{projectId}' does not exist."
+            );
+        EnsureOperationalProject(project);
+    }
+
+    private async Task EnsureOperationalProjectAsync(
+        Guid projectId,
+        CancellationToken cancellationToken
+    )
+    {
+        var project = await projects.FindAsync(projectId, cancellationToken).ConfigureAwait(false);
+        if (project is null)
+            throw new BusinessRuleViolationException(
+                "projects.not-found",
+                $"Project '{projectId}' does not exist."
+            );
+        EnsureOperationalProject(project);
+    }
+
+    private static void EnsureOperationalProject(Project project)
+    {
+        if (project.Status == ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational planning."
             );
     }
 
@@ -312,14 +407,8 @@ public sealed class ProjectCoordination(
     )
     {
         ArgumentNullException.ThrowIfNull(request);
-        if (
-            await projects.FindAsync(request.ProjectId, cancellationToken).ConfigureAwait(false)
-            is null
-        )
-            throw new BusinessRuleViolationException(
-                "projects.not-found",
-                $"Project '{request.ProjectId}' does not exist."
-            );
+        await EnsureOperationalProjectAsync(request.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         var schedule = ProjectSchedule.Create(
             request.ProjectId,
             request.Title,
@@ -359,6 +448,8 @@ public sealed class ProjectCoordination(
             .ConfigureAwait(false);
         if (schedule is null)
             return null;
+        await EnsureOperationalProjectAsync(schedule.ProjectId, cancellationToken)
+            .ConfigureAwait(false);
         schedule.Shift(request.Days);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(schedule);

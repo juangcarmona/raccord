@@ -2,7 +2,7 @@
 id: BR-PRJ-STATUS-AREA-VISIBILITY
 type: business-rule
 title: "Status decides where a project appears"
-status: draft
+status: active
 applies-to:
   - "UC-PRJ-CHANGE-PROJECT-STATUS"
   - "BC-PROJECTS"

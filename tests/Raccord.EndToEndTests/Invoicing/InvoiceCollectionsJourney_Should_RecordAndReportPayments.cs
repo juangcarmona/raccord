@@ -22,7 +22,7 @@ public sealed class InvoiceCollectionsJourney_Should_RecordAndReportPayments(
 ) : BrowserJourneyBase(app)
 {
     private static readonly DateOnly IssueDate = new(2025, 5, 11);
-    private static readonly DateOnly Today = DateOnly.FromDateTime(DateTime.UtcNow);
+    private static DateOnly Today => OrganizationDateToday();
 
     /// <summary>
     /// Given synthetic project work, when the billing administrator receives a deposit, records

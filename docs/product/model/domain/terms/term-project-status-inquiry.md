@@ -2,7 +2,7 @@
 id: TERM-PROJECT-STATUS-INQUIRY
 type: domain-term
 title: "Inquiry (project status)"
-status: draft
+status: active
 defined-in: "BC-PROJECTS"
 synonyms: []
 uses-terms:

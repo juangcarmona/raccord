@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "runId": "ff-303-20261020T210555Z",
+  "workItem": "#303",
+  "branch": "codex/303-project-lifecycle",
+  "startedAt": "2026-10-20T21:05:55Z",
+  "executorModel": "GPT-6 (system-reported)",
+  "reviewerModel": "gpt-6-astra",
+  "maxCorrectionRounds": 3,
+  "status": "awaiting-integration",
+  "reviewerWaiver": {
+    "scope": "#303 unattended cycle",
+    "authorizedBy": "Owner explicit instruction in active session",
+    "reason": "No independent reviewer will participate in this flow",
+    "deterministicChecksRemainRequired": true
+  },
+  "stages": [
+    {
+      "name": "refine",
+      "startedAt": "2026-10-20T21:05:55Z",
+      "completedAt": "2026-10-20T21:06:49Z",
+      "inputCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
+      "result": "ready",
+      "findings": "All required Ready dimensions are satisfied after adding explicit Product Change scope, BR citations, E2E selection details, quality expectations, risks and red lines. Issue remains status:in-progress because lifecycle has no valid rollback transition from implementation to ready.",
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/issues/303"
+      ]
+    },
+    {
+      "name": "propose",
+      "startedAt": "2026-10-20T21:06:49Z",
+      "completedAt": "2026-10-20T21:12:15Z",
+      "inputCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
+      "outputCommit": "f4cea9148ce46299a0836511c94ddd093421b8f0",
+      "result": "approved",
+      "findings": "Plan revision addressed round-one findings and received independent approval from gpt-6-astra. One Transport-function wording detail will be resolved during implementation.",
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
+    },
+    {
+      "name": "implement",
+      "startedAt": "2026-10-20T21:43:41Z",
+      "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
+      "outputCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
+      "outputCommit": "00541ca85bfaac8c503e0d925bb240199f498ed6",
+      "result": "complete",
+      "findings": "Implementation and deterministic verification are complete on the final branch head. Project detail editing, notes/files, planning and usage periods, designation/order/duplication, linked-record propagation with rollback, document visibility, lifecycle status, Complete/reopen, cancellation actions and invoice-history preservation are implemented and covered. Project-level commercial overrides remain deliberately deferred to #300/#323/#417/#419 because the current OpenSpec contract does not define those stable catalog references; the task list records that boundary explicitly.",
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectScheduleJourney_Should_ManagePeriods.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261020214850_ProjectFunctionTimePeriodLink.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectCompleteJourney_Should_ReopenOperations.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectDetailsJourney_Should_EditDetails.cs",
+        "tests/Raccord.Web.Tests/ProjectNumbersEndpointTests.cs",
+        "tests/Raccord.Web.Tests/ProjectNumberMigrationTests.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261021041758_ProjectNumberSeries.cs",
+        "src/Raccord.Frontend/src/features/projects/ProjectDetailPage.test.tsx",
+        "src/Raccord.Frontend/src/features/projects/ProjectContextPanel.tsx",
+        "tests/Raccord.EndToEndTests/Projects/ProjectDetailsJourney_Should_EditDetails.cs",
+        "src/Raccord.Frontend/src/features/projects/NewProjectPage.test.tsx",
+        "tests/Raccord.Web.Tests/ProjectAccountManagerEndpointTests.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261021043845_ProjectAccountManager.cs",
+        "docs/operations/process-ledger.md",
+        "frontend format/lint/typecheck passed; 52 frontend tests passed; frontend build, architecture check and npm audit passed on Node 22.22.1 (npm reported non-blocking engine warnings)",
+        "dotnet build Raccord.slnx -c Release --no-restore passed with 0 warnings and 0 errors",
+        "full per-PR E2E selection passed (49 passed, 0 failed, 0 skipped; 178.751s) after rebuilding the final source; suite log: /tmp/raccord-303-e2e-clean.log"
+      ]
+    },
+    {
+      "name": "integrate",
+      "result": "awaiting-integration"
+    },
+    {
+      "name": "review",
+      "result": "pending"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewerModel": "gpt-6-astra",
+      "kind": "plan",
+      "reviewedCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
+      "decision": "request-changes",
+      "findings": [
+        "Added explicit tasks and scenarios for period designation and linked/unlinked propagation.",
+        "Added module ownership and failure-handling details for Projects, Contacts, Commercial, Documents, Crew, Transport and Warehouse boundaries.",
+        "Added API and browser coverage for Complete/reopen, status-dependent visibility, document rendering, selected cancellation actions, synthetic data and Area=projects selection metadata."
+      ],
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
+    },
+    {
+      "reviewerModel": "gpt-6-astra",
+      "kind": "plan",
+      "reviewedCommit": "f4cea9148ce46299a0836511c94ddd093421b8f0",
+      "decision": "approve",
+      "findings": [
+        "Prior gaps are covered with explicit accepted-scope tasks, module boundaries, transaction behavior, failure scenarios and per-PR E2E selection metadata.",
+        "Align whether Transport function generation applies to every selected period during implementation; this wording detail does not block the plan."
+      ],
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
+    },
+    {
+      "reviewerModel": "gpt-6-astra",
+      "kind": "plan amendment",
+      "reviewedCommit": "6491f91e639384dcc5acbe6246992d1d83aca294",
+      "decision": "approve",
+      "findings": [
+        "The committed number allocation amendment matches the previously reviewed plan; custom and generated numbers share a transaction-scoped lock, the migration backfills deterministically, and configurable start values remain tracked by #416."
+      ],
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
+    },
+    {
+      "gate": "account manager assignment slice",
+      "round": 1,
+      "resultingCommit": "d9b48c529e0ec4da25adbeaf9b0900caa7c116ba",
+      "rerunChecks": {
+        "accountManagerApiTests": "passed (3 passed, 0 failed)",
+        "projectDetailFrontendTests": "passed (10 passed, 0 failed)",
+        "projectAreaE2E": "passed (12 passed, 0 failed; 47 journeys selected)",
+        "fullE2E": "passed (49 passed, 0 failed, 0 skipped)",
+        "fullWebTests": "passed (72 passed, 0 failed)",
+        "frontendCiSequence": "passed (51 tests; lint, typecheck, format, architecture, build, audit, API generation)",
+        "openSpecValidateAll": "passed (41 items)",
+        "productshapeValidateAndCitations": "passed (1917 artifacts; 152 documents, 597 current citations)",
+        "csharpierMarkdownlintAndDiffCheck": "passed",
+        "efPendingModelChanges": "passed (no pending model changes)",
+        "runtimeEvidence": "passed (Playwright account manager selection persisted after reload; screenshot, trace and video captured under /tmp/raccord-ff-303-account-manager)",
+        "remoteCi": "running (PR #401, head d9b48c5)"
+      },
+      "findings": "The project detail previously had no account manager assignment. The approved plan's Admin/Office eligibility is enforced in the Projects module using a Workspace identity directory, checked on writes, and exposed through an eligible-user endpoint. The browser journey selects and reloads a manager. The process ledger now records the rule to validate role-based assignments at the write boundary."
+    },
+    {
+      "gate": "project context detail slice",
+      "round": 1,
+      "resultingCommit": "20034c302acb2931f75afc1ae5bfb8eeab0cf354",
+      "rerunChecks": {
+        "projectDetailFrontendTests": "passed (10 passed, 0 failed)",
+        "fullFrontendSuite": "passed (52 passed, 0 failed; format, lint, typecheck, build, architecture check, audit)",
+        "focusedProjectDetailsE2E": "passed (1 passed, 0 failed)",
+        "fullE2E": "passed (49 passed, 0 failed, 0 skipped)",
+        "csharpierAndDiffCheck": "passed",
+        "remoteCiForPreviousCommit": "passed all required checks on d5d3a0f"
+      },
+      "findings": "The first frontend test exposed that a React submit event's currentTarget must be captured before awaiting a network request; the form element is now retained explicitly. The first E2E attempt used Spanish labels against the English browser locale; the journey now uses the labels from the configured locale. Aspire E2E recreates node_modules with npm ci, so frontend checks must run after the E2E runner completes in a shared worktree."
+    }
+  ],
+  "corrections": [
+    {
+      "gate": "plan review and CI",
+      "round": 1,
+      "requestedChanges": "Complete plan traceability and failure coverage; fix PostgreSQL migration NULL type inference reported by both integration and E2E CI jobs.",
+      "resultingCommit": "f4cea9148ce46299a0836511c94ddd093421b8f0",
+      "rerunChecks": {
+        "openspecValidateAll": "passed (37 items)",
+        "webIntegrationTests": "passed (26 passed, 0 failed)",
+        "openspecChangeValidation": "passed",
+        "productshapeCitations": "passed after expanded citations (145 documents, 531 current citations)",
+        "markdownlint": "passed",
+        "csharpier": "passed",
+        "gitDiffCheck": "passed"
+      }
+    },
+    {
+      "gate": "project-number slice",
+      "round": 1,
+      "requestedChanges": "Exercise automatic and custom project numbers, duplicate rejection, concurrent creation, deterministic populated-database backfill, generated API contract, browser edit persistence, seed creation and request conversion.",
+      "resultingCommit": "677af75b762e89791f9d9898a176b20dcd598139",
+      "rerunChecks": {
+        "webIntegrationTests": "passed (69 passed, 0 failed)",
+        "focusedProjectNumberApiTests": "passed (5 passed, 0 failed)",
+        "projectNumberMigrationTest": "passed (1 passed, 0 failed)",
+        "projectDomainTests": "passed (21 passed, 0 failed)",
+        "frontendTests": "passed (49 passed, 0 failed)",
+        "focusedProjectDetailsE2E": "passed (1 passed, 0 failed)",
+        "frontendLintTypecheckFormatBuild": "passed",
+        "openapiGeneration": "passed",
+        "openspecValidateAll": "passed (41 items)",
+        "productshapeCitations": "passed (152 documents, 595 current citations)",
+        "markdownlint": "passed",
+        "csharpier": "passed",
+        "gitDiffCheck": "passed"
+      },
+      "findings": "The first Aspire run exposed two project-creation paths outside the interactive workflow: demo seed and incoming-request conversion. Both now use explicit/allocated unique numbers. The full Web suite then exposed retained per-database Npgsql pools exhausting PostgreSQL connections; RaccordApi now clears only its own pool on disposal, and the suite passed with normal parallelism."
+    },
+    {
+      "gate": "project detail task controls and E2E",
+      "round": 1,
+      "requestedChanges": "Keep task-board UI in #386, resolve a project lifecycle Status locator collision while the board was under experiment, and rebuild the E2E assembly after frontend/test source changes.",
+      "resultingCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
+      "rerunChecks": {
+        "focusedProjectE2E": "passed (3 passed, 0 failed) with task controls present",
+        "finalFrontendSuite": "passed (52 passed, 0 failed)",
+        "finalBuild": "passed (0 warnings, 0 errors)",
+        "finalFullE2E": "passed (49 passed, 0 failed, 0 skipped; 178.751s)"
+      },
+      "findings": "A page-wide Status query became ambiguous when task-board controls were added; those controls belong to #386 and were removed from #303. An initial full run used an E2E assembly compiled before that scope correction and timed out on the removed task field; rebuilding the complete solution and rerunning the final source passed all 49 selected journeys."
+    }
+  ],
+  "stopReason": "Awaiting integration of PR #401. The Owner explicitly waived the independent-reviewer gate for this unattended cycle; deterministic checks and forge policy remain enforced.",
+  "pullRequest": "https://github.com/juangcarmona/raccord/pull/401",
+  "links": [
+    "openspec/changes/project-lifecycle-303/proposal.md",
+    "openspec/changes/project-lifecycle-303/design.md",
+    "openspec/changes/project-lifecycle-303/tasks.md"
+  ]
+}

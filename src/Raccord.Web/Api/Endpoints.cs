@@ -14,6 +14,7 @@ using Raccord.Infrastructure.Persistence;
 using Raccord.Modules.Contacts;
 using Raccord.Modules.Invoicing;
 using Raccord.Modules.Projects;
+using Raccord.Modules.Projects.Contracts;
 using Raccord.Modules.Workspace;
 using Raccord.SharedKernel.Abstractions;
 using Raccord.Web.Authorization;
@@ -374,9 +375,10 @@ internal static class Endpoints
                 async Task<Results<Ok<GeneratedProjectDocumentResponse>, NotFound>> (
                     Guid id,
                     DocumentGenerationCatalog catalog,
-                    CancellationToken ct
+                    CancellationToken ct,
+                    string audience = "internal"
                 ) =>
-                    await catalog.GenerateProjectAsync(id, ct) is { } document
+                    await catalog.GenerateProjectAsync(id, audience, ct) is { } document
                         ? TypedResults.Ok(document)
                         : TypedResults.NotFound()
             )
@@ -684,7 +686,13 @@ internal static class Endpoints
         var coordination = api.MapGroup("/project-coordination").WithTags("Project coordination");
         MapProjectCoordination(coordination);
         MapProjectContext(projects);
+        MapProjectPeriods(projects);
         MapProjectTime(projects);
+        projects.MapGet(
+            "/account-managers",
+            async (ProjectWorkspace workspace, CancellationToken ct) =>
+                TypedResults.Ok(await workspace.ListAccountManagersAsync(ct))
+        );
         projects.MapGet(
             "/",
             async (ProjectWorkspace workspace, CancellationToken ct) =>
@@ -712,6 +720,83 @@ internal static class Endpoints
                 var project = await workspace.CreateAsync(request, ct);
                 return TypedResults.Created($"/api/projects/{project.Id}", project);
             }
+        );
+        projects.MapPut(
+            "/{id:guid}/status",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                ChangeProjectStatusRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ChangeStatusAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                UpdateProjectDetailsRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.EditDetailsAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound()
+        );
+        projects.MapGet(
+            "/{id:guid}/cancellation-preview",
+            async Task<Results<Ok<ProjectCancellationPreviewResponse>, NotFound>> (
+                Guid id,
+                ProjectWorkspace workspace,
+                ProjectCoordination coordination,
+                IProjectCancellationOperations cancellationOperations,
+                CancellationToken ct
+            ) =>
+            {
+                if (await workspace.GetAsync(id, ct) is null)
+                    return TypedResults.NotFound();
+
+                var openTaskCount = await coordination.CountOpenTasksAsync(id, ct);
+                var planning = await cancellationOperations.PreviewAsync(id, ct);
+                return TypedResults.Ok(
+                    new ProjectCancellationPreviewResponse(
+                        openTaskCount,
+                        planning.PlannedCrewCount,
+                        planning.PlannedTransportCount,
+                        planning.ActiveInvitationCount,
+                        await coordination.CanCompleteOpenTasksAsync(ct)
+                    )
+                );
+            }
+        );
+        projects.MapPost(
+            "/{id:guid}/cancellation",
+            async Task<Results<Ok<ProjectResponse>, NotFound>> (
+                Guid id,
+                CancelProjectRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+            {
+                return await workspace.CancelAsync(id, request, ct) is { } project
+                    ? TypedResults.Ok(project)
+                    : TypedResults.NotFound();
+            }
+        );
+        projects.MapPost(
+            "/{id:guid}/functions/from-periods",
+            async (
+                Guid id,
+                GenerateProjectFunctionsFromPeriodsRequest request,
+                CrewPlanningCatalog catalog,
+                CancellationToken ct
+            ) =>
+                TypedResults.Created(
+                    $"/api/projects/{id}/functions",
+                    await catalog.GenerateFunctionsFromPeriodsAsync(id, request, ct)
+                )
         );
         projects.MapPost(
             "/{id:guid}/functions",
@@ -882,6 +967,83 @@ internal static class Endpoints
             ) =>
                 await tracking.GetReportAsync(id, ct) is { } report
                     ? TypedResults.Ok(report)
+                    : TypedResults.NotFound()
+        );
+    }
+
+    private static void MapProjectPeriods(RouteGroupBuilder projects)
+    {
+        projects.MapGet(
+            "/{id:guid}/periods",
+            async Task<Results<Ok<IReadOnlyList<ProjectTimePeriodResponse>>, NotFound>> (
+                Guid id,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.GetTimePeriodsAsync(id, ct) is { } periods
+                    ? TypedResults.Ok(periods)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/periods",
+            async Task<Results<Created<ProjectTimePeriodResponse>, NotFound>> (
+                Guid id,
+                AddProjectTimePeriodRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.AddTimePeriodAsync(id, request, ct) is { } period
+                    ? TypedResults.Created($"/api/projects/{id}/periods/{period.Id}", period)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/periods/{periodId:guid}",
+            async Task<Results<Ok<ProjectTimePeriodResponse>, NotFound>> (
+                Guid id,
+                Guid periodId,
+                UpdateProjectTimePeriodRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.UpdateTimePeriodAsync(id, periodId, request, ct) is { } period
+                    ? TypedResults.Ok(period)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPost(
+            "/{id:guid}/periods/{periodId:guid}/duplicate",
+            async Task<Results<Created<ProjectTimePeriodResponse>, NotFound>> (
+                Guid id,
+                Guid periodId,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.DuplicateTimePeriodAsync(id, periodId, ct) is { } period
+                    ? TypedResults.Created($"/api/projects/{id}/periods/{period.Id}", period)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/periods/order",
+            async Task<Results<Ok<IReadOnlyList<ProjectTimePeriodResponse>>, NotFound>> (
+                Guid id,
+                ReorderProjectTimePeriodsRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.ReorderTimePeriodsAsync(id, request, ct) is { } periods
+                    ? TypedResults.Ok(periods)
+                    : TypedResults.NotFound()
+        );
+        projects.MapPut(
+            "/{id:guid}/periods/{periodId:guid}/designation",
+            async Task<Results<Ok<ProjectTimePeriodResponse>, NotFound>> (
+                Guid id,
+                Guid periodId,
+                DesignateProjectTimePeriodRequest request,
+                ProjectWorkspace workspace,
+                CancellationToken ct
+            ) =>
+                await workspace.DesignateTimePeriodAsync(id, periodId, request, ct) is { } period
+                    ? TypedResults.Ok(period)
                     : TypedResults.NotFound()
         );
     }

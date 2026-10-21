@@ -545,6 +545,18 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<Guid?>("AccountManagerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_manager_id");
+
+                    b.Property<DateTimeOffset?>("CancelledAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("cancelled_at");
+
+                    b.Property<Guid?>("ContactPersonId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_person_id");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid")
                         .HasColumnName("customer_id");
@@ -559,6 +571,15 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("date")
                         .HasColumnName("end_date");
 
+                    b.Property<string>("ExternalReference")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("external_reference");
+
+                    b.Property<bool>("HasCancellationWarning")
+                        .HasColumnType("boolean")
+                        .HasColumnName("has_cancellation_warning");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -569,6 +590,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasPrecision(5, 2)
                         .HasColumnType("numeric(5,2)")
                         .HasColumnName("progress_percent");
+
+                    b.Property<string>("ProjectNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("project_number");
 
                     b.Property<Guid?>("ProjectTypeId")
                         .HasColumnType("uuid")
@@ -583,6 +610,14 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("date")
                         .HasColumnName("start_date");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasDefaultValue("Draft")
+                        .HasColumnName("status");
+
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("uuid")
                         .HasColumnName("team_id");
@@ -595,6 +630,13 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_projects");
+
+                    b.HasIndex("AccountManagerId")
+                        .HasDatabaseName("ix_projects_account_manager_id");
+
+                    b.HasIndex("ProjectNumber")
+                        .IsUnique()
+                        .HasDatabaseName("ix_projects_project_number");
 
                     b.ToTable("projects", "projects");
                 });
@@ -2132,6 +2174,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("project_id");
 
+                    b.Property<Guid?>("ProjectTimePeriodId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_time_period_id");
+
                     b.Property<int>("RequiredResources")
                         .HasColumnType("integer")
                         .HasColumnName("required_resources");
@@ -2146,6 +2192,9 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.HasIndex("ProjectId", "Name")
                         .IsUnique()
                         .HasDatabaseName("ix_project_functions_project_id_name");
+
+                    b.HasIndex("ProjectId", "ProjectTimePeriodId")
+                        .HasDatabaseName("ix_project_functions_project_id_project_time_period_id");
 
                     b.ToTable("project_functions", "crew");
                 });
@@ -2624,6 +2673,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
                 {
+                    b.HasOne("Raccord.Infrastructure.Persistence.RaccordUser", null)
+                        .WithMany()
+                        .HasForeignKey("AccountManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("fk_projects_users_account_manager_id");
+
                     b.OwnsMany("Raccord.Domain.Projects.BillableLine", "BillableLines", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -2814,9 +2869,86 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                                 .HasConstraintName("fk_packing_lines_projects_project_id");
                         });
 
+                    b.OwnsMany("Raccord.Domain.Projects.ProjectTimePeriod", "TimePeriods", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("id");
+
+                            b1.Property<DateTimeOffset?>("End")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("end");
+
+                            b1.Property<bool>("IsDefaultPlanning")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_default_planning");
+
+                            b1.Property<bool>("IsDefaultUsage")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_default_usage");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(120)
+                                .HasColumnType("character varying(120)")
+                                .HasColumnName("name");
+
+                            b1.Property<int>("Position")
+                                .HasColumnType("integer")
+                                .HasColumnName("position");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("project_id");
+
+                            b1.Property<bool>("ShowOnExternalDocuments")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("boolean")
+                                .HasDefaultValue(false)
+                                .HasColumnName("show_on_external_documents");
+
+                            b1.Property<bool>("ShowOnInternalDocuments")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("boolean")
+                                .HasDefaultValue(true)
+                                .HasColumnName("show_on_internal_documents");
+
+                            b1.Property<DateTimeOffset?>("Start")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("start");
+
+                            b1.HasKey("Id")
+                                .HasName("pk_project_time_periods");
+
+                            b1.HasIndex("ProjectId", "IsDefaultPlanning")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_is_default_planning")
+                                .HasFilter("is_default_planning");
+
+                            b1.HasIndex("ProjectId", "IsDefaultUsage")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_is_default_usage")
+                                .HasFilter("is_default_usage");
+
+                            b1.HasIndex("ProjectId", "Position")
+                                .IsUnique()
+                                .HasDatabaseName("ix_project_time_periods_project_id_position");
+
+                            b1.ToTable("project_time_periods", "projects", t =>
+                                {
+                                    t.HasCheckConstraint("CK_project_time_periods_complete_range", "(\"start\" IS NULL AND \"end\" IS NULL) OR (\"start\" IS NOT NULL AND \"end\" IS NOT NULL AND \"end\" > \"start\")");
+                                });
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId")
+                                .HasConstraintName("fk_project_time_periods_projects_project_id");
+                        });
+
                     b.Navigation("BillableLines");
 
                     b.Navigation("PackingLines");
+
+                    b.Navigation("TimePeriods");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactFolderRow", b =>

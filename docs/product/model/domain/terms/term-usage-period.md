@@ -2,7 +2,7 @@
 id: TERM-USAGE-PERIOD
 type: domain-term
 title: "Usage period"
-status: draft
+status: active
 defined-in: BC-EQUIPMENT
 synonyms:
   - "charge period"

@@ -61,7 +61,7 @@ Migrating a database created by the pre-change migrations SHALL move every table
 
 `UPDATE` and `DELETE` on issued invoices and audit events, and `DELETE` on compliance records, SHALL still be rejected by database triggers after the move.
 
-<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
+<!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:8138f31518261c618e3fef1dc93d5deaef6f55a4c3b2bfd41dfc0c5a4b75aecc" -->
 
 <!-- pdac:cite id="FR-INVOICE-006" digest="sha256:fee328e3745e8275c00914dd830f3c7cbd3a1aec267f18ed117ef24ddb8e2466" -->
 

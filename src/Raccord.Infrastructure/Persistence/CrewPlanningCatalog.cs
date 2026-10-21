@@ -14,6 +14,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         CancellationToken ct
     )
     {
+        await EnsureOperationalProjectAsync(projectId, ct);
         if (
             string.IsNullOrWhiteSpace(request.Name)
             || request.RequiredResources < 1
@@ -65,6 +66,98 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
             .Select(ToResponse)
             .ToArray();
 
+    public async Task<IReadOnlyList<ProjectFunctionResponse>> GenerateFunctionsFromPeriodsAsync(
+        Guid projectId,
+        GenerateProjectFunctionsFromPeriodsRequest request,
+        CancellationToken ct
+    )
+    {
+        await EnsureOperationalProjectAsync(projectId, ct);
+        ValidateGenerationRequest(request);
+        var periods = await LoadSelectedPeriodsAsync(projectId, request.PeriodIds, ct);
+        var generated = BuildFunctionsFromPeriods(projectId, periods, request.Kinds);
+        var names = generated.Select(function => function.Name).ToArray();
+        if (
+            names.Distinct(StringComparer.Ordinal).Count() != names.Length
+            || await db.ProjectFunctions.AnyAsync(
+                function => function.ProjectId == projectId && names.Contains(function.Name),
+                ct
+            )
+        )
+            throw new BusinessRuleViolationException(
+                "crew.period-generation-function-exists",
+                "A function already exists for one of the selected periods and kinds."
+            );
+
+        db.ProjectFunctions.AddRange(generated);
+        await db.SaveChangesAsync(ct);
+        return generated.Select(ToResponse).ToArray();
+    }
+
+    private async Task<Raccord.Domain.Projects.ProjectTimePeriod[]> LoadSelectedPeriodsAsync(
+        Guid projectId,
+        IReadOnlyList<Guid> periodIds,
+        CancellationToken ct
+    )
+    {
+        var project = await db
+            .Projects.Include(row => row.TimePeriods)
+            .SingleOrDefaultAsync(row => row.Id == projectId, ct);
+        if (project is null)
+            throw new BusinessRuleViolationException("projects.not-found", "Project not found.");
+        var periods = project.TimePeriods.Where(period => periodIds.Contains(period.Id)).ToArray();
+        if (periods.Length != periodIds.Count)
+            throw new BusinessRuleViolationException(
+                "crew.period-generation-period-not-found",
+                "Every selected period must belong to the project."
+            );
+        if (periods.Any(period => period.Start is null || period.End is null))
+            throw new BusinessRuleViolationException(
+                "crew.period-generation-period-untimed",
+                "Set start and end times on every selected period before generating functions."
+            );
+        return periods;
+    }
+
+    private static void ValidateGenerationRequest(
+        GenerateProjectFunctionsFromPeriodsRequest request
+    )
+    {
+        if (
+            request.PeriodIds.Count != 0
+            && request.Kinds.Count != 0
+            && request.PeriodIds.Distinct().Count() == request.PeriodIds.Count
+            && request.Kinds.Distinct().Count() == request.Kinds.Count
+            && request.Kinds.All(Enum.IsDefined)
+        )
+            return;
+        throw new BusinessRuleViolationException(
+            "crew.period-generation-invalid-selection",
+            "Select one or more distinct periods and function kinds."
+        );
+    }
+
+    private static ProjectFunctionRow[] BuildFunctionsFromPeriods(
+        Guid projectId,
+        IReadOnlyList<Raccord.Domain.Projects.ProjectTimePeriod> periods,
+        IReadOnlyList<CrewFunctionKind> kinds
+    ) =>
+        periods
+            .SelectMany(period =>
+                kinds.Select(kind => new ProjectFunctionRow
+                {
+                    Id = Guid.CreateVersion7(),
+                    ProjectId = projectId,
+                    ProjectTimePeriodId = period.Id,
+                    Name = $"{period.Name} — {kind}",
+                    Kind = kind,
+                    StartDate = DateOnly.FromDateTime(period.Start!.Value.DateTime),
+                    EndDate = DateOnly.FromDateTime(period.End!.Value.DateTime),
+                    RequiredResources = 1,
+                })
+            )
+            .ToArray();
+
     public async Task<ProjectFunctionResponse?> AddShiftAsync(
         Guid functionId,
         CreateProjectShiftRequest request,
@@ -74,6 +167,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (
             request.EndTime <= request.StartTime
             || request.Date < function.StartDate
@@ -106,6 +200,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (function.Kind != CrewFunctionKind.Crew)
             throw new BusinessRuleViolationException(
                 "crew.function-kind-mismatch",
@@ -146,6 +241,7 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
         var function = await Load(functionId, ct);
         if (function is null)
             return null;
+        await EnsureOperationalProjectAsync(function.ProjectId, ct);
         if (function.Kind != CrewFunctionKind.Transport)
             throw new BusinessRuleViolationException(
                 "crew.function-kind-mismatch",
@@ -180,6 +276,21 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
             .Include(row => row.Crew)
             .Include(row => row.Vehicles)
             .SingleOrDefaultAsync(row => row.Id == id, ct);
+
+    private async Task EnsureOperationalProjectAsync(Guid projectId, CancellationToken ct)
+    {
+        var status = await db
+            .Projects.Where(project => project.Id == projectId)
+            .Select(project => (Raccord.Domain.Projects.ProjectStatus?)project.Status)
+            .SingleOrDefaultAsync(ct);
+        if (status is null)
+            throw new BusinessRuleViolationException("projects.not-found", "Project not found.");
+        if (status == Raccord.Domain.Projects.ProjectStatus.Complete)
+            throw new BusinessRuleViolationException(
+                "projects.complete-read-only",
+                "Reopen a completed project before changing its operational planning."
+            );
+    }
 
     private static string? Clean(string? value) =>
         string.IsNullOrWhiteSpace(value) ? null : value.Trim();
@@ -217,7 +328,8 @@ public sealed class CrewPlanningCatalog(RaccordDbContext db)
                     vehicle.VehicleId,
                     vehicle.Remark
                 ))
-                .ToArray()
+                .ToArray(),
+            row.ProjectTimePeriodId
         );
 }
 

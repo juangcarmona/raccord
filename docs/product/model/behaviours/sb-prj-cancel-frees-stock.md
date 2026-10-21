@@ -2,7 +2,7 @@
 id: SB-PRJ-CANCEL-FREES-STOCK
 type: structured-behaviour
 title: "Cancelling makes equipment available immediately"
-status: draft
+status: active
 illustrates:
   - "BR-PRJ-CANCEL-RELEASES-EQUIPMENT"
   - "UC-PRJ-CANCEL-PROJECT"

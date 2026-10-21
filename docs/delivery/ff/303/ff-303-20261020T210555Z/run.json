@@ -32,9 +32,9 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "578561b70befa8eaa96a77faf97a63b8371516fa",
+      "outputCommit": "677af75b762e89791f9d9898a176b20dcd598139",
       "result": "running",
-      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing now persists contact-person selection, project type and team; the focused browser journey reloads and verifies all three alongside project name, customer, dates and external reference. Equipment-group propagation, the remaining accepted project-detail fields and the Done gate remain unfinished.",
+      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing persists contact-person selection, project type and team. The project-number slice now supports transactional automatic/custom allocation, deterministic legacy backfill, duplicate rejection, concurrency and browser reload persistence; seed and request-conversion creation paths also assign unique values. The full Web suite passed after the API test fixture began clearing its own Npgsql pool on disposal. Remaining project detail fields, equipment-group propagation, remaining planned UI/E2E coverage and the Done gate remain unfinished.",
       "evidence": [
         "openspec/changes/project-lifecycle-303/tasks.md",
         "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
@@ -43,6 +43,9 @@
         "tests/Raccord.EndToEndTests/Projects/ProjectCompleteJourney_Should_ReopenOperations.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectDetailsJourney_Should_EditDetails.cs",
+        "tests/Raccord.Web.Tests/ProjectNumbersEndpointTests.cs",
+        "tests/Raccord.Web.Tests/ProjectNumberMigrationTests.cs",
+        "src/Raccord.Infrastructure/Persistence/Migrations/20261021041758_ProjectNumberSeries.cs",
         "src/Raccord.Frontend/src/features/projects/ProjectDetailPage.test.tsx",
         "docs/operations/process-ledger.md"
       ]
@@ -73,6 +76,16 @@
         "Align whether Transport function generation applies to every selected period during implementation; this wording detail does not block the plan."
       ],
       "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+    },
+    {
+      "reviewerModel": "gpt-6-astra",
+      "kind": "plan amendment",
+      "reviewedCommit": "6491f91e639384dcc5acbe6246992d1d83aca294",
+      "decision": "approve",
+      "findings": [
+        "The committed number allocation amendment matches the previously reviewed plan; custom and generated numbers share a transaction-scoped lock, the migration backfills deterministically, and configurable start values remain tracked by #416."
+      ],
+      "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
     }
   ],
   "corrections": [
@@ -90,6 +103,28 @@
         "csharpier": "passed",
         "gitDiffCheck": "passed"
       }
+    },
+    {
+      "gate": "project-number slice",
+      "round": 1,
+      "requestedChanges": "Exercise automatic and custom project numbers, duplicate rejection, concurrent creation, deterministic populated-database backfill, generated API contract, browser edit persistence, seed creation and request conversion.",
+      "resultingCommit": "677af75b762e89791f9d9898a176b20dcd598139",
+      "rerunChecks": {
+        "webIntegrationTests": "passed (69 passed, 0 failed)",
+        "focusedProjectNumberApiTests": "passed (5 passed, 0 failed)",
+        "projectNumberMigrationTest": "passed (1 passed, 0 failed)",
+        "projectDomainTests": "passed (21 passed, 0 failed)",
+        "frontendTests": "passed (49 passed, 0 failed)",
+        "focusedProjectDetailsE2E": "passed (1 passed, 0 failed)",
+        "frontendLintTypecheckFormatBuild": "passed",
+        "openapiGeneration": "passed",
+        "openspecValidateAll": "passed (41 items)",
+        "productshapeCitations": "passed (152 documents, 595 current citations)",
+        "markdownlint": "passed",
+        "csharpier": "passed",
+        "gitDiffCheck": "passed"
+      },
+      "findings": "The first Aspire run exposed two project-creation paths outside the interactive workflow: demo seed and incoming-request conversion. Both now use explicit/allocated unique numbers. The full Web suite then exposed retained per-database Npgsql pools exhausting PostgreSQL connections; RaccordApi now clears only its own pool on disposal, and the suite passed with normal parallelism."
     }
   ],
   "stopReason": null,

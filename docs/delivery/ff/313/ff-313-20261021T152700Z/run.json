@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "runId": "ff-313-20261021T152700Z",
+  "workItem": "#313",
+  "branch": "codex/313-warehouse-manual-booking",
+  "startedAt": "2026-10-21T15:27:00Z",
+  "executorModel": "GPT-6 (system-reported)",
+  "status": "complete",
+  "reviewerWaiver": {
+    "scope": "#313 unattended cycle",
+    "authorizedBy": "Owner explicit instruction in active session",
+    "reason": "No independent reviewer will participate in this flow",
+    "deterministicChecksRemainRequired": true
+  },
+  "stages": [
+    {
+      "name": "implement",
+      "completedAt": "2026-10-21T15:30:23Z",
+      "result": "complete",
+      "outputCommit": "3553350b9d57a6517e01ec42222bd38642323c5b",
+      "evidence": [
+        "openspec/changes/warehouse-manual-booking-313/tasks.md",
+        "src/Raccord.Frontend/src/features/projects/WarehousePackingPanel.tsx",
+        "tests/Raccord.EndToEndTests/Equipment/WarehouseJourney_Should_BookEquipment.cs",
+        "npm test -- --run src/features/projects/ProjectDetailPage.test.tsx (5 passed)",
+        "focused E2E journey (1 passed)"
+      ]
+    },
+    {
+      "name": "integrate",
+      "completedAt": "2026-10-21T15:35:45Z",
+      "result": "complete",
+      "outputCommit": "90999feab203b6939abc3311f5e6ff8d2b945faf",
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/pull/423",
+        "https://github.com/juangcarmona/raccord/commit/90999feab203b6939abc3311f5e6ff8d2b945faf"
+      ]
+    },
+    {
+      "name": "review",
+      "completedAt": "2026-10-21T15:37:00Z",
+      "result": "complete",
+      "evidence": [
+        "docs/reviews/issue-313.md"
+      ]
+    }
+  ],
+  "verification": {
+    "remoteCi": "all required checks passed; E2E job passed",
+    "openspec": "warehouse-manual-booking-313 valid",
+    "citations": "146 documents, 512 current citations, 0 stale/tampered/unresolved",
+    "frontend": "typecheck, lint, format and focused tests passed",
+    "build": "dotnet build Raccord.slnx -c Release --no-restore passed",
+    "diff": "git diff --check passed"
+  },
+  "pullRequest": "https://github.com/juangcarmona/raccord/pull/423",
+  "links": [
+    "openspec/changes/warehouse-manual-booking-313/proposal.md",
+    "openspec/changes/warehouse-manual-booking-313/design.md",
+    "openspec/changes/warehouse-manual-booking-313/tasks.md",
+    "docs/reviews/issue-313.md"
+  ],
+  "stopReason": null
+}

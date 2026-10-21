@@ -2,7 +2,7 @@
 id: FR-FIN-101
 type: functional-requirement
 title: "Offer customers per-group discounts"
-status: draft
+status: active
 derived-from:
   - "UC-FIN-CONFIGURE-DISCOUNT-GROUPS"
   - "BR-FIN-DISCOUNT-GROUP-PERCENTAGE"

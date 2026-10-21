@@ -5,6 +5,7 @@ import { DraftPage } from "../features/invoicing/DraftPage";
 import { DraftsPage } from "../features/invoicing/DraftsPage";
 import { InvoicePage } from "../features/invoicing/InvoicePage";
 import { InvoicesPage } from "../features/invoicing/InvoicesPage";
+import { VatCatalogSettingsPage } from "../features/invoicing/VatCatalogSettingsPage";
 import { IssuerSettingsPage } from "../features/organization/IssuerSettingsPage";
 import { RolesPage } from "../features/organization/RolesPage";
 import { NewProjectPage } from "../features/projects/NewProjectPage";
@@ -36,6 +37,7 @@ export const routes: RouteObject[] = [
                     { path: "invoices", element: <InvoicesPage /> },
                     { path: "invoices/:id", element: <InvoicePage /> },
                     { path: "settings/issuer", element: <IssuerSettingsPage /> },
+                    { path: "settings/vat", element: <VatCatalogSettingsPage /> },
                     {
                         element: <RequireRoleManagement />,
                         children: [{ path: "settings/roles", element: <RolesPage /> }],

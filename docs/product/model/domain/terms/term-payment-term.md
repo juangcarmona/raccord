@@ -2,7 +2,7 @@
 id: TERM-PAYMENT-TERM
 type: domain-term
 title: "Payment term"
-status: draft
+status: active
 defined-in: "BC-INVOICING"
 synonyms: []
 uses-terms:

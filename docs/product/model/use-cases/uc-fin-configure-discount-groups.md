@@ -2,7 +2,7 @@
 id: UC-FIN-CONFIGURE-DISCOUNT-GROUPS
 type: use-case
 title: "Configure discount groups"
-status: draft
+status: active
 primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
 supporting-actors:
   - "ACT-BILLING-ADMINISTRATOR"

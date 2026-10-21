@@ -45,7 +45,6 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
         (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.roles")).ShouldBe(4);
         (await api.QueryScalarAsync<long>("select count(*) from workspace.user_roles")).ShouldBe(1);
-
         var roles =
             await client.GetFromJsonAsync<List<RoleResponse>>("/api/roles")
             ?? throw new InvalidOperationException("The role list was empty.");

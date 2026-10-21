@@ -11,30 +11,20 @@ namespace Raccord.Web.Tests;
 
 public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLifetime
 {
-    private static readonly AddBillableLineRequest Camera = new(
-        "equipment",
-        "Cinema camera kit",
-        2m,
-        450m,
-        0m,
-        21m
-    );
-    private static readonly AddBillableLineRequest Gaffer = new(
-        "labour",
-        "Gaffer, 10h day",
-        1m,
-        380m,
-        0m,
-        21m
-    );
-
     private RaccordApi api = null!;
     private HttpClient client = null!;
+    private Guid vatClassId;
+    private Guid vatSchemeId;
+    private AddBillableLineRequest Camera =>
+        new("equipment", "Cinema camera kit", 2m, 450m, 0m, vatClassId, vatSchemeId);
+    private AddBillableLineRequest Gaffer =>
+        new("labour", "Gaffer, 10h day", 1m, 380m, 0m, vatClassId, vatSchemeId);
 
     public async ValueTask InitializeAsync()
     {
         api = await RaccordApi.StartAsync(postgres);
         client = api.CreateClient();
+        (vatClassId, vatSchemeId) = await RaccordApi.GetDefaultVatReferenceAsync(client);
     }
 
     public async ValueTask DisposeAsync()
@@ -403,7 +393,7 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
 
     [Theory]
     [InlineData("rocket", "projects.billable-line-kind-invalid")]
-    [InlineData("equipment", "pricing.vat-rate-out-of-range")]
+    [InlineData("equipment", "pricing.discount-out-of-range")]
     public async Task Invalid_billable_lines_Should_be_rejected_with_rule_codes(
         string kind,
         string expectedCode
@@ -413,7 +403,15 @@ public sealed class InvoicingRulesTests(PostgresContainer postgres) : IAsyncLife
 
         var response = await client.PostAsJsonAsync(
             $"/api/projects/{project.Id}/billable-lines",
-            new AddBillableLineRequest(kind, "Item", 1m, 10m, 0m, 121m)
+            new AddBillableLineRequest(
+                kind,
+                "Item",
+                1m,
+                10m,
+                string.Equals(kind, "equipment", StringComparison.Ordinal) ? 121m : 0m,
+                vatClassId,
+                vatSchemeId
+            )
         );
 
         (await ProblemAsync(response, HttpStatusCode.UnprocessableEntity))

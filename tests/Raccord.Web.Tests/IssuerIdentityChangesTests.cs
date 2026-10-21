@@ -49,9 +49,21 @@ public sealed class IssuerIdentityChangesTests(PostgresContainer postgres) : IAs
 
     private async Task<IssuedInvoiceResponse> IssueInvoiceAsync()
     {
+        var (vatClassId, vatSchemeId) = await RaccordApi.GetDefaultVatReferenceAsync(client);
         var project = await RaccordApi.ArrangeProjectAsync(
             client,
-            lines: [new AddBillableLineRequest("labour", "Camera operator", 1m, 500m, 0m, 21m)]
+            lines:
+            [
+                new AddBillableLineRequest(
+                    "labour",
+                    "Camera operator",
+                    1m,
+                    500m,
+                    0m,
+                    vatClassId,
+                    vatSchemeId
+                ),
+            ]
         );
         var draftResponse = await client.PostAsJsonAsync(
             "/api/invoice-drafts",

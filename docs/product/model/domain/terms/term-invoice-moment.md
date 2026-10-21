@@ -2,7 +2,7 @@
 id: TERM-INVOICE-MOMENT
 type: domain-term
 title: "Invoice moment"
-status: draft
+status: active
 defined-in: "BC-INVOICING"
 synonyms:
   - "Billing milestone schedule"

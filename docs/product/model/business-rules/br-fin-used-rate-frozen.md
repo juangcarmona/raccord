@@ -2,7 +2,7 @@
 id: BR-FIN-USED-RATE-FROZEN
 type: business-rule
 title: "A used VAT rate cannot be changed"
-status: draft
+status: active
 applies-to:
   - "UC-FIN-CONFIGURE-VAT"
 uses-terms:

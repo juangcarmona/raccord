@@ -8,7 +8,8 @@ namespace Raccord.Infrastructure.Persistence;
 public sealed class InstallationSetup(
     RaccordDbContext db,
     UserManager<RaccordUser> users,
-    RoleManager<IdentityRole<Guid>> roles
+    RoleManager<IdentityRole<Guid>> roles,
+    VatCatalogInitializer vatCatalog
 )
 {
     /// <summary>The roles available to every new installation.</summary>
@@ -78,6 +79,8 @@ public sealed class InstallationSetup(
         {
             return SetupResult.Failed(assignment.Errors.Select(error => error.Description));
         }
+
+        await vatCatalog.EnsureInitializedAsync(email, cancellationToken).ConfigureAwait(false);
 
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return SetupResult.Created;

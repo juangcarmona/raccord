@@ -2,7 +2,7 @@
 id: FR-FIN-VAT
 type: functional-requirement
 title: "Tax by VAT classes and schemes"
-status: draft
+status: active
 derived-from:
   - "UC-FIN-CONFIGURE-VAT"
   - "UC-FIN-SELECT-VAT-SCHEME"

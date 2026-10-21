@@ -62,7 +62,9 @@ internal static class ContractMapping
             pricing.UnitPrice,
             pricing.DiscountPercent,
             pricing.VatRate.Percentage,
-            pricing.NetAmount.Amount
+            pricing.NetAmount.Amount,
+            line.VatClassId,
+            line.VatSchemeId
         );
     }
 
@@ -75,7 +77,9 @@ internal static class ContractMapping
             line.Pricing.UnitPrice,
             line.Pricing.DiscountPercent,
             line.Pricing.VatRate.Percentage,
-            line.Pricing.NetAmount.Amount
+            line.Pricing.NetAmount.Amount,
+            null,
+            null
         );
 
     public static ValidationIssueResponse ToResponse(this ValidationIssue issue) =>

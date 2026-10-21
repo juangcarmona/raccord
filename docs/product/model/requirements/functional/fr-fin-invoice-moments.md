@@ -2,7 +2,7 @@
 id: FR-FIN-INVOICE-MOMENTS
 type: functional-requirement
 title: "Configure invoice moments"
-status: draft
+status: active
 derived-from:
   - "UC-FIN-CONFIGURE-INVOICE-MOMENTS"
   - "BR-FIN-MOMENT-TRIGGER-DATES"

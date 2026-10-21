@@ -23,6 +23,8 @@ public sealed class InvoiceDraftLine
         UnitPrice = source.UnitPrice;
         DiscountPercent = source.DiscountPercent;
         VatPercentage = source.VatPercentage;
+        VatClassId = source.VatClassId;
+        VatSchemeId = source.VatSchemeId;
         CurrencyCode = source.CurrencyCode;
     }
 
@@ -68,6 +70,12 @@ public sealed class InvoiceDraftLine
 
     /// <summary>VAT percentage.</summary>
     public decimal VatPercentage { get; private set; }
+
+    /// <summary>Stable VAT class identity copied from the project line.</summary>
+    public Guid? VatClassId { get; private set; }
+
+    /// <summary>Stable VAT scheme identity copied from the project line.</summary>
+    public Guid? VatSchemeId { get; private set; }
 
     /// <summary>ISO currency code.</summary>
     public string CurrencyCode { get; private set; }

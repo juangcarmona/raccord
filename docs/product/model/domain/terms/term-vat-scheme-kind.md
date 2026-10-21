@@ -2,7 +2,7 @@
 id: TERM-VAT-SCHEME-KIND
 type: domain-term
 title: "VAT scheme kind"
-status: draft
+status: active
 defined-in: "BC-INVOICING"
 synonyms: []
 uses-terms:

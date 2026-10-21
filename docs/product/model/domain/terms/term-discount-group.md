@@ -2,7 +2,7 @@
 id: TERM-DISCOUNT-GROUP
 type: domain-term
 title: "Discount group"
-status: draft
+status: active
 defined-in: "BC-COMMERCIAL"
 synonyms: []
 uses-terms:

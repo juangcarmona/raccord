@@ -55,6 +55,18 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                     .WaitForAsync();
                 await page.ReloadAsync();
                 await AssertSavedDetailsAsync(page, accountManagerName);
+
+                await page.GetByLabel("Note title").FillAsync("Acceso al recinto");
+                await page.GetByLabel("Note content").FillAsync("Usar entrada lateral.");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Add note" }).ClickAsync();
+                await page.GetByText("Acceso al recinto", new() { Exact = true }).WaitForAsync();
+                await page.GetByLabel("File name").FillAsync("Plano de acceso");
+                await page.GetByLabel("File content").FillAsync("Plano recibido por correo.");
+                await page.GetByRole(AriaRole.Button, new() { Name = "Add file" }).ClickAsync();
+                await page.GetByText("Plano de acceso", new() { Exact = true }).WaitForAsync();
+                await page.ReloadAsync();
+                await page.GetByText("Acceso al recinto", new() { Exact = true }).WaitForAsync();
+                await page.GetByText("Plano de acceso", new() { Exact = true }).WaitForAsync();
             }
         );
     }

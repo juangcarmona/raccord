@@ -8,6 +8,7 @@ import { PageHeader } from "../../shared/ui/PageHeader";
 import { Async, Empty } from "../../shared/ui/States";
 import { AddBillableLineForm } from "./AddBillableLineForm";
 import { ProjectTimeSchedule } from "./ProjectTimeSchedule";
+import { ProjectContextPanel } from "./ProjectContextPanel";
 import { formText } from "../../shared/ui/formText";
 
 const projectStatuses = [
@@ -332,6 +333,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
             </section>
 
             <ProjectTimeSchedule projectId={project.id} readOnly={project.status === "complete"} />
+            <ProjectContextPanel projectId={project.id} readOnly={project.status === "complete"} />
 
             <section aria-labelledby="project-status-heading" className="panel">
                 <h2 id="project-status-heading">{t("projects.status")}</h2>

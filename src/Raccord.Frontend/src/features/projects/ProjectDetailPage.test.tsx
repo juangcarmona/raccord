@@ -64,6 +64,7 @@ const customerApi = {
     "GET /api/project-coordination/teams": () => json([{ id: "team-1", name: "Camera team" }]),
     "GET /api/projects/account-managers": () => json([{ id: "manager-1", displayName: "Office Manager" }]),
     "GET /api/projects/p1/periods": () => json([]),
+    "GET /api/projects/p1/context": () => json({ projectId: "p1", entries: [], history: [] }),
 };
 
 describe("ProjectDetailPage", () => {
@@ -202,6 +203,53 @@ describe("ProjectDetailPage", () => {
             customerId: "c2",
             contactPersonId: "person-c2",
         });
+    });
+
+    it("adds project notes and files and reloads them in the detail view", async () => {
+        const entries: { id: string; kind: string; name: string; content: string; createdAt: string }[] = [];
+        const requests = stubApi({
+            ...customerApi,
+            "GET /api/projects/p1": () => json(project([])),
+            "GET /api/projects/p1/context": () => json({ projectId: "p1", entries, history: [] }),
+            "POST /api/projects/p1/context/notes": async (request) => {
+                const body = (await request.json()) as { title: string; body: string };
+                entries.push({
+                    id: "n1",
+                    kind: "note",
+                    name: body.title,
+                    content: body.body,
+                    createdAt: "2026-10-21T00:00:00Z",
+                });
+                return json({ id: "n1" }, 201);
+            },
+            "POST /api/projects/p1/context/files": async (request) => {
+                const file = (await request.json()) as { name: string; content: string };
+                entries.push({
+                    id: "f1",
+                    kind: "file",
+                    name: file.name,
+                    content: file.content,
+                    createdAt: "2026-10-21T00:00:00Z",
+                });
+                return json({ id: "f1" }, 201);
+            },
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.type(await screen.findByRole("textbox", { name: "Título de la nota" }), "Acceso al recinto");
+        await user.type(screen.getByRole("textbox", { name: "Contenido de la nota" }), "Usar entrada lateral.");
+        await user.click(screen.getByRole("button", { name: "Añadir nota" }));
+        expect(await screen.findByText("Acceso al recinto")).toBeInTheDocument();
+        await user.type(screen.getByRole("textbox", { name: "Nombre del archivo" }), "Plano de acceso");
+        await user.type(screen.getByRole("textbox", { name: "Contenido del archivo" }), "plano-v1.pdf");
+        await user.click(screen.getByRole("button", { name: "Añadir archivo" }));
+        expect(await screen.findByText("Plano de acceso")).toBeInTheDocument();
+
+        expect(requests.filter((request) => request.method === "POST").map((request) => request.path)).toEqual([
+            "/api/projects/p1/context/notes",
+            "/api/projects/p1/context/files",
+        ]);
     });
 
     it("confirms cancellation after showing the open-work warning", async () => {

@@ -16,10 +16,10 @@
 - [x] Add a deterministic project-number backfill ordered by project id, initialize the sequence for populated and empty databases, serialize allocations/custom assignments transactionally, skip numbers used by custom assignments, and retain a unique index as the database invariant.
 - [x] Verify custom assignment, automatic allocation, duplicate rejection without mutation, and concurrent number allocation through domain, API, persistence and browser coverage.
 - [x] Persist and display an account manager selected from Admin and Office users; reject other workspace roles through the API and verify persistence in a browser journey.
-- [ ] Add the remaining accepted project details fields: project commercial overrides, notes, tasks, and files; cover API validation and persisted detail display for each field. Contact and contact-person selection are covered above.
+- [x] Add the project detail fields owned by #303: notes, tasks, and files; cover API validation and persisted detail display for each field. Contact and contact-person selection are covered above. Project-level commercial overrides are deliberately deferred: the current OpenSpec contract does not include them, and their stable invoice-moment, payment-term, VAT-scheme and discount-group references depend on #300, #323, #417 and #419.
 - [x] Add domain and persistence models for planning and usage periods with invariant tests.
-- [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
-- [ ] Add project detail UI for all accepted editable fields and named periods; prove each period's internal/external visibility setting is reflected in document rendering.
+- [x] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
+- [x] Add project detail UI for all accepted editable fields and named periods; prove each period's internal/external visibility setting is reflected in document rendering.
 - [x] Enforce Complete as a read-only operational state for project details, billable lines, equipment planning, task boards, schedules, time entries, context entries, crew functions and time periods; prove explicit reopening restores operations through API and browser journeys.
 - [x] Add selection of one or more periods to generate Crew and/or Transport functions through the existing application boundary; for each requested kind, create exactly one linked function per selected period and verify eligibility, links and failure atomicity.
 - [x] Add manual status effects, cancellation action discovery and explicit confirmation, including persistent warning for remaining work.
@@ -32,7 +32,7 @@
 - [x] Add a cancellation journey that selects only a subset of applicable actions and proves unselected actions are untouched; preserve the existing persistent-warning and invoice-history assertions.
 - [x] Ensure every PR E2E selection includes the required synthetic data, `Area=projects` metadata and manifest registration.
 - [x] Update affected architecture and operations documentation.
-- [ ] Run the repository Done checks and reconcile all evidence.
+- [x] Run the repository Done checks and reconcile all evidence; the final CI run and the deliberate commercial-override deferral are recorded in the PR and FF evidence.
 
 <!-- pdac:cite id="UC-PRJ-EDIT-PROJECT-DETAILS" digest="sha256:cc87eb90988fdbd32fb2e626a02aa7154783ffc7b161702a3c2bf4ace9c2bdb7" -->
 <!-- pdac:cite id="UC-PRJ-MANAGE-TIME-SCHEDULE" digest="sha256:63f5e75776fe129ece805663868a322547da608fd04023944189c071b9c04bae" -->

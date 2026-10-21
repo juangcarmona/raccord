@@ -20,7 +20,8 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
             async page =>
             {
                 await CreateCustomerAsync(page);
-                await CreateProjectWithBillableLineAsync(page);
+                var (accountManagerId, accountManagerName) = await GetAccountManagerAsync(page);
+                await CreateProjectWithBillableLineAsync(page, accountManagerId: accountManagerId);
                 var projectUrl = page.Url;
                 var (projectTypeId, teamId) = await CreateProjectClassificationsAsync(page);
                 await CreateAlternativeCustomerAsync(page);
@@ -43,6 +44,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                         new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
                     );
                 await page.GetByLabel("Contact person").SelectOptionAsync(contactPersonId);
+                await page.GetByLabel("Account manager").SelectOptionAsync(accountManagerId);
                 await page.GetByLabel("Project type").SelectOptionAsync(projectTypeId);
                 await page.GetByLabel("Team").SelectOptionAsync(teamId);
                 await page.GetByLabel("Start", new() { Exact = true }).FillAsync("2026-10-01");
@@ -52,7 +54,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Summer campaign shoot" })
                     .WaitForAsync();
                 await page.ReloadAsync();
-                await AssertSavedDetailsAsync(page);
+                await AssertSavedDetailsAsync(page, accountManagerName);
             }
         );
     }
@@ -111,6 +113,18 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
         return personDocument.RootElement.GetProperty("id").GetString()!;
     }
 
+    private static async Task<(string Id, string Name)> GetAccountManagerAsync(IPage page)
+    {
+        var response = await page.APIRequest.GetAsync("/api/projects/account-managers");
+        response.Ok.ShouldBeTrue();
+        using var document = JsonDocument.Parse(await response.TextAsync());
+        var manager = document.RootElement.EnumerateArray().First();
+        return (
+            manager.GetProperty("id").GetString()!,
+            manager.GetProperty("displayName").GetString()!
+        );
+    }
+
     private static async Task<(
         string ProjectTypeId,
         string TeamId
@@ -143,7 +157,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
             },
         };
 
-    private async Task AssertSavedDetailsAsync(IPage page)
+    private async Task AssertSavedDetailsAsync(IPage page, string accountManagerName)
     {
         (await page.GetByLabel("Project name").InputValueAsync()).ShouldBe("Summer campaign shoot");
         (await page.GetByLabel("Project number").InputValueAsync()).ShouldBe("PRJ-2026-041");
@@ -153,6 +167,9 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
         (
             await page.GetByLabel("Contact person").Locator("option:checked").TextContentAsync()
         ).ShouldBe("Production lead");
+        (
+            await page.GetByLabel("Account manager").Locator("option:checked").TextContentAsync()
+        ).ShouldBe(accountManagerName);
         (
             await page.GetByLabel("Project type").Locator("option:checked").TextContentAsync()
         ).ShouldBe("Commercial E2E");

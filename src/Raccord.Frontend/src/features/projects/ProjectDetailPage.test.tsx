@@ -34,6 +34,7 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     cancelledAt: null,
     externalReference: null,
     contactPersonId: null,
+    accountManagerId: null,
 });
 
 const routes = [
@@ -61,6 +62,7 @@ const customerApi = {
         ]),
     "GET /api/project-coordination/types": () => json([{ id: "type-1", name: "Commercial" }]),
     "GET /api/project-coordination/teams": () => json([{ id: "team-1", name: "Camera team" }]),
+    "GET /api/projects/account-managers": () => json([{ id: "manager-1", displayName: "Office Manager" }]),
     "GET /api/projects/p1/periods": () => json([]),
 };
 
@@ -162,6 +164,24 @@ describe("ProjectDetailPage", () => {
             projectTypeId: "type-1",
             teamId: "team-1",
             contactPersonId: null,
+            accountManagerId: null,
+        });
+    });
+
+    it("assigns and saves an eligible project account manager", async () => {
+        const requests = stubApi({
+            ...customerApi,
+            "GET /api/projects/p1": () => json(project([])),
+            "PUT /api/projects/p1": () => json(project([])),
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+        await user.selectOptions(await screen.findByRole("combobox", { name: "Responsable de cuenta" }), "manager-1");
+        await user.click(screen.getByRole("button", { name: "Guardar datos" }));
+
+        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({
+            accountManagerId: "manager-1",
         });
     });
 

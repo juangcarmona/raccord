@@ -15,7 +15,8 @@
 - [x] Assign the next unique project number on create when omitted and when cleared during edit; accept custom numbers on create and edit while preserving the number for legacy update requests that omit the field.
 - [x] Add a deterministic project-number backfill ordered by project id, initialize the sequence for populated and empty databases, serialize allocations/custom assignments transactionally, skip numbers used by custom assignments, and retain a unique index as the database invariant.
 - [x] Verify custom assignment, automatic allocation, duplicate rejection without mutation, and concurrent number allocation through domain, API, persistence and browser coverage.
-- [ ] Add the accepted project details workflow for existing contact and contact-person selection, project commercial overrides, account manager, notes, tasks, and files, plus duplicate project number validation; cover API validation and persisted detail display for each field.
+- [x] Persist and display an account manager selected from Admin and Office users; reject other workspace roles through the API and verify persistence in a browser journey.
+- [ ] Add the remaining accepted project details fields: project commercial overrides, notes, tasks, and files; cover API validation and persisted detail display for each field. Contact and contact-person selection are covered above.
 - [x] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
 - [ ] Add project detail UI for all accepted editable fields and named periods; prove each period's internal/external visibility setting is reflected in document rendering.

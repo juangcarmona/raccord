@@ -85,6 +85,10 @@ public static class DependencyInjection
         services.AddScoped<IContactsUnitOfWork, ContactsUnitOfWork>();
         services.AddScoped<IBillableWork, ProjectRepository>();
         services.AddScoped<
+            Raccord.Modules.Projects.Contracts.IProjectAccountManagerDirectory,
+            ProjectAccountManagerDirectory
+        >();
+        services.AddScoped<
             Raccord.Modules.Projects.Contracts.IProjectNumberSeries,
             ProjectNumberSeriesRepository
         >();

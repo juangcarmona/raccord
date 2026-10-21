@@ -21,6 +21,7 @@ public enum DepositStatus
 /// <param name="ProjectTypeId">Optional reusable project type.</param>
 /// <param name="TeamId">Optional assigned team.</param>
 /// <param name="ProjectNumber">Optional custom project number; omitted values are assigned automatically.</param>
+/// <param name="AccountManagerId">Optional workspace user with the Admin or Office role.</param>
 public sealed record CreateProjectRequest(
     string Name,
     Guid CustomerId,
@@ -28,7 +29,8 @@ public sealed record CreateProjectRequest(
     DateOnly EndDate,
     Guid? ProjectTypeId = null,
     Guid? TeamId = null,
-    string? ProjectNumber = null
+    string? ProjectNumber = null,
+    Guid? AccountManagerId = null
 );
 
 /// <summary>Changes a project's fixed lifecycle status.</summary>
@@ -44,7 +46,8 @@ public sealed record UpdateProjectDetailsRequest(
     Guid? TeamId = null,
     string? ExternalReference = null,
     Guid? ContactPersonId = null,
-    string? ProjectNumber = null
+    string? ProjectNumber = null,
+    Guid? AccountManagerId = null
 );
 
 /// <summary>Creates a named period in the project schedule.</summary>
@@ -281,6 +284,7 @@ public sealed record SetDepositStatusRequest(DepositStatus Status);
 /// <param name="DepositStatus">Current deposit lifecycle status.</param>
 /// <param name="Status">Commercial lifecycle status of the project.</param>
 /// <param name="ProjectNumber">Installation-wide project number.</param>
+/// <param name="AccountManagerId">Assigned project account manager.</param>
 public sealed record ProjectSummaryResponse(
     Guid Id,
     string Name,
@@ -296,7 +300,8 @@ public sealed record ProjectSummaryResponse(
     decimal? RefundableDepositAmount = null,
     DepositStatus DepositStatus = DepositStatus.NotPaid,
     string Status = "draft",
-    string ProjectNumber = ""
+    string ProjectNumber = "",
+    Guid? AccountManagerId = null
 );
 
 /// <summary>A project with its billable lines.</summary>
@@ -319,6 +324,7 @@ public sealed record ProjectSummaryResponse(
 /// <param name="ExternalReference">Customer or production reference associated with the project.</param>
 /// <param name="ContactPersonId">Selected person at the project customer contact.</param>
 /// <param name="ProjectNumber">Installation-wide project number.</param>
+/// <param name="AccountManagerId">Assigned project account manager.</param>
 public sealed record ProjectResponse(
     Guid Id,
     string Name,
@@ -338,8 +344,12 @@ public sealed record ProjectResponse(
     DateTimeOffset? CancelledAt = null,
     string? ExternalReference = null,
     Guid? ContactPersonId = null,
-    string ProjectNumber = ""
+    string ProjectNumber = "",
+    Guid? AccountManagerId = null
 );
+
+/// <summary>A user eligible to manage a project.</summary>
+public sealed record ProjectAccountManagerResponse(Guid Id, string DisplayName);
 
 /// <summary>A billable line.</summary>
 /// <param name="Id">Line identifier.</param>

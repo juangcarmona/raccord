@@ -22,11 +22,13 @@ public sealed class Project
         DateOnly endDate,
         Guid? projectTypeId,
         Guid? teamId,
-        string projectNumber
+        string projectNumber,
+        Guid? accountManagerId
     )
     {
         Id = Guid.CreateVersion7();
         ProjectNumber = projectNumber;
+        AccountManagerId = accountManagerId;
         Name = name;
         CustomerId = customerId;
         StartDate = startDate;
@@ -42,6 +44,9 @@ public sealed class Project
 
     /// <summary>Installation-wide project number.</summary>
     public string ProjectNumber { get; private set; } = string.Empty;
+
+    /// <summary>Workspace user responsible for the project, when assigned.</summary>
+    public Guid? AccountManagerId { get; private set; }
 
     /// <summary>Human-readable project name.</summary>
     public string Name { get; private set; }
@@ -162,7 +167,8 @@ public sealed class Project
         Guid? projectTypeId,
         Guid? teamId,
         string? externalReference = null,
-        Guid? contactPersonId = null
+        Guid? contactPersonId = null,
+        Guid? accountManagerId = null
     )
     {
         if (Status == ProjectStatus.Complete)
@@ -195,6 +201,7 @@ public sealed class Project
         ExternalReference = NormalizeExternalReference(externalReference);
         CustomerId = customerId;
         ContactPersonId = contactPersonId;
+        AccountManagerId = accountManagerId;
         StartDate = startDate;
         EndDate = endDate;
         ProjectTypeId = projectTypeId;
@@ -484,7 +491,8 @@ public sealed class Project
         DateOnly endDate,
         Guid? projectTypeId = null,
         Guid? teamId = null,
-        string projectNumber = "TEMP"
+        string projectNumber = "TEMP",
+        Guid? accountManagerId = null
     )
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -516,7 +524,8 @@ public sealed class Project
             endDate,
             projectTypeId,
             teamId,
-            projectNumber.Trim()
+            projectNumber.Trim(),
+            accountManagerId
         );
     }
 

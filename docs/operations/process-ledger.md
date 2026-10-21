@@ -625,3 +625,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The complete Web integration suite exhausted PostgreSQL's connection limit because each test creates a database-specific Npgsql pool and disposing its `RaccordApi` did not clear idle connections for that database.
 - **Action:** Clear only the disposed fixture's Npgsql pool after its web host shuts down, so parallel test databases release server connections promptly.
 - **Check:** Run the full Web integration suite with normal xUnit parallelism and require it to finish without PostgreSQL `53300` connection-limit errors.
+
+## 2026-10-21 · Validate role-based project assignments at the write boundary
+
+- **Observation:** Filtering eligible users in a project editor does not protect API callers or stale browser forms from assigning a user whose role is not permitted.
+- **Action:** Expose only eligible candidates through a module-owned directory port and revalidate role eligibility in the Projects use case before persisting the assignment; keep the optional user relationship constrained by a database foreign key.
+- **Check:** The API test lists Admin and Office users, rejects a Crew assignment without mutation, and the selected browser journey reloads the saved account manager.

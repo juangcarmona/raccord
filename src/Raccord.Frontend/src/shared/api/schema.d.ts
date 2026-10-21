@@ -3194,6 +3194,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/account-managers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProjectAccountManagerResponse"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects": {
         parameters: {
             query?: never;
@@ -7315,6 +7350,11 @@ export interface components {
             teamId?: null | string;
             /** @description Optional custom project number; omitted values are assigned automatically. */
             projectNumber?: null | string;
+            /**
+             * Format: uuid
+             * @description Optional workspace user with the Admin or Office role.
+             */
+            accountManagerId?: null | string;
         };
         /** @description Creates scheduled project work. */
         CreateProjectScheduleRequest: {
@@ -8101,6 +8141,12 @@ export interface components {
             /** Format: int32 */
             position: number;
         };
+        /** @description A user eligible to manage a project. */
+        ProjectAccountManagerResponse: {
+            /** Format: uuid */
+            id: string;
+            displayName: string;
+        };
         /** @description A project board with automatic progress. */
         ProjectBoardResponse: {
             /** Format: uuid */
@@ -8279,6 +8325,11 @@ export interface components {
              * @default
              */
             projectNumber: string;
+            /**
+             * Format: uuid
+             * @description Assigned project account manager.
+             */
+            accountManagerId?: null | string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -8369,6 +8420,11 @@ export interface components {
              * @default
              */
             projectNumber: string;
+            /**
+             * Format: uuid
+             * @description Assigned project account manager.
+             */
+            accountManagerId?: null | string;
         };
         /** @description A project task. */
         ProjectTaskResponse: {
@@ -8751,6 +8807,8 @@ export interface components {
             /** Format: uuid */
             contactPersonId?: null | string;
             projectNumber?: null | string;
+            /** Format: uuid */
+            accountManagerId?: null | string;
         };
         /** @description Updates a period's name, range and document visibility. */
         UpdateProjectTimePeriodRequest: {

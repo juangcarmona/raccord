@@ -689,6 +689,11 @@ internal static class Endpoints
         MapProjectPeriods(projects);
         MapProjectTime(projects);
         projects.MapGet(
+            "/account-managers",
+            async (ProjectWorkspace workspace, CancellationToken ct) =>
+                TypedResults.Ok(await workspace.ListAccountManagersAsync(ct))
+        );
+        projects.MapGet(
             "/",
             async (ProjectWorkspace workspace, CancellationToken ct) =>
                 TypedResults.Ok(await workspace.ListAsync(ct))

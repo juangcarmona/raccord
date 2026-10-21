@@ -15,6 +15,7 @@ public sealed class ProjectWorkspace(
     IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork,
     IProjectNumberSeries projectNumbers,
+    IProjectAccountManagerDirectory accountManagers,
     IProjectScheduleStore projectScheduleStore,
     IProjectSchedulePropagation projectSchedulePropagation,
     ProjectCoordination coordination,
@@ -34,6 +35,8 @@ public sealed class ProjectWorkspace(
                 "customers.not-found",
                 $"Customer '{request.CustomerId}' does not exist."
             );
+        await EnsureAccountManagerAsync(request.AccountManagerId, cancellationToken)
+            .ConfigureAwait(false);
         return await unitOfWork
             .ExecuteAsync(
                 async ct =>
@@ -52,7 +55,8 @@ public sealed class ProjectWorkspace(
                         request.EndDate,
                         request.ProjectTypeId,
                         request.TeamId,
-                        projectNumber
+                        projectNumber,
+                        request.AccountManagerId
                     );
                     projects.Add(project);
                     return ToResponse(project, customer.LegalName);
@@ -98,11 +102,22 @@ public sealed class ProjectWorkspace(
                     project.RefundableDepositAmount,
                     (Raccord.Contracts.Projects.DepositStatus)project.DepositStatus,
                     ToStatusText(project.Status),
-                    project.ProjectNumber
+                    project.ProjectNumber,
+                    project.AccountManagerId
                 );
             }),
         ];
     }
+
+    /// <summary>Lists workspace users eligible to manage a project.</summary>
+    public async Task<IReadOnlyList<ProjectAccountManagerResponse>> ListAccountManagersAsync(
+        CancellationToken cancellationToken
+    ) =>
+        [
+            .. (await accountManagers.ListAsync(cancellationToken).ConfigureAwait(false)).Select(
+                manager => new ProjectAccountManagerResponse(manager.Id, manager.DisplayName)
+            ),
+        ];
 
     /// <summary>Reads a project with its billable lines.</summary>
     public async Task<ProjectResponse?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -181,6 +196,8 @@ public sealed class ProjectWorkspace(
                 "projects.contact-person-not-found",
                 "The selected contact person does not belong to the project customer."
             );
+        await EnsureAccountManagerAsync(request.AccountManagerId, cancellationToken)
+            .ConfigureAwait(false);
 
         return await unitOfWork
             .ExecuteAsync(
@@ -202,7 +219,8 @@ public sealed class ProjectWorkspace(
                         request.ProjectTypeId,
                         request.TeamId,
                         request.ExternalReference,
-                        request.ContactPersonId
+                        request.ContactPersonId,
+                        request.AccountManagerId
                     );
                     return ToResponse(project, customer.LegalName);
                 },
@@ -779,8 +797,26 @@ public sealed class ProjectWorkspace(
             project.CancelledAt,
             project.ExternalReference,
             project.ContactPersonId,
-            project.ProjectNumber
+            project.ProjectNumber,
+            project.AccountManagerId
         );
+
+    private async Task EnsureAccountManagerAsync(
+        Guid? accountManagerId,
+        CancellationToken cancellationToken
+    )
+    {
+        if (
+            accountManagerId is { } userId
+            && !await accountManagers
+                .IsEligibleAsync(userId, cancellationToken)
+                .ConfigureAwait(false)
+        )
+            throw new BusinessRuleViolationException(
+                "projects.account-manager-invalid",
+                "Only Admin or Office users can manage projects."
+            );
+    }
 
     private async Task<string> ResolveProjectNumberAsync(
         string? requestedNumber,

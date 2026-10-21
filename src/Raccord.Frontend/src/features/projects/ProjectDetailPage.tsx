@@ -34,12 +34,16 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const [status, setStatus] = useState(project.status);
     const [customerId, setCustomerId] = useState(project.customerId);
     const [contactPersonId, setContactPersonId] = useState(project.contactPersonId ?? "");
+    const [accountManagerId, setAccountManagerId] = useState(project.accountManagerId ?? "");
     const contactPeople = useQuery(`contact-people:${customerId}`, () =>
         unwrap(api.GET("/api/contacts/{id}/people", { params: { path: { id: customerId } } })),
     );
     const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
     const projectTypes = useQuery("project-types", () => unwrap(api.GET("/api/project-coordination/types")));
     const projectTeams = useQuery("project-teams", () => unwrap(api.GET("/api/project-coordination/teams")));
+    const accountManagers = useQuery("project-account-managers", () =>
+        unwrap(api.GET("/api/projects/account-managers")),
+    );
     const [error, setError] = useState<unknown>(null);
     const [detailsError, setDetailsError] = useState<unknown>(null);
     const [cancellationPreview, setCancellationPreview] = useState<
@@ -110,6 +114,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         projectTypeId: formText(data, "projectTypeId") || null,
                         teamId: formText(data, "teamId") || null,
                         contactPersonId: contactPersonId || null,
+                        accountManagerId: accountManagerId || null,
                         projectNumber: formText(data, "projectNumber"),
                     },
                 }),
@@ -265,6 +270,26 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                                 {people.map((person) => (
                                     <option key={person.id} value={person.id}>
                                         {person.name}
+                                    </option>
+                                ))}
+                            </SelectField>
+                        )}
+                    </Async>
+                    <Async query={accountManagers}>
+                        {(managers) => (
+                            <SelectField
+                                label={t("projects.accountManager")}
+                                name="accountManagerId"
+                                value={accountManagerId}
+                                onChange={(event) => {
+                                    setAccountManagerId(event.target.value);
+                                }}
+                                disabled={busy || project.status === "complete"}
+                            >
+                                <option value="">{t("projects.noAccountManager")}</option>
+                                {managers.map((manager) => (
+                                    <option key={manager.id} value={manager.id}>
+                                        {manager.displayName}
                                     </option>
                                 ))}
                             </SelectField>

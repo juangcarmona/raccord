@@ -2847,6 +2847,28 @@
         }
       }
     },
+    "/api/projects/account-managers": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectAccountManagerResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -7438,6 +7460,14 @@
               "string"
             ],
             "description": "Optional custom project number; omitted values are assigned automatically."
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional workspace user with the Admin or Office role.",
+            "format": "uuid"
           }
         },
         "description": "Creates a project."
@@ -9672,6 +9702,23 @@
         },
         "description": "Moves a task on the board."
       },
+      "ProjectAccountManagerResponse": {
+        "required": [
+          "id",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          }
+        },
+        "description": "A user eligible to manage a project."
+      },
       "ProjectBoardResponse": {
         "required": [
           "projectId",
@@ -10163,6 +10210,14 @@
             "type": "string",
             "description": "Installation-wide project number.",
             "default": ""
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned project account manager.",
+            "format": "uuid"
           }
         },
         "description": "A project with its billable lines."
@@ -10327,6 +10382,14 @@
             "type": "string",
             "description": "Installation-wide project number.",
             "default": ""
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Assigned project account manager.",
+            "format": "uuid"
           }
         },
         "description": "A project in a list."
@@ -11657,6 +11720,13 @@
               "null",
               "string"
             ]
+          },
+          "accountManagerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         },
         "description": "Edits the identifying and scheduling details of an existing project."

@@ -22,6 +22,11 @@ The system MUST let an operator edit the accepted project detail fields, choose 
 - **WHEN** an operator supplies an unused custom number while creating or editing a project
 - **THEN** the project stores that number and future automatic assignments do not reuse it
 
+#### Scenario: Assign an eligible account manager
+
+- **WHEN** an operator selects a project account manager
+- **THEN** the project saves the selected Admin or Office user and rejects users with other roles
+
 #### Scenario: Reject a contact person from another contact
 
 - **WHEN** an operator saves a contact person that does not belong to the selected customer
@@ -117,3 +122,4 @@ The system MUST show cancellation actions only when relevant, execute exactly th
 <!-- pdac:cite id="BR-PRJ-PARTIES-FROM-CONTACTS" digest="sha256:2fe8ce59516db4c08c3582e1c3dd6341fa3b658e8386d10f725671b633b2dcfe" -->
 <!-- pdac:cite id="FR-PRJ-010" digest="sha256:1475c6b8459b26d9838f42e83f16953e9e2aa967d29585efc738f102251abd91" -->
 <!-- pdac:cite id="BR-PRJ-PROJECT-NUMBER-ASSIGNMENT" digest="sha256:f7b7bbb40f510d6a21e40f8728a060565c0efd2ef3c8488775fd3b3ecba98757" -->
+<!-- pdac:cite id="BR-PRJ-ACCOUNT-MANAGER-POWER-USER" digest="sha256:19dc1cd98961a921fb57fac111143f8a10ee075bea4db6149d30cffd73d2b5cc" -->

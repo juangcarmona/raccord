@@ -545,6 +545,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<Guid?>("AccountManagerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_manager_id");
+
                     b.Property<DateTimeOffset?>("CancelledAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("cancelled_at");
@@ -626,6 +630,9 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_projects");
+
+                    b.HasIndex("AccountManagerId")
+                        .HasDatabaseName("ix_projects_account_manager_id");
 
                     b.HasIndex("ProjectNumber")
                         .IsUnique()
@@ -2666,6 +2673,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Projects.Project", b =>
                 {
+                    b.HasOne("Raccord.Infrastructure.Persistence.RaccordUser", null)
+                        .WithMany()
+                        .HasForeignKey("AccountManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("fk_projects_users_account_manager_id");
+
                     b.OwnsMany("Raccord.Domain.Projects.BillableLine", "BillableLines", b1 =>
                         {
                             b1.Property<Guid>("Id")

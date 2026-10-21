@@ -196,7 +196,11 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     /// registered in the same page session (the project form needs a customer to bill), with one
     /// billable line, and lands on the project detail page showing the line.
     /// </summary>
-    protected async Task CreateProjectWithBillableLineAsync(IPage page, string? customerName = null)
+    protected async Task CreateProjectWithBillableLineAsync(
+        IPage page,
+        string? customerName = null,
+        string? accountManagerId = null
+    )
     {
         await page.GotoAsync("/projects/new");
         await page.GetByLabel("Project name").FillAsync($"Promo E2E {RunStamp}");
@@ -208,6 +212,8 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
             );
         await page.GetByLabel("Start").FillAsync("2026-09-14");
         await page.GetByLabel("End").FillAsync("2026-09-18");
+        if (accountManagerId is not null)
+            await page.GetByLabel("Account manager").SelectOptionAsync(accountManagerId);
         await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
 
         await page.WaitForURLAsync(url => url.Contains("/projects/", StringComparison.Ordinal));

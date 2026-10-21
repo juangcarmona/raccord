@@ -7,7 +7,7 @@
   "executorModel": "GPT-6 (system-reported)",
   "reviewerModel": "gpt-6-astra",
   "maxCorrectionRounds": 3,
-  "status": "awaiting-integration",
+  "status": "complete",
   "reviewerWaiver": {
     "scope": "#303 unattended cycle",
     "authorizedBy": "Owner explicit instruction in active session",
@@ -44,7 +44,6 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
       "outputCommit": "00541ca85bfaac8c503e0d925bb240199f498ed6",
       "result": "complete",
       "findings": "Implementation and deterministic verification are complete on the final branch head. Project detail editing, notes/files, planning and usage periods, designation/order/duplication, linked-record propagation with rollback, document visibility, lifecycle status, Complete/reopen, cancellation actions and invoice-history preservation are implemented and covered. Project-level commercial overrides remain deliberately deferred to #300/#323/#417/#419 because the current OpenSpec contract does not define those stable catalog references; the task list records that boundary explicitly.",
@@ -73,11 +72,21 @@
     },
     {
       "name": "integrate",
-      "result": "awaiting-integration"
+      "completedAt": "2026-10-21T15:22:32Z",
+      "result": "complete",
+      "outputCommit": "df00eae3008dcd37d55be16978a3f1c8c4505b33",
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/pull/401",
+        "https://github.com/juangcarmona/raccord/commit/df00eae3008dcd37d55be16978a3f1c8c4505b33"
+      ]
     },
     {
       "name": "review",
-      "result": "pending"
+      "completedAt": "2026-10-21T15:24:39Z",
+      "result": "complete",
+      "evidence": [
+        "docs/reviews/issue-303.md"
+      ]
     }
   ],
   "reviews": [
@@ -213,11 +222,13 @@
       "findings": "A page-wide Status query became ambiguous when task-board controls were added; those controls belong to #386 and were removed from #303. An initial full run used an E2E assembly compiled before that scope correction and timed out on the removed task field; rebuilding the complete solution and rerunning the final source passed all 49 selected journeys."
     }
   ],
-  "stopReason": "Awaiting integration of PR #401. The Owner explicitly waived the independent-reviewer gate for this unattended cycle; deterministic checks and forge policy remain enforced.",
+  "stopReason": null,
   "pullRequest": "https://github.com/juangcarmona/raccord/pull/401",
   "links": [
-    "openspec/changes/project-lifecycle-303/proposal.md",
-    "openspec/changes/project-lifecycle-303/design.md",
-    "openspec/changes/project-lifecycle-303/tasks.md"
+    "openspec/changes/archive/2026-10-21-project-lifecycle-303/proposal.md",
+    "openspec/changes/archive/2026-10-21-project-lifecycle-303/design.md",
+    "openspec/changes/archive/2026-10-21-project-lifecycle-303/tasks.md",
+    "openspec/specs/project-lifecycle/spec.md",
+    "docs/reviews/issue-303.md"
   ]
 }

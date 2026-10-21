@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "runId": "300-finance-catalogs-20261021T083639Z",
+  "workItem": "#300",
+  "branch": "codex/300-commercial-defaults",
+  "startedAt": "2026-10-21T08:36:39Z",
+  "executorModel": "gpt-6",
+  "reviewerModel": "gpt-6-astra",
+  "maxCorrectionRounds": 3,
+  "status": "blocked",
+  "stages": [
+    {
+      "name": "refine",
+      "startedAt": "2026-10-21T08:36:39Z",
+      "endedAt": "2026-10-21T08:42:00Z",
+      "inputCommit": "e62b612fc976527292d2ea120159607bde5b1a6d",
+      "outputCommit": "e62b612fc976527292d2ea120159607bde5b1a6d",
+      "result": "complete",
+      "evidence": ["https://github.com/juangcarmona/raccord/issues/300"]
+    },
+    {
+      "name": "propose",
+      "startedAt": "2026-10-21T08:42:00Z",
+      "endedAt": "2026-10-21T08:49:24Z",
+      "inputCommit": "e62b612fc976527292d2ea120159607bde5b1a6d",
+      "outputCommit": "de77da5e87e4e1040ac8977a6bd3b665560313e6",
+      "result": "blocked",
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/pull/394",
+        "https://github.com/juangcarmona/raccord/pull/420",
+        "https://github.com/juangcarmona/raccord/issues/417",
+        "https://github.com/juangcarmona/raccord/issues/418",
+        "https://github.com/juangcarmona/raccord/issues/419"
+      ]
+    },
+    {"name": "implement", "result": "not-started", "evidence": []},
+    {"name": "integrate", "result": "not-started", "evidence": []},
+    {"name": "review", "result": "not-started", "evidence": []}
+  ],
+  "reviews": [
+    {
+      "reviewerModel": "gpt-6-astra",
+      "reviewKind": "catalog-dependency-scope",
+      "reviewedCommit": "e62b612fc976527292d2ea120159607bde5b1a6d",
+      "decision": "approve",
+      "findings": "Three new prerequisite issues are required: payment terms, VAT classes/schemes, and discount groups. Existing #323 covers invoice moments; #320 is quote/contract settings and is not a prerequisite. Keep #300 under Contacts #373 and record cross-epic dependencies.",
+      "evidence": ["issues #300, #320, #323, #378, #379; Product Definition catalog use cases"]
+    }
+  ],
+  "corrections": [],
+  "stopReason": "Owner decision is required on the two product questions in CHG-FINANCE-CATALOGS-417-419-001 before the catalog Product Change can be approved and applied: whether VAT classes are seeded, and how rental/sale contact discount defaults map to discount-group percentages. No catalog or #300 implementation has started.",
+  "pullRequest": "https://github.com/juangcarmona/raccord/pull/394",
+  "links": [
+    "https://github.com/juangcarmona/raccord/pull/420",
+    "https://github.com/juangcarmona/raccord/issues/323",
+    "https://github.com/juangcarmona/raccord/issues/417",
+    "https://github.com/juangcarmona/raccord/issues/418",
+    "https://github.com/juangcarmona/raccord/issues/419"
+  ]
+}

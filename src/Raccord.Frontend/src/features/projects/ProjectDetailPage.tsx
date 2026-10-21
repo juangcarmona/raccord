@@ -38,6 +38,8 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
         unwrap(api.GET("/api/contacts/{id}/people", { params: { path: { id: customerId } } })),
     );
     const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
+    const projectTypes = useQuery("project-types", () => unwrap(api.GET("/api/project-coordination/types")));
+    const projectTeams = useQuery("project-teams", () => unwrap(api.GET("/api/project-coordination/teams")));
     const [error, setError] = useState<unknown>(null);
     const [detailsError, setDetailsError] = useState<unknown>(null);
     const [cancellationPreview, setCancellationPreview] = useState<
@@ -105,8 +107,8 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         startDate: formText(data, "startDate"),
                         endDate: formText(data, "endDate"),
                         externalReference: formText(data, "externalReference") || null,
-                        projectTypeId: project.projectTypeId ?? null,
-                        teamId: project.teamId ?? null,
+                        projectTypeId: formText(data, "projectTypeId") || null,
+                        teamId: formText(data, "teamId") || null,
                         contactPersonId: contactPersonId || null,
                     },
                 }),
@@ -200,6 +202,40 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                                 {list.map((customer) => (
                                     <option key={customer.id} value={customer.id}>
                                         {customer.legalName}
+                                    </option>
+                                ))}
+                            </SelectField>
+                        )}
+                    </Async>
+                    <Async query={projectTypes}>
+                        {(types) => (
+                            <SelectField
+                                label={t("projects.projectType")}
+                                name="projectTypeId"
+                                defaultValue={project.projectTypeId ?? ""}
+                                disabled={busy || project.status === "complete"}
+                            >
+                                <option value="">{t("projects.noProjectType")}</option>
+                                {types.map((type) => (
+                                    <option key={type.id} value={type.id}>
+                                        {type.name}
+                                    </option>
+                                ))}
+                            </SelectField>
+                        )}
+                    </Async>
+                    <Async query={projectTeams}>
+                        {(teams) => (
+                            <SelectField
+                                label={t("projects.team")}
+                                name="teamId"
+                                defaultValue={project.teamId ?? ""}
+                                disabled={busy || project.status === "complete"}
+                            >
+                                <option value="">{t("projects.noTeam")}</option>
+                                {teams.map((team) => (
+                                    <option key={team.id} value={team.id}>
+                                        {team.name}
                                     </option>
                                 ))}
                             </SelectField>

@@ -58,6 +58,8 @@ const customerApi = {
                 isAdministrative: false,
             },
         ]),
+    "GET /api/project-coordination/types": () => json([{ id: "type-1", name: "Commercial" }]),
+    "GET /api/project-coordination/teams": () => json([{ id: "team-1", name: "Camera team" }]),
     "GET /api/projects/p1/periods": () => json([]),
 };
 
@@ -143,6 +145,8 @@ describe("ProjectDetailPage", () => {
         await user.clear(screen.getByLabelText("Fin"));
         await user.type(screen.getByLabelText("Fin"), "2026-10-03");
         await user.type(screen.getByLabelText(/Referencia externa/), "PO-2026-041");
+        await user.selectOptions(await screen.findByRole("combobox", { name: "Tipo de proyecto" }), "type-1");
+        await user.selectOptions(screen.getByRole("combobox", { name: "Equipo" }), "team-1");
         await user.click(screen.getByRole("button", { name: "Guardar datos" }));
 
         expect(requests.find((request) => request.method === "PUT")?.body).toEqual({
@@ -151,8 +155,8 @@ describe("ProjectDetailPage", () => {
             startDate: "2026-10-01",
             endDate: "2026-10-03",
             externalReference: "PO-2026-041",
-            projectTypeId: null,
-            teamId: null,
+            projectTypeId: "type-1",
+            teamId: "team-1",
             contactPersonId: null,
         });
     });

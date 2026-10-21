@@ -607,3 +607,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Prettier rewrites ProductShape-owned YAML front matter, which changes ProductShape content digests and makes OpenSpec citations stale even when product behavior is unchanged.
 - **Action:** Exclude `docs/product/model/**` from generic Prettier runs and use ProductShape commands for model changes; regenerate consumer citations with `prodshape cite` whenever an approved model change alters a referenced artifact.
 - **Check:** `prodshape citations verify --provider openspec` reports zero stale, tampered or unresolved citations after model and formatter changes.
+
+## 2026-10-21 · Serialize Aspire E2E and frontend dependency checks in one worktree
+
+- **Observation:** The Aspire E2E fixture runs `npm ci`; running frontend checks at the same time can remove and replace `node_modules` while TypeScript or Vite is starting.
+- **Action:** Run the Aspire E2E journey to completion before frontend checks in a shared worktree, then rerun `npm ci` before lint, typecheck, tests and build.
+- **Check:** The project detail E2E passes, followed by the complete frontend check sequence with dependencies present and a successful production build.

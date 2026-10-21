@@ -22,6 +22,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 await CreateCustomerAsync(page);
                 await CreateProjectWithBillableLineAsync(page);
                 var projectUrl = page.Url;
+                var (projectTypeId, teamId) = await CreateProjectClassificationsAsync(page);
                 await CreateAlternativeCustomerAsync(page);
                 var contactPersonId = await CreateAlternativeContactPersonAsync(page);
                 await page.GotoAsync(projectUrl);
@@ -41,6 +42,8 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                         new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
                     );
                 await page.GetByLabel("Contact person").SelectOptionAsync(contactPersonId);
+                await page.GetByLabel("Project type").SelectOptionAsync(projectTypeId);
+                await page.GetByLabel("Team").SelectOptionAsync(teamId);
                 await page.GetByLabel("Start", new() { Exact = true }).FillAsync("2026-10-01");
                 await page.GetByLabel("End", new() { Exact = true }).FillAsync("2026-10-03");
                 await page.GetByLabel("External reference").FillAsync("PO-2026-041");
@@ -48,27 +51,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 await page.GetByRole(AriaRole.Heading, new() { Name = "Summer campaign shoot" })
                     .WaitForAsync();
                 await page.ReloadAsync();
-
-                (await page.GetByLabel("Project name").InputValueAsync()).ShouldBe(
-                    "Summer campaign shoot"
-                );
-                (
-                    await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()
-                ).ShouldBe($"Alternative E2E {RunStamp}");
-                (
-                    await page.GetByLabel("Contact person")
-                        .Locator("option:checked")
-                        .TextContentAsync()
-                ).ShouldBe("Production lead");
-                (await page.GetByLabel("Start", new() { Exact = true }).InputValueAsync()).ShouldBe(
-                    "2026-10-01"
-                );
-                (await page.GetByLabel("End", new() { Exact = true }).InputValueAsync()).ShouldBe(
-                    "2026-10-03"
-                );
-                (await page.GetByLabel("External reference").InputValueAsync()).ShouldBe(
-                    "PO-2026-041"
-                );
+                await AssertSavedDetailsAsync(page);
             }
         );
     }
@@ -125,6 +108,62 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
         response.Status.ShouldBe(201);
         using var personDocument = JsonDocument.Parse(await response.TextAsync());
         return personDocument.RootElement.GetProperty("id").GetString()!;
+    }
+
+    private static async Task<(
+        string ProjectTypeId,
+        string TeamId
+    )> CreateProjectClassificationsAsync(IPage page)
+    {
+        var projectTypeResponse = await page.APIRequest.PostAsync(
+            "/api/project-coordination/types",
+            JsonRequest("Commercial E2E")
+        );
+        projectTypeResponse.Status.ShouldBe(201);
+        using var projectTypeDocument = JsonDocument.Parse(await projectTypeResponse.TextAsync());
+        var projectTypeId = projectTypeDocument.RootElement.GetProperty("id").GetString()!;
+
+        var teamResponse = await page.APIRequest.PostAsync(
+            "/api/project-coordination/teams",
+            JsonRequest("Camera team E2E")
+        );
+        teamResponse.Status.ShouldBe(201);
+        using var teamDocument = JsonDocument.Parse(await teamResponse.TextAsync());
+        return (projectTypeId, teamDocument.RootElement.GetProperty("id").GetString()!);
+    }
+
+    private static APIRequestContextOptions JsonRequest(string name) =>
+        new()
+        {
+            Data = JsonSerializer.Serialize(new { name, description = (string?)null }),
+            Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                ["content-type"] = "application/json",
+            },
+        };
+
+    private async Task AssertSavedDetailsAsync(IPage page)
+    {
+        (await page.GetByLabel("Project name").InputValueAsync()).ShouldBe("Summer campaign shoot");
+        (await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()).ShouldBe(
+            $"Alternative E2E {RunStamp}"
+        );
+        (
+            await page.GetByLabel("Contact person").Locator("option:checked").TextContentAsync()
+        ).ShouldBe("Production lead");
+        (
+            await page.GetByLabel("Project type").Locator("option:checked").TextContentAsync()
+        ).ShouldBe("Commercial E2E");
+        (await page.GetByLabel("Team").Locator("option:checked").TextContentAsync()).ShouldBe(
+            "Camera team E2E"
+        );
+        (await page.GetByLabel("Start", new() { Exact = true }).InputValueAsync()).ShouldBe(
+            "2026-10-01"
+        );
+        (await page.GetByLabel("End", new() { Exact = true }).InputValueAsync()).ShouldBe(
+            "2026-10-03"
+        );
+        (await page.GetByLabel("External reference").InputValueAsync()).ShouldBe("PO-2026-041");
     }
 
     private static async Task AssertOverlongReferenceRejectedAsync(

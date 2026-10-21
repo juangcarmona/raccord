@@ -481,3 +481,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Optional class and scheme identities let a new API write bypass the catalog and preserve only a caller-supplied percentage.
 - **Action:** Require both stable identities when creating project billable lines; allow older persisted rows to retain nullable identity fields for historical compatibility.
 - **Check:** A web integration test posts a line without either identity, expects a validation response, and confirms that no billable-line row was written; the generated API contract marks both request identities required.
+
+## 2026-10-21 · Isolate E2E journeys from mutable catalog defaults
+
+- **Observation:** The collections journey selected whichever VAT scheme was currently marked default; a parallel catalog journey changed that global default and changed the invoice total, failing CI at four workers although the local run passed at a higher worker count.
+- **Action:** When a journey needs a specific setup rate, select the named source-dated starter scheme and assert its expected rate instead of depending on mutable default selection; keep tests that exercise default changes focused on the defaulting behavior itself.
+- **Check:** The collections journey selects `General`, asserts the 21% setup rate, and retains its expected invoice total when other journeys change the workspace default.

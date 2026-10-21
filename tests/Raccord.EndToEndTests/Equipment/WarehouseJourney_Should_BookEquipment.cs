@@ -33,6 +33,40 @@ public sealed class WarehouseJourney_Should_BookEquipment(DistributedAppFixture 
     }
 
     [Fact]
+    public async Task Journey_Should_BookEquipmentManuallyFromProject()
+    {
+        await RunJourneyAsync(
+            "warehouse-manual-book-out",
+            async page =>
+            {
+                await CreateCustomerAsync(page);
+                await CreateProjectWithBillableLineAsync(page);
+                var projectId = Guid.Parse(new Uri(page.Url).Segments[^1]);
+                var api = page.Context.APIRequest;
+                var itemId = await CreateEquipmentAsync(api, "MANUAL");
+                await CreatePackingLineAsync(api, projectId, itemId);
+
+                await page.ReloadAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Pack" }).ClickAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Book out manually" })
+                    .ClickAsync();
+                await page.GetByRole(AriaRole.Button, new() { Name = "Record return" })
+                    .ClickAsync();
+
+                await page.GetByText("Received")
+                    .WaitForAsync(new() { State = WaitForSelectorState.Visible });
+                var project = await api.GetAsync($"/api/projects/{projectId}");
+                project.Status.ShouldBe(200);
+                (await project.JsonAsync())!
+                    .Value.GetProperty("packingLines")[0]
+                    .GetProperty("isReceived")
+                    .GetBoolean()
+                    .ShouldBeTrue();
+            }
+        );
+    }
+
+    [Fact]
     public async Task Journey_Should_AdjustAdditionalTemporaryAndOptionalLines()
     {
         await RunJourneyAsync(

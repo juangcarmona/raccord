@@ -19,7 +19,10 @@ const line = (id: string, description: string, billingState: string): Schemas["B
     invoiceId: null,
 });
 
-const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["ProjectResponse"] => ({
+const project = (
+    billableLines: Schemas["BillableLineResponse"][],
+    packingLines?: Schemas["PackingLineResponse"][],
+): Schemas["ProjectResponse"] => ({
     id: "p1",
     name: "Rodaje campaña primavera",
     customerId: "c1",
@@ -28,6 +31,26 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     endDate: "2026-09-18",
     currency: "EUR",
     billableLines,
+    ...(packingLines === undefined ? {} : { packingLines }),
+});
+
+const packingLine = (overrides: Partial<Schemas["PackingLineResponse"]> = {}): Schemas["PackingLineResponse"] => ({
+    id: "line-1",
+    equipmentId: "item-1",
+    quantity: 1,
+    role: "required",
+    disposition: "none",
+    isPacked: false,
+    isBookedOut: false,
+    isReceived: false,
+    packedBy: null,
+    bookedOutBy: null,
+    receivedBy: null,
+    exceptionKind: null,
+    exceptionDescription: null,
+    exceptionReportedBy: null,
+    exceptionReportedAt: null,
+    ...overrides,
 });
 
 const routes = [
@@ -90,5 +113,43 @@ describe("ProjectDetailPage", () => {
         renderAt("/projects/p1", routes);
 
         expect(await screen.findByRole("alert")).toHaveTextContent("No existe o ya no está disponible.");
+    });
+
+    it("books equipment out manually and preserves the line state after reload", async () => {
+        let current = packingLine({ isPacked: true });
+        const requests = stubApi({
+            "GET /api/projects/p1": () => json(project([], [current])),
+            "GET /api/equipment/items": () =>
+                json([
+                    {
+                        id: "item-1",
+                        code: "CAM-1",
+                        name: "Cámara",
+                        scanCode: "scan-1",
+                        stockQuantity: 1,
+                        availableQuantity: 1,
+                        status: "active",
+                        disposedAt: null,
+                        dispositionReason: null,
+                        saleAmount: null,
+                    },
+                ]),
+            "POST /api/projects/p1/packing-lines/line-1/book-out": () => {
+                current = packingLine({ isPacked: true, isBookedOut: true, bookedOutBy: "warehouse-ui" });
+                return json(current);
+            },
+        });
+
+        renderAt("/projects/p1", routes);
+        const user = userEvent.setup();
+
+        await user.click(await screen.findByRole("button", { name: "Dar salida manual" }));
+        await waitFor(() => expect(screen.getByText("En salida")).toBeInTheDocument());
+
+        expect(requests.find((request) => request.method === "POST")?.body).toEqual({
+            actor: "warehouse-ui",
+            scanCode: null,
+        });
+        expect(screen.getByRole("button", { name: "Registrar devolución" })).toBeInTheDocument();
     });
 });

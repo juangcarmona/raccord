@@ -32,16 +32,19 @@
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "76b788e0b0266463d674e81669172154fbd10a50",
+      "outputCommit": "578561b70befa8eaa96a77faf97a63b8371516fa",
       "result": "running",
-      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation now creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Equipment-group propagation, full accepted project-detail fields and the Done gate remain unfinished.",
+      "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing now persists contact-person selection, project type and team; the focused browser journey reloads and verifies all three alongside project name, customer, dates and external reference. Equipment-group propagation, the remaining accepted project-detail fields and the Done gate remain unfinished.",
       "evidence": [
         "openspec/changes/project-lifecycle-303/tasks.md",
         "tests/Raccord.Web.Tests/ProjectTimePeriodsEndpointTests.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectScheduleJourney_Should_ManagePeriods.cs",
         "src/Raccord.Infrastructure/Persistence/Migrations/20261020214850_ProjectFunctionTimePeriodLink.cs",
         "tests/Raccord.EndToEndTests/Projects/ProjectCompleteJourney_Should_ReopenOperations.cs",
-        "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs"
+        "tests/Raccord.EndToEndTests/Projects/ProjectCancellationJourney_Should_PreserveInvoiceHistory.cs",
+        "tests/Raccord.EndToEndTests/Projects/ProjectDetailsJourney_Should_EditDetails.cs",
+        "src/Raccord.Frontend/src/features/projects/ProjectDetailPage.test.tsx",
+        "docs/operations/process-ledger.md"
       ]
     },
     { "name": "integrate", "result": "pending" },

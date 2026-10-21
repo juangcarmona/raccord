@@ -41,7 +41,7 @@
       "startedAt": "2026-10-21T12:20:00Z",
       "endedAt": "2026-10-21T13:52:29Z",
       "inputCommit": "b3f32046e60c53fd7df2e63039c35db667ab354b",
-      "outputCommit": "63398ccc0b85b8de6563dc0b3c2c16a3858e73e2",
+      "outputCommit": "bfe1ebf",
       "result": "complete",
       "evidence": [
         "Owner approval in conversation for PR #421 plan",
@@ -50,7 +50,8 @@
         "CI E2E runner: 37 passed, 0 failed; vat-catalog-project-rate browser evidence status passed",
         "OpenSpec 1.12.0: 37 passed; ProductShape: 0 errors and warnings; citations: 145 documents and 517 current citations",
         "CSharpier: 406 files; Markdown lint: 301 files, 0 issues; EF reports no pending model changes",
-        "PR #421 implementation commit 63398ccc0b85b8de6563dc0b3c2c16a3858e73e2"
+        "PR #421 implementation commit 63398ccc0b85b8de6563dc0b3c2c16a3858e73e2",
+        "CI E2E failure corrected: collections journey now selects and asserts the named General scheme instead of the mutable workspace default; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)"
       ]
     }
   ],
@@ -92,6 +93,15 @@
       ],
       "resultingCommit": "6584f12085b3b1ef15e763b6fa877cd70258fd17",
       "rerunChecks": "OpenSpec 1.12.0 (this change and all 37 items), ProductShape, citations (516 current), Markdown and git diff checks passed; independent review approved"
+    },
+    {
+      "gate": "CI E2E",
+      "round": 2,
+      "requestedChanges": [
+        "Remove dependency on the workspace default scheme because parallel E2E journeys mutate it; select the named source-dated General scheme and assert its 21% rate."
+      ],
+      "resultingCommit": "bfe1ebf",
+      "rerunChecks": "Release build 0 warnings/0 errors; full selected E2E runner with DOTNET_PROCESSOR_COUNT=4: 37 passed, 0 failed; selection manifest 35 journeys; metadata tests 2/2; OpenSpec 37/37; citations 145 documents and 517 current; Markdown 0 issues; CSharpier 406 files."
     }
   ],
   "stopReason": null,
@@ -99,7 +109,7 @@
     "number": 421,
     "url": "https://github.com/juangcarmona/raccord/pull/421",
     "state": "open",
-    "isDraft": true,
+    "isDraft": false,
     "base": "codex/finance-catalog-product-change"
   },
   "reviewOverride": "Owner explicitly waived any independent reviewer for work item #418. No independent implementation review is required; this item-level exception does not change repository-wide policy.",

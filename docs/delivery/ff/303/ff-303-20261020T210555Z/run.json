@@ -16,7 +16,9 @@
       "inputCommit": "74cc9b7df11d60eb43352016f1813549e8985155",
       "result": "ready",
       "findings": "All required Ready dimensions are satisfied after adding explicit Product Change scope, BR citations, E2E selection details, quality expectations, risks and red lines. Issue remains status:in-progress because lifecycle has no valid rollback transition from implementation to ready.",
-      "evidence": ["https://github.com/juangcarmona/raccord/issues/303"]
+      "evidence": [
+        "https://github.com/juangcarmona/raccord/issues/303"
+      ]
     },
     {
       "name": "propose",
@@ -26,13 +28,17 @@
       "outputCommit": "f4cea9148ce46299a0836511c94ddd093421b8f0",
       "result": "approved",
       "findings": "Plan revision addressed round-one findings and received independent approval from gpt-6-astra. One Transport-function wording detail will be resolved during implementation.",
-      "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
     },
     {
       "name": "implement",
       "startedAt": "2026-10-20T21:43:41Z",
       "inputCommit": "406afb85861b68493be8e9aeb9a63ef2f18ea1c1",
-      "outputCommit": "20034c302acb2931f75afc1ae5bfb8eeab0cf354",
+      "outputCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
       "result": "running",
       "findings": "Implementation remains underway. Project time periods support persistence, API/browser management and audience-specific document visibility; Complete blocks operational writes and reopening restores them. Period-based Crew/Transport generation creates one linked function per selected period and requested kind. Moving a period updates linked function ranges and shift offsets transactionally; invalid ranges roll back and unlinked functions remain unchanged. Project detail editing persists contact-person selection, project type, team, and an eligible Admin/Office account manager. The account manager directory is role-filtered, assignments are revalidated on create/update, and the detail E2E reloads the persisted name. Project-number allocation supports transactional automatic/custom assignment, deterministic backfill, duplicate rejection, concurrency and browser reload persistence; seed and request-conversion paths assign unique values. The detail screen now creates and displays project note and file-context records, and the E2E checks persistence after reload. Full Web, frontend, solution and E2E suites have passed locally. Remote CI for d5d3a0f passed all required checks. Remaining commercial overrides, task/file capability gaps, equipment-group propagation, remaining planned UI/E2E coverage and the Done gate remain unfinished.",
       "evidence": [
@@ -52,11 +58,20 @@
         "src/Raccord.Frontend/src/features/projects/NewProjectPage.test.tsx",
         "tests/Raccord.Web.Tests/ProjectAccountManagerEndpointTests.cs",
         "src/Raccord.Infrastructure/Persistence/Migrations/20261021043845_ProjectAccountManager.cs",
-        "docs/operations/process-ledger.md"
+        "docs/operations/process-ledger.md",
+        "frontend format/lint/typecheck passed; 52 frontend tests passed; frontend build, architecture check and npm audit passed on Node 22.22.1 (npm reported non-blocking engine warnings)",
+        "dotnet build Raccord.slnx -c Release --no-restore passed with 0 warnings and 0 errors",
+        "full per-PR E2E selection passed (49 passed, 0 failed, 0 skipped; 178.751s) after rebuilding the final source; suite log: /tmp/raccord-303-e2e-clean.log"
       ]
     },
-    { "name": "integrate", "result": "pending" },
-    { "name": "review", "result": "pending" }
+    {
+      "name": "integrate",
+      "result": "pending"
+    },
+    {
+      "name": "review",
+      "result": "pending"
+    }
   ],
   "reviews": [
     {
@@ -69,7 +84,11 @@
         "Added module ownership and failure-handling details for Projects, Contacts, Commercial, Documents, Crew, Transport and Warehouse boundaries.",
         "Added API and browser coverage for Complete/reopen, status-dependent visibility, document rendering, selected cancellation actions, synthetic data and Area=projects selection metadata."
       ],
-      "evidence": ["openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
     },
     {
       "reviewerModel": "gpt-6-astra",
@@ -80,7 +99,11 @@
         "Prior gaps are covered with explicit accepted-scope tasks, module boundaries, transaction behavior, failure scenarios and per-PR E2E selection metadata.",
         "Align whether Transport function generation applies to every selected period during implementation; this wording detail does not block the plan."
       ],
-      "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
     },
     {
       "reviewerModel": "gpt-6-astra",
@@ -90,7 +113,11 @@
       "findings": [
         "The committed number allocation amendment matches the previously reviewed plan; custom and generated numbers share a transaction-scoped lock, the migration backfills deterministically, and configurable start values remain tracked by #416."
       ],
-      "evidence": ["openspec/changes/project-lifecycle-303/design.md", "openspec/changes/project-lifecycle-303/tasks.md", "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"]
+      "evidence": [
+        "openspec/changes/project-lifecycle-303/design.md",
+        "openspec/changes/project-lifecycle-303/tasks.md",
+        "openspec/changes/project-lifecycle-303/specs/project-lifecycle/spec.md"
+      ]
     },
     {
       "gate": "account manager assignment slice",
@@ -164,6 +191,19 @@
         "gitDiffCheck": "passed"
       },
       "findings": "The first Aspire run exposed two project-creation paths outside the interactive workflow: demo seed and incoming-request conversion. Both now use explicit/allocated unique numbers. The full Web suite then exposed retained per-database Npgsql pools exhausting PostgreSQL connections; RaccordApi now clears only its own pool on disposal, and the suite passed with normal parallelism."
+    },
+    {
+      "gate": "project detail task controls and E2E",
+      "round": 1,
+      "requestedChanges": "Keep task-board UI in #386, resolve a project lifecycle Status locator collision while the board was under experiment, and rebuild the E2E assembly after frontend/test source changes.",
+      "resultingCommit": "4c95009d713ac8e3e0098422eb1ba74df1d2cee9",
+      "rerunChecks": {
+        "focusedProjectE2E": "passed (3 passed, 0 failed) with task controls present",
+        "finalFrontendSuite": "passed (52 passed, 0 failed)",
+        "finalBuild": "passed (0 warnings, 0 errors)",
+        "finalFullE2E": "passed (49 passed, 0 failed, 0 skipped; 178.751s)"
+      },
+      "findings": "A page-wide Status query became ambiguous when task-board controls were added; those controls belong to #386 and were removed from #303. An initial full run used an E2E assembly compiled before that scope correction and timed out on the removed task field; rebuilding the complete solution and rerunning the final source passed all 49 selected journeys."
     }
   ],
   "stopReason": null,

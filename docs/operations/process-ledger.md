@@ -631,3 +631,15 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** Filtering eligible users in a project editor does not protect API callers or stale browser forms from assigning a user whose role is not permitted.
 - **Action:** Expose only eligible candidates through a module-owned directory port and revalidate role eligibility in the Projects use case before persisting the assignment; keep the optional user relationship constrained by a database foreign key.
 - **Check:** The API test lists Admin and Office users, rejects a Crew assignment without mutation, and the selected browser journey reloads the saved account manager.
+
+## 2026-10-21 · Keep project journey labels exact across adjacent forms
+
+- **Observation:** As project detail sections accumulate, broad Playwright label lookups such as `Description`, `Task` or `Status` can match controls from more than one section.
+- **Action:** Use exact accessible labels or scope a locator to its named section when a journey interacts with adjacent forms; when a selector becomes ambiguous, make the shared helper exact before rerunning the affected flow.
+- **Check:** Run the affected project detail and lifecycle journeys after adding or changing form sections and verify saved values through browser reloads.
+
+## 2026-10-21 · Scope project lifecycle locators to their section
+
+- **Observation:** Adding task status controls introduced a second accessible `Status` control, which made the project lifecycle journey's page-wide selector ambiguous.
+- **Action:** Scope lifecycle controls to the section named by `project-status-heading` and use section-scoped locators for future controls with shared labels.
+- **Check:** Run both the project status and Complete/reopen journeys alongside the project details journey after adding task controls.

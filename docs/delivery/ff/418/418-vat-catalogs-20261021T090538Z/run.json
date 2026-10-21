@@ -41,7 +41,7 @@
       "startedAt": "2026-10-21T12:20:00Z",
       "endedAt": "2026-10-21T13:52:29Z",
       "inputCommit": "b3f32046e60c53fd7df2e63039c35db667ab354b",
-      "outputCommit": "bfe1ebf",
+      "outputCommit": "8199399",
       "result": "complete",
       "evidence": [
         "Owner approval in conversation for PR #421 plan",
@@ -51,7 +51,8 @@
         "OpenSpec 1.12.0: 37 passed; ProductShape: 0 errors and warnings; citations: 145 documents and 517 current citations",
         "CSharpier: 406 files; Markdown lint: 301 files, 0 issues; EF reports no pending model changes",
         "PR #421 implementation commit 63398ccc0b85b8de6563dc0b3c2c16a3858e73e2",
-        "CI E2E failure corrected: collections journey now selects and asserts the named General scheme instead of the mutable workspace default; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)"
+        "CI E2E failure corrected: collections journey now selects and asserts the named General scheme instead of the mutable workspace default; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)",
+        "Second CI E2E failure corrected in shared BrowserJourneyBase: common billing journeys explicitly choose General unless the journey supplies its own scheme; full local suite passed with DOTNET_PROCESSOR_COUNT=4 (37/37)"
       ]
     }
   ],
@@ -102,6 +103,15 @@
       ],
       "resultingCommit": "bfe1ebf",
       "rerunChecks": "Release build 0 warnings/0 errors; full selected E2E runner with DOTNET_PROCESSOR_COUNT=4: 37 passed, 0 failed; selection manifest 35 journeys; metadata tests 2/2; OpenSpec 37/37; citations 145 documents and 517 current; Markdown 0 issues; CSharpier 406 files."
+    },
+    {
+      "gate": "CI E2E",
+      "round": 3,
+      "requestedChanges": [
+        "Pin the shared browser billing helper to the named General class and scheme by default so invoice and UBL journeys do not inherit parallel changes to the mutable workspace default."
+      ],
+      "resultingCommit": "8199399",
+      "rerunChecks": "Release build 0 warnings/0 errors; full selected E2E runner with DOTNET_PROCESSOR_COUNT=4: 37 passed, 0 failed; CSharpier 406 files; Markdown lint 301 files, 0 issues."
     }
   ],
   "stopReason": null,

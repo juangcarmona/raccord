@@ -2,7 +2,7 @@
 id: TERM-CONTACT-COMMERCIAL-DEFAULTS
 type: domain-term
 title: "Contact commercial defaults"
-status: draft
+status: active
 defined-in: "BC-CONTACTS"
 synonyms: []
 uses-terms:
@@ -20,12 +20,12 @@ provenance:
 
 ## Definition
 
-Commercial settings stored on a contact that apply when it is the client of a project: invoice moment, payment term and VAT scheme (each overriding the project's own value), an optional contact-specific insurance percentage, and discount groups giving discount percentages for rental and for sale equipment.
+Commercial settings stored on a contact and copied to a new project when that contact is selected as its client: invoice moment, payment term, VAT scheme, optional contact-specific insurance percentage, and rental and sale discount groups. Each setting is optional.
 
 ## Distinguish From
 
-Project type defaults: apply by kind of project, overridden by the client's defaults.
+Project type defaults initialize a project according to its kind. Contact defaults, when present, take precedence during initial project creation.
 
 ## Usage
 
-Honouring agreed terms automatically on every project of the customer.
+Honouring agreed terms when a new project is created. Later contact changes do not alter existing projects.

@@ -1,13 +1,14 @@
 ---
 id: FR-PRJ-033
 type: functional-requirement
-title: "Contact commercial defaults"
-status: draft
+title: "Contact commercial defaults initialize new projects"
+status: active
 derived-from:
   - "UC-PRJ-SET-CONTACT-COMMERCIAL-DEFAULTS"
   - "BR-PRJ-CLIENT-COMMERCIAL-OVERRIDE"
 verification:
   - scenario-ref: "SB-PRJ-CLIENT-PAYMENT-TERM-OVERRIDES"
+  - scenario-ref: "SB-CONTACT-DEFAULTS-SNAPSHOT-ON-CREATE"
 uses-terms:
   - "TERM-CONTACT-COMMERCIAL-DEFAULTS"
 provenance:
@@ -18,8 +19,8 @@ provenance:
 
 ## Requirement
 
-The product MUST store invoice moment, payment term, VAT scheme, insurance percentage and discount groups on contacts and apply them, overriding project values, when the contact is the client.
+The product MUST let authorized users store the supported commercial defaults on a contact. When that contact is selected as the client of a new project, the product MUST copy each set default into the project's initial commercial settings. Later edits to contact defaults MUST NOT change existing or running projects.
 
 ## Rationale
 
-Agreed terms applied consistently.
+Agreed terms initialize new work while each existing project retains the values it was created with.

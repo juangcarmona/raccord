@@ -2,7 +2,7 @@
 id: CHG-CONTACT-COMMERCIAL-DEFAULTS-300
 type: product-change
 title: Accept contact commercial defaults copied into new projects
-status: proposed
+status: applied
 base-revision: "769edf87e11dec97b23de000741c2f745545256b"
 operations:
   add:
@@ -35,15 +35,13 @@ Contacts commercial defaults, project creation, project commercial settings, and
 
 ## Open Questions
 
-- Confirm that the supported fields are invoice moment, payment term, VAT scheme, optional insurance percentage, and rental and sale discount groups. Recommendation: accept the full draft term field set; “financial settings” in #300's out-of-scope section means global configuration, quotes, and unrelated settings, not these per-contact defaults.
-- Confirm that defaults are copied once during project creation and never synchronized later. Recommendation: copy once; allow normal project-level edits.
-- Confirm which roles can edit defaults and create projects. Recommendation: billing administrators and operations coordinators may maintain defaults; project creation follows its existing permission.
+None. The accepted field set is invoice moment, payment term, VAT scheme, optional insurance percentage, and rental and sale discount groups. These per-contact defaults are distinct from global financial configuration and quotes.
 
 ## Product Acceptance
 
-- The Product Owner confirms the supported default fields.
-- The Product Owner confirms snapshot-on-project-creation semantics, including that later contact edits do not alter existing or running projects.
-- The Product Owner confirms the authorized roles.
+- Billing administrators and operations coordinators may maintain contact commercial defaults; project creation follows its existing permission.
+- A newly created project copies the selected contact's current defaults once into its initial commercial settings. Later edits to contact defaults do not alter existing or running projects.
+- Project users can continue editing the project's own commercial settings through the existing project workflow.
 
 ## Out of Scope
 

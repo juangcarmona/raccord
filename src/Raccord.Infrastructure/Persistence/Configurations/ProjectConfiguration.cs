@@ -12,6 +12,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
         builder.ToTable("projects", "projects");
         builder.HasKey(project => project.Id);
         builder.Property(project => project.Name).HasMaxLength(200);
+        builder.Property(project => project.ContactPersonId);
         builder.Property(project => project.ExternalReference).HasMaxLength(200);
         builder.Property(project => project.ProjectTypeId);
         builder.Property(project => project.TeamId);

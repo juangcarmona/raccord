@@ -10143,6 +10143,14 @@
               "string"
             ],
             "description": "Customer or production reference associated with the project."
+          },
+          "contactPersonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Selected person at the project customer contact.",
+            "format": "uuid"
           }
         },
         "description": "A project with its billable lines."
@@ -11619,6 +11627,13 @@
               "null",
               "string"
             ]
+          },
+          "contactPersonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         },
         "description": "Edits the identifying and scheduling details of an existing project."

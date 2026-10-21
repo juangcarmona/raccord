@@ -23,6 +23,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 await CreateProjectWithBillableLineAsync(page);
                 var projectUrl = page.Url;
                 await CreateAlternativeCustomerAsync(page);
+                var contactPersonId = await CreateAlternativeContactPersonAsync(page);
                 await page.GotoAsync(projectUrl);
                 var projectId = new Uri(projectUrl).Segments[^1];
                 var currentProject = await page.APIRequest.GetAsync($"/api/projects/{projectId}");
@@ -39,6 +40,7 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                     .SelectOptionAsync(
                         new SelectOptionValue { Label = $"Alternative E2E {RunStamp}" }
                     );
+                await page.GetByLabel("Contact person").SelectOptionAsync(contactPersonId);
                 await page.GetByLabel("Start", new() { Exact = true }).FillAsync("2026-10-01");
                 await page.GetByLabel("End", new() { Exact = true }).FillAsync("2026-10-03");
                 await page.GetByLabel("External reference").FillAsync("PO-2026-041");
@@ -53,6 +55,11 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
                 (
                     await page.GetByLabel("Customer").Locator("option:checked").TextContentAsync()
                 ).ShouldBe($"Alternative E2E {RunStamp}");
+                (
+                    await page.GetByLabel("Contact person")
+                        .Locator("option:checked")
+                        .TextContentAsync()
+                ).ShouldBe("Production lead");
                 (await page.GetByLabel("Start", new() { Exact = true }).InputValueAsync()).ShouldBe(
                     "2026-10-01"
                 );
@@ -78,6 +85,46 @@ public sealed class ProjectDetailsJourney_Should_EditDetails(DistributedAppFixtu
         await page.GetByLabel("Country (ISO").FillAsync("ES");
         await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
         await page.WaitForURLAsync(url => url.EndsWith("/customers", StringComparison.Ordinal));
+    }
+
+    private async Task<string> CreateAlternativeContactPersonAsync(IPage page)
+    {
+        var alternativeCustomer = await page.APIRequest.GetAsync("/api/customers");
+        using var customerList = JsonDocument.Parse(await alternativeCustomer.TextAsync());
+        var alternativeCustomerId = customerList
+            .RootElement.EnumerateArray()
+            .Single(customer =>
+                string.Equals(
+                    customer.GetProperty("legalName").GetString(),
+                    $"Alternative E2E {RunStamp}",
+                    StringComparison.Ordinal
+                )
+            )
+            .GetProperty("id")
+            .GetString()!;
+        var response = await page.APIRequest.PostAsync(
+            $"/api/contacts/{alternativeCustomerId}/people",
+            new APIRequestContextOptions
+            {
+                Data = JsonSerializer.Serialize(
+                    new
+                    {
+                        name = "Production lead",
+                        email = "production.lead@example.test",
+                        phone = (string?)null,
+                        isDefault = true,
+                        isAdministrative = false,
+                    }
+                ),
+                Headers = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["content-type"] = "application/json",
+                },
+            }
+        );
+        response.Status.ShouldBe(201);
+        using var personDocument = JsonDocument.Parse(await response.TextAsync());
+        return personDocument.RootElement.GetProperty("id").GetString()!;
     }
 
     private static async Task AssertOverlongReferenceRejectedAsync(

@@ -11,6 +11,7 @@ namespace Raccord.Modules.Projects;
 public sealed class ProjectWorkspace(
     IBillableWork projects,
     IPartyDirectory parties,
+    IContactPeopleDirectory contactPeople,
     IEquipmentStock equipment,
     IProjectsUnitOfWork unitOfWork,
     IProjectScheduleStore projectScheduleStore,
@@ -152,6 +153,17 @@ public sealed class ProjectWorkspace(
                 "customers.not-found",
                 $"Customer '{request.CustomerId}' does not exist."
             );
+        if (
+            request.ContactPersonId is { } contactPersonId
+            && await contactPeople
+                .FindAsync(customer.Id, contactPersonId, cancellationToken)
+                .ConfigureAwait(false)
+                is null
+        )
+            throw new BusinessRuleViolationException(
+                "projects.contact-person-not-found",
+                "The selected contact person does not belong to the project customer."
+            );
 
         project.EditDetails(
             customer.Id,
@@ -160,7 +172,8 @@ public sealed class ProjectWorkspace(
             request.EndDate,
             request.ProjectTypeId,
             request.TeamId,
-            request.ExternalReference
+            request.ExternalReference,
+            request.ContactPersonId
         );
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(project, customer?.LegalName ?? string.Empty);
@@ -732,7 +745,8 @@ public sealed class ProjectWorkspace(
             ToStatusText(project.Status),
             project.HasCancellationWarning,
             project.CancelledAt,
-            project.ExternalReference
+            project.ExternalReference,
+            project.ContactPersonId
         );
 
     private static ProjectTimePeriodResponse ToResponse(

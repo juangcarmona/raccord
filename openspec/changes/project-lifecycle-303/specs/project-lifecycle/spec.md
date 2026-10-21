@@ -5,12 +5,17 @@
 
 ### Requirement: Project details can be maintained
 
-The system MUST let an operator edit the accepted project detail fields and persist the update to the project history. A duplicate manually assigned project number MUST be rejected.
+The system MUST let an operator edit the accepted project detail fields, choose a contact person belonging to the selected customer contact, and persist the update to the project history. A duplicate manually assigned project number MUST be rejected.
 
 #### Scenario: Update project details
 
 - **WHEN** an operator saves valid project details
 - **THEN** the project overview and detail show the saved values
+
+#### Scenario: Reject a contact person from another contact
+
+- **WHEN** an operator saves a contact person that does not belong to the selected customer
+- **THEN** the API rejects the update and the project details remain unchanged
 
 #### Scenario: Reject duplicate project number
 
@@ -98,4 +103,6 @@ The system MUST show cancellation actions only when relevant, execute exactly th
 <!-- pdac:cite id="BR-PRJ-PERIOD-DOCUMENT-DISPLAY" digest="sha256:aec83cc960f978d7a6e59f2105e5c15f9e75d0c855f7a5d44fa543756c54c907" -->
 <!-- pdac:cite id="BR-PRJ-FUNCTIONS-FROM-PERIODS" digest="sha256:335f48cbaf338557f9f01e6f1b49e6278b02d4a9d5c73328729650d909e330ac" -->
 <!-- pdac:cite id="TERM-PROJECT-STATUS" digest="sha256:ea57a30386b9806577b0ed5376630ed6b9048a5afc882cc20320958ed8382eef" -->
+<!-- pdac:cite id="BR-PRJ-CONTACT-SELECTION-EFFECTS" digest="sha256:8a97ed06931ff2b4ec14c11e4df84a1e1fb74a3599ee568ca195272d4bc541b7" -->
+<!-- pdac:cite id="BR-PRJ-PARTIES-FROM-CONTACTS" digest="sha256:2fe8ce59516db4c08c3582e1c3dd6341fa3b658e8386d10f725671b633b2dcfe" -->
 <!-- pdac:cite id="FR-PRJ-010" digest="sha256:1475c6b8459b26d9838f42e83f16953e9e2aa967d29585efc738f102251abd91" -->

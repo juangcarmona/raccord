@@ -32,6 +32,7 @@ const project = (billableLines: Schemas["BillableLineResponse"][]): Schemas["Pro
     hasCancellationWarning: false,
     cancelledAt: null,
     externalReference: null,
+    contactPersonId: null,
 });
 
 const routes = [
@@ -44,6 +45,19 @@ const customerResponse = [
 ];
 const customerApi = {
     "GET /api/customers": () => json(customerResponse),
+    "GET /api/contacts/c1/people": () => json([]),
+    "GET /api/contacts/c2/people": () =>
+        json([
+            {
+                id: "person-c2",
+                contactId: "c2",
+                name: "Production lead",
+                email: "lead@example.test",
+                phone: null,
+                isDefault: true,
+                isAdministrative: false,
+            },
+        ]),
     "GET /api/projects/p1/periods": () => json([]),
 };
 
@@ -139,6 +153,7 @@ describe("ProjectDetailPage", () => {
             externalReference: "PO-2026-041",
             projectTypeId: null,
             teamId: null,
+            contactPersonId: null,
         });
     });
 
@@ -152,9 +167,13 @@ describe("ProjectDetailPage", () => {
         renderAt("/projects/p1", routes);
         const user = userEvent.setup();
         await user.selectOptions(await screen.findByRole("combobox", { name: "Cliente" }), "c2");
+        await user.selectOptions(await screen.findByRole("combobox", { name: "Persona de contacto" }), "person-c2");
         await user.click(screen.getByRole("button", { name: "Guardar datos" }));
 
-        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({ customerId: "c2" });
+        expect(requests.find((request) => request.method === "PUT")?.body).toMatchObject({
+            customerId: "c2",
+            contactPersonId: "person-c2",
+        });
     });
 
     it("confirms cancellation after showing the open-work warning", async () => {

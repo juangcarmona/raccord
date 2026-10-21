@@ -47,6 +47,9 @@ public sealed class Project
     /// <summary>The customer billed for the project.</summary>
     public Guid CustomerId { get; private set; }
 
+    /// <summary>The selected person at the customer contact, when applicable.</summary>
+    public Guid? ContactPersonId { get; private set; }
+
     /// <summary>First day of the job.</summary>
     public DateOnly StartDate { get; private set; }
 
@@ -153,7 +156,8 @@ public sealed class Project
         DateOnly endDate,
         Guid? projectTypeId,
         Guid? teamId,
-        string? externalReference = null
+        string? externalReference = null,
+        Guid? contactPersonId = null
     )
     {
         if (Status == ProjectStatus.Complete)
@@ -185,6 +189,7 @@ public sealed class Project
         Name = name.Trim();
         ExternalReference = NormalizeExternalReference(externalReference);
         CustomerId = customerId;
+        ContactPersonId = contactPersonId;
         StartDate = startDate;
         EndDate = endDate;
         ProjectTypeId = projectTypeId;

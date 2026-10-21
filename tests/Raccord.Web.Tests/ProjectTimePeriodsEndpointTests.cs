@@ -1,7 +1,9 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Crew;
+using Raccord.Contracts.Customers;
 using Raccord.Contracts.Projects;
 using Raccord.Web.Tests.Infrastructure;
 
@@ -50,6 +52,61 @@ public sealed class ProjectTimePeriodsEndpointTests(PostgresContainer postgres) 
         var reloaded = await GetPeriodsAsync(project.Id);
         reloaded.Select(period => period.Id).ToArray().ShouldBe(ids);
         reloaded.Select(period => period.Position).ToArray().ShouldBe([0, 1, 2, 3]);
+    }
+
+    [Fact]
+    public async Task Editing_project_details_Should_PersistOnlyAPersonFromTheSelectedCustomer()
+    {
+        var project = await RaccordApi.ArrangeProjectAsync(client);
+        var personResponse = await client.PostAsJsonAsync(
+            $"/api/contacts/{project.CustomerId}/people",
+            new SaveContactPersonRequest("Production lead", "lead@example.test", null)
+        );
+        personResponse.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var person = (await personResponse.Content.ReadFromJsonAsync<ContactPersonResponse>())!;
+
+        var saved = await client.PutAsJsonAsync(
+            $"/api/projects/{project.Id}",
+            new UpdateProjectDetailsRequest(
+                project.CustomerId,
+                project.Name,
+                project.StartDate,
+                project.EndDate,
+                ContactPersonId: person.Id
+            )
+        );
+        saved.StatusCode.ShouldBe(HttpStatusCode.OK);
+        (await saved.Content.ReadFromJsonAsync<ProjectResponse>())!.ContactPersonId.ShouldBe(
+            person.Id
+        );
+        (
+            await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project.Id}")
+        )!.ContactPersonId.ShouldBe(person.Id);
+
+        var otherCustomer = await (
+            await client.PostAsJsonAsync(
+                "/api/customers",
+                new RegisterCustomerRequest("Other customer", "C00000000", RaccordApi.Madrid, null)
+            )
+        )
+            .EnsureSuccessStatusCode()
+            .Content.ReadFromJsonAsync<CustomerResponse>();
+        var invalid = await client.PutAsJsonAsync(
+            $"/api/projects/{project.Id}",
+            new UpdateProjectDetailsRequest(
+                otherCustomer!.Id,
+                "Other customer project",
+                project.StartDate,
+                project.EndDate,
+                ContactPersonId: person.Id
+            )
+        );
+        invalid.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
+        var unchanged = (
+            await client.GetFromJsonAsync<ProjectResponse>($"/api/projects/{project.Id}")
+        )!;
+        unchanged.CustomerId.ShouldBe(project.CustomerId);
+        unchanged.ContactPersonId.ShouldBe(person.Id);
     }
 
     private async Task<List<ProjectTimePeriodResponse>> GetPeriodsAsync(Guid projectId) =>

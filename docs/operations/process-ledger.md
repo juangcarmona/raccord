@@ -508,9 +508,9 @@ Every completed FF loop must review this ledger, add new observations and action
 
 ## 2026-10-20 · Project lifecycle browser checks use role-specific selectors
 
-- **Observation:** The project status journey matched both a labelled section and its select, then later matched both “Save” and “Save details” buttons; parallel project builds also contended while installing Git hooks into shared worktree config.
-- **Action:** Select form controls by semantic role and use exact button names where labels overlap, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
-- **Check:** The status Playwright journey passes after reload using the named combobox, and a Release solution build passes with zero warnings under `HUSKY=0`.
+- **Observation:** The project status journey matched both a labelled section and its select, then its Save button became ambiguous after schedule periods added identical buttons; parallel project builds also contended while installing Git hooks into shared worktree config.
+- **Action:** Select form controls by semantic role, scope repeated buttons to their owning section, and set `HUSKY=0` for local build verification in worktrees so build checks do not mutate shared Git configuration.
+- **Check:** The status Playwright journey passes after reload using its named combobox and section-scoped Save button, and a Release solution build passes with zero warnings under `HUSKY=0`.
 
 ## 2026-10-20 · Cancellation journeys wait for confirmation state and assert product copy
 

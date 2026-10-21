@@ -32,6 +32,11 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
     const [selected, setSelected] = useState<ReadonlySet<string>>(new Set());
     const [busy, setBusy] = useState(false);
     const [status, setStatus] = useState(project.status);
+    const [customerId, setCustomerId] = useState(project.customerId);
+    const [contactPersonId, setContactPersonId] = useState(project.contactPersonId ?? "");
+    const contactPeople = useQuery(`contact-people:${customerId}`, () =>
+        unwrap(api.GET("/api/contacts/{id}/people", { params: { path: { id: customerId } } })),
+    );
     const customers = useQuery("customers", () => unwrap(api.GET("/api/customers")));
     const [error, setError] = useState<unknown>(null);
     const [detailsError, setDetailsError] = useState<unknown>(null);
@@ -102,6 +107,7 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                         externalReference: formText(data, "externalReference") || null,
                         projectTypeId: project.projectTypeId ?? null,
                         teamId: project.teamId ?? null,
+                        contactPersonId: contactPersonId || null,
                     },
                 }),
             );
@@ -184,12 +190,36 @@ function ProjectView({ project, onChanged }: { project: Schemas["ProjectResponse
                                 label={t("common.customer")}
                                 name="customerId"
                                 required
-                                defaultValue={project.customerId}
+                                value={customerId}
+                                onChange={(event) => {
+                                    setCustomerId(event.target.value);
+                                    setContactPersonId("");
+                                }}
                                 disabled={busy || project.status === "complete"}
                             >
                                 {list.map((customer) => (
                                     <option key={customer.id} value={customer.id}>
                                         {customer.legalName}
+                                    </option>
+                                ))}
+                            </SelectField>
+                        )}
+                    </Async>
+                    <Async query={contactPeople}>
+                        {(people) => (
+                            <SelectField
+                                label={t("projects.contactPerson")}
+                                name="contactPersonId"
+                                value={contactPersonId}
+                                onChange={(event) => {
+                                    setContactPersonId(event.target.value);
+                                }}
+                                disabled={busy || project.status === "complete"}
+                            >
+                                <option value="">{t("projects.noContactPerson")}</option>
+                                {people.map((person) => (
+                                    <option key={person.id} value={person.id}>
+                                        {person.name}
                                     </option>
                                 ))}
                             </SelectField>

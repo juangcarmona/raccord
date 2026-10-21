@@ -10,6 +10,7 @@
 - [x] Edit a project's name and date range through the project detail API and screen, with domain validation and a reloadable browser journey.
 - [x] Allow changing the selected customer on a project and prove persistence through a browser reload.
 - [x] Edit the optional external reference, reject values over 200 characters without mutation, and verify persistence after a browser reload.
+- [x] Persist a selected project contact person, reject a person belonging to another customer, and verify the selection through the project detail browser flow.
 - [ ] Add the accepted project details workflow for existing contact and contact-person selection, project commercial overrides, account manager, notes, tasks, and files, plus duplicate project number validation; cover API validation and persisted detail display for each field.
 - [x] Add domain and persistence models for planning and usage periods with invariant tests.
 - [ ] Expose period designation, create/edit/duplicate/order and internal/external document-display operations through the Projects API; prove linked equipment and functions update on date changes, unlinked records remain unchanged, and failed propagation leaves the period and records consistent.
@@ -25,7 +26,7 @@
 - [x] Add a Playwright journey that selects multiple periods and a function kind, then verifies exactly one linked function per selected period, plus internal/external document rendering for visible and hidden periods.
 - [x] Add a cancellation journey that selects only a subset of applicable actions and proves unselected actions are untouched; preserve the existing persistent-warning and invoice-history assertions.
 - [x] Ensure every PR E2E selection includes the required synthetic data, `Area=projects` metadata and manifest registration.
-- [ ] Update affected architecture and operations documentation.
+- [x] Update affected architecture and operations documentation.
 - [ ] Run the repository Done checks and reconcile all evidence.
 
 <!-- pdac:cite id="UC-PRJ-EDIT-PROJECT-DETAILS" digest="sha256:cc87eb90988fdbd32fb2e626a02aa7154783ffc7b161702a3c2bf4ace9c2bdb7" -->
@@ -38,3 +39,5 @@
 <!-- pdac:cite id="TERM-PROJECT-STATUS" digest="sha256:ea57a30386b9806577b0ed5376630ed6b9048a5afc882cc20320958ed8382eef" -->
 <!-- pdac:cite id="BR-PRJ-EXTERNAL-REFERENCE-PRINTING" digest="sha256:97cf1e3e9d16398907ff2f91d1025afaf15865c4a24c1c6e6c11ef684bd97810" -->
 <!-- pdac:cite id="TERM-PROJECT-EXTERNAL-REFERENCE" digest="sha256:83edd787e70044c969325194692ecf45c1adce1686e3029ce2b8c378590ca420" -->
+<!-- pdac:cite id="BR-PRJ-CONTACT-SELECTION-EFFECTS" digest="sha256:8a97ed06931ff2b4ec14c11e4df84a1e1fb74a3599ee568ca195272d4bc541b7" -->
+<!-- pdac:cite id="BR-PRJ-PARTIES-FROM-CONTACTS" digest="sha256:2fe8ce59516db4c08c3582e1c3dd6341fa3b658e8386d10f725671b633b2dcfe" -->

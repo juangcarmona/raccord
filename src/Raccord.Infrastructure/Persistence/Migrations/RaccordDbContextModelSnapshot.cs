@@ -549,6 +549,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("cancelled_at");
 
+                    b.Property<Guid?>("ContactPersonId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_person_id");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid")
                         .HasColumnName("customer_id");

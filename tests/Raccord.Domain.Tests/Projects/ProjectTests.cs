@@ -162,6 +162,25 @@ public sealed class ProjectTests
     }
 
     [Fact]
+    public void Editing_project_details_Should_persist_the_selected_contact_person()
+    {
+        var project = NewProject();
+        var contactPersonId = Guid.CreateVersion7();
+
+        project.EditDetails(
+            CustomerId,
+            "Summer campaign",
+            new DateOnly(2026, 6, 1),
+            new DateOnly(2026, 6, 3),
+            null,
+            null,
+            contactPersonId: contactPersonId
+        );
+
+        project.ContactPersonId.ShouldBe(contactPersonId);
+    }
+
+    [Fact]
     public void Editing_project_details_Should_reject_an_overlong_external_reference_without_mutation()
     {
         var project = NewProject();

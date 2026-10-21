@@ -7657,7 +7657,7 @@ export interface components {
             periodIds: string[];
             kinds: components["schemas"]["CrewFunctionKind"][];
         };
-        /** @description Format: binary */
+        /** Format: binary */
         IFormFile: string;
         /** @description An inbound structured invoice and its current reporting status. */
         InboundEInvoiceResponse: {
@@ -8267,6 +8267,11 @@ export interface components {
             cancelledAt?: null | string;
             /** @description Customer or production reference associated with the project. */
             externalReference?: null | string;
+            /**
+             * Format: uuid
+             * @description Selected person at the project customer contact.
+             */
+            contactPersonId?: null | string;
         };
         /** @description A scheduled project work item. */
         ProjectScheduleResponse: {
@@ -8731,6 +8736,8 @@ export interface components {
             /** Format: uuid */
             teamId?: null | string;
             externalReference?: null | string;
+            /** Format: uuid */
+            contactPersonId?: null | string;
         };
         /** @description Updates a period's name, range and document visibility. */
         UpdateProjectTimePeriodRequest: {

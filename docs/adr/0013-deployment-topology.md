@@ -11,7 +11,7 @@ tags: ["deployment", "docker", "aspire", "azure", "health-checks"]
 
 ## Context
 
-Deployment paths must be documented for Docker Compose, .NET Aspire, and Azure/Bicep (AGENTS.md). Migrations are applied by an explicit command, never at web start-up (ADR-0004), and binary documents need storage (ADR-0009).
+Deployment paths must be documented for Docker Compose, .NET Aspire, and Azure/Bicep. Migrations are applied by an explicit command, never at web start-up (ADR-0004), and binary documents need storage (ADR-0009).
 
 ## Decision
 

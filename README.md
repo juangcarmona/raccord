@@ -54,4 +54,4 @@ See [local development](docs/operations/local-development.md).
 - `docs/research/` — domain and Spanish tax research
 - `docs/operations/` — local development, self-hosting, backup/restore, Azure
 
-Read [AGENTS.md](AGENTS.md) before contributing.
+Read the [architecture rules](docs/architecture/architecture-rules.md) before contributing.

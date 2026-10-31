@@ -1,6 +1,6 @@
-# Screen traces — pen.dev trial
+# Product design screen traces
 
-Every screen in `raccord-screens.pen` is generated from Product Definition as Code artifacts, never from imagination. This file records which artifact decided which design decision, so a reviewer can audit spec fidelity without reading the chat that produced the screens.
+Every screen in `raccord-screens.pen` is derived from Product Definition as Code artifacts. This file records which artifact informs each design decision, so reviewers can audit fidelity against the product model.
 
 Model root: `docs/product/model/`. Translation keys (QR-MOBILE-WEB-APP) are in `docs/product/model/requirements/quality/`. Screen mode split comes from the mobile-delivery decision recorded in `docs/product/changes/completed/chg-initial/change.md` (decision table: "Mobile delivery — one responsive PWA, with a field mode for workday check-in/out and read-only assignments, a management mode for operational control, and a read-only large-screen board").
 

@@ -126,27 +126,3 @@ git diff --check
 ```
 
 Run the existing frontend format/lint/typecheck/test/build/audit commands, commitlint over the PR range, and CI security/image/SBOM checks. The new shared projects must participate in existing runtime dependency/license scanning. No tests/builds are claimed at planning time; record actual results on the PR during implementation.
-
-## Definition of Done mapping
-
-All eleven dimensions from `docs/engineering-lifecycle.md` apply:
-
-| Dimension | Required closure evidence |
-| --- | --- |
-| 1. Acceptance criteria | AC1–AC8 mapped above to passing evidence, with Owner confirmation. |
-| 2. Implementation completeness | This task list complete or explicit justified drops; parent tasks 1.1/1.2 marked only after verification. |
-| 3. Tests | Green suites, recorded new-test red/green evidence and naming/Shouldly conformance; Owner assesses coverage. |
-| 4. Quality checks | Format, analyzers, TypeScript/lint/commitlint, pending-model and OpenAPI checks. |
-| 5. Security | Current secrets/static/dependency/container/license/SBOM gates; Owner reviews new infrastructure dependencies; post-merge ZAP belongs to integration. |
-| 6. Architecture/design | Interim graph, pure SharedKernel and bounded adapters verified; deviations reported to Owner. |
-| 7. Documentation | Interim architecture rules and arc42 5/8 updated; existing operation/migration paths remain accurate. |
-| 8. Product/spec consistency | Baseline/OpenSpec/citations valid; no accepted-model edits; Owner confirms agreement. |
-| 9. Evidence | Link green CI for exact head commit. UI capture is N/A because no UI changes. |
-| 10. Human review | Owner approves the implementation PR before integration. |
-| 11. Known limitations | Module migration/analyzers linked to #31–#34 and epic #16; endpoint adoption and full finalization remain later Invoicing work. Document storage is outside PostgreSQL rollback. |
-
-## Handoff to a smaller model
-
-Use this prompt after the Owner approves the plan:
-
-> Implement issue #30 on the existing PR branch. Read AGENTS.md and openspec/changes/shared-module-foundation/{proposal,design,tasks,test-plan}.md plus its spec. Work through this change's unchecked tasks in order, one checkpoint at a time. Use the exact signatures, source/destination paths and temporary adapters in design.md. Write the named failing tests before each new seam; preserve existing domain/web/E2E assertions. Run each task's verification before ticking it. Do not execute the parent epic's module/schema migration tasks, change the product model, weaken architecture/selection/contract checks, or merge/deploy. Record test results and AC1–AC8 evidence in the existing PR. If an invariant fails, report the concrete diff/failing test rather than inventing a new design. Finish by requesting the Owner's Done review.

@@ -5,7 +5,7 @@
 
 rules:
   # The domain and application layers must stay free of infrastructure concerns — the
-  # modular monolith's inner-ring rule (see AGENTS.md and the ForbiddenInCore test).
+  # modular monolith's inner-ring rule (see docs/architecture/architecture-rules.md and the ForbiddenInCore test).
   - id: raccord-no-httpclient-in-core
     message: HttpClient belongs to infrastructure; Domain and Application must not make HTTP calls.
     severity: ERROR

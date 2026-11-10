@@ -1,13 +1,15 @@
 {
-    "extraKnownMarketplaces": {
-        "agent-toolkit": {
-            "source": {
-                "source": "github",
-                "repo": "juangcarmona/agent-toolkit"
-            }
-        }
-    },
-    "enabledPlugins": {
-        "agentic-sdlc@agent-toolkit": true
-    }
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/guard-git-hooks.mjs\"; status=$?; if [ \"$status\" -eq 2 ]; then exit 2; fi; exit 0"
+          }
+        ]
+      }
+    ]
+  }
 }

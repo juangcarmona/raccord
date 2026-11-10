@@ -487,3 +487,9 @@ Every completed FF loop must review this ledger, add new observations and action
 - **Observation:** The collections journey selected whichever VAT scheme was currently marked default; a parallel catalog journey changed that global default and changed the invoice total, failing CI at four workers although the local run passed at a higher worker count.
 - **Action:** When a journey needs a specific setup rate, select the named source-dated starter scheme and assert its expected rate instead of depending on mutable default selection; make the shared browser billing helper explicitly choose `General` unless a journey supplies its own class and scheme.
 - **Check:** Collections and UBL export journeys use `General` and assert the 21% setup rate; the full 37-journey suite passes with four workers while the VAT catalog journey changes the workspace default to a synthetic rate.
+
+## 2026-11-10 · Keep generated Lighthouse verification runnable
+
+- **Observation:** The generated Lighthouse workflow runs `npm ci` at the repository root, while Raccord previously had a lockfile only under `src/Raccord.Frontend/`.
+- **Action:** Pin the Lighthouse CLI in a private root tooling package and commit its lockfile without changing the frontend dependency tree.
+- **Check:** `npm ci --ignore-scripts` followed by `npm exec --no -- lighthouse verify` passes from the repository root.

@@ -1,8 +1,8 @@
 # Engineering lifecycle
 
-**Project**: `juangcarmona/raccord` **Adopted**: 2026-10-12 · **Last amended**: 2026-10-19
+**Project**: `juangcarmona/raccord` **Adopted**: 2026-10-12 · **Last amended**: 2026-11-10
 
-This is raccord's lifecycle contract for the agentic-sdlc capabilities (`refine`, `propose`, `implement`, `integrate`, `review`, `status`). Its section headings are an interface: add sections freely, but never rename or delete one. Repository conventions stay in `AGENTS.md`. Product intent stays in `docs/product/`. Decisions stay in `docs/adr/`.
+This is Raccord's lifecycle contract. Repository conventions stay in `AGENTS.md`. Product intent stays in `docs/product/`. Decisions stay in `docs/adr/`.
 
 ## Definition of Ready
 
@@ -137,8 +137,6 @@ Post-merge retrospectives use one file per issue at `docs/reviews/issue-<number>
 | Durable evidence              | `docs/delivery/ff/<work-item-id>/<run-id>/run.json` and `summary.md`                                                                          |
 | Human-only or protected gates | Owner-only product, security, and compliance decisions; required forge approvals; production deployment; credentials and repository red lines |
 
-Invoke `/agentic-sdlc:ff <work-item-id>` in Claude Code or `ff <work-item-id>` in portable skill hosts. It may prepare and update a PR, push its branch, and merge only after all configured gates pass and repository protection permits it.
-
 ## Work in progress
 
 **WIP cap**: Not used. **Query used at pickup**: Not used. **Sprint commitment**: Not used. **Board**: Not used. The project has a single maintainer and no GitHub Projects board.
@@ -148,35 +146,6 @@ Invoke `/agentic-sdlc:ff <work-item-id>` in Claude Code or `ff <work-item-id>` i
 | Role  | Who                              | Decides                                                                                                                                          |
 | ----- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Owner | Juan G. Carmona (`juangcarmona`) | Every judgement item of the Definition of Done (1, 2, 3, 5, 6, 7, 8, 10, 11), plan approval at the Planned gate, and every human-only transition |
-
-## Installed roles
-
-Role sources are in `.agents/skills/`; `.claude/skills/` contains generated copies. These roles were reset to Agentic SDLC 0.2.2 defaults on 2026-10-19.
-
-| Role skill             | Adapted from                         | Installed  | Projected to       |
-| ---------------------- | ------------------------------------ | ---------- | ------------------ |
-| `read-work-item`       | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `read-work-item-links` | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `create-work-item`     | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `update-work-item`     | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `comment-work-item`    | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `transition-work-item` | Agentic SDLC GitHub Issues template  | 2026-10-19 | Codex, Claude Code |
-| `create-branch`        | Agentic SDLC branch template         | 2026-10-19 | Codex, Claude Code |
-| `checkout-branch`      | Agentic SDLC branch template         | 2026-10-19 | Codex, Claude Code |
-| `open-pull-request`    | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
-| `update-pull-request`  | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
-| `inspect-pull-request` | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
-| `inspect-ci-result`    | Agentic SDLC GitHub Actions template | 2026-10-19 | Codex, Claude Code |
-| `merge-pull-request`   | Agentic SDLC GitHub template         | 2026-10-19 | Codex, Claude Code |
-
-Not installed, by decision:
-
-- `read-work-item-attachments`: issues carry their content inline.
-- `discover-related-docs`, `read-kb-page`, `search-kb`, `sync-doc-to-kb` and `classify-doc-drift`: documentation lives in the repository, with no separate wiki or knowledge base.
-- `commit-to-sprint` and `wip-query`: sprints and WIP limits are not used.
-- The plan-artifact contracts are provided by OpenSpec (see **Provided roles**).
-
-The lifecycle package itself is not vendored for Claude Code: `.claude/settings.json` registers the `agent-toolkit` marketplace (`juangcarmona/agent-toolkit`) and enables the `agentic-sdlc` plugin, so Claude Code offers to install it when the project is opened. The plugin brings the seven stage commands (for example `/agentic-sdlc:refine`), the `done-gate-auditor` and `flow-reporter` agents, the stage skills, and the `adr`, `rebase-safely` and `git-worktrees` skills `integrate` and `propose` call. Codex has no plugin mechanism, so the same skills are committed under `.agents/skills/`, installed with the skills CLI and locked in `skills-lock.json`: `npx skills add juangcarmona/agent-toolkit/packages/agentic-sdlc -a codex --copy`, and `npx skills add juangcarmona/agent-toolkit --skill adr --skill rebase-safely --skill git-worktrees -a codex --copy`. Agents are a Claude Code feature: with Codex, run `done-gate-auditor`'s instructions as a prompt in a fresh session, since the Done gate depends on the audit not being done by the session that wrote the change.
 
 ## Provided roles
 
@@ -193,7 +162,5 @@ OpenSpec 1.12.0 generates these skills; `openspec init --tools claude,codex` was
 
 | Date       | Section                                                | Change                                                                                                                                                                                                   | Why                                                                                              |
 | ---------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| 2026-10-12 | All                                                    | Bootstrapped by `adopt`                                                                                                                                                                                  | Onboarding onto agentic-sdlc                                                                     |
 | 2026-10-12 | Definition of Done (8), Deterministic checks           | Added the OpenSpec citation gate and moved ProductShape to 0.22.0                                                                                                                                        | ProductShape's OpenSpec integration was adopted, so product grounding became checkable in CI     |
-| 2026-10-12 | Installed roles                                        | Replaced the APM install of agentic-sdlc with the Claude Code plugin (project settings) plus the skills CLI for Codex; the missing `rebase-safely` skill and `done-gate-auditor` agent are now delivered | The package could not be used without APM; agent-toolkit now publishes a Claude Code marketplace |
 | 2026-10-19 | Lifecycle labels, retrospective baseline, Fast Forward | Reset issue status to the shared `status:*` set, established per-item review records, and configured bounded `/ff`                                                                                       | Align issue handling and PR integration across repositories while preserving Owner gates         |

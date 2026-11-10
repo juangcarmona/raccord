@@ -9,3 +9,4 @@
 - [x] Add and test the Claude Code PreToolUse guard; run it in CI.
 - [x] Preserve Raccord's application analyzers, architecture tests, Semgrep rules, pre-commit hook, and CI jobs.
 - [x] Run the Release build, non-E2E tests, Lighthouse verifier, guard tests, and documentation lint.
+- [x] Patch the existing arc42 snapshot DOMPurify pin found by the PR security gate and rerun its tests.

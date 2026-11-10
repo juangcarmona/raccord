@@ -13,6 +13,7 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 - Remove retired agent tooling and its copied skills without changing application behavior.
 - Use Lighthouse's generated commit-message and pre-push hooks; retain Raccord's pre-commit checks and CI jobs.
 - Reject Claude Code Bash calls that bypass Git hooks, and run the guard tests in CI.
+- Patch the arc42 snapshot tool's DOMPurify pin after the PR security gate exposed a vulnerable version.
 
 ## Impact
 

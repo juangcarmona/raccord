@@ -25,6 +25,8 @@ jobs:
         run: node scripts/check-design-system.mjs
       - name: Check drift guard behavior
         run: node --test scripts/check-design-system.test.mjs
+      - name: Check Claude Code git hook guard
+        run: node --test scripts/guard-git-hooks.test.mjs
 
   changes:
     name: Classify changed paths

@@ -23,7 +23,7 @@ We will enforce these gates in the build and in CI:
 - **Line endings:** LF everywhere (`.editorconfig` + `.gitattributes`); containers and shell scripts require it. (The initial scaffold specified CRLF.)
 - **CI** (`.github/workflows/ci.yml`): restore, `dotnet format --verify-no-changes`, Release build, all tests (with Docker), vulnerable package check, pending-model-changes check; frontend lint, type check, tests, build, `npm audit --audit-level=high`, OpenAPI contract drift; container image build, Compose validation, Bicep build and lint.
 - **Aspire CLI bundle:** the AppHost runs from NuGet packages (`AspireUseCliBundle=false`), so CI and contributors need no extra CLI.
-- New production dependencies require an ADR (AGENTS.md).
+- New production dependencies require an ADR (see `docs/architecture/architecture-rules.md`).
 
 ### Production dependencies added in the first slice
 

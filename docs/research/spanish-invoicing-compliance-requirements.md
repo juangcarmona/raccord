@@ -660,7 +660,7 @@ The exact calendar day (for example 2027-10-06 vs 2027-10-07) depends on how the
 
 ## 10. Implications for Raccord's design
 
-Raccord's architecture already separates the invoice domain, the compliance adapter, and the accounting and e-invoicing adapters (`docs/operations/claude-execution-brief.md`). The requirements below describe the **compliance seam** between the immutable invoice domain and any SIF or e-invoicing adapter.
+Raccord's architecture already separates the invoice domain, the compliance adapter, and the accounting and e-invoicing adapters (`docs/architecture/compliance-seam.md`). The requirements below describe the **compliance seam** between the immutable invoice domain and any SIF or e-invoicing adapter.
 
 ### Inputs, outputs and evidence
 

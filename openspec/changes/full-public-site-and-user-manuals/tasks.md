@@ -34,4 +34,3 @@ Product pages and task guides must reflect the product areas and the people resp
 
 - [x] 5.1 Extend the Node build tests to cover all routes, locale peer links, local navigation, image assets and required notices; verify `npm run verify` passes.
 - [x] 5.2 Run `npx -y @fission-ai/openspec@1.12.0 validate full-public-site-and-user-manuals --strict` and `npx -y @prodshape/cli@0.22.0 citations verify --provider openspec`; resolve every diagnostic before marking the plan complete.
-- [x] 5.3 Review `docs/operations/process-ledger.md` and record a durable lesson only if the implementation revealed a repeatable process gap; verify the ledger change is tied to an observed issue.

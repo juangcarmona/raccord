@@ -20,7 +20,7 @@ ADR-0018 moves code into module assemblies, so each module needs to register its
 - `ErrorOr<T>` results mapped to problem details;
 - FluentValidation.
 
-Their risk logs note that contributors and coding agents copy whichever pattern they find. One shared shape across these repositories reduces that drift.
+Their risk logs note that contributors copy whichever pattern they find. One shared shape across these repositories reduces that drift.
 
 ## Decision
 

@@ -14,7 +14,7 @@ The product MUST provide an authenticated account page that displays the current
 
 <!-- pdac:cite id="UC-WSP-EDIT-PROFILE" digest="sha256:110a8e418914abd5f8a156d5729ec9a0055972823b845b5d17c5e1873d6b99ae" -->
 <!-- pdac:cite id="FR-WSP-016" digest="sha256:a6318f734164595fecbe906b6be4b7e17830d40f1e32d1db2fc161f5a3ad63d5" -->
-<!-- pdac:cite id="BR-WSP-PROFILE-OWNED-BY-PERSON" digest="sha256:cc05019851b877d398a0a749334a59b40bc905731e3744f87b67532ba493f7c6" -->
+<!-- pdac:cite id="BR-WSP-PROFILE-OWNED-BY-PERSON" digest="sha256:0b9f21ef0aa3dfdb9850fec8910ab6edbd2b8479c7e93c738074579aba243c87" -->
 <!-- pdac:cite id="TERM-PERSONAL-PROFILE" digest="sha256:9e904c99957e8115e03adbe906f242aae13fa65eb1dea0e1a4f7bf1667d9675c" -->
 <!-- pdac:cite id="ACT-CREW-MEMBER" digest="sha256:7e8350f158cc4ac6c30857753bcf74655a043878f28b0d5561343b7092ecfdbe" -->
 <!-- pdac:cite id="BC-WORKSPACE" digest="sha256:013841dd37789974afef821eb2c071a85acaa72c083abd2285b7c406db95f8a5" -->
@@ -44,7 +44,7 @@ The product MUST provide an authenticated account page that displays the current
 The product MUST apply the saved profile language to the signed-in user's interface without changing the workspace language, other users' preferences, or workspace-level notifications and defaults. A user's saved language MUST be loaded from the server when their authenticated session is established; local storage MAY be used only as a display fallback while the server value loads.
 
 <!-- pdac:cite id="UC-WSP-SET-LANGUAGE" digest="sha256:4e1830ebc5acc09bdedf5900f8543f6d29ee5a13439f608dfb055a43bf972aed" -->
-<!-- pdac:cite id="BR-WSP-LANGUAGE-SCOPES" digest="sha256:495045d198c600a95725b0796363ad8d29d8690f67b494c4b12be5275178b335" -->
+<!-- pdac:cite id="BR-WSP-LANGUAGE-SCOPES" digest="sha256:66e6c37a965d4c04ce6a87db543e98d98a93b9ac1db386dc84060ce72faa5eeb" -->
 <!-- pdac:cite id="TERM-PROFILE-LANGUAGE" digest="sha256:0782e7729b035f366560a1116c249189a7e896cf146614e2f44bf3078889acd8" -->
 <!-- pdac:cite id="FR-WSP-018" digest="sha256:38cd7c21cde0b0d0037f1475e74e69dd454a153b247d804ff2f862bfa1d0db6d" -->
 <!-- pdac:cite id="SB-WSP-PROFILE-LANGUAGE-ONLY-SCREENS" digest="sha256:d487ec2e88e21259cce5eb9b05dc6f1899a27175c4d31b753f73aab32d118c4c" -->

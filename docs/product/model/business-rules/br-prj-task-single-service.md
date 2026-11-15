@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-SINGLE-SERVICE
 type: business-rule
 title: "A task belongs to at most one service"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
   - "TERM-PRODUCTION-SERVICE"

@@ -3,9 +3,7 @@ id: BR-CRW-SIGNATURE-STATUS-ASSIGNMENT
 type: business-rule
 title: "Signature status follows how a document was created"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-DOCUMENTS"
-  - "UC-CRW-GENERATE-CREW-AGREEMENT"
+applies-to: []
 uses-terms:
   - "TERM-SIGNATURE-STATUS"
 provenance:

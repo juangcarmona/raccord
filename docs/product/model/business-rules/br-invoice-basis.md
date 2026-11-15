@@ -3,9 +3,7 @@ id: BR-INVOICE-BASIS
 type: business-rule
 title: "Invoices bill selected lines or a project advance"
 status: draft
-applies-to:
-  - "UC-CREATE-INVOICE-DRAFT"
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-DRAFT"
   - "TERM-BILLABLE-LINE"

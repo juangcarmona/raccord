@@ -3,9 +3,7 @@ id: "BR-DOC-TEXT-TEMPLATE-VISIBILITY"
 type: business-rule
 title: "The author decides who may use a text template"
 status: draft
-applies-to:
-  - "UC-DOC-SAVE-TEXT-TEMPLATE"
-  - "UC-DOC-APPLY-TEXT-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-TEXT-TEMPLATE"
 provenance:

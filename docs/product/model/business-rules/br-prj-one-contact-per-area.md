@@ -3,8 +3,7 @@ id: BR-PRJ-ONE-CONTACT-PER-AREA
 type: business-rule
 title: "Venue areas are separate contacts"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-CONTACT"
+applies-to: []
 uses-terms:
   - "TERM-VENUE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-NAME-REQUIRED
 type: business-rule
 title: "A task needs only a name"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
 provenance:

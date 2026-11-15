@@ -1,0 +1,15 @@
+# Lighthouse adoption in Raccord
+
+The pinned root tooling package runs Lighthouse verification for the existing .NET backend and React TypeScript frontend. `dotnet-backend`, `react-web-platform`, and `visual-theme` are selected; the React profile requires the visual profile. Raccord's current authentication uses local ASP.NET Core Identity and a same-origin session, so the external-provider-oriented `web-bff` profile is not selected.
+
+The .NET profile describes LH1001 and LH1002, but initialization does not install those analyzers. Raccord keeps its RACC001–004 analyzer, RACC100 MSBuild rule, architecture tests, and Semgrep rules as the executable module-boundary contract. LH1002 overlaps the existing sibling-module checks; LH1001 targets Lighthouse CQRS interfaces that Raccord does not use. Do not add either analyzer without a separate reviewed change.
+
+Lighthouse manages `.husky/commit-msg` and `.husky/pre-push`. Raccord's `.husky/pre-commit` remains project-owned. The CI lint job still runs Raccord's configured commitlint policy over PR commits, while the generated commit hook checks Lighthouse's conventional-commit baseline.
+
+The SDLC triage, refine, propose, implement, and apply-review workflows are installed from the pinned package and compiled with gh-aw v0.93.2. The repository variable `LIGHTHOUSE_AUTOMATION_ENABLED` is set to `true`, enabling the router, while automatic implementation remains disabled. Runner provisioning and label review remain separate steps; no self-hosted runner was registered at the time of this update.
+
+The implementation publisher consumes the repository's `LIGHTHOUSE_CI_APP_CLIENT_ID` Actions variable and `LIGHTHOUSE_CI_APP_PRIVATE_KEY` Actions secret in its trusted job. It creates an immutable `lighthouse/verification-*` ref so the existing CI workflow can produce eligible checks for bot-authored PRs. The agent receives neither credential. The configured App installation and token scope still need an owner-run probe before activation.
+
+Lighthouse 0.13.9 requires PDaC serialization `v1alpha2`. The human-approved Product Change `CHG-PDAC-V1ALPHA2-001` migrated Raccord's model to that version while preserving its 794 rule-to-use-case relationships. ProductShape validates all 1,889 artifacts, and all 501 current OpenSpec citations resolve against the migrated model. Lighthouse's PDaC foundation check passes.
+
+The copied SDLC workflow sources retain the package's [license](../licenses/lighthouse-sdlc/LICENSE) and [notice](../licenses/lighthouse-sdlc/NOTICE).

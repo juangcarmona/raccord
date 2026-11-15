@@ -3,8 +3,7 @@ id: BR-CRW-EXPORT-PENDING-WARNING
 type: business-rule
 title: "Exporting with pending registrations warns"
 status: draft
-applies-to:
-  - "UC-CRW-EXPORT-PAYROLL-DATA"
+applies-to: []
 uses-terms:
   - "TERM-PAYROLL-EXPORT"
   - "TERM-TIME-REGISTRATION-STATUS"

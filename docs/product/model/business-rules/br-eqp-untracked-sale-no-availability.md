@@ -3,8 +3,7 @@ id: BR-EQP-UNTRACKED-SALE-NO-AVAILABILITY
 type: business-rule
 title: "Untracked sale items have no availability"
 status: draft
-applies-to:
-  - "UC-EQP-CREATE-SALE-ITEM"
+applies-to: []
 uses-terms:
   - "TERM-STOCK-MANAGEMENT-MODE"
 provenance:

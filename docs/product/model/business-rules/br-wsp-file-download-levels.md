@@ -3,8 +3,7 @@ id: BR-WSP-FILE-DOWNLOAD-LEVELS
 type: business-rule
 title: "File downloads follow the role's download level"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-FILE-DOWNLOAD-LEVEL"
 provenance:

@@ -3,9 +3,7 @@ id: BR-FIN-DEFAULTS-BY-PROJECT-TYPE
 type: business-rule
 title: "Project type selects default template, letterhead and additional conditions"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-QUOTE"
-  - "UC-FIN-SET-PROJECT-CONDITIONS"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-CONDITIONS"
 provenance:

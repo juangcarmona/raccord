@@ -3,8 +3,7 @@ id: BR-FIN-ADDITIONAL-COST-GROUPED
 type: business-rule
 title: "Every additional cost belongs to a cost group"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-ADDITIONAL-COSTS"
+applies-to: []
 uses-terms:
   - "TERM-COST-GROUP"
   - "TERM-ADDITIONAL-COST"

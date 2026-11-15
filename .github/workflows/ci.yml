@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'lighthouse/verification-*']
   pull_request:
 
 permissions:
@@ -25,6 +25,8 @@ jobs:
         run: node scripts/check-design-system.mjs
       - name: Check drift guard behavior
         run: node --test scripts/check-design-system.test.mjs
+      - name: Check Claude Code git hook guard
+        run: node --test scripts/guard-git-hooks.test.mjs
 
   changes:
     name: Classify changed paths
@@ -208,10 +210,10 @@ jobs:
           node-version: 24
       - name: Validate baseline and live Product Changes
         run: |
-          npx -y @prodshape/cli@0.22.0 validate
+          npx -y @prodshape/cli@0.26.1 validate
           for change in docs/product/changes/active/*/; do
             id=$(grep -m1 '^id:' "$change/change.md" | awk '{print $2}')
-            npx -y @prodshape/cli@0.22.0 change validate "$id"
+            npx -y @prodshape/cli@0.26.1 change validate "$id"
           done
       # Every current OpenSpec document must be bound (cites the product model) or exempt (with a
       # human-approved reason). Stale citations only warn: .product/config.yaml keeps
@@ -220,7 +222,7 @@ jobs:
       - name: Install the OpenSpec CLI
         run: npm install -g @fission-ai/openspec@1.12.0
       - name: OpenSpec documents cite the product model
-        run: npx -y @prodshape/cli@0.22.0 citations verify --provider openspec
+        run: npx -y @prodshape/cli@0.26.1 citations verify --provider openspec
 
   frontend:
     name: Frontend lint, types, tests, build, audit, contract drift

@@ -3,8 +3,7 @@ id: BR-WHS-BOARD-DUE-DATE
 type: business-rule
 title: "Packing lists appear on their due date"
 status: draft
-applies-to:
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-WAREHOUSE-DUE-DATE"
   - "TERM-PACKING-LIST"

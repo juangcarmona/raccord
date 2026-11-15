@@ -3,9 +3,7 @@ id: BR-CRW-PLANNED-COST-VISIBILITY
 type: business-rule
 title: "Planned cost of activities is visible only with permission"
 status: draft
-applies-to:
-  - "UC-CRW-RECORD-ACTIVITY-INVOICE-REFERENCE"
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-COST"
   - "TERM-PLANNED-ACTIVITY"

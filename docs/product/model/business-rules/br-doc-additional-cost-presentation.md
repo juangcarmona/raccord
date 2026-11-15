@@ -3,8 +3,7 @@ id: "BR-DOC-ADDITIONAL-COST-PRESENTATION"
 type: business-rule
 title: "Additional costs show groups only on request and always close with a total"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-COSTS-MODULE"
 provenance:

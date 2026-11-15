@@ -3,9 +3,7 @@ id: "BR-DOC-LETTERHEAD-PRECEDENCE"
 type: business-rule
 title: "Letterhead and template choice at generation overrides defaults"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
-  - "UC-DOC-REGENERATE-WITH-OTHER-LAYOUT"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
   - "TERM-DOCUMENT-TEMPLATE"

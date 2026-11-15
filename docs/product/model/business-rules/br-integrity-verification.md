@@ -3,9 +3,7 @@ id: BR-INTEGRITY-VERIFICATION
 type: business-rule
 title: "Altered issued invoices are never served"
 status: draft
-applies-to:
-  - "UC-OBTAIN-INVOICE-DOCUMENT"
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-FINGERPRINT"
 ---

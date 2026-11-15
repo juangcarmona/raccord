@@ -3,8 +3,7 @@ id: BR-WSP-DEFAULT-TIME-ZONE-BASELINE
 type: business-rule
 title: "The default time zone is the planning baseline"
 status: draft
-applies-to:
-  - "UC-WSP-SET-TIME-ZONE"
+applies-to: []
 uses-terms:
   - "TERM-WORKSPACE-TIME-ZONE"
 provenance:

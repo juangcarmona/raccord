@@ -3,9 +3,7 @@ id: BR-PRJ-BOARD-MOVE-EDITS-TASK
 type: business-rule
 title: "Moving a card edits the task"
 status: draft
-applies-to:
-  - "UC-PRJ-WORK-WITH-TASK-BOARD"
-  - "UC-PRJ-PROGRESS-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-BOARD"
 provenance:

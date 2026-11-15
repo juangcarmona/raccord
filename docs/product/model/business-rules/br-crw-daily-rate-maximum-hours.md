@@ -3,8 +3,7 @@ id: BR-CRW-DAILY-RATE-MAXIMUM-HOURS
 type: business-rule
 title: "Hours beyond the daily maximum are charged hourly on top of the daily rate"
 status: draft
-applies-to:
-  - "UC-CRW-LINK-RATES-TO-CREW-MEMBER"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RATE"
 provenance:

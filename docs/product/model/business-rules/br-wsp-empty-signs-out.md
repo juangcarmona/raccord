@@ -3,8 +3,7 @@ id: BR-WSP-EMPTY-SIGNS-OUT
 type: business-rule
 title: "Emptying signs everyone out"
 status: draft
-applies-to:
-  - "UC-WSP-EMPTY-SAMPLE-DATA"
+applies-to: []
 uses-terms:
   - "TERM-WORKSPACE"
 provenance:

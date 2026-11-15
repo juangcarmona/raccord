@@ -3,8 +3,7 @@ id: BR-PRJ-TEAM-MEMBERSHIP-NOTICE
 type: business-rule
 title: "Members are notified of team changes"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TEAMS"
+applies-to: []
 uses-terms:
   - "TERM-TASK-TEAM"
 provenance:

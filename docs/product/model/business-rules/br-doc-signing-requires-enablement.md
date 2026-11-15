@@ -3,8 +3,7 @@ id: "BR-DOC-SIGNING-REQUIRES-ENABLEMENT"
 type: business-rule
 title: "Digital signing works only when the company allows it"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-DIGITAL-SIGNING"
+applies-to: []
 uses-terms:
   - "TERM-DIGITAL-SIGNING-ELEMENT"
 provenance:

@@ -3,8 +3,7 @@ id: BR-WHS-SCAN-CODE-UNIQUE
 type: business-rule
 title: "Scan codes are unique and at most 25 characters"
 status: draft
-applies-to:
-  - "UC-WHS-ASSIGN-SCAN-CODES"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-CODE"
 provenance:

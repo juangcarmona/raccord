@@ -3,9 +3,7 @@ id: BR-PRJ-PROJECT-TYPE-DEFAULTS
 type: business-rule
 title: "Project types supply defaults"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-PROJECT-TYPES"
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TYPE"
 provenance:

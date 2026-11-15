@@ -3,9 +3,7 @@ id: BR-EQP-ARCHIVE-PRESERVES-HISTORY
 type: business-rule
 title: "Archiving removes from stock but keeps history"
 status: draft
-applies-to:
-  - "UC-EQP-ARCHIVE-ITEM"
-  - "UC-EQP-CHANGE-ITEM-TYPE"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-RECORD-STATE"
   - "TERM-ARCHIVED-EQUIPMENT"

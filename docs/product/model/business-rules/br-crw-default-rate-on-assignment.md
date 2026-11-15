@@ -3,9 +3,7 @@ id: BR-CRW-DEFAULT-RATE-ON-ASSIGNMENT
 type: business-rule
 title: "Planning applies the crew member's default rate unless another is chosen"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-CRW-CHANGE-ASSIGNMENT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RATE"
   - "TERM-CREW-ASSIGNMENT"

@@ -3,10 +3,7 @@ id: BR-WHS-LINE-TIMES-DEFAULT
 type: business-rule
 title: "Lines inherit default times until changed"
 status: draft
-applies-to:
-  - "UC-WHS-SET-LINE-TIMES"
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-WHS-ORGANIZE-GROUPS"
+applies-to: []
 uses-terms:
   - "TERM-PLANNING-PERIOD"
   - "TERM-USAGE-PERIOD"

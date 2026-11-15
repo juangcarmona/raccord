@@ -3,8 +3,7 @@ id: BR-PRJ-OPEN-INVOICE-BUCKETS
 type: business-rule
 title: "Open invoice widget buckets"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-DASHBOARD"
+applies-to: []
 uses-terms:
   - "TERM-DASHBOARD-WIDGET"
   - "TERM-PAYMENT-STATUS"

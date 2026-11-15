@@ -3,8 +3,7 @@ id: BR-WSP-DST-CONVERSION
 type: business-rule
 title: "Time zone conversions include daylight saving"
 status: draft
-applies-to:
-  - "UC-WSP-SWITCH-VIEWING-TIME-ZONE"
+applies-to: []
 uses-terms:
   - "TERM-MULTIPLE-TIME-ZONES"
 provenance:

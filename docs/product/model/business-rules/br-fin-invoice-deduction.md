@@ -3,9 +3,7 @@ id: BR-FIN-INVOICE-DEDUCTION
 type: business-rule
 title: "Earlier invoices can be deducted from a new one"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
-  - "UC-FIN-CREATE-CREDIT-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-DEDUCTION"
 provenance:

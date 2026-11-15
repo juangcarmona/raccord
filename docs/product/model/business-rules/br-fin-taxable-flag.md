@@ -3,8 +3,7 @@ id: BR-FIN-TAXABLE-FLAG
 type: business-rule
 title: "Only taxable equipment carries location tax"
 status: draft
-applies-to:
-  - "UC-FIN-MAINTAIN-LOCATION-TAX-RATES"
+applies-to: []
 uses-terms:
   - "TERM-LOCATION-TAX-RATE"
 provenance:

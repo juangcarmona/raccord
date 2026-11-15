@@ -4,8 +4,6 @@ type: business-rule
 title: "Losses reduce stock; finds restore it"
 status: draft
 applies-to:
-  - "UC-WHS-MARK-LOST"
-  - "UC-WHS-MARK-FOUND"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-LOST-EQUIPMENT"

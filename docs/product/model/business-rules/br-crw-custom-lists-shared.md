@@ -3,8 +3,7 @@ id: BR-CRW-CUSTOM-LISTS-SHARED
 type: business-rule
 title: "Custom resource lists are shared by the company"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CUSTOM-RESOURCE-LISTS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-LIST"
 provenance:

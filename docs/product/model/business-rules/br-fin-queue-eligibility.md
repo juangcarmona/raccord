@@ -3,8 +3,7 @@ id: BR-FIN-QUEUE-ELIGIBILITY
 type: business-rule
 title: "When a project enters the invoicing queue"
 status: draft
-applies-to:
-  - "UC-FIN-WORK-INVOICING-QUEUE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICING-QUEUE"
   - "TERM-QUEUE-ENTRY-STATUS"

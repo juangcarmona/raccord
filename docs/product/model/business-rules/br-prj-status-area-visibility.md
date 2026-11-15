@@ -4,7 +4,6 @@ type: business-rule
 title: "Status decides where a project appears"
 status: draft
 applies-to:
-  - "UC-PRJ-CHANGE-PROJECT-STATUS"
   - "BC-PROJECTS"
 uses-terms:
   - "TERM-PROJECT-STATUS"

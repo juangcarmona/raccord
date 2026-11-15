@@ -3,8 +3,7 @@ id: BR-WSP-IMPORTANT-DAYS-NON-BLOCKING
 type: business-rule
 title: "Important days inform but never block"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-IMPORTANT-DAYS"
+applies-to: []
 uses-terms:
   - "TERM-IMPORTANT-DAY"
 provenance:

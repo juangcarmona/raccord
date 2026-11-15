@@ -3,8 +3,7 @@ id: BR-WHS-SPLIT-DETACHES-FROM-VIRTUAL-KIT
 type: business-rule
 title: "Splitting kit content takes it out of the kit"
 status: draft
-applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

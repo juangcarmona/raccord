@@ -9,6 +9,7 @@ supporting-actors:
 bounded-context: "BC-COMMERCIAL"
 governed-by:
   - "BR-FIN-TERMS-ATTACHMENT"
+  - "BR-PRJ-QUOTE-SENT-PENDING"
 uses-terms:
   - "TERM-QUOTE"
 provenance:

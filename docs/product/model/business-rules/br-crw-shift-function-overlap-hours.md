@@ -3,9 +3,7 @@ id: BR-CRW-SHIFT-FUNCTION-OVERLAP-HOURS
 type: business-rule
 title: "Hours overlapping a shift and a function count once"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-SHIFT"
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-SHIFT"
 provenance:

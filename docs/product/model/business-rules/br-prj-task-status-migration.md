@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-STATUS-MIGRATION
 type: business-rule
 title: "Existing tasks map to the fixed statuses"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-TASK-STATUSES"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS"
 provenance:

@@ -3,9 +3,7 @@ id: "BR-DOC-DELIVERY-STATUS-TRANSITIONS"
 type: business-rule
 title: "E-mail delivery status follows the mail account's reports"
 status: draft
-applies-to:
-  - "UC-DOC-RECORD-DELIVERY-OUTCOME"
-  - "UC-DOC-REVIEW-SENT-EMAILS"
+applies-to: []
 uses-terms:
   - "TERM-EMAIL-DELIVERY-STATUS"
 provenance:

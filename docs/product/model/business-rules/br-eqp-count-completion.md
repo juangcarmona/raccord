@@ -3,8 +3,7 @@ id: BR-EQP-COUNT-COMPLETION
 type: business-rule
 title: "Completing a count applies differences"
 status: draft
-applies-to:
-  - "UC-EQP-COUNT-SELECTED-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-COUNT-RESULT"
   - "TERM-INVENTORY-COUNT"

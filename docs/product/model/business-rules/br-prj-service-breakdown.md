@@ -3,9 +3,7 @@ id: BR-PRJ-SERVICE-BREAKDOWN
 type: business-rule
 title: "Service breakdown calculation"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
-  - "UC-PRJ-REPORT-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-PRODUCTION-SERVICE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-RELATIVE-DEADLINE
 type: business-rule
 title: "Relative deadlines follow the project schedule"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-DEADLINE"
 provenance:

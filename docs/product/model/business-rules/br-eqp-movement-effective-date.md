@@ -3,8 +3,7 @@ id: BR-EQP-MOVEMENT-EFFECTIVE-DATE
 type: business-rule
 title: "Stock movements take effect on their date"
 status: draft
-applies-to:
-  - "UC-EQP-SCHEDULE-STOCK-MOVEMENT"
+applies-to: []
 uses-terms:
   - "TERM-SCHEDULED-STOCK-MOVEMENT"
   - "TERM-STOCK-QUANTITY"

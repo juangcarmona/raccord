@@ -3,8 +3,7 @@ id: BR-WSP-EDITED-IDENTIFIER-MISMATCH
 type: business-rule
 title: "Editing identifiers in a file corrupts the update"
 status: draft
-applies-to:
-  - "UC-WSP-UPDATE-BY-IMPORT"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-IDENTIFIER"
 provenance:

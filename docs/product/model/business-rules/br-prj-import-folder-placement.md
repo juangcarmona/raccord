@@ -3,8 +3,7 @@ id: BR-PRJ-IMPORT-FOLDER-PLACEMENT
 type: business-rule
 title: "Imported records are placed by folder path"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-CONTACTS"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-FOLDER"
 provenance:

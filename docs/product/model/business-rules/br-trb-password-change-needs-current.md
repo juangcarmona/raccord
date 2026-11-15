@@ -3,8 +3,7 @@ id: "BR-TRB-PASSWORD-CHANGE-NEEDS-CURRENT"
 type: business-rule
 title: "Changing a known password requires the current one"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-PASSWORD"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360014048499.md"

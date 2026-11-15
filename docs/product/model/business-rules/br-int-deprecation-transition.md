@@ -3,8 +3,7 @@ id: BR-INT-DEPRECATION-TRANSITION
 type: business-rule
 title: "Moved fields are served in both places during a transition"
 status: draft
-applies-to:
-  - "UC-INT-ADAPT-TO-API-CHANGE"
+applies-to: []
 uses-terms:
   - "TERM-API-DEPRECATION"
 provenance:

@@ -4,8 +4,6 @@ type: business-rule
 title: "Delayed is derived, never set"
 status: draft
 applies-to:
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
-  - "UC-WHS-MARK-DELAYED"
   - "BC-WAREHOUSE"
 uses-terms:
   - "TERM-DELAYED-EQUIPMENT"

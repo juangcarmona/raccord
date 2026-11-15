@@ -5,7 +5,6 @@ title: "A verified email address identifies exactly one user"
 status: draft
 applies-to:
   - "BC-WORKSPACE"
-  - "UC-WSP-CHANGE-PROFILE-EMAIL"
 uses-terms:
   - "TERM-PERSONAL-PROFILE"
 provenance:

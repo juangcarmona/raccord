@@ -3,8 +3,7 @@ id: BR-EQP-CONTENT-IMPORT-MODES
 type: business-rule
 title: "Content import update versus overwrite"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-KIT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-IMPORT-MODE"
   - "TERM-DEFAULT-CONTENT"

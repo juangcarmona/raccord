@@ -3,8 +3,7 @@ id: BR-WSP-BULK-EDIT-KIND-FIELDS
 type: business-rule
 title: "Bulk edit only changes fields valid for the selected kinds"
 status: draft
-applies-to:
-  - "UC-WSP-BULK-EDIT"
+applies-to: []
 uses-terms:
   - "TERM-BULK-EDIT"
   - "TERM-EQUIPMENT-TYPE"

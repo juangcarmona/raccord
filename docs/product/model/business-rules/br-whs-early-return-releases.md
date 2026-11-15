@@ -4,8 +4,6 @@ type: business-rule
 title: "Early returns release reservations"
 status: draft
 applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-SCAN-RETURN"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-EARLY-RETURN"

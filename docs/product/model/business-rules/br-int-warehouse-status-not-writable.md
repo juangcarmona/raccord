@@ -3,8 +3,7 @@ id: BR-INT-WAREHOUSE-STATUS-NOT-WRITABLE
 type: business-rule
 title: "Warehouse statuses are not written to project status"
 status: draft
-applies-to:
-  - "UC-INT-WRITE-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-WAREHOUSE-STATUS"
   - "TERM-PROJECT-STATUS"

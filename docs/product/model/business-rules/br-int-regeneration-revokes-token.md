@@ -3,8 +3,7 @@ id: BR-INT-REGENERATION-REVOKES-TOKEN
 type: business-rule
 title: "Regenerating revokes the previous token"
 status: draft
-applies-to:
-  - "UC-INT-REGENERATE-API-TOKEN"
+applies-to: []
 uses-terms:
   - "TERM-API-TOKEN"
 provenance:

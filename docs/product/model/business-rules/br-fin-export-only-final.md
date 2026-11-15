@@ -3,8 +3,7 @@ id: BR-FIN-EXPORT-ONLY-FINAL
 type: business-rule
 title: "Only finalized invoices are exported"
 status: draft
-applies-to:
-  - "UC-FIN-RUN-ACCOUNTING-EXPORT"
+applies-to: []
 uses-terms:
   - "TERM-ACCOUNTING-EXPORT"
 provenance:

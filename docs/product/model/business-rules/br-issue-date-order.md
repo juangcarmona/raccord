@@ -3,8 +3,7 @@ id: BR-ISSUE-DATE-ORDER
 type: business-rule
 title: "Issue dates follow number order within a series"
 status: draft
-applies-to:
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-ISSUE-DATE"
 ---

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-STATUS-ANY-USER
 type: business-rule
 title: "Any user may change the status of visible tasks"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS"
 provenance:

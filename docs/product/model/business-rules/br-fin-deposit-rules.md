@@ -3,8 +3,7 @@ id: BR-FIN-DEPOSIT-RULES
 type: business-rule
 title: "A refundable deposit is a fixed amount with a tracked status"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-REFUNDABLE-DEPOSIT"
+applies-to: []
 uses-terms:
   - "TERM-REFUNDABLE-DEPOSIT"
   - "TERM-DEPOSIT-STATUS"

@@ -3,8 +3,7 @@ id: BR-INT-PAGE-SIZE-LIMITS
 type: business-rule
 title: "Pages hold 300 records by default and 1500 at most"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-COLLECTION-PAGE"
 provenance:

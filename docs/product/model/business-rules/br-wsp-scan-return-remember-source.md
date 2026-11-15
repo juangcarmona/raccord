@@ -3,8 +3,7 @@ id: BR-WSP-SCAN-RETURN-REMEMBER-SOURCE
 type: business-rule
 title: "Remembered source for bulk scans"
 status: draft
-applies-to:
-  - "UC-WHS-SCAN-RETURN"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-RETURN"
 provenance:

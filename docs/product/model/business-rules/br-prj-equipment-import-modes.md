@@ -3,8 +3,7 @@ id: BR-PRJ-EQUIPMENT-IMPORT-MODES
 type: business-rule
 title: "Equipment list import appends or replaces"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-EQUIPMENT-LIST"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/4413562661138.md"

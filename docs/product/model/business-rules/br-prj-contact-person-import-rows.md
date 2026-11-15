@@ -3,8 +3,7 @@ id: BR-PRJ-CONTACT-PERSON-IMPORT-ROWS
 type: business-rule
 title: "Contact persons are imported one row each"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-CONTACTS"
+applies-to: []
 uses-terms:
   - "TERM-CONTACT-PERSON"
 provenance:

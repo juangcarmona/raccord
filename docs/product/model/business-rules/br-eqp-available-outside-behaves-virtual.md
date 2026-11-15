@@ -3,8 +3,7 @@ id: BR-EQP-AVAILABLE-OUTSIDE-BEHAVES-VIRTUAL
 type: business-rule
 title: "Content available outside a kit behaves like virtual content"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-DEFAULT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-CONTENT-STOCK-BINDING"
   - "TERM-VIRTUAL-KIT"

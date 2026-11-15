@@ -3,8 +3,7 @@ id: BR-PRJ-DASHBOARD-DEFAULTS
 type: business-rule
 title: "Dashboard defaults and permission"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-DASHBOARD"
+applies-to: []
 uses-terms:
   - "TERM-DASHBOARD-WIDGET"
 provenance:

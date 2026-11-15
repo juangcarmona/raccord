@@ -3,8 +3,7 @@ id: BR-CRW-JOB-BOARD-IGNORES-CONFLICTS
 type: business-rule
 title: "Job board sign-ups ignore conflicts and availability"
 status: draft
-applies-to:
-  - "UC-CRW-SIGN-UP-FOR-POSTED-JOB"
+applies-to: []
 uses-terms:
   - "TERM-JOB-POSTING"
   - "TERM-PLANNING-CONFLICT"

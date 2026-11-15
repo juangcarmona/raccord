@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-WAREHOUSE"
 governed-by:
   - "BR-WHS-LOSS-REDUCES-STOCK"
+  - "BR-WSP-FOUND-NO-FINANCIAL-CORRECTION"
 uses-terms:
   - "TERM-LOST-EQUIPMENT"
 provenance:

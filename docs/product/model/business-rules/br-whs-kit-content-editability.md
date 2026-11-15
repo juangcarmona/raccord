@@ -3,8 +3,7 @@ id: BR-WHS-KIT-CONTENT-EDITABILITY
 type: business-rule
 title: "Kit content may be edited in a project only when allowed"
 status: draft
-applies-to:
-  - "UC-WHS-ADJUST-KIT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

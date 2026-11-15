@@ -4,10 +4,7 @@ type: business-rule
 title: "Moving a project recalculates availability and may create shortages"
 status: draft
 applies-to:
-  - "UC-WHS-SET-LINE-TIMES"
-  - "UC-WHS-REVIEW-SHORTAGES"
   - "BC-EQUIPMENT"
-  - "UC-PRJ-SHIFT-PROJECT-TIMES"
 uses-terms:
   - "TERM-EQUIPMENT-AVAILABILITY"
   - "TERM-SHORTAGE"

@@ -3,9 +3,7 @@ id: BR-CRW-DRAFT-INVISIBLE
 type: business-rule
 title: "Draft assignments are hidden from crew members"
 status: draft
-applies-to:
-  - "UC-CRW-SWITCH-PLAN-STATUS"
-  - "UC-CRW-CONSULT-OWN-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-DRAFT-PLANNING"
   - "TERM-FINAL-PLANNING"

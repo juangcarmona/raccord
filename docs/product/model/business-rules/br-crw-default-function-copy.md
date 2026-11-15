@@ -3,9 +3,7 @@ id: BR-CRW-DEFAULT-FUNCTION-COPY
 type: business-rule
 title: "Project functions are copies of default functions"
 status: draft
-applies-to:
-  - "UC-CRW-UPDATE-FUNCTIONS-TO-DEFAULTS"
-  - "UC-CRW-ADD-FUNCTION-TO-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-FUNCTION"
 provenance:

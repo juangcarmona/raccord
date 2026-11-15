@@ -3,8 +3,7 @@ id: BR-WSP-QUALIFICATIONS-PER-COUNTRY
 type: business-rule
 title: "Qualifications are recorded per country"
 status: draft
-applies-to:
-  - "UC-WSP-EDIT-PROFILE"
+applies-to: []
 uses-terms:
   - "TERM-PROFILE-SECTION"
 provenance:

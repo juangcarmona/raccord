@@ -3,10 +3,7 @@ id: BR-CRW-SELF-PRESELECTED
 type: business-rule
 title: "The acting user is preselected in their own schedule"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-APPOINTMENT"
-  - "UC-CRW-ENTER-CREW-AVAILABILITY"
-  - "UC-CRW-DECLARE-OWN-AVAILABILITY"
+applies-to: []
 uses-terms:
   - "TERM-APPOINTMENT"
   - "TERM-AVAILABILITY-ENTRY"

@@ -3,9 +3,7 @@ id: BR-FIN-ONLINE-VERSION-VISIBILITY
 type: business-rule
 title: "What the customer sees depends on the regeneration mode"
 status: draft
-applies-to:
-  - "UC-FIN-REGENERATE-QUOTE"
-  - "UC-FIN-PUBLISH-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-ONLINE-QUOTE-STATUS"
   - "TERM-REGENERATION-MODE"

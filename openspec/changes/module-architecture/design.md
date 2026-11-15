@@ -57,9 +57,9 @@ Contract dependencies between modules: Invoicing → Projects, Contacts, Workspa
 - The existing conflict mapping (`DbUpdateConcurrencyException` and unique violation → conflict) is kept.
 - **Rejected:** a `TransactionScope` with ambient enlistment. Npgsql supports it, but it hides the transaction boundary and complicates async flows.
 
-<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:895fc96f4b9c40db18c3ad4c529c4bfb3188fac61ccb68b4cd46e79ac3d3c12b" -->
 
-<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
 

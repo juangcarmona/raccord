@@ -3,8 +3,7 @@ id: BR-EQP-UNPLANNED-KIT-CONFIRM
 type: business-rule
 title: "Unplanned kits with content need confirmation"
 status: draft
-applies-to:
-  - "UC-WHS-ADD-ADDITIONAL-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-PHYSICAL-KIT"
 provenance:

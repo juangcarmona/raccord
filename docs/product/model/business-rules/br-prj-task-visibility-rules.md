@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-VISIBILITY-RULES
 type: business-rule
 title: "Private tasks stay with their creator"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-VISIBILITY"
 provenance:

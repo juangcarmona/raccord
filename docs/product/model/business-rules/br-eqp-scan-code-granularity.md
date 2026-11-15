@@ -3,8 +3,7 @@ id: BR-EQP-SCAN-CODE-GRANULARITY
 type: business-rule
 title: "Items share one scan code"
 status: draft
-applies-to:
-  - "UC-WHS-ASSIGN-SCAN-CODES"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-CODE"
 provenance:

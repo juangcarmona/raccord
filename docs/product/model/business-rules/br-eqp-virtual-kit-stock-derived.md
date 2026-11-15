@@ -3,8 +3,7 @@ id: BR-EQP-VIRTUAL-KIT-STOCK-DERIVED
 type: business-rule
 title: "Virtual kit stock and availability come from content"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-VIRTUAL-KIT"
+applies-to: []
 uses-terms:
   - "TERM-VIRTUAL-KIT"
   - "TERM-STOCK-QUANTITY"

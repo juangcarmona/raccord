@@ -3,8 +3,7 @@ id: BR-FIN-QUOTE-CONTRACT-SAME
 type: business-rule
 title: "Quotes and contracts behave identically"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-CONTRACT"
   - "TERM-QUOTE"

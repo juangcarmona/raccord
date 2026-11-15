@@ -3,9 +3,7 @@ id: BR-WHS-LINE-TIMES-LINKED
 type: business-rule
 title: "Equipment times always reference schedule entries"
 status: draft
-applies-to:
-  - "UC-WHS-SET-LINE-TIMES"
-  - "UC-WHS-ORGANIZE-GROUPS"
+applies-to: []
 uses-terms:
   - "TERM-PLANNING-PERIOD"
   - "TERM-USAGE-PERIOD"

@@ -3,8 +3,7 @@ id: BR-PRJ-HISTORY-FROM-ACTIVATION
 type: business-rule
 title: "History starts at activation"
 status: draft
-applies-to:
-  - "UC-PRJ-REVIEW-HISTORY"
+applies-to: []
 uses-terms:
   - "TERM-HISTORY-LOG"
 provenance:

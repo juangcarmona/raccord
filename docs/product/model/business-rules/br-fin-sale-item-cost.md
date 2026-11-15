@@ -3,8 +3,7 @@ id: BR-FIN-SALE-ITEM-COST
 type: business-rule
 title: "Cost of sold equipment is purchase price times quantity"
 status: draft
-applies-to:
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-ESTIMATED-COST"
   - "TERM-PLANNED-COST"

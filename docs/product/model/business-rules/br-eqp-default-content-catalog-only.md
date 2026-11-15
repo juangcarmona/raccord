@@ -3,9 +3,7 @@ id: BR-EQP-DEFAULT-CONTENT-CATALOG-ONLY
 type: business-rule
 title: "Default content is maintained in the catalog"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
-  - "UC-EQP-DEFINE-VIRTUAL-KIT"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-CONTENT"
 provenance:

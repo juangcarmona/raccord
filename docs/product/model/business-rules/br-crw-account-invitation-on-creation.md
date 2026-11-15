@@ -3,10 +3,7 @@ id: BR-CRW-ACCOUNT-INVITATION-ON-CREATION
 type: business-rule
 title: "New crew members with login permission receive an account invitation"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-CREW-MEMBER"
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-MANAGE-CREW-LOGIN-ACCESS"
+applies-to: []
 uses-terms:
   - "TERM-ACCOUNT-INVITATION-STATUS"
   - "TERM-CREW-MEMBER"

@@ -3,8 +3,7 @@ id: BR-PRJ-SERVICE-DOCUMENT-SECTION
 type: business-rule
 title: "Services print in their own document section"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
+applies-to: []
 uses-terms:
   - "TERM-PRODUCTION-SERVICE"
 provenance:

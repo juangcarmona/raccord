@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-EQUIPMENT"
 governed-by:
   - "BR-EQP-CONTENT-IMPORT-MODES"
+  - "BR-EQP-IMPORT-NO-STRUCTURE"
 uses-terms:
   - "TERM-DEFAULT-CONTENT"
   - "TERM-IMPORT-MODE"

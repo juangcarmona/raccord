@@ -3,8 +3,7 @@ id: BR-FIN-LOSS-CHARGED-AS-COST
 type: business-rule
 title: "Lost or defective returned equipment becomes an additional cost"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-ADDITIONAL-COSTS"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-COST"
 provenance:

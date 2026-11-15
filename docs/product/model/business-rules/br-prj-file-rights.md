@@ -3,8 +3,7 @@ id: BR-PRJ-FILE-RIGHTS
 type: business-rule
 title: "Adding and downloading files needs rights"
 status: draft
-applies-to:
-  - "UC-PRJ-ATTACH-FILE"
+applies-to: []
 uses-terms:
   - "TERM-ATTACHED-FILE"
 provenance:

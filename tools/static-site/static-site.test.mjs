@@ -570,7 +570,7 @@ test("labels an empty latest run as missing evidence instead of successful", () 
     const root = temporaryDirectory();
     try {
         const runId = "empty-run";
-        const date = "2026-10-15T05:48:53Z";
+        const date = new Date(Date.now() - 60_000).toISOString();
         const reportDirectory = join(root, "e2e", "reports", runId);
         mkdirSync(reportDirectory, { recursive: true });
         writeFileSync(
@@ -610,7 +610,7 @@ test("labels an empty latest run as missing evidence instead of successful", () 
         assert.match(landing, /No journeys were recorded/);
         assert.match(landing, /workflow reported success/);
         assert.match(landing, />No results</);
-        assert.match(landing, /2026-10-15T05:48:53\.000Z UTC/);
+        assert.ok(landing.includes(`${date} UTC`));
         assert.match(landing, /new Intl\.DateTimeFormat\(undefined/);
     } finally {
         rmSync(root, { recursive: true, force: true });

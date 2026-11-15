@@ -3,8 +3,7 @@ id: BR-WSP-DELAYED-WHOLE-GROUP
 type: business-rule
 title: "Delay marking applies to the whole equipment group"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-DELAYED"
+applies-to: []
 uses-terms:
   - "TERM-DELAYED-EQUIPMENT"
   - "TERM-EQUIPMENT-GROUP"

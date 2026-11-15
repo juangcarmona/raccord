@@ -3,8 +3,7 @@ id: BR-WSP-CREW-RATES-WITH-PROJECT-ACCESS
 type: business-rule
 title: "Project access exposes crew rates in activities"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

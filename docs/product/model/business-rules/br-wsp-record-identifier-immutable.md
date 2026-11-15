@@ -4,7 +4,6 @@ type: business-rule
 title: "Record identifiers never change"
 status: draft
 applies-to:
-  - "UC-WSP-UPDATE-BY-IMPORT"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-RECORD-IDENTIFIER"

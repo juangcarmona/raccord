@@ -4,9 +4,6 @@ type: business-rule
 title: "Project status decides whether planned equipment consumes availability and is reserved"
 status: draft
 applies-to:
-  - "UC-WHS-RESERVE-EQUIPMENT"
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-WHS-VIEW-AVAILABILITY-TIMELINE"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-AVAILABILITY-FORECAST"

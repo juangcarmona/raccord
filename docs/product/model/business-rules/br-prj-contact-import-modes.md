@@ -3,8 +3,7 @@ id: BR-PRJ-CONTACT-IMPORT-MODES
 type: business-rule
 title: "Contact import modes and match columns"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-CONTACTS"
+applies-to: []
 uses-terms:
   - "TERM-CONTACT"
 provenance:

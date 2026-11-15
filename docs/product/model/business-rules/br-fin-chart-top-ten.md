@@ -3,8 +3,7 @@ id: BR-FIN-CHART-TOP-TEN
 type: business-rule
 title: "Pie charts show the ten largest results"
 status: draft
-applies-to:
-  - "UC-FIN-ANALYZE-STATISTICS"
+applies-to: []
 uses-terms:
   - "TERM-STATISTICS-VIEW"
 provenance:

@@ -284,12 +284,12 @@ jobs:
         if: needs.prepare.outputs.build_architecture == 'true'
         run: node tools/arc42-snapshot/generate.mjs docs/architecture/arc42 --out "$GITHUB_WORKSPACE/_site/architecture/index.html" --title "Raccord architecture"
 
-      - name: Generate the ProductShape model snapshot
+      - name: Generate the ProductShape model explorer
         if: needs.prepare.outputs.build_model == 'true'
         run: |
-          npx -y @prodshape/cli@0.22.0 graph --format html
+          npx -y @prodshape/cli@0.26.1 graph --format html
           mkdir -p _site/model
-          cp .product/generated/snapshot.html _site/model/index.html
+          cp .product/generated/explorer.html _site/model/index.html
 
       - name: Download the nightly E2E evidence
         if: needs.prepare.outputs.run_e2e == 'true'

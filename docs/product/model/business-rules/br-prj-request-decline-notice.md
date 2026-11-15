@@ -3,8 +3,7 @@ id: BR-PRJ-REQUEST-DECLINE-NOTICE
 type: business-rule
 title: "Declining informs the requester by e-mail"
 status: draft
-applies-to:
-  - "UC-PRJ-DECLINE-PROJECT-REQUEST"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-REQUEST-STATUS"
 provenance:

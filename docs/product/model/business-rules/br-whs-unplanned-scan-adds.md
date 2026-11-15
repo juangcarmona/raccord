@@ -3,9 +3,7 @@ id: BR-WHS-UNPLANNED-SCAN-ADDS
 type: business-rule
 title: "Scanning unplanned equipment proposes it as additional"
 status: draft
-applies-to:
-  - "UC-WHS-BOOK-BY-SCANNING"
-  - "UC-WHS-ADD-ADDITIONAL-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-EQUIPMENT"
 provenance:

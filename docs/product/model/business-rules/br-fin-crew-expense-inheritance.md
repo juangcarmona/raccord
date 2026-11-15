@@ -3,8 +3,7 @@ id: BR-FIN-CREW-EXPENSE-INHERITANCE
 type: business-rule
 title: "Crew expenses are inherited from default function to planned function to crew member"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-CREW-EXPENSES"
+applies-to: []
 uses-terms:
   - "TERM-CREW-EXPENSE"
 provenance:

@@ -3,9 +3,7 @@ id: BR-CRW-DRAFT-INVITATION-EFFECT
 type: business-rule
 title: "Accepting a draft-planning invitation plans the person invisibly"
 status: draft
-applies-to:
-  - "UC-CRW-RESPOND-TO-INVITATION"
-  - "UC-CRW-SWITCH-PLAN-STATUS"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TYPE"
   - "TERM-DRAFT-PLANNING"

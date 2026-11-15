@@ -3,9 +3,7 @@ id: "BR-DOC-TYPE-SCOPES-TEMPLATE"
 type: business-rule
 title: "A template's document type decides where it is used and what it contains"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-TEMPLATE-SETTINGS"
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-DOCUMENT-TYPE"
   - "TERM-DOCUMENT-TEMPLATE"

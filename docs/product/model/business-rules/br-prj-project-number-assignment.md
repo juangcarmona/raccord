@@ -3,11 +3,7 @@ id: BR-PRJ-PROJECT-NUMBER-ASSIGNMENT
 type: business-rule
 title: "Project numbers are unique and auto-assigned when empty"
 status: draft
-applies-to:
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
-  - "UC-CREATE-PROJECT"
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
-  - "UC-PRJ-DUPLICATE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-NUMBER"
   - "TERM-NUMBER-SERIES"

@@ -3,8 +3,7 @@ id: BR-PRJ-DELETION-PERMANENT
 type: business-rule
 title: "Deleting a project is permanent"
 status: draft
-applies-to:
-  - "UC-PRJ-DELETE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT"
 provenance:

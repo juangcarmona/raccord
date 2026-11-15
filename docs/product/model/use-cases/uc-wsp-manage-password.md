@@ -8,6 +8,8 @@ supporting-actors: []
 bounded-context: "BC-WORKSPACE"
 governed-by:
   - "BR-WSP-BREACHED-PASSWORD-CHECK"
+  - "BR-TRB-PASSWORD-CHANGE-NEEDS-CURRENT"
+  - "BR-TRB-RESET-NEEDS-UNIQUE-EMAIL"
 uses-terms:
   - "TERM-PERSONAL-PROFILE"
   - "TERM-EXTERNAL-SIGN-IN"

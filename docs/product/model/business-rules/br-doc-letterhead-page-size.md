@@ -3,9 +3,7 @@ id: "BR-DOC-LETTERHEAD-PAGE-SIZE"
 type: business-rule
 title: "The letterhead sets the page size"
 status: draft
-applies-to:
-  - "UC-DOC-ADD-LETTERHEAD"
-  - "UC-DOC-DESIGN-EQUIPMENT-LABEL"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
   - "TERM-EQUIPMENT-LABEL"

@@ -4,7 +4,6 @@ type: business-rule
 title: "Line price follows its own usage period"
 status: draft
 applies-to:
-  - "UC-WHS-SET-LINE-TIMES"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-USAGE-PERIOD"

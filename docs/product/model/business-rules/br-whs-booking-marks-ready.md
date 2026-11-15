@@ -3,10 +3,7 @@ id: BR-WHS-BOOKING-MARKS-READY
 type: business-rule
 title: "Booking an unmarked project marks it ready"
 status: draft
-applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-BOOK-BY-SCANNING"
-  - "UC-WHS-MARK-READY-TO-PACK"
+applies-to: []
 uses-terms:
   - "TERM-READY-TO-PACK"
 provenance:

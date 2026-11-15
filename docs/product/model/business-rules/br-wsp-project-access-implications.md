@@ -3,8 +3,7 @@ id: BR-WSP-PROJECT-ACCESS-IMPLICATIONS
 type: business-rule
 title: "Project access is implied by planning and account management"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
   - "TERM-OWN-RECORD"

@@ -4,8 +4,6 @@ type: business-rule
 title: "Rental availability follows planning, not booking"
 status: draft
 applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-WAREHOUSE-BOOKING"

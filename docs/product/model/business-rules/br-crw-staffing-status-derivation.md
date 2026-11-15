@@ -3,9 +3,7 @@ id: BR-CRW-STAFFING-STATUS-DERIVATION
 type: business-rule
 title: "Staffing status compares planned resources with the quantity"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-CRW-SWITCH-PLAN-STATUS"
+applies-to: []
 uses-terms:
   - "TERM-STAFFING-STATUS"
 provenance:

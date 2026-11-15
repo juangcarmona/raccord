@@ -3,9 +3,7 @@ id: BR-FIN-E-INVOICE-AUTO-ATTACH
 type: business-rule
 title: "Structured files are attached automatically when enabled"
 status: draft
-applies-to:
-  - "UC-FIN-CONFIGURE-E-INVOICING"
-  - "UC-FIN-EMAIL-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-E-INVOICE"
   - "TERM-E-INVOICE-FORMAT"

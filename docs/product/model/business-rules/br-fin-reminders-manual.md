@@ -3,8 +3,7 @@ id: BR-FIN-REMINDERS-MANUAL
 type: business-rule
 title: "Reminders are manual and only after the due date"
 status: draft
-applies-to:
-  - "UC-FIN-SEND-PAYMENT-REMINDER"
+applies-to: []
 uses-terms:
   - "TERM-PAYMENT-REMINDER"
   - "TERM-OVERDUE-INVOICE"

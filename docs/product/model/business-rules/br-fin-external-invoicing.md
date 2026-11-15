@@ -3,8 +3,7 @@ id: BR-FIN-EXTERNAL-INVOICING
 type: business-rule
 title: "Marking as invoiced externally removes the reminder"
 status: draft
-applies-to:
-  - "UC-FIN-MARK-INVOICED-EXTERNALLY"
+applies-to: []
 uses-terms:
   - "TERM-EXTERNALLY-INVOICED"
 provenance:

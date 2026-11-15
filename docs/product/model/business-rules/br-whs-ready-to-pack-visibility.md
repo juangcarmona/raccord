@@ -4,8 +4,6 @@ type: business-rule
 title: "The warehouse sees only projects handed over"
 status: draft
 applies-to:
-  - "UC-WHS-MARK-READY-TO-PACK"
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
   - "BC-WAREHOUSE"
 uses-terms:
   - "TERM-READY-TO-PACK"

@@ -3,8 +3,7 @@ id: BR-WORKDAY-RETENTION
 type: business-rule
 title: "Workday records are kept four years"
 status: draft
-applies-to:
-  - "UC-EXPORT-WORKDAY-RECORDS"
+applies-to: []
 uses-terms:
   - "TERM-WORKDAY-RECORD"
 ---

@@ -3,9 +3,7 @@ id: BR-FIN-MOMENT-DEFAULTS
 type: business-rule
 title: "Invoice moment defaults come from customer or project type"
 status: active
-applies-to:
-  - "UC-FIN-CONFIGURE-INVOICE-MOMENTS"
-  - "UC-FIN-APPLY-CUSTOMER-DEFAULTS"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-MOMENT"
   - "TERM-CUSTOMER-FINANCIAL-DEFAULTS"

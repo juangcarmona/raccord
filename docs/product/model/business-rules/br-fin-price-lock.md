@@ -3,8 +3,7 @@ id: BR-FIN-PRICE-LOCK
 type: business-rule
 title: "A locked project price ignores plan changes"
 status: draft
-applies-to:
-  - "UC-FIN-LOCK-PROJECT-PRICE"
+applies-to: []
 uses-terms:
   - "TERM-PRICE-LOCK"
 provenance:

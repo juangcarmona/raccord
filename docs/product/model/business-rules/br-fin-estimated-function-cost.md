@@ -3,8 +3,7 @@ id: BR-FIN-ESTIMATED-FUNCTION-COST
 type: business-rule
 title: "Estimated cost of a crew or transport function"
 status: draft
-applies-to:
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-ESTIMATED-COST"
 provenance:

@@ -9,6 +9,7 @@ supporting-actors:
 bounded-context: "BC-CONTACTS"
 governed-by:
   - "BR-TAX-ID-NORMALIZATION"
+  - "BR-PARTY-SNAPSHOT"
 uses-terms:
   - "TERM-CUSTOMER"
 ---

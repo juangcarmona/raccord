@@ -3,9 +3,7 @@ id: BR-WHS-NO-EARLY-CHECK-OUT
 type: business-rule
 title: "Equipment cannot be booked before its planning period"
 status: draft
-applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-BOOK-BY-SCANNING"
+applies-to: []
 uses-terms:
   - "TERM-PLANNING-PERIOD"
   - "TERM-CHECK-OUT"

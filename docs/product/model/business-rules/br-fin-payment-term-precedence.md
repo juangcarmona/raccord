@@ -3,9 +3,7 @@ id: BR-FIN-PAYMENT-TERM-PRECEDENCE
 type: business-rule
 title: "Invoice payment term overrides the customer default"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
-  - "UC-FIN-EDIT-INVOICE-DRAFT"
+applies-to: []
 uses-terms:
   - "TERM-PAYMENT-TERM"
   - "TERM-CUSTOMER-FINANCIAL-DEFAULTS"

@@ -3,9 +3,7 @@ id: BR-WSP-ENTRY-IN-VIEWING-ZONE
 type: business-rule
 title: "Times are entered in the viewing time zone"
 status: draft
-applies-to:
-  - "UC-WSP-SWITCH-VIEWING-TIME-ZONE"
-  - "UC-WSP-SET-TIME-ZONE"
+applies-to: []
 uses-terms:
   - "TERM-VIEWING-TIME-ZONE"
   - "TERM-PROJECT-TIME-ZONE"

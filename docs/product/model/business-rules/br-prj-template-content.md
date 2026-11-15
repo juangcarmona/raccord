@@ -3,9 +3,7 @@ id: BR-PRJ-TEMPLATE-CONTENT
 type: business-rule
 title: "What a project template copies"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-PROJECT-TEMPLATE"
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TEMPLATE"
 provenance:

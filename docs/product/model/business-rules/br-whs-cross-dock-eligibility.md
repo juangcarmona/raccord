@@ -3,8 +3,7 @@ id: BR-WHS-CROSS-DOCK-ELIGIBILITY
 type: business-rule
 title: "Cross-docking candidates"
 status: draft
-applies-to:
-  - "UC-WHS-REVIEW-CROSS-DOCKING"
+applies-to: []
 uses-terms:
   - "TERM-CROSS-DOCKING-OVERLAP"
 provenance:

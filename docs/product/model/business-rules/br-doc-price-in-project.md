@@ -3,8 +3,7 @@ id: "BR-DOC-PRICE-IN-PROJECT"
 type: business-rule
 title: "Line amounts on documents come from the price in project"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-COSTS-MODULE"
   - "TERM-ADDITIONAL-COST"

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-NOT-INVOICEABLE
 type: business-rule
 title: "Tasks are charged only through services"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
   - "TERM-PRODUCTION-SERVICE"

@@ -3,8 +3,7 @@ id: BR-WSP-SERIES-CURRENT-NUMBER
 type: business-rule
 title: "A series' current number is the latest used"
 status: draft
-applies-to:
-  - "UC-WSP-CONFIGURE-NUMBER-SERIES"
+applies-to: []
 uses-terms:
   - "TERM-NUMBER-SERIES"
 provenance:

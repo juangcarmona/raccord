@@ -3,9 +3,7 @@ id: BR-CRW-FUNCTION-NAMES-BY-AUDIENCE
 type: business-rule
 title: "External names go to customers, internal names to planning"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-DEFAULT-FUNCTIONS"
-  - "UC-CRW-GENERATE-CALL-SHEET"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-FUNCTION"
 provenance:

@@ -3,9 +3,7 @@ id: BR-WSP-INVOICE-FORWARD-COPY
 type: business-rule
 title: "Invoice emails can be copied to an accounting inbox"
 status: draft
-applies-to:
-  - "UC-FIN-EMAIL-INVOICE"
-  - "UC-FIN-RUN-ACCOUNTING-EXPORT"
+applies-to: []
 uses-terms:
   - "TERM-ISSUED-INVOICE"
 provenance:

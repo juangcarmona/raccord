@@ -3,9 +3,7 @@ id: BR-CRW-IMPORT-HEADER-ROW
 type: business-rule
 title: "A declared header row is not imported"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-IMPORT-VEHICLES"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
 provenance:

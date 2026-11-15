@@ -3,9 +3,7 @@ id: BR-CRW-INVITATION-DISCLOSURE
 type: business-rule
 title: "Invitation templates decide which job details are shown"
 status: draft
-applies-to:
-  - "UC-CRW-CONFIGURE-INVITATION-TEMPLATES"
-  - "UC-CRW-INVITE-CREW-FOR-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TEMPLATE"
 provenance:

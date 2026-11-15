@@ -3,9 +3,7 @@ id: BR-CRW-DEACTIVATE-RATHER-THAN-DELETE
 type: business-rule
 title: "Deleting a crew member removes their history"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-LOGIN-ACCESS"
-  - "UC-CRW-EDIT-CREW-MEMBERS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-MEMBER"
 provenance:

@@ -4,9 +4,6 @@ type: business-rule
 title: "Stock changes invalidate reservations they can no longer back"
 status: draft
 applies-to:
-  - "UC-WHS-REVIEW-SHORTAGES"
-  - "UC-WHS-MARK-LOST"
-  - "UC-WHS-MARK-DELAYED"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-INVALID-RESERVATION"

@@ -3,9 +3,7 @@ id: BR-WSP-SSO-COMPLIANCE
 type: business-rule
 title: "Users of enforced roles must be compliant to sign in"
 status: draft
-applies-to:
-  - "UC-WSP-ENFORCE-SSO"
-  - "UC-WSP-RESOLVE-SSO-NONCOMPLIANCE"
+applies-to: []
 uses-terms:
   - "TERM-SSO-ENFORCEMENT"
   - "TERM-LOGIN-DOMAIN-RESTRICTION"

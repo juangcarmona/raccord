@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-EQUIPMENT"
 governed-by:
   - "BR-WHS-KIT-CONTENT-EDITABILITY"
+  - "BR-EQP-KIT-PRICING"
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

@@ -3,8 +3,7 @@ id: "BR-DOC-TRANSLATED-NAMES"
 type: business-rule
 title: "Foreign-language documents print translated names from custom fields"
 status: draft
-applies-to:
-  - "UC-DOC-PREPARE-FOREIGN-LANGUAGE-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
   - "TERM-TEMPLATE-LOCALE"

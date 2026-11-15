@@ -11,6 +11,7 @@ governed-by:
   - "BR-LINE-ORDER"
   - "BR-VAT-PER-RATE"
   - "BR-AUDITED-ACTIONS"
+  - "BR-INVOICE-BASIS"
 uses-terms:
   - "TERM-INVOICE-DRAFT"
   - "TERM-VALIDATION-ISSUE"

@@ -3,8 +3,7 @@ id: BR-EQP-PHYSICAL-KIT-CONSUMES-CONTENT-STOCK
 type: business-rule
 title: "Physical kit content leaves free stock"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
+applies-to: []
 uses-terms:
   - "TERM-PHYSICAL-KIT"
   - "TERM-CONTENT-STOCK-BINDING"

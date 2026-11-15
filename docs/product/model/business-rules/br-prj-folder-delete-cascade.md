@@ -3,9 +3,7 @@ id: BR-PRJ-FOLDER-DELETE-CASCADE
 type: business-rule
 title: "Deleting a file folder deletes its files"
 status: draft
-applies-to:
-  - "UC-PRJ-ATTACH-FILE"
-  - "UC-PRJ-MANAGE-FILE-FOLDERS"
+applies-to: []
 uses-terms:
   - "TERM-FILE-FOLDER"
 provenance:

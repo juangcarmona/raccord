@@ -3,9 +3,7 @@ id: BR-WSP-BREACHED-PASSWORD-CHECK
 type: business-rule
 title: "Breached passwords are flagged without disclosing them"
 status: draft
-applies-to:
-  - "UC-WSP-SIGN-IN"
-  - "UC-WSP-CREATE-WORKSPACE"
+applies-to: []
 uses-terms:
   - "TERM-BREACHED-PASSWORD-WARNING"
 provenance:

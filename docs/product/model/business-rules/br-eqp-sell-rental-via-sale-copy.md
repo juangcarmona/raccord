@@ -3,8 +3,7 @@ id: BR-EQP-SELL-RENTAL-VIA-SALE-COPY
 type: business-rule
 title: "Selling rental equipment uses a sale copy"
 status: draft
-applies-to:
-  - "UC-EQP-SELL-RENTAL-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-RENTAL-ITEM"
   - "TERM-SALE-ITEM"

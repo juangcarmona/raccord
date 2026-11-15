@@ -3,8 +3,7 @@ id: BR-EQP-PHYSICAL-KIT-AVAILABILITY
 type: business-rule
 title: "Physical kit availability is that of an item"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
+applies-to: []
 uses-terms:
   - "TERM-PHYSICAL-KIT"
   - "TERM-EQUIPMENT-AVAILABILITY"

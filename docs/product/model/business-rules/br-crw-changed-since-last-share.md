@@ -3,8 +3,7 @@ id: BR-CRW-CHANGED-SINCE-LAST-SHARE
 type: business-rule
 title: "Crew affected by changes since the last communication are marked"
 status: draft
-applies-to:
-  - "UC-CRW-SHARE-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-SCHEDULE-COMMUNICATION"
 provenance:

@@ -3,9 +3,7 @@ id: BR-CRW-PAYROLL-CODE-IN-EXPORT
 type: business-rule
 title: "Exports carry the payroll code of each hour type"
 status: draft
-applies-to:
-  - "UC-CRW-EXPORT-PAYROLL-DATA"
-  - "UC-CRW-CONFIGURE-HOUR-TYPES"
+applies-to: []
 uses-terms:
   - "TERM-PAYROLL-CODE"
 provenance:

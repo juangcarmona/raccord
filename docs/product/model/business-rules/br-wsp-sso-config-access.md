@@ -3,8 +3,7 @@ id: BR-WSP-SSO-CONFIG-ACCESS
 type: business-rule
 title: "Only configuration users may enforce single sign-on"
 status: draft
-applies-to:
-  - "UC-WSP-ENFORCE-SSO"
+applies-to: []
 uses-terms:
   - "TERM-SSO-ENFORCEMENT"
 provenance:

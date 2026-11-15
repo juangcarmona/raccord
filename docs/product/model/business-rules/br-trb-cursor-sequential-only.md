@@ -3,8 +3,7 @@ id: "BR-TRB-CURSOR-SEQUENTIAL-ONLY"
 type: business-rule
 title: "Cursor paging offers no random page access"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-PAGINATION-CURSOR"
 provenance:

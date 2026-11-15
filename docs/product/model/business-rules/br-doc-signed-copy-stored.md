@@ -3,8 +3,7 @@ id: "BR-DOC-SIGNED-COPY-STORED"
 type: business-rule
 title: "Signed documents are stored with the project"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-DIGITAL-SIGNING"
+applies-to: []
 uses-terms:
   - "TERM-DIGITAL-SIGNING-ELEMENT"
   - "TERM-ATTACHED-FILE"

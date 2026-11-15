@@ -3,8 +3,7 @@ id: BR-FIN-E-INVOICE-IDENTIFIERS
 type: business-rule
 title: "E-invoices require electronic identifiers of both parties"
 status: draft
-applies-to:
-  - "UC-FIN-CONFIGURE-E-INVOICING"
+applies-to: []
 uses-terms:
   - "TERM-ELECTRONIC-IDENTIFIER"
 provenance:

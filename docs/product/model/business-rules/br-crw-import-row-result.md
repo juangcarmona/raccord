@@ -3,9 +3,7 @@ id: BR-CRW-IMPORT-ROW-RESULT
 type: business-rule
 title: "Import results report each failed row with its reason"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-IMPORT-VEHICLES"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
 provenance:

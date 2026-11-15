@@ -3,8 +3,7 @@ id: BR-PRJ-NOTE-DEFAULT-VISIBILITY
 type: business-rule
 title: "Notes are confidential to account managers by default"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-NOTE-VISIBILITY"
 provenance:

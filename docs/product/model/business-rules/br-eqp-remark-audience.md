@@ -3,8 +3,7 @@ id: BR-EQP-REMARK-AUDIENCE
 type: business-rule
 title: "Remarks print to their audience"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-REMARKS"
 provenance:

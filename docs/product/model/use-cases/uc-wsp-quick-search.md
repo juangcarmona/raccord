@@ -6,7 +6,8 @@ status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
 bounded-context: "BC-WORKSPACE"
-governed-by: []
+governed-by:
+  - "BR-TRB-SEARCH-MINIMUM-THREE-CHARACTERS"
 uses-terms:
   - "TERM-QUICK-ACCESS-SEARCH"
 provenance:

@@ -3,9 +3,7 @@ id: BR-CRW-SHIFT-AVAILABILITY-BLOCKING
 type: business-rule
 title: "Shifts block availability unless marked otherwise"
 status: draft
-applies-to:
-  - "UC-CRW-CREATE-SHIFT"
-  - "UC-CRW-PLAN-RESOURCE-ON-SHIFT"
+applies-to: []
 uses-terms:
   - "TERM-SHIFT"
   - "TERM-AVAILABILITY-STATE"

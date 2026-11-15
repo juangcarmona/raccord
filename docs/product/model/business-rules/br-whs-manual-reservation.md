@@ -3,9 +3,7 @@ id: BR-WHS-MANUAL-RESERVATION
 type: business-rule
 title: "Planners may reserve manually in any status that consumes availability"
 status: draft
-applies-to:
-  - "UC-WHS-RESERVE-EQUIPMENT"
-  - "UC-WHS-REALLOCATE-RESERVATIONS"
+applies-to: []
 uses-terms:
   - "TERM-RESERVATION"
   - "TERM-SOFT-HOLD"

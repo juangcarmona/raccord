@@ -3,8 +3,7 @@ id: BR-CRW-INVITATION-TEXT-RESET
 type: business-rule
 title: "Resetting invitation texts overwrites customisations"
 status: draft
-applies-to:
-  - "UC-CRW-CONFIGURE-INVITATION-TEMPLATES"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TEMPLATE"
 provenance:

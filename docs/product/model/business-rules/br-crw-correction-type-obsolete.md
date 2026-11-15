@@ -3,8 +3,7 @@ id: BR-CRW-CORRECTION-TYPE-OBSOLETE
 type: business-rule
 title: "The correction hour type is no longer used for adjustments"
 status: draft
-applies-to:
-  - "UC-CRW-CONFIGURE-HOUR-TYPES"
+applies-to: []
 uses-terms:
   - "TERM-HOUR-TYPE"
 provenance:

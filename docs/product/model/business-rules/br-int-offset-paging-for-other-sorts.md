@@ -3,8 +3,7 @@ id: BR-INT-OFFSET-PAGING-FOR-OTHER-SORTS
 type: business-rule
 title: "Offset paging applies when sorting by another column"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-COLLECTION-PAGE"
 provenance:

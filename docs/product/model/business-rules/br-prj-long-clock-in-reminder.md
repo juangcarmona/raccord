@@ -3,8 +3,7 @@ id: BR-PRJ-LONG-CLOCK-IN-REMINDER
 type: business-rule
 title: "Long-running timers trigger reminders"
 status: draft
-applies-to:
-  - "UC-PRJ-TRACK-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
 provenance:

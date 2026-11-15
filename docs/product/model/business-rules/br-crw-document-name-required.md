@@ -3,9 +3,7 @@ id: BR-CRW-DOCUMENT-NAME-REQUIRED
 type: business-rule
 title: "A crew document needs a name"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-DOCUMENTS"
-  - "UC-CRW-GENERATE-CREW-AGREEMENT"
+applies-to: []
 uses-terms:
   - "TERM-CREW-DOCUMENT"
 provenance:

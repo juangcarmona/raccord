@@ -4,10 +4,6 @@ type: business-rule
 title: "Planned equipment is unavailable for its whole planning period"
 status: draft
 applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-WHS-CHECK-AVAILABILITY"
-  - "UC-WHS-VIEW-AVAILABILITY-TIMELINE"
-  - "UC-WHS-SET-LINE-TIMES"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-PLANNING-PERIOD"

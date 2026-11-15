@@ -3,9 +3,7 @@ id: BR-WHS-RESOLUTION-USABILITY
 type: business-rule
 title: "Resolutions are offered as usable or not usable"
 status: draft
-applies-to:
-  - "UC-WHS-REVIEW-SHORTAGES"
-  - "UC-WHS-SOLVE-WITH-ALTERNATIVE"
+applies-to: []
 uses-terms:
   - "TERM-SHORTAGE-RESOLUTION"
 provenance:

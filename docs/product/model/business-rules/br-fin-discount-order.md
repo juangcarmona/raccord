@@ -3,8 +3,7 @@ id: BR-FIN-DISCOUNT-ORDER
 type: business-rule
 title: "Discounts apply from line to category to total"
 status: draft
-applies-to:
-  - "UC-FIN-APPLY-PROJECT-DISCOUNTS"
+applies-to: []
 uses-terms:
   - "TERM-DISCOUNT-LEVEL"
 provenance:

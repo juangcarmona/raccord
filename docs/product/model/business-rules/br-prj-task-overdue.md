@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-OVERDUE
 type: business-rule
 title: "Uncompleted tasks past a fixed deadline are overdue"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-DEADLINE"
 provenance:

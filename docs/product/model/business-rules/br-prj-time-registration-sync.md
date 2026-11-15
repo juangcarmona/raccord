@@ -3,8 +3,7 @@ id: BR-PRJ-TIME-REGISTRATION-SYNC
 type: business-rule
 title: "Adjusting a time registration adjusts the task"
 status: draft
-applies-to:
-  - "UC-PRJ-TRACK-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
   - "TERM-TIME-REGISTRATION"

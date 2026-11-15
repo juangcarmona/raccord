@@ -3,8 +3,7 @@ id: BR-WSP-WAREHOUSE-ALL-PROJECTS
 type: business-rule
 title: "Seeing all projects in the warehouse requires all projects in projects"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

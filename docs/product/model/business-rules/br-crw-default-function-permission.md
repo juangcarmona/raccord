@@ -3,8 +3,7 @@ id: BR-CRW-DEFAULT-FUNCTION-PERMISSION
 type: business-rule
 title: "Managing default functions can be restricted by role"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-DEFAULT-FUNCTIONS"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-FUNCTION"
 provenance:

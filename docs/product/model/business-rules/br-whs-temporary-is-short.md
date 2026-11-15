@@ -4,7 +4,6 @@ type: business-rule
 title: "Temporary equipment is always short"
 status: draft
 applies-to:
-  - "UC-WHS-ADD-TEMPORARY-EQUIPMENT"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-TEMPORARY-EQUIPMENT"

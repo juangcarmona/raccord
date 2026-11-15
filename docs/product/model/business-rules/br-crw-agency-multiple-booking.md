@@ -3,9 +3,7 @@ id: BR-CRW-AGENCY-MULTIPLE-BOOKING
 type: business-rule
 title: "Agency records can be planned several times at once"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-CRW-RESOLVE-PLANNING-CONFLICTS"
+applies-to: []
 uses-terms:
   - "TERM-AGENCY-CREW-RECORD"
   - "TERM-PLANNING-CONFLICT"

@@ -3,8 +3,7 @@ id: BR-CRW-TAG-MATCH-EXACT
 type: business-rule
 title: "Skill matching requires identical tags"
 status: draft
-applies-to:
-  - "UC-CRW-FIND-CREW-WITH-LISTS"
+applies-to: []
 uses-terms:
   - "TERM-SKILL-TAG"
 provenance:

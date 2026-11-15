@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-IMPORT-EXCLUSIONS
 type: business-rule
 title: "What a task import cannot create"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-TASKS"
+applies-to: []
 uses-terms:
   - "TERM-TASK-VISIBILITY"
 provenance:

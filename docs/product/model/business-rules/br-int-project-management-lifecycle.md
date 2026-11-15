@@ -5,8 +5,6 @@ title: "Project-management status lifecycle with automatic progress"
 status: draft
 applies-to:
   - "BC-PROJECTS"
-  - "UC-INT-LEAVE-EQUIPMENT-BEHIND"
-  - "UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY"
 uses-terms:
   - "TERM-PROJECT-STATUS"
 provenance:

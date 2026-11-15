@@ -3,9 +3,7 @@ id: BR-EQP-IMPORT-NO-STRUCTURE
 type: business-rule
 title: "Imports do not build kits or accessories"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-EQUIPMENT"
-  - "UC-EQP-IMPORT-KIT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-IMPORT"
   - "TERM-DEFAULT-CONTENT"

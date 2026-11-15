@@ -3,9 +3,7 @@ id: BR-CRW-DEFAULT-PLAN-STATUS-NEW-ONLY
 type: business-rule
 title: "The default plan status applies only to new assignments"
 status: draft
-applies-to:
-  - "UC-CRW-SWITCH-PLAN-STATUS"
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-PLAN-STATUS"
 provenance:

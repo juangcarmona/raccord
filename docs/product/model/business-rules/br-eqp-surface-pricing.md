@@ -3,8 +3,7 @@ id: BR-EQP-SURFACE-PRICING
 type: business-rule
 title: "Surface items priced by area"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-SURFACE-ITEM"
 provenance:

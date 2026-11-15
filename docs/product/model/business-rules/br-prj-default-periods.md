@@ -3,9 +3,7 @@ id: BR-PRJ-DEFAULT-PERIODS
 type: business-rule
 title: "Every schedule starts with a planning and a usage period"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TIME-SCHEDULE"
-  - "UC-CREATE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PLANNING-PERIOD"
   - "TERM-USAGE-PERIOD"

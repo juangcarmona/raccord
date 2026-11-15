@@ -3,8 +3,7 @@ id: BR-INT-FEED-ONE-WAY
 type: business-rule
 title: "Subscription feeds are read-only"
 status: draft
-applies-to:
-  - "UC-INT-SUBSCRIBE-TO-CALENDAR-FEED"
+applies-to: []
 uses-terms:
   - "TERM-CALENDAR-SUBSCRIPTION-FEED"
 provenance:

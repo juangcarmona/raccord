@@ -3,8 +3,7 @@ id: BR-CRW-PLANNED-ACTIVITIES-WINDOW
 type: business-rule
 title: "Registration from planned activities offers the last 24 hours"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-ACTIVITY"
 provenance:

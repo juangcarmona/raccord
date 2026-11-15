@@ -17,7 +17,7 @@ The system MUST let an authorized administrator create and maintain named VAT cl
 <!-- pdac:cite id="TERM-VAT-CLASS" digest="sha256:3ad27a6e017bcec71c1452669ff354b4c0fc8f29725635de0a90c01421d287c2" -->
 <!-- pdac:cite id="TERM-VAT-SCHEME" digest="sha256:d7fbf3cf62480bae491180a199e8fbe4455b25712d349af2b203173abf42095f" -->
 <!-- pdac:cite id="TERM-VAT-SCHEME-KIND" digest="sha256:b7a466e19572ce3eae02fc09efab7e1adbc34b940bf889d2d32984ee79d508cf" -->
-<!-- pdac:cite id="BR-FIN-VAT-FROM-CLASS-AND-SCHEME" digest="sha256:7ec9486b4513c0492fa7b7b53718f358db9717f8b620d1ee9d1f839e791c6f2a" -->
+<!-- pdac:cite id="BR-FIN-VAT-FROM-CLASS-AND-SCHEME" digest="sha256:53e768e074e63b4f09b944bd1da284cd0772063476cc5dca3b6fb05e07718a72" -->
 
 #### Scenario: Administrator creates a per-class scheme
 
@@ -35,7 +35,7 @@ The system MUST initialize a new Spanish installation with the standard-rate VAT
 
 <!-- pdac:cite id="UC-FIN-CONFIGURE-VAT" digest="sha256:3c05cb10f788f77cb6752fca0c806d089d618a79be13a6cd2a2d4cb911388ab7" -->
 <!-- pdac:cite id="TERM-VAT-SCHEME" digest="sha256:d7fbf3cf62480bae491180a199e8fbe4455b25712d349af2b203173abf42095f" -->
-<!-- pdac:cite id="BR-FIN-DEFAULT-VAT-CLASS" digest="sha256:7f539a8bdefbc8cea1877191ba869addd68c206993c40a5f791f8bf96a09049b" -->
+<!-- pdac:cite id="BR-FIN-DEFAULT-VAT-CLASS" digest="sha256:903466a75de9eb2897bd37f85e72c162edd586a929d41e4802a72ee20d27f5a9" -->
 
 #### Scenario: Fresh Spanish installation receives the initial default
 
@@ -53,7 +53,7 @@ The system MUST initialize a new Spanish installation with the standard-rate VAT
 The system MUST refuse to change a VAT rate once that rate has been used by a saved commercial record. A project billable line MUST save the stable scheme identity and the effective percentage snapshot on first use, and an invoice draft line MUST carry both forward. Recording scheme use MUST be atomic with saving the commercial record. A later rate change MUST be represented by a new scheme so existing records retain their original scheme and rate.
 
 <!-- pdac:cite id="TERM-VAT-SCHEME" digest="sha256:d7fbf3cf62480bae491180a199e8fbe4455b25712d349af2b203173abf42095f" -->
-<!-- pdac:cite id="BR-FIN-USED-RATE-FROZEN" digest="sha256:b33134bd0f2519dfb830cd37b214eab8e6c9e8609b7a9bf63c9db8e2e6cb8a95" -->
+<!-- pdac:cite id="BR-FIN-USED-RATE-FROZEN" digest="sha256:d7aec770e756b675dbf28cf586ee5a3bd2db8883683d9972217a4f9bf9284744" -->
 
 #### Scenario: Used VAT rate cannot be edited
 

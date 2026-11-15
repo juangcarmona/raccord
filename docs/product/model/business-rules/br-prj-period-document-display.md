@@ -3,8 +3,7 @@ id: BR-PRJ-PERIOD-DOCUMENT-DISPLAY
 type: business-rule
 title: "Each period chooses the documents it appears on"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TIME-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-TIME-PERIOD"
 provenance:

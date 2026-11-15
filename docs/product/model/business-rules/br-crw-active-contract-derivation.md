@@ -3,8 +3,7 @@ id: BR-CRW-ACTIVE-CONTRACT-DERIVATION
 type: business-rule
 title: "A crew member has an active contract when a contract document covers today"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-DOCUMENTS"
+applies-to: []
 uses-terms:
   - "TERM-ACTIVE-CONTRACT"
 provenance:

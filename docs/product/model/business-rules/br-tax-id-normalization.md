@@ -3,9 +3,7 @@ id: BR-TAX-ID-NORMALIZATION
 type: business-rule
 title: "Tax identifiers are normalized"
 status: draft
-applies-to:
-  - "UC-REGISTER-CUSTOMER"
-  - "UC-DEFINE-ISSUER-PROFILE"
+applies-to: []
 uses-terms:
   - "TERM-TAX-ID"
 ---

@@ -3,8 +3,7 @@ id: BR-UNIT-PRICE-PRECISION
 type: business-rule
 title: "Unit prices keep up to four decimals"
 status: draft
-applies-to:
-  - "UC-RECORD-BILLABLE-WORK"
+applies-to: []
 uses-terms: []
 ---
 

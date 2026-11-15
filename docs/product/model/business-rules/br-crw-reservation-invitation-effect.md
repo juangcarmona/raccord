@@ -3,9 +3,7 @@ id: BR-CRW-RESERVATION-INVITATION-EFFECT
 type: business-rule
 title: "Accepting a reservation invitation reserves the person"
 status: draft
-applies-to:
-  - "UC-CRW-RESPOND-TO-INVITATION"
-  - "UC-CRW-INVITE-CREW-FOR-PERIOD"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TYPE"
   - "TERM-CREW-RESERVATION"

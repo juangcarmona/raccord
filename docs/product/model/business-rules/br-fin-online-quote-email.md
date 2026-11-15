@@ -3,8 +3,7 @@ id: BR-FIN-ONLINE-QUOTE-EMAIL
 type: business-rule
 title: "Online quote e-mails carry link and password, not the PDF"
 status: draft
-applies-to:
-  - "UC-FIN-PUBLISH-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-ONLINE-QUOTE"
 provenance:

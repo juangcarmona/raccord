@@ -3,8 +3,7 @@ id: BR-LINE-PRICING-BOUNDS
 type: business-rule
 title: "Billable line pricing bounds"
 status: draft
-applies-to:
-  - "UC-RECORD-BILLABLE-WORK"
+applies-to: []
 uses-terms:
   - "TERM-BILLABLE-LINE"
 ---

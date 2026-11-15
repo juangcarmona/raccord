@@ -3,9 +3,7 @@ id: "BR-DOC-LETTERHEAD-MARGINS"
 type: business-rule
 title: "Generated content stays inside the letterhead margins"
 status: draft
-applies-to:
-  - "UC-DOC-ADD-LETTERHEAD"
-  - "UC-DOC-EDIT-LETTERHEAD"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
 provenance:

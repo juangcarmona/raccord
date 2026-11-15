@@ -3,9 +3,7 @@ id: BR-CRW-DEFAULT-BREAK
 type: business-rule
 title: "Registrations start with the default break"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
-  - "UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION"
 provenance:

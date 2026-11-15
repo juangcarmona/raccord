@@ -4,10 +4,6 @@ type: business-rule
 title: "A token can do what its owner's role can do"
 status: draft
 applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
-  - "UC-INT-WRITE-RECORDS-THROUGH-API"
-  - "UC-INT-ENABLE-API-ACCESS"
-  - "UC-INT-REPORT-PAYMENT-THROUGH-API"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-API-TOKEN"

@@ -3,8 +3,7 @@ id: BR-PRJ-BOARD-SHARING-POWER-USER
 type: business-rule
 title: "Only Admin and Office roles share boards"
 status: draft
-applies-to:
-  - "UC-PRJ-SHARE-PROJECT-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TASK-BOARD"
 provenance:

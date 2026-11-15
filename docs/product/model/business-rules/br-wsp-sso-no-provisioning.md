@@ -3,8 +3,7 @@ id: BR-WSP-SSO-NO-PROVISIONING
 type: business-rule
 title: "Identity provider does not provision users"
 status: draft
-applies-to:
-  - "UC-WSP-ENFORCE-SSO"
+applies-to: []
 uses-terms:
   - "TERM-SSO-ENFORCEMENT"
 provenance:

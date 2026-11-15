@@ -3,8 +3,7 @@ id: BR-CRW-LOGIN-PERMISSION
 type: business-rule
 title: "Crew members without login permission cannot log in"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-LOGIN-ACCESS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-MEMBER"
 provenance:

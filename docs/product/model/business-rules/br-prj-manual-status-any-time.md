@@ -3,8 +3,7 @@ id: BR-PRJ-MANUAL-STATUS-ANY-TIME
 type: business-rule
 title: "Project status can be changed manually within its lifecycle"
 status: draft
-applies-to:
-  - "UC-PRJ-CHANGE-PROJECT-STATUS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS"
 provenance:

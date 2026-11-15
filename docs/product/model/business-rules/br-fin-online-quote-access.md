@@ -3,9 +3,7 @@ id: BR-FIN-ONLINE-QUOTE-ACCESS
 type: business-rule
 title: "Online quotes are reached by link and optional password"
 status: draft
-applies-to:
-  - "UC-FIN-PUBLISH-ONLINE-QUOTE"
-  - "UC-FIN-RESPOND-TO-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-ONLINE-QUOTE"
 provenance:

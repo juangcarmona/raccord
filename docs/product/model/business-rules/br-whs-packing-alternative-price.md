@@ -3,8 +3,7 @@ id: BR-WHS-PACKING-ALTERNATIVE-PRICE
 type: business-rule
 title: "Alternatives chosen while packing keep the planned price"
 status: draft
-applies-to:
-  - "UC-WHS-SWAP-ALTERNATIVE-PACKING"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-ALTERNATIVE"
 provenance:

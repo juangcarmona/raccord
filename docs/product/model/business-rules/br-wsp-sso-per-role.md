@@ -3,8 +3,7 @@ id: BR-WSP-SSO-PER-ROLE
 type: business-rule
 title: "Single sign-on is enforced per role, never per person"
 status: draft
-applies-to:
-  - "UC-WSP-ENFORCE-SSO"
+applies-to: []
 uses-terms:
   - "TERM-SSO-ENFORCEMENT"
   - "TERM-USER-ROLE"

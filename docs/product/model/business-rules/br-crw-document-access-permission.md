@@ -3,9 +3,7 @@ id: BR-CRW-DOCUMENT-ACCESS-PERMISSION
 type: business-rule
 title: "Crew documents require a dedicated permission"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-DOCUMENTS"
-  - "UC-CRW-GENERATE-CREW-AGREEMENT"
+applies-to: []
 uses-terms:
   - "TERM-CREW-DOCUMENT"
 provenance:

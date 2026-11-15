@@ -3,9 +3,7 @@ id: BR-FIN-QUOTE-VALIDITY-DEFAULT
 type: business-rule
 title: "Quotes expire after a configurable default period"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-QUOTE"
-  - "UC-FIN-CONFIGURE-FINANCIAL-SETTINGS"
+applies-to: []
 uses-terms:
   - "TERM-QUOTE-VALIDITY"
   - "TERM-EXPIRED-QUOTE"

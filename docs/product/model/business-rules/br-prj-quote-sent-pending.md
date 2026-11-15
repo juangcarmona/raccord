@@ -3,9 +3,7 @@ id: BR-PRJ-QUOTE-SENT-PENDING
 type: business-rule
 title: "Sending a quotation makes the project pending"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY"
-  - "UC-FIN-SEND-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS-PENDING"
   - "TERM-QUOTE-STATUS"

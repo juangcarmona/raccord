@@ -3,8 +3,7 @@ id: "BR-DOC-PAGE-NUMBERS"
 type: business-rule
 title: "Page numbers are switched per letterhead"
 status: draft
-applies-to:
-  - "UC-DOC-EDIT-LETTERHEAD"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-HOURS-APPROVAL
 type: business-rule
 title: "Task hours follow the approval process"
 status: draft
-applies-to:
-  - "UC-PRJ-TRACK-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
   - "TERM-TIME-REGISTRATION-STATUS"

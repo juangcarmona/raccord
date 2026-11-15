@@ -3,9 +3,7 @@ id: BR-CRW-DAYS-BACK-LIMIT
 type: business-rule
 title: "Own hours are editable only a configured number of days back"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
-  - "UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION-RIGHTS"
 provenance:

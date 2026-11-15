@@ -3,8 +3,7 @@ id: BR-WSP-VIEWING-ZONE-PERSONAL
 type: business-rule
 title: "Switching the viewing time zone affects only oneself"
 status: draft
-applies-to:
-  - "UC-WSP-SWITCH-VIEWING-TIME-ZONE"
+applies-to: []
 uses-terms:
   - "TERM-VIEWING-TIME-ZONE"
 provenance:

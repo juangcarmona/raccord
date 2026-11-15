@@ -3,8 +3,7 @@ id: BR-CRW-RECONCILIATION-STATUS-DERIVATION
 type: business-rule
 title: "Reconciliation status compares registered with planned time"
 status: draft
-applies-to:
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
+applies-to: []
 uses-terms:
   - "TERM-RECONCILIATION-STATUS"
 provenance:

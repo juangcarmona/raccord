@@ -3,9 +3,7 @@ id: BR-CRW-NO-AUTOMATIC-SCHEDULE-NOTIFICATION
 type: business-rule
 title: "Planning changes are not sent automatically"
 status: draft
-applies-to:
-  - "UC-CRW-SHARE-SCHEDULE"
-  - "UC-CRW-RESOLVE-PLANNING-CONFLICTS"
+applies-to: []
 uses-terms:
   - "TERM-SCHEDULE-COMMUNICATION"
 provenance:

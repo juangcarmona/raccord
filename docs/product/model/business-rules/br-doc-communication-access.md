@@ -3,10 +3,7 @@ id: "BR-DOC-COMMUNICATION-ACCESS"
 type: business-rule
 title: "Communication history is always present but permission-filtered"
 status: draft
-applies-to:
-  - "UC-DOC-REVIEW-COMMUNICATION-LOG"
-  - "UC-DOC-REVIEW-SENT-EMAILS"
-  - "UC-DOC-REVIEW-RECIPIENT-COMMUNICATIONS"
+applies-to: []
 uses-terms:
   - "TERM-COMMUNICATION-LOG"
   - "TERM-USER-ROLE"

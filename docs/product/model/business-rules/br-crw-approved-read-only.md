@@ -3,9 +3,7 @@ id: BR-CRW-APPROVED-READ-ONLY
 type: business-rule
 title: "Approved registrations cannot be changed until reverted"
 status: draft
-applies-to:
-  - "UC-CRW-APPROVE-TIME-REGISTRATIONS"
-  - "UC-CRW-REVERT-TIME-REGISTRATION-APPROVAL"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION-STATUS"
 provenance:

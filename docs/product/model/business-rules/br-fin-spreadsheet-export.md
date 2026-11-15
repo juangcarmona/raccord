@@ -3,8 +3,7 @@ id: BR-FIN-SPREADSHEET-EXPORT
 type: business-rule
 title: "Exports contain the selected records and chosen columns"
 status: draft
-applies-to:
-  - "UC-FIN-EXPORT-DATA"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360014696379.md"

@@ -3,8 +3,7 @@ id: BR-PRJ-REVENUE-WIDGET-RANGE
 type: business-rule
 title: "Revenue widgets cover up to 15 months each way"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-DASHBOARD"
+applies-to: []
 uses-terms:
   - "TERM-DASHBOARD-WIDGET"
 provenance:

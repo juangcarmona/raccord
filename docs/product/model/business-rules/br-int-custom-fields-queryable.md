@@ -3,8 +3,7 @@ id: BR-INT-CUSTOM-FIELDS-QUERYABLE
 type: business-rule
 title: "Custom fields behave like standard fields in queries"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
   - "TERM-API-FILTER"

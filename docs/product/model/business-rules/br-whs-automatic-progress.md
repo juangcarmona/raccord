@@ -4,8 +4,6 @@ type: business-rule
 title: "Warehouse events drive project progress"
 status: draft
 applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-BOOK-BY-SCANNING"
   - "BC-PROJECTS"
 uses-terms:
   - "TERM-WAREHOUSE-BOOKING"

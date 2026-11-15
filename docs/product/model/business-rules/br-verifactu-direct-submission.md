@@ -3,8 +3,7 @@ id: BR-VERIFACTU-DIRECT-SUBMISSION
 type: business-rule
 title: "Billing records are submitted directly with the company certificate"
 status: draft
-applies-to:
-  - "UC-REPORT-BILLING-RECORDS"
+applies-to: []
 uses-terms:
   - "TERM-COMPANY-CERTIFICATE"
   - "TERM-COMPLIANCE-RECORD"

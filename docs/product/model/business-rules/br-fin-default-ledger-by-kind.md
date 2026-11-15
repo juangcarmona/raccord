@@ -3,8 +3,7 @@ id: BR-FIN-DEFAULT-LEDGER-BY-KIND
 type: business-rule
 title: "Ledger accounts default by kind and can be overridden locally"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-LEDGERS"
+applies-to: []
 uses-terms:
   - "TERM-LEDGER-ACCOUNT"
 provenance:

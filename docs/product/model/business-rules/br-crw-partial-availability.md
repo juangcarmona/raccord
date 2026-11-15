@@ -3,8 +3,7 @@ id: BR-CRW-PARTIAL-AVAILABILITY
 type: business-rule
 title: "Partial unavailability makes the whole period unavailable"
 status: draft
-applies-to:
-  - "UC-CRW-VIEW-CREW-AVAILABILITY"
+applies-to: []
 uses-terms:
   - "TERM-AVAILABILITY-STATE"
 provenance:

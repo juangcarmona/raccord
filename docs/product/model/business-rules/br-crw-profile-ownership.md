@@ -3,9 +3,7 @@ id: BR-CRW-PROFILE-OWNERSHIP
 type: business-rule
 title: "Profile ownership decides who edits personal details"
 status: draft
-applies-to:
-  - "UC-CRW-EDIT-CREW-MEMBERS"
-  - "UC-CRW-SET-UP-OWN-PROFILE"
+applies-to: []
 uses-terms:
   - "TERM-PROFILE-OWNERSHIP"
 provenance:

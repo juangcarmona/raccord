@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-WORKSPACE"
 governed-by:
   - "BR-INT-DEPRECATION-TRANSITION"
+  - "BR-TRB-OFFSET-PAGING-RETIRED"
 uses-terms:
   - "TERM-API-VERSION"
   - "TERM-API-DEPRECATION"

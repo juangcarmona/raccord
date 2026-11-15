@@ -3,8 +3,7 @@ id: BR-PRJ-REVENUE-DAY-SPREAD
 type: business-rule
 title: "Revenue is spread evenly over project days"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-DASHBOARD"
+applies-to: []
 uses-terms:
   - "TERM-DASHBOARD-WIDGET"
   - "TERM-PLANNING-PERIOD"

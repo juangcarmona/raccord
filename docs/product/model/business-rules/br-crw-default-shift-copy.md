@@ -3,9 +3,7 @@ id: BR-CRW-DEFAULT-SHIFT-COPY
 type: business-rule
 title: "Shifts copy default shift values and stay independent"
 status: draft
-applies-to:
-  - "UC-CRW-CREATE-SHIFT"
-  - "UC-CRW-MANAGE-DEFAULT-SHIFTS"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-SHIFT"
 provenance:

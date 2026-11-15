@@ -3,9 +3,7 @@ id: BR-FIN-QUOTE-SNAPSHOTS-PLAN
 type: business-rule
 title: "A quote copies the plan at generation"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-QUOTE"
-  - "UC-FIN-REGENERATE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-QUOTE"
 provenance:

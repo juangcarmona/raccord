@@ -3,11 +3,7 @@ id: BR-CRW-PLANNABLE-FLAG
 type: business-rule
 title: "Only resources shown in planning can be planned"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-CRW-PLAN-RESOURCE-ON-SHIFT"
-  - "UC-CRW-ADD-VEHICLE"
-  - "UC-CRW-EDIT-CREW-MEMBERS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-MEMBER"
   - "TERM-VEHICLE"

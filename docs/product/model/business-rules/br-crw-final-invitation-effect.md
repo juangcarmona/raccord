@@ -3,8 +3,7 @@ id: BR-CRW-FINAL-INVITATION-EFFECT
 type: business-rule
 title: "Accepting a final-planning invitation plans the person visibly"
 status: draft
-applies-to:
-  - "UC-CRW-RESPOND-TO-INVITATION"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TYPE"
   - "TERM-PLAN-STATUS"

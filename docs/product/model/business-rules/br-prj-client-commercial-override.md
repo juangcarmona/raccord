@@ -3,9 +3,7 @@ id: BR-PRJ-CLIENT-COMMERCIAL-OVERRIDE
 type: business-rule
 title: "Client commercial defaults override project values"
 status: draft
-applies-to:
-  - "UC-PRJ-SET-CONTACT-COMMERCIAL-DEFAULTS"
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-CONTACT-COMMERCIAL-DEFAULTS"
   - "TERM-PROJECT-TYPE"

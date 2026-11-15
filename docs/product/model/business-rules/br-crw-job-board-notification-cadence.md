@@ -3,8 +3,7 @@ id: BR-CRW-JOB-BOARD-NOTIFICATION-CADENCE
 type: business-rule
 title: "New job postings are notified in six-hourly batches"
 status: draft
-applies-to:
-  - "UC-CRW-POST-JOB-ON-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-JOB-POSTING"
   - "TERM-NOTIFICATION-PREFERENCE"

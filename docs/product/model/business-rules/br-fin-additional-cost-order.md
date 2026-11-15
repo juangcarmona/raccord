@@ -3,8 +3,7 @@ id: BR-FIN-ADDITIONAL-COST-ORDER
 type: business-rule
 title: "Display order of additional costs is document order"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-ADDITIONAL-COSTS"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-COST"
 provenance:

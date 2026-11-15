@@ -3,8 +3,7 @@ id: BR-EQP-ACCESSORIES-NOT-INHERITED
 type: business-rule
 title: "Accessories are not inherited by kits"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ACCESSORIES"
+applies-to: []
 uses-terms:
   - "TERM-ACCESSORY"
   - "TERM-VIRTUAL-KIT"

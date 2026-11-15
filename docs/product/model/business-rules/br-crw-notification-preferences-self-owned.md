@@ -3,8 +3,7 @@ id: BR-CRW-NOTIFICATION-PREFERENCES-SELF-OWNED
 type: business-rule
 title: "Only the crew member sets their notification channels"
 status: draft
-applies-to:
-  - "UC-CRW-SHARE-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-NOTIFICATION-PREFERENCE"
 provenance:

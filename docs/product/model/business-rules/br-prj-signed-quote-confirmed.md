@@ -3,9 +3,7 @@ id: BR-PRJ-SIGNED-QUOTE-CONFIRMED
 type: business-rule
 title: "A digitally signed quotation confirms the project"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY"
-  - "UC-FIN-RESPOND-TO-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS-CONFIRMED"
   - "TERM-SIGNED-QUOTE"

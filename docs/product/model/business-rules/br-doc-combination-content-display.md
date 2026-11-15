@@ -3,9 +3,7 @@ id: "BR-DOC-COMBINATION-CONTENT-DISPLAY"
 type: business-rule
 title: "Combination content follows its default unless overridden at generation"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
-  - "UC-DOC-HIDE-ITEMS-ON-FINANCIAL-DOCUMENTS"
+applies-to: []
 uses-terms:
   - "TERM-GENERATED-DOCUMENT"
   - "TERM-PHYSICAL-KIT"

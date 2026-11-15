@@ -3,9 +3,7 @@ id: "BR-TRB-SEARCH-INCLUDES-SHOWN-COLUMNS"
 type: business-rule
 title: "Planning lists search the columns that are shown"
 status: draft
-applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
 provenance:

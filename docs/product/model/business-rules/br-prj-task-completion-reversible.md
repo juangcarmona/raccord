@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-COMPLETION-REVERSIBLE
 type: business-rule
 title: "Completing a task can be undone"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS-COMPLETED"
 provenance:

@@ -3,8 +3,7 @@ id: BR-RECTIFYING-INVOICE
 type: business-rule
 title: "Corrections are Spanish rectifying invoices"
 status: draft
-applies-to:
-  - "UC-CORRECT-ISSUED-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-RECTIFYING-INVOICE"
   - "TERM-INVOICE-SERIES"

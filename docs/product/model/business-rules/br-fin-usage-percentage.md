@@ -3,8 +3,7 @@ id: BR-FIN-USAGE-PERCENTAGE
 type: business-rule
 title: "Equipment usage percentage formula"
 status: draft
-applies-to:
-  - "UC-FIN-ANALYZE-STATISTICS"
+applies-to: []
 uses-terms:
   - "TERM-USAGE-PERCENTAGE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-STATUS-ORDER
 type: business-rule
 title: "Status order is board column order"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-TASK-STATUSES"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS"
 provenance:

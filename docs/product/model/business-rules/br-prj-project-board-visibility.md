@@ -3,8 +3,7 @@ id: BR-PRJ-PROJECT-BOARD-VISIBILITY
 type: business-rule
 title: "Who sees a project task board"
 status: draft
-applies-to:
-  - "UC-PRJ-SHARE-PROJECT-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TASK-BOARD"
 provenance:

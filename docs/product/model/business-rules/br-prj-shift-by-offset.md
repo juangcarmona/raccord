@@ -3,8 +3,7 @@ id: BR-PRJ-SHIFT-BY-OFFSET
 type: business-rule
 title: "Shifting by offset moves periods by a signed amount"
 status: draft
-applies-to:
-  - "UC-PRJ-SHIFT-PROJECT-TIMES"
+applies-to: []
 uses-terms:
   - "TERM-TIME-PERIOD"
 provenance:

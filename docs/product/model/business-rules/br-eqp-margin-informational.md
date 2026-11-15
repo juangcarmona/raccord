@@ -3,8 +3,7 @@ id: BR-EQP-MARGIN-INFORMATIONAL
 type: business-rule
 title: "Margin price is informational"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-MARGIN-PRICE"
 provenance:

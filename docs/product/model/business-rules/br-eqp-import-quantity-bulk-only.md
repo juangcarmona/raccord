@@ -3,8 +3,7 @@ id: BR-EQP-IMPORT-QUANTITY-BULK-ONLY
 type: business-rule
 title: "Quantity column sets stock"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-IMPORT"
 provenance:

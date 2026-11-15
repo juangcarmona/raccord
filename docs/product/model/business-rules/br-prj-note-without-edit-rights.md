@@ -3,8 +3,7 @@ id: BR-PRJ-NOTE-WITHOUT-EDIT-RIGHTS
 type: business-rule
 title: "Roles may allow adding notes without edit rights"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-NOTE"
 provenance:

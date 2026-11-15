@@ -3,8 +3,7 @@ id: "BR-DOC-HIDE-ZERO-PRICED"
 type: business-rule
 title: "Zero-priced lines can be hidden on financial documents"
 status: draft
-applies-to:
-  - "UC-DOC-HIDE-ITEMS-ON-FINANCIAL-DOCUMENTS"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360017647860.md, .private/research/help-center/articles/360017647940.md"

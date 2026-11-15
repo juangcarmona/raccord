@@ -3,8 +3,7 @@ id: BR-PRJ-CONTACT-SELECTION-EFFECTS
 type: business-rule
 title: "Selecting a contact on a project applies its stored behaviour"
 status: draft
-applies-to:
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-CONTACT-WARNING"
   - "TERM-AUTOMATIC-PROJECT-NOTE"

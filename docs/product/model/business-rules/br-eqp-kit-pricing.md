@@ -3,10 +3,7 @@ id: BR-EQP-KIT-PRICING
 type: business-rule
 title: "Kit pricing"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
-  - "UC-EQP-DEFINE-VIRTUAL-KIT"
-  - "UC-WHS-ADJUST-KIT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-PHYSICAL-KIT"
   - "TERM-VIRTUAL-KIT"

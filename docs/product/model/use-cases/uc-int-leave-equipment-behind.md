@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-WAREHOUSE"
 governed-by:
   - "BR-INT-LEAVE-BEHIND-REMOVES-LINE"
+  - "BR-INT-PROJECT-MANAGEMENT-LIFECYCLE"
 uses-terms:
   - "TERM-WAREHOUSE-STATUS"
 provenance:

@@ -3,9 +3,7 @@ id: BR-INT-RATE-LIMIT-REFUSAL
 type: business-rule
 title: "Requests beyond the rate limit are refused"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
-  - "UC-INT-WRITE-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-API-RATE-LIMIT"
 provenance:

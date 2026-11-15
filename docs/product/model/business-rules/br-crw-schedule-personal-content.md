@@ -3,9 +3,7 @@ id: BR-CRW-SCHEDULE-PERSONAL-CONTENT
 type: business-rule
 title: "Each shared schedule contains only the recipient's own work"
 status: draft
-applies-to:
-  - "UC-CRW-SHARE-SCHEDULE"
-  - "UC-CRW-GENERATE-PERSONAL-SCHEDULE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-SCHEDULE-COMMUNICATION"
 provenance:

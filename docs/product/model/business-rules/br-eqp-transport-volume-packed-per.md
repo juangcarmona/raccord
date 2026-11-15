@@ -3,8 +3,7 @@ id: BR-EQP-TRANSPORT-VOLUME-PACKED-PER
 type: business-rule
 title: "Transport volume by package"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-PACKED-PER"
   - "TERM-TRANSPORT-VOLUME"

@@ -3,9 +3,7 @@ id: "BR-DOC-SIGNATURE-APPENDED"
 type: business-rule
 title: "A user's signature is added to that user's e-mails"
 status: draft
-applies-to:
-  - "UC-DOC-EMAIL-DOCUMENT"
-  - "UC-DOC-MAINTAIN-EMAIL-SIGNATURE"
+applies-to: []
 uses-terms:
   - "TERM-EMAIL-SIGNATURE"
 provenance:

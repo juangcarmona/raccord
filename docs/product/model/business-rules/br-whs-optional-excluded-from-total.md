@@ -3,8 +3,7 @@ id: BR-WHS-OPTIONAL-EXCLUDED-FROM-TOTAL
 type: business-rule
 title: "Optional equipment is excluded from quotation totals"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-OPTIONAL"
+applies-to: []
 uses-terms:
   - "TERM-OPTIONAL-EQUIPMENT"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TRAVEL-ESTIMATE-REFRESH
 type: business-rule
 title: "Travel estimates are calculated on refresh"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-CONTACT"
+applies-to: []
 uses-terms:
   - "TERM-TRAVEL-ESTIMATE"
 provenance:

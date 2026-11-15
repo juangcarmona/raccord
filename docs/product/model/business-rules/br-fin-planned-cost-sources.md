@@ -3,8 +3,7 @@ id: BR-FIN-PLANNED-COST-SOURCES
 type: business-rule
 title: "Planned costs come from the resources actually scheduled"
 status: draft
-applies-to:
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-COST"
 provenance:

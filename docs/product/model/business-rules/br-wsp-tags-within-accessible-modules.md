@@ -3,8 +3,7 @@ id: BR-WSP-TAGS-WITHIN-ACCESSIBLE-MODULES
 type: business-rule
 title: "Tag management is limited to accessible modules"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-TAG"
 provenance:

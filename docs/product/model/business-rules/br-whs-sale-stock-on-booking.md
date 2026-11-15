@@ -4,8 +4,6 @@ type: business-rule
 title: "Sale stock changes only when booked"
 status: draft
 applies-to:
-  - "UC-WHS-RETURN-SALE-ITEMS"
-  - "UC-WHS-BOOK-MANUALLY"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-UNUSED-SALE-QUANTITY"

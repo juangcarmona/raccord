@@ -3,8 +3,7 @@ id: BR-FIN-LEDGER-IMPORT-CREATES
 type: business-rule
 title: "Importing equipment with an unknown ledger creates it"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-LEDGERS"
+applies-to: []
 uses-terms:
   - "TERM-LEDGER-ACCOUNT"
 provenance:

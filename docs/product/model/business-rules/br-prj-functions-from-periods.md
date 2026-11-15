@@ -3,8 +3,7 @@ id: BR-PRJ-FUNCTIONS-FROM-PERIODS
 type: business-rule
 title: "Functions can be generated from periods"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TIME-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-TIME-PERIOD"
 provenance:

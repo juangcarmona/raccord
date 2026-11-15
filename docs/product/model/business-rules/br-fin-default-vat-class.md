@@ -3,8 +3,7 @@ id: BR-FIN-DEFAULT-VAT-CLASS
 type: business-rule
 title: "New items receive the default VAT class"
 status: active
-applies-to:
-  - "UC-FIN-CONFIGURE-VAT"
+applies-to: []
 uses-terms:
   - "TERM-VAT-CLASS"
 provenance:

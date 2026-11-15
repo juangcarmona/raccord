@@ -3,8 +3,7 @@ id: BR-WHS-SHORTAGE-EXPLAINED
 type: business-rule
 title: "Every shortage states its kind"
 status: draft
-applies-to:
-  - "UC-WHS-REVIEW-SHORTAGES"
+applies-to: []
 uses-terms:
   - "TERM-SHORTAGE-KIND"
 provenance:

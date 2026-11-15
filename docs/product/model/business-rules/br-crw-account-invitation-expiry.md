@@ -3,9 +3,7 @@ id: BR-CRW-ACCOUNT-INVITATION-EXPIRY
 type: business-rule
 title: "Account invitations expire after 30 days"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-LOGIN-ACCESS"
-  - "UC-CRW-SET-UP-OWN-PROFILE"
+applies-to: []
 uses-terms:
   - "TERM-ACCOUNT-INVITATION-STATUS"
 provenance:

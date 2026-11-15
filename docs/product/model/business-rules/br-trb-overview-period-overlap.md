@@ -3,8 +3,7 @@ id: "BR-TRB-OVERVIEW-PERIOD-OVERLAP"
 type: business-rule
 title: "The project overview shows projects whose planning period overlaps the selected period"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-OVERVIEW"
   - "TERM-PLANNING-PERIOD"

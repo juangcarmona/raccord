@@ -3,8 +3,7 @@ id: BR-CRW-PENDING-NOT-IN-TOTAL
 type: business-rule
 title: "Pending hours are not counted as worked"
 status: draft
-applies-to:
-  - "UC-CRW-APPROVE-TIME-REGISTRATIONS"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION-STATUS"
 provenance:

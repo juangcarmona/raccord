@@ -3,8 +3,7 @@ id: BR-INT-GENERATED-FIELDS-ON-REQUEST
 type: business-rule
 title: "Generated fields appear in collections only when selected"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-GENERATED-FIELD"
   - "TERM-FIELD-SELECTION"

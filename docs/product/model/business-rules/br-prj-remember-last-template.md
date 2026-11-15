@@ -3,9 +3,7 @@ id: BR-PRJ-REMEMBER-LAST-TEMPLATE
 type: business-rule
 title: "A type may remember the last used document template"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-PROJECT-TYPES"
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TYPE"
 provenance:

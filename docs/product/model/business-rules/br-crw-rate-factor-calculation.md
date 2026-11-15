@@ -3,9 +3,7 @@ id: BR-CRW-RATE-FACTOR-CALCULATION
 type: business-rule
 title: "Crew rates are calculated band by band"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-RATES"
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
+applies-to: []
 uses-terms:
   - "TERM-RATE-FACTOR"
   - "TERM-OVERTIME"

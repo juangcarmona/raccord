@@ -3,9 +3,7 @@ id: BR-FIN-MOMENT-TRIGGER-DATES
 type: business-rule
 title: "Invoice moment parts are due on their trigger"
 status: active
-applies-to:
-  - "UC-FIN-CONFIGURE-INVOICE-MOMENTS"
-  - "UC-FIN-WORK-INVOICING-QUEUE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-MOMENT"
   - "TERM-INVOICE-MOMENT-TRIGGER"

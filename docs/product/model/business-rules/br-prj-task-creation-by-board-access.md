@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-CREATION-BY-BOARD-ACCESS
 type: business-rule
 title: "Task creation in a project follows board access"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TASK-BOARD"
 provenance:

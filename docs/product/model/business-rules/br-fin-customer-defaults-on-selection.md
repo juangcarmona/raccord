@@ -3,8 +3,7 @@ id: BR-FIN-CUSTOMER-DEFAULTS-ON-SELECTION
 type: business-rule
 title: "Customer financial defaults are proposed when the client is chosen"
 status: draft
-applies-to:
-  - "UC-FIN-APPLY-CUSTOMER-DEFAULTS"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOMER-FINANCIAL-DEFAULTS"
 provenance:

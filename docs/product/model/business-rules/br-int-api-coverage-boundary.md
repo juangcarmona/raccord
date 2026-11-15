@@ -4,7 +4,6 @@ type: business-rule
 title: "Only offered operations are possible"
 status: draft
 applies-to:
-  - "UC-INT-WRITE-RECORDS-THROUGH-API"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-API-RESOURCE"

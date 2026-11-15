@@ -3,10 +3,7 @@ id: BR-SINGLE-BILLING
 type: business-rule
 title: "A billable line is billed once"
 status: draft
-applies-to:
-  - "UC-CREATE-INVOICE-DRAFT"
-  - "UC-REVISE-INVOICE-DRAFT"
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-BILLING-STATE"
 ---

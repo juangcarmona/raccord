@@ -3,8 +3,7 @@ id: BR-WHS-REFRESH-VIRTUAL-CONTENT
 type: business-rule
 title: "Refreshing a virtual combination can realign its content"
 status: draft
-applies-to:
-  - "UC-WHS-REFRESH-PLANNED-DATA"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-BOARD-SHARING-VERSUS-ROLE
 type: business-rule
 title: "Sharing gives task access, roles give rights"
 status: draft
-applies-to:
-  - "UC-PRJ-SHARE-PROJECT-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TASK-BOARD"
 provenance:

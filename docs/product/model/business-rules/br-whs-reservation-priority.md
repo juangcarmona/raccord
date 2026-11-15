@@ -4,9 +4,6 @@ type: business-rule
 title: "Reserved quantities take precedence over unreserved demand"
 status: draft
 applies-to:
-  - "UC-WHS-RESERVE-EQUIPMENT"
-  - "UC-WHS-REALLOCATE-RESERVATIONS"
-  - "UC-WHS-REVIEW-SHORTAGES"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-RESERVATION"

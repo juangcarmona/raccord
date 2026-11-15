@@ -6,7 +6,11 @@ status: draft
 primary-actor: "ACT-OPERATIONS-COORDINATOR"
 supporting-actors: []
 bounded-context: "BC-PROJECTS"
-governed-by: []
+governed-by:
+  - "BR-PRJ-DEFAULT-PERIODS"
+  - "BR-PRJ-INITIAL-STATUS"
+  - "BR-PRJ-PROJECT-NUMBER-ASSIGNMENT"
+  - "BR-PRJ-SCHEDULE-REQUIRED"
 uses-terms:
   - "TERM-PROJECT"
   - "TERM-CUSTOMER"

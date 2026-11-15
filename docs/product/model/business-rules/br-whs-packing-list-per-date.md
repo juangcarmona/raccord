@@ -4,8 +4,6 @@ type: business-rule
 title: "One packing list per pickup or return moment"
 status: draft
 applies-to:
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
-  - "UC-WHS-SET-LINE-TIMES"
   - "BC-WAREHOUSE"
 uses-terms:
   - "TERM-PACKING-LIST"

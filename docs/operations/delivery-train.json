@@ -1,0 +1,567 @@
+{
+  "schemaVersion": 1,
+  "repository": {
+    "fullName": "juangcarmona/raccord",
+    "id": 1407641006
+  },
+  "sourceRevision": "38366dc88bccffe5dfa4797cb4d976c423b56733",
+  "authorization": {
+    "date": "2026-11-15",
+    "record": "https://github.com/juangcarmona/raccord/issues/437",
+    "quote": "Dalo por aprobado todo. Lo escribí yo",
+    "scope": "Existing owner-authored product intent and proposals; recover, refine, validate/apply Product Changes, implement and publish PRs.",
+    "merge": false,
+    "production": false
+  },
+  "capacity": 1,
+  "status": "blocked",
+  "blockers": [
+    "https://github.com/juangcarmona/lighthouse/issues/699"
+  ],
+  "epics": [
+    {
+      "issue": 24,
+      "title": "Epic: Issued invoices are reported to the tax authority (VERI*FACTU)"
+    },
+    {
+      "issue": 342,
+      "title": "Epic: Expose project coordination workflows in the web app"
+    },
+    {
+      "issue": 373,
+      "title": "Epic: Complete Contacts workflows"
+    },
+    {
+      "issue": 374,
+      "title": "Epic: Complete Projects coordination and lifecycle workflows"
+    },
+    {
+      "issue": 375,
+      "title": "Epic: Complete Equipment catalog and planning capabilities"
+    },
+    {
+      "issue": 376,
+      "title": "Epic: Complete Warehouse planning and handling workflows"
+    },
+    {
+      "issue": 377,
+      "title": "Epic: Complete Crew and transport workflows"
+    },
+    {
+      "issue": 378,
+      "title": "Epic: Complete Commercial and quote workflows"
+    },
+    {
+      "issue": 379,
+      "title": "Epic: Complete Invoicing workflows"
+    },
+    {
+      "issue": 380,
+      "title": "Epic: Complete Compliance and audit workflows"
+    },
+    {
+      "issue": 381,
+      "title": "Epic: Complete Documents and communication workflows"
+    },
+    {
+      "issue": 382,
+      "title": "Epic: Complete Workspace setup and identity workflows"
+    }
+  ],
+  "order": [
+    299,
+    301,
+    302,
+    397,
+    409,
+    410,
+    413,
+    294,
+    295,
+    296,
+    297,
+    416,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312,
+    314,
+    384,
+    304,
+    385,
+    386,
+    387,
+    388,
+    389,
+    411,
+    315,
+    316,
+    317,
+    318,
+    369,
+    383,
+    329,
+    330,
+    331,
+    414,
+    320,
+    417,
+    419,
+    323,
+    300,
+    321,
+    333,
+    334,
+    335,
+    336,
+    322,
+    412,
+    391,
+    324,
+    325,
+    326,
+    327,
+    328,
+    415,
+    338,
+    265
+  ],
+  "inventory": [
+    {
+      "issue": 419,
+      "title": "Configure equipment discount groups for customer agreements",
+      "updatedAt": "2026-10-31T12:06:31Z",
+      "bodySha256": "19efd3d09359981a0087cf23e916eb9bd4dcb5ed8dd26cd33b8d5f761b05f9c2"
+    },
+    {
+      "issue": 417,
+      "title": "Configure reusable payment terms for invoices and projects",
+      "updatedAt": "2026-10-31T12:06:32Z",
+      "bodySha256": "e30c172cfb5b7ce3e4380a5e19ecc668076465c94d4f683660ea3ea259c16b85"
+    },
+    {
+      "issue": 416,
+      "title": "Configure the project-number series in Workspace",
+      "updatedAt": "2026-10-31T12:06:33Z",
+      "bodySha256": "7162d7e15839b3ad7271093876a41902d50d08cb7e9b3d4848bd3181d1c79b1d"
+    },
+    {
+      "issue": 415,
+      "title": "Support multiple organizations within one deployment",
+      "updatedAt": "2026-10-31T12:06:34Z",
+      "bodySha256": "bea0ab599fead4c4c2bfebaf7428def589db606885a3ee6c3abe23b5a529407c"
+    },
+    {
+      "issue": 414,
+      "title": "Send project communications to contact persons",
+      "updatedAt": "2026-10-31T12:06:35Z",
+      "bodySha256": "3a0e6f3996b2319e88e50f16d310fbecdb172c518f61e75e76953bb743224ab3"
+    },
+    {
+      "issue": 413,
+      "title": "Attach files to contact-person records",
+      "updatedAt": "2026-10-31T12:06:36Z",
+      "bodySha256": "dc00eed8b8dd25837ce131982023d5719ee26ebea2b079509a402e9e4adac19b"
+    },
+    {
+      "issue": 412,
+      "title": "Address issued invoices to a contact person",
+      "updatedAt": "2026-10-31T12:06:37Z",
+      "bodySha256": "50d76dc89c6675fb42bd3a28694b02428b0089050d6dae82a532d2da76ee2b9c"
+    },
+    {
+      "issue": 411,
+      "title": "Select a contact person for a project",
+      "updatedAt": "2026-10-31T12:06:38Z",
+      "bodySha256": "053be9cdaf48daef4b935915efb34c025925006daeaa4964350069e194d1196f"
+    },
+    {
+      "issue": 410,
+      "title": "Extend contact persons with approved custom fields",
+      "updatedAt": "2026-10-31T12:06:39Z",
+      "bodySha256": "0211db98a9bfafab0ed1d3ca869ea126e3dd50f5202f8e4b81eea47deb4c3a0b"
+    },
+    {
+      "issue": 409,
+      "title": "Define contact-person removal and retention",
+      "updatedAt": "2026-10-31T12:06:39Z",
+      "bodySha256": "c4fe3c99779b24a810748b402b794328eb17f85099d906ba80b6a5b4f5b594a9"
+    },
+    {
+      "issue": 397,
+      "title": "Configure the contact-number series in Workspace",
+      "updatedAt": "2026-10-31T12:06:31Z",
+      "bodySha256": "562af0dcefcdf106680a34e7ed3962f3ca5b0f28ac8cc65e824b278381c46d44"
+    },
+    {
+      "issue": 391,
+      "title": "Resolve statutory producer identity for self-hosted VERI*FACTU",
+      "updatedAt": "2026-10-31T12:06:40Z",
+      "bodySha256": "aa2723a30a5a20806375d3ac98b8a08271dad90d006aa4cc0357d30e01d40e67"
+    },
+    {
+      "issue": 389,
+      "title": "Keep project notes, files and history accessible in the project workspace",
+      "updatedAt": "2026-10-31T12:06:41Z",
+      "bodySha256": "f94ac0423bcbae438d893b5c918d25b2d5bf10acf1597d84e2a493b16c5ea7f4"
+    },
+    {
+      "issue": 388,
+      "title": "Record project task time and compare planned work with actuals",
+      "updatedAt": "2026-10-31T12:06:42Z",
+      "bodySha256": "f4855ac365df50b5f94053c0969147ebc8f81562003de3bb725df8631094c788"
+    },
+    {
+      "issue": 387,
+      "title": "View project schedules and personal assignments in the web app",
+      "updatedAt": "2026-10-31T12:06:43Z",
+      "bodySha256": "9f6f0577987416fa48a4894b9d223e13815ba7abf071959c9d497ee7ab48b32e"
+    },
+    {
+      "issue": 386,
+      "title": "Coordinate project tasks and progress on a shared board",
+      "updatedAt": "2026-10-31T12:06:44Z",
+      "bodySha256": "74b420b26f06fec81152188a56647f31f41cb2a61a1e418a56e342dedf5146f7"
+    },
+    {
+      "issue": 385,
+      "title": "Manage project requests, types and teams through the web app",
+      "updatedAt": "2026-10-31T12:06:45Z",
+      "bodySha256": "3389a9e1b96d579f2edaa82c854e46f7575e4cc197280696b996638b948ec8b0"
+    },
+    {
+      "issue": 384,
+      "title": "Release Warehouse reservations atomically when a project is cancelled",
+      "updatedAt": "2026-10-31T12:06:46Z",
+      "bodySha256": "6052ee97bf2d24561d036d9747e72968f2f98396233c06b35aaee293b62ed4b2"
+    },
+    {
+      "issue": 383,
+      "title": "Preserve crew-profile associations through unlinking and account lifecycle changes",
+      "updatedAt": "2026-10-31T12:06:47Z",
+      "bodySha256": "0b87808ebe5ee6e0e092566f02dc848350b8928ea67c6618e18c8789519aef69"
+    },
+    {
+      "issue": 382,
+      "title": "Epic: Complete Workspace setup and identity workflows",
+      "updatedAt": "2026-10-20T05:17:31Z",
+      "bodySha256": "69421b87e839032dfdb6d9148bccb00f26e3ffd1371a0b7dd3387a0e6c477f75"
+    },
+    {
+      "issue": 381,
+      "title": "Epic: Complete Documents and communication workflows",
+      "updatedAt": "2026-10-20T05:17:30Z",
+      "bodySha256": "12071c791bac1e9173ad3ab639beb9e599599d04565fc080b4ba5db9a6f483a3"
+    },
+    {
+      "issue": 380,
+      "title": "Epic: Complete Compliance and audit workflows",
+      "updatedAt": "2026-10-20T05:17:30Z",
+      "bodySha256": "b067f16f9d43c0f0e83a8435b045a67b26318349b3b3d5e0b4fbe7fa9b5bd4d4"
+    },
+    {
+      "issue": 379,
+      "title": "Epic: Complete Invoicing workflows",
+      "updatedAt": "2026-10-20T05:17:29Z",
+      "bodySha256": "4c66a21a47974e0f30ca89e8c402311fb5fe289d9c1d44712ef6bbd59e14947f"
+    },
+    {
+      "issue": 378,
+      "title": "Epic: Complete Commercial and quote workflows",
+      "updatedAt": "2026-10-20T05:17:28Z",
+      "bodySha256": "4c7c633b66ebaee452920662c9260227208634d75145c94d1d26bc180790951a"
+    },
+    {
+      "issue": 377,
+      "title": "Epic: Complete Crew and transport workflows",
+      "updatedAt": "2026-10-20T05:17:27Z",
+      "bodySha256": "ff6815d903ce1350702c483256d53ba55c9f5401b572084889eaa3ab336f4f0d"
+    },
+    {
+      "issue": 376,
+      "title": "Epic: Complete Warehouse planning and handling workflows",
+      "updatedAt": "2026-10-20T05:17:26Z",
+      "bodySha256": "53221384eb48d9e72b97fc1b5ac5005bb2dd64b476b01f5d4283aa14b8614b07"
+    },
+    {
+      "issue": 375,
+      "title": "Epic: Complete Equipment catalog and planning capabilities",
+      "updatedAt": "2026-10-20T05:17:25Z",
+      "bodySha256": "ea114da337c77b33f0f86af7b3c641f8c279e1c045a766f038690f2f31a5ebf9"
+    },
+    {
+      "issue": 374,
+      "title": "Epic: Complete Projects coordination and lifecycle workflows",
+      "updatedAt": "2026-10-20T05:17:24Z",
+      "bodySha256": "a6d769eb8922e7df8c29577fc0cba649f88cc650455578037a4a5044add45335"
+    },
+    {
+      "issue": 373,
+      "title": "Epic: Complete Contacts workflows",
+      "updatedAt": "2026-10-20T05:17:23Z",
+      "bodySha256": "a021ded00126fb3bf962b7928d15b74769be28e61e7b4fcf9ce6a02023be4da7"
+    },
+    {
+      "issue": 369,
+      "title": "Crew members can confirm and manage their profile association",
+      "updatedAt": "2026-10-31T12:06:33Z",
+      "bodySha256": "b5446cca13f6e7e4ef7385340ddfd48f6e9bfacdbe3229eb5573f220198e34b9"
+    },
+    {
+      "issue": 342,
+      "title": "Epic: Expose project coordination workflows in the web app",
+      "updatedAt": "2026-10-20T05:25:14Z",
+      "bodySha256": "7446eb369905d3ec4aa6dd6b2bce1470db674de317911aeda03d660ecd149447"
+    },
+    {
+      "issue": 338,
+      "title": "Publish the verified capability inventory on the public site by bounded context",
+      "updatedAt": "2026-10-31T12:06:48Z",
+      "bodySha256": "43066db1c079bc7d2f7b0b6a0eb6422da67be33b08037cec154b8d08ce6e5ec9"
+    },
+    {
+      "issue": 336,
+      "title": "Record quote signature metadata after customer acceptance",
+      "updatedAt": "2026-10-31T12:06:48Z",
+      "bodySha256": "3aa7f48f5e460c83fff99bd981e67fbbdc2f5e06f4a07b6eeb952719e7e1f782"
+    },
+    {
+      "issue": 335,
+      "title": "Download a deterministic accepted-quote document",
+      "updatedAt": "2026-10-31T12:06:49Z",
+      "bodySha256": "a7df1b8ac373d6dde04dc87c323d9bcfd736e3c157d8b0b8dde5e9b934e74548"
+    },
+    {
+      "issue": 334,
+      "title": "Record customer acceptance of an immutable quote",
+      "updatedAt": "2026-10-31T12:06:50Z",
+      "bodySha256": "93a6ae630255e47049a92ad3e1ff8455d5edff34ac3e1b8570b5cfc0c6ead065"
+    },
+    {
+      "issue": 333,
+      "title": "Review generated quotes and mark them ready for signature",
+      "updatedAt": "2026-10-31T12:06:51Z",
+      "bodySha256": "765a44b9ba9ed31eb7b34cc8325ca65dd155645c3c971cd6e1e868f7353fa0e2"
+    },
+    {
+      "issue": 331,
+      "title": "Deliver project communications through a testable email provider",
+      "updatedAt": "2026-10-31T12:06:52Z",
+      "bodySha256": "b172346ae34080876d21999cd4f68b4d1e7db187ecfde27f9c46087b1738221e"
+    },
+    {
+      "issue": 330,
+      "title": "Generate general project documents from approved templates",
+      "updatedAt": "2026-10-31T12:06:53Z",
+      "bodySha256": "b94955dd1c9dbde9f2d47cf7620478833f101ce9724af771da06e3efc2b5ef9d"
+    },
+    {
+      "issue": 329,
+      "title": "Edit branded and multilingual document templates through the app",
+      "updatedAt": "2026-10-31T12:06:54Z",
+      "bodySha256": "094d754d2f1c9e669513d683a7e40710d654619702ee743455cb66466a1fca1e"
+    },
+    {
+      "issue": 328,
+      "title": "Submit approved billing records through a retry-safe authority outbox",
+      "updatedAt": "2026-10-31T12:06:55Z",
+      "bodySha256": "e5ebe179e1186b98abebf7428ef450f61199acd8729943b5123d077f8e7fba59"
+    },
+    {
+      "issue": 327,
+      "title": "Render the approved tax QR code and legend in invoice PDFs",
+      "updatedAt": "2026-10-31T12:06:56Z",
+      "bodySha256": "b6f48276570db04c5aae5d5e29242b8d977bb0489615cea947ddef40e491942a"
+    },
+    {
+      "issue": 326,
+      "title": "Create and verify chained billing records atomically",
+      "updatedAt": "2026-10-31T12:06:57Z",
+      "bodySha256": "0184be50420c2593252993ca88794ad101f91c0860e5456545618708dbaff5f5"
+    },
+    {
+      "issue": 325,
+      "title": "Record VAT regime and exemption cause in each invoice representation",
+      "updatedAt": "2026-10-31T12:06:58Z",
+      "bodySha256": "5a0cde93fb9dc14d5e4cee14624fdb4321af1973ca114e5f0b8062ccc3dbf4a2"
+    },
+    {
+      "issue": 324,
+      "title": "Configure structured e-invoice behavior and preserve export evidence",
+      "updatedAt": "2026-10-31T12:06:59Z",
+      "bodySha256": "979d4dfdfccdb4d692977d8a34a23a7dad5249d1524ec1dda78aa3b1e748762b"
+    },
+    {
+      "issue": 323,
+      "title": "Configure invoice moments and generate staged project invoices",
+      "updatedAt": "2026-10-31T12:07:00Z",
+      "bodySha256": "3b8a0fd51eb0a77a04a2cf23162224a4e9a7ef181cea59300a39489b11e81375"
+    },
+    {
+      "issue": 322,
+      "title": "Issue rectifying invoices without changing the original",
+      "updatedAt": "2026-10-31T12:07:01Z",
+      "bodySha256": "4ea1c86eea9f123d2a3b3e9d89294c5bf520158a0ae03a807548dd2824edc1ed"
+    },
+    {
+      "issue": 321,
+      "title": "Generate immutable, gaplessly numbered quotes from project plans",
+      "updatedAt": "2026-10-31T12:07:01Z",
+      "bodySha256": "e386158217bce0b957ac1f55d15221e35e5cd126edb97f6ea92f2b17c9755556"
+    },
+    {
+      "issue": 320,
+      "title": "Configure company financial defaults for quotes and contracts",
+      "updatedAt": "2026-10-31T12:07:02Z",
+      "bodySha256": "6fb39ad3883d85c8d643cec2579fbaca44f96cd455d3e994108d60cd807b68e5"
+    },
+    {
+      "issue": 318,
+      "title": "Register hours from planned work and reconcile planned versus actual time",
+      "updatedAt": "2026-10-31T12:07:03Z",
+      "bodySha256": "3e7ad53ddef7dc05b1587a534e60ad3013eb860b0e1bc8c7d858e6c20c4b1949"
+    },
+    {
+      "issue": 317,
+      "title": "Surface and resolve crew and vehicle planning conflicts",
+      "updatedAt": "2026-10-31T12:07:04Z",
+      "bodySha256": "6da17e63c8aa41e94e75be9d42fe2c37fa63fe71da1145a28ca83663f3771762"
+    },
+    {
+      "issue": 316,
+      "title": "Manage and securely store crew documents",
+      "updatedAt": "2026-10-31T12:07:05Z",
+      "bodySha256": "a43254bf8736e4eded43d81d5026e0a1026e9aeafa0f9afa04063818f4a38704"
+    },
+    {
+      "issue": 315,
+      "title": "Import crew members and vehicles with validation feedback",
+      "updatedAt": "2026-10-31T12:07:06Z",
+      "bodySha256": "c3590dfcccbb28b5a4c8257543eba5a3982cfc848dd6d0fe4fe1717efe213f70"
+    },
+    {
+      "issue": 314,
+      "title": "Complete warehouse found/lost transitions and sale-item return review",
+      "updatedAt": "2026-10-31T12:07:07Z",
+      "bodySha256": "bb2d03de633f12669fad97c4f2351c45953da9b86ae874c9f0be7c47721de780"
+    },
+    {
+      "issue": 312,
+      "title": "Review equipment shortages and substitute declared alternatives",
+      "updatedAt": "2026-10-31T12:07:07Z",
+      "bodySha256": "2a25c06a3147db13ed051d07b6be732e5b8e995656b33d765327116faa160189"
+    },
+    {
+      "issue": 311,
+      "title": "Calculate equipment availability over time and reserve it safely",
+      "updatedAt": "2026-10-31T12:07:08Z",
+      "bodySha256": "f5c918e2cb70fdff7492bf667b4836fac15ef00ffe6ad5d733d13f1d77a13ec5"
+    },
+    {
+      "issue": 310,
+      "title": "Plan equipment lines with groups and project-bounded periods",
+      "updatedAt": "2026-10-31T12:07:09Z",
+      "bodySha256": "c4d9d5cd19d0d665252de8caf5c896f23dcff4f454a428d37865bd2ba55cd914"
+    },
+    {
+      "issue": 309,
+      "title": "Import the equipment catalog with preview and rejected-row reporting",
+      "updatedAt": "2026-10-31T12:07:10Z",
+      "bodySha256": "53d5fad88f53ce5f65310c7846b3549a3e8ef33207b27181bfc3b0c596a06781"
+    },
+    {
+      "issue": 308,
+      "title": "Define physical and virtual equipment kits",
+      "updatedAt": "2026-10-31T12:07:11Z",
+      "bodySha256": "bca519a911c6ae422a8732ab3415499d3adeda86abc1149cd46148766d92a724"
+    },
+    {
+      "issue": 307,
+      "title": "Add equipment details, images, accessories and alternatives",
+      "updatedAt": "2026-10-31T12:06:32Z",
+      "bodySha256": "42f27ab2bcbc949d3b805ba87678ed0ad572263f59b9abef12aef67aa9daae6e"
+    },
+    {
+      "issue": 306,
+      "title": "Model rental and sale equipment with serial units and a paged catalog",
+      "updatedAt": "2026-10-31T12:06:34Z",
+      "bodySha256": "4e41880a7acbf0a4cc16ff4144866c0feadaa110b1a5f586bf030b2c52f3b451"
+    },
+    {
+      "issue": 305,
+      "title": "Establish an Equipment module and enforce its ownership boundary",
+      "updatedAt": "2026-10-31T12:06:35Z",
+      "bodySha256": "4dc04a2267a1a6e2773b1c36c1037e2fbfd550e28527b9b03d23a7fd2469f0d0"
+    },
+    {
+      "issue": 304,
+      "title": "Create Projects from templates and reschedule the whole project",
+      "updatedAt": "2026-10-31T12:07:12Z",
+      "bodySha256": "1dbb7d39742d1a1ab94da5db16b8f63b2cae5cfb58a449942226f9b293093933"
+    },
+    {
+      "issue": 302,
+      "title": "Filter and organize contacts with tags and folders",
+      "updatedAt": "2026-11-15T22:38:24Z",
+      "bodySha256": "3e76b929d6e11df2db6aa9d784e426ad493687d56767bd0e0e6b0e1738eb5836"
+    },
+    {
+      "issue": 301,
+      "title": "Import contacts from a spreadsheet with a validation report",
+      "updatedAt": "2026-11-15T22:41:48Z",
+      "bodySha256": "4884788579ba7bc4139177f54597802ab28091fe612a5796813ab0a7ae531669"
+    },
+    {
+      "issue": 300,
+      "title": "Copy contact commercial defaults into new projects",
+      "updatedAt": "2026-10-31T12:06:35Z",
+      "bodySha256": "1ea43bc7c77105489ddfb4d9ecb8ea67a995f6d775349e369895a589d3d6116d"
+    },
+    {
+      "issue": 299,
+      "title": "Manage contact persons and their designations",
+      "updatedAt": "2026-11-15T22:35:51Z",
+      "bodySha256": "f0b25282d40d624e1003ae6dec8a656814821ab39ea94f95bdc2dedd5c558e5e"
+    },
+    {
+      "issue": 297,
+      "title": "Add optional OpenID Connect sign-in and role enforcement",
+      "updatedAt": "2026-10-31T12:07:13Z",
+      "bodySha256": "d4f210d453bb3d7ce0a94cfbadf92c5308db082024aca0dc9e9ef38805bc6e1e"
+    },
+    {
+      "issue": 296,
+      "title": "Configure Workspace company details, locale, time zone and invoice series",
+      "updatedAt": "2026-10-31T12:07:14Z",
+      "bodySha256": "cbb3e746a9d044f1b846d2a6c6e4a0c9b817702f22f46279405dc92762fa892c"
+    },
+    {
+      "issue": 295,
+      "title": "Invite Workspace members with single-use invitation links",
+      "updatedAt": "2026-10-31T12:07:14Z",
+      "bodySha256": "26fb79b3246414b33073c137785a70eb8137fea08971300b0cdaaf7c6fdbc790"
+    },
+    {
+      "issue": 294,
+      "title": "Create the first Workspace administrator through the browser",
+      "updatedAt": "2026-10-31T12:07:15Z",
+      "bodySha256": "c9d02d1be43d48049ccebd293e254d7ac661d2c62a22d4cd58a7f7cf6fc4255e"
+    },
+    {
+      "issue": 265,
+      "title": "Support self-host installation and updates from releases",
+      "updatedAt": "2026-10-31T12:06:34Z",
+      "bodySha256": "7cb48e91cbe9722305d6c18b7ea1aaca01d10aac10580be5800ef7fdc9b81fd5"
+    },
+    {
+      "issue": 24,
+      "title": "Epic: Issued invoices are reported to the tax authority (VERI*FACTU)",
+      "updatedAt": "2026-10-16T03:55:54Z",
+      "bodySha256": "92ec8d6aa3f2669713791ffa72a266a6ffb861fa3b97b02c43c53f3ddaabfcf5"
+    }
+  ]
+}

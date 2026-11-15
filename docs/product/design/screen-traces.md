@@ -175,7 +175,7 @@ File: `my-assignments.png` / `my-assignments.html`
 
 | Design decision | Decided by |
 | --- | --- |
-| Phone layout in the field PWA dark theme; "My jobs" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
+| Phone layout in the field PWA dark theme; "My jobs" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
 | Open invitations answered with Yes/No directly in the mobile web app | [UC-CRW-RESPOND-TO-INVITATION](../model/use-cases/uc-crw-respond-to-invitation.md) steps 1–2 |
 | Invitation card explains what a yes does per type ("plans you visibly", "marks me available") | [TERM-INVITATION-TYPE](../model/domain/terms/term-invitation-type.md) |
 | Availability invitation shows no job details (only the period) | [TERM-INVITATION-TYPE](../model/domain/terms/term-invitation-type.md) definition |
@@ -190,7 +190,7 @@ File: `hours-registration.png` / `hours-registration.html`
 
 | Design decision | Decided by |
 | --- | --- |
-| Phone layout in the field PWA dark theme; "Hours" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../../../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
+| Phone layout in the field PWA dark theme; "Hours" is an active field-nav destination | Mobile-delivery decision in [CHG-INITIAL](../changes/completed/chg-initial/change.md), [QR-MOBILE-WEB-APP](../model/requirements/quality/qr-mobile-web-app.md) |
 | "Still to register" list of activities scheduled in the past 24 hours | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) step 1, [BR-CRW-PLANNED-ACTIVITIES-WINDOW](../model/business-rules/br-crw-planned-activities-window.md) |
 | From / until / break prefilled from the planned activity, editable before saving | [UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES](../model/use-cases/uc-crw-register-hours-from-planned-activities.md) steps 2–4 |
 | Break prefilled from the linked shift ("45 min · from the shift") | [BR-CRW-DEFAULT-BREAK](../model/business-rules/br-crw-default-break.md) |

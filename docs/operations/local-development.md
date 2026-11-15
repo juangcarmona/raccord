@@ -100,7 +100,7 @@ dotnet run --project tools/dependency-licenses/dependency-licenses.csproj -- --c
 Every meaningful change ships an OpenSpec change under `openspec/changes/` (proposal, tasks, capability deltas). PDaC (`docs/product/`) stays the product-model source of truth. Validate locally:
 
 ```bash
-npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive
+npx -y @fission-ai/openspec@1.15.0 validate --all --no-interactive
 ```
 
 ## Changing the API contract

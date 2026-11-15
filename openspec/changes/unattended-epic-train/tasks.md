@@ -8,4 +8,7 @@
 - [x] Declare explicit independent implementation checks and observed CI identities.
 - [x] Retain the original scope inventory, queue order, activation blocker and native authorization prerequisites.
 - [x] Validate workflow projection, policy schemas, Lighthouse, OpenSpec, citations and Markdown.
-- [ ] Publish the bootstrap PR and update #437 with its actual validation and activation status.
+- [x] Publish the bootstrap PR and update #437 with its actual validation and activation status.
+- [x] Adopt the published scoped-evidence correction for Lighthouse #699 and regenerate the worker projections.
+- [ ] Verify a native refinement and implementation continuation before releasing dependent work.
+- [x] Pin the native worker OpenSpec version locally and in CI so citation discovery has an authoritative CLI after root dependency installation.

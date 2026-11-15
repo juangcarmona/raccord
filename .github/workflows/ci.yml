@@ -140,7 +140,7 @@ jobs:
       # Pinned like @prodshape/cli in the product job: unpinned, a CLI drift silently changes
       # what "a valid change" means between a contributor's machine and CI.
       - name: Validate OpenSpec changes (PDaC stays the product-model source of truth)
-        run: npx -y @fission-ai/openspec@1.12.0 validate --all --no-interactive
+        run: npx -y @fission-ai/openspec@1.15.0 validate --all --no-interactive
 
   # The whole Aspire AppHost boots once (Postgres, Azurite, migrations, the API and the Vite
   # frontend; the frontend resource's `npm ci` dominates a cold boot) and Playwright drives the
@@ -220,7 +220,7 @@ jobs:
       # warnings-as-errors false. Population discovery runs `openspec list`, so the pinned
       # OpenSpec CLI must be on PATH. This verdict stays separate from the openspec job's.
       - name: Install the OpenSpec CLI
-        run: npm install -g @fission-ai/openspec@1.12.0
+        run: npm install -g @fission-ai/openspec@1.15.0
       - name: OpenSpec documents cite the product model
         run: npx -y @prodshape/cli@0.26.1 citations verify --provider openspec
 

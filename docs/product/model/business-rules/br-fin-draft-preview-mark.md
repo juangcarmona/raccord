@@ -15,7 +15,7 @@ provenance:
 
 ## Rule
 
-An invoice that is not finalized is editable, duplicable and deletable, its document carries a preview mark, and it cannot be exported without the mark; finalizing regenerates the document without the mark and enables e-mailing, download and export.
+An open invoice draft is editable, duplicable and discardable. Its document carries a preview mark and cannot be exported without the mark. Issuing regenerates the document without the mark and enables e-mailing, download and export. A removed draft is neither editable nor exportable.
 
 ## Rationale
 

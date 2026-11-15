@@ -29,7 +29,7 @@ Something in the draft must change.
 
 ## Preconditions
 
-The invoice is not finalized.
+The invoice draft is open.
 
 ## Main Flow
 
@@ -38,11 +38,11 @@ The invoice is not finalized.
 
 ## Alternative Flows
 
-The administrator deletes the draft (see UC-REVISE-INVOICE-DRAFT).
+The administrator discards the draft (see UC-REVISE-INVOICE-DRAFT).
 
 ## Failure Conditions
 
-The invoice is finalized: editing is refused; a credit note is needed.
+The draft is Issued or Removed: editing is refused. An issued invoice can be corrected with a credit note.
 
 ## Postconditions
 

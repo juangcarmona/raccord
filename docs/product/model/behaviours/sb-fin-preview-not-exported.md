@@ -7,7 +7,7 @@ illustrates:
   - "BR-FIN-DRAFT-PREVIEW-MARK"
   - "BR-FIN-EXPORT-ONLY-FINAL"
 given:
-  - "An invoice is generated but not finalized"
+  - "An open invoice draft has a preview-marked document"
 when: "The nightly accounting export runs"
 then:
   - "The draft is not exported"

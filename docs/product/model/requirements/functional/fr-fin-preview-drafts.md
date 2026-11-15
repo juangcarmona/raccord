@@ -1,7 +1,7 @@
 ---
 id: FR-FIN-PREVIEW-DRAFTS
 type: functional-requirement
-title: "Mark non-final invoices as previews"
+title: "Mark open invoice drafts as previews"
 status: draft
 derived-from:
   - "UC-FIN-EDIT-INVOICE-DRAFT"
@@ -18,7 +18,7 @@ provenance:
 
 ## Requirement
 
-The product MUST mark documents of non-finalized invoices as previews and keep them out of exports.
+The product MUST mark documents of open invoice drafts as previews and keep them out of exports. Removed drafts are not exportable.
 
 ## Rationale
 

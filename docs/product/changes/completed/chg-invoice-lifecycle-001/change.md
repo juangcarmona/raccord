@@ -2,7 +2,7 @@
 id: CHG-INVOICE-LIFECYCLE-001
 type: product-change
 title: Make invoice draft removal a traceable lifecycle state
-status: proposed
+status: applied
 base-revision: "e6d00da5fbff519eb5695ba08f3f974a3a2b819c"
 operations:
   add:

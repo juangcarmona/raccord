@@ -12,6 +12,7 @@ governed-by:
   - "BR-AUDITED-ACTIONS"
 uses-terms:
   - "TERM-INVOICE-DRAFT"
+  - "TERM-INVOICE-STATUS"
 ---
 
 ## Goal
@@ -34,12 +35,12 @@ The draft is open.
 
 ## Alternative Flows
 
-Discard: the administrator discards the draft; all its lines become unbilled and the discard is audited.
+Discard: the administrator discards the draft; it enters the terminal Removed state and remains queryable with its audit trail. All its lines become unbilled and the discard is audited.
 
 ## Failure Conditions
 
-Revising or discarding an issued draft is refused.
+Revising or discarding an issued or removed draft is refused. Issuing a removed draft is refused.
 
 ## Postconditions
 
-Removed lines are available for another draft.
+Removed lines are available for another draft. A discarded draft remains queryable in Removed status and cannot be revised or issued.

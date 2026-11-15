@@ -21,10 +21,11 @@ Lifecycle of an invoice document.
 
 | State | Meaning |
 | --- | --- |
-| Draft (preview) | Generated but not final: editable, duplicable, deletable; its document carries a preview mark and it cannot be exported. |
+| Draft (preview) | Generated but not final: editable, duplicable, discardable; its document carries a preview mark and it cannot be exported. |
 | Issued (finalized) | Numbered and immutable; can be e-mailed, downloaded, exported and paid. |
+| Removed (discarded) | A discarded draft retained as a queryable record with its audit trail; it cannot be edited or issued. Its billable lines are unbilled again. |
 
-Transitions: draft -> issued (finalize, see UC-ISSUE-INVOICE); draft -> removed (discard, see UC-REVISE-INVOICE-DRAFT). No transition leaves the issued state; corrections are credit notes. Payment progress is tracked separately in TERM-PAYMENT-STATUS.
+Draft is the initial state. Issued and Removed are terminal. The transitions are Draft to Issued (UC-ISSUE-INVOICE) and Draft to Removed (UC-REVISE-INVOICE-DRAFT), as specified by LC-INVOICE-STATUS. Corrections to issued invoices are credit notes. Payment progress is tracked separately in TERM-PAYMENT-STATUS.
 
 ## Distinguish From
 

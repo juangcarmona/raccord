@@ -3,9 +3,7 @@ id: "BR-DOC-LOG-SCOPE"
 type: business-rule
 title: "The communication log covers all users and channels"
 status: draft
-applies-to:
-  - "UC-DOC-REVIEW-COMMUNICATION-LOG"
-  - "UC-DOC-REVIEW-SENT-EMAILS"
+applies-to: []
 uses-terms:
   - "TERM-COMMUNICATION-LOG"
   - "TERM-COMMUNICATION-CHANNEL"

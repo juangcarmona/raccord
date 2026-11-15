@@ -3,8 +3,7 @@ id: BR-PRJ-CUSTOM-FIELD-FROZEN
 type: business-rule
 title: "Custom fields cannot be changed after creation"
 status: draft
-applies-to:
-  - "UC-PRJ-DEFINE-CUSTOM-FIELD"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
 provenance:

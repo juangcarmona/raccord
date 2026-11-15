@@ -3,8 +3,7 @@ id: "BR-TRB-LIVE-CHANGES-PUSHED"
 type: business-rule
 title: "Saved changes appear on colleagues' screens without reloading"
 status: draft
-applies-to:
-  - "UC-TRB-SEE-LIVE-CHANGES"
+applies-to: []
 uses-terms:
   - "TERM-LIVE-UPDATE-CONNECTION"
 provenance:

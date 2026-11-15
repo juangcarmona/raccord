@@ -3,9 +3,7 @@ id: BR-PRJ-SCHEDULE-REQUIRED
 type: business-rule
 title: "A project cannot be saved without a time schedule"
 status: draft
-applies-to:
-  - "UC-CREATE-PROJECT"
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-TIME-SCHEDULE"
 provenance:

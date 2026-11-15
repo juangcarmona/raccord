@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-STATUS-DELETION
 type: business-rule
 title: "Deleting a status moves its tasks"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-TASK-STATUSES"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS"
 provenance:

@@ -19,9 +19,9 @@ Each module SHALL have one DbContext mapping only its own tables, in a PostgreSQ
 
 `IUnitOfWork` SHALL run the use case's writes to every participating module context on one connection, in one transaction, and commit once. A failure in any context SHALL roll back all of them.
 
-<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:895fc96f4b9c40db18c3ad4c529c4bfb3188fac61ccb68b4cd46e79ac3d3c12b" -->
 
-<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
 
@@ -78,7 +78,7 @@ Migrating a database created by the pre-change migrations SHALL move every table
 
 A module SHALL reference another module's records only by identifier, and SHALL validate the identifier through the owning module's contract at write time.
 
-<!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:b8bbb65b0f50ceeb882d7f30ec3219623b5f1242292f19240785f442960b755f" -->
+<!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:2416d85758de14ca9785a48a1aa604ba6fbba2b85b520092035d55a407e51a10" -->
 
 #### Scenario: Unknown customer
 

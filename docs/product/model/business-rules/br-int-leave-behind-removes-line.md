@@ -3,8 +3,7 @@ id: BR-INT-LEAVE-BEHIND-REMOVES-LINE
 type: business-rule
 title: "Leaving equipment behind removes it from the project"
 status: draft
-applies-to:
-  - "UC-INT-LEAVE-EQUIPMENT-BEHIND"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/37629880908050.md"

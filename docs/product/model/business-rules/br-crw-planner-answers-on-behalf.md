@@ -3,8 +3,7 @@ id: BR-CRW-PLANNER-ANSWERS-ON-BEHALF
 type: business-rule
 title: "Planners can answer or withdraw open invitations"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-OPEN-INVITATIONS"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-STATUS"
 provenance:

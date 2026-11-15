@@ -3,8 +3,7 @@ id: BR-PRJ-HISTORY-STRUCTURE
 type: business-rule
 title: "History is organised by save and location"
 status: draft
-applies-to:
-  - "UC-PRJ-REVIEW-HISTORY"
+applies-to: []
 uses-terms:
   - "TERM-HISTORY-LOG"
 provenance:

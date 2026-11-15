@@ -3,8 +3,7 @@ id: BR-EQP-IMPORT-DUPLICATE-CODES
 type: business-rule
 title: "Imports reject duplicate scan codes"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-CODE"
 provenance:

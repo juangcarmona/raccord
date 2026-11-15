@@ -3,10 +3,7 @@ id: BR-FIN-TERMS-ATTACHMENT
 type: business-rule
 title: "Terms and conditions travel with documents per document type"
 status: draft
-applies-to:
-  - "UC-FIN-SEND-QUOTE"
-  - "UC-FIN-EMAIL-INVOICE"
-  - "UC-FIN-CONFIGURE-FINANCIAL-SETTINGS"
+applies-to: []
 uses-terms:
   - "TERM-TERMS-AND-CONDITIONS"
 provenance:

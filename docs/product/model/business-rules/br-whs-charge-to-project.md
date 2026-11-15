@@ -3,8 +3,7 @@ id: BR-WHS-CHARGE-TO-PROJECT
 type: business-rule
 title: "Charges for loss become project costs"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-LOST"
+applies-to: []
 uses-terms:
   - "TERM-DAMAGE-CHARGE"
   - "TERM-ADDITIONAL-COST"

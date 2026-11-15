@@ -3,8 +3,7 @@ id: BR-WSP-FOUND-NO-FINANCIAL-CORRECTION
 type: business-rule
 title: "Recovering lost equipment does not correct charges"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-FOUND"
+applies-to: []
 uses-terms:
   - "TERM-LOST-EQUIPMENT"
 provenance:

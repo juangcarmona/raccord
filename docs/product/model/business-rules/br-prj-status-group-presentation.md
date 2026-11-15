@@ -3,8 +3,7 @@ id: BR-PRJ-STATUS-GROUP-PRESENTATION
 type: business-rule
 title: "Status groups are presented distinctly"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS-GROUP"
 provenance:

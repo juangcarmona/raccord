@@ -3,10 +3,7 @@ id: BR-EQP-KIT-WEIGHT
 type: business-rule
 title: "Kit weight and volume"
 status: draft
-applies-to:
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
-  - "UC-EQP-DEFINE-VIRTUAL-KIT"
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-EMPTY-WEIGHT"
   - "TERM-TRANSPORT-VOLUME"

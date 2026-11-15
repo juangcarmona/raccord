@@ -3,9 +3,7 @@ id: BR-WORKDAY-OPEN-DAY
 type: business-rule
 title: "An unclosed day must be corrected"
 status: draft
-applies-to:
-  - "UC-CLOCK-WORKDAY"
-  - "UC-CORRECT-WORKDAY-RECORD"
+applies-to: []
 uses-terms:
   - "TERM-WORKDAY-RECORD"
 ---

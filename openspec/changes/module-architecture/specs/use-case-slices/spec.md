@@ -10,7 +10,7 @@ Every use case reads the same way: one file from route to handler, one result ty
 
 Each use case SHALL live in `src/modules/<Module>/Raccord.Modules.<Module>/Features/<Feature>/<UseCase>.cs` and contain its route mapping, request and response types, command or query, validator and `internal sealed` handler. Each module SHALL list its slices explicitly in `Map<Module>Endpoints()`.
 
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
 
 #### Scenario: Locating a use case
 

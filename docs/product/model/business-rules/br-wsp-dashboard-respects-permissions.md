@@ -3,8 +3,7 @@ id: BR-WSP-DASHBOARD-RESPECTS-PERMISSIONS
 type: business-rule
 title: "Dashboards only show permitted information"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-DASHBOARD-WIDGET"
   - "TERM-ROLE-PERMISSION"

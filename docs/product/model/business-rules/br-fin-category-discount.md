@@ -3,8 +3,7 @@ id: BR-FIN-CATEGORY-DISCOUNT
 type: business-rule
 title: "Category discounts are percentages of the category total"
 status: draft
-applies-to:
-  - "UC-FIN-APPLY-PROJECT-DISCOUNTS"
+applies-to: []
 uses-terms:
   - "TERM-CATEGORY-DISCOUNT"
 provenance:

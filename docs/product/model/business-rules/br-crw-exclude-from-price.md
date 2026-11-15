@@ -3,8 +3,7 @@ id: BR-CRW-EXCLUDE-FROM-PRICE
 type: business-rule
 title: "Functions can be excluded from the price"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-FUNCTION-TO-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-FUNCTION"
 provenance:

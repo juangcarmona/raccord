@@ -10,6 +10,7 @@ bounded-context: "BC-INVOICING"
 governed-by:
   - "BR-FIN-TERMS-ATTACHMENT"
   - "BR-FIN-E-INVOICE-AUTO-ATTACH"
+  - "BR-WSP-INVOICE-FORWARD-COPY"
 uses-terms:
   - "TERM-ISSUED-INVOICE"
   - "TERM-E-INVOICE"

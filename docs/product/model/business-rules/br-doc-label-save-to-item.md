@@ -3,8 +3,7 @@ id: "BR-DOC-LABEL-SAVE-TO-ITEM"
 type: business-rule
 title: "A generated label can be linked to its article"
 status: draft
-applies-to:
-  - "UC-DOC-DESIGN-EQUIPMENT-LABEL"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-LABEL"
   - "TERM-ATTACHED-FILE"

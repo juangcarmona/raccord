@@ -3,9 +3,7 @@ id: BR-PRJ-CONFIDENTIAL-FOLDER
 type: business-rule
 title: "Confidential folders hide their whole content"
 status: draft
-applies-to:
-  - "UC-PRJ-ATTACH-FILE"
-  - "UC-PRJ-MANAGE-FILE-FOLDERS"
+applies-to: []
 uses-terms:
   - "TERM-FILE-FOLDER"
 provenance:

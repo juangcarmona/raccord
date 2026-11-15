@@ -3,8 +3,7 @@ id: BR-PRJ-BOARD-IS-VIEW
 type: business-rule
 title: "Boards are views, not containers"
 status: draft
-applies-to:
-  - "UC-PRJ-WORK-WITH-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-TASK-BOARD"
 provenance:

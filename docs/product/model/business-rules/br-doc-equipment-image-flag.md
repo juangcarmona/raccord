@@ -3,8 +3,7 @@ id: "BR-DOC-EQUIPMENT-IMAGE-FLAG"
 type: business-rule
 title: "Only images flagged for documents are printed"
 status: draft
-applies-to:
-  - "UC-DOC-SHOW-EQUIPMENT-IMAGES"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-ITEM"
 provenance:

@@ -3,8 +3,7 @@ id: BR-EQP-AUTO-SCAN-CODE
 type: business-rule
 title: "Scan codes generated when not supplied"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-CODE"
 provenance:

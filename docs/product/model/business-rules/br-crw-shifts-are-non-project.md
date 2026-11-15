@@ -3,8 +3,7 @@ id: BR-CRW-SHIFTS-ARE-NON-PROJECT
 type: business-rule
 title: "Shifts belong to no project"
 status: draft
-applies-to:
-  - "UC-CRW-CREATE-SHIFT"
+applies-to: []
 uses-terms:
   - "TERM-SHIFT"
   - "TERM-PROJECT-FUNCTION"

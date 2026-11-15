@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-IMPORT-SUBTASK-ROWS
 type: business-rule
 title: "Subtasks are imported as repeated parent rows"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-TASKS"
+applies-to: []
 uses-terms:
   - "TERM-SUBTASK"
 provenance:

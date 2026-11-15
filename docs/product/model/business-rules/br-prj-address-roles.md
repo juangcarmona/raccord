@@ -3,8 +3,7 @@ id: BR-PRJ-ADDRESS-ROLES
 type: business-rule
 title: "Each contact address has its own purpose"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-CONTACT"
+applies-to: []
 uses-terms:
   - "TERM-VISITING-ADDRESS"
   - "TERM-MAILING-ADDRESS"

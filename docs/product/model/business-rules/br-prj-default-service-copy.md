@@ -3,8 +3,7 @@ id: BR-PRJ-DEFAULT-SERVICE-COPY
 type: business-rule
 title: "Adding a default service copies it and creates its tasks"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-SERVICE"
 provenance:

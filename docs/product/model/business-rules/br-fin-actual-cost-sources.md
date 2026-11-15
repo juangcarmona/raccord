@@ -3,8 +3,7 @@ id: BR-FIN-ACTUAL-COST-SOURCES
 type: business-rule
 title: "Actual costs come from registered hours"
 status: draft
-applies-to:
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-ACTUAL-COST"
 provenance:

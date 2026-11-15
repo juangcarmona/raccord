@@ -5,7 +5,6 @@ title: "Each user has exactly one role, applied everywhere"
 status: draft
 applies-to:
   - "BC-WORKSPACE"
-  - "UC-WSP-ASSIGN-ROLE"
 uses-terms:
   - "TERM-USER-ROLE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-WSP-LAST-SEEN-REQUIRES-LOGIN-RIGHTS
 type: business-rule
 title: "Last seen requires the right to manage login information"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-LAST-SEEN"
 provenance:

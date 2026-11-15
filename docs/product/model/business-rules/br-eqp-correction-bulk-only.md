@@ -3,8 +3,7 @@ id: BR-EQP-CORRECTION-BULK-ONLY
 type: business-rule
 title: "Stock corrections apply to tracked stock"
 status: draft
-applies-to:
-  - "UC-EQP-CORRECT-STOCK"
+applies-to: []
 uses-terms:
   - "TERM-STOCK-CORRECTION"
 provenance:

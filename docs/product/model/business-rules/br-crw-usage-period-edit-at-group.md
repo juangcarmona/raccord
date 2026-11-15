@@ -3,8 +3,7 @@ id: BR-CRW-USAGE-PERIOD-EDIT-AT-GROUP
 type: business-rule
 title: "A price-changing time edit is made on the function group"
 status: draft
-applies-to:
-  - "UC-CRW-RETIME-FUNCTION-GROUP"
+applies-to: []
 uses-terms:
   - "TERM-FUNCTION-GROUP"
   - "TERM-FUNCTION-USAGE-PERIOD"

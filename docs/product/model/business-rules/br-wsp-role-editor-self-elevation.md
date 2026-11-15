@@ -3,8 +3,7 @@ id: BR-WSP-ROLE-EDITOR-SELF-ELEVATION
 type: business-rule
 title: "Role editors can extend their own role"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
   - "TERM-USER-ROLE"

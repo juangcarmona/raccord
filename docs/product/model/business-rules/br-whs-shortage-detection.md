@@ -4,8 +4,6 @@ type: business-rule
 title: "A shortage exists when planned demand exceeds availability"
 status: draft
 applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-WHS-REVIEW-SHORTAGES"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-SHORTAGE"

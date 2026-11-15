@@ -3,9 +3,7 @@ id: "BR-DOC-LETTERHEAD-TYPE-AVAILABILITY"
 type: business-rule
 title: "A letterhead is offered only for its document types"
 status: draft
-applies-to:
-  - "UC-DOC-ADD-LETTERHEAD"
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
 provenance:

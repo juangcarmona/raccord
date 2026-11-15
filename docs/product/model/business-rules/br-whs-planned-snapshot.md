@@ -4,8 +4,6 @@ type: business-rule
 title: "Planned equipment is a snapshot independent of the catalog"
 status: draft
 applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-WHS-REFRESH-PLANNED-DATA"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"

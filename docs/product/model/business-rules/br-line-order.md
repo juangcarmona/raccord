@@ -3,9 +3,7 @@ id: BR-LINE-ORDER
 type: business-rule
 title: "Lines keep the order in which work was recorded"
 status: draft
-applies-to:
-  - "UC-RECORD-BILLABLE-WORK"
-  - "UC-CREATE-INVOICE-DRAFT"
+applies-to: []
 uses-terms: []
 ---
 

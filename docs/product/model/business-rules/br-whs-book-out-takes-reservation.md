@@ -4,8 +4,6 @@ type: business-rule
 title: "Booking out moves the reservation to the booking project"
 status: draft
 applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-BOOK-BY-SCANNING"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-RESERVATION"

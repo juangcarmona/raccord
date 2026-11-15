@@ -3,9 +3,7 @@ id: BR-CRW-IMPORT-TAG
 type: business-rule
 title: "Each import tags the records it creates"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-IMPORT-VEHICLES"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
   - "TERM-TAG"

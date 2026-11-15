@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-BULK-ADVANCE
 type: business-rule
 title: "Bulk status advance requires identical statuses"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS"
 provenance:

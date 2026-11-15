@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-STATUS-ENDPOINTS
 type: business-rule
 title: "To do and Completed always exist"
 status: draft
-applies-to:
-  - "UC-PRJ-CONFIGURE-TASK-STATUSES"
+applies-to: []
 uses-terms:
   - "TERM-TASK-STATUS-TO-DO"
   - "TERM-TASK-STATUS-COMPLETED"

@@ -3,8 +3,7 @@ id: "BR-TRB-PRESENCE-SHARED"
 type: business-rule
 title: "Users see who else is working in a project"
 status: draft
-applies-to:
-  - "UC-TRB-SEE-LIVE-CHANGES"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-PRESENCE"
 provenance:

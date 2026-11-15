@@ -3,8 +3,7 @@ id: BR-WSP-BACKUP-SCHEDULE
 type: business-rule
 title: "Backups are taken on a schedule and kept for a retention period"
 status: draft
-applies-to:
-  - "UC-WSP-REQUEST-RESTORE"
+applies-to: []
 uses-terms:
   - "TERM-WORKSPACE-BACKUP"
 provenance:

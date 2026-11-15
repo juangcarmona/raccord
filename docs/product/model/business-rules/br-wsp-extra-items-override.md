@@ -3,8 +3,7 @@ id: BR-WSP-EXTRA-ITEMS-OVERRIDE
 type: business-rule
 title: "Adding extra items in the warehouse overrides the booked-equipment restriction"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-BOOKED-EQUIPMENT-EDIT-RIGHT"
 provenance:

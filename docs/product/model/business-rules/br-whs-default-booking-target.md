@@ -3,9 +3,7 @@ id: BR-WHS-DEFAULT-BOOKING-TARGET
 type: business-rule
 title: "Default booking targets"
 status: draft
-applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-BOOK-BY-SCANNING"
+applies-to: []
 uses-terms:
   - "TERM-CHECK-OUT"
   - "TERM-CHECK-IN"

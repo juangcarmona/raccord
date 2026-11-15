@@ -3,9 +3,7 @@ id: "BR-DOC-STATUS-EMAIL-ONLY"
 type: business-rule
 title: "Delivery status exists only for e-mails"
 status: draft
-applies-to:
-  - "UC-DOC-REVIEW-RECIPIENT-COMMUNICATIONS"
-  - "UC-DOC-REVIEW-COMMUNICATION-LOG"
+applies-to: []
 uses-terms:
   - "TERM-COMMUNICATION-CHANNEL"
   - "TERM-EMAIL-DELIVERY-STATUS"

@@ -3,8 +3,7 @@ id: BR-WHS-ALTERNATIVE-REPLACEMENT
 type: business-rule
 title: "Replacing by an alternative chooses quantity and price policy"
 status: draft
-applies-to:
-  - "UC-WHS-SOLVE-WITH-ALTERNATIVE"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-ALTERNATIVE"
   - "TERM-PLANNED-EQUIPMENT"

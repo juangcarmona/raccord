@@ -3,8 +3,7 @@ id: BR-PRJ-EQUIPMENT-TOTALS
 type: business-rule
 title: "Equipment totals at group and project level"
 status: draft
-applies-to:
-  - "UC-PRJ-VIEW-EQUIPMENT-TOTALS"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/24621478894354.md"

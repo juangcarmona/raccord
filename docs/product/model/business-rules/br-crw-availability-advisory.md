@@ -3,8 +3,7 @@ id: BR-CRW-AVAILABILITY-ADVISORY
 type: business-rule
 title: "Unknown availability does not prevent planning"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-AVAILABILITY-STATE"
 provenance:

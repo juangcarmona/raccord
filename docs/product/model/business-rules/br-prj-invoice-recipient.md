@@ -3,8 +3,7 @@ id: BR-PRJ-INVOICE-RECIPIENT
 type: business-rule
 title: "Invoices go to the administrative contact person"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-CONTACT-PERSON"
+applies-to: []
 uses-terms:
   - "TERM-ADMINISTRATIVE-CONTACT-PERSON"
   - "TERM-DEFAULT-CONTACT-PERSON"

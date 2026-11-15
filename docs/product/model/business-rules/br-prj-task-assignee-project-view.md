@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-ASSIGNEE-PROJECT-VIEW
 type: business-rule
 title: "Task assignees see basic project information"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
 provenance:

@@ -3,8 +3,7 @@ id: BR-EQP-PROJECT-HISTORY-ALL-SELECTED
 type: business-rule
 title: "Project history of several items requires all"
 status: draft
-applies-to:
-  - "UC-EQP-VIEW-EQUIPMENT-PROJECT-HISTORY"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-ITEM"
 provenance:

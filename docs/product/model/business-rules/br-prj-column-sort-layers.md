@@ -3,8 +3,7 @@ id: BR-PRJ-COLUMN-SORT-LAYERS
 type: business-rule
 title: "Overviews sort on several columns in order"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-OVERVIEW"
 provenance:

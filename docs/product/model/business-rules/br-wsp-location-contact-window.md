@@ -3,8 +3,7 @@ id: BR-WSP-LOCATION-CONTACT-WINDOW
 type: business-rule
 title: "Location contacts can be hidden after the project"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-LOCATION-CONTACT-VISIBILITY"
 provenance:

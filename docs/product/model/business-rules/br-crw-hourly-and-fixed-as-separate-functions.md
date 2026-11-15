@@ -3,8 +3,7 @@ id: BR-CRW-HOURLY-AND-FIXED-AS-SEPARATE-FUNCTIONS
 type: business-rule
 title: "Alternative pricing of one role uses separate functions"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-DEFAULT-FUNCTIONS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-FUNCTION"
 provenance:

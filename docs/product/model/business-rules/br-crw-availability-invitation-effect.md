@@ -3,9 +3,7 @@ id: BR-CRW-AVAILABILITY-INVITATION-EFFECT
 type: business-rule
 title: "Answering an availability invitation sets availability"
 status: draft
-applies-to:
-  - "UC-CRW-RESPOND-TO-INVITATION"
-  - "UC-CRW-INVITE-CREW-FOR-PERIOD"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TYPE"
   - "TERM-AVAILABILITY-STATE"

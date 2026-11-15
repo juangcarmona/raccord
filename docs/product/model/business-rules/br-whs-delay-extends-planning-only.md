@@ -4,7 +4,6 @@ type: business-rule
 title: "Marking delayed extends planning, not usage"
 status: draft
 applies-to:
-  - "UC-WHS-MARK-DELAYED"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-DELAYED-EQUIPMENT"

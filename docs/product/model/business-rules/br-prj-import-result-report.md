@@ -3,10 +3,7 @@ id: BR-PRJ-IMPORT-RESULT-REPORT
 type: business-rule
 title: "Imports report failed rows with reasons"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-EQUIPMENT-LIST"
-  - "UC-PRJ-IMPORT-TASKS"
-  - "UC-PRJ-IMPORT-CONTACTS"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/4413562661138.md, .private/research/help-center/articles/39225660180626.md, .private/research/help-center/articles/360013553000.md"

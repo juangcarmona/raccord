@@ -3,8 +3,7 @@ id: BR-CRW-AVAILABLE-LIST-ORDER
 type: business-rule
 title: "The available list puts reserved crew first"
 status: draft
-applies-to:
-  - "UC-CRW-FIND-CREW-WITH-LISTS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-LIST"
   - "TERM-AVAILABILITY-STATE"

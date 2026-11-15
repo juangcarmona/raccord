@@ -3,8 +3,7 @@ id: BR-PRJ-EXTERNAL-BOARD-INVITE
 type: business-rule
 title: "Inviting an outsider to a board creates a crew member without project access"
 status: draft
-applies-to:
-  - "UC-PRJ-SHARE-PROJECT-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TASK-BOARD"
 provenance:

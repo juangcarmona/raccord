@@ -3,9 +3,7 @@ id: BR-CRW-IMPORT-MATCH-COLUMN
 type: business-rule
 title: "Update and skip imports need a unique match column"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-IMPORT-VEHICLES"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
 provenance:

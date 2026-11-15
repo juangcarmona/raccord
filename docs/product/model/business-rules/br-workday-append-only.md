@@ -3,9 +3,7 @@ id: BR-WORKDAY-APPEND-ONLY
 type: business-rule
 title: "Workday records are append-only"
 status: draft
-applies-to:
-  - "UC-CLOCK-WORKDAY"
-  - "UC-CORRECT-WORKDAY-RECORD"
+applies-to: []
 uses-terms:
   - "TERM-WORKDAY-RECORD"
 ---

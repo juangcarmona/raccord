@@ -3,10 +3,7 @@ id: BR-CRW-RECURRENCE-SERIES
 type: business-rule
 title: "Recurring items are created as a series up to an end date"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-APPOINTMENT"
-  - "UC-CRW-ENTER-CREW-AVAILABILITY"
-  - "UC-CRW-CREATE-SHIFT"
+applies-to: []
 uses-terms:
   - "TERM-RECURRENCE-PATTERN"
 provenance:

@@ -3,8 +3,7 @@ id: BR-EQP-COUNT-EXCLUDES-VIRTUAL-KITS
 type: business-rule
 title: "Virtual kits are not counted"
 status: draft
-applies-to:
-  - "UC-EQP-COUNT-SELECTED-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-VIRTUAL-KIT"
   - "TERM-INVENTORY-COUNT"

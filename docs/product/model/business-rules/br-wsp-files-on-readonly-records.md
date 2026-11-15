@@ -3,8 +3,7 @@ id: BR-WSP-FILES-ON-READONLY-RECORDS
 type: business-rule
 title: "Uploading files to read-only records is a separate right"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

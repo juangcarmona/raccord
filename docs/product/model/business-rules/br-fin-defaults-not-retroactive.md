@@ -3,9 +3,7 @@ id: BR-FIN-DEFAULTS-NOT-RETROACTIVE
 type: business-rule
 title: "Changed customer defaults do not reach running projects automatically"
 status: draft
-applies-to:
-  - "UC-FIN-SET-CUSTOMER-FINANCIAL-DEFAULTS"
-  - "UC-FIN-APPLY-CUSTOMER-DEFAULTS"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOMER-FINANCIAL-DEFAULTS"
 provenance:

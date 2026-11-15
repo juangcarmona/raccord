@@ -3,9 +3,7 @@ id: BR-CRW-PRICE-RATES-ON-FUNCTIONS-ONLY
 type: business-rule
 title: "Price rates apply only to functions"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-RATES"
-  - "UC-CRW-LINK-RATES-TO-CREW-MEMBER"
+applies-to: []
 uses-terms:
   - "TERM-RATE-KIND"
 provenance:

@@ -3,9 +3,7 @@ id: BR-CRW-RECURRING-SHIFT-PLANNING
 type: business-rule
 title: "Resources chosen at creation are planned on all recurrences"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-SHIFT"
-  - "UC-CRW-CREATE-SHIFT"
+applies-to: []
 uses-terms:
   - "TERM-SHIFT"
   - "TERM-RECURRENCE-PATTERN"

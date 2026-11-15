@@ -3,9 +3,7 @@ id: BR-WSP-NOTIFICATION-CHANNEL-CHOICE
 type: business-rule
 title: "Notification channels are chosen per category"
 status: draft
-applies-to:
-  - "UC-WSP-SET-NOTIFICATION-PREFERENCES"
-  - "UC-WSP-RECEIVE-NOTIFICATION"
+applies-to: []
 uses-terms:
   - "TERM-NOTIFICATION-CATEGORY"
   - "TERM-NOTIFICATION-PREFERENCE"

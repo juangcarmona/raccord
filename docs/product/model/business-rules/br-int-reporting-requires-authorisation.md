@@ -4,7 +4,6 @@ type: business-rule
 title: "Reporting requires the company certificate"
 status: draft
 applies-to:
-  - "UC-INT-ENABLE-FISCAL-REPORTING"
   - "BC-COMPLIANCE"
 uses-terms:
   - "TERM-COMPLIANCE-RECORD"

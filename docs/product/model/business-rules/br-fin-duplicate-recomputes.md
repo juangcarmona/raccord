@@ -3,8 +3,7 @@ id: BR-FIN-DUPLICATE-RECOMPUTES
 type: business-rule
 title: "A duplicated invoice copies settings but recomputes content"
 status: draft
-applies-to:
-  - "UC-FIN-DUPLICATE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-INVOICE"
 provenance:

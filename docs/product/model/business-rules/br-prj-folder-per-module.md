@@ -3,8 +3,7 @@ id: BR-PRJ-FOLDER-PER-MODULE
 type: business-rule
 title: "Each module has its own folder structure"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-RECORD-FOLDERS"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-FOLDER"
 provenance:

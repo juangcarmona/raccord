@@ -3,8 +3,7 @@ id: "BR-DOC-OPTIONAL-EQUIPMENT-DISPLAY"
 type: business-rule
 title: "Optional equipment is listed inline unless a document separates it"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-OPTIONAL-EQUIPMENT"
 provenance:

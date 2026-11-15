@@ -3,8 +3,7 @@ id: BR-OPERATION-DATE
 type: business-rule
 title: "Operation date is printed when it differs from the issue date"
 status: draft
-applies-to:
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-OPERATION-DATE"
 ---

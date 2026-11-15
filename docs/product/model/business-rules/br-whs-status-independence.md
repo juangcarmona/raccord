@@ -4,11 +4,7 @@ type: business-rule
 title: "Project status and equipment status are independent"
 status: draft
 applies-to:
-  - "UC-WHS-BOOK-MANUALLY"
-  - "UC-WHS-REVIEW-WAREHOUSE-BOARD"
-  - "UC-WHS-MARK-DELAYED"
   - "BC-WAREHOUSE"
-  - "UC-PRJ-CHANGE-PROJECT-STATUS"
   - "BC-PROJECTS"
 uses-terms:
   - "TERM-WAREHOUSE-STATUS"

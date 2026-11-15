@@ -3,8 +3,7 @@ id: "BR-DOC-GROUP-PRICE-VISIBILITY"
 type: business-rule
 title: "Equipment groups excluded from price calculation stay off financial documents"
 status: draft
-applies-to:
-  - "UC-DOC-HIDE-ITEMS-ON-FINANCIAL-DOCUMENTS"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-GROUP"
 provenance:

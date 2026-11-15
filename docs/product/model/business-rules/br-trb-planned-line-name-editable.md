@@ -3,8 +3,7 @@ id: "BR-TRB-PLANNED-LINE-NAME-EDITABLE"
 type: business-rule
 title: "A planned line's name can differ from the catalog name"
 status: draft
-applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

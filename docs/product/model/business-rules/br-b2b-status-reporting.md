@@ -3,8 +3,7 @@ id: BR-B2B-STATUS-REPORTING
 type: business-rule
 title: "Received B2B invoices need a status within four days"
 status: draft
-applies-to:
-  - "UC-EXCHANGE-B2B-E-INVOICE"
+applies-to: []
 uses-terms: []
 ---
 

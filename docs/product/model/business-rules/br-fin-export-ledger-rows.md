@@ -3,9 +3,7 @@ id: BR-FIN-EXPORT-LEDGER-ROWS
 type: business-rule
 title: "Invoices are exported as ledger rows"
 status: draft
-applies-to:
-  - "UC-FIN-EXPORT-INVOICES-SPREADSHEET"
-  - "UC-FIN-RUN-ACCOUNTING-EXPORT"
+applies-to: []
 uses-terms:
   - "TERM-LEDGER-ACCOUNT"
   - "TERM-ACCOUNTING-EXPORT"

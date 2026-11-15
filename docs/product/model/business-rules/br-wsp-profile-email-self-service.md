@@ -4,7 +4,6 @@ type: business-rule
 title: "Only the person changes a profile's email address"
 status: draft
 applies-to:
-  - "UC-WSP-CHANGE-PROFILE-EMAIL"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-PERSONAL-PROFILE"

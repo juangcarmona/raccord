@@ -3,8 +3,7 @@ id: BR-PRJ-UNAPPROVED-HOURS-EXPORT-WARNING
 type: business-rule
 title: "Exports warn about unapproved hours"
 status: draft
-applies-to:
-  - "UC-PRJ-REPORT-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
 provenance:

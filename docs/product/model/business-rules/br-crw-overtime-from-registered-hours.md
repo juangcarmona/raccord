@@ -3,9 +3,7 @@ id: BR-CRW-OVERTIME-FROM-REGISTERED-HOURS
 type: business-rule
 title: "Overtime is calculated only from registered hours"
 status: draft
-applies-to:
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
+applies-to: []
 uses-terms:
   - "TERM-OVERTIME"
   - "TERM-TIME-REGISTRATION"

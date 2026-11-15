@@ -3,8 +3,7 @@ id: BR-CRW-PERIOD-INVITATION-TYPES
 type: business-rule
 title: "Period invitations are availability or reservation invitations"
 status: draft
-applies-to:
-  - "UC-CRW-INVITE-CREW-FOR-PERIOD"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-TYPE"
 provenance:

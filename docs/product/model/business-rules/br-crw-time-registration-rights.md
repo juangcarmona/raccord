@@ -3,11 +3,7 @@ id: BR-CRW-TIME-REGISTRATION-RIGHTS
 type: business-rule
 title: "Registering hours requires role rights"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
-  - "UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES"
-  - "UC-CRW-CLOCK-IN-AND-OUT"
-  - "UC-CRW-CONFIGURE-TIME-REGISTRATION"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION-RIGHTS"
 provenance:

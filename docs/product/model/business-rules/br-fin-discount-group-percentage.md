@@ -3,9 +3,7 @@ id: BR-FIN-DISCOUNT-GROUP-PERCENTAGE
 type: business-rule
 title: "Discount group percentage of the client applies to items in the group"
 status: active
-applies-to:
-  - "UC-FIN-CONFIGURE-DISCOUNT-GROUPS"
-  - "UC-FIN-APPLY-CUSTOMER-DEFAULTS"
+applies-to: []
 uses-terms:
   - "TERM-DISCOUNT-GROUP"
 provenance:

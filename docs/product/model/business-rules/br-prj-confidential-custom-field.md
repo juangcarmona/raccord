@@ -3,8 +3,7 @@ id: BR-PRJ-CONFIDENTIAL-CUSTOM-FIELD
 type: business-rule
 title: "Confidential custom fields are role-restricted"
 status: draft
-applies-to:
-  - "UC-PRJ-DEFINE-CUSTOM-FIELD"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
 provenance:

@@ -3,8 +3,7 @@ id: BR-FIN-STATISTICS-ARE-LIVE
 type: business-rule
 title: "Statistics are recalculated from current data"
 status: draft
-applies-to:
-  - "UC-FIN-ANALYZE-STATISTICS"
+applies-to: []
 uses-terms:
   - "TERM-STATISTICS-VIEW"
 provenance:

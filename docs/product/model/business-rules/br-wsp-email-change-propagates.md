@@ -3,8 +3,7 @@ id: BR-WSP-EMAIL-CHANGE-PROPAGATES
 type: business-rule
 title: "A verified email change updates the connected crew member"
 status: draft
-applies-to:
-  - "UC-WSP-CHANGE-PROFILE-EMAIL"
+applies-to: []
 uses-terms:
   - "TERM-PERSONAL-PROFILE"
   - "TERM-CREW-MEMBER"

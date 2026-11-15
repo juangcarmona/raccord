@@ -3,8 +3,7 @@ id: BR-PRJ-FOLDER-DELETE-NONEMPTY
 type: business-rule
 title: "Folders with records cannot be deleted"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-RECORD-FOLDERS"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-FOLDER"
 provenance:

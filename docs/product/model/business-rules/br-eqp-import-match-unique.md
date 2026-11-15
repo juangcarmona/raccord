@@ -3,9 +3,7 @@ id: BR-EQP-IMPORT-MATCH-UNIQUE
 type: business-rule
 title: "Match columns must be unique and unchanged"
 status: draft
-applies-to:
-  - "UC-EQP-IMPORT-EQUIPMENT"
-  - "UC-EQP-MASS-UPDATE-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-IMPORT-MATCH-COLUMN"
 provenance:

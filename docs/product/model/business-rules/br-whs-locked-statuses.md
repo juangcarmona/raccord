@@ -4,7 +4,6 @@ type: business-rule
 title: "Three warehouse statuses are fixed"
 status: draft
 applies-to:
-  - "UC-WHS-CONFIGURE-WAREHOUSE-STATUSES"
   - "BC-WAREHOUSE"
 uses-terms:
   - "TERM-WAREHOUSE-STATUS"

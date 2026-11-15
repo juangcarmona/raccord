@@ -3,9 +3,7 @@ id: BR-CRW-RETIME-WITH-PLANNED-RESOURCES
 type: business-rule
 title: "Retiming a staffed function asks what happens to planned resources"
 status: draft
-applies-to:
-  - "UC-CRW-RETIME-FUNCTION"
-  - "UC-CRW-RETIME-FUNCTION-GROUP"
+applies-to: []
 uses-terms:
   - "TERM-CREW-ASSIGNMENT"
   - "TERM-CREW-PLANNING-PERIOD"

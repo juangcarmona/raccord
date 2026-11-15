@@ -8,6 +8,7 @@ supporting-actors: []
 bounded-context: "BC-WAREHOUSE"
 governed-by:
   - "BR-WHS-SCAN-CODE-UNIQUE"
+  - "BR-EQP-SCAN-CODE-GRANULARITY"
 uses-terms:
   - "TERM-SCAN-CODE"
 provenance:

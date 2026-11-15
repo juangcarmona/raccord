@@ -3,9 +3,7 @@ id: BR-PRJ-TEMPLATE-TASKS
 type: business-rule
 title: "Template tasks are created on every new project"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-PROJECT-TEMPLATE"
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
   - "TERM-TASK-DEADLINE"

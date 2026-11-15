@@ -3,8 +3,7 @@ id: BR-WHS-ALTERNATIVE-SAVED
 type: business-rule
 title: "Alternatives found while solving are remembered"
 status: draft
-applies-to:
-  - "UC-WHS-SOLVE-WITH-ALTERNATIVE"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-ALTERNATIVE"
 provenance:

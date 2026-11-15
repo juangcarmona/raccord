@@ -3,8 +3,7 @@ id: BR-FIN-REGENERATION-MODES
 type: business-rule
 title: "Regeneration keeps, raises or replaces the document identity"
 status: draft
-applies-to:
-  - "UC-FIN-REGENERATE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-REGENERATION-MODE"
   - "TERM-QUOTE-VERSION"

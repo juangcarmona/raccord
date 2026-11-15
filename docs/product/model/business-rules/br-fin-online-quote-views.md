@@ -3,8 +3,7 @@ id: BR-FIN-ONLINE-QUOTE-VIEWS
 type: business-rule
 title: "Only visitors who are not logged-in users are counted as views"
 status: draft
-applies-to:
-  - "UC-FIN-RESPOND-TO-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-ONLINE-QUOTE"
 provenance:

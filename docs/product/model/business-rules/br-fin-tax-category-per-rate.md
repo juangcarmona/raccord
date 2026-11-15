@@ -3,8 +3,7 @@ id: BR-FIN-TAX-CATEGORY-PER-RATE
 type: business-rule
 title: "Each VAT rate states its tax category code"
 status: draft
-applies-to:
-  - "UC-FIN-CONFIGURE-E-INVOICING"
+applies-to: []
 uses-terms:
   - "TERM-TAX-CATEGORY-CODE"
 provenance:

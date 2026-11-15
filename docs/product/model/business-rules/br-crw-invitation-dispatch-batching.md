@@ -3,9 +3,7 @@ id: BR-CRW-INVITATION-DISPATCH-BATCHING
 type: business-rule
 title: "Invitations are sent within 15 minutes and combined"
 status: draft
-applies-to:
-  - "UC-CRW-SEND-PENDING-INVITATIONS"
-  - "UC-CRW-INVITE-CREW-FOR-FUNCTION"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION"
 provenance:

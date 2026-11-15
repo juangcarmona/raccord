@@ -3,8 +3,7 @@ id: "BR-DOC-SIGNING-COMMENT"
 type: business-rule
 title: "Signers may comment only when allowed"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-DIGITAL-SIGNING"
+applies-to: []
 uses-terms:
   - "TERM-DIGITAL-SIGNING-ELEMENT"
 provenance:

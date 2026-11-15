@@ -3,8 +3,7 @@ id: BR-CRW-REGISTRATION-HISTORY
 type: business-rule
 title: "Every change to a registration is logged"
 status: draft
-applies-to:
-  - "UC-CRW-APPROVE-TIME-REGISTRATIONS"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION"
 provenance:

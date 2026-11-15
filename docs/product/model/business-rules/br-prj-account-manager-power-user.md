@@ -3,8 +3,7 @@ id: BR-PRJ-ACCOUNT-MANAGER-POWER-USER
 type: business-rule
 title: "Account managers hold the Admin or Office role"
 status: draft
-applies-to:
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-ACCOUNT-MANAGER"
   - "TERM-USER-ROLE"

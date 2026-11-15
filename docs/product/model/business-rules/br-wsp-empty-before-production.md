@@ -3,8 +3,7 @@ id: BR-WSP-EMPTY-BEFORE-PRODUCTION
 type: business-rule
 title: "Automatic emptying is only possible before production use"
 status: draft
-applies-to:
-  - "UC-WSP-EMPTY-SAMPLE-DATA"
+applies-to: []
 uses-terms:
   - "TERM-SAMPLE-DATA"
 provenance:

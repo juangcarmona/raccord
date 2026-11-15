@@ -3,9 +3,7 @@ id: "BR-TRB-OFFSET-PAGING-RETIRED"
 type: business-rule
 title: "Offset paging is retired in favour of cursor paging"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
-  - "UC-INT-ADAPT-TO-API-CHANGE"
+applies-to: []
 uses-terms:
   - "TERM-PAGINATION-CURSOR"
   - "TERM-API-DEPRECATION"

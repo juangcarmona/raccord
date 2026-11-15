@@ -4,7 +4,6 @@ type: business-rule
 title: "Master data changes do not update planned lines"
 status: draft
 applies-to:
-  - "UC-WSP-BULK-EDIT"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"

@@ -3,8 +3,7 @@ id: BR-INT-CURSOR-PAGING-DEFAULT
 type: business-rule
 title: "Collections are paged with an opaque cursor"
 status: draft
-applies-to:
-  - "UC-INT-READ-RECORDS-THROUGH-API"
+applies-to: []
 uses-terms:
   - "TERM-PAGINATION-CURSOR"
 provenance:

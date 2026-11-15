@@ -3,8 +3,7 @@ id: BR-FIN-TOTAL-DISCOUNT
 type: business-rule
 title: "The project discount is a percentage or a fixed amount"
 status: draft
-applies-to:
-  - "UC-FIN-APPLY-PROJECT-DISCOUNTS"
+applies-to: []
 uses-terms:
   - "TERM-TOTAL-DISCOUNT"
 provenance:

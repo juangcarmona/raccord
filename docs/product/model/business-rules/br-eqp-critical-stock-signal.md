@@ -3,8 +3,7 @@ id: BR-EQP-CRITICAL-STOCK-SIGNAL
 type: business-rule
 title: "Critical stock flags replenishment"
 status: draft
-applies-to:
-  - "UC-EQP-CREATE-SALE-ITEM"
+applies-to: []
 uses-terms:
   - "TERM-CRITICAL-STOCK"
 provenance:

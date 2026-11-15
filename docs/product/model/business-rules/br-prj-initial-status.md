@@ -3,10 +3,7 @@ id: BR-PRJ-INITIAL-STATUS
 type: business-rule
 title: "Initial status of a new project"
 status: draft
-applies-to:
-  - "UC-CREATE-PROJECT"
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
-  - "UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS"
 provenance:

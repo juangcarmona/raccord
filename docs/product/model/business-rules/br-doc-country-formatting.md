@@ -3,9 +3,7 @@ id: "BR-DOC-COUNTRY-FORMATTING"
 type: business-rule
 title: "The template country decides regional formatting"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-TEMPLATE-SETTINGS"
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-TEMPLATE-LOCALE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-FIN-DEFAULT-FACTOR-GROUP
 type: business-rule
 title: "Items without an assigned factor group use the default group"
 status: draft
-applies-to:
-  - "UC-FIN-CONFIGURE-PRICE-FACTORS"
+applies-to: []
 uses-terms:
   - "TERM-FACTOR-GROUP"
 provenance:

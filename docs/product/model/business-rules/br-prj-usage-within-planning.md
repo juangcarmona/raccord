@@ -4,7 +4,6 @@ type: business-rule
 title: "The usage period is shorter than the planning period"
 status: draft
 applies-to:
-  - "UC-PRJ-MANAGE-TIME-SCHEDULE"
   - "BC-PROJECTS"
 uses-terms:
   - "TERM-PLANNING-PERIOD"

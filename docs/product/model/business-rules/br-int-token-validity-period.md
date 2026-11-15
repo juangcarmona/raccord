@@ -3,8 +3,7 @@ id: BR-INT-TOKEN-VALIDITY-PERIOD
 type: business-rule
 title: "Tokens are valid for ten years"
 status: draft
-applies-to:
-  - "UC-INT-ENABLE-API-ACCESS"
+applies-to: []
 uses-terms:
   - "TERM-API-TOKEN-VALIDITY"
 provenance:

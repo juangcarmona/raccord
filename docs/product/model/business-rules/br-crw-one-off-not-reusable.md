@@ -3,8 +3,7 @@ id: BR-CRW-ONE-OFF-NOT-REUSABLE
 type: business-rule
 title: "One-off functions stay in their project"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-FUNCTION-TO-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-ONE-OFF-FUNCTION"
 provenance:

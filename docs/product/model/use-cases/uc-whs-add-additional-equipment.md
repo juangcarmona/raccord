@@ -8,6 +8,8 @@ supporting-actors: []
 bounded-context: "BC-WAREHOUSE"
 governed-by:
   - "BR-WHS-UNPLANNED-SCAN-ADDS"
+  - "BR-EQP-HIDDEN-ITEM-STILL-BOOKABLE"
+  - "BR-EQP-UNPLANNED-KIT-CONFIRM"
 uses-terms:
   - "TERM-ADDITIONAL-EQUIPMENT"
 provenance:

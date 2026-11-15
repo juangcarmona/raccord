@@ -3,8 +3,7 @@ id: BR-EQP-NEW-ITEM-IS-SINGLE
 type: business-rule
 title: "New equipment defaults to a single item"
 status: draft
-applies-to:
-  - "UC-EQP-CREATE-ITEM"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-TYPE"
   - "TERM-SINGLE-ITEM"

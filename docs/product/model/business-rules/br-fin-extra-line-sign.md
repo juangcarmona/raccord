@@ -3,10 +3,7 @@ id: BR-FIN-EXTRA-LINE-SIGN
 type: business-rule
 title: "Extra invoice lines may be positive or negative"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
-  - "UC-FIN-CREATE-STANDALONE-INVOICE"
-  - "UC-FIN-CREATE-CREDIT-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-EXTRA-LINE"
 provenance:

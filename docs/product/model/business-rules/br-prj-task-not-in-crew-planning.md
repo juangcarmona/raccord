@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-NOT-IN-CREW-PLANNING
 type: business-rule
 title: "Tasks never appear in crew planning"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-CANCEL-OPEN-ITEMS-WARNING
 type: business-rule
 title: "Cancelled projects with open items show a warning"
 status: draft
-applies-to:
-  - "UC-PRJ-CANCEL-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS-CANCELLED"
 provenance:

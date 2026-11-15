@@ -3,8 +3,7 @@ id: BR-PRJ-REQUEST-NOTIFICATION
 type: business-rule
 title: "Incoming requests notify all account managers"
 status: draft
-applies-to:
-  - "UC-PRJ-RECEIVE-PROJECT-REQUEST"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-REQUEST"
 provenance:

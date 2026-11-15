@@ -3,9 +3,7 @@ id: BR-EQP-CONTENT-BINDING-DEFAULT
 type: business-rule
 title: "Content lines default to reserved from stock"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-DEFAULT-CONTENT"
-  - "UC-EQP-DEFINE-PHYSICAL-KIT"
+applies-to: []
 uses-terms:
   - "TERM-CONTENT-STOCK-BINDING"
 provenance:

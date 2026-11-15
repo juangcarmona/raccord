@@ -3,8 +3,7 @@ id: BR-FIN-INSURANCE-ON-GROSS-RENTAL
 type: business-rule
 title: "Insurance is a percentage of the gross rental price"
 status: draft
-applies-to:
-  - "UC-FIN-CHARGE-INSURANCE"
+applies-to: []
 uses-terms:
   - "TERM-INSURANCE-CHARGE"
 provenance:

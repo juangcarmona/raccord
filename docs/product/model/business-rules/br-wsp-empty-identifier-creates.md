@@ -3,8 +3,7 @@ id: BR-WSP-EMPTY-IDENTIFIER-CREATES
 type: business-rule
 title: "Rows without identifier become new records"
 status: draft
-applies-to:
-  - "UC-WSP-UPDATE-BY-IMPORT"
+applies-to: []
 uses-terms:
   - "TERM-RECORD-IDENTIFIER"
   - "TERM-IMPORT-MATCH-COLUMN"

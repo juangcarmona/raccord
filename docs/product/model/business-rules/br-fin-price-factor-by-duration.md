@@ -3,9 +3,7 @@ id: BR-FIN-PRICE-FACTOR-BY-DURATION
 type: business-rule
 title: "Price factor follows the usage period"
 status: draft
-applies-to:
-  - "UC-FIN-CONFIGURE-PRICE-FACTORS"
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-PRICE-FACTOR"
   - "TERM-FACTOR-GROUP"

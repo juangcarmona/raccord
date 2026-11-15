@@ -3,8 +3,7 @@ id: "BR-TRB-OVERVIEW-DAY-KIND-FILTER"
 type: business-rule
 title: "Day-kind selection can hide projects outside list mode"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-DAY-KIND"
   - "TERM-PROJECT-OVERVIEW"

@@ -3,8 +3,7 @@ id: BR-PRJ-CONTACT-PERSON-NOT-MOVABLE
 type: business-rule
 title: "Contact persons cannot move between contacts"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-CONTACT-PERSON"
+applies-to: []
 uses-terms:
   - "TERM-CONTACT-PERSON"
 provenance:

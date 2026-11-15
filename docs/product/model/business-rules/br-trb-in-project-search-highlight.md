@@ -3,8 +3,7 @@ id: "BR-TRB-IN-PROJECT-SEARCH-HIGHLIGHT"
 type: business-rule
 title: "Search within a project highlights all matches"
 status: draft
-applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-PLANNED-EQUIPMENT"
 provenance:

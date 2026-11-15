@@ -3,10 +3,7 @@ id: BR-FIN-DRAFT-PREVIEW-MARK
 type: business-rule
 title: "Non-final invoices carry a preview mark and are not exportable"
 status: draft
-applies-to:
-  - "UC-FIN-EDIT-INVOICE-DRAFT"
-  - "UC-ISSUE-INVOICE"
-  - "UC-FIN-RUN-ACCOUNTING-EXPORT"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-PREVIEW"
   - "TERM-INVOICE-STATUS"

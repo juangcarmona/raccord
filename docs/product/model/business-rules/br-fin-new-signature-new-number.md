@@ -3,9 +3,7 @@ id: BR-FIN-NEW-SIGNATURE-NEW-NUMBER
 type: business-rule
 title: "A new digital signature requires a new quote number"
 status: draft
-applies-to:
-  - "UC-FIN-REGENERATE-QUOTE"
-  - "UC-FIN-RESPOND-TO-ONLINE-QUOTE"
+applies-to: []
 uses-terms:
   - "TERM-SIGNED-QUOTE"
   - "TERM-COMMERCIAL-DOCUMENT-NUMBER"

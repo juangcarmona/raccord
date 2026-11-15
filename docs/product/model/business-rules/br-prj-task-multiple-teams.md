@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-MULTIPLE-TEAMS
 type: business-rule
 title: "A task may be linked to several teams"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TEAMS"
+applies-to: []
 uses-terms:
   - "TERM-TASK-TEAM"
 provenance:

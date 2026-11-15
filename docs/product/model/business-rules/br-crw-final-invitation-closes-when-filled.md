@@ -3,8 +3,7 @@ id: BR-CRW-FINAL-INVITATION-CLOSES-WHEN-FILLED
 type: business-rule
 title: "Final-planning invitations close when the function is full"
 status: draft
-applies-to:
-  - "UC-CRW-RESPOND-TO-INVITATION"
+applies-to: []
 uses-terms:
   - "TERM-INVITATION-STATUS"
   - "TERM-STAFFING-STATUS"

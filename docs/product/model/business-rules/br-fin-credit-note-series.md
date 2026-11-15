@@ -3,9 +3,7 @@ id: BR-FIN-CREDIT-NOTE-SERIES
 type: business-rule
 title: "Credit notes can use their own number series"
 status: draft
-applies-to:
-  - "UC-FIN-CREATE-CREDIT-NOTE"
-  - "UC-FIN-CONFIGURE-FINANCIAL-SETTINGS"
+applies-to: []
 uses-terms:
   - "TERM-CREDIT-NOTE"
   - "TERM-INVOICE-SERIES"

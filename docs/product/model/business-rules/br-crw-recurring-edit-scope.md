@@ -3,9 +3,7 @@ id: BR-CRW-RECURRING-EDIT-SCOPE
 type: business-rule
 title: "Changes to a recurring item ask which occurrences they affect"
 status: draft
-applies-to:
-  - "UC-CRW-EDIT-APPOINTMENT"
-  - "UC-CRW-EDIT-SHIFT"
+applies-to: []
 uses-terms:
   - "TERM-RECURRENCE-PATTERN"
   - "TERM-SHIFT"

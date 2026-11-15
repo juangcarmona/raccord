@@ -3,10 +3,7 @@ id: "BR-TRB-SEARCH-MINIMUM-THREE-CHARACTERS"
 type: business-rule
 title: "Searches start from three characters"
 status: draft
-applies-to:
-  - "UC-WHS-PLAN-EQUIPMENT"
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-WSP-QUICK-SEARCH"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360015031799.md"

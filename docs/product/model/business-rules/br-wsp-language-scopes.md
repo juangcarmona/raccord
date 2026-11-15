@@ -3,8 +3,7 @@ id: BR-WSP-LANGUAGE-SCOPES
 type: business-rule
 title: "Workspace and profile language have different reach"
 status: draft
-applies-to:
-  - "UC-WSP-SET-LANGUAGE"
+applies-to: []
 uses-terms:
   - "TERM-WORKSPACE-LANGUAGE"
   - "TERM-PROFILE-LANGUAGE"

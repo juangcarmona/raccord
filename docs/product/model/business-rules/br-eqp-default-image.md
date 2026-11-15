@@ -3,8 +3,7 @@ id: BR-EQP-DEFAULT-IMAGE
 type: business-rule
 title: "First non-confidential image is the default"
 status: draft
-applies-to:
-  - "UC-EQP-ADD-ITEM-IMAGE"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-IMAGE"
 provenance:

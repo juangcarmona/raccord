@@ -3,8 +3,7 @@ id: BR-PRJ-BOARD-HIDING-PERSONAL
 type: business-rule
 title: "Hiding a board affects only oneself"
 status: draft
-applies-to:
-  - "UC-PRJ-WORK-WITH-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-TASK-BOARD"
 provenance:

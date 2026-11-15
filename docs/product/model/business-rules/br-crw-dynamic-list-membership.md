@@ -3,9 +3,7 @@ id: BR-CRW-DYNAMIC-LIST-MEMBERSHIP
 type: business-rule
 title: "Folder and tag lists update automatically"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CUSTOM-RESOURCE-LISTS"
-  - "UC-CRW-FIND-CREW-WITH-LISTS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-LIST"
 provenance:

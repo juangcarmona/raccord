@@ -12,9 +12,9 @@
 - [ ] 2.3 Write failing tests for append through IAuditAppender, including one persisted event and copied detail values. Add AuditEntry/IAuditAppender in SharedKernel; make the current IAuditTrail inherit the port and add AuditTrail's overload/alias registration as designed. Verify: append/read and actor/timestamp/action tests pass with one event, and SharedKernel references no Domain assembly.
 
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
-<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:652792a573f685a43f131a08b467a4de67c176c48e81ea5ba38aa1367e7c599c" -->
-<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:aadb655c57c6486610d3a3346f45bdd19696a407dd954d4fc37cd9cefd3391ca" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
+<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:540c744a9100bf27b3094353016316aa7e50ea96791665e3f6c5be545ae611cc" -->
+<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:2a2b07a88ddffe4bd6b3de5750620c50efbf8e58001278b0a1da2215e5a69d7a" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
@@ -27,7 +27,7 @@
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
-<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
+<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:16d52ea384cf2be82ec2a7c754500a52ca21f9bbd2c62827a24d2c3f75e3026f" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
 
 ## 4. Implement failure mapping and dispatch in small increments
@@ -37,10 +37,10 @@
 - [ ] 4.3 Add domain exception conversion with the draft.not-open conflict special case and integrity passthrough; add Infrastructure ApplicationExceptionMapper for InvoiceValidationException and current concurrency exception. Register the application mapper explicitly. Verify: original codes/messages/issue objects survive; unknown exceptions and cancellation propagate; BuildingBlocks has no Application/Domain reference.
 - [ ] 4.4 Exercise sender and ApiResults together through a test-only HTTP seam, including valid response, invalid shape, readiness issues, domain rule, conflict and critical integrity passthrough. Verify: current production endpoint behavior and tests remain unchanged.
 
-<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:f7310fed1fddd6fc7c813db19db677f8aea9feff2f179549c9a9425607804d33" -->
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
+<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
-<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
+<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:16d52ea384cf2be82ec2a7c754500a52ca21f9bbd2c62827a24d2c3f75e3026f" -->
 
 ## 5. Prove atomic shared persistence
 
@@ -50,10 +50,10 @@
 - [ ] 5.4 Test EF concurrency and PostgreSQL unique violation mapping, successful scope reuse after commit, nested/active-transaction rejection and unsupported retry configuration. Implement the documented fail-fast safeguards. Verify: no case silently commits separately, retries an individual save or disposes a caller-owned connection.
 - [ ] 5.5 Replace Infrastructure UnitOfWork with the current Application-port adapter; register the shared service against the current context's connection, retaining Aspire and design-time configuration. Verify: existing web finalization/conflict/audit tests pass, pending-model check reports no changes, and original Application exception semantics are retained.
 
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
-<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
-<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:895fc96f4b9c40db18c3ad4c529c4bfb3188fac61ccb68b4cd46e79ac3d3c12b" -->
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 <!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
 <!-- pdac:cite id="QR-CONCURRENCY-CONSISTENCY" digest="sha256:320945ebf06be10006380b4e183377f48569c75224692b903f3cf093887736a2" -->
@@ -67,17 +67,17 @@
 - [ ] 6.5 Validate ProductShape/OpenSpec and all current citations. Refresh only genuinely stale citations by inspect/cite; never edit the accepted model or remove citations to suppress drift. Verify: validation and grounding commands are green.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:f7310fed1fddd6fc7c813db19db677f8aea9feff2f179549c9a9425607804d33" -->
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
+<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
-<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:652792a573f685a43f131a08b467a4de67c176c48e81ea5ba38aa1367e7c599c" -->
-<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:aadb655c57c6486610d3a3346f45bdd19696a407dd954d4fc37cd9cefd3391ca" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
-<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:540c744a9100bf27b3094353016316aa7e50ea96791665e3f6c5be545ae611cc" -->
+<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:2a2b07a88ddffe4bd6b3de5750620c50efbf8e58001278b0a1da2215e5a69d7a" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
-<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
-<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:895fc96f4b9c40db18c3ad4c529c4bfb3188fac61ccb68b4cd46e79ac3d3c12b" -->
+<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:16d52ea384cf2be82ec2a7c754500a52ca21f9bbd2c62827a24d2c3f75e3026f" -->
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 <!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->

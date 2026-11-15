@@ -10,6 +10,6 @@ The SDLC triage, refine, propose, implement, and apply-review workflows are inst
 
 The implementation publisher consumes the repository's `LIGHTHOUSE_CI_APP_CLIENT_ID` Actions variable and `LIGHTHOUSE_CI_APP_PRIVATE_KEY` Actions secret in its trusted job. It creates an immutable `lighthouse/verification-*` ref so the existing CI workflow can produce eligible checks for bot-authored PRs. The agent receives neither credential. The configured App installation and token scope still need an owner-run probe before activation.
 
-Lighthouse 0.13.9 requires PDaC serialization `v1alpha2`. Raccord's existing ProductShape model uses `v1alpha1`; upgrade verification reports that adoption gap until the model is migrated and validated through the ProductShape authority. The harness upgrade does not change product artifacts.
+Lighthouse 0.13.9 requires PDaC serialization `v1alpha2`. The human-approved Product Change `CHG-PDAC-V1ALPHA2-001` migrated Raccord's model to that version while preserving its 794 rule-to-use-case relationships. ProductShape validates all 1,889 artifacts, and all 501 current OpenSpec citations resolve against the migrated model. Lighthouse's PDaC foundation check passes.
 
 The copied SDLC workflow sources retain the package's [license](../licenses/lighthouse-sdlc/LICENSE) and [notice](../licenses/lighthouse-sdlc/NOTICE).

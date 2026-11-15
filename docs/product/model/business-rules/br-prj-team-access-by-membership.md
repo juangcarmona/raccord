@@ -3,8 +3,7 @@ id: BR-PRJ-TEAM-ACCESS-BY-MEMBERSHIP
 type: business-rule
 title: "Team boards follow team membership"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TEAMS"
+applies-to: []
 uses-terms:
   - "TERM-TASK-TEAM"
   - "TERM-TEAM-TASK-BOARD"

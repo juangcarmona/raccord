@@ -3,8 +3,7 @@ id: BR-CRW-IMPORT-EXCLUSIONS
 type: business-rule
 title: "Some crew data cannot be imported"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
 provenance:

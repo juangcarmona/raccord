@@ -3,8 +3,7 @@ id: BR-PRJ-BOARD-GROUPING-SCOPE
 type: business-rule
 title: "Board grouping is personal unless saved to the board"
 status: draft
-applies-to:
-  - "UC-PRJ-WORK-WITH-TASK-BOARD"
+applies-to: []
 uses-terms:
   - "TERM-TASK-BOARD"
 provenance:

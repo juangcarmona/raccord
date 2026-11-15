@@ -3,8 +3,7 @@ id: BR-WSP-ROLL-OVER-WITH-STATUSES
 type: business-rule
 title: "Roll-overs between projects are tracked with custom warehouse statuses"
 status: draft
-applies-to:
-  - "UC-WHS-CONFIGURE-WAREHOUSE-STATUSES"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-WAREHOUSE-STATUS"
 provenance:

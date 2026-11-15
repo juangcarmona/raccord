@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-IMPORT-MATCHING
 type: business-rule
 title: "Task import matches statuses, people and items"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-TASKS"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
   - "TERM-TASK-STATUS"

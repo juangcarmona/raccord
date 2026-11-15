@@ -3,8 +3,7 @@ id: BR-EQP-ACCESSORY-DETACHED-WHEN-PLANNED
 type: business-rule
 title: "Accessories become independent lines"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ACCESSORIES"
+applies-to: []
 uses-terms:
   - "TERM-ACCESSORY"
   - "TERM-PLANNED-EQUIPMENT"

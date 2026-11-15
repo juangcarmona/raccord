@@ -3,9 +3,7 @@ id: BR-PRJ-IMPORT-TAG
 type: business-rule
 title: "Every import is tagged for undo"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-TASKS"
-  - "UC-PRJ-IMPORT-CONTACTS"
+applies-to: []
 uses-terms:
   - "TERM-TAG"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-EQUIPMENT-IMPORT-MATCHING
 type: business-rule
 title: "Import rows are matched to catalogue items"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-EQUIPMENT-LIST"
+applies-to: []
 uses-terms:
   - "TERM-SAVED-IMPORT-MATCH"
 provenance:

@@ -3,8 +3,7 @@ id: BR-WSP-DELETE-NEEDS-EDIT
 type: business-rule
 title: "Deleting a project requires the right to change it"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

@@ -3,8 +3,7 @@ id: BR-INT-SYNC-RESPECTS-ROLE
 type: business-rule
 title: "Calendar feeds show only what the role allows"
 status: draft
-applies-to:
-  - "UC-INT-SUBSCRIBE-TO-CALENDAR-FEED"
+applies-to: []
 uses-terms:
   - "TERM-CALENDAR-STREAM"
 provenance:

@@ -3,9 +3,7 @@ id: BR-PRJ-TEMPLATE-START-ANCHOR
 type: business-rule
 title: "Copied schedules are anchored to the chosen start date"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
-  - "UC-PRJ-DUPLICATE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TEMPLATE"
 provenance:

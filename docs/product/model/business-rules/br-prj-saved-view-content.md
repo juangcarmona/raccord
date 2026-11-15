@@ -3,8 +3,7 @@ id: BR-PRJ-SAVED-VIEW-CONTENT
 type: business-rule
 title: "What a project view saves"
 status: draft
-applies-to:
-  - "UC-PRJ-SAVE-VIEW"
+applies-to: []
 uses-terms:
   - "TERM-SAVED-VIEW"
 provenance:

@@ -11,9 +11,9 @@ Provides shared application foundations that downstream module slices can consum
 The extracted shared primitives SHALL preserve the existing behaviors of money, pricing, legal identities, tax identifiers and invoice representation consumers under `src/Raccord.Domain/`. Existing domain test expectations SHALL remain unchanged except for source namespaces/references.
 
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
-<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:652792a573f685a43f131a08b467a4de67c176c48e81ea5ba38aa1367e7c599c" -->
-<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:aadb655c57c6486610d3a3346f45bdd19696a407dd954d4fc37cd9cefd3391ca" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
+<!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:540c744a9100bf27b3094353016316aa7e50ea96791665e3f6c5be545ae611cc" -->
+<!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:2a2b07a88ddffe4bd6b3de5750620c50efbf8e58001278b0a1da2215e5a69d7a" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
 
 #### Scenario: Existing financial and party tests after extraction
@@ -42,8 +42,8 @@ The shared audit port SHALL append to pending persistence work and SHALL preserv
 
 The shared dispatcher SHALL validate input before invoking its handler, SHALL retain all reported validation issues in deterministic order, and SHALL propagate cancellation. It SHALL return a successful handler result unchanged when validation succeeds.
 
-<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:f7310fed1fddd6fc7c813db19db677f8aea9feff2f179549c9a9425607804d33" -->
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
+<!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
 
 #### Scenario: Invalid input is rejected before handling
 
@@ -59,9 +59,9 @@ The shared dispatcher SHALL validate input before invoking its handler, SHALL re
 
 The shared failure mapping SHALL preserve the existing status and problem-code conventions in `src/Raccord.Web/Api/ApiExceptionHandler.cs`. Validation and rule errors SHALL map to 422, conflict to 409, not found to 404, forbidden to 403 and unauthenticated to 401. Problem responses SHALL include `type = urn:raccord:problem:<code>` and `code`; validation issues SHALL retain the current `{code,message}` shape. Defects and integrity failures SHALL not be downgraded to business-rule failures.
 
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
-<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
+<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:16d52ea384cf2be82ec2a7c754500a52ca21f9bbd2c62827a24d2c3f75e3026f" -->
 
 #### Scenario: Already-issued draft
 
@@ -87,10 +87,10 @@ The shared failure mapping SHALL preserve the existing status and problem-code c
 
 Shared persistence SHALL execute participating context writes on the same PostgreSQL connection in one transaction with a single commit. Any callback, enlistment or persistence failure SHALL roll back all database writes in that transaction. Conflicting writes SHALL preserve the existing retryable conflict meaning. Independent connection instances SHALL be rejected rather than silently committed separately.
 
-<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:08b2bb0bd93fc7fbb0b745ee1e6e7f3f70d064d44da287ed8c478a8da7761afc" -->
-<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:1d6404217e241d191188f8a20bdaedda2204e10548c344df7d46793d1c204adb" -->
+<!-- pdac:cite id="UC-ISSUE-INVOICE" digest="sha256:342ce2d34a022b8a621fd91efff10751c2dd841e6f42b28c5530dbc5ead7eb63" -->
+<!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
-<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:dab51b5c3c98ca25c40abec4a8e477fdc172ac986788fd2233eb2560f14a4757" -->
+<!-- pdac:cite id="BR-COMPLIANCE-OBLIGATION" digest="sha256:895fc96f4b9c40db18c3ad4c529c4bfb3188fac61ccb68b4cd46e79ac3d3c12b" -->
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 <!-- pdac:cite id="FR-COMPLIANCE-001" digest="sha256:a53549df92d28a28435890b7663e0a9c92ec126ff0988b6cb103c39d5aa050d8" -->
 <!-- pdac:cite id="QR-CONCURRENCY-CONSISTENCY" digest="sha256:320945ebf06be10006380b4e183377f48569c75224692b903f3cf093887736a2" -->
@@ -120,9 +120,9 @@ Shared persistence SHALL execute participating context writes on the same Postgr
 Extracted storage SHALL retain the current `Storage` options, document keys, overwrite semantics, content types, missing-document behavior and filesystem containment rules. The current HTTP endpoints and regenerated OpenAPI schemas SHALL remain compatible; this foundation SHALL not create module migrations or remove existing end-to-end selection entries.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:c39682fe0c3b9b93d43648b9417cb60d24ad54f2d3693a6de415029cb19a8a96" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
-<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:19dff5afbeb5e4cd25a3baaa4f1395ee74b0c0722572021e496e654cb44aaf34" -->
+<!-- pdac:cite id="BR-INTEGRITY-VERIFICATION" digest="sha256:16d52ea384cf2be82ec2a7c754500a52ca21f9bbd2c62827a24d2c3f75e3026f" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
 
 #### Scenario: Storage adapter extraction

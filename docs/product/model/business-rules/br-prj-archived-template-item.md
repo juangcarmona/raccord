@@ -3,8 +3,7 @@ id: BR-PRJ-ARCHIVED-TEMPLATE-ITEM
 type: business-rule
 title: "Archived items copied from templates are flagged"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TEMPLATE"
 provenance:

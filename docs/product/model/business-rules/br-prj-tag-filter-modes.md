@@ -3,9 +3,7 @@ id: BR-PRJ-TAG-FILTER-MODES
 type: business-rule
 title: "Tag filters match any or all"
 status: draft
-applies-to:
-  - "UC-PRJ-TAG-RECORDS"
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-TAG"
 provenance:

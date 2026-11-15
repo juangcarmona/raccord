@@ -3,8 +3,7 @@ id: BR-EQP-CONTENT-DOCUMENT-VISIBILITY
 type: business-rule
 title: "Kit content visibility on documents"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-DEFAULT-CONTENT"
+applies-to: []
 uses-terms:
   - "TERM-DEFAULT-CONTENT"
 provenance:

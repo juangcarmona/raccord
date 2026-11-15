@@ -3,9 +3,7 @@ id: BR-CRW-IMPORT-FOLDER-PLACEMENT
 type: business-rule
 title: "Imported records are placed under the chosen root folder"
 status: draft
-applies-to:
-  - "UC-CRW-IMPORT-CREW-MEMBERS"
-  - "UC-CRW-IMPORT-VEHICLES"
+applies-to: []
 uses-terms:
   - "TERM-RESOURCE-IMPORT"
   - "TERM-RECORD-FOLDER"

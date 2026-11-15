@@ -3,8 +3,7 @@ id: BR-CRW-ACTUAL-COST-FROM-REGISTRATIONS
 type: business-rule
 title: "Registered hours make up actual crew cost"
 status: draft
-applies-to:
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
+applies-to: []
 uses-terms:
   - "TERM-ACTUAL-COST"
   - "TERM-TIME-REGISTRATION"

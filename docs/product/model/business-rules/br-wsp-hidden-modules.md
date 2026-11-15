@@ -3,8 +3,7 @@ id: BR-WSP-HIDDEN-MODULES
 type: business-rule
 title: "Modules not granted are invisible"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

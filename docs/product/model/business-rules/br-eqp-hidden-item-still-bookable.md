@@ -3,10 +3,7 @@ id: BR-EQP-HIDDEN-ITEM-STILL-BOOKABLE
 type: business-rule
 title: "Items hidden from planning remain bookable"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
-  - "UC-EQP-ARCHIVE-ITEM"
-  - "UC-WHS-ADD-ADDITIONAL-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-PLANNER-VISIBILITY"
 provenance:

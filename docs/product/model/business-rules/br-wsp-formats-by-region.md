@@ -3,8 +3,7 @@ id: BR-WSP-FORMATS-BY-REGION
 type: business-rule
 title: "Time and date formats follow region"
 status: draft
-applies-to:
-  - "UC-WSP-SET-TIME-ZONE"
+applies-to: []
 uses-terms:
   - "TERM-DATE-TIME-FORMAT"
 provenance:

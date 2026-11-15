@@ -3,8 +3,7 @@ id: BR-PRJ-SHIFT-TO-START
 type: business-rule
 title: "Shifting to a new start keeps relative offsets"
 status: draft
-applies-to:
-  - "UC-PRJ-SHIFT-PROJECT-TIMES"
+applies-to: []
 uses-terms:
   - "TERM-TIME-PERIOD"
 provenance:

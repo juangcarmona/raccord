@@ -3,8 +3,7 @@ id: BR-PRJ-CALENDAR-COLOUR-BY-TYPE
 type: business-rule
 title: "Calendar colour comes from project or type, not status"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TYPE"
   - "TERM-PROJECT-STATUS-GROUP"

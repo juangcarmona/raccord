@@ -3,8 +3,7 @@ id: BR-GAPLESS-NUMBERING
 type: business-rule
 title: "Numbers are correlative and gapless per series and year"
 status: draft
-applies-to:
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-INVOICE-NUMBER"
   - "TERM-INVOICE-SERIES"

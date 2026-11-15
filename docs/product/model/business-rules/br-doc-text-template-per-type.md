@@ -3,9 +3,7 @@ id: "BR-DOC-TEXT-TEMPLATE-PER-TYPE"
 type: business-rule
 title: "Text templates are offered only for their document type"
 status: draft
-applies-to:
-  - "UC-DOC-SAVE-TEXT-TEMPLATE"
-  - "UC-DOC-APPLY-TEXT-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-TEXT-TEMPLATE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-WHS-PHYSICAL-KIT-SHARED-TIME
 type: business-rule
 title: "Content of a physical combination shares its time"
 status: draft
-applies-to:
-  - "UC-WHS-SET-LINE-TIMES"
+applies-to: []
 uses-terms:
   - "TERM-PLANNING-PERIOD"
 provenance:

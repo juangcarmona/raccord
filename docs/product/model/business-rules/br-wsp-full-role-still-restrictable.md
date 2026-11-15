@@ -3,8 +3,7 @@ id: BR-WSP-FULL-ROLE-STILL-RESTRICTABLE
 type: business-rule
 title: "Broad roles can still be restricted"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-OWN-RECORD"
 provenance:

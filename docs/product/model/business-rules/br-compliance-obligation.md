@@ -4,7 +4,6 @@ type: business-rule
 title: "Every issued invoice creates its compliance record"
 status: draft
 applies-to:
-  - "UC-ISSUE-INVOICE"
   - "BC-COMPLIANCE"
 uses-terms:
   - "TERM-COMPLIANCE-RECORD"

@@ -3,8 +3,7 @@ id: BR-PRJ-SINGLE-RUNNING-TIMER
 type: business-rule
 title: "One running task timer per person"
 status: draft
-applies-to:
-  - "UC-PRJ-TRACK-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
 provenance:

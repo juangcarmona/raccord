@@ -3,8 +3,7 @@ id: BR-PRJ-SAVED-MATCH-REUSE
 type: business-rule
 title: "Saved matches are suggested again"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-EQUIPMENT-LIST"
+applies-to: []
 uses-terms:
   - "TERM-SAVED-IMPORT-MATCH"
 provenance:

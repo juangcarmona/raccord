@@ -4,8 +4,6 @@ type: business-rule
 title: "Custom statuses count as out of the warehouse"
 status: draft
 applies-to:
-  - "UC-WHS-CONFIGURE-WAREHOUSE-STATUSES"
-  - "UC-WHS-BOOK-MANUALLY"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-CUSTOM-WAREHOUSE-STATUS"

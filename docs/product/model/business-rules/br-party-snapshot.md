@@ -3,11 +3,7 @@ id: BR-PARTY-SNAPSHOT
 type: business-rule
 title: "Issued invoices keep the party details of their issue time"
 status: draft
-applies-to:
-  - "UC-ISSUE-INVOICE"
-  - "UC-DEFINE-ISSUER-PROFILE"
-  - "UC-REGISTER-CUSTOMER"
-  - "UC-CORRECT-ISSUED-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-ISSUER"
   - "TERM-CUSTOMER"

@@ -3,8 +3,7 @@ id: BR-EQP-NESTING-LIMIT
 type: business-rule
 title: "Kits nest at most ten levels deep"
 status: draft
-applies-to:
-  - "UC-EQP-NEST-KITS"
+applies-to: []
 uses-terms:
   - "TERM-NESTED-KIT"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-WAREHOUSE-STATUS-PROMPT
 type: business-rule
 title: "Warehouse handling drives packing-list statuses, not project statuses"
 status: draft
-applies-to:
-  - "UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-STATUS"
   - "TERM-WAREHOUSE-STATUS"

@@ -3,8 +3,7 @@ id: BR-WSP-TASK-RIGHTS-IN-SIDEBAR
 type: business-rule
 title: "Task rights also apply to the task side panel"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
 provenance:

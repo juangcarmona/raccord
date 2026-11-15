@@ -3,8 +3,7 @@ id: "BR-DOC-ONLINE-QUOTE-FORCED-PASSWORD"
 type: business-rule
 title: "Forced password protection applies to every online quote"
 status: draft
-applies-to:
-  - "UC-DOC-CONFIGURE-ONLINE-QUOTE-PAGE"
+applies-to: []
 uses-terms:
   - "TERM-ONLINE-QUOTE"
 provenance:

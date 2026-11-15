@@ -3,9 +3,7 @@ id: BR-PRJ-CALENDAR-QUICK-CREATE
 type: business-rule
 title: "Creating from a calendar day sets the start"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-FROM-TEMPLATE"
-  - "UC-PRJ-VIEW-PERSONAL-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-OVERVIEW"
 provenance:

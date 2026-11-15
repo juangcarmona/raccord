@@ -3,8 +3,7 @@ id: BR-CRW-APPROVAL-CHECK-THRESHOLDS
 type: business-rule
 title: "Approval signals grade differences at 30 minutes"
 status: draft
-applies-to:
-  - "UC-CRW-APPROVE-TIME-REGISTRATIONS"
+applies-to: []
 uses-terms:
   - "TERM-APPROVAL-CHECK"
 provenance:

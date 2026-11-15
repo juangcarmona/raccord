@@ -3,9 +3,7 @@ id: BR-FIN-DUE-DATE-FROM-TERM
 type: business-rule
 title: "Due date is the invoice date plus the payment term"
 status: active
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
-  - "UC-FIN-CONFIGURE-PAYMENT-TERMS"
+applies-to: []
 uses-terms:
   - "TERM-DUE-DATE"
   - "TERM-PAYMENT-TERM"

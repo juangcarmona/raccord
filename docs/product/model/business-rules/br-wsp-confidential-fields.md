@@ -3,8 +3,7 @@ id: BR-WSP-CONFIDENTIAL-FIELDS
 type: business-rule
 title: "Confidential custom fields need explicit permission"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-CUSTOM-FIELD"
 provenance:

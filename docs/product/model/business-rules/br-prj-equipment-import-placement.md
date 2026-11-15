@@ -3,8 +3,7 @@ id: BR-PRJ-EQUIPMENT-IMPORT-PLACEMENT
 type: business-rule
 title: "Imported equipment lands in one group without accessories"
 status: draft
-applies-to:
-  - "UC-PRJ-IMPORT-EQUIPMENT-LIST"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/4413562661138.md"

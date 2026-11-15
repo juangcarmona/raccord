@@ -3,9 +3,7 @@ id: BR-EQP-CODE-GENERATED
 type: business-rule
 title: "Equipment code is generated when left empty"
 status: draft
-applies-to:
-  - "UC-EQP-CREATE-ITEM"
-  - "UC-EQP-CONFIGURE-ITEM-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-CODE"
 provenance:

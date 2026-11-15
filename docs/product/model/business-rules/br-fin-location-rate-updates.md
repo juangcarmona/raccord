@@ -3,8 +3,7 @@ id: BR-FIN-LOCATION-RATE-UPDATES
 type: business-rule
 title: "Location tax rates are refreshed monthly with history"
 status: draft
-applies-to:
-  - "UC-FIN-MAINTAIN-LOCATION-TAX-RATES"
+applies-to: []
 uses-terms:
   - "TERM-LOCATION-TAX-RATE"
 provenance:

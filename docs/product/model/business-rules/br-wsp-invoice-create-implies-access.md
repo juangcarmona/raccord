@@ -3,8 +3,7 @@ id: BR-WSP-INVOICE-CREATE-IMPLIES-ACCESS
 type: business-rule
 title: "Creating invoices implies access to invoices"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

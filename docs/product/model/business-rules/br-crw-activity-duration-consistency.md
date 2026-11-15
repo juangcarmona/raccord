@@ -3,9 +3,7 @@ id: BR-CRW-ACTIVITY-DURATION-CONSISTENCY
 type: business-rule
 title: "Changed times require consistent activity durations"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-FROM-PLANNED-ACTIVITIES"
-  - "UC-CRW-EXPORT-PAYROLL-DATA"
+applies-to: []
 uses-terms:
   - "TERM-REGISTRATION-ACTIVITY"
 provenance:

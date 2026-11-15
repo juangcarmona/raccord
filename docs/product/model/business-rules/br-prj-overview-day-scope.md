@@ -3,9 +3,7 @@ id: BR-PRJ-OVERVIEW-DAY-SCOPE
 type: business-rule
 title: "Day scope limits shown days"
 status: draft
-applies-to:
-  - "UC-PRJ-BROWSE-PROJECTS"
-  - "UC-PRJ-VIEW-PERSONAL-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-OVERVIEW-DAY-SCOPE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-NON-PROJECT-TASK-HOURS
 type: business-rule
 title: "Hours on tasks without project stay out of project finance"
 status: draft
-applies-to:
-  - "UC-PRJ-TRACK-TASK-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TRACKED-TIME"
 provenance:

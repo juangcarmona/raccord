@@ -3,8 +3,7 @@ id: BR-CRW-PLANNER-MOVE-UPDATES-PROJECT
 type: business-rule
 title: "Moving a function in the planner changes the project but not its price"
 status: draft
-applies-to:
-  - "UC-CRW-ADJUST-FUNCTION-TIMES-IN-PLANNER"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-FUNCTION"
   - "TERM-PLANNED-COST"

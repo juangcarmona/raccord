@@ -3,8 +3,7 @@ id: BR-PRJ-TASK-DEFAULT-ASSIGNEE
 type: business-rule
 title: "The creator is the default assignee"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-TASK"
 provenance:

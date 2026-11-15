@@ -3,9 +3,7 @@ id: BR-CRW-FUNCTIONS-WITHOUT-TIMES
 type: business-rule
 title: "Functions without times are planned only in the cross-project planner"
 status: draft
-applies-to:
-  - "UC-CRW-PLAN-RESOURCE-ON-FUNCTION"
-  - "UC-CRW-ADJUST-FUNCTION-TIMES-IN-PLANNER"
+applies-to: []
 uses-terms:
   - "TERM-FUNCTION-TIMING-MODE"
 provenance:

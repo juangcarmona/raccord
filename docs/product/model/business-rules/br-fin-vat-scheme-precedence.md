@@ -3,9 +3,7 @@ id: BR-FIN-VAT-SCHEME-PRECEDENCE
 type: business-rule
 title: "VAT scheme precedence"
 status: draft
-applies-to:
-  - "UC-FIN-SELECT-VAT-SCHEME"
-  - "UC-FIN-APPLY-CUSTOMER-DEFAULTS"
+applies-to: []
 uses-terms:
   - "TERM-VAT-SCHEME"
   - "TERM-CUSTOMER-FINANCIAL-DEFAULTS"

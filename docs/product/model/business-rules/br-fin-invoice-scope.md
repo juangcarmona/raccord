@@ -3,8 +3,7 @@ id: BR-FIN-INVOICE-SCOPE
 type: business-rule
 title: "An invoice defaults to the whole project and can be reduced"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-PARTIAL-INVOICE"
   - "TERM-PROJECT-INVOICE"

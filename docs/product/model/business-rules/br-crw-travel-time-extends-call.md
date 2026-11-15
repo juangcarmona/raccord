@@ -3,8 +3,7 @@ id: BR-CRW-TRAVEL-TIME-EXTENDS-CALL
 type: business-rule
 title: "Travel options widen the communicated working time"
 status: draft
-applies-to:
-  - "UC-CRW-CHANGE-ASSIGNMENT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-TRAVEL-OPTION"
 provenance:

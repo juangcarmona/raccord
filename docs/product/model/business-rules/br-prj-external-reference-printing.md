@@ -3,8 +3,7 @@ id: BR-PRJ-EXTERNAL-REFERENCE-PRINTING
 type: business-rule
 title: "External reference is printed only when the template asks"
 status: draft
-applies-to:
-  - "UC-PRJ-EDIT-PROJECT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-EXTERNAL-REFERENCE"
 provenance:

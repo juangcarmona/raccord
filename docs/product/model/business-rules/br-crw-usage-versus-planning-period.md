@@ -3,10 +3,7 @@ id: BR-CRW-USAGE-VERSUS-PLANNING-PERIOD
 type: business-rule
 title: "Planning period changes affect cost but not price"
 status: draft
-applies-to:
-  - "UC-CRW-RETIME-FUNCTION"
-  - "UC-CRW-RETIME-FUNCTION-GROUP"
-  - "UC-CRW-CHANGE-ASSIGNMENT-DETAILS"
+applies-to: []
 uses-terms:
   - "TERM-CREW-PLANNING-PERIOD"
   - "TERM-FUNCTION-USAGE-PERIOD"

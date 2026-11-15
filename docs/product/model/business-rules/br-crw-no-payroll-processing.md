@@ -3,8 +3,7 @@ id: BR-CRW-NO-PAYROLL-PROCESSING
 type: business-rule
 title: "Hours leave the product by export"
 status: draft
-applies-to:
-  - "UC-CRW-EXPORT-PAYROLL-DATA"
+applies-to: []
 uses-terms:
   - "TERM-PAYROLL-EXPORT"
 provenance:

@@ -3,11 +3,7 @@ id: BR-CRW-FUNCTION-TIMING-PROPAGATION
 type: business-rule
 title: "Functions linked to the time schedule follow its changes"
 status: draft
-applies-to:
-  - "UC-CRW-CREATE-FUNCTION-GROUP"
-  - "UC-CRW-ADD-FUNCTION-TO-PROJECT"
-  - "UC-PRJ-SHIFT-PROJECT-TIMES"
-  - "UC-PRJ-MANAGE-TIME-SCHEDULE"
+applies-to: []
 uses-terms:
   - "TERM-FUNCTION-TIMING-MODE"
   - "TERM-TIME-SCHEDULE"

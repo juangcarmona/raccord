@@ -4,7 +4,6 @@ type: business-rule
 title: "Only configuration users manage integrations"
 status: draft
 applies-to:
-  - "UC-INT-ENABLE-API-ACCESS"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-INTEGRATION"

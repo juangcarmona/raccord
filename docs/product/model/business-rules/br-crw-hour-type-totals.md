@@ -3,9 +3,7 @@ id: BR-CRW-HOUR-TYPE-TOTALS
 type: business-rule
 title: "Each hour type has a fixed effect on worked totals"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
-  - "UC-CRW-EXPORT-PAYROLL-DATA"
+applies-to: []
 uses-terms:
   - "TERM-HOUR-TYPE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-FIN-REVENUE-AND-PROFIT
 type: business-rule
 title: "Revenue, profit and margin per category"
 status: draft
-applies-to:
-  - "UC-FIN-REVIEW-PROJECT-FINANCIALS"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-PROFIT"
   - "TERM-REVENUE-CATEGORY"

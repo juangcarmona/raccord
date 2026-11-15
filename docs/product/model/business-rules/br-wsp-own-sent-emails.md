@@ -3,8 +3,7 @@ id: BR-WSP-OWN-SENT-EMAILS
 type: business-rule
 title: "Everyone sees the emails they sent"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
 provenance:

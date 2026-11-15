@@ -3,9 +3,7 @@ id: "BR-DOC-LETTERHEAD-PAGE-MAPPING"
 type: business-rule
 title: "Letterhead pages map to document pages"
 status: draft
-applies-to:
-  - "UC-DOC-ADD-LETTERHEAD"
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms:
   - "TERM-LETTERHEAD"
 provenance:

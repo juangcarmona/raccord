@@ -3,8 +3,7 @@ id: BR-ISSUE-READINESS
 type: business-rule
 title: "Conditions for issuing an invoice"
 status: draft
-applies-to:
-  - "UC-ISSUE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-VALIDATION-ISSUE"
   - "TERM-ISSUER"

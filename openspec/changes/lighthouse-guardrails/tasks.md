@@ -13,4 +13,4 @@
 - [x] Update vulnerable frontend transitive locks and rerun lint, tests, and the high-severity dependency audit.
 - [x] Upgrade the Lighthouse harness and SDLC package projection; compile triage, refine, propose, implement, and apply-review workflows.
 - [x] Subscribe CI to App-created verification refs and keep automatic implementation disabled.
-- [ ] Complete the required ProductShape v1alpha2 migration and verify the Lighthouse foundation.
+- [x] Apply the approved Product Change `CHG-PDAC-V1ALPHA2-001`, renew OpenSpec citations, and verify the Lighthouse foundation.

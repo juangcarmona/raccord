@@ -3,8 +3,7 @@ id: BR-CRW-ONE-DEFAULT-RATE
 type: business-rule
 title: "A crew member has at most one default rate"
 status: draft
-applies-to:
-  - "UC-CRW-LINK-RATES-TO-CREW-MEMBER"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RATE"
 provenance:

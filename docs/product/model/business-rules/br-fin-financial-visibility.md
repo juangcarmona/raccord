@@ -4,7 +4,6 @@ type: business-rule
 title: "Roles without financial visibility see no financial details"
 status: draft
 applies-to:
-  - "UC-FIN-RESTRICT-FINANCIAL-VISIBILITY"
   - "BC-WORKSPACE"
 uses-terms:
   - "TERM-FINANCIAL-DETAILS"

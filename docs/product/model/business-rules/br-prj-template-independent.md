@@ -3,9 +3,7 @@ id: BR-PRJ-TEMPLATE-INDEPENDENT
 type: business-rule
 title: "Templates survive deletion of their source project"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-PROJECT-TEMPLATE"
-  - "UC-PRJ-DELETE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TEMPLATE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-TEMPLATE-NOT-EDITABLE
 type: business-rule
 title: "Templates are replaced, not edited"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-PROJECT-TEMPLATE"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT-TEMPLATE"
 provenance:

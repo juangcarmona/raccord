@@ -3,8 +3,7 @@ id: BR-WSP-SCAN-RETURN-LIMITS
 type: business-rule
 title: "Scan return limits"
 status: draft
-applies-to:
-  - "UC-WHS-SCAN-RETURN"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-RETURN"
 provenance:

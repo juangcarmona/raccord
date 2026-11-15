@@ -3,8 +3,7 @@ id: BR-FIN-CREW-EXPENSE-MARGIN
 type: business-rule
 title: "Each crew expense has a cost, a price and a margin"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-CREW-EXPENSES"
+applies-to: []
 uses-terms:
   - "TERM-CREW-EXPENSE"
 provenance:

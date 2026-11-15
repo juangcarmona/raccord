@@ -3,8 +3,7 @@ id: BR-PRJ-SUBTASK-LIMITS
 type: business-rule
 title: "Subtasks are plain checklist items"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-TASK"
+applies-to: []
 uses-terms:
   - "TERM-SUBTASK"
 provenance:

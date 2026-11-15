@@ -5,7 +5,6 @@ title: "The personal profile belongs to the person"
 status: draft
 applies-to:
   - "BC-WORKSPACE"
-  - "UC-WSP-EDIT-PROFILE"
 uses-terms:
   - "TERM-PERSONAL-PROFILE"
 provenance:

@@ -3,9 +3,7 @@ id: BR-FIN-SIGN-AFTER-EXPIRY
 type: business-rule
 title: "Signing after expiry depends on a company setting"
 status: draft
-applies-to:
-  - "UC-FIN-RESPOND-TO-ONLINE-QUOTE"
-  - "UC-FIN-CONFIGURE-FINANCIAL-SETTINGS"
+applies-to: []
 uses-terms:
   - "TERM-EXPIRED-QUOTE"
   - "TERM-SIGNED-QUOTE"

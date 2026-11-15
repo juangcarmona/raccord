@@ -3,8 +3,7 @@ id: BR-WHS-SCAN-RETURN-ROUTING
 type: business-rule
 title: "Scan return asks for project and quantity"
 status: draft
-applies-to:
-  - "UC-WHS-SCAN-RETURN"
+applies-to: []
 uses-terms:
   - "TERM-SCAN-RETURN"
 provenance:

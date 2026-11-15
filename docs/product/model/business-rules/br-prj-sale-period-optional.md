@@ -3,8 +3,7 @@ id: BR-PRJ-SALE-PERIOD-OPTIONAL
 type: business-rule
 title: "Sale projects need no period"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-SALE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-SALE-PROJECT"
 provenance:

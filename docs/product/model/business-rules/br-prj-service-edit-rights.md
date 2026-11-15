@@ -3,8 +3,7 @@ id: BR-PRJ-SERVICE-EDIT-RIGHTS
 type: business-rule
 title: "Task rights do not grant service rights"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-SERVICES"
+applies-to: []
 uses-terms:
   - "TERM-PRODUCTION-SERVICE"
 provenance:

@@ -3,10 +3,7 @@ id: BR-CRW-AVAILABILITY-RIGHTS
 type: business-rule
 title: "Entering availability for oneself or others depends on role"
 status: draft
-applies-to:
-  - "UC-CRW-DECLARE-OWN-AVAILABILITY"
-  - "UC-CRW-ENTER-CREW-AVAILABILITY"
-  - "UC-CRW-ADD-APPOINTMENT"
+applies-to: []
 uses-terms:
   - "TERM-AVAILABILITY-ENTRY"
 provenance:

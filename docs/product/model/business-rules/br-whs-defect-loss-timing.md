@@ -3,8 +3,7 @@ id: BR-WHS-DEFECT-LOSS-TIMING
 type: business-rule
 title: "Losses are reported before returned"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-LOST"
+applies-to: []
 uses-terms:
   - "TERM-LOST-EQUIPMENT"
 provenance:

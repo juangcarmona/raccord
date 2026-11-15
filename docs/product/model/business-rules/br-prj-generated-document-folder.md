@@ -3,8 +3,7 @@ id: BR-PRJ-GENERATED-DOCUMENT-FOLDER
 type: business-rule
 title: "Generated project documents cannot be moved between folders"
 status: draft
-applies-to:
-  - "UC-PRJ-ATTACH-FILE"
+applies-to: []
 uses-terms:
   - "TERM-ATTACHED-FILE"
 provenance:

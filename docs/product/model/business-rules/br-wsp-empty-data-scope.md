@@ -3,8 +3,7 @@ id: BR-WSP-EMPTY-DATA-SCOPE
 type: business-rule
 title: "Emptying sample data keeps configuration"
 status: draft
-applies-to:
-  - "UC-WSP-EMPTY-SAMPLE-DATA"
+applies-to: []
 uses-terms:
   - "TERM-SAMPLE-DATA"
 provenance:

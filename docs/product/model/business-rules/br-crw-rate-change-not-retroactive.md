@@ -3,8 +3,7 @@ id: BR-CRW-RATE-CHANGE-NOT-RETROACTIVE
 type: business-rule
 title: "Rate changes apply only to new planning"
 status: draft
-applies-to:
-  - "UC-CRW-MANAGE-CREW-RATES"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RATE"
 provenance:

@@ -3,8 +3,7 @@ id: BR-PRJ-NOTE-DISPLAY
 type: business-rule
 title: "Notes appear only at their display targets"
 status: draft
-applies-to:
-  - "UC-PRJ-ADD-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-NOTE-DISPLAY-TARGET"
 provenance:

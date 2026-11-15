@@ -3,8 +3,7 @@ id: BR-FIN-CREW-EXPENSE-CATEGORIES
 type: business-rule
 title: "Crew expense categories are fixed"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-CREW-EXPENSES"
+applies-to: []
 uses-terms:
   - "TERM-CREW-EXPENSE"
 provenance:

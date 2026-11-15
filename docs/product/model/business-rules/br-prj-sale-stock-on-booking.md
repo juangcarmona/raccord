@@ -3,8 +3,7 @@ id: BR-PRJ-SALE-STOCK-ON-BOOKING
 type: business-rule
 title: "Sale stock changes on booking, given a period"
 status: draft
-applies-to:
-  - "UC-PRJ-CREATE-SALE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-SALE-PROJECT"
 provenance:

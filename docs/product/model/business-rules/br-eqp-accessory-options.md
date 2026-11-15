@@ -3,9 +3,7 @@ id: BR-EQP-ACCESSORY-OPTIONS
 type: business-rule
 title: "Accessory options govern planning"
 status: draft
-applies-to:
-  - "UC-EQP-CONFIGURE-ACCESSORIES"
-  - "UC-WHS-PLAN-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-ACCESSORY"
 provenance:

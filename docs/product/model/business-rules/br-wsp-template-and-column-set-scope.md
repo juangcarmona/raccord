@@ -3,8 +3,7 @@ id: BR-WSP-TEMPLATE-AND-COLUMN-SET-SCOPE
 type: business-rule
 title: "Personal or shared scope for templates and column sets"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-ROLE-PERMISSION"
   - "TERM-SAVED-VIEW"

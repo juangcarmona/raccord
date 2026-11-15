@@ -3,8 +3,7 @@ id: BR-PRJ-DELETE-BOOKED-WARNING
 type: business-rule
 title: "Deleting a project with booked-out equipment warns"
 status: draft
-applies-to:
-  - "UC-PRJ-DELETE-PROJECT"
+applies-to: []
 uses-terms:
   - "TERM-PROJECT"
 provenance:

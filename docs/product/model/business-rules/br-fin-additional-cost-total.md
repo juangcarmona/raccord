@@ -3,8 +3,7 @@ id: BR-FIN-ADDITIONAL-COST-TOTAL
 type: business-rule
 title: "Additional cost total is quantity times sale price less discount"
 status: draft
-applies-to:
-  - "UC-FIN-MANAGE-ADDITIONAL-COSTS"
+applies-to: []
 uses-terms:
   - "TERM-ADDITIONAL-COST"
 provenance:

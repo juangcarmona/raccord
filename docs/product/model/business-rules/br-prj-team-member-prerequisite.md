@@ -3,8 +3,7 @@ id: BR-PRJ-TEAM-MEMBER-PREREQUISITE
 type: business-rule
 title: "Team members must be able to see tasks"
 status: draft
-applies-to:
-  - "UC-PRJ-MANAGE-TEAMS"
+applies-to: []
 uses-terms:
   - "TERM-TASK-TEAM"
 provenance:

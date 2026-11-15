@@ -3,8 +3,7 @@ id: BR-FIN-CREDIT-NOTE-CORRECTION
 type: business-rule
 title: "Finalized invoices are corrected with credit notes"
 status: draft
-applies-to:
-  - "UC-FIN-CREATE-CREDIT-NOTE"
+applies-to: []
 uses-terms:
   - "TERM-CREDIT-NOTE"
   - "TERM-ISSUED-INVOICE"

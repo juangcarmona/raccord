@@ -3,8 +3,7 @@ id: "BR-TRB-RESET-NEEDS-UNIQUE-EMAIL"
 type: business-rule
 title: "Password reset requires a unique e-mail address"
 status: draft
-applies-to:
-  - "UC-WSP-MANAGE-PASSWORD"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360014048499.md"

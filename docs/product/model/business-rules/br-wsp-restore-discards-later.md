@@ -3,8 +3,7 @@ id: BR-WSP-RESTORE-DISCARDS-LATER
 type: business-rule
 title: "Restoring a backup discards all later changes"
 status: draft
-applies-to:
-  - "UC-WSP-REQUEST-RESTORE"
+applies-to: []
 uses-terms:
   - "TERM-WORKSPACE-BACKUP"
 provenance:

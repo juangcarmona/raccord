@@ -3,8 +3,7 @@ id: BR-EQP-EXPECTED-STOCK
 type: business-rule
 title: "Expected warehouse stock calculation"
 status: draft
-applies-to:
-  - "UC-EQP-COUNT-SELECTED-EQUIPMENT"
+applies-to: []
 uses-terms:
   - "TERM-EXPECTED-WAREHOUSE-STOCK"
 provenance:

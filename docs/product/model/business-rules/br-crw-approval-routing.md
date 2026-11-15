@@ -3,9 +3,7 @@ id: BR-CRW-APPROVAL-ROUTING
 type: business-rule
 title: "Hour types requiring approval start pending"
 status: draft
-applies-to:
-  - "UC-CRW-APPROVE-TIME-REGISTRATIONS"
-  - "UC-CRW-CONFIGURE-HOUR-TYPES"
+applies-to: []
 uses-terms:
   - "TERM-HOUR-TYPE"
   - "TERM-TIME-REGISTRATION-STATUS"

@@ -2,7 +2,7 @@
 id: CHG-PDAC-V1ALPHA2-001
 type: product-change
 title: 'Migrate product relationship serialization to v1alpha2'
-status: draft
+status: applied
 base-revision: 'cb14c34753156fdfbd789cfc110f0f1c207393b7'
 operations:
   add: []

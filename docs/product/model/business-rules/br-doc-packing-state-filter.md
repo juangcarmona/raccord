@@ -3,8 +3,7 @@ id: "BR-DOC-PACKING-STATE-FILTER"
 type: business-rule
 title: "Packing slips can be limited by packing state"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360014240919.md"

@@ -3,8 +3,7 @@ id: BR-PRJ-DOCUMENT-REGENERATION
 type: business-rule
 title: "Documents reflect the project only when regenerated"
 status: draft
-applies-to:
-  - "UC-DOC-GENERATE-DOCUMENT"
+applies-to: []
 uses-terms: []
 provenance:
   source: ".private/research/help-center/articles/360013838560.md"

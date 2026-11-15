@@ -3,9 +3,7 @@ id: BR-CRW-RESERVATION-WITHOUT-DETAILS
 type: business-rule
 title: "Reservations do not disclose the job"
 status: draft
-applies-to:
-  - "UC-CRW-RESERVE-RESOURCE"
-  - "UC-CRW-RESPOND-TO-INVITATION"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RESERVATION"
 provenance:

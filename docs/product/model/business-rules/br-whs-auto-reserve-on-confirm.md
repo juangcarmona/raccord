@@ -4,7 +4,6 @@ type: business-rule
 title: "Confirming a project reserves everything that is available"
 status: draft
 applies-to:
-  - "UC-WHS-RESERVE-EQUIPMENT"
   - "BC-EQUIPMENT"
 uses-terms:
   - "TERM-RESERVATION"

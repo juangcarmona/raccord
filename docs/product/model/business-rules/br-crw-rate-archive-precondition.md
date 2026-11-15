@@ -3,8 +3,7 @@ id: BR-CRW-RATE-ARCHIVE-PRECONDITION
 type: business-rule
 title: "A rate in use on future work cannot be archived"
 status: draft
-applies-to:
-  - "UC-CRW-ARCHIVE-CREW-RATE"
+applies-to: []
 uses-terms:
   - "TERM-CREW-RATE-STATUS"
 provenance:

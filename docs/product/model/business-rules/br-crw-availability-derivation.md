@@ -3,8 +3,7 @@ id: BR-CRW-AVAILABILITY-DERIVATION
 type: business-rule
 title: "Availability is derived from all commitments and declarations"
 status: draft
-applies-to:
-  - "UC-CRW-VIEW-CREW-AVAILABILITY"
+applies-to: []
 uses-terms:
   - "TERM-AVAILABILITY-STATE"
 provenance:

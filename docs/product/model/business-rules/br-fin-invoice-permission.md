@@ -3,9 +3,7 @@ id: BR-FIN-INVOICE-PERMISSION
 type: business-rule
 title: "Only users with financial access can generate invoices"
 status: draft
-applies-to:
-  - "UC-FIN-GENERATE-PROJECT-INVOICE"
-  - "UC-FIN-CREATE-STANDALONE-INVOICE"
+applies-to: []
 uses-terms:
   - "TERM-FINANCIAL-DETAILS"
 provenance:

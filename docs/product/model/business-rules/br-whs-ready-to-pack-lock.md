@@ -3,8 +3,7 @@ id: BR-WHS-READY-TO-PACK-LOCK
 type: business-rule
 title: "Ready to pack cannot be withdrawn after packing started"
 status: draft
-applies-to:
-  - "UC-WHS-MARK-READY-TO-PACK"
+applies-to: []
 uses-terms:
   - "TERM-READY-TO-PACK"
 provenance:

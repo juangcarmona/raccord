@@ -3,9 +3,7 @@ id: BR-CRW-BREAK-AND-TRAVEL-EXCLUDED
 type: business-rule
 title: "Breaks and travel time are not worked hours"
 status: draft
-applies-to:
-  - "UC-CRW-REGISTER-HOURS-MANUALLY"
-  - "UC-CRW-RECONCILE-PLANNED-AND-REGISTERED-TIME"
+applies-to: []
 uses-terms:
   - "TERM-TIME-REGISTRATION"
 provenance:

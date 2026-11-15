@@ -3,8 +3,7 @@ id: BR-PRJ-TAG-RULES
 type: business-rule
 title: "Tags are space-free labels managed with permission"
 status: draft
-applies-to:
-  - "UC-PRJ-TAG-RECORDS"
+applies-to: []
 uses-terms:
   - "TERM-TAG"
 provenance:

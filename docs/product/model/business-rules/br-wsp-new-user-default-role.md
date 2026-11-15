@@ -3,8 +3,7 @@ id: BR-WSP-NEW-USER-DEFAULT-ROLE
 type: business-rule
 title: "New users receive the Crew role"
 status: draft
-applies-to:
-  - "UC-WSP-ASSIGN-ROLE"
+applies-to: []
 uses-terms:
   - "TERM-PREDEFINED-ROLE"
 provenance:

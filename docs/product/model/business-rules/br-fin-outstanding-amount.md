@@ -3,8 +3,7 @@ id: BR-FIN-OUTSTANDING-AMOUNT
 type: business-rule
 title: "Outstanding amount and paid status follow recorded payments"
 status: draft
-applies-to:
-  - "UC-FIN-RECORD-PAYMENT"
+applies-to: []
 uses-terms:
   - "TERM-OUTSTANDING-AMOUNT"
   - "TERM-PAYMENT-STATUS"

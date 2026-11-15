@@ -3,8 +3,7 @@ id: BR-CRW-CREW-MEMBER-MINIMUM-DATA
 type: business-rule
 title: "A crew member needs a first name, a user role and an email"
 status: draft
-applies-to:
-  - "UC-CRW-ADD-CREW-MEMBER"
+applies-to: []
 uses-terms:
   - "TERM-CREW-MEMBER"
 provenance:

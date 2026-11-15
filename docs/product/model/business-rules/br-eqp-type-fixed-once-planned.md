@@ -3,8 +3,7 @@ id: BR-EQP-TYPE-FIXED-ONCE-PLANNED
 type: business-rule
 title: "Equipment type is fixed once planned"
 status: draft
-applies-to:
-  - "UC-EQP-CHANGE-ITEM-TYPE"
+applies-to: []
 uses-terms:
   - "TERM-EQUIPMENT-TYPE"
 provenance:

@@ -3,8 +3,7 @@ id: "BR-TRB-CONNECTION-LOST-WARNING"
 type: business-rule
 title: "A lost live connection is announced with a refresh recommendation"
 status: draft
-applies-to:
-  - "UC-TRB-SEE-LIVE-CHANGES"
+applies-to: []
 uses-terms:
   - "TERM-LIVE-UPDATE-CONNECTION"
 provenance:

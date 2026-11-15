@@ -3,11 +3,7 @@ id: BR-WSP-ACCOUNT-CREW-ASSOCIATION
 type: business-rule
 title: "Personal profiles link to crew records only after confirmation"
 status: draft
-applies-to:
-  - "UC-WSP-LINK-EXISTING-CREW-RECORD"
-  - "UC-WSP-JOIN-WORKSPACE"
-  - "UC-WSP-CHANGE-PROFILE-EMAIL"
-  - "UC-CRW-MANAGE-CREW-LOGIN-ACCESS"
+applies-to: []
 uses-terms:
   - "TERM-USER-ACCOUNT"
   - "TERM-PERSONAL-PROFILE"

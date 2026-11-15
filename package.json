@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Repository-local Lighthouse verification tooling",
   "devDependencies": {
-    "@juangcarmona/lighthouse": "0.13.11",
-    "@juangcarmona/lighthouse-sdlc": "0.24.0"
+    "@juangcarmona/lighthouse": "0.13.13",
+    "@juangcarmona/lighthouse-sdlc": "0.24.2"
   }
 }

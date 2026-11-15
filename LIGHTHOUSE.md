@@ -5,9 +5,10 @@
 - Baseline: `0.1.0`
 - Product: `Raccord`
 - Profiles: `dotnet-backend`, `react-web-platform`, `visual-theme`
-- SDLC package: `@juangcarmona/lighthouse-sdlc@0.22.4`
+- SDLC package: `@juangcarmona/lighthouse-sdlc@0.23.9`
 - UI package: `@juangcarmona/lighthouse-ui@0.2.1`
 - ProductShape: not adopted
+- Required PDaC serialization: `v1alpha2`
 - ArcShape: not adopted
 - Public site: `enabled`
 - Repository roots: `src/`, `docs/`, `infra/`, `scripts/`
@@ -15,7 +16,7 @@
 
 ## Delivery contract
 
-ProductShape is not adopted; follow the repository-owned product intent and decision records. ArcShape is not adopted; follow the repository-owned architecture guidance. Lighthouse installs the repository baseline and verifies the selected integrations.
+ProductShape is not adopted; every adopter requires explicitly configured PDaC v1alpha2. Review the installed upgrades/pdac-v1alpha2.md guide. ArcShape is not adopted; follow the repository-owned architecture guidance. Lighthouse installs the repository baseline and verifies the selected integrations.
 
 The repository keeps source code in `src/`, documentation in `docs/`, infrastructure in `infra/` and repository automation in `scripts/`. A project may record a narrow, owned exception, but an initializer never overwrites an existing project file.
 

@@ -6,6 +6,10 @@ The .NET profile describes LH1001 and LH1002, but initialization does not instal
 
 Lighthouse manages `.husky/commit-msg` and `.husky/pre-push`. Raccord's `.husky/pre-commit` remains project-owned. The CI lint job still runs Raccord's configured commitlint policy over PR commits, while the generated commit hook checks Lighthouse's conventional-commit baseline.
 
-The default SDLC triage and refine workflows are installed from the pinned package and compiled with gh-aw v0.93.2. The router requires the repository variable `LIGHTHOUSE_AUTOMATION_ENABLED=true`; installing files does not set it. Runner provisioning, label review, and an explicit automation decision are separate steps.
+The SDLC triage, refine, propose, implement, and apply-review workflows are installed from the pinned package and compiled with gh-aw v0.93.2. The router keeps automatic implementation disabled. It requires the repository variable `LIGHTHOUSE_AUTOMATION_ENABLED=true`; installing files does not set it. Runner provisioning, label review, and an explicit automation decision are separate steps.
+
+The implementation publisher consumes the repository's `LIGHTHOUSE_CI_APP_CLIENT_ID` Actions variable and `LIGHTHOUSE_CI_APP_PRIVATE_KEY` Actions secret in its trusted job. It creates an immutable `lighthouse/verification-*` ref so the existing CI workflow can produce eligible checks for bot-authored PRs. The agent receives neither credential. The configured App installation and token scope still need an owner-run probe before activation.
+
+Lighthouse 0.13.9 requires PDaC serialization `v1alpha2`. Raccord's existing ProductShape model uses `v1alpha1`; upgrade verification reports that adoption gap until the model is migrated and validated through the ProductShape authority. The harness upgrade does not change product artifacts.
 
 The copied SDLC workflow sources retain the package's [license](../licenses/lighthouse-sdlc/LICENSE) and [notice](../licenses/lighthouse-sdlc/NOTICE).

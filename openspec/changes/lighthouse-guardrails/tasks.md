@@ -11,3 +11,6 @@
 - [x] Run the Release build, non-E2E tests, Lighthouse verifier, guard tests, and documentation lint.
 - [x] Patch the existing arc42 snapshot DOMPurify pin found by the PR security gate and rerun its tests.
 - [x] Update vulnerable frontend transitive locks and rerun lint, tests, and the high-severity dependency audit.
+- [x] Upgrade the Lighthouse harness and SDLC package projection; compile triage, refine, propose, implement, and apply-review workflows.
+- [x] Subscribe CI to App-created verification refs and keep automatic implementation disabled.
+- [ ] Complete the required ProductShape v1alpha2 migration and verify the Lighthouse foundation.

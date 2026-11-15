@@ -22,4 +22,4 @@ None. No product behavior or product capability requirement changes.
 
 ## Impact
 
-`tools/static-site/static-site.mjs`, `tools/static-site/static-site.test.mjs`, and `docs/operations/process-ledger.md`. The report remains static and adds no runtime dependency. Product APIs, data, and deployment configuration are unaffected.
+`tools/static-site/static-site.mjs` and `tools/static-site/static-site.test.mjs`. The report remains static and adds no runtime dependency. Product APIs, data, and deployment configuration are unaffected.

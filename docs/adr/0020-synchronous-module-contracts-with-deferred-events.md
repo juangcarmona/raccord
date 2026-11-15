@@ -43,7 +43,7 @@ We will make modules communicate only through synchronous, in-process interfaces
   - a transactional outbox table owned by the producing module and written in the same transaction;
   - a background dispatcher in the web host.
 
-    Third-party messaging frameworks need their own justification under AGENTS.md's dependency rule.
+    New production dependencies need an ADR, as required by `docs/architecture/architecture-rules.md`.
 
 - **No cycles.** Contract dependencies between modules must form an acyclic graph, checked by an architecture test.
 

@@ -23,4 +23,3 @@
 - [x] 4.1 Run metadata and static report tests; verify API evidence semantics and bounded-context grouping, including multi-context journeys.
 - [x] 4.2 Run the complete committed per-PR E2E selection with visual evidence; verify each result's mode, area metadata, assets and verdict in the generated report grouped by bounded context.
 - [x] 4.3 Document the static public-site build prerequisite for local AppHost E2E runs; verify the build produces the input copied into the E2E test output.
-- [x] 4.4 Review `docs/operations/process-ledger.md`, record any durable lesson from the escaped misleading evidence, and verify the resulting action.

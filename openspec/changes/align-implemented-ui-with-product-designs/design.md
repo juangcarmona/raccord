@@ -10,7 +10,7 @@ The SPA already has working API-backed routes but uses generic styling. The sour
 
 ## Decisions
 
-- Treat `docs/design/visual-direction.md`, `color-tokens.md`, and logo guidance as design-system authority; treat screen HTML/PNG and `screen-traces.md` as route-level references. The existing design-system agent skill is at `.agents/skills/raccord-design-system/SKILL.md` in the companion design-system worktree; keep its unmerged changes isolated.
+- Treat `docs/design/visual-direction.md`, `color-tokens.md`, and logo guidance as design-system authority; treat screen HTML/PNG and `screen-traces.md` as route-level references.
 - Keep the accepted React/TypeScript/Vite, semantic HTML, and CSS approach; no new dependency or architecture exception.
 - Document the existing frontend structure in ADR-0023: thin `app/` composition, capability-owned `features/`, a small cross-cutting `shared/` kernel, and dependency direction `app → features → shared`. Keep the rule proportional; this change does not migrate folders or add a new layer taxonomy. Automated enforcement is not claimed until a CI boundary check exists.
 - Map `/projects`, `/projects/new`, `/projects/:id` to project list/creation/detail references; `/customers` and `/customers/new` to contact-detail patterns with an explicit list/form gap; `/drafts` and `/drafts/:id` to invoicing queue/draft editor; `/invoices` and `/invoices/:id` to invoice list/detail patterns; `/settings/issuer` to issuer profile. The shared shell follows the common dark navigation/light workspace direction.

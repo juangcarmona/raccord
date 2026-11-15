@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "profileVersion": 1,
+  "repository": "juangcarmona/raccord",
+  "intake": "preserve",
+  "requiredChecks": [
+    {
+      "context": "Design system alignment",
+      "integrationId": 15368
+    },
+    {
+      "context": "Markdown lint",
+      "integrationId": 15368
+    },
+    {
+      "context": "OpenSpec changes",
+      "integrationId": 15368
+    },
+    {
+      "context": "Product definition (PDaC)",
+      "integrationId": 15368
+    },
+    {
+      "context": ".NET restore, analyzers, format, tests, vulnerabilities",
+      "integrationId": 15368
+    },
+    {
+      "context": "Frontend lint, types, tests, build, audit, contract drift",
+      "integrationId": 15368
+    },
+    {
+      "context": "E2E journeys (Playwright over the Aspire AppHost)",
+      "integrationId": 15368
+    },
+    {
+      "context": "Security gates (secrets, patterns, vulnerabilities)",
+      "integrationId": 15368
+    },
+    {
+      "context": "SBOM and license policy",
+      "integrationId": 15368
+    },
+    {
+      "context": "Container image, Compose and Bicep",
+      "integrationId": 15368
+    },
+    {
+      "context": "Lint mirror (format, commit messages)",
+      "integrationId": 15368
+    }
+  ],
+  "requiredApprovals": 1,
+  "releaseWorkflowReady": false
+}

@@ -53,7 +53,7 @@ public sealed class CustomerDirectory
             customer.BillingAddress.ToAddress(),
             customer.Email
         );
-        writer.Add(party);
+        await writer.AddAsync(party, cancellationToken).ConfigureAwait(false);
         await unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return ToResponse(party);
     }

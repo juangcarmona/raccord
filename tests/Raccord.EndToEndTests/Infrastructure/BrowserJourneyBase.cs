@@ -199,7 +199,8 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
     protected async Task CreateProjectWithBillableLineAsync(
         IPage page,
         string? vatClassName = null,
-        string? vatSchemeName = null
+        string? vatSchemeName = null,
+        string? customerName = null
     )
     {
         await page.GotoAsync("/projects/new");
@@ -207,7 +208,9 @@ public abstract class BrowserJourneyBase(DistributedAppFixture app)
         // The customer select lists every customer — the one this journey created is picked by
         // its unique legal name.
         await page.GetByLabel("Customer")
-            .SelectOptionAsync(new SelectOptionValue { Label = $"Productora E2E {RunStamp}" });
+            .SelectOptionAsync(
+                new SelectOptionValue { Label = customerName ?? $"Productora E2E {RunStamp}" }
+            );
         await page.GetByLabel("Start").FillAsync("2026-09-14");
         await page.GetByLabel("End").FillAsync("2026-09-18");
         await page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();

@@ -1,0 +1,48 @@
+{
+    "schemaVersion": 1,
+    "date": "2026-11-16",
+    "repository": {
+        "fullName": "juangcarmona/raccord",
+        "id": 1407641006
+    },
+    "issue": 299,
+    "approval": "https://github.com/juangcarmona/raccord/issues/437",
+    "historical": {
+        "directoryMerge": "7ef7247",
+        "peopleMerge": "8be3215",
+        "observedEpicHead": "49b38a87516398d7aefcfdd73bd37f376a79a67d"
+    },
+    "seed": {
+        "base": "21534cad056b2a3b219ec75f119a870527694e0c",
+        "head": "5afa9d5d33cefa64ef83d95904352f2cfc84ce2c",
+        "branch": "fix/437-recover-contacts-source",
+        "productBaselineChanged": false
+    },
+    "localVerification": {
+        "build": "passed, zero warnings/errors",
+        "backendTests": 197,
+        "frontendTests": 47,
+        "frontendLintAndBuild": "passed",
+        "selectedBrowserJourneys": 38,
+        "browserCases": 40,
+        "browserFailures": 0,
+        "browserSkipped": 0,
+        "providerCitationsCurrent": 561
+    },
+    "nativeCorrections": {
+        "nugetCache": "Per-attempt ignored /workspace/obj NuGet cache paths, not private /tmp",
+        "nugetQualification": "Fresh solution restore passed in pinned implementation image with the original 2 GiB tmpfs limit; cache size exceeded that bound without exhausting scratch",
+        "githubActions": {
+            "default_workflow_permissions": "read",
+            "can_approve_pull_request_reviews": true
+        }
+    },
+    "priorPublication": {
+        "run": "43788430364",
+        "branch": "chore/299-lighthouse-implement-e6f829f62edc",
+        "head": "6ee88ccf46d0e625a09129d1877b398080f861cc",
+        "pullRequestCreated": false,
+        "candidate": "Plan only; blocked because historical runtime source was unavailable"
+    },
+    "state": "source-qualified-native-delivery-pending"
+}

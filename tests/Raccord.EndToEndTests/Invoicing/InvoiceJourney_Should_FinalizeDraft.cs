@@ -153,16 +153,6 @@ public sealed class InvoiceJourney_Should_FinalizeDraft(DistributedAppFixture ap
         invoice.RootElement.GetProperty("issueDate").GetString().ShouldBe(selectedDate);
     }
 
-    private static DateOnly OrganizationToday =>
-        DateOnly.FromDateTime(
-            TimeZoneInfo
-                .ConvertTime(
-                    DateTimeOffset.UtcNow,
-                    TimeZoneInfo.FindSystemTimeZoneById("Europe/Madrid")
-                )
-                .DateTime
-        );
-
     private async Task AssertDuplicateAndStandaloneAsync(IPage page, string invoiceId)
     {
         var duplicate = await page.APIRequest.PostAsync($"/api/invoices/{invoiceId}/duplicate");

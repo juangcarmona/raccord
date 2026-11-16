@@ -7,3 +7,4 @@
 - [x] Preserve explicit date selection and nullable API semantics.
 - [x] Add explicit-date and browser/org-midnight regression coverage.
 - [x] Confirm the existing server workflow remains responsible for organization date and invoice ordering validation.
+- [x] Share the organization-date helper with generic invoice-finalization journeys to preserve chronological numbering across the UTC/local midnight boundary.

@@ -14,10 +14,8 @@
     "production": false
   },
   "capacity": 1,
-  "status": "blocked",
-  "blockers": [
-    "https://github.com/juangcarmona/lighthouse/issues/699"
-  ],
+  "status": "waiting-native-qualification",
+  "blockers": [],
   "epics": [
     {
       "issue": 24,
@@ -563,5 +561,12 @@
       "updatedAt": "2026-10-16T03:55:54Z",
       "bodySha256": "92ec8d6aa3f2669713791ffa72a266a6ffb861fa3b97b02c43c53f3ddaabfcf5"
     }
-  ]
+  ],
+  "qualification": {
+    "lighthouseVersion": "0.13.14",
+    "sdlcVersion": "0.24.3",
+    "releaseRun": "https://github.com/juangcarmona/lighthouse/actions/runs/43775678986",
+    "packageGitHead": "1ade56e7e462de6e7e2ff746b90b0a908601b4a0",
+    "nativeResult": null
+  }
 }

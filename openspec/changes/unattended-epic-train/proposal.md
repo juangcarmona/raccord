@@ -9,7 +9,8 @@ The owner approved the existing written intent and requested serial unattended P
 ## What Changes
 
 - Retain the owner-authorized queue, source-body digests and cross-context order for #437.
-- Regenerate the selected SDLC 0.24.2 workflows with implementation continuation, Product Change workers and optional native epic control.
+- Regenerate the selected SDLC 0.24.3 workflows with implementation continuation, Product Change workers and optional native epic control.
+- Adopt the published scoped-evidence correction and pin OpenSpec 1.15.0 for local and CI citation discovery.
 - Declare the existing CI identities and explicit independent repository implementation commands.
 - Preserve the technical blocker and native controller activation prerequisites without claiming an operating train.
 

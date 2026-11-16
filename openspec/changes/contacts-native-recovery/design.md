@@ -16,6 +16,8 @@ The explicit dotnet/PostgreSQL environment provides a disposable server on an at
 
 The managed-command wrapper already creates its ID-specific log with exclusive file creation. Redirecting the invoking shell to that same path pre-creates it and fails before the command starts; the current wrapper can leave a misleading running receipt after that exception. The adopter scope explicitly forbids this redirection and requires fresh IDs for a corrected attempt while preserving failed receipts.
 
+The harness sets PLAYWRIGHT_BROWSERS_PATH to /workspace/.cache/ms-playwright. Ignore that exact root cache directory so downloaded browser binaries remain disposable check output rather than entering the source inventory. Preserve all tracked source edits and existing source-size limits. Cold restore and browser tool invocations need an explicit 600000 ms allowance; if an invocation returns a session handle, wait for the existing managed receipt to terminate before advancing. Native run 43950371580 passed every independent command, but the unignored browser download exceeded the source-inventory bound after checks; its agent had separately cancelled restore at the default 120-second tool timeout. Neither outcome is native acceptance.
+
 ## Verification
 
 Validate the exact seed with the installed provider loader against current source. Restore the real solution inside the pinned implementation image with the same private 2 GiB tmpfs and fresh workspace caches. Run repository OpenSpec, ProductShape, citation, Markdown and policy validation. Observe the next native worker and actual PR publication independently.

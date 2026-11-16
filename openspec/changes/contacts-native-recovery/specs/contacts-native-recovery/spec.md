@@ -44,4 +44,15 @@ The worker SHALL invoke managed commands without redirecting to the wrapper-owne
 - **THEN** the shell does not pre-create the wrapper log
 - **AND** the receipt and actual command exit status remain attributable to that invocation
 
+### Requirement: Keep browser caches out of source inventory
+
+The native check workspace SHALL ignore its generated root .cache/ms-playwright browser cache without weakening source bounds or hiding tracked source edits.
+
+#### Scenario: Browser qualification installs Chromium in the disposable workspace
+
+- **WHEN** the complete configured browser command downloads its runtime
+- **THEN** downloaded binaries remain disposable output outside the implementation source inventory
+- **AND** tracked source edits remain visible to verification
+- **AND** acceptance still requires terminal managed receipts and authentic native publication
+
 <!-- pdac:cite id="FR-CON-002" digest="sha256:050518c8af11e5d7f1e90fa0e7e4f71e949c4923ac5e8d8335697cd4c3fa235b" -->

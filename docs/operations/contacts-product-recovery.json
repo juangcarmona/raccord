@@ -1,0 +1,704 @@
+{
+    "schemaVersion": 1,
+    "date": "2026-11-16",
+    "issue": 437,
+    "repository": {
+        "fullName": "juangcarmona/raccord",
+        "id": 1407641006
+    },
+    "source": {
+        "branch": "codex/epic-373-contacts",
+        "revision": "49b38a87516398d7aefcfdd73bd37f376a79a67d"
+    },
+    "baselineRevision": "4cf56c86891d500e1220051009bb16e8cd6b05d3",
+    "approval": {
+        "record": "https://github.com/juangcarmona/raccord/issues/437",
+        "scope": "Owner-approved historical Contacts intent; explicit reconciliation and apply requested on 2026-11-16."
+    },
+    "reconciliation": "CHG-CONTACTS-RECOVERY",
+    "historical": [
+        {
+            "id": "CHG-CONTACT-ORGANIZATION-302",
+            "path": "docs/product/changes/completed/chg-contact-organization-302/change.md",
+            "sourceSha256": "d985113fa87b761a5b282aefa0ad33715f71bf61c20a3378086d0aacde672881"
+        },
+        {
+            "id": "CHG-CONTACT-PERSON-DESIGNATION-CARDINALITY-299",
+            "path": "docs/product/changes/completed/chg-contact-person-designation-cardinality-299/change.md",
+            "sourceSha256": "5eeef50a66ce711e2725b7b543c8288665baeb94ba267a7c880e704222915127"
+        },
+        {
+            "id": "CHG-CONTACT-PERSONS-299",
+            "path": "docs/product/changes/completed/chg-contact-persons-299/change.md",
+            "sourceSha256": "99fc14771887aee31e142ac3ffd79eba81c72e36a8cf7d790bc99948ad6196ad"
+        },
+        {
+            "id": "CHG-CONTACT-SPREADSHEET-IMPORT-301",
+            "path": "docs/product/changes/completed/chg-contact-spreadsheet-import-301/change.md",
+            "sourceSha256": "552c9cf1f5fe9080741fb4d70eddfdbaffb3fbfe244733242e360dd07e40c0dc"
+        },
+        {
+            "id": "CHG-CONTACTS-DIRECTORY-001",
+            "path": "docs/product/changes/completed/chg-contacts-directory-001/change.md",
+            "sourceSha256": "2246d9ef9eed5796dc9ef3ed75c0aee15b521d16b088df80dc77ea0853955a58"
+        }
+    ],
+    "operations": [
+        {
+            "id": "BC-CONTACTS",
+            "operation": "modify",
+            "path": "domain/bounded-contexts/bc-contacts.md"
+        },
+        {
+            "id": "BR-CON-CONTACT-PERSON-DESIGNATIONS",
+            "operation": "add",
+            "path": "business-rules/br-con-contact-person-designations.md"
+        },
+        {
+            "id": "BR-CON-CONTACT-TAG-SCOPE",
+            "operation": "add",
+            "path": "business-rules/br-con-contact-tag-scope.md"
+        },
+        {
+            "id": "BR-CON-FOLDER-DELETE-NONEMPTY",
+            "operation": "add",
+            "path": "business-rules/br-con-folder-delete-nonempty.md"
+        },
+        {
+            "id": "BR-CON-FOLDER-HIERARCHY",
+            "operation": "add",
+            "path": "business-rules/br-con-folder-hierarchy.md"
+        },
+        {
+            "id": "BR-CON-IMPORT-AUDIT",
+            "operation": "add",
+            "path": "business-rules/br-con-import-audit.md"
+        },
+        {
+            "id": "BR-CON-IMPORT-ROW-ATOMICITY",
+            "operation": "add",
+            "path": "business-rules/br-con-import-row-atomicity.md"
+        },
+        {
+            "id": "BR-CON-TAG-FILTER-MODES",
+            "operation": "add",
+            "path": "business-rules/br-con-tag-filter-modes.md"
+        },
+        {
+            "id": "BR-PARTY-SNAPSHOT",
+            "operation": "modify",
+            "path": "business-rules/br-party-snapshot.md"
+        },
+        {
+            "id": "BR-PRJ-CONTACT-IMPORT-MODES",
+            "operation": "modify",
+            "path": "business-rules/br-prj-contact-import-modes.md"
+        },
+        {
+            "id": "BR-PRJ-CONTACT-NUMBER-ASSIGNMENT",
+            "operation": "modify",
+            "path": "business-rules/br-prj-contact-number-assignment.md"
+        },
+        {
+            "id": "BR-PRJ-CONTACT-PERSON-IMPORT-ROWS",
+            "operation": "modify",
+            "path": "business-rules/br-prj-contact-person-import-rows.md"
+        },
+        {
+            "id": "BR-PRJ-CONTACT-PERSON-NOT-MOVABLE",
+            "operation": "modify",
+            "path": "business-rules/br-prj-contact-person-not-movable.md"
+        },
+        {
+            "id": "BR-PRJ-CONTACT-ROLES-BY-TAG",
+            "operation": "modify",
+            "path": "business-rules/br-prj-contact-roles-by-tag.md"
+        },
+        {
+            "id": "BR-PRJ-FOLDER-DELETE-NONEMPTY",
+            "operation": "modify",
+            "path": "business-rules/br-prj-folder-delete-nonempty.md"
+        },
+        {
+            "id": "BR-PRJ-IMPORT-FOLDER-PLACEMENT",
+            "operation": "modify",
+            "path": "business-rules/br-prj-import-folder-placement.md"
+        },
+        {
+            "id": "BR-PRJ-IMPORT-RESULT-REPORT",
+            "operation": "modify",
+            "path": "business-rules/br-prj-import-result-report.md"
+        },
+        {
+            "id": "BR-PRJ-IMPORT-TAG",
+            "operation": "modify",
+            "path": "business-rules/br-prj-import-tag.md"
+        },
+        {
+            "id": "BR-PRJ-PARTIES-FROM-CONTACTS",
+            "operation": "modify",
+            "path": "business-rules/br-prj-parties-from-contacts.md"
+        },
+        {
+            "id": "CON-CON-IMPORT-FILE-FORMAT",
+            "operation": "add",
+            "path": "requirements/constraints/con-con-import-file-format.md"
+        },
+        {
+            "id": "FR-CON-001",
+            "operation": "add",
+            "path": "requirements/functional/fr-con-001.md"
+        },
+        {
+            "id": "FR-CON-002",
+            "operation": "add",
+            "path": "requirements/functional/fr-con-002.md"
+        },
+        {
+            "id": "FR-CON-003",
+            "operation": "add",
+            "path": "requirements/functional/fr-con-003.md"
+        },
+        {
+            "id": "FR-CON-004",
+            "operation": "add",
+            "path": "requirements/functional/fr-con-004.md"
+        },
+        {
+            "id": "FR-CON-005",
+            "operation": "add",
+            "path": "requirements/functional/fr-con-005.md"
+        },
+        {
+            "id": "FR-CUSTOMER-001",
+            "operation": "modify",
+            "path": "requirements/functional/fr-customer-001.md"
+        },
+        {
+            "id": "FR-PRJ-032",
+            "operation": "modify",
+            "path": "requirements/functional/fr-prj-032.md"
+        },
+        {
+            "id": "FR-PRJ-034",
+            "operation": "modify",
+            "path": "requirements/functional/fr-prj-034.md"
+        },
+        {
+            "id": "JRN-PRJ-SET-UP-CONTACT-DATABASE",
+            "operation": "modify",
+            "path": "journeys/jrn-prj-set-up-contact-database.md"
+        },
+        {
+            "id": "SB-CON-CHANGE-DEFAULT-CONTACT-PERSON",
+            "operation": "add",
+            "path": "behaviours/sb-con-change-default-contact-person.md"
+        },
+        {
+            "id": "SB-CON-CONTACT-PERSON-PRESERVES-PARTY-SNAPSHOT",
+            "operation": "add",
+            "path": "behaviours/sb-con-contact-person-preserves-party-snapshot.md"
+        },
+        {
+            "id": "SB-CON-CONTACTS-ISOLATED-BY-WORKSPACE",
+            "operation": "add",
+            "path": "behaviours/sb-con-contacts-isolated-by-workspace.md"
+        },
+        {
+            "id": "SB-CON-IMPORT-RECHECKS-PREVIEW",
+            "operation": "add",
+            "path": "behaviours/sb-con-import-rechecks-preview.md"
+        },
+        {
+            "id": "SB-CON-IMPORT-VALID-AND-INVALID-ROWS",
+            "operation": "add",
+            "path": "behaviours/sb-con-import-valid-and-invalid-rows.md"
+        },
+        {
+            "id": "SB-CON-ORGANIZE-AND-FILTER-CONTACTS",
+            "operation": "add",
+            "path": "behaviours/sb-con-organize-and-filter-contacts.md"
+        },
+        {
+            "id": "SB-CON-REASSIGN-ADMINISTRATIVE-CONTACT-PERSON",
+            "operation": "add",
+            "path": "behaviours/sb-con-reassign-administrative-contact-person.md"
+        },
+        {
+            "id": "SB-CON-TAG-FILTER-ANY-AND-ALL",
+            "operation": "add",
+            "path": "behaviours/sb-con-tag-filter-any-and-all.md"
+        },
+        {
+            "id": "SB-PRJ-CONTACT-IMPORT-SKIP-EXISTING",
+            "operation": "modify",
+            "path": "behaviours/sb-prj-contact-import-skip-existing.md"
+        },
+        {
+            "id": "SB-PRJ-IMPORT-FAILED-ROWS-FILE",
+            "operation": "modify",
+            "path": "behaviours/sb-prj-import-failed-rows-file.md"
+        },
+        {
+            "id": "SB-PRJ-NONEMPTY-FOLDER-DELETE-REFUSED",
+            "operation": "modify",
+            "path": "behaviours/sb-prj-nonempty-folder-delete-refused.md"
+        },
+        {
+            "id": "TERM-ADMINISTRATIVE-CONTACT-PERSON",
+            "operation": "modify",
+            "path": "domain/terms/term-administrative-contact-person.md"
+        },
+        {
+            "id": "TERM-CONTACT",
+            "operation": "modify",
+            "path": "domain/terms/term-contact.md"
+        },
+        {
+            "id": "TERM-CONTACT-FOLDER",
+            "operation": "add",
+            "path": "domain/terms/term-contact-folder.md"
+        },
+        {
+            "id": "TERM-CONTACT-NUMBER",
+            "operation": "modify",
+            "path": "domain/terms/term-contact-number.md"
+        },
+        {
+            "id": "TERM-CONTACT-PERSON",
+            "operation": "modify",
+            "path": "domain/terms/term-contact-person.md"
+        },
+        {
+            "id": "TERM-CONTACT-TAG",
+            "operation": "add",
+            "path": "domain/terms/term-contact-tag.md"
+        },
+        {
+            "id": "TERM-CONTACT-TYPE",
+            "operation": "modify",
+            "path": "domain/terms/term-contact-type.md"
+        },
+        {
+            "id": "TERM-CUSTOMER",
+            "operation": "modify",
+            "path": "domain/terms/term-customer.md"
+        },
+        {
+            "id": "TERM-DEFAULT-CONTACT-PERSON",
+            "operation": "modify",
+            "path": "domain/terms/term-default-contact-person.md"
+        },
+        {
+            "id": "TERM-RECORD-FOLDER",
+            "operation": "modify",
+            "path": "domain/terms/term-record-folder.md"
+        },
+        {
+            "id": "TERM-SUPPLIER-CONTACT",
+            "operation": "modify",
+            "path": "domain/terms/term-supplier-contact.md"
+        },
+        {
+            "id": "TERM-VENUE",
+            "operation": "modify",
+            "path": "domain/terms/term-venue.md"
+        },
+        {
+            "id": "UC-CON-FILTER-CONTACT-DIRECTORY",
+            "operation": "add",
+            "path": "use-cases/uc-con-filter-contact-directory.md"
+        },
+        {
+            "id": "UC-CON-IMPORT-CONTACTS",
+            "operation": "add",
+            "path": "use-cases/uc-con-import-contacts.md"
+        },
+        {
+            "id": "UC-CON-MANAGE-CONTACT-DIRECTORY",
+            "operation": "add",
+            "path": "use-cases/uc-con-manage-contact-directory.md"
+        },
+        {
+            "id": "UC-CON-MANAGE-CONTACT-FOLDERS",
+            "operation": "add",
+            "path": "use-cases/uc-con-manage-contact-folders.md"
+        },
+        {
+            "id": "UC-CON-MANAGE-CONTACT-PERSONS",
+            "operation": "add",
+            "path": "use-cases/uc-con-manage-contact-persons.md"
+        },
+        {
+            "id": "UC-CON-TAG-CONTACTS",
+            "operation": "add",
+            "path": "use-cases/uc-con-tag-contacts.md"
+        },
+        {
+            "id": "UC-PRJ-ADD-CONTACT",
+            "operation": "modify",
+            "path": "use-cases/uc-prj-add-contact.md"
+        },
+        {
+            "id": "UC-PRJ-ADD-CONTACT-PERSON",
+            "operation": "modify",
+            "path": "use-cases/uc-prj-add-contact-person.md"
+        },
+        {
+            "id": "UC-PRJ-IMPORT-CONTACTS",
+            "operation": "modify",
+            "path": "use-cases/uc-prj-import-contacts.md"
+        },
+        {
+            "id": "UC-PRJ-MANAGE-RECORD-FOLDERS",
+            "operation": "modify",
+            "path": "use-cases/uc-prj-manage-record-folders.md"
+        },
+        {
+            "id": "UC-REGISTER-CUSTOMER",
+            "operation": "modify",
+            "path": "use-cases/uc-register-customer.md"
+        }
+    ],
+    "impact": {
+        "reviewedRelations": 66,
+        "unchangedArtifacts": 48
+    },
+    "application": {
+        "provider": "@prodshape/cli@0.26.1",
+        "dryRunVerified": true,
+        "actions": [
+            {
+                "kind": "write",
+                "description": "Replace BC-CONTACTS at docs/product/model/domain/bounded-contexts/bc-contacts.md",
+                "to": "docs/product/model/domain/bounded-contexts/bc-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-CONTACT-PERSON-DESIGNATIONS at docs/product/model/business-rules/br-con-contact-person-designations.md",
+                "to": "docs/product/model/business-rules/br-con-contact-person-designations.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-CONTACT-TAG-SCOPE at docs/product/model/business-rules/br-con-contact-tag-scope.md",
+                "to": "docs/product/model/business-rules/br-con-contact-tag-scope.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-FOLDER-DELETE-NONEMPTY at docs/product/model/business-rules/br-con-folder-delete-nonempty.md",
+                "to": "docs/product/model/business-rules/br-con-folder-delete-nonempty.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-FOLDER-HIERARCHY at docs/product/model/business-rules/br-con-folder-hierarchy.md",
+                "to": "docs/product/model/business-rules/br-con-folder-hierarchy.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-IMPORT-AUDIT at docs/product/model/business-rules/br-con-import-audit.md",
+                "to": "docs/product/model/business-rules/br-con-import-audit.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-IMPORT-ROW-ATOMICITY at docs/product/model/business-rules/br-con-import-row-atomicity.md",
+                "to": "docs/product/model/business-rules/br-con-import-row-atomicity.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add BR-CON-TAG-FILTER-MODES at docs/product/model/business-rules/br-con-tag-filter-modes.md",
+                "to": "docs/product/model/business-rules/br-con-tag-filter-modes.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PARTY-SNAPSHOT at docs/product/model/business-rules/br-party-snapshot.md",
+                "to": "docs/product/model/business-rules/br-party-snapshot.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-CONTACT-IMPORT-MODES at docs/product/model/business-rules/br-prj-contact-import-modes.md",
+                "to": "docs/product/model/business-rules/br-prj-contact-import-modes.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-CONTACT-NUMBER-ASSIGNMENT at docs/product/model/business-rules/br-prj-contact-number-assignment.md",
+                "to": "docs/product/model/business-rules/br-prj-contact-number-assignment.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-CONTACT-PERSON-IMPORT-ROWS at docs/product/model/business-rules/br-prj-contact-person-import-rows.md",
+                "to": "docs/product/model/business-rules/br-prj-contact-person-import-rows.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-CONTACT-PERSON-NOT-MOVABLE at docs/product/model/business-rules/br-prj-contact-person-not-movable.md",
+                "to": "docs/product/model/business-rules/br-prj-contact-person-not-movable.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-CONTACT-ROLES-BY-TAG at docs/product/model/business-rules/br-prj-contact-roles-by-tag.md",
+                "to": "docs/product/model/business-rules/br-prj-contact-roles-by-tag.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-FOLDER-DELETE-NONEMPTY at docs/product/model/business-rules/br-prj-folder-delete-nonempty.md",
+                "to": "docs/product/model/business-rules/br-prj-folder-delete-nonempty.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-IMPORT-FOLDER-PLACEMENT at docs/product/model/business-rules/br-prj-import-folder-placement.md",
+                "to": "docs/product/model/business-rules/br-prj-import-folder-placement.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-IMPORT-RESULT-REPORT at docs/product/model/business-rules/br-prj-import-result-report.md",
+                "to": "docs/product/model/business-rules/br-prj-import-result-report.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-IMPORT-TAG at docs/product/model/business-rules/br-prj-import-tag.md",
+                "to": "docs/product/model/business-rules/br-prj-import-tag.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace BR-PRJ-PARTIES-FROM-CONTACTS at docs/product/model/business-rules/br-prj-parties-from-contacts.md",
+                "to": "docs/product/model/business-rules/br-prj-parties-from-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add CON-CON-IMPORT-FILE-FORMAT at docs/product/model/requirements/constraints/con-con-import-file-format.md",
+                "to": "docs/product/model/requirements/constraints/con-con-import-file-format.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add FR-CON-001 at docs/product/model/requirements/functional/fr-con-001.md",
+                "to": "docs/product/model/requirements/functional/fr-con-001.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add FR-CON-002 at docs/product/model/requirements/functional/fr-con-002.md",
+                "to": "docs/product/model/requirements/functional/fr-con-002.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add FR-CON-003 at docs/product/model/requirements/functional/fr-con-003.md",
+                "to": "docs/product/model/requirements/functional/fr-con-003.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add FR-CON-004 at docs/product/model/requirements/functional/fr-con-004.md",
+                "to": "docs/product/model/requirements/functional/fr-con-004.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add FR-CON-005 at docs/product/model/requirements/functional/fr-con-005.md",
+                "to": "docs/product/model/requirements/functional/fr-con-005.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace FR-CUSTOMER-001 at docs/product/model/requirements/functional/fr-customer-001.md",
+                "to": "docs/product/model/requirements/functional/fr-customer-001.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace FR-PRJ-032 at docs/product/model/requirements/functional/fr-prj-032.md",
+                "to": "docs/product/model/requirements/functional/fr-prj-032.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace FR-PRJ-034 at docs/product/model/requirements/functional/fr-prj-034.md",
+                "to": "docs/product/model/requirements/functional/fr-prj-034.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace JRN-PRJ-SET-UP-CONTACT-DATABASE at docs/product/model/journeys/jrn-prj-set-up-contact-database.md",
+                "to": "docs/product/model/journeys/jrn-prj-set-up-contact-database.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-CHANGE-DEFAULT-CONTACT-PERSON at docs/product/model/behaviours/sb-con-change-default-contact-person.md",
+                "to": "docs/product/model/behaviours/sb-con-change-default-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-CONTACT-PERSON-PRESERVES-PARTY-SNAPSHOT at docs/product/model/behaviours/sb-con-contact-person-preserves-party-snapshot.md",
+                "to": "docs/product/model/behaviours/sb-con-contact-person-preserves-party-snapshot.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-CONTACTS-ISOLATED-BY-WORKSPACE at docs/product/model/behaviours/sb-con-contacts-isolated-by-workspace.md",
+                "to": "docs/product/model/behaviours/sb-con-contacts-isolated-by-workspace.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-IMPORT-RECHECKS-PREVIEW at docs/product/model/behaviours/sb-con-import-rechecks-preview.md",
+                "to": "docs/product/model/behaviours/sb-con-import-rechecks-preview.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-IMPORT-VALID-AND-INVALID-ROWS at docs/product/model/behaviours/sb-con-import-valid-and-invalid-rows.md",
+                "to": "docs/product/model/behaviours/sb-con-import-valid-and-invalid-rows.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-ORGANIZE-AND-FILTER-CONTACTS at docs/product/model/behaviours/sb-con-organize-and-filter-contacts.md",
+                "to": "docs/product/model/behaviours/sb-con-organize-and-filter-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-REASSIGN-ADMINISTRATIVE-CONTACT-PERSON at docs/product/model/behaviours/sb-con-reassign-administrative-contact-person.md",
+                "to": "docs/product/model/behaviours/sb-con-reassign-administrative-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add SB-CON-TAG-FILTER-ANY-AND-ALL at docs/product/model/behaviours/sb-con-tag-filter-any-and-all.md",
+                "to": "docs/product/model/behaviours/sb-con-tag-filter-any-and-all.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace SB-PRJ-CONTACT-IMPORT-SKIP-EXISTING at docs/product/model/behaviours/sb-prj-contact-import-skip-existing.md",
+                "to": "docs/product/model/behaviours/sb-prj-contact-import-skip-existing.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace SB-PRJ-IMPORT-FAILED-ROWS-FILE at docs/product/model/behaviours/sb-prj-import-failed-rows-file.md",
+                "to": "docs/product/model/behaviours/sb-prj-import-failed-rows-file.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace SB-PRJ-NONEMPTY-FOLDER-DELETE-REFUSED at docs/product/model/behaviours/sb-prj-nonempty-folder-delete-refused.md",
+                "to": "docs/product/model/behaviours/sb-prj-nonempty-folder-delete-refused.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-ADMINISTRATIVE-CONTACT-PERSON at docs/product/model/domain/terms/term-administrative-contact-person.md",
+                "to": "docs/product/model/domain/terms/term-administrative-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-CONTACT at docs/product/model/domain/terms/term-contact.md",
+                "to": "docs/product/model/domain/terms/term-contact.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add TERM-CONTACT-FOLDER at docs/product/model/domain/terms/term-contact-folder.md",
+                "to": "docs/product/model/domain/terms/term-contact-folder.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-CONTACT-NUMBER at docs/product/model/domain/terms/term-contact-number.md",
+                "to": "docs/product/model/domain/terms/term-contact-number.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-CONTACT-PERSON at docs/product/model/domain/terms/term-contact-person.md",
+                "to": "docs/product/model/domain/terms/term-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add TERM-CONTACT-TAG at docs/product/model/domain/terms/term-contact-tag.md",
+                "to": "docs/product/model/domain/terms/term-contact-tag.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-CONTACT-TYPE at docs/product/model/domain/terms/term-contact-type.md",
+                "to": "docs/product/model/domain/terms/term-contact-type.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-CUSTOMER at docs/product/model/domain/terms/term-customer.md",
+                "to": "docs/product/model/domain/terms/term-customer.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-DEFAULT-CONTACT-PERSON at docs/product/model/domain/terms/term-default-contact-person.md",
+                "to": "docs/product/model/domain/terms/term-default-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-RECORD-FOLDER at docs/product/model/domain/terms/term-record-folder.md",
+                "to": "docs/product/model/domain/terms/term-record-folder.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-SUPPLIER-CONTACT at docs/product/model/domain/terms/term-supplier-contact.md",
+                "to": "docs/product/model/domain/terms/term-supplier-contact.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace TERM-VENUE at docs/product/model/domain/terms/term-venue.md",
+                "to": "docs/product/model/domain/terms/term-venue.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-FILTER-CONTACT-DIRECTORY at docs/product/model/use-cases/uc-con-filter-contact-directory.md",
+                "to": "docs/product/model/use-cases/uc-con-filter-contact-directory.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-IMPORT-CONTACTS at docs/product/model/use-cases/uc-con-import-contacts.md",
+                "to": "docs/product/model/use-cases/uc-con-import-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-MANAGE-CONTACT-DIRECTORY at docs/product/model/use-cases/uc-con-manage-contact-directory.md",
+                "to": "docs/product/model/use-cases/uc-con-manage-contact-directory.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-MANAGE-CONTACT-FOLDERS at docs/product/model/use-cases/uc-con-manage-contact-folders.md",
+                "to": "docs/product/model/use-cases/uc-con-manage-contact-folders.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-MANAGE-CONTACT-PERSONS at docs/product/model/use-cases/uc-con-manage-contact-persons.md",
+                "to": "docs/product/model/use-cases/uc-con-manage-contact-persons.md"
+            },
+            {
+                "kind": "write",
+                "description": "Add UC-CON-TAG-CONTACTS at docs/product/model/use-cases/uc-con-tag-contacts.md",
+                "to": "docs/product/model/use-cases/uc-con-tag-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace UC-PRJ-ADD-CONTACT at docs/product/model/use-cases/uc-prj-add-contact.md",
+                "to": "docs/product/model/use-cases/uc-prj-add-contact.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace UC-PRJ-ADD-CONTACT-PERSON at docs/product/model/use-cases/uc-prj-add-contact-person.md",
+                "to": "docs/product/model/use-cases/uc-prj-add-contact-person.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace UC-PRJ-IMPORT-CONTACTS at docs/product/model/use-cases/uc-prj-import-contacts.md",
+                "to": "docs/product/model/use-cases/uc-prj-import-contacts.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace UC-PRJ-MANAGE-RECORD-FOLDERS at docs/product/model/use-cases/uc-prj-manage-record-folders.md",
+                "to": "docs/product/model/use-cases/uc-prj-manage-record-folders.md"
+            },
+            {
+                "kind": "write",
+                "description": "Replace UC-REGISTER-CUSTOMER at docs/product/model/use-cases/uc-register-customer.md",
+                "to": "docs/product/model/use-cases/uc-register-customer.md"
+            },
+            {
+                "kind": "set-status",
+                "description": "Set CHG-CONTACTS-RECOVERY status to applied"
+            },
+            {
+                "kind": "move-change",
+                "description": "Move change to docs/product/changes/completed/chg-contacts-recovery",
+                "to": "docs/product/changes/completed/chg-contacts-recovery"
+            }
+        ],
+        "baselineArtifacts": 1918,
+        "errors": 0,
+        "warnings": 0
+    },
+    "implementation": {
+        "status": "pending-recovery",
+        "note": "Historical directory and people/import/organization code is on the epic branch, not delivered to main. Recover against the accepted baseline before advancing dependencies."
+    }
+}

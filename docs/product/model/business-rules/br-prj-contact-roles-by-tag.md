@@ -1,14 +1,14 @@
 ---
 id: BR-PRJ-CONTACT-ROLES-BY-TAG
 type: business-rule
-title: "Contact roles are expressed with tags, not folders"
-status: draft
+title: Contact roles are expressed with tags, not folders
+status: active
 applies-to: []
 uses-terms:
-  - "TERM-SUPPLIER-CONTACT"
-  - "TERM-TAG"
+  - TERM-SUPPLIER-CONTACT
+  - TERM-TAG
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013628759.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013628759.md
   confidence: high
   recovered-from: documentation
 ---

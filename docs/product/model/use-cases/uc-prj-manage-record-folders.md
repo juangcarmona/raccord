@@ -1,18 +1,18 @@
 ---
 id: UC-PRJ-MANAGE-RECORD-FOLDERS
 type: use-case
-title: "Maintain a record folder structure"
+title: Maintain a record folder structure
 status: draft
-primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
+primary-actor: ACT-WORKSPACE-ADMINISTRATOR
 supporting-actors: []
-bounded-context: "BC-CONTACTS"
+bounded-context: BC-CONTACTS
 governed-by:
-  - "BR-PRJ-FOLDER-DELETE-NONEMPTY"
-  - "BR-PRJ-FOLDER-PER-MODULE"
+  - BR-PRJ-FOLDER-DELETE-NONEMPTY
+  - BR-PRJ-FOLDER-PER-MODULE
 uses-terms:
-  - "TERM-RECORD-FOLDER"
+  - TERM-RECORD-FOLDER
 provenance:
-  source: ".private/research/help-center/articles/360013700660.md"
+  source: .private/research/help-center/articles/360013700660.md
   confidence: high
   recovered-from: documentation
 ---
@@ -44,4 +44,4 @@ A folder that still contains records cannot be deleted.
 
 ## Postconditions
 
-Folder structure updated.
+The module folder structure is updated. Contacts-specific maintenance and optional contact placement follow UC-CON-MANAGE-CONTACT-FOLDERS.

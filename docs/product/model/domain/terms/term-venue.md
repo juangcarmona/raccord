@@ -1,15 +1,15 @@
 ---
 id: TERM-VENUE
 type: domain-term
-title: "Venue"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Venue
+status: active
+defined-in: BC-CONTACTS
 synonyms:
-  - "Location"
+  - Location
 uses-terms:
-  - "TERM-CONTACT"
+  - TERM-CONTACT
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013668139.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013668139.md
   confidence: high
   recovered-from: documentation
 ---

@@ -1,13 +1,13 @@
 ---
 id: BR-PRJ-IMPORT-FOLDER-PLACEMENT
 type: business-rule
-title: "Imported records are placed by folder path"
+title: Imported records are placed by folder path
 status: draft
 applies-to: []
 uses-terms:
-  - "TERM-RECORD-FOLDER"
+  - TERM-RECORD-FOLDER
 provenance:
-  source: ".private/research/help-center/articles/360013553000.md, .private/research/help-center/articles/360013700660.md"
+  source: .private/research/help-center/articles/360013553000.md, .private/research/help-center/articles/360013700660.md
   confidence: high
   recovered-from: documentation
 ---
@@ -26,4 +26,4 @@ Path freelancers/audio technicians creates both folders under the root.
 
 ## Exceptions
 
-None.
+UC-CON-IMPORT-CONTACTS does not assign folders; its new contacts may remain unfiled under BR-CON-FOLDER-HIERARCHY.

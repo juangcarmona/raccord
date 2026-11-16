@@ -1,13 +1,13 @@
 ---
 id: BR-PRJ-IMPORT-TAG
 type: business-rule
-title: "Every import is tagged for undo"
+title: Every import is tagged for undo
 status: draft
 applies-to: []
 uses-terms:
-  - "TERM-TAG"
+  - TERM-TAG
 provenance:
-  source: ".private/research/help-center/articles/39225660180626.md, .private/research/help-center/articles/360013553000.md"
+  source: .private/research/help-center/articles/39225660180626.md, .private/research/help-center/articles/360013553000.md
   confidence: high
   recovered-from: documentation
 ---
@@ -26,4 +26,4 @@ Deleting all contacts tagged with the faulty import's tag.
 
 ## Exceptions
 
-None.
+UC-CON-IMPORT-CONTACTS does not assign import tags or offer undo. BR-CON-IMPORT-AUDIT supplies its outcome record without uploaded contact values.

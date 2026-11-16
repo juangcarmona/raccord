@@ -1,32 +1,32 @@
 ---
 id: UC-PRJ-IMPORT-CONTACTS
 type: use-case
-title: "Import contacts"
+title: Extended contact import
 status: draft
-primary-actor: "ACT-WORKSPACE-ADMINISTRATOR"
+primary-actor: ACT-WORKSPACE-ADMINISTRATOR
 supporting-actors:
-  - "ACT-OPERATIONS-COORDINATOR"
-bounded-context: "BC-CONTACTS"
+  - ACT-OPERATIONS-COORDINATOR
+bounded-context: BC-CONTACTS
 governed-by:
-  - "BR-PRJ-CONTACT-IMPORT-MODES"
-  - "BR-PRJ-CONTACT-PERSON-IMPORT-ROWS"
-  - "BR-PRJ-IMPORT-FOLDER-PLACEMENT"
-  - "BR-PRJ-IMPORT-RESULT-REPORT"
-  - "BR-PRJ-IMPORT-TAG"
+  - BR-PRJ-CONTACT-IMPORT-MODES
+  - BR-PRJ-CONTACT-PERSON-IMPORT-ROWS
+  - BR-PRJ-IMPORT-FOLDER-PLACEMENT
+  - BR-PRJ-IMPORT-RESULT-REPORT
+  - BR-PRJ-IMPORT-TAG
 uses-terms:
-  - "TERM-CONTACT"
-  - "TERM-CONTACT-PERSON"
-  - "TERM-RECORD-FOLDER"
-  - "TERM-TAG"
+  - TERM-CONTACT
+  - TERM-CONTACT-PERSON
+  - TERM-RECORD-FOLDER
+  - TERM-TAG
 provenance:
-  source: ".private/research/help-center/articles/360013553000.md, .private/research/help-center/articles/360015867120.md, .private/research/help-center/articles/360013700660.md"
+  source: .private/research/help-center/articles/360013553000.md, .private/research/help-center/articles/360015867120.md, .private/research/help-center/articles/360013700660.md
   confidence: high
   recovered-from: documentation
 ---
 
 ## Goal
 
-An existing contact list is loaded in bulk, with contact persons and folders.
+Describe the extended contact-import profile with updates, contact persons and folder placement. The separately accepted create-only profile is UC-CON-IMPORT-CONTACTS; its exclusions are not overridden by this extended profile.
 
 ## Trigger
 

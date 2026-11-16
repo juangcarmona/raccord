@@ -27,3 +27,7 @@ The optional epic controller is installed but remains disabled until a valid cur
 3. Inspect the validated result and separate implementation continuation; observe the first PR and its real head/base, independent commands and CI.
 4. Advance a dependent issue only when its prerequisites are available in its declared base. Respect the existing native controller's per-action authorization contract.
 5. Keep credentials, production, releases and deployment in their repository-owned paths. Record failed or unavailable evidence without reporting it as acceptance.
+
+## Contacts product reconciliation
+
+CHG-CONTACTS-RECOVERY reconciles the five approved historical Contacts decisions against the current baseline. The provider apply and source-bound records are in [the recovery manifest](contacts-product-recovery.json). All 1,918 accepted artifacts validate without diagnostics. Existing invoice recipient selection and later issuer-history decisions are preserved; create-only import and optional folder membership have explicit scope. Historical directory and dependent implementation remains on the epic branch and must be recovered against current main before the queue advances.

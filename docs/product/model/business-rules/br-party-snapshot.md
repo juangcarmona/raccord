@@ -1,14 +1,14 @@
 ---
 id: BR-PARTY-SNAPSHOT
 type: business-rule
-title: "Issued invoices keep the party details of their issue time"
-status: draft
+title: Issued invoices keep the party details of their issue time
+status: active
 applies-to: []
 uses-terms:
-  - "TERM-ISSUER"
-  - "TERM-CUSTOMER"
-  - "TERM-ISSUED-INVOICE"
-  - "TERM-RECTIFYING-INVOICE"
+  - TERM-ISSUER
+  - TERM-CUSTOMER
+  - TERM-ISSUED-INVOICE
+  - TERM-RECTIFYING-INVOICE
 ---
 
 ## Rule

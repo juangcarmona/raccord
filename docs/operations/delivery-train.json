@@ -8,7 +8,7 @@
     "authorization": {
         "date": "2026-11-15",
         "record": "https://github.com/juangcarmona/raccord/issues/437",
-        "quote": "Dalo por aprobado todo. Lo escribí yo",
+        "quote": "Dalo por aprobado todo. Lo escrib\u00ed yo",
         "scope": "Existing owner-authored product intent and proposals; recover, refine, validate/apply Product Changes, implement and publish PRs.",
         "merge": false,
         "production": false
@@ -18,7 +18,7 @@
     "blockers": [
         {
             "issue": 299,
-            "reason": "Approved Contacts product baseline reconciled and applied; recover historical directory prerequisite and contact-person code against current main before advancing dependent issues."
+            "reason": "Historical runtime recovery is supplied through the validated issue-specific immutable seed; native execution, independent checks and actual PR publication remain to be qualified."
         }
     ],
     "epics": [
@@ -524,6 +524,14 @@
     "productReconciliation": {
         "change": "CHG-CONTACTS-RECOVERY",
         "record": "contacts-product-recovery.json",
-        "status": "applied-awaiting-integration"
+        "status": "applied-integrated"
+    },
+    "implementationRecovery": {
+        "issue": 299,
+        "seed": {
+            "base": "21534cad056b2a3b219ec75f119a870527694e0c",
+            "head": "5afa9d5d33cefa64ef83d95904352f2cfc84ce2c"
+        },
+        "record": "contacts-runtime-recovery.json"
     }
 }

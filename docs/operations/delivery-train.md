@@ -31,3 +31,7 @@ The optional epic controller is installed but remains disabled until a valid cur
 ## Contacts product reconciliation
 
 CHG-CONTACTS-RECOVERY reconciles the five approved historical Contacts decisions against the current baseline. The provider apply and source-bound records are in [the recovery manifest](contacts-product-recovery.json). All 1,918 accepted artifacts validate without diagnostics. Existing invoice recipient selection and later issuer-history decisions are preserved; create-only import and optional folder membership have explicit scope. Historical directory and dependent implementation remains on the epic branch and must be recovered against current main before the queue advances.
+
+## Contacts runtime recovery input
+
+The first issue receives the reviewed #298/#299 recovery through the immutable seed in [the runtime recovery record](contacts-runtime-recovery.json). The seed is a single commit directly based on the accepted baseline; its local backend, frontend and selected browser checks passed. It changes no canonical product artifacts. Independent .NET checks use ignored, disposable workspace obj caches to avoid exhausting the private tmpfs; the full command set and browser selection remain required. Local qualification and repository Actions permission are prerequisites, not proof of native candidate acceptance or actual PR publication.

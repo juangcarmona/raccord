@@ -47,8 +47,18 @@ public sealed class ContactPeopleJourney_Should_ManageDesignations(DistributedAp
     private static async Task AddAndAssertDesignationsAsync(IPage page, string contactId)
     {
         await page.GotoAsync($"/contacts/{contactId}");
-        await AddPersonAsync(page, "Billing lead", isDefault: true, isAdministrative: false);
-        await AddPersonAsync(page, "Production contact", isDefault: true, isAdministrative: true);
+        await AddPersonAsync(page, "Billing lead", isDefault: true, isAdministrative: true);
+        await AddPersonAsync(page, "Production contact", isDefault: true, isAdministrative: false);
+        await page.GetByRole(AriaRole.Listitem)
+            .Filter(new() { HasText = "Production contact" })
+            .GetByRole(AriaRole.Button, new() { Name = "Edit person", Exact = true })
+            .ClickAsync();
+        await page.GetByLabel("Person name").FillAsync("Production contact updated");
+        await page.GetByLabel("Person email").FillAsync("production.updated@example.test");
+        await page.GetByLabel("Administrative person").CheckAsync();
+        await page.GetByRole(AriaRole.Button, new() { Name = "Save changes", Exact = true })
+            .ClickAsync();
+        await page.GetByText("Production contact updated", new() { Exact = true }).WaitForAsync();
 
         var response = await page.APIRequest.GetAsync($"/api/contacts/{contactId}/people");
         response.Ok.ShouldBeTrue();
@@ -58,10 +68,15 @@ public sealed class ContactPeopleJourney_Should_ManageDesignations(DistributedAp
         persons.Count(person => person.GetProperty("isDefault").GetBoolean()).ShouldBe(1);
         persons.Count(person => person.GetProperty("isAdministrative").GetBoolean()).ShouldBe(1);
         FindPerson(persons, "Billing lead").GetProperty("isDefault").GetBoolean().ShouldBeFalse();
-        var selected = FindPerson(persons, "Production contact");
+        FindPerson(persons, "Billing lead")
+            .GetProperty("isAdministrative")
+            .GetBoolean()
+            .ShouldBeFalse();
+        var selected = FindPerson(persons, "Production contact updated");
+        selected.GetProperty("email").GetString().ShouldBe("production.updated@example.test");
         selected.GetProperty("isDefault").GetBoolean().ShouldBeTrue();
         selected.GetProperty("isAdministrative").GetBoolean().ShouldBeTrue();
-        await page.GetByText("Production contact").WaitForAsync();
+        await page.GetByText("Production contact updated", new() { Exact = true }).WaitForAsync();
     }
 
     private static JsonElement FindPerson(JsonElement[] persons, string name) =>

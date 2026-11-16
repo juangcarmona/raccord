@@ -63,7 +63,7 @@ public sealed class ContactPeopleTests(PostgresContainer postgres) : IAsyncLifet
         people.Single(person => person.Id == formerDefault.Id).IsAdministrative.ShouldBeTrue();
         people.Single(person => person.Id == newDefault.Id).Email.ShouldBe("bea@example.test");
 
-        var conflictingAdmin = await client.PutAsJsonAsync(
+        var reassignedAdmin = await client.PutAsJsonAsync(
             PersonPath(contact.Id, newDefault.Id),
             new SaveContactPersonRequest(
                 "Bea Costa",
@@ -73,17 +73,54 @@ public sealed class ContactPeopleTests(PostgresContainer postgres) : IAsyncLifet
                 IsAdministrative: true
             )
         );
-        conflictingAdmin.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
-        var problem = await conflictingAdmin.Content.ReadFromJsonAsync<ProblemDetails>();
-        problem!.Extensions["code"]!
-            .ToString()
-            .ShouldBe("contacts.contact-person-administrative-already-assigned");
+        reassignedAdmin.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-        var unchanged = await client.GetFromJsonAsync<ContactPersonResponse>(
+        var reassigned = await client.GetFromJsonAsync<ContactPersonResponse>(
             PersonPath(contact.Id, newDefault.Id)
         );
-        unchanged!.IsDefault.ShouldBeTrue();
-        unchanged.IsAdministrative.ShouldBeFalse();
+        reassigned!.IsDefault.ShouldBeTrue();
+        reassigned.IsAdministrative.ShouldBeTrue();
+        var previous = await client.GetFromJsonAsync<ContactPersonResponse>(
+            PersonPath(contact.Id, formerDefault.Id)
+        );
+        previous!.IsDefault.ShouldBeFalse();
+        previous.IsAdministrative.ShouldBeFalse();
+    }
+
+    [Fact]
+    public async Task Contact_people_Should_ReassignAdministrativeDesignationInBothDirections()
+    {
+        var contact = await CreateContactAsync("Administrative reassignment");
+        var first = await CreatePersonAsync(
+            contact.Id,
+            new SaveContactPersonRequest("Alex Rivera", null, null, IsAdministrative: true)
+        );
+        var second = await CreatePersonAsync(
+            contact.Id,
+            new SaveContactPersonRequest("Bea Costa", null, null, IsDefault: true)
+        );
+
+        foreach (var selected in new[] { second, first })
+        {
+            var response = await client.PutAsJsonAsync(
+                PersonPath(contact.Id, selected.Id),
+                new SaveContactPersonRequest(
+                    selected.Name,
+                    null,
+                    null,
+                    IsDefault: selected.IsDefault,
+                    IsAdministrative: true
+                )
+            );
+            response.StatusCode.ShouldBe(HttpStatusCode.OK);
+            var people = (
+                await client.GetFromJsonAsync<IReadOnlyList<ContactPersonResponse>>(
+                    PeoplePath(contact.Id)
+                )
+            )!;
+            people.Single(person => person.IsAdministrative).Id.ShouldBe(selected.Id);
+            people.Single(person => person.IsDefault).Id.ShouldBe(second.Id);
+        }
     }
 
     [Fact]
@@ -135,13 +172,18 @@ public sealed class ContactPeopleTests(PostgresContainer postgres) : IAsyncLifet
         unchanged.Name.ShouldBe("Alex Rivera");
     }
 
-    [Fact]
-    public async Task Concurrent_contact_person_default_changes_Should_LeaveOneDefaultPerContact()
+    [Theory]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    public async Task Concurrent_contact_person_designation_changes_Should_LeaveOneDesignationPerContact(
+        bool isDefault,
+        bool isAdministrative
+    )
     {
         var contact = await CreateContactAsync("Concurrent contact");
         var first = await CreatePersonAsync(
             contact.Id,
-            new SaveContactPersonRequest("Alex Rivera", null, null, IsDefault: true)
+            new SaveContactPersonRequest("Alex Rivera", null, null, isDefault, isAdministrative)
         );
         var second = await CreatePersonAsync(
             contact.Id,
@@ -151,11 +193,11 @@ public sealed class ContactPeopleTests(PostgresContainer postgres) : IAsyncLifet
         var updates = await Task.WhenAll(
             client.PutAsJsonAsync(
                 PersonPath(contact.Id, first.Id),
-                new SaveContactPersonRequest("Alex Rivera", null, null, IsDefault: true)
+                new SaveContactPersonRequest("Alex Rivera", null, null, isDefault, isAdministrative)
             ),
             client.PutAsJsonAsync(
                 PersonPath(contact.Id, second.Id),
-                new SaveContactPersonRequest("Bea Costa", null, null, IsDefault: true)
+                new SaveContactPersonRequest("Bea Costa", null, null, isDefault, isAdministrative)
             )
         );
 
@@ -167,7 +209,7 @@ public sealed class ContactPeopleTests(PostgresContainer postgres) : IAsyncLifet
         var people = await client.GetFromJsonAsync<IReadOnlyList<ContactPersonResponse>>(
             PeoplePath(contact.Id)
         );
-        people!.Count(person => person.IsDefault).ShouldBe(1);
+        people!.Count(person => isDefault ? person.IsDefault : person.IsAdministrative).ShouldBe(1);
     }
 
     [Fact]

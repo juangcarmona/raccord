@@ -21,3 +21,5 @@ For every vertical slice:
 5. Refactor only after the slice is green.
 
 Do not write speculative tests for imagined APIs. Money, taxes, numbering, rounding, finalization and audit never change without a test. Strategy: ADR-0014.
+
+Isolated workers can supply RACCORD_TEST_DATABASE for their disposable PostgreSQL server instead of launching Testcontainers. Web tests retain a fresh database per test and release it on disposal. Browser journeys still run the real Aspire AppHost and full pinned selection; Testing mode uses a separate database and document directory with the existing FileSystem provider. See [local development](../docs/operations/local-development.md).

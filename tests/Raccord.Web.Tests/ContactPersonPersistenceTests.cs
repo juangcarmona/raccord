@@ -73,26 +73,35 @@ public sealed class ContactPersonPersistenceTests(PostgresContainer postgres) : 
         );
         await InsertPersonAsync(newPersonId, contactId, "Bea Costa");
 
-        await using var connection = new NpgsqlConnection(api.ConnectionString);
-        await connection.OpenAsync();
-        await using var transaction = await connection.BeginTransactionAsync();
-        await ExecuteAsync(
-            connection,
-            transaction,
-            "UPDATE contacts.contact_persons SET is_default = false WHERE id = @personId",
-            ("personId", formerDefaultId)
+        await api.ExecuteAsync(
+            """
+            CREATE FUNCTION contacts.reject_test_designation() RETURNS trigger AS $$
+            BEGIN
+                RAISE unique_violation USING MESSAGE = 'Synthetic late designation failure';
+            END;
+            $$ LANGUAGE plpgsql;
+            CREATE TRIGGER reject_test_designation BEFORE UPDATE ON contacts.contact_persons
+            FOR EACH ROW WHEN (NEW.is_default = TRUE AND NEW.name = 'Bea Costa')
+            EXECUTE FUNCTION contacts.reject_test_designation();
+            """
         );
-        var error = await Should.ThrowAsync<PostgresException>(() =>
-            ExecuteAsync(
-                connection,
-                transaction,
-                "UPDATE contacts.contact_persons SET is_default = true, is_administrative = true WHERE id = @personId",
-                ("personId", newPersonId)
+        var auditBefore = await api.QueryScalarAsync<long>(
+            "SELECT count(*) FROM compliance.audit_events"
+        );
+        var response = await client.PutAsJsonAsync(
+            $"/api/contacts/{contactId}/people/{newPersonId}",
+            new SaveContactPersonRequest(
+                "Bea Costa",
+                null,
+                null,
+                IsDefault: true,
+                IsAdministrative: true
             )
         );
-        await transaction.RollbackAsync();
-
-        error.SqlState.ShouldBe(PostgresErrorCodes.UniqueViolation);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.Conflict);
+        (await api.QueryScalarAsync<long>("SELECT count(*) FROM compliance.audit_events")).ShouldBe(
+            auditBefore
+        );
         var previousDefault = await QueryScalarAsync<bool>(
             "SELECT is_default FROM contacts.contact_persons WHERE id = @personId",
             ("personId", formerDefaultId)
@@ -165,18 +174,6 @@ public sealed class ContactPersonPersistenceTests(PostgresContainer postgres) : 
         await using var connection = new NpgsqlConnection(api.ConnectionString);
         await connection.OpenAsync();
         await using var command = new NpgsqlCommand(sql, connection);
-        AddParameters(command, args);
-        await command.ExecuteNonQueryAsync();
-    }
-
-    private static async Task ExecuteAsync(
-        NpgsqlConnection connection,
-        NpgsqlTransaction transaction,
-        string sql,
-        params (string Name, object Value)[] args
-    )
-    {
-        await using var command = new NpgsqlCommand(sql, connection, transaction);
         AddParameters(command, args);
         await command.ExecuteNonQueryAsync();
     }

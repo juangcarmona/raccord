@@ -4,19 +4,19 @@
 
 ## 1. Recover the contact directory prerequisite
 
-- [ ] 1.1 Recover and requalify approved #298 contact-directory domain, persistence, API, authorization, audit, and editor behavior; verify directory/API/editor tests cover installation isolation and authorized access.
-- [ ] 1.2 Add or reconcile directory schema and migration; verify migration/model tests and existing customer/project/invoice data behavior.
+- [x] 1.1 Recover and requalify approved #298 contact-directory domain, persistence, API, authorization, audit, and editor behavior; verify directory/API/editor tests cover installation isolation and authorized access.
+- [x] 1.2 Add or reconcile directory schema and migration; verify migration/model tests and existing customer/project/invoice data behavior.
 
 ## 2. Implement contact-person behavior
 
-- [ ] 2.1 Add contact-person domain and persistence with immutable parent ownership and unique designation constraints; verify domain and persistence tests cover validation, uniqueness, and atomic reassignment.
-- [ ] 2.2 Add authorized list/create/read/edit API operations and audit evidence; verify Web tests cover invalid input, missing/wrong parent, authorization, installation isolation, and transaction conflicts.
-- [ ] 2.3 Add the contact editor people workflow; verify frontend tests cover listing, create/edit, and independent designation reassignment.
+- [x] 2.1 Add contact-person domain and persistence with immutable parent ownership and unique designation constraints; verify domain and persistence tests cover validation, uniqueness, and atomic reassignment.
+- [x] 2.2 Add authorized list/create/read/edit API operations and audit evidence; verify Web tests cover invalid input, missing/wrong parent, authorization, installation isolation, and transaction conflicts.
+- [x] 2.3 Add the contact editor people workflow; verify frontend tests cover listing, create/edit, and independent designation reassignment.
 
 ## 3. Verify end-to-end invariants
 
-- [ ] 3.1 Add a Contacts-tagged selected browser journey; verify it creates and edits people, changes default and administrative designations, and proves sole-designation invariants.
-- [ ] 3.2 Verify project associations and issued-invoice snapshots remain unchanged in regression coverage; run the required solution, frontend, ProductShape, E2E-selection, browser, and strict implementation-plan checks and record completed receipts.
+- [x] 3.1 Add a Contacts-tagged selected browser journey; verify it creates and edits people, changes default and administrative designations, and proves sole-designation invariants.
+- [x] 3.2 Verify project associations and issued-invoice snapshots remain unchanged in regression coverage; run the required solution, frontend, ProductShape, E2E-selection, browser, and strict implementation-plan checks and record completed receipts.
 
 <!-- pdac:cite id="FR-CON-001" digest="sha256:a7e73bb8c5c496226d8074b5fda85a5f974703596c57ee0f7b10c49eba3e040e" -->
 <!-- pdac:cite id="FR-CON-002" digest="sha256:050518c8af11e5d7f1e90fa0e7e4f71e949c4923ac5e8d8335697cd4c3fa235b" -->

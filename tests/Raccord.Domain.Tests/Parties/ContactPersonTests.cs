@@ -122,7 +122,7 @@ public sealed class ContactPersonTests
     }
 
     [Fact]
-    public void Assigning_a_second_administrative_person_Should_preserve_the_existing_designation()
+    public void Assigning_a_new_administrative_person_Should_clear_the_previous_administrative_person()
     {
         var contactId = Guid.CreateVersion7();
         var formerAdmin = ContactPerson.Create(contactId, "Alex Rivera", null, null);
@@ -135,18 +135,15 @@ public sealed class ContactPersonTests
             isAdministrative: true
         );
 
-        var error = Should.Throw<BusinessRuleViolationException>(() =>
-            ContactPerson.AssignDesignations(
-                newAdmin,
-                people,
-                isDefault: false,
-                isAdministrative: true
-            )
+        ContactPerson.AssignDesignations(
+            newAdmin,
+            people,
+            isDefault: false,
+            isAdministrative: true
         );
 
-        error.Code.ShouldBe("contacts.contact-person-administrative-already-assigned");
-        formerAdmin.IsAdministrative.ShouldBeTrue();
-        newAdmin.IsAdministrative.ShouldBeFalse();
+        formerAdmin.IsAdministrative.ShouldBeFalse();
+        newAdmin.IsAdministrative.ShouldBeTrue();
         people.Count(person => person.IsAdministrative).ShouldBe(1);
     }
 

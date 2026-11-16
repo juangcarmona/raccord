@@ -126,22 +126,15 @@ internal sealed class ContactPerson
             );
         }
 
-        if (
-            isAdministrative
-            && people.Any(candidate => candidate.Id != person.Id && candidate.IsAdministrative)
-        )
+        foreach (var candidate in people.Where(candidate => candidate.Id != person.Id))
         {
-            throw new BusinessRuleViolationException(
-                "contacts.contact-person-administrative-already-assigned",
-                "A contact can have at most one administrative contact person."
-            );
-        }
-
-        if (isDefault)
-        {
-            foreach (var candidate in people.Where(candidate => candidate.Id != person.Id))
+            if (isDefault)
             {
                 candidate.IsDefault = false;
+            }
+            if (isAdministrative)
+            {
+                candidate.IsAdministrative = false;
             }
         }
 

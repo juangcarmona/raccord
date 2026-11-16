@@ -87,6 +87,9 @@ public sealed class ContactPeopleDirectory(
                     }
                 }
 
+                // Release unique designations before assigning them; the outer transaction
+                // keeps both saves and their audit records in one atomic change.
+                await unitOfWork.SaveChangesAsync(token).ConfigureAwait(false);
                 await people.AddAsync(ToSnapshot(created), token).ConfigureAwait(false);
                 return ToResponse(ToSnapshot(created));
             },
@@ -129,7 +132,7 @@ public sealed class ContactPeopleDirectory(
                     request.IsAdministrative
                 );
 
-                foreach (var updatedPerson in domainPeople)
+                foreach (var updatedPerson in domainPeople.Where(item => item.Id != person.Id))
                 {
                     var previous = existingSnapshots.Single(item => item.Id == updatedPerson.Id);
                     var updated = ToSnapshot(updatedPerson);
@@ -139,6 +142,8 @@ public sealed class ContactPeopleDirectory(
                     }
                 }
 
+                await unitOfWork.SaveChangesAsync(token).ConfigureAwait(false);
+                await people.UpdateAsync(ToSnapshot(person), token).ConfigureAwait(false);
                 return ToResponse(ToSnapshot(person));
             },
             cancellationToken

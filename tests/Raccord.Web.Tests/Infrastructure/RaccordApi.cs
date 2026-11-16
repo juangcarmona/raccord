@@ -180,9 +180,23 @@ public sealed class RaccordApi : WebApplicationFactory<Program>
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        if (disposing && Directory.Exists(DocumentRoot))
+        if (!disposing)
+            return;
+
+        if (Directory.Exists(DocumentRoot))
         {
             Directory.Delete(DocumentRoot, recursive: true);
         }
+
+        var database = new NpgsqlConnectionStringBuilder(ConnectionString);
+        var name = database.Database;
+        database.Database = "postgres";
+        using var connection = new NpgsqlConnection(database.ConnectionString);
+        connection.Open();
+        using var command = new NpgsqlCommand(
+            $"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(name!)} WITH (FORCE)",
+            connection
+        );
+        command.ExecuteNonQuery();
     }
 }

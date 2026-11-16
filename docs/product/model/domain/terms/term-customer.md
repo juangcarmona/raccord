@@ -1,9 +1,9 @@
 ---
 id: TERM-CUSTOMER
 type: domain-term
-title: "Customer"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Customer
+status: active
+defined-in: BC-CONTACTS
 synonyms: []
 uses-terms: []
 ---

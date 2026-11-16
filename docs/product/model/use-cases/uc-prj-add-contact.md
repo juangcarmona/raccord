@@ -1,26 +1,26 @@
 ---
 id: UC-PRJ-ADD-CONTACT
 type: use-case
-title: "Add a contact"
+title: Add a contact
 status: draft
-primary-actor: "ACT-OPERATIONS-COORDINATOR"
+primary-actor: ACT-OPERATIONS-COORDINATOR
 supporting-actors: []
-bounded-context: "BC-CONTACTS"
+bounded-context: BC-CONTACTS
 governed-by:
-  - "BR-PRJ-CONTACT-NUMBER-ASSIGNMENT"
-  - "BR-PRJ-ADDRESS-ROLES"
-  - "BR-PRJ-TRAVEL-ESTIMATE-REFRESH"
-  - "BR-PRJ-CONTACT-ROLES-BY-TAG"
-  - "BR-PRJ-ONE-CONTACT-PER-AREA"
+  - BR-PRJ-CONTACT-NUMBER-ASSIGNMENT
+  - BR-PRJ-ADDRESS-ROLES
+  - BR-PRJ-TRAVEL-ESTIMATE-REFRESH
+  - BR-PRJ-CONTACT-ROLES-BY-TAG
+  - BR-PRJ-ONE-CONTACT-PER-AREA
 uses-terms:
-  - "TERM-CONTACT"
-  - "TERM-CONTACT-TYPE"
-  - "TERM-VISITING-ADDRESS"
-  - "TERM-MAILING-ADDRESS"
-  - "TERM-BILLING-ADDRESS"
-  - "TERM-TRAVEL-ESTIMATE"
+  - TERM-CONTACT
+  - TERM-CONTACT-TYPE
+  - TERM-VISITING-ADDRESS
+  - TERM-MAILING-ADDRESS
+  - TERM-BILLING-ADDRESS
+  - TERM-TRAVEL-ESTIMATE
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/29017857097618.md, .private/research/help-center/articles/360013628759.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/29017857097618.md, .private/research/help-center/articles/360013628759.md
   confidence: high
   recovered-from: documentation
 ---
@@ -40,7 +40,7 @@ None.
 ## Main Flow
 
 1. The user chooses company or private individual; for a company the user may look it up by name and adopt its details.
-2. The user enters folder, number (or leaves it for automatic numbering), addresses, warning, automatic project note, contact persons and commercial defaults.
+2. The user enters an optional Contacts folder, number (or leaves it for automatic numbering), addresses, warning, automatic project note, contact persons and commercial defaults.
 3. The user refreshes the travel estimate.
 4. The product saves the contact.
 

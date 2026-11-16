@@ -1,15 +1,15 @@
 ---
 id: BR-PRJ-PARTIES-FROM-CONTACTS
 type: business-rule
-title: "Clients and locations come from the contact database"
-status: draft
+title: Clients and locations come from the contact database
+status: active
 applies-to: []
 uses-terms:
-  - "TERM-CONTACT"
-  - "TERM-CUSTOMER"
-  - "TERM-VENUE"
+  - TERM-CONTACT
+  - TERM-CUSTOMER
+  - TERM-VENUE
 provenance:
-  source: ".private/research/help-center/articles/360013668139.md, .private/research/help-center/articles/29017857097618.md"
+  source: .private/research/help-center/articles/360013668139.md, .private/research/help-center/articles/29017857097618.md
   confidence: high
   recovered-from: documentation
 ---

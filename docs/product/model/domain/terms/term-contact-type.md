@@ -1,14 +1,14 @@
 ---
 id: TERM-CONTACT-TYPE
 type: domain-term
-title: "Contact type"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Contact type
+status: active
+defined-in: BC-CONTACTS
 synonyms: []
 uses-terms:
-  - "TERM-CONTACT"
+  - TERM-CONTACT
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md"
+  source: .private/research/help-center/articles/360014254000.md
   confidence: medium
   recovered-from: documentation
 ---

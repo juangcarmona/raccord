@@ -1,15 +1,15 @@
 ---
 id: TERM-SUPPLIER-CONTACT
 type: domain-term
-title: "Supplier contact"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Supplier contact
+status: active
+defined-in: BC-CONTACTS
 synonyms: []
 uses-terms:
-  - "TERM-CONTACT"
-  - "TERM-TAG"
+  - TERM-CONTACT
+  - TERM-TAG
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013628759.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360013628759.md
   confidence: medium
   recovered-from: documentation
 ---

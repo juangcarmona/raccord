@@ -1,31 +1,32 @@
 ---
 id: FR-PRJ-032
 type: functional-requirement
-title: "Contact database"
+title: Contact database
 status: draft
 derived-from:
-  - "UC-PRJ-ADD-CONTACT"
-  - "UC-PRJ-ADD-CONTACT-PERSON"
-  - "BR-PRJ-ADDRESS-ROLES"
-  - "BR-PRJ-INVOICE-RECIPIENT"
-  - "BR-PRJ-TRAVEL-ESTIMATE-REFRESH"
-  - "BR-PRJ-CONTACT-NUMBER-ASSIGNMENT"
+  - UC-PRJ-ADD-CONTACT
+  - UC-PRJ-ADD-CONTACT-PERSON
+  - BR-PRJ-ADDRESS-ROLES
+  - BR-PRJ-INVOICE-RECIPIENT
+  - BR-PRJ-TRAVEL-ESTIMATE-REFRESH
+  - BR-PRJ-CONTACT-NUMBER-ASSIGNMENT
 verification:
-  - scenario-ref: "SB-PRJ-BILLING-ADDRESS-ON-INVOICE"
-  - scenario-ref: "SB-PRJ-INVOICE-TO-ADMINISTRATIVE-CONTACT"
-  - scenario-ref: "SB-PRJ-INVOICE-FALLBACK-DEFAULT-CONTACT"
+  - scenario-ref: SB-PRJ-BILLING-ADDRESS-ON-INVOICE
+  - scenario-ref: SB-PRJ-INVOICE-TO-ADMINISTRATIVE-CONTACT
+  - scenario-ref: SB-PRJ-INVOICE-FALLBACK-DEFAULT-CONTACT
 uses-terms:
-  - "TERM-CONTACT"
-  - "TERM-CONTACT-PERSON"
+  - TERM-CONTACT
+  - TERM-CONTACT-PERSON
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md"
+  source: .private/research/help-center/articles/360014254000.md
   confidence: high
   recovered-from: documentation
 ---
 
 ## Requirement
 
-The product MUST keep contacts (company or private individual) with folder, number, visiting, mailing and billing addresses, travel estimate, warning, automatic project note and contact persons with default and administrative designations.
+The product MUST keep contacts (company or private individual) with an optional Contacts folder, number, visiting, mailing and billing addresses, travel estimate, warning, automatic project note and contact persons with default and administrative designations.
+ Directory maintenance, contact-person cardinality and optional folder organization are detailed by FR-CON-001, FR-CON-002 and FR-CON-005; invoice recipient selection remains governed by BR-PRJ-INVOICE-RECIPIENT.
 
 ## Rationale
 

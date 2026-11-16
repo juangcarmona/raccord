@@ -5,7 +5,7 @@
 The public homepage is a dependency-free Spanish HTML and CSS site in `src/public-site/`. Its visitor journey is covered by `PublicHomepageJourney_Should_IntroduceTheProject`. The existing route map documents customer, project and invoicing UI boundaries; authentication is implemented in the React shell and protected API, but the public homepage and README still claim it is unavailable.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:0207d9f907fdcda83252889656f6908045531745c30ac81579b3bb037fd20774" -->
+<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:2ed3ef0366ab20037c6770f083c9883517370afc4cae9deb633f20bf6e960f23" -->
 <!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:2416d85758de14ca9785a48a1aa604ba6fbba2b85b520092035d55a407e51a10" -->
 <!-- pdac:cite id="UC-RECORD-BILLABLE-WORK" digest="sha256:01fdd6ec53f1b0be369bfe034bd4bfea3a00a5b3ff5ba54198b254b7db538336" -->
 <!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->
@@ -38,7 +38,7 @@ The public homepage is a dependency-free Spanish HTML and CSS site in `src/publi
 - Keep the no-compliance-claim warning explicit. Payment management and tax submission remain outside the available-capabilities list until the current application exposes and verifies them.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:0207d9f907fdcda83252889656f6908045531745c30ac81579b3bb037fd20774" -->
+<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:2ed3ef0366ab20037c6770f083c9883517370afc4cae9deb633f20bf6e960f23" -->
 <!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:2416d85758de14ca9785a48a1aa604ba6fbba2b85b520092035d55a407e51a10" -->
 <!-- pdac:cite id="UC-RECORD-BILLABLE-WORK" digest="sha256:01fdd6ec53f1b0be369bfe034bd4bfea3a00a5b3ff5ba54198b254b7db538336" -->
 <!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->

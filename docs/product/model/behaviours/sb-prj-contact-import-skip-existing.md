@@ -1,20 +1,20 @@
 ---
 id: SB-PRJ-CONTACT-IMPORT-SKIP-EXISTING
 type: structured-behaviour
-title: "Skip-existing import ignores known contacts"
+title: Skip-existing import ignores known contacts
 status: draft
 illustrates:
-  - "BR-PRJ-CONTACT-IMPORT-MODES"
+  - BR-PRJ-CONTACT-IMPORT-MODES
 given:
-  - "The database has contact 'Acme'"
-  - "The file has rows 'Acme' and 'Beta' with name as match column"
-when: "The user imports in add-new-and-skip-existing mode"
+  - The database has contact 'Acme'
+  - The file has rows 'Acme' and 'Beta' with name as match column
+when: The user imports in add-new-and-skip-existing mode
 then:
-  - "Only 'Beta' is created"
+  - Only 'Beta' is created
   - "'Acme' is unchanged"
 uses-terms: []
 provenance:
-  source: ".private/research/help-center/articles/360013553000.md"
+  source: .private/research/help-center/articles/360013553000.md
   confidence: high
   recovered-from: documentation
 ---
@@ -25,4 +25,4 @@ Duplicate prevention.
 
 ## Boundaries
 
-None.
+This example belongs to the extended import profile. It does not require the excluded behavior in UC-CON-IMPORT-CONTACTS.

@@ -1,15 +1,15 @@
 ---
 id: TERM-CONTACT-NUMBER
 type: domain-term
-title: "Contact number"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Contact number
+status: active
+defined-in: BC-CONTACTS
 synonyms:
-  - "Database number"
+  - Database number
 uses-terms:
-  - "TERM-CONTACT"
+  - TERM-CONTACT
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360014106599.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360014106599.md
   confidence: high
   recovered-from: documentation
 ---

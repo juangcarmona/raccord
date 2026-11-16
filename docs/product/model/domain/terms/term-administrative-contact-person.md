@@ -1,27 +1,27 @@
 ---
 id: TERM-ADMINISTRATIVE-CONTACT-PERSON
 type: domain-term
-title: "Administrative contact person"
-status: draft
-defined-in: "BC-CONTACTS"
+title: Administrative contact person
+status: active
+defined-in: BC-CONTACTS
 synonyms: []
 uses-terms:
-  - "TERM-CONTACT-PERSON"
-  - "TERM-DEFAULT-CONTACT-PERSON"
+  - TERM-CONTACT-PERSON
+  - TERM-DEFAULT-CONTACT-PERSON
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md"
+  source: .private/research/help-center/articles/360014254000.md
   confidence: high
   recovered-from: documentation
 ---
 
 ## Definition
 
-The contact person (or address) automatically chosen as recipient when an invoice is sent to the contact. When none is designated, the default contact person receives invoices.
+The contact person designated for administrative matters involving the contact. A contact has zero or one administrative contact person, independently of its zero-or-one default designation; one person may hold both designations.
 
 ## Distinguish From
 
-Default contact person: operational counterpart.
+Default contact person: the contact's separately maintained default designation.
 
 ## Usage
 
-Invoice sending.
+The designation is maintained in Contacts. Invoice recipient selection and message delivery are defined by their respective workflows.

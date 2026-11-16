@@ -1,13 +1,13 @@
 ---
 id: BR-PRJ-CONTACT-IMPORT-MODES
 type: business-rule
-title: "Contact import modes and match columns"
+title: Contact import modes and match columns
 status: draft
 applies-to: []
 uses-terms:
-  - "TERM-CONTACT"
+  - TERM-CONTACT
 provenance:
-  source: ".private/research/help-center/articles/360013553000.md"
+  source: .private/research/help-center/articles/360013553000.md
   confidence: high
   recovered-from: documentation
 ---
@@ -26,4 +26,4 @@ See SB-PRJ-CONTACT-IMPORT-SKIP-EXISTING.
 
 ## Exceptions
 
-None.
+UC-CON-IMPORT-CONTACTS is create-only; it does not expose update or skip-existing modes or match-column behavior.

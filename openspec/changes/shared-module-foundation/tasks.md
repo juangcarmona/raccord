@@ -14,7 +14,7 @@
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
 <!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:540c744a9100bf27b3094353016316aa7e50ea96791665e3f6c5be545ae611cc" -->
 <!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:2a2b07a88ddffe4bd6b3de5750620c50efbf8e58001278b0a1da2215e5a69d7a" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:eec706ec68420337799bb8bcbeb1c690876f8c071a823de6e087387d8f3f6ac5" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->
 <!-- pdac:cite id="FR-AUDIT-001" digest="sha256:7646b5398f69286e802b2a3175edcf8b18cfc3b742edc9d3c2a44476c6159417" -->
 <!-- pdac:cite id="QR-DETERMINISM" digest="sha256:2186a4638c7ad311864a05314e15638df09365c839eaa932ceb57eddcb1559e9" -->
@@ -72,7 +72,7 @@
 <!-- pdac:cite id="BR-MONEY-ROUNDING" digest="sha256:51ad0cc84544ce872e3a93e25fb8110b701a85ec9efe737bc1ec15b8b985b87f" -->
 <!-- pdac:cite id="BR-LINE-PRICING-BOUNDS" digest="sha256:540c744a9100bf27b3094353016316aa7e50ea96791665e3f6c5be545ae611cc" -->
 <!-- pdac:cite id="BR-TAX-ID-NORMALIZATION" digest="sha256:2a2b07a88ddffe4bd6b3de5750620c50efbf8e58001278b0a1da2215e5a69d7a" -->
-<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:247903ffe0624bf6f86899f53c34a2fb44a8697cda2e54d083060ec816796b58" -->
+<!-- pdac:cite id="BR-PARTY-SNAPSHOT" digest="sha256:eec706ec68420337799bb8bcbeb1c690876f8c071a823de6e087387d8f3f6ac5" -->
 <!-- pdac:cite id="BR-GAPLESS-NUMBERING" digest="sha256:a41628aa11dfdcd37418fb32f9d94a6240857646cd8cad02b084e573f0c6f613" -->
 <!-- pdac:cite id="BR-ISSUED-INVOICE-IMMUTABLE" digest="sha256:309c88f0d7855c684b8ba796c0896ead9f6e821a19edfb731369a176a75ff8b3" -->
 <!-- pdac:cite id="BR-AUDITED-ACTIONS" digest="sha256:33a6a76f11ff3ed15dcbd22798ea6b65a05d65d4130cb17c7751eb516266e54c" -->

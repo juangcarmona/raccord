@@ -1,14 +1,14 @@
 ---
 id: BR-PRJ-CONTACT-NUMBER-ASSIGNMENT
 type: business-rule
-title: "Contact numbers are auto-assigned when empty"
-status: draft
+title: Contact numbers are auto-assigned when empty
+status: active
 applies-to: []
 uses-terms:
-  - "TERM-CONTACT-NUMBER"
-  - "TERM-NUMBER-SERIES"
+  - TERM-CONTACT-NUMBER
+  - TERM-NUMBER-SERIES
 provenance:
-  source: ".private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360014106599.md"
+  source: .private/research/help-center/articles/360014254000.md, .private/research/help-center/articles/360014106599.md
   confidence: high
   recovered-from: documentation
 ---

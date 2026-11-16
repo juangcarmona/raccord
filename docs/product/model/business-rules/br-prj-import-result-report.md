@@ -1,12 +1,12 @@
 ---
 id: BR-PRJ-IMPORT-RESULT-REPORT
 type: business-rule
-title: "Imports report failed rows with reasons"
+title: Imports report failed rows with reasons
 status: draft
 applies-to: []
 uses-terms: []
 provenance:
-  source: ".private/research/help-center/articles/4413562661138.md, .private/research/help-center/articles/39225660180626.md, .private/research/help-center/articles/360013553000.md"
+  source: .private/research/help-center/articles/4413562661138.md, .private/research/help-center/articles/39225660180626.md, .private/research/help-center/articles/360013553000.md
   confidence: high
   recovered-from: documentation
 ---
@@ -25,4 +25,4 @@ See SB-PRJ-IMPORT-FAILED-ROWS-FILE.
 
 ## Exceptions
 
-None.
+UC-CON-IMPORT-CONTACTS reports rejected row numbers and reasons in the product; downloadable correction files and re-import are outside that create-only profile.

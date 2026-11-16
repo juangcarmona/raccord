@@ -1,13 +1,13 @@
 ---
 id: BR-PRJ-CONTACT-PERSON-IMPORT-ROWS
 type: business-rule
-title: "Contact persons are imported one row each"
+title: Contact persons are imported one row each
 status: draft
 applies-to: []
 uses-terms:
-  - "TERM-CONTACT-PERSON"
+  - TERM-CONTACT-PERSON
 provenance:
-  source: ".private/research/help-center/articles/360013553000.md"
+  source: .private/research/help-center/articles/360013553000.md
   confidence: high
   recovered-from: documentation
 ---
@@ -26,4 +26,4 @@ Two rows for 'Acme' with different persons produce one contact with two persons.
 
 ## Exceptions
 
-None.
+UC-CON-IMPORT-CONTACTS imports no contact-person records.

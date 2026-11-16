@@ -7,7 +7,7 @@
 - [x] 1.3 Update the repository README maturity statement so it no longer says authentication is missing; verify its status matches the implemented sign-in flow and excludes unsupported tax claims.
 
 <!-- pdac:cite id="JRN-BILL-FINISHED-PROJECT" digest="sha256:b9530a2b0a9aac0f9cb3a5a9608494d08be1fc1190f395887fc7bb7fb30df28e" -->
-<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:0207d9f907fdcda83252889656f6908045531745c30ac81579b3bb037fd20774" -->
+<!-- pdac:cite id="UC-REGISTER-CUSTOMER" digest="sha256:2ed3ef0366ab20037c6770f083c9883517370afc4cae9deb633f20bf6e960f23" -->
 <!-- pdac:cite id="UC-CREATE-PROJECT" digest="sha256:2416d85758de14ca9785a48a1aa604ba6fbba2b85b520092035d55a407e51a10" -->
 <!-- pdac:cite id="UC-RECORD-BILLABLE-WORK" digest="sha256:01fdd6ec53f1b0be369bfe034bd4bfea3a00a5b3ff5ba54198b254b7db538336" -->
 <!-- pdac:cite id="UC-CREATE-INVOICE-DRAFT" digest="sha256:19acf3217f0478eb0624b44b2f11a30f5d2e589895ea162cda25924f79e7c4cf" -->

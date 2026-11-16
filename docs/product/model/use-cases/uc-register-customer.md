@@ -1,17 +1,17 @@
 ---
 id: UC-REGISTER-CUSTOMER
 type: use-case
-title: "Register a customer"
-status: draft
-primary-actor: "ACT-BILLING-ADMINISTRATOR"
+title: Register a customer
+status: active
+primary-actor: ACT-BILLING-ADMINISTRATOR
 supporting-actors:
-  - "ACT-OPERATIONS-COORDINATOR"
-bounded-context: "BC-CONTACTS"
+  - ACT-OPERATIONS-COORDINATOR
+bounded-context: BC-CONTACTS
 governed-by:
-  - "BR-TAX-ID-NORMALIZATION"
-  - "BR-PARTY-SNAPSHOT"
+  - BR-TAX-ID-NORMALIZATION
+  - BR-PARTY-SNAPSHOT
 uses-terms:
-  - "TERM-CUSTOMER"
+  - TERM-CUSTOMER
 ---
 
 ## Goal

@@ -12,3 +12,4 @@
 - [x] Adopt the published scoped-evidence correction for Lighthouse #699 and regenerate the worker projections.
 - [ ] Verify a native refinement and implementation continuation before releasing dependent work.
 - [x] Pin the native worker OpenSpec version locally and in CI so citation discovery has an authoritative CLI after root dependency installation.
+- [x] Adopt the structured-context reference correction and retain the native execution result separately from feature readiness.

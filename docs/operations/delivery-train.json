@@ -8,14 +8,19 @@
   "authorization": {
     "date": "2026-11-15",
     "record": "https://github.com/juangcarmona/raccord/issues/437",
-    "quote": "Dalo por aprobado todo. Lo escribí yo",
+    "quote": "Dalo por aprobado todo. Lo escrib\u00ed yo",
     "scope": "Existing owner-authored product intent and proposals; recover, refine, validate/apply Product Changes, implement and publish PRs.",
     "merge": false,
     "production": false
   },
   "capacity": 1,
-  "status": "waiting-native-qualification",
-  "blockers": [],
+  "status": "recovering-first-item",
+  "blockers": [
+    {
+      "issue": 299,
+      "reason": "Historical approved Product Changes must be reconciled and applied to the current delivery baseline."
+    }
+  ],
   "epics": [
     {
       "issue": 24,
@@ -563,10 +568,12 @@
     }
   ],
   "qualification": {
-    "lighthouseVersion": "0.13.14",
-    "sdlcVersion": "0.24.3",
-    "releaseRun": "https://github.com/juangcarmona/lighthouse/actions/runs/43775678986",
-    "packageGitHead": "1ade56e7e462de6e7e2ff746b90b0a908601b4a0",
-    "nativeResult": null
+    "lighthouseVersion": "0.13.15",
+    "sdlcVersion": "0.24.4",
+    "releaseRun": "https://github.com/juangcarmona/lighthouse/actions/runs/43779717013",
+    "packageGitHead": "29cc494fffc0f8554f8e1d3bcecb89bd1ef1ef85",
+    "nativeResult": "https://github.com/juangcarmona/raccord/actions/runs/43778174757",
+    "nativeOutcome": "validated blocked refinement; execution, evidence and completion passed; historical Product Change recovery required",
+    "historicalArtifacts": "https://github.com/juangcarmona/raccord/issues/299#issuecomment-6903818386"
   }
 }

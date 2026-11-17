@@ -484,6 +484,7 @@ internal static class Endpoints
                         : TypedResults.NotFound()
             )
             .RequirePermission(PermissionCatalog.ContactsCreate);
+        contacts.MapContactImport();
         MapContactPeople(contacts);
     }
 

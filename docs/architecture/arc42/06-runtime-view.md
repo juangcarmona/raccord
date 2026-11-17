@@ -50,6 +50,15 @@ description: Shows the runtime interactions for the system's important scenarios
 
 <!-- pdac:cite id="FR-ISSUER-001" digest="sha256:1d443dcade4a5af9dce47d75a383a243a298dd37de5a2d1be22bc80d5dfe1712" -->
 
+## R-3 Maintain and browse contacts
+
+1. `POST /api/contacts` validates company/person type, required legal name and one or more supported roles; the database sequence assigns a unique contact number when omitted.
+2. The Contacts adapter persists contact details in the existing `contacts.customers` identity table and role membership in `contacts.contact_roles`; migration backfills old rows as company/customer records without changing their IDs.
+3. `GET /api/contacts` filters by role and orders by contact number then ID before applying bounded pagination; `PUT /api/contacts/{id}` updates the current record while preserving its identifier.
+4. `GET /api/customers` remains a customer-role projection over the same records so project and invoice consumers keep their current contract and cannot see supplier-only or venue-only contacts.
+5. Invoice issuance snapshots current party details. Editing a contact changes future invoice inputs but does not update any already issued invoice representation.
+6. `POST /api/contacts/import/inspect` reads a bounded CSV/XLSX file for column mapping; `/preview` validates every row without writes and returns a digest; `/import` recomputes that digest, persists valid contacts independently, reports rejected rows and appends start/completion audit events containing counts and file type without row values (`UC-CON-IMPORT-CONTACTS`, `BR-CON-IMPORT-ROW-ATOMICITY`, `BR-CON-IMPORT-AUDIT`).
+
 ```mermaid
 sequenceDiagram
     accTitle: Invoice finalization runtime flow

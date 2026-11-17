@@ -6,6 +6,9 @@ public interface IContactDirectory
     /// <summary>Finds a contact by its stable identifier.</summary>
     Task<ContactSnapshot?> FindContactAsync(Guid id, CancellationToken cancellationToken);
 
+    /// <summary>Checks whether a contact number is already assigned.</summary>
+    Task<bool> ContactNumberExistsAsync(string contactNumber, CancellationToken cancellationToken);
+
     /// <summary>Returns a page ordered by contact number and identifier.</summary>
     Task<ContactPage> ListContactsAsync(
         int page,

@@ -33,6 +33,7 @@ internal sealed class ContactsUnitOfWork(IUnitOfWork unitOfWork, RaccordDbContex
                 catch
                 {
                     await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
+                    db.ChangeTracker.Clear();
                     throw;
                 }
                 finally

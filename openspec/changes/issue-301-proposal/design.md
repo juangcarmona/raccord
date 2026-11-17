@@ -6,7 +6,7 @@ pdac-scope: cited
 
 ## Context
 
-See proposal and spec. The supplied main revision lacks #443 runtime; historical source packets at 6486327b3db5dda4062a79ba77e4745cd497fea9 are reuse evidence, not current code or passing tests. Apply only after corrected-head readiness, inclusion in the real base and queue #437 activation.
+See proposal and spec. The planning-time main revision lacked #443 runtime. Delivery began after its qualified merge `166fd329cc8f312137ecc0abb81052a1ee8793dc` and serial #437 activation. Historical source packets at `6486327b3db5dda4062a79ba77e4745cd497fea9` supplied reusable deltas; current implementation and verification are recorded in tasks and verification evidence.
 <!-- pdac:cite id="UC-CON-IMPORT-CONTACTS" digest="sha256:9a964862aa671bf1c5f9648286ecf92c5ab60631ed7b30c02c3de8be38a3d587" -->
 
 ## Goals / Non-Goals

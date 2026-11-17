@@ -36,6 +36,10 @@ The import journey captures the preview at 1280 and 390 pixels in both light and
 
 The capture hashes and operator receipt are retained outside Git with the delivery-watch qualification evidence; screenshots contain synthetic records only. This operator review makes no separate claim of human visual acceptance. Existing owner delivery and merge authorization is recorded in #437.
 
-## Remaining integration gates
+## Published qualification and integration review
 
-The existing PR must publish the runtime candidate, pass every required check on its actual head, and receive the final integration review before merge. Local execution, rendered review, forge checks and merge are separate receipts; tasks 5.2 and 5.3 remain open until those steps are complete.
+Source candidate `57107f3b96658de4ac31ee8b431b752912afb05d` passed [full CI 44007623177](https://github.com/juangcarmona/raccord/actions/runs/44007623177), [guardrails 44007623136](https://github.com/juangcarmona/raccord/actions/runs/44007623136) and [engineering validation 44007623130](https://github.com/juangcarmona/raccord/actions/runs/44007623130). Actual selected browser output reports 41 cases, zero errors, failures, skips or not-run cases, in 187.363 seconds; the separate metadata check also passed both cases. Security, dependency/license, image/Compose/Bicep, product, OpenSpec, formatting and contract-drift gates passed.
+
+The Codex operator reviewed the implemented boundaries against the applied baseline and all fifteen tasks: bounded parser inputs, original sparse row numbering, complete row rollback and persistence-context recovery, propagation of unexpected/cancelled operations, authorization on every endpoint, separate-installation data and audit isolation, uploaded-value privacy, input-change invalidation, error explanations and preservation of the integrated designation/snapshot behavior. The generic concurrency exception retains its HTTP mapping after moving to SharedKernel; no dependency, migration or product-policy change was introduced.
+
+This final documentation update records completed source qualification and review. It leaves the runtime unchanged; checks on its own published head must still pass before the owner-authorized merge. No additional human acceptance or production deployment is claimed.

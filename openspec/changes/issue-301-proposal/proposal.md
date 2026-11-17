@@ -32,4 +32,4 @@ None.
 
 Contacts module and contracts, root-host authenticated endpoints, persistence, append-only audit, frontend routes and generated OpenAPI types are affected. No new production dependency or migration is planned. Existing `contacts-native-recovery` concerns recovery policy, not this runtime behavior. Impact neighbours checked include contact people, folder/tag and extended project import, commercial defaults and invoice/project selection; they are outside this profile.
 
-This proposal is a candidate, not implementation approval. #443 corrected-head readiness and availability in the actual base, plus serial queue #437 activation, remain prerequisites to implementation.
+The owner authorized delivery and merge through #437. PR #443 passed native qualification and published-head CI, then merged as `166fd329cc8f312137ecc0abb81052a1ee8793dc` before serial #301 activation. Delivery consumes that integrated base; publication, checks and merge remain separately verified effects.

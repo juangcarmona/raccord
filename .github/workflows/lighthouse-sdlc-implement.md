@@ -31,6 +31,7 @@ runs-on: [self-hosted, linux, lighthouse-workflow]
 runs-on-slim: ubuntu-24.04
 timeout-minutes: 150
 env:
+  LIGHTHOUSE_MODEL_PROFILE: plan
   LIGHTHOUSE_RECOVERY_ENABLED: ${{ vars.LIGHTHOUSE_RECOVERY_ENABLED }}
   LIGHTHOUSE_MAINTENANCE_ISSUES: ${{ vars.LIGHTHOUSE_MAINTENANCE_ISSUES }}
   LIGHTHOUSE_EPIC_CAPACITY: ${{ vars.LIGHTHOUSE_EPIC_CAPACITY }}

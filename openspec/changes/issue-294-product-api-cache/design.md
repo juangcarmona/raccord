@@ -20,6 +20,8 @@ Use the supported `LIGHTHOUSE_MODEL_PROFILE: plan` task selection in the recover
 
 ## Risks / Trade-offs
 
+The owner resumed runtime delivery after the product prerequisite merged. First implementation44130857653 returned a flat, invalid envelope and exhausted private scratch after bypassing the configured workspace NuGet caches. Preserve its failed evidence and recovered source input. Select the same existing operator review profile explicitly for the branch-scoped implementation recovery, so it can finish the supplied source and contract verification without changing host configuration, SDK pins, resource limits or authority gates. This selection affects only manual dispatches from this recovery branch, not main or other workers.
+
 Recovery router44045324725 received403 on its first approval-comment read, with zero cache hits. Record only allowlisted numeric rate-limit and retry headers on denied repository GETs to distinguish exhausted request allowance from other denials. Never log request headers, response bodies or credentials; return the original response unchanged and preserve every authorization check.
 
 The cache is bounded to this repository and its existing model path; a changed or missing object falls back to normal authenticated reads. Git checkout availability is now a verification prerequisite. Fail closed on malformed or oversized local objects and record native workflow results separately from local tests.

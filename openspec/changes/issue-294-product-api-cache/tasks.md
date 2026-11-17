@@ -8,6 +8,9 @@
 
 ## Workflow follow-up
 
+- [x] Select the existing operator review profile for the branch-scoped implementation retry after44130857653; regenerate the lock without changing admission, checks, limits or SDK pins.
+- [ ] Observe native implementation recovery, complete managed and independent checks, and publish genuine runtime qualification using the preserved source input.
+
 - [x] Select the existing review profile explicitly in this branch's Product Change workflow, regenerate its lock and verify all other worker selections and provider gates remain unchanged.
 - [x] Observe the native Product Change worker's resolved profile and genuine completed or blocked assessment; configuration alone is not proof of execution. Native44040604751 selected plan and passed all phases before publishing d4e4021.
 - [x] Add numeric-only response rate metadata for denied GitHub reads after recovery router44045324725 failed on its first approval-comment GET; prove response bodies and unrelated headers remain private and responses remain unchanged.

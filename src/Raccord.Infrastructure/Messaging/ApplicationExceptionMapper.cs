@@ -1,8 +1,8 @@
 using ErrorOr;
-using Raccord.Application.Abstractions;
 using Raccord.Application.Invoicing;
 using Raccord.BuildingBlocks.Api;
 using Raccord.BuildingBlocks.Messaging;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Infrastructure.Messaging;
 

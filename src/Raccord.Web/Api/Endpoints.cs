@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Raccord.Application.Auditing;
 using Raccord.Application.Invoicing;
 using Raccord.Contracts.Auditing;
+using Raccord.Contracts.Contacts;
 using Raccord.Contracts.Crew;
 using Raccord.Contracts.Customers;
 using Raccord.Contracts.Documents;
@@ -35,6 +36,7 @@ internal static class Endpoints
         MapOrganization(api);
         MapDocuments(api);
         MapGeneratedDocuments(api);
+        MapContacts(api);
         MapCustomers(api);
         MapEquipment(api);
         MapProjects(api);
@@ -424,6 +426,129 @@ internal static class Endpoints
                 return TypedResults.Created($"/api/customers/{customer.Id}", customer);
             }
         );
+    }
+
+    private static void MapContacts(RouteGroupBuilder api)
+    {
+        var contacts = api.MapGroup("/contacts").WithTags("Contacts");
+        contacts
+            .MapGet(
+                "/",
+                async (
+                    int? page,
+                    int? pageSize,
+                    string? role,
+                    ContactsDirectory directory,
+                    CancellationToken ct
+                ) => TypedResults.Ok(await directory.ListAsync(page ?? 1, pageSize ?? 25, role, ct))
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        contacts
+            .MapGet(
+                "/{id:guid}",
+                async Task<Results<Ok<ContactResponse>, NotFound>> (
+                    Guid id,
+                    ContactsDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.GetAsync(id, ct) is { } contact
+                        ? TypedResults.Ok(contact)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        contacts
+            .MapPost(
+                "/",
+                async (
+                    SaveContactRequest request,
+                    ContactsDirectory directory,
+                    CancellationToken ct
+                ) =>
+                {
+                    var contact = await directory.CreateAsync(request, ct);
+                    return TypedResults.Created($"/api/contacts/{contact.Id}", contact);
+                }
+            )
+            .RequirePermission(PermissionCatalog.ContactsCreate);
+        contacts
+            .MapPut(
+                "/{id:guid}",
+                async Task<Results<Ok<ContactResponse>, NotFound>> (
+                    Guid id,
+                    SaveContactRequest request,
+                    ContactsDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.UpdateAsync(id, request, ct) is { } contact
+                        ? TypedResults.Ok(contact)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsCreate);
+        contacts.MapContactImport();
+        MapContactPeople(contacts);
+    }
+
+    private static void MapContactPeople(RouteGroupBuilder contacts)
+    {
+        contacts
+            .MapGet(
+                "/{id:guid}/people",
+                async Task<Results<Ok<IReadOnlyList<ContactPersonResponse>>, NotFound>> (
+                    Guid id,
+                    ContactPeopleDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.ListAsync(id, ct) is { } people
+                        ? TypedResults.Ok(people)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        contacts
+            .MapGet(
+                "/{id:guid}/people/{personId:guid}",
+                async Task<Results<Ok<ContactPersonResponse>, NotFound>> (
+                    Guid id,
+                    Guid personId,
+                    ContactPeopleDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.GetAsync(id, personId, ct) is { } person
+                        ? TypedResults.Ok(person)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsRead);
+        contacts
+            .MapPost(
+                "/{id:guid}/people",
+                async Task<Results<Created<ContactPersonResponse>, NotFound>> (
+                    Guid id,
+                    SaveContactPersonRequest request,
+                    ContactPeopleDirectory directory,
+                    CancellationToken ct
+                ) =>
+                {
+                    var person = await directory.CreateAsync(id, request, ct);
+                    return person is null
+                        ? TypedResults.NotFound()
+                        : TypedResults.Created($"/api/contacts/{id}/people/{person.Id}", person);
+                }
+            )
+            .RequirePermission(PermissionCatalog.ContactsCreate);
+        contacts
+            .MapPut(
+                "/{id:guid}/people/{personId:guid}",
+                async Task<Results<Ok<ContactPersonResponse>, NotFound>> (
+                    Guid id,
+                    Guid personId,
+                    SaveContactPersonRequest request,
+                    ContactPeopleDirectory directory,
+                    CancellationToken ct
+                ) =>
+                    await directory.UpdateAsync(id, personId, request, ct) is { } person
+                        ? TypedResults.Ok(person)
+                        : TypedResults.NotFound()
+            )
+            .RequirePermission(PermissionCatalog.ContactsCreate);
     }
 
     private static void MapEquipment(RouteGroupBuilder api)

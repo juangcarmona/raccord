@@ -1192,6 +1192,77 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.ToTable("communications", "documents");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("IsAdministrative")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_administrative");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("phone");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_persons");
+
+                    b.HasIndex("ContactId", "Name")
+                        .HasDatabaseName("ix_contact_persons_contact_name");
+
+                    b.HasIndex(new[] { "ContactId" }, "ix_contact_persons_contact_administrative")
+                        .IsUnique()
+                        .HasDatabaseName("ix_contact_persons_contact_administrative")
+                        .HasFilter("is_administrative = TRUE");
+
+                    b.HasIndex(new[] { "ContactId" }, "ix_contact_persons_contact_default")
+                        .IsUnique()
+                        .HasDatabaseName("ix_contact_persons_contact_default")
+                        .HasFilter("is_default = TRUE");
+
+                    b.ToTable("contact_persons", "contacts");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactRoleRow", b =>
+                {
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<string>("Role")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("role");
+
+                    b.HasKey("ContactId", "Role")
+                        .HasName("pk_contact_roles");
+
+                    b.ToTable("contact_roles", "contacts");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1504,6 +1575,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("ContactNumber")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("contact_number");
+
                     b.Property<string>("Email")
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)")
@@ -1519,6 +1595,12 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)")
                         .HasColumnName("tax_id");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("type");
 
                     b.ComplexProperty(typeof(Dictionary<string, object>), "BillingAddress", "Raccord.Infrastructure.Persistence.CustomerRow.BillingAddress#AddressFields", b1 =>
                         {
@@ -1552,6 +1634,10 @@ namespace Raccord.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_customers");
+
+                    b.HasIndex("ContactNumber")
+                        .IsUnique()
+                        .HasDatabaseName("ix_customers_contact_number");
 
                     b.HasIndex("TaxId")
                         .HasDatabaseName("ix_customers_tax_id");
@@ -2789,6 +2875,28 @@ namespace Raccord.Infrastructure.Persistence.Migrations
                     b.Navigation("PackingLines");
                 });
 
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactPersonRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.CustomerRow", null)
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_contact_persons_customers_contact_id");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.ContactRoleRow", b =>
+                {
+                    b.HasOne("Raccord.Infrastructure.Persistence.CustomerRow", "Contact")
+                        .WithMany("Roles")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_contact_roles_customers_contact_id");
+
+                    b.Navigation("Contact");
+                });
+
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewAssignmentRow", b =>
                 {
                     b.HasOne("Raccord.Infrastructure.Persistence.ProjectFunctionRow", null)
@@ -2832,6 +2940,11 @@ namespace Raccord.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.CrewJobRow", b =>
                 {
                     b.Navigation("Signups");
+                });
+
+            modelBuilder.Entity("Raccord.Infrastructure.Persistence.CustomerRow", b =>
+                {
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("Raccord.Infrastructure.Persistence.ProjectFunctionRow", b =>

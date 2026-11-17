@@ -6,11 +6,17 @@ The native candidate has a bounded current snapshot rather than every historical
 
 ## Decisions
 
-Use the installed provider seed contract: one immutable commit directly based on its declared base, restricted to safe candidate paths whose preimages still match current source. Configure this seed only for issue 299. The agent must requalify the recovered code, complete its OpenSpec tasks and produce current evidence.
+Use the installed provider seed contract: one immutable commit directly based on its declared base, restricted to safe candidate paths whose preimages still match current source. Configure this seed only for issue 299 until the recovered runtime is integrated. The runtime delivery removes that input from its own policy so later attempts do not try to reapply obsolete source preimages; the immutable source branch and provenance remain preserved. The agent must requalify the recovered code, complete its OpenSpec tasks and produce current evidence.
 
 Prefix the existing .NET check argument arrays with env and per-attempt workspace obj cache paths. This directory is already ignored, is owned by the disposable candidate and survives across that candidate’s check containers; it introduces no shared cache or production secret. Keep the same checks, filters and per-PR browser selection.
 
 The repository GitHub Actions setting now permits PR creation while retaining read-only default workflow permissions. This does not itself create a PR, approve a candidate or authorize a merge. The failed publication created branch chore/299-lighthouse-implement-e6f829f62edc at 6ee88ccf46d0e625a09129d1877b398080f861cc and no PR; preserve it as evidence rather than treating its plan-only candidate as implemented.
+
+The explicit dotnet/PostgreSQL environment provides a disposable server on an attempt-owned network. The adopter maps its provider connection to RACCORD_TEST_DATABASE for .NET checks. Web fixtures retain separate randomized databases and release each after its test. Browser fixtures allocate their own database and document directory, inject the connection through the testing builder, and boot the real AppHost in Testing mode with the existing FileSystem storage provider. Normal development continues using PostgreSQL and Azurite containers. No Docker socket is mounted in workloads, no production database is used, and the pinned browser selection is unchanged.
+
+The managed-command wrapper already creates its ID-specific log with exclusive file creation. Redirecting the invoking shell to that same path pre-creates it and fails before the command starts; the current wrapper can leave a misleading running receipt after that exception. The adopter scope explicitly forbids this redirection and requires fresh IDs for a corrected attempt while preserving failed receipts.
+
+The harness sets PLAYWRIGHT_BROWSERS_PATH to /workspace/.cache/ms-playwright. Ignore that exact root cache directory so downloaded browser binaries remain disposable check output rather than entering the source inventory. Preserve all tracked source edits and existing source-size limits. Cold restore and browser tool invocations need an explicit 600000 ms allowance; if an invocation returns a session handle, wait for the existing managed receipt to terminate before advancing. Native run 43950371580 passed every independent command, but the unignored browser download exceeded the source-inventory bound after checks; its agent had separately cancelled restore at the default 120-second tool timeout. Neither outcome is native acceptance.
 
 ## Verification
 

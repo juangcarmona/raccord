@@ -20,14 +20,22 @@ type Handler = (request: Request) => Response | Promise<Response>;
 /** Replaces fetch with handlers keyed by "METHOD /path"; records every request. */
 export function stubApi(handlers: Record<string, Handler>) {
     const requests: { method: string; path: string; body: unknown }[] = [];
-    vi.stubGlobal("fetch", async (request: Request) => {
+    vi.stubGlobal("fetch", async (input: RequestInfo | URL, init?: RequestInit) => {
+        const request = input instanceof Request ? input : new Request(input, init);
         const url = new URL(request.url);
         const key = `${request.method} ${url.pathname}`;
-        const text = await request.clone().text();
+        const contentType = request.headers.get("content-type") ?? "";
+        const text = contentType.includes("multipart/form-data") ? undefined : await request.clone().text();
         requests.push({
             method: request.method,
             path: url.pathname,
-            body: text ? (JSON.parse(text) as unknown) : undefined,
+            body: contentType.includes("multipart/form-data")
+                ? init?.body instanceof FormData
+                    ? init.body
+                    : await request.clone().formData()
+                : text
+                  ? (JSON.parse(text) as unknown)
+                  : undefined,
         });
         const handler = handlers[key];
         if (!handler) {

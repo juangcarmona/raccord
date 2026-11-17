@@ -11,9 +11,7 @@ public interface IContactDirectory
 
     /// <summary>Returns a page ordered by contact number and identifier.</summary>
     Task<ContactPage> ListContactsAsync(
-        int page,
-        int pageSize,
-        ContactRole? role,
+        ContactDirectoryFilter filter,
         CancellationToken cancellationToken
     );
 

@@ -20,5 +20,7 @@ internal sealed class CustomerRow
 
     public string? ContactNumber { get; set; }
 
+    public Guid? FolderId { get; set; }
+
     public List<ContactRoleRow> Roles { get; set; } = [];
 }

@@ -107,3 +107,7 @@ A background worker claims pending compliance records per issuer in order, build
 For task progression, the Projects coordination service validates the configured status, moves the task, and recalculates project progress from statuses marked complete.
 
 <!-- pdac:cite id="UC-PRJ-PROGRESS-STATUS-AUTOMATICALLY" digest="sha256:cd576d336c8096b0e71096d084bb2258c78c0d81522848e32a78730276caafed" -->
+
+## R-6 Organize contacts
+
+An authorized organization mutation enters the existing Contacts unit of work and acquires PostgreSQL transaction advisory lock `(302, 1)` in the active installation database before reading hierarchy, emptiness or assignments. Folder moves, creation, reordering, deletion and filing share the lock; tag creation, assignment and deletion share it as well. The lock lasts through commit or rollback, so opposing moves cannot both commit a cycle and conflicting deletions return controlled domain errors. Restrictive foreign keys remain a backstop. Separate deployment databases isolate the lock and data; unrelated contact import and designation transactions retain their existing boundaries. Cancellation and infrastructure failures propagate through rollback.

@@ -13,7 +13,7 @@
 - [x] 2.1 Reconcile native run 43793111095 and its published draft PR #443; preserve failed agent receipts and independent check logs.
 - [x] 2.2 Correct wrapper invocation guidance and declare the supported disposable PostgreSQL environment.
 - [x] 2.3 Verify Web database isolation/cleanup and the complete real AppHost/browser selection without workload Docker access.
-- [ ] 2.4 Validate the updated policy, OpenSpec/citations, formatting and actual PR checks; publish the correction and record the remaining native acceptance state.
+- [x] 2.4 Validate the updated policy, OpenSpec/citations, formatting and all 13 configured agent checks; record the remaining host-owned independent verification and same-PR publication as pending.
 
 ## 3. Requalify historical behavior against the accepted baseline
 

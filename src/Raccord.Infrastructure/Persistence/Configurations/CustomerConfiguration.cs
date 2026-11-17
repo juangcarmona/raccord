@@ -19,6 +19,12 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<CustomerR
         builder.ComplexProperty(customer => customer.BillingAddress, AddressMapping.Configure);
         builder.HasIndex(customer => customer.TaxId);
         builder
+            .HasOne<ContactFolderRow>()
+            .WithMany()
+            .HasForeignKey(customer => customer.FolderId)
+            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasIndex(customer => customer.FolderId);
+        builder
             .HasMany(customer => customer.Roles)
             .WithOne(role => role.Contact)
             .HasForeignKey(role => role.ContactId)

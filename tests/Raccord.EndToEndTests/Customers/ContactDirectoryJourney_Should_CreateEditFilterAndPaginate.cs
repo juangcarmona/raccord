@@ -97,17 +97,17 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
         await page.GotoAsync("/contacts");
         await page.GetByLabel("Filter by role").SelectOptionAsync("Venue");
         await page.Locator("tbody tr").Nth(9).WaitForAsync();
-        var firstPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        var firstPageVenueNames = await page.Locator("tbody tr th a").AllTextContentsAsync();
         firstPageVenueNames.Count.ShouldBe(10);
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Next" }).ClickAsync();
         await page.GetByText("Page 2 of", new() { Exact = false }).WaitForAsync();
-        var secondPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        var secondPageVenueNames = await page.Locator("tbody tr th a").AllTextContentsAsync();
         firstPageVenueNames.ShouldNotContain(secondPageVenueNames[0]);
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Previous" }).ClickAsync();
         await page.GetByText("Page 1 of", new() { Exact = false }).WaitForAsync();
-        var returnedPageVenueNames = await page.Locator("tbody tr a").AllTextContentsAsync();
+        var returnedPageVenueNames = await page.Locator("tbody tr th a").AllTextContentsAsync();
         returnedPageVenueNames.ShouldBe(firstPageVenueNames);
 
         var allVenueNames = await ReadAllContactNamesAcrossPagesAsync(page);
@@ -123,7 +123,7 @@ public sealed class ContactDirectoryJourney_Should_CreateEditFilterAndPaginate(
         while (true)
         {
             await page.Locator("tbody tr").First.WaitForAsync();
-            names.AddRange(await page.Locator("tbody tr a").AllTextContentsAsync());
+            names.AddRange(await page.Locator("tbody tr th a").AllTextContentsAsync());
             var next = page.GetByRole(AriaRole.Button, new() { Name = "Next" });
             if (await next.IsDisabledAsync())
             {

@@ -431,18 +431,7 @@ internal static class Endpoints
     private static void MapContacts(RouteGroupBuilder api)
     {
         var contacts = api.MapGroup("/contacts").WithTags("Contacts");
-        contacts
-            .MapGet(
-                "/",
-                async (
-                    int? page,
-                    int? pageSize,
-                    string? role,
-                    ContactsDirectory directory,
-                    CancellationToken ct
-                ) => TypedResults.Ok(await directory.ListAsync(page ?? 1, pageSize ?? 25, role, ct))
-            )
-            .RequirePermission(PermissionCatalog.ContactsRead);
+        ContactOrganizationEndpoints.MapDirectory(contacts);
         contacts
             .MapGet(
                 "/{id:guid}",
@@ -486,6 +475,7 @@ internal static class Endpoints
             .RequirePermission(PermissionCatalog.ContactsCreate);
         contacts.MapContactImport();
         MapContactPeople(contacts);
+        ContactOrganizationEndpoints.Map(contacts);
     }
 
     private static void MapContactPeople(RouteGroupBuilder contacts)

@@ -8,13 +8,15 @@ Trusted product apply for #294 stopped at a GitHub blob read with HTTP 403 befor
 
 Add a branch-scoped host read cache for immutable product-model Git blobs. Verify each cached byte sequence against its requested Git object ID, and leave authorization, current tree reads, digest computation, provider validation and publication with the unchanged pinned Lighthouse harness.
 
+Select the already-provisioned `plan` review profile explicitly for this branch's Product Change worker after repeated executions deferred their own integrity review. Verify the actual native selection; a host file edit alone does not prove a running container consumed it.
+
 ## Capabilities
 
 No product or specification behavior changes. This tooling-only recovery sets `skip_specs: true` and supports the already-approved Product Change on PR #450.
 
 ## Impact
 
-Only the recovery branch's router and trusted-apply workflows use the cache. The existing approval comment is replayed through the supported owner dispatch; no new approval, credential, accepted-model write, merge, release or production operation is introduced by this change.
+Only the recovery branch's router and trusted-apply workflows use the cache; its Product Change workflow selects the existing review profile. The existing approval comment is replayed through the supported owner dispatch; no new approval, credential, accepted-model write, merge, release or production operation is introduced by this change.
 
 FR-WSP-013 is reviewed only as context for the existing product decision. Its change remains owned by CHG-WSP-FIRST-ADMIN-BROWSER on PR #450.
 

@@ -28,6 +28,7 @@ timeout-minutes: 30
 env:
   LIGHTHOUSE_STAGE: propose
   LIGHTHOUSE_WORKER: product-change
+  LIGHTHOUSE_MODEL_PROFILE: plan
   LIGHTHOUSE_DISPATCH_REQUIRED: "true"
   LIGHTHOUSE_PRODUCT_CHANGE_ENABLED: "true"
 permissions:

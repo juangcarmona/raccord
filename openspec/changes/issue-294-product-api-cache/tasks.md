@@ -8,6 +8,9 @@
 
 ## Workflow follow-up
 
+- [x] Select the existing review profile explicitly in this branch's Product Change workflow, regenerate its lock and verify all other worker selections and provider gates remain unchanged.
+- [ ] Observe the native Product Change worker's resolved profile and genuine completed or blocked assessment; configuration alone is not proof of execution.
+
 - After review, dispatch this recovery branch with the original approval comment, observe authentic native apply/publication receipts and current-head checks, and retain merge authority as a separate boundary.
 
 FR-WSP-013 supplies context for the existing approved product delta, without changing it on this recovery branch.

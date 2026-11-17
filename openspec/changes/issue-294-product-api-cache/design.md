@@ -16,6 +16,8 @@ Load the adapter only for router/apply verification and publication commands thr
 
 Waiting and replaying without changing reads risks repeating the same per-job budget failure. Raising permissions, issuing credentials and manually applying or manufacturing provider receipts are excluded.
 
+Use the supported `LIGHTHOUSE_MODEL_PROFILE: plan` task selection in the recovery branch's Product Change workflow. The operator already provisions this profile with review capabilities. Native run44039134527 still selected the default profile after a host-side atomic config replacement: the running container retained its read-only bind mount of the old file inode. Restore that temporary host assignment and select the task profile directly; do not restart a runner or change another worker. Regenerate the lock and check `runtime.json` before claiming the selection took effect. The selected model must still perform the complete integrity review and the unchanged trusted host must independently validate its candidate.
+
 ## Risks / Trade-offs
 
 The cache is bounded to this repository and its existing model path; a changed or missing object falls back to normal authenticated reads. Git checkout availability is now a verification prerequisite. Fail closed on malformed or oversized local objects and record native workflow results separately from local tests.

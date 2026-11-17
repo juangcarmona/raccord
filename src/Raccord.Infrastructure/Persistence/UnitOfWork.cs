@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Raccord.Application.Abstractions;
+using Raccord.SharedKernel.Common;
 
 namespace Raccord.Infrastructure.Persistence;
 
@@ -17,6 +18,20 @@ internal sealed class UnitOfWork(RaccordDbContext db) : IUnitOfWork
             throw new ConcurrencyConflictException(
                 "The records were changed by another operation. Reload and try again.",
                 exception
+            );
+        }
+        catch (DbUpdateException exception)
+            when (exception.InnerException
+                    is PostgresException
+                    {
+                        SqlState: PostgresErrorCodes.UniqueViolation,
+                        ConstraintName: "ix_customers_contact_number",
+                    }
+            )
+        {
+            throw new BusinessRuleViolationException(
+                "contacts.number-duplicate",
+                "The contact number is already assigned to another contact."
             );
         }
         catch (DbUpdateException exception)

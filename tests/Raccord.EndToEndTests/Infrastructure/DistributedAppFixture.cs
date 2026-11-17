@@ -2,6 +2,7 @@ using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 using Npgsql;
 using Raccord.Infrastructure.Persistence;
@@ -10,7 +11,7 @@ using Xunit;
 namespace Raccord.EndToEndTests.Infrastructure;
 
 /// <summary>
-/// Boots the unmodified Aspire AppHost (Postgres, Azurite, migrations, the API and the Vite
+/// Boots the real Aspire AppHost (PostgreSQL, document storage, migrations, the API and the Vite
 /// frontend) once per run via <see cref="DistributedApplicationTestingBuilder"/>, hands the
 /// browser the frontend resource's external URL, and owns the shared Playwright browser. Shared
 /// via <see cref="E2ECollection"/>. See ADR-0017 for the strategy.
@@ -30,6 +31,9 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     private DistributedApplication? app;
     private IPlaywright? playwright;
     private IBrowser? browser;
+    private string? externalServer;
+    private string? externalDatabase;
+    private string? documentRoot;
 
     /// <summary>The frontend (Vite) resource's external base URL — what the browser drives.</summary>
     public Uri FrontendBaseUrl { get; private set; } = null!;
@@ -48,11 +52,8 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         // transport must be allowed before the builder composes the app model.
         Environment.SetEnvironmentVariable("ASPIRE_ALLOW_UNSECURED_TRANSPORT", "true");
 
-        var builder =
-            await DistributedApplicationTestingBuilder.CreateAsync<global::Projects.Raccord_Aspire>();
+        var builder = await CreateBuilderAsync();
         Log("create-builder: done");
-
-        ForceEphemeralPostgres(builder);
 
         Log("build+start app: starting");
         app = await builder.BuildAsync();
@@ -70,12 +71,12 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         FrontendBaseUrl = app.GetEndpoint(FrontendResourceName, "http");
         Log($"web healthy; frontend at {FrontendBaseUrl}");
 
-        // Browser install is a no-op (sub-second) when the browser is already cached; it keeps
-        // the suite runnable with no manual setup beyond a Docker-capable machine.
+        // Isolated workloads use provisioned Chromium; local runs install it when needed.
         Log("playwright install: starting");
-        var installExitCode = await Task.Run(() =>
-            Microsoft.Playwright.Program.Main(["install", "chromium"])
-        );
+        var chromium = Environment.GetEnvironmentVariable("CHROMIUM_PATH");
+        var installExitCode = string.IsNullOrWhiteSpace(chromium)
+            ? await Task.Run(() => Microsoft.Playwright.Program.Main(["install", "chromium"]))
+            : 0;
         Log($"playwright install: exit {installExitCode}");
         if (installExitCode != 0)
         {
@@ -87,9 +88,54 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         Log("launching chromium");
         playwright = await Playwright.CreateAsync();
         browser = await playwright.Chromium.LaunchAsync(
-            new BrowserTypeLaunchOptions { Headless = true }
+            new BrowserTypeLaunchOptions { Headless = true, ExecutablePath = chromium }
         );
         Log("chromium up");
+    }
+
+    private async Task<IDistributedApplicationTestingBuilder> CreateBuilderAsync()
+    {
+        externalServer = Environment.GetEnvironmentVariable("RACCORD_TEST_DATABASE");
+        string? externalConnection = null;
+        if (!string.IsNullOrWhiteSpace(externalServer))
+        {
+            externalDatabase = "raccord_e2e_" + Guid.NewGuid().ToString("N");
+            await using var connection = new NpgsqlConnection(externalServer);
+            await connection.OpenAsync();
+            await using var command = new NpgsqlCommand(
+                $"CREATE DATABASE {externalDatabase}",
+                connection
+            );
+            await command.ExecuteNonQueryAsync();
+            externalConnection = new NpgsqlConnectionStringBuilder(externalServer)
+            {
+                Database = externalDatabase,
+            }.ConnectionString;
+            documentRoot = Path.Combine(Path.GetTempPath(), externalDatabase);
+        }
+
+        var builder =
+            await DistributedApplicationTestingBuilder.CreateAsync<global::Projects.Raccord_Aspire>(
+                [],
+                (_, settings) =>
+                {
+                    if (externalConnection is null)
+                        return;
+                    settings.EnvironmentName = "Testing";
+                    settings.Configuration ??= new ConfigurationManager();
+                    settings.Configuration.AddInMemoryCollection(
+                        new Dictionary<string, string?>(StringComparer.Ordinal)
+                        {
+                            ["ConnectionStrings:raccord"] = externalConnection,
+                            ["Storage:FileSystemRoot"] = documentRoot,
+                        }
+                    );
+                }
+            );
+        if (externalConnection is null)
+            ForceEphemeralPostgres(builder);
+
+        return builder;
     }
 
     /// <summary>
@@ -259,5 +305,19 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         {
             await app.DisposeAsync();
         }
+
+        if (externalDatabase is not null)
+        {
+            await using var connection = new NpgsqlConnection(externalServer);
+            await connection.OpenAsync();
+            await using var command = new NpgsqlCommand(
+                $"DROP DATABASE {externalDatabase} WITH (FORCE)",
+                connection
+            );
+            await command.ExecuteNonQueryAsync();
+        }
+
+        if (documentRoot is not null && Directory.Exists(documentRoot))
+            Directory.Delete(documentRoot, recursive: true);
     }
 }

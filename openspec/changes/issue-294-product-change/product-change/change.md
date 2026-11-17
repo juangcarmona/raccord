@@ -2,7 +2,7 @@
 id: CHG-WSP-FIRST-ADMIN-BROWSER
 type: product-change
 title: First workspace administrator through the browser
-status: draft
+status: applied
 base-revision: '998ff32'
 operations:
   add: []

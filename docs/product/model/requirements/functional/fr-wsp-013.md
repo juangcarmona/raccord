@@ -20,7 +20,7 @@ provenance:
 
 ## Requirement
 
-The product MUST let authorized users assign one role per user, give new users the Crew role, and list users per role.
+The product MUST let authorized users assign one role per user, give subsequently added users the Crew role by default, and list users per role. The first account created during first-run setup receives the Admin role.
 
 ## Rationale
 

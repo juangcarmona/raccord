@@ -14,7 +14,7 @@ provenance:
 
 ## Rule
 
-A newly added user gets the Crew role, which shows their own schedule and the projects they are planned on, until someone assigns another role.
+A subsequently added user gets the Crew role, which shows their own schedule and the projects they are planned on, until someone assigns another role.
 
 ## Rationale
 
@@ -26,4 +26,4 @@ Least privilege by default.
 
 ## Exceptions
 
-None.
+The first account created during first-run setup receives the Admin role.

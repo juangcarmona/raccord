@@ -4,7 +4,33 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { createProductBlobCache } from "./product-model-api-cache.mjs";
+import {
+    createProductBlobCache,
+    githubDenialMetadata,
+} from "./product-model-api-cache.mjs";
+
+test("denial diagnostics expose only numeric rate metadata and preserve the response", async () => {
+    const response = new Response("private response", {
+        status: 403,
+        headers: {
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "0",
+            "x-ratelimit-reset": "1794904200",
+            "x-ratelimit-used": "1000",
+            "retry-after": "invalid-private-value",
+            authorization: "private credential",
+            "set-cookie": "private cookie",
+        },
+    });
+    assert.deepEqual(githubDenialMetadata(response), {
+        status: 403,
+        "x-ratelimit-limit": "1000",
+        "x-ratelimit-remaining": "0",
+        "x-ratelimit-reset": "1794904200",
+        "x-ratelimit-used": "1000",
+    });
+    assert.equal(await response.text(), "private response");
+});
 
 const base = "https://api.github.com/repos/juangcarmona/raccord/git/blobs/";
 

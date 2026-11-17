@@ -20,6 +20,8 @@ Use the supported `LIGHTHOUSE_MODEL_PROFILE: plan` task selection in the recover
 
 ## Risks / Trade-offs
 
+Recovery router44045324725 received403 on its first approval-comment read, with zero cache hits. Record only allowlisted numeric rate-limit and retry headers on denied repository GETs to distinguish exhausted request allowance from other denials. Never log request headers, response bodies or credentials; return the original response unchanged and preserve every authorization check.
+
 The cache is bounded to this repository and its existing model path; a changed or missing object falls back to normal authenticated reads. Git checkout availability is now a verification prerequisite. Fail closed on malformed or oversized local objects and record native workflow results separately from local tests.
 
 FR-WSP-013 remains unchanged on this branch; only trusted ProductShape apply on PR #450 may apply its approved change.

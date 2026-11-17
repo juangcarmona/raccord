@@ -2,6 +2,21 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
+export function githubDenialMetadata(response) {
+    const metadata = { status: response.status };
+    for (const name of [
+        "x-ratelimit-limit",
+        "x-ratelimit-remaining",
+        "x-ratelimit-reset",
+        "x-ratelimit-used",
+        "retry-after",
+    ]) {
+        const value = response.headers.get(name);
+        if (/^[0-9]{1,16}$/.test(value ?? "")) metadata[name] = value;
+    }
+    return metadata;
+}
+
 // Branch-scoped recovery: keep the published harness and all authenticated writes unchanged.
 export function createProductBlobCache(repository, network) {
     const git = (args) =>
@@ -52,8 +67,20 @@ export function createProductBlobCache(repository, network) {
                 options?.body != null ||
                 !match ||
                 !allowed.has(match[1])
-            )
-                return network(input, options);
+            ) {
+                const response = await network(input, options);
+                if (
+                    url.origin === "https://api.github.com" &&
+                    url.pathname.startsWith("/repos/juangcarmona/raccord/") &&
+                    method === "GET" &&
+                    response.status === 403
+                )
+                    console.error(
+                        "GitHub read denial metadata: " +
+                            JSON.stringify(githubDenialMetadata(response)),
+                    );
+                return response;
+            }
             const sha = match[1];
             if (!cached.has(sha)) {
                 let content;

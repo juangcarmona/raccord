@@ -25,6 +25,7 @@ node_modules/
 coverage/
 TestResults/
 playwright-artifacts/
+/.cache/ms-playwright/
 *.pdf
 *.zip
 dist/

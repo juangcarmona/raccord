@@ -48,7 +48,7 @@ On a fresh installation, the migration/setup flow creates an editable VAT scheme
 dotnet test Raccord.slnx
 ```
 
-Integration tests start a PostgreSQL container through Testcontainers and create one database per test.
+Integration tests start a PostgreSQL container through Testcontainers and create one database per test, released when its API fixture is disposed. In an isolated worker, RACCORD_TEST_DATABASE may point to its disposable test server instead; fixture initialization verifies the connection and does not fall back or skip failed checks. Never set this variable to a production or shared application database.
 
 Formatting is enforced by CSharpier (C#) and Prettier (frontend code and configuration) — no `dotnet format`. Markdown is linted, not reformatted, by markdownlint-cli2 with the repository-root `.markdownlint-cli2.jsonc`: write each prose paragraph and list item on one source line, never hard-wrapped (custom rule `no-hard-wrapped-prose` in `.markdownlint-rules.cjs`).
 
@@ -78,6 +78,8 @@ dotnet test tests/Raccord.EndToEndTests/Raccord.EndToEndTests.csproj -c Release 
 ```
 
 Build the public homepage first so the E2E project can copy `src/public-site/dist/` into its output directory before the AppHost starts.
+
+When RACCORD_TEST_DATABASE is supplied, the browser fixture creates its own database and document directory and configures the real AppHost in Testing mode with an external connection and FileSystem document storage. The test process removes both after the run; normal development keeps the PostgreSQL/Azurite containers. CHROMIUM_PATH may select an already installed Chromium executable instead of downloading a second browser. The worker environment and disposable server are provisioned by Lighthouse, with no workload access to the Docker socket.
 
 The PR-blocking selection is pinned by `tests/Raccord.EndToEndTests/per-pr-selection.txt`; regenerate it after adding or renaming journeys:
 

@@ -27,7 +27,8 @@
         "browserCases": 40,
         "browserFailures": 0,
         "browserSkipped": 0,
-        "providerCitationsCurrent": 561
+        "providerCitationsCurrent": 561,
+        "scope": "Historical seed build/test qualification only; later review found superseded administrative reassignment behavior, corrected separately in PR #443"
     },
     "nativeCorrections": {
         "nugetCache": "Per-attempt ignored /workspace/obj NuGet cache paths, not private /tmp",
@@ -44,5 +45,49 @@
         "pullRequestCreated": false,
         "candidate": "Plan only; blocked because historical runtime source was unavailable"
     },
-    "state": "source-qualified-native-delivery-pending"
+    "state": "source-qualified-native-delivery-pending",
+    "nativeAttempt": {
+        "run": 43793111095,
+        "conclusion": "blocked",
+        "pullRequest": 443,
+        "publishedHead": "b452aac36f15cc9ad9f264b611835dae0be49980",
+        "candidateFiles": 60,
+        "sourceAvailable": true,
+        "nugetRestore": "passed",
+        "agentBlocker": "Shell redirection pre-created the wrapper-owned command log; receipt remained running after prelaunch EEXIST",
+        "hostBlocker": "HTTP tests required Docker inside the isolated workload",
+        "correction": "Declare the provider-owned PostgreSQL environment, retain per-test databases, use Testing-only real AppHost external-service configuration, preserve full selection and correct wrapper invocation guidance",
+        "qualification": {
+            "operator": "passed with the corrected source in the pinned isolated image, separate from the blocked native result",
+            "backendTests": 199,
+            "webTests": 56,
+            "frontendTests": 47,
+            "selectedBrowserJourneys": 38,
+            "browserCases": 40,
+            "browserFailures": 0,
+            "browserSkipped": 0,
+            "browserSeconds": 397.836,
+            "productArtifacts": 1918,
+            "currentCitations": 565,
+            "canonicalModelChanged": false,
+            "fullChecksAndFiltersPreserved": true,
+            "nativeAcceptance": "not established by operator qualification",
+            "forgeCi": "pending on the correction commit"
+        },
+        "productCorrection": {
+            "rule": "BR-CON-CONTACT-PERSON-DESIGNATIONS",
+            "observed": "Historical code and tests rejected administrative reassignment; reverse reassignment also hit a unique-index conflict",
+            "implemented": "Transfer either designation, flush released designations before assignment inside the same audited transaction, and verify reverse transfer plus a forced late failure",
+            "browser": "The same selected journey now edits a person, transfers the administrative designation and preserves project/invoice snapshots",
+            "redTests": [
+                "Administrative transfer was rejected by the historical domain",
+                "Reverse administrative transfer returned HTTP 409"
+            ],
+            "greenTests": [
+                "Domain transfer tests",
+                "Forward/reverse API transfer",
+                "Forced late API failure restores prior designations and audit count"
+            ]
+        }
+    }
 }

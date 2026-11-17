@@ -217,10 +217,6 @@
                 "/[Quarantine!=true&TestKind!=metadata]",
                 "-stopOnFail"
             ]
-        ],
-        "seed": {
-            "base": "21534cad056b2a3b219ec75f119a870527694e0c",
-            "head": "5afa9d5d33cefa64ef83d95904352f2cfc84ce2c"
-        }
+        ]
     }
 }

@@ -16,6 +16,7 @@ provenance:
 ## Definition
 
 The four roles every installation starts with; each can be edited and further roles can be added:
+
 - Admin: may view and change everything, including configuration and roles; assigned to the first account during first-run setup.
 - Office: sees all modules and may change what is needed to keep track of projects, planning, finances, contacts and equipment.
 - Warehouse: works with equipment, stock, packing and returns, and sees the projects those tasks concern.

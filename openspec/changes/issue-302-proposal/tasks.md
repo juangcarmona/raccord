@@ -23,9 +23,9 @@
 ## 4. Integration evidence
 
 - [x] 4.1 Add the authenticated synthetic ContactOrganizationJourney_Should_ManageTagsFoldersAndFilters to the per-PR manifest and run it with the existing directory and import journeys; record revisions, commands, run IDs and exit status.
-- [ ] 4.2 Run CI-equivalent build, tests, CSharpier, Prettier, lint-staged, commitlint and OpenAPI drift checks on the actual base; record results and failures.
+- [x] 4.2 Run CI-equivalent build, tests, CSharpier, Prettier, lint-staged, commitlint and OpenAPI drift checks on the actual base; record results and failures.
 - [x] 4.3 Refresh affected provider citations as needed and run ProductShape citation/evidence verification and OpenSpec strict validation; record current model digest, citation status and results.
 
 ## Workflow follow-up
 
-- Request owner review of the implementation and evidence; archive only after required acceptance.
+- Operator integration and visual reviews are recorded under the owner’s existing explicit delivery and merge authorization; archive only after integration.

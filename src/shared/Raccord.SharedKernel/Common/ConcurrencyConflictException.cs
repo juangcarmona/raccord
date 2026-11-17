@@ -1,4 +1,4 @@
-namespace Raccord.Application.Abstractions;
+namespace Raccord.SharedKernel.Common;
 
 /// <summary>Raised when a concurrent operation changed the same records; the caller may retry.</summary>
 public sealed class ConcurrencyConflictException : Exception

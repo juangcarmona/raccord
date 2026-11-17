@@ -19,6 +19,7 @@ import { AccountPage } from "../features/auth/AccountPage";
 import { RequireRoleManagement } from "../features/auth/RequireRoleManagement";
 import { ContactsPage } from "../features/contacts/ContactsPage";
 import { ContactFormPage } from "../features/contacts/ContactFormPage";
+import { ContactImportPage } from "../features/contacts/ContactImportPage";
 
 export const routes: RouteObject[] = [
     { path: "sign-in", element: <SignInPage /> },
@@ -35,6 +36,7 @@ export const routes: RouteObject[] = [
                     { path: "customers", element: <CustomersPage /> },
                     { path: "customers/new", element: <NewCustomerPage /> },
                     { path: "contacts", element: <ContactsPage /> },
+                    { path: "contacts/import", element: <ContactImportPage /> },
                     { path: "contacts/new", element: <ContactFormPage /> },
                     { path: "contacts/:id", element: <ContactFormPage /> },
                     { path: "drafts", element: <DraftsPage /> },

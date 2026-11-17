@@ -32,6 +32,37 @@ export const api = createClient<paths>({
     fetch: (request: Request) => globalThis.fetch(request),
 });
 
+/** Sends a typed Contacts upload without JSON-serializing multipart file data. */
+export async function uploadContactsImport<
+    T extends
+        | Schemas["ContactImportInspectionResponse"]
+        | Schemas["ContactImportPreviewResponse"]
+        | Schemas["ContactImportResultResponse"],
+>(
+    path: "/api/contacts/import/inspect" | "/api/contacts/import/preview" | "/api/contacts/import",
+    body: FormData,
+): Promise<T> {
+    const baseUrl = globalThis.location.protocol.startsWith("http") ? globalThis.location.origin : "http://localhost";
+    const response = await globalThis.fetch(new URL(path, baseUrl), {
+        method: "POST",
+        body,
+        credentials: "same-origin",
+    });
+    const content = parseResponse(await response.text());
+    if (!response.ok) {
+        throw toApiError(response.status, content);
+    }
+    return content as T;
+}
+
+function parseResponse(content: string): unknown {
+    try {
+        return JSON.parse(content) as unknown;
+    } catch {
+        return undefined;
+    }
+}
+
 interface FetchResult<T> {
     data?: T;
     error?: unknown;
@@ -61,10 +92,12 @@ function toApiError(status: number, body: unknown): ApiError {
         : [];
     const code = typeof problem.code === "string" ? problem.code : status === 404 ? "not-found" : "unknown";
     const message =
-        typeof problem.detail === "string"
-            ? problem.detail
-            : typeof problem.title === "string"
-              ? problem.title
-              : `HTTP ${status}`;
+        typeof body === "string"
+            ? body
+            : typeof problem.detail === "string"
+              ? problem.detail
+              : typeof problem.title === "string"
+                ? problem.title
+                : `HTTP ${status}`;
     return new ApiError(status, code, message, issues);
 }

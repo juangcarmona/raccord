@@ -1,3 +1,5 @@
+using Raccord.SharedKernel.Common;
+
 namespace Raccord.Application.Abstractions;
 
 /// <summary>Commits all changes of a use case atomically.</summary>

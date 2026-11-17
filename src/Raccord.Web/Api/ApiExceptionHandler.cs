@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Raccord.Application.Abstractions;
 using Raccord.Application.Invoicing;
 using Raccord.Contracts.Common;
 using Raccord.SharedKernel.Common;

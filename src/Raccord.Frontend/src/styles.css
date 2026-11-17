@@ -329,6 +329,11 @@ select {
     background: var(--surface);
     color: var(--text);
 }
+input[type="file"] {
+    max-width: 100%;
+    min-width: 0;
+}
+
 input[type="checkbox"] {
     width: 1.15rem;
     height: 1.15rem;

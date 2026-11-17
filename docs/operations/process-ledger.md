@@ -1,5 +1,7 @@
 # Process ledger
 
+- 2026-11-17: Native Product Change apply can exhaust its API budget while fingerprinting the accepted model before the provider runs. The #294 failure occurred at model blob 989 of 1,928. A branch-scoped read cache verified all 1,928 immutable Git objects against their requested object IDs and reproduced the exact accepted-model digest with two live metadata reads and zero blob network requests. Preserve current tree reads, exact-head approval, the unchanged provider and genuine publication receipts; local cache qualification is not native apply or merge. Keep the temporary recovery branch separate from the approved Product Change branch.
+
 - 2026-11-16: A passed proposal agent result is not proof that a PR was published. Run the pinned OpenSpec strict validator on the exact returned files; keep spec headings and requirement length within provider rules without dropping product citations. If publication stops during validation, reconcile branches and PRs before retrying or publishing an explicitly identified operator correction.
 
 - 2026-11-15: After applying a Product Change, keep its `change.md` decision record and remove the archived `proposed/` copies in the same reviewed change. Check links to those copies, then run ProductShape validation and OpenSpec citation verification. The accepted model remains in `docs/product/model/`; Git history retains earlier artifact versions.

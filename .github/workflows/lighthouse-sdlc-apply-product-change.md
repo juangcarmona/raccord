@@ -81,10 +81,23 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+      - name: Load immutable product objects for API read recovery
+        uses: actions/checkout@v5
+        with:
+          repository: juangcarmona/raccord
+          ref: ${{ github.sha }}
+          path: product-api-cache
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/product-model-api-cache.mjs
+            docs/product/model
       - name: Recheck the explicit current owner decision
         id: prepare
         env:
           GH_TOKEN: ${{ github.token }}
+          LIGHTHOUSE_PRODUCT_API_CACHE: "1"
+          NODE_OPTIONS: --import=${{ github.workspace }}/product-api-cache/scripts/product-model-api-cache.mjs
         run: node .lighthouse-harness/node_modules/@juangcarmona/lighthouse-sdlc/src/issue-actions.mjs product-apply-prepare
       - name: Preserve the approval checkpoint
         if: steps.prepare.outputs.eligible == 'true'
@@ -252,9 +265,22 @@ jobs:
       - name: Stop when the provider apply did not complete
         if: needs.apply.result != 'success'
         run: exit 1
+      - name: Load immutable product objects for API read recovery
+        uses: actions/checkout@v5
+        with:
+          repository: juangcarmona/raccord
+          ref: ${{ github.sha }}
+          path: product-api-cache
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/product-model-api-cache.mjs
+            docs/product/model
       - name: Publish only the verified applied delta
         env:
           GH_TOKEN: ${{ github.token }}
+          LIGHTHOUSE_PRODUCT_API_CACHE: "1"
+          NODE_OPTIONS: --import=${{ github.workspace }}/product-api-cache/scripts/product-model-api-cache.mjs
         run: node .lighthouse-harness/node_modules/@juangcarmona/lighthouse-sdlc/src/issue-actions.mjs product-apply-publish
       - name: Observe workflow telemetry
         if: always()

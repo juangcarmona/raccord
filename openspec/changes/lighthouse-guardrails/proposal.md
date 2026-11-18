@@ -25,6 +25,10 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 
 - Enforce the owner-approved, expiring frontend development dependency exception with a tested evaluator in both CI and native independent checks, retaining the raw audit and rejecting every out-of-scope high/critical finding.
 
+## Lighthouse 0.13.27 / SDLC 0.30.1 refresh
+
+Update the exact npm pins, generated package projections, installed package-mode workflows and all nine compiled worker locks. Preserve the qualified implementation model profile, current checks, bounded security exception and automation settings. Assess unattended eligibility separately; this upgrade installs no new route and delegates no issue implementation or merge.
+
 ## Impact
 
 Only repository tooling, documentation, and CI configuration change. The existing .NET analyzers, architecture tests, Semgrep rules, and application code remain in place.

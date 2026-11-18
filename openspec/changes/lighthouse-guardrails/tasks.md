@@ -32,6 +32,12 @@
 - [x] Record the actual owner approval and bind the temporary exception to the exact frontend lock and development nodes.
 - [x] Verify thirteen targeted evaluator regressions and the real full-audit invocation; retain raw findings and explicit exception use.
 - [x] Wire the same gate into required CI and default native policy with raw-report retention.
-- [ ] Require passing current-head CI before integrating the approved upgrade/security policy, then requalify294 independently.
+- [x] Require passing current-head CI before integrating the approved upgrade/security policy, then requalify294 independently (upgrades #454/#456 and runtime #457 merged; actual main CI44398847818 passed).
 
 - [x] Validate the corrected twelve-command native policy with the installed SDLC validator after a pre-activation rejection; preserve every original check and the approved audit gate.
+
+- [x] Pin CLI 0.13.27 and SDLC 0.30.1, apply the reviewed foundation upgrade and reinstall the existing worker catalog.
+- [x] Preserve the implementation model override and regenerate all nine locks with gh-aw v0.93.2.
+- [x] Verify foundation, package/workflow agreement, the changed plan with strict OpenSpec, all plans with the CI command, ProductShape citations, documentation and tooling regressions.
+
+Integration gate: require passing CI on the final commit before merging this refresh.

@@ -31,3 +31,17 @@ CI SHALL run the Node test suite for blocked, allowed, and malformed Bash calls.
 
 - **WHEN** CI runs for a pull request
 - **THEN** the guard test suite is executed in the existing CI workflow
+
+### Requirement: Released harness and installed workers must agree
+
+The repository SHALL pin CLI 0.13.24 and SDLC 0.28.1 in its tooling manifest and lockfile, and all installed stage and maintenance workflows SHALL execute SDLC 0.28.1 with corresponding regenerated locks. Existing audit, approval and automation controls SHALL be preserved.
+
+#### Scenario: Upgrade verification
+
+- **WHEN** the published packages are upgraded
+- **THEN** the CLI verifier passes and every installed worker source and compiled lock references the selected SDLC version
+
+#### Scenario: Native retry
+
+- **WHEN** issue #294 is retried through the upgraded router
+- **THEN** its actual execution receipt identifies the upgraded harness, and prior failed proof is retained without relabelling

@@ -15,6 +15,9 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 - Reject Claude Code Bash calls that bypass Git hooks, and run the guard tests in CI.
 - Patch the arc42 snapshot tool's DOMPurify pin and the frontend's transitive `undici` and `zod` locks after PR security and dependency-audit gates exposed vulnerable versions.
 
+- Upgrade the CLI to 0.13.24 and SDLC to 0.28.1, then reinstall the existing epic, completion and Product Change workers in package mode and regenerate their locks.
+- Retain the previously qualified implementation review profile and all current automation, audit and approval controls while retrying #294 separately.
+
 ## Impact
 
 Only repository tooling, documentation, and CI configuration change. The existing .NET analyzers, architecture tests, Semgrep rules, and application code remain in place.

@@ -14,3 +14,7 @@
 - [x] Upgrade the Lighthouse harness and SDLC package projection; compile triage, refine, propose, implement, and apply-review workflows.
 - [x] Subscribe CI to App-created verification refs and keep automatic implementation disabled.
 - [x] Apply the approved Product Change `CHG-PDAC-V1ALPHA2-001`, renew OpenSpec citations, and verify the Lighthouse foundation.
+
+- [x] Pin CLI 0.13.24 and SDLC 0.28.1, apply the reviewed CLI upgrade and reinstall the existing worker selections.
+- [x] Regenerate all nine worker locks with gh-aw v0.93.2 and preserve the qualified implementation profile.
+- [x] Verify package/workflow pin agreement, Lighthouse, strict OpenSpec, citations and documentation checks.

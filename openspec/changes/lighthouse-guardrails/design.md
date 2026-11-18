@@ -9,3 +9,9 @@ The pinned SDLC package installs its default triage and refine workflows through
 The Claude Code PreToolUse command invokes a dependency-free Node script. The script reads `tool_input.command` from stdin, exits 2 with a repair message for hook bypasses, and exits 0 for ordinary calls or malformed input. A shell wrapper also treats script launch failures as nonblocking. The guard does not change Git or Husky behavior for human users.
 
 The repository already mirrors its prior commitlint policy in the CI lint job. Lighthouse's generated commit hook remains byte-for-byte managed so `lighthouse verify` can check it.
+
+## Published package upgrade for issue #294
+
+Pin CLI 0.13.24 and SDLC 0.28.1 in the repository lock and manifest. Apply the reviewed CLI upgrade and use the SDLC installer with the existing epic, completion, Product Change and maintenance selections; regenerate all nine worker locks with gh-aw v0.93.2. Preserve `LIGHTHOUSE_MODEL_PROFILE: plan` on the implementation worker from the last native recovery branch so its internal reviews use the configured profile. No new unattended or epic worker is installed and no repository variable changes.
+
+The release adds retained visual assessment and separate PNG artifacts to planning and implementation publication. Check the actual copied workflow pins and compiled locks as well as the package metadata. A native #294 retry remains a separate execution with new receipts: the previous failed evidence and recovered source remain intact, and neither installation nor local verification establishes runtime completion. The existing full frontend dependency audit remains blocking.

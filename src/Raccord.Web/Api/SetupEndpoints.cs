@@ -21,12 +21,28 @@ internal static class SetupEndpoints
             new SetupStatusResponse(await installation.IsRequiredAsync(cancellationToken))
         );
 
-    private static async Task<IResult> CreateAdministratorAsync(
+    private static async Task<
+        Results<Ok<SetupResponse>, BadRequest<SetupError>, Conflict<SetupError>>
+    > CreateAdministratorAsync(
         SetupRequest request,
         InstallationSetup installation,
+        RegistrationPasswordCheck passwordCheck,
         CancellationToken cancellationToken
     )
     {
+        if (
+            string.IsNullOrWhiteSpace(request.Email)
+            || string.IsNullOrEmpty(request.Password)
+            || request.Password.Length > 1024
+        )
+            return TypedResults.BadRequest(
+                new SetupError("setup-invalid", "Enter an email and a valid password.")
+            );
+        if (!await installation.IsRequiredAsync(cancellationToken))
+            return TypedResults.Conflict(
+                new SetupError("setup-completed", "The installation has already been set up.")
+            );
+        var check = await passwordCheck.CheckAsync(request.Password, cancellationToken);
         var result = await installation.CreateFirstAdministratorAsync(
             request.Email,
             request.Password,
@@ -40,7 +56,7 @@ internal static class SetupEndpoints
             InstallationSetup.SetupResultKind.Failed => TypedResults.BadRequest(
                 new SetupError("setup-invalid", string.Join(" ", result.Errors))
             ),
-            _ => TypedResults.Ok(new SetupResponse(request.Email)),
+            _ => TypedResults.Ok(new SetupResponse(request.Email, check)),
         };
     }
 
@@ -48,7 +64,7 @@ internal static class SetupEndpoints
 
     private sealed record SetupStatusResponse(bool Required);
 
-    private sealed record SetupResponse(string Email);
+    private sealed record SetupResponse(string Email, string PasswordCheck);
 
     private sealed record SetupError(string Code, string Message);
 }

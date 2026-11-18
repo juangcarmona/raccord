@@ -17,7 +17,12 @@ IResourceBuilder<IResourceWithConnectionString> database = externalTestServices
 // One-shot schema migration plus fictional demo data; the API starts only after it completes.
 var migrations = builder
     .AddProject<Projects.Raccord_Web>("migrations")
-    .WithArgs("migrate", "--seed-demo")
+    .WithArgs(
+        builder.Environment.IsEnvironment("Testing")
+        && builder.Configuration.GetValue<bool>("Raccord:FreshInstallation")
+            ? ["migrate"]
+            : ["migrate", "--seed-demo"]
+    )
     .WithReference(database)
     .WaitFor(database);
 

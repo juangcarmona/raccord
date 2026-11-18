@@ -41,6 +41,10 @@ public sealed class InstallationSetup(
         using var transaction = await db
             .Database.BeginTransactionAsync(cancellationToken)
             .ConfigureAwait(false);
+        // Database-scoped bootstrap lock covers competing requests across application instances.
+        await db
+            .Database.ExecuteSqlRawAsync("SELECT pg_advisory_xact_lock(294, 1)", cancellationToken)
+            .ConfigureAwait(false);
         if (await db.Users.AnyAsync(cancellationToken).ConfigureAwait(false))
         {
             return SetupResult.AlreadyCompleted;

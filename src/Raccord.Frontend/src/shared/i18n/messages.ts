@@ -3,6 +3,24 @@ export type Locale = "es" | "en";
 export const locales: readonly Locale[] = ["es", "en"];
 
 const es = {
+    "setup.checking": "Comprobando la instalación…",
+    "setup.title": "Crear el primer administrador",
+    "setup.intro": "Crea la primera cuenta de administrador. Los datos de la empresa se configuran después.",
+    "setup.submit": "Crear cuenta de administrador",
+    "setup.pending": "Creando cuenta…",
+    "setup.signIn": "Ir a iniciar sesión",
+    "setup.continue": "Continuar a la aplicación",
+    "setup.created": "La cuenta de administrador se ha creado.",
+    "setup.password.hint": "Usa al menos 12 caracteres con mayúsculas, minúsculas, números y un símbolo.",
+    "setup.password.matched":
+        "Esta contraseña aparece en filtraciones de otros servicios. Te recomendamos cambiarla por una contraseña única. Esto no significa que esta cuenta se haya visto comprometida; puedes iniciar sesión.",
+    "setup.password.unavailable":
+        "No se pudo comprobar si la contraseña aparece en filtraciones. Puedes iniciar sesión; usa una contraseña única.",
+    "setup.error.invalid": "No se ha podido crear la cuenta. Comprueba el correo y los requisitos de la contraseña.",
+    "setup.error.completed": "Ya existe una cuenta en esta instalación. Inicia sesión.",
+    "setup.error.sign-in": "La cuenta se creó, pero no se pudo iniciar sesión. Inicia sesión con tus datos.",
+    "setup.error.unavailable":
+        "No se puede comprobar la configuración. Intenta iniciar sesión o vuelve a intentarlo más tarde.",
     "app.name": "Raccord",
     "app.skipToContent": "Saltar al contenido",
     "app.language": "Idioma",
@@ -281,6 +299,23 @@ const es = {
 export type MessageKey = keyof typeof es;
 
 const en: Record<MessageKey, string> = {
+    "setup.checking": "Checking installation…",
+    "setup.title": "Create the first administrator",
+    "setup.intro": "Create the first administrator account. Company details are configured later.",
+    "setup.submit": "Create administrator account",
+    "setup.pending": "Creating account…",
+    "setup.signIn": "Go to sign in",
+    "setup.continue": "Continue to the application",
+    "setup.created": "The administrator account was created.",
+    "setup.password.hint": "Use at least 12 characters with uppercase, lowercase, numbers and a symbol.",
+    "setup.password.matched":
+        "This password appears in breaches of other services. We recommend changing it to a unique password. This does not mean this account was compromised; you can sign in.",
+    "setup.password.unavailable":
+        "The password breach check was unavailable. You can still sign in; use a unique password.",
+    "setup.error.invalid": "The account could not be created. Check the email and password requirements.",
+    "setup.error.completed": "An account already exists in this installation. Sign in instead.",
+    "setup.error.sign-in": "The account was created, but sign-in failed. Sign in with your details.",
+    "setup.error.unavailable": "Setup could not be checked. Try signing in or come back later.",
     "app.name": "Raccord",
     "app.skipToContent": "Skip to content",
     "app.language": "Language",

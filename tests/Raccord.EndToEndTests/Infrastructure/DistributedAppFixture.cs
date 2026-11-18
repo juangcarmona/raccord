@@ -3,6 +3,8 @@ using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Npgsql;
 using Raccord.Infrastructure.Persistence;
@@ -16,7 +18,7 @@ namespace Raccord.EndToEndTests.Infrastructure;
 /// browser the frontend resource's external URL, and owns the shared Playwright browser. Shared
 /// via <see cref="E2ECollection"/>. See ADR-0017 for the strategy.
 /// </summary>
-public sealed class DistributedAppFixture : IAsyncLifetime
+public class DistributedAppFixture : IAsyncLifetime
 {
     // The resource names Program.cs in the Aspire host declares; these name container/project
     // resources, not connection strings, so they do not live in application config.
@@ -41,6 +43,22 @@ public sealed class DistributedAppFixture : IAsyncLifetime
     /// <summary>The web resource's external base URL — where production serves the SPA and CSP.</summary>
     public Uri WebBaseUrl { get; private set; } = null!;
 
+    protected virtual bool FreshInstallation => false;
+
+    public async Task<long> CountSetupRecordsAsync(string table)
+    {
+        if (table is not ("users" or "roles" or "user_roles"))
+            throw new ArgumentOutOfRangeException(nameof(table));
+        var connectionString = await app!.GetConnectionStringAsync("raccord");
+        await using var connection = new NpgsqlConnection(connectionString);
+        await connection.OpenAsync();
+        await using var command = new NpgsqlCommand(
+            $"SELECT count(*) FROM workspace.{table}",
+            connection
+        );
+        return (long)(await command.ExecuteScalarAsync())!;
+    }
+
     public async ValueTask InitializeAsync()
     {
         // The 90-minute CI hang had no visible output because the default console logger
@@ -53,6 +71,12 @@ public sealed class DistributedAppFixture : IAsyncLifetime
         Environment.SetEnvironmentVariable("ASPIRE_ALLOW_UNSECURED_TRANSPORT", "true");
 
         var builder = await CreateBuilderAsync();
+        // Preserve warnings, errors and stage markers without overflowing bounded host logs.
+        builder.Services.AddLogging(logging =>
+            logging
+                .AddFilter("Aspire.Hosting", LogLevel.Warning)
+                .AddFilter("Raccord.Aspire.Resources", LogLevel.Warning)
+        );
         Log("create-builder: done");
 
         Log("build+start app: starting");
@@ -116,13 +140,13 @@ public sealed class DistributedAppFixture : IAsyncLifetime
 
         var builder =
             await DistributedApplicationTestingBuilder.CreateAsync<global::Projects.Raccord_Aspire>(
-                [],
+                FreshInstallation ? ["--Raccord:FreshInstallation=true"] : [],
                 (_, settings) =>
                 {
-                    if (externalConnection is null)
-                        return;
                     settings.EnvironmentName = "Testing";
                     settings.Configuration ??= new ConfigurationManager();
+                    if (externalConnection is null)
+                        return;
                     settings.Configuration.AddInMemoryCollection(
                         new Dictionary<string, string?>(StringComparer.Ordinal)
                         {
@@ -131,6 +155,10 @@ public sealed class DistributedAppFixture : IAsyncLifetime
                         }
                     );
                 }
+            );
+        if (builder.Configuration.GetValue<bool>("Raccord:FreshInstallation") != FreshInstallation)
+            throw new InvalidOperationException(
+                "The requested AppHost installation mode was not applied."
             );
         if (externalConnection is null)
             ForceEphemeralPostgres(builder);
@@ -319,5 +347,6 @@ public sealed class DistributedAppFixture : IAsyncLifetime
 
         if (documentRoot is not null && Directory.Exists(documentRoot))
             Directory.Delete(documentRoot, recursive: true);
+        GC.SuppressFinalize(this);
     }
 }

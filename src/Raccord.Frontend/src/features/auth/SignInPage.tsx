@@ -1,12 +1,11 @@
 import { useState, type SyntheticEvent } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { ApiError } from "../../shared/api/client";
 import { useAuth } from "./AuthProvider";
 
 export function SignInPage() {
     const { t } = useI18n();
-    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
@@ -14,6 +13,16 @@ export function SignInPage() {
     const [pending, setPending] = useState(false);
     const auth = useAuth();
     const location = useLocation();
+    const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? "/projects";
+
+    if (auth.status === "loading")
+        return (
+            <main className="auth-page">
+                <p role="status">{t("setup.checking")}</p>
+            </main>
+        );
+    if (auth.user) return <Navigate to={from} replace />;
+    if (auth.setupRequired === true) return <Navigate to="/setup" replace />;
 
     async function submit(event: SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -21,8 +30,6 @@ export function SignInPage() {
         setPending(true);
         try {
             await auth.signIn(email, password, rememberMe);
-            const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? "/projects";
-            await navigate(from, { replace: true });
         } catch (exception) {
             setError(exception instanceof ApiError && exception.status === 401 ? "invalid" : "network");
         } finally {
@@ -42,6 +49,7 @@ export function SignInPage() {
                 <h1 data-page-heading tabIndex={-1}>
                     {t("auth.title")}
                 </h1>
+                {auth.setupRequired === null && <p role="status">{t("setup.error.unavailable")}</p>}
                 <label>
                     {t("auth.email")}
                     <input

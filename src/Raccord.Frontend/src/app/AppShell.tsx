@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useI18n } from "../shared/i18n/I18nProvider";
 import { useAuth } from "../features/auth/AuthProvider";
-import { useNavigate } from "react-router";
 import { Link } from "react-router";
 
 const navigation = [
@@ -20,7 +19,6 @@ export function AppShell() {
     const main = useRef<HTMLElement>(null);
     const firstRender = useRef(true);
     const auth = useAuth();
-    const navigate = useNavigate();
 
     // Move focus to the new page heading after client-side navigation, as a full page load would.
     useEffect(() => {
@@ -68,11 +66,7 @@ export function AppShell() {
                             <span className="account-entry__name">{auth.user?.displayName || auth.user?.email}</span>
                             {auth.user?.displayName && <span className="account-entry__email">{auth.user.email}</span>}
                         </Link>
-                        <button
-                            type="button"
-                            className="button"
-                            onClick={() => void auth.signOut().then(() => navigate("/sign-in", { replace: true }))}
-                        >
+                        <button type="button" className="button" onClick={() => void auth.signOut()}>
                             {t("auth.signOut")}
                         </button>
                     </header>

@@ -22,6 +22,32 @@ public sealed class AuthenticationSetupTests(PostgresContainer postgres) : IAsyn
     }
 
     [Fact]
+    public async Task Concurrent_setup_Should_CreateExactlyOneAdministrator()
+    {
+        var results = await Task.WhenAll(
+            Enumerable
+                .Range(1, 4)
+                .Select(index =>
+                    client.PostAsJsonAsync(
+                        "/api/setup",
+                        new SetupRequest($"first-{index}@example.test", "FirstAdmin123!@#")
+                    )
+                )
+        );
+        results.Count(response => response.StatusCode == HttpStatusCode.OK).ShouldBe(1);
+        results.Count(response => response.StatusCode == HttpStatusCode.Conflict).ShouldBe(3);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.users")).ShouldBe(1);
+        (await api.QueryScalarAsync<long>("select count(*) from workspace.roles")).ShouldBe(4);
+        (
+            await api.QueryScalarAsync<long>(
+                "select count(*) from workspace.user_roles ur join workspace.roles r on r.id = ur.role_id where r.name = 'Admin'"
+            )
+        ).ShouldBe(1);
+        foreach (var response in results)
+            response.Dispose();
+    }
+
+    [Fact]
     public async Task First_setup_Should_CreateAdminAndRefuseASecondSetup()
     {
         var before = await client.GetFromJsonAsync<SetupStatusResponse>("/api/setup/status");

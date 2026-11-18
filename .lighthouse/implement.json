@@ -2,15 +2,9 @@
     "defaults": {
         "reviewRequired": false,
         "scope": "Recover and implement only the approved issue criteria and owner decisions recorded in #437. Inspect existing epic branches and PRs before writing new code. Preserve tenant isolation, auditability, numbering and immutable issued invoices. Validate and explicitly apply Product Changes; do not edit the accepted model directly. Publish a reviewable PR with current independent command and synthetic browser evidence. Respect the serial queue and dependency base. Report new contradictory intent or unavailable legal/protocol evidence precisely. Run managed commands without shell redirection: the wrapper owns /output/evidence/commands/<id>.log. Never create or redirect stdout/stderr to that same file. If a prelaunch collision leaves a running receipt but no active owner, retain the failed receipt and retry without redirection using a new command ID; do not wait indefinitely on the stale receipt. Use the policy command arguments, including its environment mapping, for agent checks. The required frontend security gate is node scripts/check-frontend-audit.mjs. It retains the full raw npm audit and enforces only the owner-approved development-only GHSA-fc5q-39xc-vjpf exception until 2026-11-24T20:45:00Z; every other high/critical finding remains blocking. A raw nonzero npm audit for that exact accepted finding is not a new blocker when this required gate passes. Preserve raw audit findings and actual exception use in evidence; never claim a clean raw audit.",
-        "paths": [
-            "*"
-        ],
+        "paths": ["*"],
         "checks": [
-            [
-                "npm",
-                "ci",
-                "--ignore-scripts"
-            ],
+            ["npm", "ci", "--ignore-scripts"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",
@@ -24,10 +18,7 @@
                 "restore",
                 "Raccord.slnx"
             ],
-            [
-                "node",
-                "src/public-site/build.mjs"
-            ],
+            ["node", "src/public-site/build.mjs"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",
@@ -53,36 +44,14 @@
                 "--prefix",
                 "src/Raccord.Frontend"
             ],
+            ["npm", "run", "lint", "--prefix", "src/Raccord.Frontend"],
+            ["npm", "run", "build", "--prefix", "src/Raccord.Frontend"],
             [
-                "npm",
-                "run",
-                "lint",
-                "--prefix",
-                "src/Raccord.Frontend"
+                "bash",
+                "-c",
+                "npm test --prefix src/Raccord.Frontend && node scripts/check-frontend-audit.mjs"
             ],
-            [
-                "npm",
-                "run",
-                "build",
-                "--prefix",
-                "src/Raccord.Frontend"
-            ],
-            [
-                "npm",
-                "test",
-                "--prefix",
-                "src/Raccord.Frontend"
-            ],
-            [
-                "node",
-                "scripts/check-frontend-audit.mjs"
-            ],
-            [
-                "npx",
-                "--no-install",
-                "prodshape",
-                "validate"
-            ],
+            ["npx", "--no-install", "prodshape", "validate"],
             [
                 "npx",
                 "--no-install",
@@ -92,10 +61,7 @@
                 "--provider",
                 "openspec"
             ],
-            [
-                "bash",
-                ".github/scripts/check-e2e-selection.sh"
-            ],
+            ["bash", ".github/scripts/check-e2e-selection.sh"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",
@@ -116,15 +82,9 @@
     "299": {
         "reviewRequired": false,
         "scope": "Recover and implement only the approved issue criteria and owner decisions recorded in #437. Inspect existing epic branches and PRs before writing new code. Preserve tenant isolation, auditability, numbering and immutable issued invoices. Validate and explicitly apply Product Changes; do not edit the accepted model directly. Publish a reviewable PR with current independent command and synthetic browser evidence. Respect the serial queue and dependency base. Report new contradictory intent or unavailable legal/protocol evidence precisely. The approved #298/#299 runtime recovery and bound OpenSpec plan are present in this repository revision. Requalify that existing implementation; no historical branch fetch, seed reapplication or repeated product approval is required. Use a fresh managed-command attempt identifier and log path for each invocation. Run managed commands without shell redirection: the wrapper owns /output/evidence/commands/<id>.log. Never create or redirect stdout/stderr to that same file. If a prelaunch collision leaves a running receipt but no active owner, retain the failed receipt and retry without redirection using a new command ID; do not wait indefinitely on the stale receipt. Use the policy command arguments, including its environment mapping, for agent checks.",
-        "paths": [
-            "*"
-        ],
+        "paths": ["*"],
         "checks": [
-            [
-                "npm",
-                "ci",
-                "--ignore-scripts"
-            ],
+            ["npm", "ci", "--ignore-scripts"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",
@@ -138,10 +98,7 @@
                 "restore",
                 "Raccord.slnx"
             ],
-            [
-                "node",
-                "src/public-site/build.mjs"
-            ],
+            ["node", "src/public-site/build.mjs"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",
@@ -167,32 +124,10 @@
                 "--prefix",
                 "src/Raccord.Frontend"
             ],
-            [
-                "npm",
-                "run",
-                "lint",
-                "--prefix",
-                "src/Raccord.Frontend"
-            ],
-            [
-                "npm",
-                "run",
-                "build",
-                "--prefix",
-                "src/Raccord.Frontend"
-            ],
-            [
-                "npm",
-                "test",
-                "--prefix",
-                "src/Raccord.Frontend"
-            ],
-            [
-                "npx",
-                "--no-install",
-                "prodshape",
-                "validate"
-            ],
+            ["npm", "run", "lint", "--prefix", "src/Raccord.Frontend"],
+            ["npm", "run", "build", "--prefix", "src/Raccord.Frontend"],
+            ["npm", "test", "--prefix", "src/Raccord.Frontend"],
+            ["npx", "--no-install", "prodshape", "validate"],
             [
                 "npx",
                 "--no-install",
@@ -202,10 +137,7 @@
                 "--provider",
                 "openspec"
             ],
-            [
-                "bash",
-                ".github/scripts/check-e2e-selection.sh"
-            ],
+            ["bash", ".github/scripts/check-e2e-selection.sh"],
             [
                 "env",
                 "DOTNET_CLI_HOME=/workspace/obj/dotnet",

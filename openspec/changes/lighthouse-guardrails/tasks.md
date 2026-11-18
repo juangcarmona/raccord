@@ -33,3 +33,5 @@
 - [x] Verify thirteen targeted evaluator regressions and the real full-audit invocation; retain raw findings and explicit exception use.
 - [x] Wire the same gate into required CI and default native policy with raw-report retention.
 - [ ] Require passing current-head CI before integrating the approved upgrade/security policy, then requalify294 independently.
+
+- [x] Validate the corrected twelve-command native policy with the installed SDLC validator after a pre-activation rejection; preserve every original check and the approved audit gate.

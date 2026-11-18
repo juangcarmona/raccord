@@ -1,12 +1,11 @@
 import { useState, type SyntheticEvent } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate } from "react-router";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { useAuth, type PasswordCheck } from "./AuthProvider";
 
 export function SetupPage() {
     const { t } = useI18n();
     const auth = useAuth();
-    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<"invalid" | "completed" | "unavailable" | "sign-in" | null>(null);
@@ -47,7 +46,6 @@ export function SetupPage() {
         try {
             await auth.signIn(email, password, false);
             setPassword("");
-            await navigate("/projects", { replace: true });
         } catch {
             setPassword("");
             setError("sign-in");

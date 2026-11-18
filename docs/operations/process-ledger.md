@@ -1,5 +1,7 @@
 # Process ledger
 
+- 2026-11-18: Bounded browser diagnostics exposed a successful sign-out response with a navigation timeout. Delayed route-loader regressions reproduced duplicate transitions in sign-out, sign-in and first-account continuation: each handler navigated while the authentication guard also redirected. Keep routing owned by authentication state and the existing guards; preserve destination/warning assertions and verify one route load for each transition. All three regressions fail before the correction and pass after it.
+
 - 2026-11-18: Independent host browser output exceeded the provider's 512,000-character capture bound before its final failure summary. Retain warning/error output and explicit fixture stage markers, while filtering routine Aspire/resource informational logs in the test builder. Preserve the original failed host receipt and verify the actual final test summary remains within the bound on the next native pass; agent and GitHub CI success do not rewrite that failure.
 
 - 2026-11-18: Separate AppHost databases do not isolate a shared frontend install directory. The first-admin recovery's complete browser filter exposed competing `npm ci` processes; a non-parallel fresh-installation collection preserves the real isolated setup test without narrowing selection. After the correction, the current 43-case suite passes. Retain failed receipts and distinguish the approved development-only security gate from a clean raw audit.

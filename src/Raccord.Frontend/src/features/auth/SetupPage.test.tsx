@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { AuthProvider } from "./AuthProvider";
 import { SetupPage } from "./SetupPage";
 import { SignInPage } from "./SignInPage";
@@ -15,6 +15,10 @@ const identity = {
     canManageRoles: true,
 };
 function renderSetup(path = "/setup") {
+    const loadProjects = vi.fn(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 10));
+        return null;
+    });
     return renderAt(path, [
         {
             path: "/protected",
@@ -40,7 +44,7 @@ function renderSetup(path = "/setup") {
                 </AuthProvider>
             ),
         },
-        { path: "/projects", element: <h1>Projects</h1> },
+        { path: "/projects", loader: loadProjects, element: <h1>Projects</h1> },
     ]);
 }
 async function submit() {
@@ -62,13 +66,14 @@ describe("first-run setup", () => {
             "POST /api/setup": () => json({ passwordCheck: "matched" }),
             "POST /api/auth/sign-in": () => json(identity),
         });
-        renderSetup();
+        const router = renderSetup();
         await submit();
         expect(await screen.findByText(/Esta contraseña aparece en filtraciones/)).toBeInTheDocument();
         expect(screen.queryByRole("button", { name: "Crear cuenta de administrador" })).not.toBeInTheDocument();
         expect(requests.filter((r) => r.path === "/api/auth/sign-in")).toHaveLength(0);
         await userEvent.click(screen.getByRole("button", { name: "Continuar a la aplicación" }));
         expect(await screen.findByRole("heading", { name: "Projects" })).toBeInTheDocument();
+        expect(router.routes.find((route) => route.path === "/projects")?.loader).toHaveBeenCalledTimes(1);
         expect(requests.filter((r) => r.path === "/api/setup")).toHaveLength(1);
         expect(requests.find((r) => r.path === "/api/auth/sign-in")?.body).toEqual({
             email: "first@example.test",

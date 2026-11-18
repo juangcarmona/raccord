@@ -1,6 +1,6 @@
 import { act, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { SignInPage } from "./SignInPage";
 import { AuthProvider } from "./AuthProvider";
 import { renderAt, stubApi, json } from "../../test/render";
@@ -12,6 +12,10 @@ describe("SignInPage", () => {
             "GET /api/setup/status": () => json({ required: false }),
             "POST /api/auth/sign-in": () => json({ id: "1", email: "person@example.test", preferredLanguage: "es" }),
         });
+        const loadAccount = vi.fn(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+            return null;
+        });
         const router = renderAt("/sign-in", [
             {
                 path: "/sign-in",
@@ -21,7 +25,7 @@ describe("SignInPage", () => {
                     </AuthProvider>
                 ),
             },
-            { path: "/account", element: <h1>My account</h1> },
+            { path: "/account", loader: loadAccount, element: <h1>My account</h1> },
             { path: "/projects", element: <h1>Projects</h1> },
         ]);
         await act(async () => {
@@ -32,6 +36,7 @@ describe("SignInPage", () => {
         await userEvent.click(screen.getByRole("button", { name: "Iniciar sesión" }));
         expect(await screen.findByRole("heading", { name: "My account" })).toBeInTheDocument();
         expect(router.state.location.pathname).toBe("/account");
+        expect(loadAccount).toHaveBeenCalledTimes(1);
     });
 
     it("uses the typed API and shows the pending and invalid states", async () => {

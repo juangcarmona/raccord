@@ -1,12 +1,11 @@
 import { useState, type SyntheticEvent } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { ApiError } from "../../shared/api/client";
 import { useAuth } from "./AuthProvider";
 
 export function SignInPage() {
     const { t } = useI18n();
-    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
@@ -31,7 +30,6 @@ export function SignInPage() {
         setPending(true);
         try {
             await auth.signIn(email, password, rememberMe);
-            await navigate(from, { replace: true });
         } catch (exception) {
             setError(exception instanceof ApiError && exception.status === 401 ? "invalid" : "network");
         } finally {

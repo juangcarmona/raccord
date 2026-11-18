@@ -1,11 +1,10 @@
 import { render } from "@testing-library/react";
-import type { ReactElement } from "react";
-import { createMemoryRouter, RouterProvider } from "react-router";
+import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { vi } from "vitest";
 import { I18nProvider } from "../shared/i18n/I18nProvider";
 
 /** Renders routes at a URL with Spanish UI, like a real session. */
-export function renderAt(url: string, routes: { path: string; element: ReactElement }[]) {
+export function renderAt(url: string, routes: RouteObject[]) {
     const router = createMemoryRouter(routes, { initialEntries: [url] });
     render(
         <I18nProvider locale="es">

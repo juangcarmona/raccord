@@ -34,7 +34,7 @@ CI SHALL run the Node test suite for blocked, allowed, and malformed Bash calls.
 
 ### Requirement: Released harness and installed workers must agree
 
-The repository SHALL pin CLI 0.13.24 and SDLC 0.28.1 in its tooling manifest and lockfile, and all installed stage and maintenance workflows SHALL execute SDLC 0.28.1 with corresponding regenerated locks. Existing audit, approval and automation controls SHALL be preserved.
+The repository SHALL pin CLI 0.13.25 and SDLC 0.29.0 in its tooling manifest and lockfile, and all installed stage and maintenance workflows SHALL execute SDLC 0.29.0 with corresponding regenerated locks. Existing audit, approval and automation controls SHALL be preserved.
 
 #### Scenario: Upgrade verification
 
@@ -45,3 +45,17 @@ The repository SHALL pin CLI 0.13.24 and SDLC 0.28.1 in its tooling manifest and
 
 - **WHEN** issue #294 is retried through the upgraded router
 - **THEN** its actual execution receipt identifies the upgraded harness, and prior failed proof is retained without relabelling
+
+### Requirement: Native evidence publication must have protected storage
+
+The repository SHALL retain sanitized native reports on a separate `lighthouse/evidence` branch with active deletion and non-fast-forward protection and no bypass actors. The reviewed profile SHALL declare publication and the existing dispatchable CI workflow without weakening source merge checks or approvals.
+
+#### Scenario: Publication admission
+
+- **WHEN** a native worker publishes its retained visual evidence
+- **THEN** its source profile identifies the protected evidence branch and a current owner-observed ruleset revision
+
+#### Scenario: Verification after merge
+
+- **WHEN** completion requests `ci.yml` on the accepted main revision
+- **THEN** all application CI jobs remain selected when the dispatch has no base SHA

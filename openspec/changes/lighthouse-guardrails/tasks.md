@@ -18,3 +18,10 @@
 - [x] Pin CLI 0.13.24 and SDLC 0.28.1, apply the reviewed CLI upgrade and reinstall the existing worker selections.
 - [x] Regenerate all nine worker locks with gh-aw v0.93.2 and preserve the qualified implementation profile.
 - [x] Verify package/workflow pin agreement, Lighthouse, strict OpenSpec, citations and documentation checks.
+
+- [x] Upgrade the reviewed delivery branch to CLI 0.13.25 and SDLC 0.29.0 and regenerate every installed worker projection.
+- [x] Recheck foundation, strict OpenSpec, citations, Markdown and exact installed workflow versions for the new release.
+
+- [x] Reconcile native 44239806576: preserve its blocked result and 13 passed independent commands, with no runtime PR created.
+- [x] Create source-independent protected evidence storage and observe its actual ruleset revision without changing main protections.
+- [x] Configure evidence publication, dispatchable full CI and router subscription; validate current policy and regenerated workflows.

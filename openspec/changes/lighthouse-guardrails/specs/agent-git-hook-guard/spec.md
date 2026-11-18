@@ -59,3 +59,17 @@ The repository SHALL retain sanitized native reports on a separate `lighthouse/e
 
 - **WHEN** completion requests `ci.yml` on the accepted main revision
 - **THEN** all application CI jobs remain selected when the dispatch has no base SHA
+
+### Requirement: Security exception must remain narrow and expire
+
+CI and default native checks SHALL retain the full frontend audit and permit only owner-approved GHSA-fc5q-39xc-vjpf in the unchanged reviewed development graph before 2026-11-24T20:45:00Z. Every other high/critical finding, production affected node, changed graph, malformed report or missing/expired approval SHALL fail.
+
+#### Scenario: Approved development finding
+
+- **WHEN** the full audit reports only the approved high-severity development chain before expiry
+- **THEN** the gate passes with explicit exception use and retains the unchanged raw findings
+
+#### Scenario: Expired or wider finding
+
+- **WHEN** the approval expires or the report contains an unapproved high/critical advisory or production node
+- **THEN** the gate refuses integration

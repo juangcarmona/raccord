@@ -44,6 +44,8 @@ A new `Raccord.EndToEndTests` project drives the real SPA with Playwright over t
 - **Trivy** fs scan (high/critical) plus an image scan in the sbom job.
 - The deeper per-ecosystem audits stay: `dotnet list package --vulnerable --include-transitive`, `npm audit --audit-level=high`.
 
+The owner approved a temporary development-only exception on 2026-11-18 for GHSA-fc5q-39xc-vjpf through 2026-11-24T20:45:00Z (issue294, comment6983388300). The full frontend audit remains recorded; `scripts/check-frontend-audit.mjs` permits only that advisory in the exact approved development graph and rejects production scope, any other high/critical finding, changed or malformed inputs, and missing or expired approval. The reviewed decision is `.github/frontend-audit-exception.json`; it is not a clean-audit claim or a change to the other security gates.
+
 ### SBOM and license policy (load-bearing for ADR-0002)
 
 The `sbom` job builds the image, Trivy-scans it, publishes the Syft SPDX SBOM (`sbom.spdx.json`) as an artifact, and enforces the license allowlist via `tools/dependency-licenses`, which reads the restored NuGet graph (nuspec license expressions) and `package-lock.json`. NuGet licenses live in nuspec metadata, not in the compiled DLLs, so an image-only SBOM cannot carry them — the policy check reads the graph. A copy-left or non-distributable surprise (e.g. an accidental GPL dependency) must fail the build before it ships in a deliverable. Allowlist: MIT, Apache-2.0, BSD-2/3-Clause, ISC, BlueOak-1.0.0, PostgreSQL, Python-2.0, MPL-2.0, CC0-1.0, CC-BY-4.0, AGPL-3.0 (Raccord itself). Packages predating license expressions are explicitly mapped after reading their license, never passed by silence.

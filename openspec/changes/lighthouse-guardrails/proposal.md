@@ -23,6 +23,8 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 
 - Synchronize the existing Contacts browser filter assertions with the rendered server response after CI exposed a premature DOM snapshot.
 
+- Enforce the owner-approved, expiring frontend development dependency exception with a tested evaluator in both CI and native independent checks, retaining the raw audit and rejecting every out-of-scope high/critical finding.
+
 ## Impact
 
 Only repository tooling, documentation, and CI configuration change. The existing .NET analyzers, architecture tests, Semgrep rules, and application code remain in place.

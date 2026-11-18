@@ -28,3 +28,8 @@
 
 - [x] Replace the premature Contacts table snapshot wait with a Playwright assertion bound to the completed API response, retaining the original filter assertions.
 - [x] Confirm the corrected Contacts journey and full selection in CI44328429724 on runtime-test head da5924e; retain that proof separately from later documentation-only commits.
+
+- [x] Record the actual owner approval and bind the temporary exception to the exact frontend lock and development nodes.
+- [x] Verify thirteen targeted evaluator regressions and the real full-audit invocation; retain raw findings and explicit exception use.
+- [x] Wire the same gate into required CI and default native policy with raw-report retention.
+- [ ] Require passing current-head CI before integrating the approved upgrade/security policy, then requalify294 independently.

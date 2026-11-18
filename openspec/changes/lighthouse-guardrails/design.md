@@ -25,3 +25,9 @@ Use the existing `ci.yml` for post-merge verification, add its manual dispatch e
 ## Existing browser assertion timing
 
 CI 44239553395 received the successful any-tag directory response but read the table before React rendered both expected contacts. The existing helper waited only for an already-visible first row. Wait for the ordered contact names from that exact response to appear in the table, then retain every any/all/folder positive and negative assertion. No application filter behavior or selected journey changes. The next required CI run validates the corrected journey and complete suite; security audit remains independently blocking.
+
+## Owner-approved temporary development dependency exception
+
+The owner explicitly accepted the scoped exception in conversation; comment6983388300 records that decision. `.github/frontend-audit-exception.json` binds GHSA-fc5q-39xc-vjpf/source1247710 to the reviewed frontend lock SHA and eight affected development nodes, expiring at 2026-11-24T20:45:00Z. `scripts/check-frontend-audit.mjs` still runs the full npm audit. It validates report structure/counts, traverses transitive advisory chains and fails on production nodes, other high/critical findings, unknown/cyclic chains, changed lock bytes, missing approval or expiry. It never accepts a critical finding.
+
+CI retains the original full JSON as an artifact; native command output also retains it. Passing under the approved exception is explicitly reported instead of claiming a clean raw audit. Regression cases exercise expiry, altered graphs, production scope, hidden advisories, URL substitution and malformed reports. The same gate is added to default native independent checks, while the historical closed299 override and original blocked receipts are preserved. Remove the exception and restore the ordinary audit when a verified upstream fix is adopted.

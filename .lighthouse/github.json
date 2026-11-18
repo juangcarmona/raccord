@@ -50,5 +50,18 @@
     }
   ],
   "requiredApprovals": 1,
-  "releaseWorkflowReady": false
+  "releaseWorkflowReady": false,
+  "evidenceBranch": "lighthouse/evidence",
+  "completion": {
+    "publishEvidence": true,
+    "postMergeWorkflows": [
+      "ci.yml"
+    ],
+    "protectionObservations": [
+      {
+        "id": 27556718,
+        "revision": "d4edf4a8255a5235cffc65ba932c61275982bb89158184f1cf1dffc13c7f06f5"
+      }
+    ]
+  }
 }

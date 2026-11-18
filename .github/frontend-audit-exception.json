@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "advisory": "GHSA-fc5q-39xc-vjpf",
+  "advisorySource": 1247710,
+  "approvedBy": "juangcarmona",
+  "approvedAt": "2026-11-18T15:40:07.162282+00:00",
+  "approvalUrl": "https://github.com/juangcarmona/raccord/issues/294#issuecomment-6983388300",
+  "expiresAt": "2026-11-24T20:45:00Z",
+  "reason": "The owner explicitly accepted the unpatched development-tool risk to complete Lighthouse and first-administrator delivery; production audit remains independently clean and all other high/critical findings remain blocking.",
+  "lockfileSha256": "03c045e1550fa94ca2052ffd187dee7452306265b1828522126ae15741876c30",
+  "allowedNodes": [
+    "node_modules/@typescript-eslint/typescript-estree",
+    "node_modules/@vitejs/plugin-react",
+    "node_modules/fdir",
+    "node_modules/lint-staged",
+    "node_modules/picomatch",
+    "node_modules/tinyglobby",
+    "node_modules/vite",
+    "node_modules/vitest"
+  ]
+}

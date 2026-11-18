@@ -216,7 +216,13 @@ public sealed class ContactOrganizationJourney_Should_ManageTagsFoldersAndFilter
             && matches(uri)
         );
         response.Ok.ShouldBeTrue();
-        await page.Locator("tbody tr").First.WaitForAsync();
+        using var body = JsonDocument.Parse(await response.TextAsync());
+        var expectedNames = body
+            .RootElement.GetProperty("items")
+            .EnumerateArray()
+            .Select(contact => contact.GetProperty("legalName").GetString()!)
+            .ToArray();
+        await Assertions.Expect(page.Locator("tbody tr th a")).ToHaveTextAsync(expectedNames);
     }
 
     private static async Task<IReadOnlyList<string>> ReadVisibleContactNamesAsync(IPage page) =>

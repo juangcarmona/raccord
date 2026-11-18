@@ -15,6 +15,16 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 - Reject Claude Code Bash calls that bypass Git hooks, and run the guard tests in CI.
 - Patch the arc42 snapshot tool's DOMPurify pin and the frontend's transitive `undici` and `zod` locks after PR security and dependency-audit gates exposed vulnerable versions.
 
+- Upgrade the CLI to 0.13.25 and SDLC to 0.29.0, then reinstall the existing epic, completion and Product Change workers in package mode and regenerate their locks.
+- Retain the previously qualified implementation review profile and all current automation, audit and approval controls while retrying #294 separately.
+
+- Configure the protected, source-independent `lighthouse/evidence` branch for sanitized native proof publication, preserving all existing required checks and approvals.
+- Make the existing CI workflow dispatchable and subscribe the completion router to its actual name.
+
+- Synchronize the existing Contacts browser filter assertions with the rendered server response after CI exposed a premature DOM snapshot.
+
+- Enforce the owner-approved, expiring frontend development dependency exception with a tested evaluator in both CI and native independent checks, retaining the raw audit and rejecting every out-of-scope high/critical finding.
+
 ## Impact
 
 Only repository tooling, documentation, and CI configuration change. The existing .NET analyzers, architecture tests, Semgrep rules, and application code remain in place.

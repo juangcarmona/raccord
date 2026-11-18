@@ -5,7 +5,7 @@
   "description": "Repository-local Lighthouse verification tooling",
   "devDependencies": {
     "@fission-ai/openspec": "1.15.0",
-    "@juangcarmona/lighthouse": "0.13.15",
-    "@juangcarmona/lighthouse-sdlc": "0.24.4"
+    "@juangcarmona/lighthouse": "0.13.25",
+    "@juangcarmona/lighthouse-sdlc": "0.29.0"
   }
 }

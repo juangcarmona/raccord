@@ -70,7 +70,7 @@ steps:
     with:
       node-version: 24
   - name: Install the published Lighthouse harness
-    run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.24.4
+    run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.29.0
   - name: Load the authorized issue context
     uses: actions/download-artifact@v8
     with:
@@ -87,9 +87,18 @@ post-steps:
       path: |
         ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/envelope.json
         ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/runtime.json
+        ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/visual-evidence.json
         ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/engine-error.json
       if-no-files-found: error
       retention-days: 14
+  - name: Preserve visual captures separately from bounded JSON results
+    if: always()
+    uses: actions/upload-artifact@v7
+    with:
+      name: lighthouse-visual-${{ inputs.issue }}-${{ github.run_attempt }}
+      path: ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/evidence/visual/*.png
+      if-no-files-found: ignore
+      retention-days: 30
   - name: Preserve OpenCode diagnostic events
     if: always()
     uses: actions/upload-artifact@v7
@@ -120,7 +129,7 @@ jobs:
         with:
           node-version: 24
       - name: Install the published Lighthouse harness
-        run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.24.4
+        run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.29.0
       - uses: actions/setup-node@v5
         with:
           node-version: 24
@@ -179,7 +188,7 @@ jobs:
         with:
           node-version: 24
       - name: Install the published Lighthouse harness
-        run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.24.4
+        run: npm install --prefix .lighthouse-harness --ignore-scripts --no-audit --no-fund --package-lock=true --save-exact @juangcarmona/lighthouse-sdlc@0.29.0
       - uses: actions/setup-node@v5
         with:
           node-version: 24
@@ -194,6 +203,16 @@ jobs:
         with:
           name: lighthouse-result-${{ inputs.issue }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Inspect the retained visual assessment
+        id: visual
+        if: needs.agent.result == 'success'
+        run: node .lighthouse-harness/node_modules/@juangcarmona/lighthouse-sdlc/src/issue-actions.mjs visual-artifact
+      - name: Load the retained visual captures
+        if: needs.agent.result == 'success' && steps.visual.outputs.visual == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: lighthouse-visual-${{ inputs.issue }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/lighthouse-${{ github.run_id }}-${{ github.run_attempt }}/evidence/visual
       - name: Require an executed agent
         if: needs.agent.result != 'success'
         run: |

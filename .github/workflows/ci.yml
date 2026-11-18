@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [main, 'lighthouse/verification-*']
   pull_request:
@@ -27,6 +28,8 @@ jobs:
         run: node --test scripts/check-design-system.test.mjs
       - name: Check Claude Code git hook guard
         run: node --test scripts/guard-git-hooks.test.mjs
+      - name: Test bounded frontend security exception
+        run: node --test scripts/check-frontend-audit.test.mjs
 
   changes:
     name: Classify changed paths
@@ -254,7 +257,15 @@ jobs:
           test -z "$(find dist -type f -name '*.map' -print -quit)"
           ! rg -n 'sourceMappingURL=' dist/assets --glob '*.js'
       - name: Dependency audit
-        run: npm audit --audit-level=high
+        run: node ../../scripts/check-frontend-audit.mjs
+      - name: Retain the unchanged full dependency audit
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: frontend-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: obj/security/frontend-audit.json
+          if-no-files-found: ignore
+          retention-days: 14
       - name: API contract is up to date
         run: |
           npm run api:generate

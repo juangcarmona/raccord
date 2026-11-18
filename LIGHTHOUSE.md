@@ -5,7 +5,7 @@
 - Baseline: `0.1.0`
 - Product: `Raccord`
 - Profiles: `dotnet-backend`, `react-web-platform`, `visual-theme`
-- SDLC package: `@juangcarmona/lighthouse-sdlc@0.24.4`
+- SDLC package: `@juangcarmona/lighthouse-sdlc@0.29.0`
 - UI package: `@juangcarmona/lighthouse-ui@0.2.1`
 - ProductShape: not adopted
 - Required PDaC serialization: `v1alpha2`

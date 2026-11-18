@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "repository": "juangcarmona/raccord",
+  "issue": 294,
+  "runId": "fde9ab0922d46224be4aadaa496b495205c1e4ffb850c22694758ecb4a15a438",
+  "workflowRunId": "44343227059",
+  "attempt": 1,
+  "stage": "implement",
+  "sourceRevision": "3747480a3a7ebcdc2f514afe7f9f7fd725cc78ff",
+  "candidateTree": "5668f41ae7c2c619de511cb10951fb04069b9381",
+  "assessmentSha256": "1a64fd1adb238d5a423101b1b68eef33f3a3763f097bb908075253a8ef2f7f83",
+  "status": "provided",
+  "reason": "Actual running product: admitted-source/candidate sign-in comparisons and real fresh-AppHost first-run captures. Masked synthetic UI-state captures supplement, not replace, backend acceptance.",
+  "items": [
+    {
+      "id": "sign-in-1280-before",
+      "kind": "before",
+      "view": "/sign-in",
+      "state": "Initialized installation, signed out, English",
+      "viewport": {
+        "width": 1280,
+        "height": 812
+      },
+      "revision": "3747480a3a7ebcdc2f514afe7f9f7fd725cc78ff",
+      "path": "evidence/visual/461c08fffe5b74a46bc514b88745fe0d6a061649cd6c3c8ecd03647c6d8e80d5.png",
+      "sha256": "461c08fffe5b74a46bc514b88745fe0d6a061649cd6c3c8ecd03647c6d8e80d5",
+      "bytes": 17670,
+      "producer": "agent-declared capture"
+    },
+    {
+      "id": "sign-in-1280-candidate",
+      "kind": "candidate",
+      "view": "/sign-in",
+      "state": "Initialized installation, signed out, English",
+      "viewport": {
+        "width": 1280,
+        "height": 812
+      },
+      "baseline": "existing",
+      "path": "evidence/visual/461c08fffe5b74a46bc514b88745fe0d6a061649cd6c3c8ecd03647c6d8e80d5.png",
+      "sha256": "461c08fffe5b74a46bc514b88745fe0d6a061649cd6c3c8ecd03647c6d8e80d5",
+      "bytes": 17670,
+      "producer": "agent-declared capture"
+    },
+    {
+      "id": "sign-in-375-before",
+      "kind": "before",
+      "view": "/sign-in",
+      "state": "Initialized installation, signed out, English",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "revision": "3747480a3a7ebcdc2f514afe7f9f7fd725cc78ff",
+      "path": "evidence/visual/48146d55c4152289c508c0e6c08bd650212fd8c109a6d723ff5e2ec69589f102.png",
+      "sha256": "48146d55c4152289c508c0e6c08bd650212fd8c109a6d723ff5e2ec69589f102",
+      "bytes": 15054,
+      "producer": "agent-declared capture"
+    },
+    {
+      "id": "sign-in-375-candidate",
+      "kind": "candidate",
+      "view": "/sign-in",
+      "state": "Initialized installation, signed out, English",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "baseline": "existing",
+      "path": "evidence/visual/48146d55c4152289c508c0e6c08bd650212fd8c109a6d723ff5e2ec69589f102.png",
+      "sha256": "48146d55c4152289c508c0e6c08bd650212fd8c109a6d723ff5e2ec69589f102",
+      "bytes": 15054,
+      "producer": "agent-declared capture"
+    },
+    {
+      "id": "setup-1280-candidate",
+      "kind": "candidate",
+      "view": "/setup",
+      "state": "Fresh installation, first administrator form",
+      "viewport": {
+        "width": 1280,
+        "height": 812
+      },
+      "baseline": "new",
+      "baselineReason": "The admitted source has no first-run setup screen. This new view uses the real fresh AppHost and PostgreSQL, not fulfilled setup or authentication responses.",
+      "path": "evidence/visual/d13b5daacde5d43bb926e5ceb2da2ce3b9bdc25deb69fd6481d6d7b75b11974e.png",
+      "sha256": "d13b5daacde5d43bb926e5ceb2da2ce3b9bdc25deb69fd6481d6d7b75b11974e",
+      "bytes": 40633,
+      "producer": "agent-declared capture"
+    },
+    {
+      "id": "setup-375-candidate",
+      "kind": "candidate",
+      "view": "/setup",
+      "state": "Fresh installation, first administrator form",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "baseline": "new",
+      "baselineReason": "The admitted source has no first-run setup screen. This new view uses the real fresh AppHost and PostgreSQL, not fulfilled setup or authentication responses.",
+      "path": "evidence/visual/68efb701b82a85311ed8996a8f16da2fc9d7c3570e509d2810c89c0726a4921c.png",
+      "sha256": "68efb701b82a85311ed8996a8f16da2fc9d7c3570e509d2810c89c0726a4921c",
+      "bytes": 35637,
+      "producer": "agent-declared capture"
+    }
+  ]
+}

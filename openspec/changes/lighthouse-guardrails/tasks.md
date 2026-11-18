@@ -27,4 +27,4 @@
 - [x] Configure evidence publication, dispatchable full CI and router subscription; validate current policy and regenerated workflows.
 
 - [x] Replace the premature Contacts table snapshot wait with a Playwright assertion bound to the completed API response, retaining the original filter assertions.
-- [ ] Confirm the corrected Contacts journey and full selection in current-head CI.
+- [x] Confirm the corrected Contacts journey and full selection in CI44328429724 on runtime-test head da5924e; retain that proof separately from later documentation-only commits.

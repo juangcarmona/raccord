@@ -17,6 +17,8 @@
 - [x] 3.1 Complete all supplied policy commands, the approved frontend security gate, repository format/design checks and strict OpenSpec/citation validation; retain terminal receipts, raw audit findings and product-derived evidence. All supplied policy checks passed on completed attempts. The approved gate applied only the temporary development exception; raw audit remains 8 high/7 moderate. Build/analyzers, 468-file CSharpier, Markdown, design guards, generated API byte comparison and no-pending-migration checks passed. ProductShape validates 1,918 artifacts and 617 current citations; four bounded execution mappings validate with no diagnostics.
 - [x] 3.2 Review current rendered evidence and localized copy; record actual fallback methods, findings and retrospective under the existing owner delivery authorization. Reviewed real connected wide/narrow light/dark captures and synthetic English/Spanish states; all 48 synthetic cases have zero axe violations and no horizontal overflow. No new human acceptance event is claimed.
 
+- [ ] 3.3 Verify bounded browser diagnostics on a fresh native correction and current-head CI. Original host44343227059 check12 exited58/check13 was not run; GitHub CI44357722582 passed on d5151c2. Keep all assertions/selection and warning/error output unchanged while reducing routine informational resource logs.
+
 ## Workflow follow-up
 
 - Host independently verifies source, scope, checks and publication. Forge CI, independent review and integration are not claimed by workspace execution. Existing owner delivery authorization is preserved; operator review does not create a new human acceptance event.

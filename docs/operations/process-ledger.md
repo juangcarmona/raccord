@@ -1,5 +1,7 @@
 # Process ledger
 
+- 2026-11-18: Independent host browser output exceeded the provider's 512,000-character capture bound before its final failure summary. Retain warning/error output and explicit fixture stage markers, while filtering routine Aspire/resource informational logs in the test builder. Preserve the original failed host receipt and verify the actual final test summary remains within the bound on the next native pass; agent and GitHub CI success do not rewrite that failure.
+
 - 2026-11-18: Separate AppHost databases do not isolate a shared frontend install directory. The first-admin recovery's complete browser filter exposed competing `npm ci` processes; a non-parallel fresh-installation collection preserves the real isolated setup test without narrowing selection. After the correction, the current 43-case suite passes. Retain failed receipts and distinguish the approved development-only security gate from a clean raw audit.
 
 - 2026-11-18: Recover complete source with per-file preimage/target hashes while preserving host-owned OpenSpec creation metadata. Current workspace checks can pass while the mandatory dependency audit remains blocking: retain the reviewable candidate and exact audit findings rather than changing gates or treating historical operator passes as current proof. Keep individual command receipts and required visual/product evidence loose; losslessly package supplementary browser evidence when collection bounds require it.

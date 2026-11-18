@@ -3,6 +3,8 @@ using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Npgsql;
 using Raccord.Infrastructure.Persistence;
@@ -69,6 +71,12 @@ public class DistributedAppFixture : IAsyncLifetime
         Environment.SetEnvironmentVariable("ASPIRE_ALLOW_UNSECURED_TRANSPORT", "true");
 
         var builder = await CreateBuilderAsync();
+        // Preserve warnings, errors and stage markers without overflowing bounded host logs.
+        builder.Services.AddLogging(logging =>
+            logging
+                .AddFilter("Aspire.Hosting", LogLevel.Warning)
+                .AddFilter("Raccord.Aspire.Resources", LogLevel.Warning)
+        );
         Log("create-builder: done");
 
         Log("build+start app: starting");

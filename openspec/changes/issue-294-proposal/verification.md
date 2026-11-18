@@ -62,3 +62,7 @@ Operator recovery fixed the fresh AppHost test option and separated signed-in an
 <!-- pdac:cite id="FR-WSP-013" digest="sha256:984e951e114d2f9bf28333e31bb0a1c433d7f5ba66b1311e93a4d964fffc6966" -->
 <!-- pdac:cite id="FR-WSP-009" digest="sha256:143607c1d5720216ce520612f926d3c2842a9525c384814f04bf9e2ba8d62645" -->
 <!-- pdac:cite id="QR-WSP-PASSWORD-CHECK-PRIVACY" digest="sha256:ffce9bb9e9b652e009748dec32960396e2688cff715b6e45d5a96983499714be" -->
+
+## Independent host follow-up
+
+Native44343227059 preserved the agent's 271 backend, 67 frontend and 43 browser passes, but its independent browser command exited58 and the strict final plan check was not run. Its host log reached the 512,000-character capture bound before the failure summary. The original blocked result remains unchanged. GitHub CI44357722582 subsequently passed every current-head check on d5151c2, including the complete browser selection. The test fixture now filters routine Aspire/resource informational logs while retaining warnings, errors, explicit startup markers and unchanged test assertions; a fresh native correction and fresh-head CI are still required.

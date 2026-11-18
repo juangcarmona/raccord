@@ -1,5 +1,7 @@
 # Process ledger
 
+- 2026-11-18: Native preparation rejected a thirteenth declared verification command before agent activation. Keep the provider's twelve-command bound by running frontend tests and the approved full-audit gate sequentially in one fail-fast command; verify the actual installed `validateImplementationPolicy` before integration. Every original check and raw audit report remains required.
+
 - 2026-11-16: A passed proposal agent result is not proof that a PR was published. Run the pinned OpenSpec strict validator on the exact returned files; keep spec headings and requirement length within provider rules without dropping product citations. If publication stops during validation, reconcile branches and PRs before retrying or publishing an explicitly identified operator correction.
 
 - 2026-11-15: After applying a Product Change, keep its `change.md` decision record and remove the archived `proposed/` copies in the same reviewed change. Check links to those copies, then run ProductShape validation and OpenSpec citation verification. The accepted model remains in `docs/product/model/`; Git history retains earlier artifact versions.

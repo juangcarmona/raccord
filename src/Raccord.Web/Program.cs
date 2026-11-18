@@ -99,6 +99,13 @@ builder.Services.AddScoped<InboundEInvoiceWorkflow>();
 builder.Services.AddScoped<OrganizationSettings>();
 builder.Services.AddScoped<AuditLog>();
 builder.Services.AddScoped<InstallationSetup>();
+builder
+    .Services.AddHttpClient<RegistrationPasswordCheck>(client =>
+    {
+        client.Timeout = TimeSpan.FromSeconds(3);
+        client.MaxResponseContentBufferSize = 1024 * 1024;
+    })
+    .RemoveAllLoggers();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 var app = builder.Build();

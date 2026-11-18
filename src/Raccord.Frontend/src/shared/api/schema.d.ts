@@ -241,7 +241,27 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["SetupResponse"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SetupError"];
+                    };
+                };
+                /** @description Conflict */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SetupError"];
+                    };
                 };
             };
         };
@@ -8334,9 +8354,17 @@ export interface components {
             /** Format: double */
             amount: number;
         };
+        SetupError: {
+            code: string;
+            message: string;
+        };
         SetupRequest: {
             email: string;
             password: string;
+        };
+        SetupResponse: {
+            email: string;
+            passwordCheck: string;
         };
         SetupStatusResponse: {
             required: boolean;

@@ -5,6 +5,7 @@ export function RequireAuth() {
     const auth = useAuth();
     const location = useLocation();
     if (auth.status === "loading") return <p>{"Loading…"}</p>;
-    if (!auth.user) return <Navigate to="/sign-in" replace state={{ from: location }} />;
+    if (!auth.user)
+        return <Navigate to={auth.setupRequired === true ? "/setup" : "/sign-in"} replace state={{ from: location }} />;
     return <Outlet />;
 }

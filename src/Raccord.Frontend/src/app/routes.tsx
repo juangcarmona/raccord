@@ -14,6 +14,7 @@ import { ProjectsPage } from "../features/projects/ProjectsPage";
 import { AppShell } from "./AppShell";
 import { NotFoundPage } from "./NotFoundPage";
 import { SignInPage } from "../features/auth/SignInPage";
+import { SetupPage } from "../features/auth/SetupPage";
 import { RequireAuth } from "../features/auth/RequireAuth";
 import { AccountPage } from "../features/auth/AccountPage";
 import { RequireRoleManagement } from "../features/auth/RequireRoleManagement";
@@ -24,6 +25,7 @@ import { ContactOrganizationPage } from "../features/contacts/ContactOrganizatio
 
 export const routes: RouteObject[] = [
     { path: "sign-in", element: <SignInPage /> },
+    { path: "setup", element: <SetupPage /> },
     {
         element: <RequireAuth />,
         children: [

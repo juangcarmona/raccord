@@ -16,7 +16,7 @@ namespace Raccord.EndToEndTests.Infrastructure;
 /// browser the frontend resource's external URL, and owns the shared Playwright browser. Shared
 /// via <see cref="E2ECollection"/>. See ADR-0017 for the strategy.
 /// </summary>
-public sealed class DistributedAppFixture : IAsyncLifetime
+public class DistributedAppFixture : IAsyncLifetime
 {
     // The resource names Program.cs in the Aspire host declares; these name container/project
     // resources, not connection strings, so they do not live in application config.
@@ -40,6 +40,22 @@ public sealed class DistributedAppFixture : IAsyncLifetime
 
     /// <summary>The web resource's external base URL — where production serves the SPA and CSP.</summary>
     public Uri WebBaseUrl { get; private set; } = null!;
+
+    protected virtual bool FreshInstallation => false;
+
+    public async Task<long> CountSetupRecordsAsync(string table)
+    {
+        if (table is not ("users" or "roles" or "user_roles"))
+            throw new ArgumentOutOfRangeException(nameof(table));
+        var connectionString = await app!.GetConnectionStringAsync("raccord");
+        await using var connection = new NpgsqlConnection(connectionString);
+        await connection.OpenAsync();
+        await using var command = new NpgsqlCommand(
+            $"SELECT count(*) FROM workspace.{table}",
+            connection
+        );
+        return (long)(await command.ExecuteScalarAsync())!;
+    }
 
     public async ValueTask InitializeAsync()
     {
@@ -116,13 +132,13 @@ public sealed class DistributedAppFixture : IAsyncLifetime
 
         var builder =
             await DistributedApplicationTestingBuilder.CreateAsync<global::Projects.Raccord_Aspire>(
-                [],
+                FreshInstallation ? ["--Raccord:FreshInstallation=true"] : [],
                 (_, settings) =>
                 {
-                    if (externalConnection is null)
-                        return;
                     settings.EnvironmentName = "Testing";
                     settings.Configuration ??= new ConfigurationManager();
+                    if (externalConnection is null)
+                        return;
                     settings.Configuration.AddInMemoryCollection(
                         new Dictionary<string, string?>(StringComparer.Ordinal)
                         {
@@ -131,6 +147,10 @@ public sealed class DistributedAppFixture : IAsyncLifetime
                         }
                     );
                 }
+            );
+        if (builder.Configuration.GetValue<bool>("Raccord:FreshInstallation") != FreshInstallation)
+            throw new InvalidOperationException(
+                "The requested AppHost installation mode was not applied."
             );
         if (externalConnection is null)
             ForceEphemeralPostgres(builder);
@@ -319,5 +339,6 @@ public sealed class DistributedAppFixture : IAsyncLifetime
 
         if (documentRoot is not null && Directory.Exists(documentRoot))
             Directory.Delete(documentRoot, recursive: true);
+        GC.SuppressFinalize(this);
     }
 }

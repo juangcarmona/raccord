@@ -57,11 +57,18 @@ body {
     object-fit: contain;
     border-radius: 0.75rem;
 }
+.auth-form > form {
+    display: grid;
+    gap: var(--space-4);
+    min-width: 0;
+}
 .auth-form label {
     display: grid;
     gap: 0.35rem;
 }
 .auth-form input:not([type="checkbox"]) {
+    min-width: 0;
+    width: 100%;
     padding: 0.65rem;
 }
 

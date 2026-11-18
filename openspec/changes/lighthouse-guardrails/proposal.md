@@ -21,6 +21,8 @@ Raccord needs a single, reproducible repository baseline and a Claude Code guard
 - Configure the protected, source-independent `lighthouse/evidence` branch for sanitized native proof publication, preserving all existing required checks and approvals.
 - Make the existing CI workflow dispatchable and subscribe the completion router to its actual name.
 
+- Synchronize the existing Contacts browser filter assertions with the rendered server response after CI exposed a premature DOM snapshot.
+
 ## Impact
 
 Only repository tooling, documentation, and CI configuration change. The existing .NET analyzers, architecture tests, Semgrep rules, and application code remain in place.

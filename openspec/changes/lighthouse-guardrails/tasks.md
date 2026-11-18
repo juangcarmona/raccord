@@ -25,3 +25,6 @@
 - [x] Reconcile native 44239806576: preserve its blocked result and 13 passed independent commands, with no runtime PR created.
 - [x] Create source-independent protected evidence storage and observe its actual ruleset revision without changing main protections.
 - [x] Configure evidence publication, dispatchable full CI and router subscription; validate current policy and regenerated workflows.
+
+- [x] Replace the premature Contacts table snapshot wait with a Playwright assertion bound to the completed API response, retaining the original filter assertions.
+- [ ] Confirm the corrected Contacts journey and full selection in current-head CI.

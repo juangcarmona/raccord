@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "repository": "juangcarmona/raccord",
+  "issue": 338,
+  "runId": "6f4ba3d5f111e3311b078c29322ed20eab7f0ece0dee31b67df29764697fc049",
+  "workflowRunId": "44877450678",
+  "attempt": 1,
+  "stage": "refine",
+  "sourceRevision": "58c3cf4c3772998c7c6f5f30599243e1fd7876dc",
+  "candidateTree": null,
+  "assessmentSha256": "614f8f2e0c47116925fd9875ead25937165899e148b1d00da64788c1052684bd",
+  "status": "provided",
+  "reason": "The bilingual product page, evidence links and responsive layout change. These are proposed wireframes only; placeholders assert no implemented capability.",
+  "items": [
+    {
+      "id": "product-inventory-wide",
+      "kind": "proposal",
+      "view": "Product capability inventory",
+      "state": "Proposed English product page with evidence links",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "path": "evidence/visual/9f03e14ff7ea2a467b00ecda3d4d87856763f58638398513a8a5326c2e36f489.png",
+      "sha256": "9f03e14ff7ea2a467b00ecda3d4d87856763f58638398513a8a5326c2e36f489",
+      "bytes": 62698,
+      "producer": "isolated proposed-design renderer",
+      "htmlSha256": "045688b87fdc7cc99b7888df9eb11a608d13cd036a9f542cc6f2c777b5a6c77f"
+    },
+    {
+      "id": "product-inventory-narrow",
+      "kind": "proposal",
+      "view": "Product capability inventory",
+      "state": "Proposed Spanish product page at narrow width",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "path": "evidence/visual/ae487dde677d726201865674fb99c89accc1ce562db7f964551bdc2f176bc7fd.png",
+      "sha256": "ae487dde677d726201865674fb99c89accc1ce562db7f964551bdc2f176bc7fd",
+      "bytes": 49960,
+      "producer": "isolated proposed-design renderer",
+      "htmlSha256": "6c2aecf24d8af295b0bbfd098f4b991ab19f7a5faa5f8a6d88646541d916f609"
+    }
+  ]
+}
